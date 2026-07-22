@@ -1,23 +1,21 @@
-# 👑 King_TCG
+# 📖 Présentation
 
-> Une plateforme intelligente de gestion, d'analyse et de suivi de collection de cartes Pokémon.
+**King_TCG** est une application web destinée aux collectionneurs de cartes Pokémon souhaitant transformer leur collection en un véritable **portfolio intelligent**.
 
-![King_TCG Banner](./public/banner.png)
+L'application permet de :
+* Gérer une collection complète
+* Suivre la valeur des cartes
+* Analyser les tendances du marché
+* Détecter des opportunités
+* Surveiller les variations de prix
+* Scanner des cartes automatiquement depuis une caméra
 
-## 📖 Présentation
-
-**King_TCG** est une application web dédiée aux collectionneurs de cartes Pokémon souhaitant gérer leur collection, suivre la valeur de leurs cartes et prendre de meilleures décisions grâce à des outils d'analyse avancés.
-
-L'objectif du projet est de transformer une collection classique en un véritable **portfolio intelligent**, combinant :
-
-- Gestion de collection
-- Analyse de marché
-- Suivi des prix
-- Alertes personnalisées
-- Prédictions d'évolution
-- Aide à l'investissement
-- Scanner intelligent de cartes
-
+L'objectif est de réunir dans une seule plateforme :
+* Collection
+* Marché
+* Analyse financière
+* Intelligence d'investissement
+* Automatisation
 
 ---
 
@@ -25,281 +23,263 @@ L'objectif du projet est de transformer une collection classique en un véritabl
 
 ## 📊 Dashboard
 
-Une vue globale de votre collection :
-
-- Valeur totale estimée
-- Nombre de cartes
-- Statistiques principales
-- Aperçu des dernières acquisitions
-- Évolution globale du portfolio
-
----
-
-## 🃏 Gestion de collection
-
-Gérez facilement vos cartes :
-
-- Ajout de cartes
-- Organisation par extensions
-- Gestion des raretés
-- Suivi des cartes favorites
-- Historique de collection
+Vue globale du portfolio :
+* Valeur estimée de la collection
+* Nombre de cartes
+* Statistiques principales
+* Aperçu des performances
+* Analyse globale
 
 ---
 
-## 🔎 Scanner de cartes
+# 🃏 Gestion de collection
 
-Identification rapide des cartes grâce au scanner intégré :
+Gestion complète des cartes :
+* Ajout et suppression de cartes
+* Gestion des quantités et des favoris
+* Informations d'achat et état des cartes
+* Organisation par extensions
 
-- Reconnaissance depuis la caméra
-- Recherche automatique
-- Ajout simplifié dans la collection
-
----
-
-## 💰 Analyse des prix
-
-Système intelligent de récupération et comparaison des prix :
-
-Sources compatibles :
-
-- Cardmarket
-- eBay
-- TCGPlayer
-- PriceCharting
-
-Fonctionnalités :
-
-- Prix actuel
-- Historique des variations
-- Comparaison marché
-- Détection d'opportunités
+**Stockage actuel :**
+* Local Storage synchronisé
+* Gestion automatique des mises à jour
 
 ---
 
-## 🔔 Alertes intelligentes
+# 🔎 Scanner intelligent
 
-Surveillez vos cartes :
+Système de reconnaissance de cartes Pokémon.
 
-- Variation de prix
-- Seuil personnalisé
-- Opportunités d'achat
-- Evolutions importantes
+**Fonctionnalités :**
+* Accès et utilisation de la caméra mobile (arrière)
+* Capture d'image et analyse OCR
+* Recherche automatique de carte et ajout rapide dans la collection
 
----
+**Architecture du scanner :**
+```text
+Camera ──> Capture image ──> OCR ──> Recherche carte ──> Ajout collection
+💰 Analyse des prix
+King_TCG intègre un système d'analyse du marché.
 
-## 📈 Intelligence marché & investissement
+Sources supportées :
 
-King_TCG intègre plusieurs moteurs d'analyse :
+Cardmarket
 
-### Market Engine
+TCGPlayer
 
-Analyse globale du marché.
+eBay (en préparation)
 
-### Prediction Engine
+Autres fournisseurs compatibles
 
-Estimation des tendances futures.
+Fonctions :
 
-### Investment Engine
+Prix actuel & historique des prix
 
-Aide à identifier :
+Évolution du marché & comparaison des valeurs
 
-- Cartes avec potentiel
-- Progressions importantes
-- Opportunités intéressantes
+Détection d'opportunités
 
+🔔 Alertes intelligentes
+Surveillance automatique :
 
----
+Variations de prix & seuils personnalisés
 
-# 🏗️ Architecture
+Opportunités d'achat & risques de baisse
 
-## Stack technique
+Types d'alertes :
 
-### Frontend
+BUY
 
-- Next.js
-- React
-- TypeScript
-- Tailwind CSS
+HOLD
 
-### Design
+SELL
 
-- Dark mode premium
-- Bento UI
-- Components réutilisables
-- Animations modernes
+WATCH
 
+📈 Intelligence marché & investissement
+Plusieurs moteurs internes analysent les cartes :
 
-### Services internes
+Market Engine : Analyse les prix, les tendances et l'évolution globale du marché.
 
-```
+Prediction Engine : Prépare l'analyse des évolutions futures, du ROI potentiel et des tendances.
+
+Investment Engine : Calcule le score d'investissement, le potentiel, les risques et génère des recommandations.
+
+🏗️ Architecture
+Stack technique
+Frontend
+Framework : Next.js 13, React
+
+Langage : TypeScript
+
+Styling : Tailwind CSS
+
+Interface
+Dark premium UI (Bento Design)
+
+Responsive mobile
+
+Composants réutilisables
+
+Structure principale
+Plaintext
+app/
+├── scanner
+├── recherche
+├── collection
+├── dashboard
+├── alerts
+└── opportunity
+
+components/
+├── scanner
+├── dashboard
+└── UI
+
 lib/
- └── priceProviders/
+├── alertEngine.ts
+├── opportunity.ts
+├── investment.ts
+├── marketEngine.ts
+├── priceHistory.ts
+├── priceIntelligence.ts
+├── pokemon.ts
+├── search.ts
+├── storage.ts
+└── types.ts
 
 services/
- ├── alerts
- ├── collection
- ├── favorites
- ├── investment
- ├── marketEngine
- ├── predictionEngine
- ├── pokemon
- ├── priceHistory
- └── scanner
-```
+└── market/
+    ├── analysis
+    └── provider
+🚀 Installation
+Prérequis
+Node.js >= 20
 
----
+npm ou pnpm
 
-# 🚀 Installation
-
-## Prérequis
-
-- Node.js >= 20
-- npm / pnpm
-
----
-
-## Installation
-
+Guide pas à pas
 Cloner le projet :
 
-```bash
-git clone https://github.com/your-account/King_TCG.git
-```
-
+Bash
+git clone [https://github.com/your-account/King_TCG.git](https://github.com/your-account/King_TCG.git)
+cd King_TCG
 Installer les dépendances :
 
-```bash
+Bash
 npm install
-```
-
 Lancer le serveur de développement :
 
-```bash
+Bash
 npm run dev
-```
+L'application sera disponible sur http://localhost:3000.
 
-L'application sera disponible sur :
+🧪 Tests avant production
+Vérification complète du build :
 
-```
-http://localhost:3000
-```
+Bash
+npm run build
+Le build doit se terminer avec les indications suivantes :
 
----
+Plaintext
+✓ Compiled successfully
+✓ Checking validity of types
+✓ Generating static pages
+✓ Finalizing page optimization
+🌐 Déploiement
+King_TCG est compatible avec Vercel ou toute plateforme Node.js compatible Next.js.
 
-# ⚙️ Variables d'environnement
+Flux de déploiement automatique :
 
-Créer un fichier :
+Plaintext
+GitHub ──> Vercel ──> Production
+⚙️ Variables d'environnement
+Créer un fichier .env.local à la racine et y ajouter :
 
-```
-.env.local
-```
-
-Ajouter vos variables :
-
-```env
+Extrait de code
 NEXT_PUBLIC_API_URL=
 DATABASE_URL=
-```
+🗺️ Roadmap
+✅ V1 - Fonctionnelle
+Interface :
 
----
+[x] Design Dark premium
 
-# 🗺️ Roadmap
+[x] Navigation complète
 
-## ✅ V1 - Presque terminée
+[x] Responsive mobile
 
-### Design & expérience
+[x] Dashboard & Pages cartes
 
-- [x] Design system Dark/Zinc
-- [x] Interface Bento
-- [x] Navigation complète
-- [x] Dashboard moderne
-- [x] Pages cartes optimisées
+Collection :
 
-### Fonctionnalités principales
+[x] Ajout, suppression & quantités
 
-- [x] Collection
-- [x] Favoris
-- [x] Scanner
-- [x] Recherche
-- [x] Alertes
-- [x] Analyse prix
-- [x] Marché
-- [x] Prédiction
-- [x] Investissement
+[x] Favoris
 
+[x] Informations d'achat
 
----
+Analyse :
 
-## 🔜 Prochaines améliorations
+[x] Prix marché & Historique
 
-### Portfolio Premium
+[x] Investment Score
 
-Prévu :
+[x] Opportunités & Alertes
 
-- Valeur totale
-- ROI global
-- Evolution 7/30/365 jours
-- Graphiques interactifs
-- Répartition extensions
-- Répartition raretés
-- Top gagnants/perdants
+Scanner :
 
+[x] Caméra mobile & Capture d'image
 
-### Notification Center
+[x] API Scanner & Recherche automatique
 
-- Alertes regroupées
-- Historique
-- Actions rapides
+🔜 Prochaines améliorations
+Portfolio Premium
+[ ] ROI global
 
+[ ] Évolution sur 7 / 30 / 365 jours
 
-### UI Final Polish
+[ ] Graphiques avancés
 
-- Remplacement emojis par Lucide Icons
-- Skeleton loaders
-- Empty states
-- Animations avancées
-- Optimisation responsive
+[ ] Répartition par extensions et raretés
 
+[ ] Performance du portefeuille
 
----
+Intelligence avancée
+[ ] Modèles prédictifs améliorés
 
-# 🎯 Vision du projet
+[ ] Analyse des tendances du marché
 
-King_TCG ambitionne de devenir un véritable assistant pour collectionneurs :
+[ ] Détection automatique des cartes sous-évaluées
 
-> "Ne plus seulement posséder des cartes, mais comprendre leur valeur."
+[ ] Comparaison historique
 
-Le projet combine collection, données marché et intelligence artificielle afin d'offrir une expérience complète aux passionnés du TCG Pokémon.
+Expérience utilisateur
+[ ] Remplacement des emojis par Lucide Icons
 
+[ ] Skeleton loaders & animations avancées
 
----
+[ ] Mode tablette
 
-# 🤝 Contribution
+[ ] Optimisations de performances
 
-Les contributions sont les bienvenues.
+🎯 Vision du projet
+King_TCG veut devenir un véritable assistant intelligent pour les collectionneurs Pokémon.
 
-Avant toute modification :
+"Ne plus seulement posséder des cartes, mais comprendre leur valeur."
 
-1. Créer une branche :
+Le projet combine Collection, Données marché, Analyse financière et Intelligence artificielle pour proposer une nouvelle manière de gérer un patrimoine TCG.
 
-```bash
+🤝 Contribution
+Les contributions sont les bienvenues !
+
+Créez une nouvelle branche :
+
+Bash
 git checkout -b feature/nouvelle-fonctionnalite
-```
+Effectuez vos modifications.
 
-2. Effectuer vos changements.
+Ouvrez une Pull Request.
 
-3. Créer une Pull Request.
-
-
----
-
-# 📄 Licence
-
+📄 Licence
 Projet privé - Tous droits réservés.
-
----
-
-# 👑 King_TCG
-
-Built with ❤️ for Pokémon TCG collectors.
