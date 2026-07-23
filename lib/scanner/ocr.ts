@@ -8,7 +8,7 @@ async function getWorker() {
   worker = await Tesseract.createWorker("eng");
 
   await worker.setParameters({
-    tessedit_pageseg_mode: "6",
+    tessedit_pageseg_mode: "8",
     preserve_interword_spaces: "1",
     tessedit_char_whitelist:
   "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzÀ-ÿ' -",
