@@ -58,7 +58,7 @@ export async function detectCard(
   const cropWidth = image.width * 0.75;
   const cropHeight = cropWidth / ratio;
 
-  const searchRadius = 0;
+  const searchRadius = Math.round(image.width * 0.16);
   const step = Math.max(8, Math.round(image.width * 0.01));
 
   let bestX = (image.width - cropWidth) / 2;
