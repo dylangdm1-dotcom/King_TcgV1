@@ -11,10 +11,10 @@ export function createOCRCrop(image64: string): Promise<string> {
        * Adaptée au cadrage actuel du scanner
        */
       const sourceX = Math.round(img.width * 0.08);
-      const sourceY = Math.round(img.height * 0.04);
+      const sourceY = Math.round(img.height * 0.055);
 
       const sourceWidth = Math.round(img.width * 0.84);
-      const sourceHeight = Math.round(img.height * 0.12);
+      const sourceHeight = Math.round(img.height * 0.09);
 
 
       const canvas = document.createElement("canvas");
@@ -92,6 +92,8 @@ export function createOCRCrop(image64: string): Promise<string> {
           g * 0.587 +
           b * 0.114;
 
+        // seuil noir/blanc
+        const value = gray > 160 ? 255 : 0;  
 
         data[i] = gray;
         data[i + 1] = gray;
