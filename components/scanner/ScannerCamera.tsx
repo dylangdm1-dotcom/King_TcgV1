@@ -21,6 +21,7 @@ const ScannerCamera = forwardRef<ScannerCameraHandle, Props>(
   function ScannerCamera({ onReady }, ref) {
     const videoRef = useRef<HTMLVideoElement>(null);
     const streamRef = useRef<MediaStream | null>(null);
+    const readyRef = useRef(false);
 
     useImperativeHandle(ref, () => ({
       capture() {
@@ -79,13 +80,23 @@ const ScannerCamera = forwardRef<ScannerCameraHandle, Props>(
 
           video.srcObject = stream;
 
-          await video.play();
+          const handleReady = () => {
+            if (readyRef.current) return;
 
-          video.onloadedmetadata = () => {
+            readyRef.current = true;
             onReady?.();
           };
+
+          video.onloadedmetadata = handleReady;
+
+          await video.play();
+
+          if (video.readyState >= 2) {
+            handleReady();
+          }
+
         } catch (err) {
-          console.error("[Scanner]", err);
+          console.error("[Scanner Camera]", err);
         }
       }
 
@@ -93,9 +104,12 @@ const ScannerCamera = forwardRef<ScannerCameraHandle, Props>(
 
       return () => {
         cancelled = true;
+        readyRef.current = false;
 
         if (streamRef.current) {
-          streamRef.current.getTracks().forEach((t) => t.stop());
+          streamRef.current
+            .getTracks()
+            .forEach((track) => track.stop());
         }
       };
     }, [onReady]);
@@ -116,8 +130,11 @@ const ScannerCamera = forwardRef<ScannerCameraHandle, Props>(
           <div className="relative h-[72%] w-[72%] rounded-2xl border-2 border-cyan-400">
 
             <div className="absolute -left-1 -top-1 h-10 w-10 border-l-4 border-t-4 border-cyan-400" />
+
             <div className="absolute -right-1 -top-1 h-10 w-10 border-r-4 border-t-4 border-cyan-400" />
+
             <div className="absolute -left-1 -bottom-1 h-10 w-10 border-l-4 border-b-4 border-cyan-400" />
+
             <div className="absolute -right-1 -bottom-1 h-10 w-10 border-r-4 border-b-4 border-cyan-400" />
 
           </div>
