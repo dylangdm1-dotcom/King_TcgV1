@@ -30,7 +30,7 @@
  
    await worker.setParameters({
  
-     tessedit_pageseg_mode: "7",
+     tessedit_pageseg_mode: 7 as any,
  
      tessedit_char_whitelist:
        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789/-À-ÿ",
@@ -165,7 +165,7 @@
       */
      await worker.setParameters({
  
-       tessedit_pageseg_mode: "7",
+       tessedit_pageseg_mode: 7 as any,
  
        tessedit_char_whitelist:
          "0123456789/",
