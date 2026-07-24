@@ -2,7 +2,7 @@
 
 export const dynamic = "force-dynamic";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 
 import ScannerCamera, {
@@ -31,14 +31,13 @@ export default function ScannerPage() {
   );
   const [cardPreview, setCardPreview] = useState<string | null>(null);
 
-  useEffect(() => {
-    loadOpenCV()
-      .then(() => {
-        console.log("✅ OpenCV prêt");
-      })
-      .catch((err) => {
-        console.error("❌ OpenCV erreur", err);
-      });
+  // Optimisation : La caméra signale qu'elle est prête, la page devient réactive immédiatement
+  const handleCameraReady = useCallback(() => {
+    setReady(true);
+    // Préchargement discret d'OpenCV 1 seconde APRÈS que la caméra tourne parfaitement
+    setTimeout(() => {
+      loadOpenCV().catch((err) => console.error("Erreur préchargement OpenCV", err));
+    }, 1000);
   }, []);
 
   async function scan() {
@@ -54,8 +53,13 @@ export default function ScannerPage() {
 
       if (!imageDataUrl) {
         setStatus("Impossible de capturer l'image.");
+        setScanning(false);
         return;
       }
+
+      // S'assure qu'OpenCV est totalement prêt avant d'analyser
+      setStatus("Vérification du moteur d'analyse...");
+      await loadOpenCV();
 
       // Encapsulation de img.onload dans une Promise pour attendre la fin du traitement
       await new Promise<void>((resolve) => {
@@ -148,7 +152,7 @@ export default function ScannerPage() {
           </section>
 
           <div className="relative aspect-[9/16] overflow-hidden rounded-xl border border-zinc-900 bg-neutral-950 shadow-xl">
-            <ScannerCamera ref={cameraRef} onReady={() => setReady(true)} />
+            <ScannerCamera ref={cameraRef} onReady={handleCameraReady} />
             <ScannerOverlay scanning={scanning} />
           </div>
 
