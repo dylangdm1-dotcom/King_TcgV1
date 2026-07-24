@@ -2,187 +2,646 @@
 
 export const dynamic = "force-dynamic";
 
-import { useRef, useState, useCallback } from "react";
-import { useRouter } from "next/navigation";
+import {
+  useRef,
+  useState,
+  useCallback,
+} from "react";
+
+import {
+  useRouter,
+} from "next/navigation";
+
 
 import ScannerCamera, {
   type ScannerCameraHandle,
 } from "../../components/scanner/ScannerCamera";
+
 import ScannerOverlay from "../../components/scanner/ScannerOverlay";
 
-import { detectCard } from "../../lib/scanner/detection";
-import { readCardName } from "../../lib/scanner/ocr";
-import { createOCRCrop } from "../../lib/scanner/ocrCrop";
-import { searchCards } from "../../lib/pokemon";
-import { translatePokemonName } from "../../lib/pokemonTranslator";
 
-import { loadOpenCV } from "../../lib/opencv/loadOpenCV";
+import {
+  captureFrame,
+} from "../../lib/scanner/capture";
+
+
+import {
+  cropCardZones,
+  type CardCrops,
+} from "../../lib/scanner/nativeCrop";
+
+
+import {
+  processCardOCR,
+} from "../../lib/scanner/ocr";
+
+
+import {
+  lookupPokemonCard,
+} from "../../lib/scanner/pokemonLookup";
+
 
 import Navbar from "../../components/Navbar";
 
+
+
 export default function ScannerPage() {
-  const cameraRef = useRef<ScannerCameraHandle>(null);
-  const router = useRouter();
 
-  const [ready, setReady] = useState(false);
-  const [scanning, setScanning] = useState(false);
-  const [status, setStatus] = useState(
-    "Centrez la carte dans le cadre puis appuyez sur Scanner"
-  );
-  const [cardPreview, setCardPreview] = useState<string | null>(null);
 
-  // Optimisation : La caméra signale qu'elle est prête, la page devient réactive immédiatement
-  const handleCameraReady = useCallback(() => {
-    setReady(true);
-    // Préchargement discret d'OpenCV 1 seconde APRÈS que la caméra tourne parfaitement
-    setTimeout(() => {
-      loadOpenCV().catch((err) => console.error("Erreur préchargement OpenCV", err));
-    }, 1000);
-  }, []);
+  const cameraRef =
+    useRef<ScannerCameraHandle>(null);
+
+
+  const router =
+    useRouter();
+
+
+
+  const [ready, setReady] =
+    useState(false);
+
+
+  const [scanning, setScanning] =
+    useState(false);
+
+
+  const [status, setStatus] =
+    useState(
+      "Alignez la carte dans le cadre et appuyez sur Scanner"
+    );
+
+
+  const [previewCrops, setPreviewCrops] =
+    useState<CardCrops | null>(null);
+
+
+
+
+
+  const handleCameraReady =
+    useCallback(() => {
+
+      setReady(true);
+
+    }, []);
+
+
+
+
+
+
 
   async function scan() {
-    if (!cameraRef.current || scanning) return;
+
+
+    if (
+      !cameraRef.current ||
+      scanning
+    ) {
+      return;
+    }
+
+
+
+    const video =
+      cameraRef.current.getVideo();
+
+
+
+    if (!video) {
+
+      setStatus(
+        "Caméra non disponible."
+      );
+
+      return;
+
+    }
+
+
 
     setScanning(true);
-    setCardPreview(null);
+
+    setPreviewCrops(null);
+
+
 
     try {
-      setStatus("Capture de la carte...");
 
-      const imageDataUrl = cameraRef.current.capture();
 
-      if (!imageDataUrl) {
-        setStatus("Impossible de capturer l'image.");
-        setScanning(false);
+      /**
+       * 1 - Capture image caméra
+       */
+      setStatus(
+        "Capture de la carte..."
+      );
+
+
+
+      const image64 =
+        captureFrame(video);
+
+
+
+      if (!image64) {
+
+        setStatus(
+          "Impossible de capturer l'image."
+        );
+
         return;
+
       }
 
-      // S'assure qu'OpenCV est totalement prêt avant d'analyser
-      setStatus("Vérification du moteur d'analyse...");
-      await loadOpenCV();
 
-      // Encapsulation de img.onload dans une Promise pour attendre la fin du traitement
-      await new Promise<void>((resolve) => {
-        const img = new Image();
 
-        img.onload = async () => {
-          try {
-            setStatus("Détection de la carte...");
 
-            // 1. Détection OpenCV
-            const result = await detectCard(img);
+      /**
+       * 2 - Découpe zones carte
+       */
+      setStatus(
+        "Analyse du cadrage..."
+      );
 
-            if (!result) {
-              setStatus("Aucune carte détectée. Rapprochez la carte.");
-              return resolve();
-            }
 
-            setCardPreview(result.image);
-            setStatus("Lecture du nom Pokémon...");
+      const crops =
+        await cropCardZones(
+          image64
+        );
 
-            // 2. Recadrage spécifique pour l'OCR & Lecture Tesseract
-            const ocrImage = await createOCRCrop(result.image);
-            const rawName = await readCardName(ocrImage);
 
-            if (!rawName) {
-              setStatus("Impossible de lire le nom.");
-              return resolve();
-            }
 
-            console.log("OCR brut :", rawName);
+      if (!crops) {
 
-            // 3. Correction & Traduction du nom
-            const correctedName = translatePokemonName(rawName);
-            console.log("Nom recherché :", correctedName);
+        setStatus(
+          "Impossible de découper la carte."
+        );
 
-            setStatus(`Recherche : ${correctedName}`);
+        return;
 
-            // 4. Appel API
-            const results = await searchCards(correctedName);
+      }
 
-            if (!results || !results.length) {
-              setStatus(`Carte introuvable (${correctedName})`);
-              return resolve();
-            }
 
-            const found = results[0];
-            console.log("Carte trouvée :", found);
 
-            setStatus("Carte trouvée ! Redirection...");
+      setPreviewCrops(crops);
 
-            // Redirection vers la fiche de la carte
-            router.push(`/card/${found.id}`);
-          } catch (error) {
-            console.error("SCAN ERROR :", error);
-            setStatus("Erreur pendant l'analyse.");
-          } finally {
-            resolve();
-          }
-        };
 
-        img.onerror = () => {
-          setStatus("Erreur lors du chargement de la capture.");
-          resolve();
-        };
 
-        img.src = imageDataUrl;
-      });
-    } catch (err) {
-      console.error("Erreur générale du scan :", err);
-      setStatus("Une erreur est survenue.");
+
+
+
+      /**
+       * 3 - OCR
+       */
+      setStatus(
+        "Lecture OCR..."
+      );
+
+
+
+      const ocr =
+        await processCardOCR(
+          crops.nameCrop,
+          crops.numberCrop
+        );
+
+
+
+      if (
+        !ocr.rawName &&
+        !ocr.cardNumber
+      ) {
+
+        setStatus(
+          "Lecture impossible. Améliorez la lumière."
+        );
+
+        return;
+
+      }
+
+
+
+
+
+      setStatus(
+        `Analyse : ${ocr.rawName}${
+          ocr.cardNumber
+            ? ` (${ocr.cardNumber})`
+            : ""
+        }`
+      );
+
+
+
+
+
+
+
+      /**
+       * 4 - Recherche API Pokémon
+       */
+      setStatus(
+        "Recherche carte..."
+      );
+
+
+
+      const match =
+        await lookupPokemonCard(
+          ocr.rawName,
+          ocr.cardNumber
+        );
+
+
+
+      if (!match) {
+
+        setStatus(
+          `Carte introuvable : ${ocr.rawName}`
+        );
+
+        return;
+
+      }
+
+
+
+
+
+
+      if (
+        match.confidence < 50
+      ) {
+
+        setStatus(
+          "Résultat incertain. Nouveau scan conseillé."
+        );
+
+        return;
+
+      }
+
+
+
+
+
+
+      setStatus(
+        `Trouvé : ${match.card.name} (${match.confidence}%)`
+      );
+
+
+
+      setTimeout(() => {
+
+        router.push(
+          `/card/${match.card.id}`
+        );
+
+      }, 500);
+
+
+
+
+
+    } catch(error) {
+
+
+      console.error(
+        "Scanner V2 error:",
+        error
+      );
+
+
+      setStatus(
+        "Erreur pendant l'analyse."
+      );
+
+
+
     } finally {
+
+
       setScanning(false);
+
+
     }
+
   }
 
+
+
+
+
+
+
   return (
+
     <>
+
       <Navbar />
 
+
       <main className="min-h-screen bg-black text-white pb-20">
+
+
         <div className="mx-auto max-w-xl space-y-6 px-4 py-6">
-          <section className="rounded-xl border border-zinc-900 bg-neutral-950/40 p-4 text-center">
-            <span className="text-[9px] font-black uppercase tracking-wider text-zinc-500">
-              Optics Capture Module
+
+
+
+          <section className="
+            rounded-xl
+            border
+            border-zinc-900
+            bg-neutral-950/40
+            p-4
+            text-center
+          ">
+
+
+            <span className="
+              text-[9px]
+              font-black
+              uppercase
+              tracking-wider
+              text-cyan-500
+            ">
+
+              Native Web Engine V2
+
             </span>
 
-            <h1 className="mt-1 text-lg font-black uppercase tracking-tight">
+
+
+            <h1 className="
+              mt-1
+              text-lg
+              font-black
+              uppercase
+              tracking-tight
+            ">
+
               King_TCG Scanner
+
             </h1>
+
+
           </section>
 
-          <div className="relative aspect-[9/16] overflow-hidden rounded-xl border border-zinc-900 bg-neutral-950 shadow-xl">
-            <ScannerCamera ref={cameraRef} onReady={handleCameraReady} />
-            <ScannerOverlay scanning={scanning} />
+
+
+
+
+
+
+          <div className="
+            relative
+            aspect-[9/16]
+            overflow-hidden
+            rounded-xl
+            border
+            border-zinc-900
+            bg-neutral-950
+            shadow-xl
+          ">
+
+
+            <ScannerCamera
+
+              ref={cameraRef}
+
+              onReady={
+                handleCameraReady
+              }
+
+            />
+
+
+            <ScannerOverlay
+
+              scanning={
+                scanning
+              }
+
+            />
+
+
           </div>
+
+
+
+
+
+
+
 
           <button
+
             onClick={scan}
-            disabled={!ready || scanning}
-            className="w-full rounded-xl bg-cyan-500 py-4 text-lg font-bold text-black transition hover:bg-cyan-400 disabled:opacity-40"
+
+            disabled={
+              !ready ||
+              scanning
+            }
+
+
+            className="
+              w-full
+              rounded-xl
+              bg-cyan-500
+              py-4
+              text-lg
+              font-bold
+              text-black
+              transition
+              hover:bg-cyan-400
+              disabled:opacity-40
+            "
+
           >
-            {scanning ? "Analyse en cours..." : "Scanner la carte"}
+
+            {
+              scanning
+                ? "Analyse..."
+                : "Scanner la carte"
+            }
+
+
           </button>
 
-          <div className="rounded-xl border border-zinc-900 bg-neutral-950/40 p-4">
-            <span className="text-xs uppercase tracking-widest text-zinc-500">
+
+
+
+
+
+
+
+          <div className="
+            rounded-xl
+            border
+            border-zinc-900
+            bg-neutral-950/40
+            p-4
+          ">
+
+
+            <span className="
+              text-xs
+              uppercase
+              tracking-widest
+              text-zinc-500
+            ">
+
               Statut
+
             </span>
 
-            <p className="mt-3 text-center text-sm font-semibold">{status}</p>
+
+
+            <p className="
+              mt-2
+              text-center
+              text-sm
+              font-semibold
+            ">
+
+              {status}
+
+            </p>
+
+
           </div>
 
-          {cardPreview && (
-            <div className="overflow-hidden rounded-xl border border-zinc-800">
-              <img
-                src={cardPreview}
-                alt="Carte détectée"
-                className="w-full"
-              />
-            </div>
-          )}
+
+
+
+
+
+
+
+
+          {
+            previewCrops && (
+
+              <div className="
+                grid
+                grid-cols-2
+                gap-3
+              ">
+
+
+
+                <div className="
+                  rounded-lg
+                  border
+                  border-zinc-800
+                  bg-zinc-900/50
+                  p-2
+                ">
+
+
+                  <span className="
+                    mb-1
+                    block
+                    text-[10px]
+                    font-bold
+                    uppercase
+                    text-zinc-400
+                  ">
+
+                    Zone Nom
+
+                  </span>
+
+
+
+                  <img
+
+                    src={
+                      previewCrops.nameCrop
+                    }
+
+                    alt="Nom Pokémon"
+
+                    className="
+                      w-full
+                      rounded
+                      border
+                      border-zinc-700
+                    "
+
+                  />
+
+
+                </div>
+
+
+
+
+
+
+
+                <div className="
+                  rounded-lg
+                  border
+                  border-zinc-800
+                  bg-zinc-900/50
+                  p-2
+                ">
+
+
+                  <span className="
+                    mb-1
+                    block
+                    text-[10px]
+                    font-bold
+                    uppercase
+                    text-zinc-400
+                  ">
+
+                    Zone Numéro
+
+                  </span>
+
+
+
+                  <img
+
+                    src={
+                      previewCrops.numberCrop
+                    }
+
+                    alt="Numéro carte"
+
+                    className="
+                      w-full
+                      rounded
+                      border
+                      border-zinc-700
+                    "
+
+                  />
+
+
+                </div>
+
+
+              </div>
+
+            )
+          }
+
+
+
         </div>
+
+
       </main>
+
+
     </>
+
   );
+
 }
