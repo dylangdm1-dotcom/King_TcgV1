@@ -184,7 +184,7 @@ export function prepareImageForOCR(
   preprocessCanvas(
     ctx,
     width,
-    height
+    height,
     1.3
   );
 
