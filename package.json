@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@google/genai": "^2.13.0",
+    "@google/generative-ai": "^0.24.1",
     "@tcgdex/sdk": "^2.9.0",
     "@types/node": "20.6.2",
     "@types/react": "18.2.22",
@@ -25,7 +27,6 @@
     "react-dom": "18.2.0",
     "recharts": "2.12.7",
     "tailwindcss": "3.3.3",
-    "tesseract.js": "^7.0.0",
     "typescript": "5.2.2"
   }
 }
