@@ -1,10 +1,10 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import Navbar from "../../components/Navbar";
 import CardResult from "@/components/cards/CardResult";
 import SearchFilters from "../../components/SearchFilters";
-import { searchCards } from "../../lib/pokemon";
+import { searchCards, searchCardsBySetId, getAllSets } from "../../lib/pokemon";
 import { filterCards, type SearchFilters as SearchFiltersType } from "../../lib/search";
 import type { PokemonCard } from "../../lib/types";
 
@@ -20,6 +20,11 @@ export default function Recherche() {
   const [visible, setVisible] = useState(PAGE_SIZE);
   const [viewMode, setViewMode] = useState<"grid" | "large">("grid");
 
+  // Mode de recherche : 'text' (nom de carte) ou 'set' (par extension)
+  const [searchMode, setSearchMode] = useState<"text" | "set">("text");
+  const [allSetsList, setAllSetsList] = useState<any[]>([]);
+  const [selectedSetId, setSelectedSetId] = useState<string>("");
+
   const [filters, setFilters] = useState<SearchFiltersType>({
     category: "all",
     rarity: "all",
@@ -27,6 +32,16 @@ export default function Recherche() {
     sort: "recent",
   });
 
+  // Charger la liste des extensions au premier affichage
+  useEffect(() => {
+    async function loadSets() {
+      const setsData = await getAllSets();
+      setAllSetsList(setsData);
+    }
+    loadSets();
+  }, []);
+
+  // Recherche textuelle classique
   async function handleSearch() {
     const value = searchQuery.trim();
     setQuery(value);
@@ -45,6 +60,26 @@ export default function Recherche() {
       setVisible(PAGE_SIZE);
     } catch (error) {
       console.error("[King_TCG] Erreur recherche :", error);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  // 🆕 Recherche directe par Extension
+  async function handleSetSelect(setId: string) {
+    setSelectedSetId(setId);
+    if (!setId) return;
+
+    const chosenSet = allSetsList.find((s) => s.id === setId);
+    setQuery(chosenSet ? chosenSet.name : setId);
+    setLoading(true);
+
+    try {
+      const results = await searchCardsBySetId(setId);
+      setCards(results);
+      setVisible(PAGE_SIZE);
+    } catch (error) {
+      console.error("[King_TCG] Erreur recherche extension :", error);
     } finally {
       setLoading(false);
     }
@@ -83,26 +118,70 @@ export default function Recherche() {
               Filtrez les bases TCG, analysez les cotations et recherchez vos Pokémon.
             </p>
 
-            <div className="mt-5 space-y-3">
-              <input
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    handleSearch();
-                  }
-                }}
-                placeholder="Saisir un nom de Pokémon, une extension..."
-                className="w-full rounded-lg border border-zinc-900 bg-neutral-950/80 px-4 py-3 text-xs font-bold text-white placeholder-zinc-600 outline-none transition focus:border-cyan-500/30"
-              />
-
+            {/* Commutateur de Mode : Texte / Extension */}
+            <div className="mt-4 flex gap-2">
               <button
-                onClick={handleSearch}
-                disabled={loading}
-                className="w-full rounded-lg bg-cyan-500 py-3 text-xs font-black uppercase tracking-widest text-black transition hover:bg-cyan-400 disabled:opacity-50"
+                onClick={() => setSearchMode("text")}
+                className={`rounded-lg px-3 py-1.5 text-[11px] font-black uppercase tracking-wider transition ${
+                  searchMode === "text"
+                    ? "bg-cyan-500 text-black"
+                    : "border border-zinc-800 bg-neutral-900 text-zinc-400 hover:text-white"
+                }`}
               >
-                {loading ? "Recherche..." : "Rechercher"}
+                Par Nom
               </button>
+              <button
+                onClick={() => setSearchMode("set")}
+                className={`rounded-lg px-3 py-1.5 text-[11px] font-black uppercase tracking-wider transition ${
+                  searchMode === "set"
+                    ? "bg-cyan-500 text-black"
+                    : "border border-zinc-800 bg-neutral-900 text-cyan-400 hover:bg-cyan-500/10"
+                }`}
+              >
+                📦 Par Extension
+              </button>
+            </div>
+
+            <div className="mt-4 space-y-3">
+              {searchMode === "text" ? (
+                <>
+                  <input
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        handleSearch();
+                      }
+                    }}
+                    placeholder="Saisir un nom de Pokémon, un dresseur..."
+                    className="w-full rounded-lg border border-zinc-900 bg-neutral-950/80 px-4 py-3 text-xs font-bold text-white placeholder-zinc-600 outline-none transition focus:border-cyan-500/30"
+                  />
+
+                  <button
+                    onClick={handleSearch}
+                    disabled={loading}
+                    className="w-full rounded-lg bg-cyan-500 py-3 text-xs font-black uppercase tracking-widest text-black transition hover:bg-cyan-400 disabled:opacity-50"
+                  >
+                    {loading ? "Recherche..." : "Rechercher"}
+                  </button>
+                </>
+              ) : (
+                /* Sélecteur d'extension Cyan */
+                <div className="space-y-2">
+                  <select
+                    value={selectedSetId}
+                    onChange={(e) => handleSetSelect(e.target.value)}
+                    className="w-full rounded-lg border border-cyan-500/40 bg-neutral-950/90 px-4 py-3 text-xs font-bold text-cyan-300 outline-none transition focus:border-cyan-400"
+                  >
+                    <option value="">-- Choisir une extension / série --</option>
+                    {allSetsList.map((s) => (
+                      <option key={s.id} value={s.id} className="bg-neutral-900 text-white">
+                        {s.series} -- {s.name} ({s.id.toUpperCase()}) [{s.total} cartes]
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              )}
             </div>
 
             <div className="mt-5">
