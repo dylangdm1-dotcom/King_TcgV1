@@ -273,17 +273,6 @@ export function translatePokemonToFrench(name: string): string {
 
 export function cleanTCGSuffix(name: string): string {
   if (!name) return "";
-  return name
-  .replace(
-    /\s+(ex|EX|gx|GX|v|V|vmax|VMAX|vstar|VSTAR|radiant|shiny|prime|AR|SAR|IR)$/i,
-    ""
-   )
-    .replace(/\s+/g, " ")
-    .trim();
-}
-
-export function cleanTCGSuffix(name: string): string {
-  if (!name) return "";
 
   return name
     .replace(
@@ -298,6 +287,23 @@ export function cleanTCGSuffix(name: string): string {
     .trim();
 }
 
+
+function extractTCGSuffix(name: string): string {
+  if (!name) return "";
+
+  const cleaned = name
+    .replace(
+      /\b(d'alola|d alola|alola|hisui|de hisui)\b/gi,
+      ""
+    )
+    .trim();
+
+  const match = cleaned.match(
+    /\b(ex|EX|gx|GX|v|V|vmax|VMAX|vstar|VSTAR|radiant|shiny|prime|AR|SAR|IR)\b/i
+  );
+
+  return match ? match[1].toLowerCase() : "";
+}
 export function translatePokemonToEnglish(name: string): string | null {
   if (!name) return null;
 
