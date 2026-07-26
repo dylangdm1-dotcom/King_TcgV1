@@ -5,14 +5,12 @@ export const dynamic = "force-dynamic";
 import { useRef, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 
-// Import du composant par défaut uniquement (évite les erreurs d'export TypeScript)
 import ScannerCamera from "../../components/scanner/ScannerCamera";
 import ScannerOverlay from "../../components/scanner/ScannerOverlay";
 import { captureFrame } from "../../lib/scanner/capture";
 import { lookupPokemonCard } from "../../lib/scanner/pokemonLookup";
 import Navbar from "../../components/Navbar";
 
-// Interface locale pour le ref de la caméra
 interface ScannerCameraHandle {
   getVideo: () => HTMLVideoElement | null;
 }
@@ -27,7 +25,6 @@ export default function ScannerPage() {
     "Alignez la carte dans le cadre et appuyez sur Scanner"
   );
 
-  // État pour afficher les informations détectées par Gemini en direct
   const [detectedCard, setDetectedCard] = useState<{
     name: string;
     number?: string;
@@ -79,6 +76,7 @@ export default function ScannerPage() {
       });
 
       const resData = await response.json();
+      console.log("🔍 Réponse reçue de l'API Gemini :", resData);
 
       if (!resData.success || !resData.data?.cardName) {
         setStatus("Carte non reconnue. Améliorez la lumière ou le cadrage.");
