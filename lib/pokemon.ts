@@ -1,5 +1,4 @@
 import type { PokemonCard, CardScanResult } from "./types";
-
 import {
   translatePokemonToEnglish,
   correctPokemonOCR,
@@ -29,7 +28,6 @@ function normalize(card: any): PokemonCard {
 
 function saveBrowserCache(cards: PokemonCard[]) {
   if (typeof window === "undefined") return;
-
   try {
     localStorage.setItem(CACHE_KEY, JSON.stringify(cards));
   } catch {}
@@ -39,14 +37,12 @@ function loadBrowserCache(): PokemonCard[] {
   if (typeof window === "undefined") {
     return [];
   }
-
   try {
     const data = localStorage.getItem(CACHE_KEY);
-
-    if (!data) return [];
-
+    if (!data) {
+      return [];
+    }
     const parsed = JSON.parse(data);
-
     return Array.isArray(parsed) ? parsed.map(normalize) : [];
   } catch {
     return [];
@@ -61,14 +57,8 @@ function normalizeText(value: string) {
     .trim();
 }
 
-/**
- * Extraction numéro carte
- * Exemple :
- * Pikachu 025/165
- */
 function parseSearchInput(input: string) {
   const trimmed = input.trim();
-
   const match = trimmed.match(/\s+(\d{1,3})(?:\/\d{1,3})?$/);
 
   if (!match) {
@@ -79,7 +69,6 @@ function parseSearchInput(input: string) {
   }
 
   const original = match[1];
-
   const withoutZero = original.replace(/^0+/, "") || "0";
 
   return {
@@ -90,7 +79,6 @@ function parseSearchInput(input: string) {
 
 async function fetchPage(query: string, page = 1): Promise<any[]> {
   const params = new URLSearchParams();
-
   params.set("q", query);
   params.set("page", String(page));
   params.set("pageSize", "50");
@@ -115,7 +103,6 @@ async function fetchPage(query: string, page = 1): Promise<any[]> {
     }
 
     const json = await response.json();
-
     return json.data ?? [];
   } catch (error) {
     console.error("[Pokemon API]", error);
@@ -125,37 +112,33 @@ async function fetchPage(query: string, page = 1): Promise<any[]> {
 
 function removeDuplicates(cards: PokemonCard[]) {
   const map = new Map<string, PokemonCard>();
-
   cards.forEach((card) => {
     map.set(card.id, card);
   });
-
   return Array.from(map.values());
 }
 
 function compareCardNumbers(a?: string, b?: string | null) {
-  if (!a || !b) return false;
+  if (!a || !b) {
+    return false;
+  }
 
   const clean = (value: string) => value.split("/")[0].replace(/^0+/, "");
-
   return clean(a) === clean(b);
 }
 
-/**
- * Score final
- * Sert uniquement à choisir
- * la meilleure carte
- */
 function scoreCard(card: PokemonCard, scan: CardScanResult) {
   let score = 0;
-
   const cardName = normalizeText(card.name);
-
   const target = normalizeText(scan.cardName ?? scan.pokemonName ?? "");
 
-  if (cardName === target) score += 100;
+  if (cardName === target) {
+    score += 100;
+  }
 
-  if (target && cardName.includes(target)) score += 40;
+  if (target && cardName.includes(target)) {
+    score += 40;
+  }
 
   if (scan.cardNumber && compareCardNumbers(card.number, scan.cardNumber)) {
     score += 150;
@@ -163,6 +146,7 @@ function scoreCard(card: PokemonCard, scan: CardScanResult) {
 
   if (
     scan.setName &&
+    card.set?.name &&
     normalizeText(card.set.name).includes(normalizeText(scan.setName))
   ) {
     score += 80;
@@ -174,7 +158,9 @@ function scoreCard(card: PokemonCard, scan: CardScanResult) {
 export async function searchCards(search = ""): Promise<PokemonCard[]> {
   const key = search.trim().toLowerCase();
 
-  if (!key) return [];
+  if (!key) {
+    return [];
+  }
 
   if (searchCache.has(key)) {
     return searchCache.get(key)!;
@@ -183,18 +169,19 @@ export async function searchCards(search = ""): Promise<PokemonCard[]> {
   const { namePart, numbers } = parseSearchInput(key);
 
   let corrected = correctPokemonOCR(namePart);
-
   corrected = resolvePokemonName(corrected);
 
-  /**
-   * Nettoyage TCG
-   * Noadkoko V d'Alola
-   * devient Noadkoko d'Alola
-   */
+  /*
+    Exemple :
+    Noadkoko V d'Alola
+
+    devient :
+    Noadkoko d'Alola
+
+    puis traduction EN
+  */
   const cleanBase = cleanTCGSuffix(corrected);
-
   const translated = translatePokemonToEnglish(corrected);
-
   const translatedBase = translatePokemonToEnglish(cleanBase);
 
   const candidates = Array.from(
@@ -207,41 +194,43 @@ export async function searchCards(search = ""): Promise<PokemonCard[]> {
 
   let cards: PokemonCard[] = [];
 
-  /**
-   * 1 - Recherche nom + numéro
-   */
+  /*
+    1 - Recherche numéro seul
+
+    Plus fiable avec les cartes
+    V / EX / GX / Full Art
+  */
   if (numbers.length) {
-    for (const name of candidates) {
-      const found = await fetchPage(
-        `name:"${name}" number:${numbers[0]}`,
-        1
-      );
-
-      cards = removeDuplicates([...cards, ...found.map(normalize)]);
-    }
-  }
-
-  /**
-   * 2 - Recherche nom seul
-   */
-  if (cards.length === 0) {
-    for (const name of candidates) {
-      const found = await fetchPage(`name:"${name}"`, 1);
-
-      cards = removeDuplicates([...cards, ...found.map(normalize)]);
-
-      if (cards.length) break;
-    }
-  }
-
-  /**
-   * 3 - Dernier secours numéro
-   */
-  if (cards.length === 0 && numbers.length) {
     for (const number of numbers) {
       const found = await fetchPage(`number:${number}`, 1);
-
       cards = removeDuplicates([...cards, ...found.map(normalize)]);
+    }
+  }
+
+  /*
+    2 - Recherche nom large
+  */
+  if (!cards.length) {
+    for (const name of candidates) {
+      const found = await fetchPage(`name:${name}`, 1);
+      cards = removeDuplicates([...cards, ...found.map(normalize)]);
+      if (cards.length) {
+        break;
+      }
+    }
+  }
+
+  /*
+    3 - Recherche texte complet
+    dernier secours
+  */
+  if (!cards.length) {
+    for (const name of candidates) {
+      const found = await fetchPage(name, 1);
+      cards = removeDuplicates([...cards, ...found.map(normalize)]);
+      if (cards.length) {
+        break;
+      }
     }
   }
 
@@ -250,7 +239,6 @@ export async function searchCards(search = ""): Promise<PokemonCard[]> {
   );
 
   searchCache.set(key, cards);
-
   saveBrowserCache(cards);
 
   return cards;
@@ -274,26 +262,24 @@ export async function getCardById(id: string): Promise<PokemonCard | null> {
   }
 
   const stored = loadBrowserCache();
-
-  const saved = stored.find((c) => c.id === id);
+  const saved = stored.find((card) => card.id === id);
 
   if (saved) {
     cache.set(id, saved);
-
     return saved;
   }
 
   try {
     const response = await fetch(`${API_URL}/${id}`);
 
-    if (!response.ok) return null;
+    if (!response.ok) {
+      return null;
+    }
 
     const json = await response.json();
-
     const card = normalize(json.data);
 
     cache.set(id, card);
-
     return card;
   } catch {
     return null;
@@ -302,7 +288,6 @@ export async function getCardById(id: string): Promise<PokemonCard | null> {
 
 export function clearPokemonCache() {
   cache.clear();
-
   searchCache.clear();
 
   if (typeof window !== "undefined") {
