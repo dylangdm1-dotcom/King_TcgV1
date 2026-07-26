@@ -130,7 +130,7 @@ export default function ScannerPage() {
 
       const cards = await searchCardsFromScan(scanResult);
 
-      if (!cards.length) {
+      if (!cards || cards.length === 0) {
         setStatus(
           `Carte détectée (${scanResult.cardName}) mais introuvable.`
         );
@@ -139,12 +139,7 @@ export default function ScannerPage() {
 
       const best = cards[0];
 
-      if (!best) {
-        setStatus("Aucun résultat fiable.");
-        return;
-      }
-
-      setStatus(`Trouvé : ${best.name}`);
+      setStatus(`Trouvé : ${best.name} (${best.number})`);
 
       setTimeout(() => {
         router.push(`/card/${best.id}`);
