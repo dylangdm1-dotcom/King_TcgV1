@@ -1,14 +1,16 @@
 /**
- * 🧠 Pokémon Translator King TCG V3
+ * 🧠 Pokémon Translator King TCG V3.1
  *
  * Gestion :
  * - Traduction Français ⇄ Anglais
  * - Correction OCR scanner
  * - Gestion suffixes TCG (ex, GX, V, VMAX, VSTAR...)
+ * - Support des cartes Promos TCG (SWSH, SVP, SM, XY, PROMO)
  * - Résolution des noms pour recherche API Pokémon TCG
  */
+
  const ocrAliases: Record<string, string> = {
-  // erreurs OCR fréquentes
+  // Erreurs OCR fréquentes
   dracaufu: "dracaufeu",
   dracaufe: "dracaufeu",
   dracauf: "dracaufeu",
@@ -86,7 +88,7 @@ export const pokemonNames: Record<string, string> = {
   hypocean: "seadra",
   poisseneche: "goldeen", poissoroy: "seaking",
   stari: "staryu", staross: "starmie",
-  mmime: "mr-mime", mrmime: "mr-mime", m_mime: "mr-mime",
+  mmime: "mr. mime", mrmime: "mr. mime", m_mime: "mr. mime",
   insecateur: "scyther", lippoutou: "jynx", elektek: "electabuzz", magmar: "magmar",
   scarabrute: "pinsir", tauros: "tauros",
   magicarpe: "magikarp", leviator: "gyarados", lokhlass: "lapras", metamorph: "ditto",
@@ -166,7 +168,7 @@ export const pokemonNames: Record<string, string> = {
   latias: "latias", latios: "latios", kyogre: "kyogre", groudon: "groudon", rayquaza: "rayquaza",
   jirachi: "jirachi", deoxys: "deoxys",
 
-  // Gen 4 à 9
+  // Gen 4 à 8
   tortipouss: "turtwig", boskara: "grotle", torterra: "torterra",
   ouisticram: "chimchar", chimpenfeu: "monferno", simiabraz: "infernape",
   tiplouf: "piplup", prinplouf: "prinplup", pingoleon: "empoleon",
@@ -189,8 +191,6 @@ export const pokemonNames: Record<string, string> = {
   dialga: "dialga", palkia: "palkia", heatran: "heatran", regigigas: "regigigas",
   giratina: "giratina", cresselia: "cresselia", phione: "phione", manaphy: "manaphy",
   darkrai: "darkrai", shaymin: "shaymin", arceus: "arceus", motisma: "rotom",
-
-  // Gen 5+
   victini: "victini", gruikui: "tepig", grotichon: "pignite", roitiflam: "emboar",
   moustillon: "oshawott", mateloutre: "dewott", clamiral: "samurott",
   vipelierre: "snivy", lianaja: "servine", majaspic: "serperior",
@@ -204,46 +204,46 @@ export const pokemonNames: Record<string, string> = {
   chinchidou: "minccino", cinccino: "cinccino", solochi: "deino", diamat: "zweilous", trioxhydre: "hydreigon",
   pyronille: "larvesta", pyrax: "volcarona", cobaltium: "cobalion", terrakium: "terrakion", viridium: "virizion",
   reshiram: "reshiram", zekrom: "zekrom", kyurem: "kyurem", genesect: "genesect",
-
-  // Gen 6
   marisson: "chespin", feunnec: "fennekin", roussil: "braixen", goupelin: "delphox",
   grenousse: "froakie", croaporal: "frogadier", amphinobi: "greninja",
   passerouge: "fletchling", flambusard: "talonflame", monorpale: "honedge", exagide: "aegislash",
   sonistrelle: "noibat", bruyverne: "noivern", zygarde: "zygarde", diancie: "diancie",
   hoopa: "hoopa", volcanion: "volcanion", nymphali: "sylveon",
-
-  // Gen 7
   brindibou: "rowlet", archeduc: "decidueye", flamiaou: "litten", felinferno: "incineroar",
   otaquin: "popplio", oratoria: "primarina", rocabot: "rockruff", lougaroc: "lycanroc",
   mimiqui: "mimikyu", solgaleo: "solgaleo", lunala: "lunala", necrozma: "necrozma",
   meltan: "meltan", melmetal: "melmetal",
-
-  // Gen 8
   ouistempo: "grookey", gorigandr: "rillaboom", flambino: "scorbunny", pyrobut: "cinderace",
   larmeon: "sobble", lezargus: "inteleon", moumouton: "wooloo",
   zacian: "zacian", zamazenta: "zamazenta", eternatus: "eternatus", shifours: "urshifu",
 
-  // Gen 9
-  poussacha: "sprigatito", miascarade: "meowscarada", chochodile: "fuecoco", flamigator: "skeledirge",
-  coiffeton: "quaxly", palmaval: "quaquaval", gromago: "gholdengo", mordudor: "gimmighoul",
+  // Gen 9 & Ajouts récents
+  poussacha: "sprigatito", matourgeon: "floragato", miascarade: "meowscarada",
+  chochodile: "fuecoco", crocodel: "crocalor", flamigator: "skeledirge",
+  coiffeton: "quaxly", canarbello: "quaxwell", palmaval: "quaquaval",
+  gromago: "gholdengo", mordudor: "gimmighoul",
   koraidon: "koraidon", miraidon: "miraidon",
+  pampam: "fidough", briochien: "dachsbun",
+  charbambin: "charcadet", carmadura: "armarouge", malvalame: "ceruledge",
+  tetsuo: "iron-treads", pachyfer: "iron-thorns", paumedefer: "iron-hands", hottedefer: "iron-bundle",
+  "garde-de-fer": "iron-valiant", "rugi-lune": "roaring-moon",
+  ogerpon: "ogerpon", terapagos: "terapagos",
+  flamenroule: "flamigo", marmitempo: "poltchageist",
 
-  // Formes / Variantes TCG
-  taupiqueurdepaldea: "diglett",
-  triopikeurdepaldea: "dugtrio",
-  flamenroule: "flamigo",
-  zoruahisui: "zorua",
-  zoroarkhisui: "zoroark",
-  arcaninhisui: "arcanine",
-  voltorbehisui: "voltorb",
-  electrodehisui: "electrode",
-  bruyvernehisui: "noivern",
+  // Formes / Variantes TCG Régionales
+  taupiqueurdepaldea: "diglett", triopikeurdepaldea: "dugtrio",
+  zoruahisui: "zorua", zoroarkhisui: "zoroark", arcaninhisui: "arcanine",
+  voltorbehisui: "voltorb", electrodehisui: "electrode", bruyvernehisui: "noivern",
+  caninoshisui: "growlithe", typhlosionhisui: "typhlosion", clamiralhisui: "samurott",
+  goupixdalola: "vulpix", feunarddalola: "ninetales", miaoussdalola: "meowth",
+  persiandalola: "persian", raichudalola: "raichu",
+  miaoussdegalar: "meowth", palarticho: "sirfetchd", darumacho: "darmanitan",
 };
 
 const englishToFrenchNames: Record<string, string> = Object.entries(
   pokemonNames
 ).reduce((acc, [fr, en]) => {
-  acc[en] = fr;
+  acc[en.toLowerCase().replace(/[^a-z0-9]/g, "")] = fr;
   return acc;
 }, {} as Record<string, string>);
 
@@ -255,7 +255,6 @@ function normalizeName(name: string): string {
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
     .replace(/[♀♂]/g, "")
-    .replace(/[.'’_-]/g, "")
     .replace(/[^a-z0-9]/g, "");
 }
 
@@ -271,39 +270,56 @@ export function translatePokemonToFrench(name: string): string {
   return result.charAt(0).toUpperCase() + result.slice(1);
 }
 
+/**
+ * Nettoie les suffixes de rareté TCG et les numéros de promos (SWSH254, SVP001, etc.)
+ */
 export function cleanTCGSuffix(name: string): string {
   if (!name) return "";
 
   return name
+    // Enlève les codes promos TCG (ex: SWSH254, SVP001, SM123, XY123)
+    .replace(/\b(swsh|svp|sm|xy|bw|hgss|dp|promo)\s*\d*\b/gi, "")
+    // Enlève les suffixes TCG de rareté
     .replace(
       /\b(ex|EX|gx|GX|v|V|vmax|VMAX|vstar|VSTAR|radiant|shiny|prime|AR|SAR|IR)\b/gi,
       ""
     )
+    // Enlève les mentions régionales du nom de base
     .replace(
-      /\b(d'alola|d alola|alola|hisui|de hisui)\b/gi,
+      /\b(d'alola|d alola|alola|hisui|de hisui|galar|de galar|paldea|de paldea)\b/gi,
       ""
     )
     .replace(/\s+/g, " ")
     .trim();
 }
 
-
+/**
+ * Extrait le suffixe TCG (Rareté ou Promo)
+ */
 function extractTCGSuffix(name: string): string {
   if (!name) return "";
 
   const cleaned = name
     .replace(
-      /\b(d'alola|d alola|alola|hisui|de hisui)\b/gi,
+      /\b(d'alola|d alola|alola|hisui|de hisui|galar|de galar|paldea|de paldea)\b/gi,
       ""
     )
     .trim();
 
+  // 1. Cherche d'abord un numéro promo (ex: SWSH254 ou SVP001)
+  const promoMatch = cleaned.match(/\b(swsh|svp|sm|xy|promo)\s*\d*\b/i);
+  if (promoMatch) {
+    return promoMatch[0].toUpperCase();
+  }
+
+  // 2. Sinon cherche un suffixe classique (ex: EX, VMAX, V)
   const match = cleaned.match(
-    /\b(ex|EX|gx|GX|v|V|vmax|VMAX|vstar|VSTAR|radiant|shiny|prime|AR|SAR|IR)\b/i
-  );
+    /\b(ex|EX|gx|GX|vmax|VMAX|vstar|VSTAR|radiant|shiny|prime|AR|SAR|IR)\b/i
+  ) || cleaned.match(/\b(v|V)$/i);
 
   return match ? match[1].toLowerCase() : "";
 }
+
 export function translatePokemonToEnglish(name: string): string | null {
   if (!name) return null;
 
@@ -351,51 +367,23 @@ export function correctPokemonOCR(name: string): string {
   const clean = cleanPokemonOCRName(name);
 
   const corrections: Record<string, string> = {
-    // Dracaufeu
     dracauf: "dracaufeu",
     dracaufe: "dracaufeu",
     "dracauf eu": "dracaufeu",
-
-    // Charizard
     "chariz ard": "charizard",
-
-    // Pikachu
     pikach: "pikachu",
     "pikach u": "pikachu",
     pikashu: "pikachu",
-
-    // Mewtwo
     mewtwoo: "mewtwo",
-
-    // Salamèche
     salamech: "salameche",
-
-    // Florizarre
     florizare: "florizarre",
-
-    // Tortank
     tortankk: "tortank",
-
-    // Evolition
     evolii: "evoli",
   };
 
   return corrections[clean] ?? clean;
 }
 
-/**
- * 🃏 Résolution complète King TCG V3
- *
- * Exemple :
- * "Dracauf eu ex"
- * retourne :
- * {
- *   original:"Dracauf eu ex",
- *   pokemon:"charizard",
- *   suffix:"ex",
- *   confidence:95
- * }
- */
 export function resolveTCGCardName(rawName: string) {
   const original = rawName;
 
