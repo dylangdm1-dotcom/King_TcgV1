@@ -34,14 +34,10 @@ function saveBrowserCache(cards: PokemonCard[]) {
 }
 
 function loadBrowserCache(): PokemonCard[] {
-  if (typeof window === "undefined") {
-    return [];
-  }
+  if (typeof window === "undefined") return [];
   try {
     const data = localStorage.getItem(CACHE_KEY);
-    if (!data) {
-      return [];
-    }
+    if (!data) return [];
     const parsed = JSON.parse(data);
     return Array.isArray(parsed) ? parsed.map(normalize) : [];
   } catch {
@@ -57,24 +53,21 @@ function normalizeText(value: string) {
     .trim();
 }
 
-function parseSearchInput(input: string) {
-  const trimmed = input.trim();
-  const match = trimmed.match(/\s+(\d{1,3})(?:\/\d{1,3})?$/);
-
-  if (!match) {
-    return {
-      namePart: trimmed,
-      numbers: [],
-    };
+/**
+ * Nettoie le numéro de carte (ex: "006/182" -> "6", "06/182" -> "6", "TG06/TG30" -> "TG06")
+ */
+function cleanCardNumber(rawNumber: string | null | undefined): string | null {
+  if (!rawNumber) return null;
+  
+  // On prend ce qu'il y a avant le slash (ex: 006/182 -> 006)
+  let clean = rawNumber.split("/")[0].trim();
+  
+  // Si c'est un pur chiffre avec des zéros devant (ex: 006 -> 6)
+  if (/^\d+$/.test(clean)) {
+    clean = String(parseInt(clean, 10));
   }
-
-  const original = match[1];
-  const withoutZero = original.replace(/^0+/, "") || "0";
-
-  return {
-    namePart: trimmed.slice(0, match.index).trim(),
-    numbers: Array.from(new Set([original, withoutZero])),
-  };
+  
+  return clean;
 }
 
 async function fetchPage(query: string, page = 1): Promise<any[]> {
@@ -118,32 +111,26 @@ function removeDuplicates(cards: PokemonCard[]) {
   return Array.from(map.values());
 }
 
-function compareCardNumbers(a?: string, b?: string | null) {
-  if (!a || !b) {
-    return false;
-  }
-
-  const clean = (value: string) => value.split("/")[0].replace(/^0+/, "");
-  return clean(a) === clean(b);
-}
-
 function scoreCard(card: PokemonCard, scan: CardScanResult) {
   let score = 0;
   const cardName = normalizeText(card.name);
   const target = normalizeText(scan.cardName ?? scan.pokemonName ?? "");
+  const scanNumber = cleanCardNumber(scan.cardNumber);
+  const cardNumber = cleanCardNumber(card.number);
 
-  if (cardName === target) {
-    score += 100;
+  // Match Numéro Exact (Critère très fort !)
+  if (scanNumber && cardNumber && scanNumber === cardNumber) {
+    score += 200;
   }
 
-  if (target && cardName.includes(target)) {
+  // Match Nom
+  if (cardName === target) {
+    score += 100;
+  } else if (target && cardName.includes(target)) {
     score += 40;
   }
 
-  if (scan.cardNumber && compareCardNumbers(card.number, scan.cardNumber)) {
-    score += 150;
-  }
-
+  // Match Set / Extension
   if (
     scan.setName &&
     card.set?.name &&
@@ -155,105 +142,86 @@ function scoreCard(card: PokemonCard, scan: CardScanResult) {
   return score;
 }
 
-export async function searchCards(search = ""): Promise<PokemonCard[]> {
-  const key = search.trim().toLowerCase();
-
-  if (!key) {
-    return [];
-  }
-
-  if (searchCache.has(key)) {
-    return searchCache.get(key)!;
-  }
-
-  const { namePart, numbers } = parseSearchInput(key);
-
-  let corrected = correctPokemonOCR(namePart);
+/**
+ * Recherche dédiée et ultra-précise pour le résultat du Scan Gemini
+ */
+export async function searchCardsFromScan(
+  scan: CardScanResult
+): Promise<PokemonCard[]> {
+  let cards: PokemonCard[] = [];
+  const cleanNum = cleanCardNumber(scan.cardNumber);
+  
+  // Préparation du nom Pokémon
+  const rawName = scan.cardName || scan.pokemonName || "";
+  let corrected = correctPokemonOCR(rawName);
   corrected = resolvePokemonName(corrected);
-
-  /*
-    Exemple :
-    Noadkoko V d'Alola
-
-    devient :
-    Noadkoko d'Alola
-
-    puis traduction EN
-  */
   const cleanBase = cleanTCGSuffix(corrected);
   const translated = translatePokemonToEnglish(corrected);
   const translatedBase = translatePokemonToEnglish(cleanBase);
 
-  const candidates = Array.from(
+  const nameCandidates = Array.from(
     new Set(
-      [translated, translatedBase, corrected, cleanBase]
+      [translated, translatedBase, corrected, cleanBase, rawName]
         .filter(Boolean)
         .map(String)
     )
   );
 
-  let cards: PokemonCard[] = [];
-
   /*
-    1 - Recherche numéro seul
-
-    Plus fiable avec les cartes
-    V / EX / GX / Full Art
+    ETAPE 1 : Recherche combinée Numéro + Nom (Le plus précis)
   */
-  if (numbers.length) {
-    for (const number of numbers) {
-      const found = await fetchPage(`number:${number}`, 1);
-      cards = removeDuplicates([...cards, ...found.map(normalize)]);
-    }
-  }
-
-  /*
-    2 - Recherche nom large
-  */
-  if (!cards.length) {
-    for (const name of candidates) {
-      const found = await fetchPage(`name:${name}`, 1);
-      cards = removeDuplicates([...cards, ...found.map(normalize)]);
-      if (cards.length) {
+  if (cleanNum && nameCandidates.length) {
+    for (const name of nameCandidates) {
+      const found = await fetchPage(`number:"${cleanNum}" name:"*${name}*"`, 1);
+      if (found.length) {
+        cards = removeDuplicates([...cards, ...found.map(normalize)]);
         break;
       }
     }
   }
 
   /*
-    3 - Recherche texte complet
-    dernier secours
+    ETAPE 2 : Recherche par Numéro seul si l'étape 1 n'a rien donné
   */
-  if (!cards.length) {
-    for (const name of candidates) {
-      const found = await fetchPage(name, 1);
+  if (!cards.length && cleanNum) {
+    const found = await fetchPage(`number:"${cleanNum}"`, 1);
+    if (found.length) {
       cards = removeDuplicates([...cards, ...found.map(normalize)]);
-      if (cards.length) {
+    }
+  }
+
+  /*
+    ETAPE 3 : Recherche par Nom seul (fallback)
+  */
+  if (!cards.length && nameCandidates.length) {
+    for (const name of nameCandidates) {
+      const found = await fetchPage(`name:"*${name}*"`, 1);
+      if (found.length) {
+        cards = removeDuplicates([...cards, ...found.map(normalize)]);
         break;
       }
     }
   }
 
-  cards.sort((a, b) =>
-    (b.set?.releaseDate ?? "").localeCompare(a.set?.releaseDate ?? "")
-  );
+  // Tri par meilleur score selon ce qu me Gemini avait scanné
+  cards.sort((a, b) => scoreCard(b, scan) - scoreCard(a, scan));
+
+  return cards;
+}
+
+export async function searchCards(search = ""): Promise<PokemonCard[]> {
+  const key = search.trim().toLowerCase();
+
+  if (!key) return [];
+  if (searchCache.has(key)) return searchCache.get(key)!;
+
+  const found = await fetchPage(`name:"*${key}*"`, 1);
+  const cards = removeDuplicates(found.map(normalize));
 
   searchCache.set(key, cards);
   saveBrowserCache(cards);
 
   return cards;
-}
-
-export async function searchCardsFromScan(
-  scan: CardScanResult
-): Promise<PokemonCard[]> {
-  const queries = [scan.cardName, scan.pokemonName, scan.cardNumber]
-    .filter(Boolean)
-    .join(" ");
-
-  const cards = await searchCards(queries);
-
-  return cards.sort((a, b) => scoreCard(b, scan) - scoreCard(a, scan));
 }
 
 export async function getCardById(id: string): Promise<PokemonCard | null> {
@@ -272,9 +240,7 @@ export async function getCardById(id: string): Promise<PokemonCard | null> {
   try {
     const response = await fetch(`${API_URL}/${id}`);
 
-    if (!response.ok) {
-      return null;
-    }
+    if (!response.ok) return null;
 
     const json = await response.json();
     const card = normalize(json.data);
