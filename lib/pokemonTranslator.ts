@@ -282,13 +282,20 @@ export function cleanTCGSuffix(name: string): string {
     .trim();
 }
 
-function extractTCGSuffix(name: string): string {
-  const match = name.match(
-    /\b(ex|EX|gx|GX|v|V|vmax|VMAX|vstar|VSTAR|radiant|shiny|prime|AR|SAR|IR)\b/i
-  );
-  replace(/\b(d'alola|d alola|alola|hisui|de hisui)\b/gi, "")
+export function cleanTCGSuffix(name: string): string {
+  if (!name) return "";
+
+  return name
+    .replace(
+      /\b(ex|EX|gx|GX|v|V|vmax|VMAX|vstar|VSTAR|radiant|shiny|prime|AR|SAR|IR)\b/gi,
+      ""
+    )
+    .replace(
+      /\b(d'alola|d alola|alola|hisui|de hisui)\b/gi,
+      ""
+    )
+    .replace(/\s+/g, " ")
     .trim();
-  return match ? match[1].toLowerCase() : "";
 }
 
 export function translatePokemonToEnglish(name: string): string | null {
