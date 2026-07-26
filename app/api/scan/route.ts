@@ -6,7 +6,6 @@ export async function POST(req: NextRequest) {
     const apiKey = process.env.GEMINI_API_KEY;
 
     if (!apiKey) {
-      console.error("❌ GEMINI_API_KEY manquante sur le serveur");
       return NextResponse.json(
         { error: "Clé API non configurée" },
         { status: 500 }
@@ -20,29 +19,19 @@ export async function POST(req: NextRequest) {
     }
 
     const base64Data = imageBase64.replace(/^data:image\/\w+;base64,/, "");
-
     const genAI = new GoogleGenerativeAI(apiKey);
-    const model = genAI.getGenerativeModel({
-      model: "gemini-1.5-flash",
-      generationConfig: {
-        responseMimeType: "application/json",
-      },
-    });
+
+    // Modèles confirmés comme valides pour votre clé API
+    const modelCandidates = [
+      "gemini-2.5-flash",
+      "gemini-2.0-flash-lite",
+      "gemini-flash-latest",
+      "gemini-2.0-flash",
+    ];
 
     const prompt = `
     Tu es un expert mondial en cartes Pokémon TCG.
-    Examine cette image et identifie la carte Pokémon présente, même si l'image présente des reflets, un léger flou ou est sous pochette plastique.
-
-    Fais tout ton possible pour lire les informations visibles sur la carte :
-    1. Nom exact du Pokémon ou du dresseur (ex: "Dracaufeu", "Charizard", "Pikachu ex", "Recherches Professorales").
-    2. Numéro de collection situé en bas de la carte (ex: "025/185", "150/162", "SWSH001", "001/025").
-    3. Nom ou code de l'extension si repérable.
-    4. Langue de la carte (FR, EN, JP, KR, etc.).
-
-    RÈGLES IMPORTANTES :
-    - Réponds STRICTEMENT au format JSON.
-    - Si tu hésites sur le nom exact, donne la meilleure estimation basée sur l'illustration visuelle.
-    - Seulement si l'image est à 100% illisible ou ne contient aucune carte, renvoie "cardName": null.
+    Examine cette image et identifie la carte Pokémon présente.
 
     Format JSON attendu :
     {
@@ -61,9 +50,47 @@ export async function POST(req: NextRequest) {
       },
     };
 
-    const result = await model.generateContent([prompt, imagePart]);
-    const rawResponse = result.response.text();
+    let result = null;
+    let successfulModel = "";
+    let isRateLimited = false;
 
+    for (const modelName of modelCandidates) {
+      try {
+        const model = genAI.getGenerativeModel({
+          model: modelName,
+          generationConfig: {
+            responseMimeType: "application/json",
+          },
+        });
+        result = await model.generateContent([prompt, imagePart]);
+        if (result) {
+          successfulModel = modelName;
+          console.log(`✅ Succès avec le modèle : ${modelName}`);
+          break;
+        }
+      } catch (err: any) {
+        const status = err?.status || err?.message;
+        if (String(status).includes("429")) {
+          isRateLimited = true;
+          console.warn(`⚠️ Modèle ${modelName} en limite de quota (429), tentative du suivant...`);
+        } else {
+          console.warn(`⚠️ Modèle ${modelName} indisponible (${status})`);
+        }
+      }
+    }
+
+    if (!result) {
+      const errorMsg = isRateLimited
+        ? "Quota API temporairement dépassé (Erreur 429). Réessayez dans 30 secondes."
+        : "Aucun modèle n'a pu traiter l'image.";
+
+      return NextResponse.json(
+        { error: errorMsg },
+        { status: isRateLimited ? 429 : 500 }
+      );
+    }
+
+    const rawResponse = result.response.text();
     const cleanedJson = rawResponse
       .replace(/```json/g, "")
       .replace(/```/g, "")
@@ -71,11 +98,15 @@ export async function POST(req: NextRequest) {
 
     const parsedData = JSON.parse(cleanedJson);
 
-    return NextResponse.json({ success: true, data: parsedData });
+    return NextResponse.json({
+      success: true,
+      modelUsed: successfulModel,
+      data: parsedData,
+    });
   } catch (error: any) {
-    console.error("❌ Erreur Gemini Server:", error?.message || error);
+    console.error("❌ Erreur serveur :", error?.message || error);
     return NextResponse.json(
-      { error: "Erreur serveur pendant le scan IA", details: error?.message },
+      { error: "Erreur serveur pendant le scan", details: error?.message },
       { status: 500 }
     );
   }
