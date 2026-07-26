@@ -30,20 +30,28 @@ export async function POST(req: NextRequest) {
     });
 
     const prompt = `
-    Tu es un expert TCG Pokémon mondialement reconnu.
-    Analyse l'image fournie et identifie la carte Pokémon exacte.
-    
-    Retourne UNIQUEMENT un objet JSON strictement formaté selon ce schéma :
-    {
-      "cardName": "string (Nom exact imprimé sur la carte)",
-      "set": "string (Nom ou code de l'extension si visible, ex: 'EV01', 'Evolutions')",
-      "cardNumber": "string (Numéro de collection exact, ex: '025/185' ou 'SWSH001')",
-      "language": "string (FR, EN, JP, KR, DE, etc.)",
-      "hp": number,
-      "confidence": number
-    }
+    Tu es un expert mondial en cartes Pokémon TCG.
+    Examine cette image et identifie la carte Pokémon présente, même si l'image présente des reflets, un léger flou ou est sous pochette plastique.
 
-    Si l'image ne contient pas une carte Pokémon ou n'est pas lisible, renvoie "cardName": null.
+    Fais tout ton possible pour lire les informations visibles sur la carte :
+    1. Nom exact du Pokémon ou du dresseur (ex: "Dracaufeu", "Charizard", "Pikachu ex", "Recherches Professorales").
+    2. Numéro de collection situé en bas de la carte (ex: "025/185", "150/162", "SWSH001", "001/025").
+    3. Nom ou code de l'extension si repérable.
+    4. Langue de la carte (FR, EN, JP, KR, etc.).
+
+    RÈGLES IMPORTANTES :
+    - Réponds STRICTEMENT au format JSON.
+    - Si tu hésites sur le nom exact, donne la meilleure estimation basée sur l'illustration visuelle.
+    - Seulement si l'image est à 100% illisible ou ne contient aucune carte, renvoie "cardName": null.
+
+    Format JSON attendu :
+    {
+      "cardName": "Nom de la carte ou null",
+      "set": "Code ou nom de l'extension ou null",
+      "cardNumber": "Numéro de collection ou null",
+      "language": "FR",
+      "confidence": 85
+    }
     `;
 
     const imagePart = {
@@ -67,7 +75,7 @@ export async function POST(req: NextRequest) {
   } catch (error: any) {
     console.error("❌ Erreur Gemini Server:", error?.message || error);
     return NextResponse.json(
-      { error: "Erreur serveur pendant le scan IA" },
+      { error: "Erreur serveur pendant le scan IA", details: error?.message },
       { status: 500 }
     );
   }
