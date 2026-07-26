@@ -3,12 +3,12 @@
 import { RefreshCw, ShoppingCart, Globe, Store, Scale } from "lucide-react";
 
 type Props = {
-  cardmarket: number;
-  ebay: number;
-  tcgplayer: number;
-  average: number;
-  spread: number;
-  onRefresh: () => void;
+  cardmarket?: number | null;
+  ebay?: number | null;
+  tcgplayer?: number | null;
+  average?: number | null;
+  spread?: number | null;
+  onRefresh?: () => void;
 };
 
 export default function MarketPanel({
@@ -19,6 +19,12 @@ export default function MarketPanel({
   spread = 0,
   onRefresh,
 }: Props) {
+  const safeCardmarket = cardmarket ?? 0;
+  const safeEbay = ebay ?? 0;
+  const safeTcgplayer = tcgplayer ?? 0;
+  const safeAverage = average ?? 0;
+  const safeSpread = spread ?? 0;
+
   return (
     <div className="space-y-6">
       {/* En-tête épuré */}
@@ -29,28 +35,30 @@ export default function MarketPanel({
           </h2>
         </div>
 
-        <button
-          onClick={onRefresh}
-          className="rounded-xl border border-zinc-800 bg-neutral-900/50 hover:bg-neutral-900 px-3 py-1.5 text-xs font-bold text-zinc-300 transition-all duration-200 flex items-center gap-1.5 active:scale-95"
-        >
-          <RefreshCw className="w-3.5 h-3.5 text-cyan-400" /> Actualiser
-        </button>
+        {onRefresh && (
+          <button
+            onClick={onRefresh}
+            className="rounded-xl border border-zinc-800 bg-neutral-900/50 hover:bg-neutral-900 px-3 py-1.5 text-xs font-bold text-zinc-300 transition-all duration-200 flex items-center gap-1.5 active:scale-95"
+          >
+            <RefreshCw className="w-3.5 h-3.5 text-cyan-400" /> Actualiser
+          </button>
+        )}
       </div>
 
       {/* Grille des plateformes */}
       <div className="grid gap-4 grid-cols-2">
-        <MarketCard title="CardMarket" icon={<Store className="w-4 h-4 text-cyan-400" />} value={cardmarket} />
-        <MarketCard title="TCGPlayer" icon={<Store className="w-4 h-4 text-cyan-400" />} value={tcgplayer} />
-        <MarketCard title="eBay" icon={<Globe className="w-4 h-4 text-cyan-400" />} value={ebay} />
-        <MarketCard title="Prix moyen" icon={<Scale className="w-4 h-4 text-cyan-400" />} value={average} />
+        <MarketCard title="CardMarket" icon={<Store className="w-4 h-4 text-cyan-400" />} value={safeCardmarket} />
+        <MarketCard title="TCGPlayer" icon={<Store className="w-4 h-4 text-cyan-400" />} value={safeTcgplayer} />
+        <MarketCard title="eBay" icon={<Globe className="w-4 h-4 text-cyan-400" />} value={safeEbay} />
+        <MarketCard title="Prix moyen" icon={<Scale className="w-4 h-4 text-cyan-400" />} value={safeAverage} />
       </div>
 
       {/* Spread Marché */}
       <div className="glass-card bg-neutral-950/40 rounded-xl p-4 flex items-center justify-between">
         <span className="text-xs font-bold text-zinc-500 uppercase tracking-wider">Spread global</span>
         <span className="text-sm font-black text-white tabular-nums">
-          {spread > 0 ? "+" : ""}
-          {spread.toFixed(2)} €
+          {safeSpread > 0 ? "+" : ""}
+          {safeSpread.toFixed(2)} €
         </span>
       </div>
     </div>
