@@ -10,7 +10,6 @@ import {
   Maximize2,
   Filter,
   Loader2,
-  Check,
 } from "lucide-react";
 import Navbar from "../../components/Navbar";
 import CardResult from "@/components/cards/CardResult";
@@ -58,17 +57,8 @@ export default function Recherche() {
       try {
         const setsData = await getAllSets(selectedLanguage);
         
-        // 1. Filtrer les séries vides ou invalides (ex: m3, m5 si total === 0 ou pas de cartes)
-        const validSets = (setsData || []).filter((s) => {
-          if (!s || !s.id) return false;
-          // Si le total est explicitement défini à 0 ou négatif, on l'écarte
-          if (typeof s.total === "number" && s.total <= 0) return false;
-          // Écartement explicite de séries corrompues ou de test connues
-          if (["m3", "m5"].includes(s.id.toLowerCase()) && (!s.total || s.total === 0)) {
-            return false;
-          }
-          return true;
-        });
+        // 1. Ne garder que les séries valides ayant un ID (sans supprimer M5, M3, M2.5)
+        const validSets = (setsData || []).filter((s) => Boolean(s && s.id && s.name));
 
         // 2. Tri du plus récent au plus ancien
         validSets.sort((a, b) => {
@@ -76,7 +66,7 @@ export default function Recherche() {
           if (a.releaseDate && b.releaseDate) {
             return new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime();
           }
-          // Sinon fallback sur la comparaison de l'ID inversée (ex: sv04 avant sv01)
+          // Sinon fallback sur la comparaison de l'ID inversée
           return b.id.localeCompare(a.id, undefined, { numeric: true, sensitivity: "base" });
         });
 
@@ -278,7 +268,7 @@ export default function Recherche() {
                   </button>
                 </>
               ) : (
-                /* Sélecteur d'extension hiérarchique (Bloc -> Série) - Optimisé Mobile */
+                /* Sélecteur d'extension hiérarchique (Bloc -> Série) */
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   {/* Étape 1 : Sélection du Bloc / Ère */}
                   <div>
