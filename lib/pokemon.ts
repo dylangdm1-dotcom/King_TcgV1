@@ -73,7 +73,7 @@ function cleanCardNumber(rawNumber: string | null | undefined): string | null {
 }
 
 /**
- * Normalise une carte issue de l'API TCGdex avec support des données marché
+ * Normalise une carte issue de l'API TCGdex (Occidentale / Fallback)
  */
 function normalizeTCGdexCard(card: any, lang: LanguageCode, parentSet?: any): PokemonCard {
   const setId = card.set?.id || parentSet?.id || "";
@@ -94,7 +94,6 @@ function normalizeTCGdexCard(card: any, lang: LanguageCode, parentSet?: any): Po
     smallImageUrl = `${baseUrl}/low.png`;
   }
 
-  // Preservation / injection basique des prix
   const cardmarketPrices = card.cardmarket?.prices || card.pricing?.cardmarket || {};
   const tcgplayerPrices = card.tcgplayer?.prices || card.pricing?.tcgplayer || {};
 
@@ -171,7 +170,7 @@ async function fetchPage(query: string, page = 1): Promise<any[]> {
     const json = await response.json();
     return json.data ?? [];
   } catch (error) {
-    console.error("[Pokemon API]", error);
+    console.error("[Pokemon TCG API]", error);
     return [];
   }
 }
@@ -179,12 +178,10 @@ async function fetchPage(query: string, page = 1): Promise<any[]> {
 function removeDuplicates(cards: PokemonCard[]) {
   const map = new Map<string, PokemonCard>();
   cards.forEach((card) => {
-    // Clé unique basée sur le nom et le numéro
     const key = `${normalizeText(card.name)}_${cleanCardNumber(card.number)}_${card.set?.id}`;
     if (!map.has(key)) {
       map.set(key, card);
     } else {
-      // Priorité à la carte qui possède des prix Cardmarket / TCGplayer
       const existing = map.get(key)!;
       const hasPricesNew = (card.cardmarket?.prices?.averageSellPrice ?? 0) > 0 || (card.tcgplayer?.prices?.holofoil?.market ?? 0) > 0;
       const hasPricesOld = (existing.cardmarket?.prices?.averageSellPrice ?? 0) > 0 || (existing.tcgplayer?.prices?.holofoil?.market ?? 0) > 0;
@@ -225,32 +222,26 @@ function scoreCard(card: PokemonCard, scan: CardScanResult) {
 }
 
 /**
- * Récupération directe des cartes via TCGdex pour une extension
+ * Récupération des cartes via TCGdex (uniquement en Fallback ou pour cartes occidentales)
  */
 async function fetchTCGdexSetCards(setId: string, lang: LanguageCode): Promise<PokemonCard[]> {
   const cleanId = setId.trim().toLowerCase();
   
-  const targetLangs: LanguageCode[] = [lang];
-  if (lang !== "fr") targetLangs.push("fr");
-  if (!targetLangs.includes("en")) targetLangs.push("en");
+  try {
+    const response = await fetch(`${TCGDEX_URL}/${lang}/sets/${cleanId}`, {
+      cache: "force-cache",
+    });
 
-  for (const l of targetLangs) {
-    try {
-      const response = await fetch(`${TCGDEX_URL}/${l}/sets/${cleanId}`, {
-        cache: "force-cache",
-      });
+    if (response.ok) {
+      const setData = await response.json();
+      const rawCards = setData.cards ?? [];
 
-      if (response.ok) {
-        const setData = await response.json();
-        const rawCards = setData.cards ?? [];
-
-        if (rawCards.length > 0) {
-          return rawCards.map((c: any) => normalizeTCGdexCard(c, l, setData));
-        }
+      if (rawCards.length > 0) {
+        return rawCards.map((c: any) => normalizeTCGdexCard(c, lang, setData));
       }
-    } catch (err) {
-      console.warn(`[TCGdex Set API] Erreur pour l'extension ${cleanId} (${l})`);
     }
+  } catch (err) {
+    console.warn(`[TCGdex Set API Fallback] Erreur pour l'extension ${cleanId} (${lang})`);
   }
 
   return [];
@@ -277,7 +268,7 @@ export async function searchCardsFromScan(
     )
   );
 
-  // 1. Recherche par numéro et nom via l'API Pokemontcg.io
+  // 1. PRIORITÉ ABSOLUE : API Officielle pokemontcg.io
   if (cleanNum && nameCandidates.length) {
     for (const name of nameCandidates) {
       const found = await fetchPage(`number:"${cleanNum}" name:"*${name}*"`, 1);
@@ -305,7 +296,7 @@ export async function searchCardsFromScan(
     }
   }
 
-  // 2. Fallback TCGdex
+  // 2. FALLBACK TCGdex : Uniquement si pokemontcg.io n'a rien trouvé
   if (cards.length === 0 && nameCandidates.length > 0) {
     for (const name of nameCandidates) {
       try {
@@ -327,7 +318,7 @@ export async function searchCardsFromScan(
   // 3. Tri des résultats
   cards.sort((a, b) => scoreCard(b, scan) - scoreCard(a, scan));
 
-  // 4. Mettre en cache toutes les cartes scannées
+  // 4. Mise en cache
   cards.forEach((c) => cache.set(c.id, c));
   saveBrowserCache(cards);
 
@@ -335,8 +326,8 @@ export async function searchCardsFromScan(
 }
 
 /**
- * 🔍 RECHERCHE GLOBALE HYBRIDE ET RÉCURSIVE
- * Combine Pokemontcg.io ET TCGdex pour garantir la totalité des cartes (ex: tous les Dracaufeu)
+ * 🔍 RECHERCHE GLOBALE
+ * Priorité à pokemontcg.io (Cartes FR & EN). TCGdex sollicité en secours / occidental.
  */
 export async function searchCards(
   search = "",
@@ -350,24 +341,7 @@ export async function searchCards(
 
   let allCards: PokemonCard[] = [];
 
-  // A. Recherche TCGdex (Toujours interrogée pour le marché FR/JA/ZH et les cartes récentes)
-  try {
-    const targetLang = lang === "en" ? "en" : lang === "ja" ? "ja" : lang === "zh-tw" ? "zh-tw" : "fr";
-    const response = await fetch(`${TCGDEX_URL}/${targetLang}/cards?name=${encodeURIComponent(key)}`, {
-      cache: "force-cache",
-    });
-    if (response.ok) {
-      const data = await response.json();
-      if (Array.isArray(data)) {
-        const tcgdexCards = data.slice(0, 100).map((c: any) => normalizeTCGdexCard(c, targetLang));
-        allCards.push(...tcgdexCards);
-      }
-    }
-  } catch (err) {
-    console.error("[TCGdex Search API]", err);
-  }
-
-  // B. Recherche Pokemontcg.io (Pour enrichir avec l'historique US et les prix TCGPlayer/Cardmarket)
+  // A. PRIORITÉ 1 : API pokemontcg.io
   try {
     const translatedName = translatePokemonToEnglish(key) || key;
     const found = await fetchPage(`name:"*${translatedName}*"`, 1);
@@ -378,16 +352,33 @@ export async function searchCards(
     console.error("[Pokemon TCG API Search Error]", err);
   }
 
+  // B. FALLBACK TCGdex : Uniquement si pokemontcg.io renvoie un résultat vide ou pour une recherche occidentale
+  if (allCards.length === 0) {
+    try {
+      const targetLang = lang === "en" ? "en" : lang === "ja" ? "ja" : lang === "zh-tw" ? "zh-tw" : "fr";
+      const response = await fetch(`${TCGDEX_URL}/${targetLang}/cards?name=${encodeURIComponent(key)}`, {
+        cache: "force-cache",
+      });
+      if (response.ok) {
+        const data = await response.json();
+        if (Array.isArray(data)) {
+          const tcgdexCards = data.slice(0, 100).map((c: any) => normalizeTCGdexCard(c, targetLang));
+          allCards.push(...tcgdexCards);
+        }
+      }
+    } catch (err) {
+      console.error("[TCGdex Search API Fallback]", err);
+    }
+  }
+
   // C. Fusion, dédoublonnage et tri du plus récent au plus ancien
   let uniqueCards = removeDuplicates(allCards);
 
-  // Tri par date de sortie d'extension ou par numéro
   uniqueCards.sort((a, b) => {
     const dateA = a.set?.releaseDate ? new Date(a.set.releaseDate).getTime() : 0;
     const dateB = b.set?.releaseDate ? new Date(b.set.releaseDate).getTime() : 0;
     if (dateB !== dateA) return dateB - dateA;
     
-    // Fallback tri par ID / extension
     return (b.set?.id || "").localeCompare(a.set?.id || "");
   });
 
@@ -411,21 +402,16 @@ export async function searchCardsBySetId(
 
   let cards: PokemonCard[] = [];
 
-  // TCGdex est privilégié pour les recherches de séries FR (M5, M3, M2.5, etc.)
-  if (lang === "fr" || lang === "ja" || lang === "zh-tw") {
-    cards = await fetchTCGdexSetCards(cleanId, lang);
+  // 1. PRIORITÉ 1 : API pokemontcg.io
+  try {
+    const found = await fetchPage(`set.id:"${cleanId}"`, 1);
+    cards = removeDuplicates(found.map(normalize));
+  } catch (error) {
+    console.error(`[Pokemon API] Erreur extension ${cleanId}:`, error);
   }
 
+  // 2. FALLBACK TCGdex : Uniquement si pokemontcg.io renvoie une liste vide
   if (cards.length === 0) {
-    try {
-      const found = await fetchPage(`set.id:"${cleanId}"`, 1);
-      cards = removeDuplicates(found.map(normalize));
-    } catch (error) {
-      console.error(`[Pokemon API] Erreur extension ${cleanId}:`, error);
-    }
-  }
-
-  if (cards.length === 0 && lang !== "fr") {
     cards = await fetchTCGdexSetCards(cleanId, lang);
   }
 
@@ -452,36 +438,11 @@ export async function searchCardsBySetId(
 }
 
 /**
- * 📚 RÉCUPÉRATION DE TOUTES LES EXTENSIONS (FR EN PRIORITÉ)
- * Récupère parfaitement M5, M3, M2.5, EV, etc. via TCGdex pour le français
+ * 📚 RÉCUPÉRATION DE TOUTES LES EXTENSIONS
+ * Priorité absolue à pokemontcg.io. TCGdex n'intervient qu'en dernier secours.
  */
 export async function getAllSets(lang: LanguageCode = "fr"): Promise<any[]> {
-  // 1. Pour FR, JA, ZH : TCGdex est la source officielle pour avoir toutes les extensions à jour (dont M5, M3, M2.5)
-  if (lang === "fr" || lang === "ja" || lang === "zh-tw") {
-    try {
-      const response = await fetch(`${TCGDEX_URL}/${lang}/sets`, {
-        cache: "force-cache",
-      });
-      if (response.ok) {
-        const data = await response.json();
-        if (Array.isArray(data) && data.length > 0) {
-          return data.map((set: any) => ({
-            id: set.id,
-            name: set.name,
-            series: set.series?.name || (lang === "fr" ? "Écarlate et Violet" : lang === "ja" ? "Japon" : "Chine / Taïwan"),
-            total: set.cardCount?.total ?? set.cardCount?.official ?? 0,
-            logo: set.logo ? `${set.logo}.png` : undefined,
-            symbol: set.symbol ? `${set.symbol}.png` : undefined,
-            releaseDate: set.releaseDate || "",
-          }));
-        }
-      }
-    } catch (err) {
-      console.error("[TCGdex Sets API Error]", err);
-    }
-  }
-
-  // 2. Pour EN ou en fallback : API Pokemontcg.io
+  // 1. PRIORITÉ 1 : API Pokemontcg.io
   try {
     const params = new URLSearchParams();
     params.set("pageSize", "300");
@@ -510,23 +471,27 @@ export async function getAllSets(lang: LanguageCode = "fr"): Promise<any[]> {
     console.error("[Pokemon Sets API Error]", error);
   }
 
-  // 3. Fallback ultime TCGdex FR
+  // 2. FALLBACK TCGdex : Uniquement si l'API officielle échoue
   try {
-    const response = await fetch(`${TCGDEX_URL}/fr/sets`, {
+    const response = await fetch(`${TCGDEX_URL}/${lang}/sets`, {
       cache: "force-cache",
     });
     if (response.ok) {
       const data = await response.json();
-      return data.map((set: any) => ({
-        id: set.id,
-        name: set.name,
-        series: set.series?.name || "Pokémon TCG",
-        total: set.cardCount?.total ?? 0,
-        logo: set.logo ? `${set.logo}.png` : undefined,
-      }));
+      if (Array.isArray(data) && data.length > 0) {
+        return data.map((set: any) => ({
+          id: set.id,
+          name: set.name,
+          series: set.series?.name || "Pokémon TCG",
+          total: set.cardCount?.total ?? set.cardCount?.official ?? 0,
+          logo: set.logo ? `${set.logo}.png` : undefined,
+          symbol: set.symbol ? `${set.symbol}.png` : undefined,
+          releaseDate: set.releaseDate || "",
+        }));
+      }
     }
   } catch (err) {
-    console.error("[TCGdex Fallback Sets API]", err);
+    console.error("[TCGdex Sets API Fallback Error]", err);
   }
 
   return [];
@@ -547,7 +512,7 @@ export async function getCardById(id: string): Promise<PokemonCard | null> {
     return saved;
   }
 
-  // 3. Si c'est une carte TCGdex
+  // 3. Si c'est explicitement une carte TCGdex
   const targetId = decodedId.startsWith("tcgdex-") ? decodedId : id;
   if (targetId.startsWith("tcgdex-")) {
     const parts = targetId.split("-");
@@ -572,7 +537,7 @@ export async function getCardById(id: string): Promise<PokemonCard | null> {
     }
   }
 
-  // 4. Appel réseau sur Pokemontcg.io si absente des caches
+  // 4. Appel réseau sur Pokemontcg.io (Comportement standard par défaut)
   try {
     const response = await fetch(`${API_URL}/${encodeURIComponent(decodedId)}`);
 
