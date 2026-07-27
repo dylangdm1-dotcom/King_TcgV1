@@ -2,7 +2,8 @@
 
 "use client";
 
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
 import { Zap, TrendingUp, HelpCircle, AlertCircle } from "lucide-react";
 import BackButton from "../../../components/BackButton";
 import Navbar from "../../../components/Navbar";
@@ -38,21 +39,21 @@ import {
 } from "../../../lib/priceIntelligence";
 import type { PokemonCard } from "../../../lib/types";
 
-type Props = {
-  params: Promise<{
-    id: string;
-  }>;
-};
-
 type ChartPoint = {
   date: string;
   price: number;
 };
 
-export default function CardPage({ params }: Props) {
-  // Support Next.js 15+ : Dépaquetage de la Promise params
-  const resolvedParams = use(params);
-  const rawId = resolvedParams?.id ? decodeURIComponent(resolvedParams.id) : "";
+export default function CardPage() {
+  const routeParams = useParams();
+  const rawParamId =
+    typeof routeParams?.id === "string"
+      ? routeParams.id
+      : Array.isArray(routeParams?.id)
+      ? routeParams.id[0]
+      : "";
+
+  const rawId = rawParamId ? decodeURIComponent(rawParamId) : "";
 
   const [card, setCard] = useState<PokemonCard | null>(null);
   const [isLoadingStats, setIsLoadingStats] = useState(true);
@@ -99,29 +100,31 @@ export default function CardPage({ params }: Props) {
         if (!isMounted) return;
         setCard(result);
 
-        // Suivi des prix
+        // Suivi des prix sécurisé
         try {
-          trackCardPrice(result);
+          if (typeof trackCardPrice === "function") {
+            trackCardPrice(result);
+          }
         } catch (e) {
           console.warn("Échec du suivi des prix :", e);
         }
 
-        // Historique marché local (30 derniers jours)
-        const marketHistory = getMarketHistory(result.id) || [];
-        const daysHistory = getMarketHistoryDays(result.id, 30) || [];
-        const formattedGraph = formatHistoryForGraph(daysHistory) || [];
+        // Historique marché local
+        const marketHistory = getMarketHistory ? getMarketHistory(result.id) || [] : [];
+        const daysHistory = getMarketHistoryDays ? getMarketHistoryDays(result.id, 30) || [] : [];
+        const formattedGraph = formatHistoryForGraph ? formatHistoryForGraph(daysHistory) || [] : [];
 
         const graphHistory: ChartPoint[] = formattedGraph.map((point: any) => ({
-          date: point.day ?? "",
-          price: point.average ?? 0,
+          date: point?.day ?? "",
+          price: point?.average ?? 0,
         }));
 
         if (isMounted) setChartHistory(graphHistory);
 
         // Calculs d'investissement sécurisés
-        const t = getTrend ? getTrend(marketHistory) : "stable";
-        const s = getInvestmentScore ? getInvestmentScore(result, marketHistory) : 5;
-        const r = getRecommendation ? getRecommendation(s) : "Conserver";
+        const t = typeof getTrend === "function" ? getTrend(marketHistory) : "stable";
+        const s = typeof getInvestmentScore === "function" ? getInvestmentScore(result, marketHistory) : 5;
+        const r = typeof getRecommendation === "function" ? getRecommendation(s) : "Conserver";
 
         if (isMounted) {
           setTrend(t);
@@ -193,7 +196,7 @@ export default function CardPage({ params }: Props) {
     );
   }
 
-  // Écran d'erreur si la carte n'existe pas ou est introuvable
+  // Écran d'erreur
   if (error || !card) {
     return (
       <>
@@ -213,18 +216,21 @@ export default function CardPage({ params }: Props) {
     );
   }
 
-  // Obtenir les données marché en toute sécurité
   const market = typeof getMarketData === "function"
     ? getMarketData(card)
     : { cardmarket: 0, ebay: 0, tcgplayer: 0, average: 0, priceTrend7d: 0, priceTrend30d: 0 };
-    
+
   const spread = typeof getMarketSpread === "function" ? getMarketSpread(card) : 0;
 
   const refreshPrice = () => {
     try {
-      trackCardPrice(card, true);
+      if (typeof trackCardPrice === "function") {
+        trackCardPrice(card, true);
+      }
     } catch {}
-    window.location.reload();
+    if (typeof window !== "undefined") {
+      window.location.reload();
+    }
   };
 
   return (
@@ -282,7 +288,7 @@ export default function CardPage({ params }: Props) {
             </div>
           </div>
 
-          {/* Section Analyse Investissement & Intelligence Artificielle */}
+          {/* Section Analyse Investissement */}
           <section className="glass-card space-y-6 rounded-2xl p-6 sm:p-8">
             <div>
               <h2 className="text-xl font-black tracking-tight text-white">
@@ -341,7 +347,7 @@ export default function CardPage({ params }: Props) {
             </div>
           </section>
 
-          {/* Section Prédictions futures */}
+          {/* Section Prédictions */}
           <section className="glass-card rounded-2xl p-6">
             <PredictionPanel
               predictedPrice30d={prediction.predictedPrice30d}
@@ -350,7 +356,7 @@ export default function CardPage({ params }: Props) {
             />
           </section>
 
-          {/* Graphiques historiques des prix */}
+          {/* Graphiques */}
           <div className="grid grid-cols-1 gap-6">
             <section className="glass-card rounded-2xl p-6">
               <h2 className="mb-6 text-sm font-bold uppercase tracking-widest text-zinc-400">
