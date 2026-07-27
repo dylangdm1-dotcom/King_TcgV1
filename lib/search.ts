@@ -1,19 +1,28 @@
+// lib/search.ts
+
 import type { SearchFilters, PokemonCard } from "./types";
 import { getCardPrice } from "./types";
 
 export type { SearchFilters };
 
+/**
+ * Convertit de manière sécurisée n'importe quelle date de release ("YYYY/MM/DD" ou "YYYY-MM-DD") en timestamp.
+ */
+function parseReleaseDate(dateStr?: string): number {
+  if (!dateStr) return 0;
+  const cleanDate = String(dateStr).trim().replace(/\//g, "-");
+  const time = new Date(cleanDate).getTime();
+  return isNaN(time) ? 0 : time;
+}
+
 export function filterCards(
   cards: PokemonCard[],
   filters: SearchFilters
-) {
+): PokemonCard[] {
   let results = [...cards];
 
-  // Catégorie
-  if (
-    filters.category &&
-    filters.category !== "all"
-  ) {
+  // 1. Catégorie (Supertype)
+  if (filters.category && filters.category !== "all") {
     results = results.filter((card) => {
       const supertype = card.supertype?.toLowerCase() ?? "";
 
@@ -30,32 +39,30 @@ export function filterCards(
     });
   }
 
-  // Rareté
-  if (
-    filters.rarity &&
-    filters.rarity !== "all"
-  ) {
+  // 2. Rareté
+  if (filters.rarity && filters.rarity !== "all") {
+    const targetRarity = filters.rarity.toLowerCase();
     results = results.filter((card) =>
-      (card.rarity ?? "")
-        .toLowerCase()
-        .includes(filters.rarity!.toLowerCase())
+      (card.rarity ?? "").toLowerCase().includes(targetRarity)
     );
   }
 
-  // Extension
-  if (
-    filters.set &&
-    filters.set !== "all"
-  ) {
-    results = results.filter(
-      (card) => card.set?.name === filters.set
-    );
+  // 3. Extension (Compatible Nom ET ID de set)
+  if (filters.set && filters.set !== "all") {
+    const targetSet = filters.set.trim().toLowerCase();
+    results = results.filter((card) => {
+      if (!card.set) return false;
+      const setName = (card.set.name || "").toLowerCase();
+      const setId = (card.set.id || "").toLowerCase();
+      
+      return setName === targetSet || setId === targetSet || setName.includes(targetSet);
+    });
   }
 
-  // Tri
+  // 4. Tri
   switch (filters.sort) {
     case "name":
-      results.sort((a, b) => a.name.localeCompare(b.name));
+      results.sort((a, b) => (a.name || "").localeCompare(b.name || ""));
       break;
 
     case "price-asc":
@@ -68,9 +75,17 @@ export function filterCards(
 
     case "recent":
       results.sort((a, b) => {
-        const dateB = b.set.releaseDate ? new Date(b.set.releaseDate).getTime() : 0;
-        const dateA = a.set.releaseDate ? new Date(a.set.releaseDate).getTime() : 0;
-        return dateB - dateA;
+        const dateB = parseReleaseDate(b.set?.releaseDate);
+        const dateA = parseReleaseDate(a.set?.releaseDate);
+        
+        if (dateB !== dateA) {
+          return dateB - dateA;
+        }
+
+        // En cas d'égalité de date, tri par numéro de carte
+        const numA = parseInt((a.number || "0").replace(/\D/g, "")) || 0;
+        const numB = parseInt((b.number || "0").replace(/\D/g, "")) || 0;
+        return numA - numB;
       });
       break;
   }
