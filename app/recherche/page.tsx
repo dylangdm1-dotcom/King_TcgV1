@@ -1,0 +1,439 @@
+"use client";
+
+import { useMemo, useState, useEffect } from "react";
+import {
+  Search,
+  Package,
+  Layers,
+  Globe,
+  LayoutGrid,
+  Maximize2,
+  Filter,
+  Loader2,
+  Check,
+} from "lucide-react";
+import Navbar from "../../components/Navbar";
+import CardResult from "@/components/cards/CardResult";
+import SearchFilters from "../../components/SearchFilters";
+import {
+  searchCards,
+  searchCardsBySetId,
+  getAllSets,
+  type LanguageCode,
+} from "../../lib/pokemon";
+import { filterCards, type SearchFilters as SearchFiltersType } from "../../lib/search";
+import type { PokemonCard } from "../../lib/types";
+
+const PAGE_SIZE = 24;
+
+export default function Recherche() {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [query, setQuery] = useState("");
+
+  const [cards, setCards] = useState<PokemonCard[]>([]);
+  const [loading, setLoading] = useState(false);
+
+  const [visible, setVisible] = useState(PAGE_SIZE);
+  const [viewMode, setViewMode] = useState<"grid" | "large">("grid");
+
+  const [searchMode, setSearchMode] = useState<"text" | "set">("text");
+  // Français sélectionné par défaut
+  const [selectedLanguage, setSelectedLanguage] = useState<LanguageCode>("fr");
+
+  const [allSetsList, setAllSetsList] = useState<any[]>([]);
+  const [selectedBlock, setSelectedBlock] = useState<string>("all");
+  const [selectedSetId, setSelectedSetId] = useState<string>("");
+
+  const [filters, setFilters] = useState<SearchFiltersType>({
+    category: "all",
+    rarity: "all",
+    set: "all",
+    sort: "recent",
+  });
+
+  // Recharger et trier la liste des extensions au changement de langue
+  useEffect(() => {
+    async function loadSets() {
+      setLoading(true);
+      try {
+        const setsData = await getAllSets(selectedLanguage);
+        
+        // 1. Filtrer les séries vides ou invalides (ex: m3, m5 si total === 0 ou pas de cartes)
+        const validSets = (setsData || []).filter((s) => {
+          if (!s || !s.id) return false;
+          // Si le total est explicitement défini à 0 ou négatif, on l'écarte
+          if (typeof s.total === "number" && s.total <= 0) return false;
+          // Écartement explicite de séries corrompues ou de test connues
+          if (["m3", "m5"].includes(s.id.toLowerCase()) && (!s.total || s.total === 0)) {
+            return false;
+          }
+          return true;
+        });
+
+        // 2. Tri du plus récent au plus ancien
+        validSets.sort((a, b) => {
+          // Tri par date de sortie si disponible
+          if (a.releaseDate && b.releaseDate) {
+            return new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime();
+          }
+          // Sinon fallback sur la comparaison de l'ID inversée (ex: sv04 avant sv01)
+          return b.id.localeCompare(a.id, undefined, { numeric: true, sensitivity: "base" });
+        });
+
+        setAllSetsList(validSets);
+      } catch (error) {
+        console.error("[King_TCG] Erreur chargement des séries :", error);
+      } finally {
+        setSelectedBlock("all");
+        setSelectedSetId("");
+        setCards([]);
+        setLoading(false);
+      }
+    }
+    loadSets();
+  }, [selectedLanguage]);
+
+  // Regroupement dynamique des séries par Bloc / Ère
+  const groupedSets = useMemo(() => {
+    const groups: { [series: string]: any[] } = {};
+    allSetsList.forEach((set) => {
+      const seriesName = set.series || "Autres Séries";
+      if (!groups[seriesName]) {
+        groups[seriesName] = [];
+      }
+      groups[seriesName].push(set);
+    });
+    return groups;
+  }, [allSetsList]);
+
+  // Liste des blocs préservant l'ordre chronologique de la première série du bloc
+  const availableBlocks = useMemo(() => Object.keys(groupedSets), [groupedSets]);
+
+  // Liste des séries filtrées par le bloc sélectionné
+  const filteredSetsByBlock = useMemo(() => {
+    if (selectedBlock === "all") return allSetsList;
+    return groupedSets[selectedBlock] || [];
+  }, [selectedBlock, groupedSets, allSetsList]);
+
+  // Recherche textuelle classique
+  async function handleSearch() {
+    const value = searchQuery.trim();
+    setQuery(value);
+
+    if (value.length < 2) {
+      setCards([]);
+      setVisible(PAGE_SIZE);
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const results = await searchCards(value, selectedLanguage);
+      setCards(results);
+      setVisible(PAGE_SIZE);
+    } catch (error) {
+      console.error("[King_TCG] Erreur recherche :", error);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  // Recherche directe par Extension
+  async function handleSetSelect(setId: string) {
+    setSelectedSetId(setId);
+    if (!setId) return;
+
+    const chosenSet = allSetsList.find((s) => s.id === setId);
+    setQuery(chosenSet ? chosenSet.name : setId);
+    setLoading(true);
+
+    try {
+      const results = await searchCardsBySetId(setId, selectedLanguage);
+      setCards(results);
+      setVisible(PAGE_SIZE);
+    } catch (error) {
+      console.error("[King_TCG] Erreur recherche extension :", error);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  const filteredCards = useMemo(
+    () => filterCards(cards, filters),
+    [cards, filters]
+  );
+
+  const displayedCards = filteredCards.slice(0, visible);
+
+  const sets = useMemo(() => {
+    return Array.from(
+      new Set(
+        cards
+          .map((c) => c.set?.name)
+          .filter(Boolean)
+      )
+    ) as string[];
+  }, [cards]);
+
+  return (
+    <>
+      <Navbar />
+
+      <main className="min-h-screen bg-black text-white">
+        <div className="mx-auto max-w-7xl space-y-6 px-4 py-8">
+          {/* Section Recherche */}
+          <section className="rounded-xl border border-zinc-900 bg-neutral-950 p-4 md:p-6">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-zinc-900/80 pb-4">
+              <div>
+                <h1 className="text-base font-black uppercase tracking-widest text-white flex items-center gap-2">
+                  <Search className="w-5 h-5 text-cyan-400" /> Recherche de Carte Pokémon
+                </h1>
+                <p className="mt-1 text-[11px] font-medium text-zinc-500">
+                  Filtrez les bases TCG, analysez les cotations et recherchez vos Pokémon.
+                </p>
+              </div>
+
+              {/* Sélecteur de Région/Langue */}
+              <div className="flex items-center gap-1 bg-neutral-900 p-1 rounded-lg border border-zinc-800">
+                <span className="text-[10px] font-bold text-zinc-500 uppercase px-2 flex items-center gap-1">
+                  <Globe className="w-3 h-3 text-cyan-400" /> Région :
+                </span>
+                {[
+                  { code: "fr", label: "🇫🇷 FR" },
+                  { code: "en", label: "🇺🇸 EN" },
+                  { code: "ja", label: "🇯🇵 JP" },
+                  { code: "zh-tw", label: "🇨🇳 ZH" },
+                ].map((lang) => (
+                  <button
+                    key={lang.code}
+                    onClick={() => setSelectedLanguage(lang.code as LanguageCode)}
+                    className={`px-2.5 py-1 rounded text-[10px] font-black transition ${
+                      selectedLanguage === lang.code
+                        ? "bg-cyan-500 text-black shadow"
+                        : "text-zinc-400 hover:text-white hover:bg-neutral-800"
+                    }`}
+                  >
+                    {lang.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Commutateur de Mode : Texte / Extension */}
+            <div className="mt-4 flex gap-2">
+              <button
+                onClick={() => setSearchMode("text")}
+                className={`rounded-lg px-3.5 py-2 text-[11px] font-black uppercase tracking-wider transition flex items-center gap-2 ${
+                  searchMode === "text"
+                    ? "bg-cyan-500 text-black shadow-md"
+                    : "border border-zinc-800 bg-neutral-900 text-zinc-400 hover:text-white"
+                }`}
+              >
+                <Search className="w-3.5 h-3.5" /> Par Nom
+              </button>
+              <button
+                onClick={() => setSearchMode("set")}
+                className={`rounded-lg px-3.5 py-2 text-[11px] font-black uppercase tracking-wider transition flex items-center gap-2 ${
+                  searchMode === "set"
+                    ? "bg-cyan-500 text-black shadow-md"
+                    : "border border-zinc-800 bg-neutral-900 text-cyan-400 hover:bg-cyan-500/10"
+                }`}
+              >
+                <Package className="w-3.5 h-3.5" /> Par Extension
+              </button>
+            </div>
+
+            <div className="mt-4 space-y-3">
+              {searchMode === "text" ? (
+                <>
+                  <div className="relative">
+                    <input
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                          handleSearch();
+                        }
+                      }}
+                      placeholder="Saisir un nom de Pokémon, un dresseur..."
+                      className="w-full rounded-lg border border-zinc-800 bg-neutral-900 px-4 py-3 text-xs font-bold text-white placeholder-zinc-600 outline-none transition focus:border-cyan-500"
+                    />
+                  </div>
+
+                  <button
+                    onClick={handleSearch}
+                    disabled={loading}
+                    className="w-full rounded-lg bg-cyan-500 py-3 text-xs font-black uppercase tracking-widest text-black transition hover:bg-cyan-400 disabled:opacity-50 flex items-center justify-center gap-2"
+                  >
+                    {loading ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin" /> Recherche...
+                      </>
+                    ) : (
+                      <>
+                        <Search className="w-4 h-4" /> Rechercher
+                      </>
+                    )}
+                  </button>
+                </>
+              ) : (
+                /* Sélecteur d'extension hiérarchique (Bloc -> Série) - Optimisé Mobile */
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  {/* Étape 1 : Sélection du Bloc / Ère */}
+                  <div>
+                    <label className="block text-[10px] font-bold uppercase tracking-wider text-zinc-400 mb-1 flex items-center gap-1.5">
+                      <Layers className="w-3.5 h-3.5 text-cyan-400" /> 1. Bloc / Ère
+                    </label>
+                    <select
+                      value={selectedBlock}
+                      onChange={(e) => {
+                        setSelectedBlock(e.target.value);
+                        setSelectedSetId("");
+                      }}
+                      style={{ colorScheme: "dark" }}
+                      className="w-full rounded-lg border border-zinc-800 bg-neutral-900 text-white px-3 py-3 text-xs font-bold outline-none transition focus:border-cyan-400 appearance-none"
+                    >
+                      <option value="all" className="bg-neutral-900 text-white">
+                        -- Tous les Blocs ({availableBlocks.length}) --
+                      </option>
+                      {availableBlocks.map((block) => (
+                        <option key={block} value={block} className="bg-neutral-900 text-white">
+                          {block} ({groupedSets[block].length} séries)
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  {/* Étape 2 : Sélection de la Série finale */}
+                  <div>
+                    <label className="block text-[10px] font-bold uppercase tracking-wider text-zinc-400 mb-1 flex items-center gap-1.5">
+                      <Package className="w-3.5 h-3.5 text-cyan-400" /> 2. Série / Extension
+                    </label>
+                    <select
+                      value={selectedSetId}
+                      onChange={(e) => handleSetSelect(e.target.value)}
+                      style={{ colorScheme: "dark" }}
+                      className="w-full rounded-lg border border-cyan-500/40 bg-neutral-900 text-cyan-300 px-3 py-3 text-xs font-bold outline-none transition focus:border-cyan-400 appearance-none"
+                    >
+                      <option value="" className="bg-neutral-900 text-white">
+                        -- Choisir la série --
+                      </option>
+                      {filteredSetsByBlock.map((s) => (
+                        <option key={s.id} value={s.id} className="bg-neutral-900 text-white">
+                          {s.name} ({s.id.toUpperCase()}) {s.total ? `[${s.total} cartes]` : ""}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <div className="mt-5">
+              <SearchFilters
+                filters={filters}
+                onChange={setFilters}
+                sets={sets}
+              />
+            </div>
+          </section>
+
+          {/* Barre d'outils */}
+          <section className="flex items-center justify-between gap-4 border-b border-zinc-900/60 pb-3">
+            <div className="rounded border border-zinc-900 bg-neutral-900 px-2.5 py-1 text-[9px] font-black uppercase tracking-wider text-zinc-400 flex items-center gap-1.5">
+              <Filter className="w-3 h-3 text-cyan-400" />
+              {filteredCards.length} Carte(s) trouvées
+            </div>
+
+            <div className="flex gap-1 rounded-lg border border-zinc-900 bg-neutral-900 p-1">
+              <button
+                onClick={() => setViewMode("grid")}
+                className={`rounded px-2.5 py-1 text-[10px] font-black uppercase flex items-center gap-1 transition ${
+                  viewMode === "grid"
+                    ? "bg-zinc-800 text-cyan-400"
+                    : "text-zinc-500 hover:text-white"
+                }`}
+                title="Vue en grille"
+              >
+                <LayoutGrid className="w-3.5 h-3.5" />
+                <span className="hidden sm:inline">Grille</span>
+              </button>
+
+              <button
+                onClick={() => setViewMode("large")}
+                className={`rounded px-2.5 py-1 text-[10px] font-black uppercase flex items-center gap-1 transition ${
+                  viewMode === "large"
+                    ? "bg-zinc-800 text-cyan-400"
+                    : "text-zinc-500 hover:text-white"
+                }`}
+                title="Vue large"
+              >
+                <Maximize2 className="w-3.5 h-3.5" />
+                <span className="hidden sm:inline">Large</span>
+              </button>
+            </div>
+          </section>
+
+          {/* Loader */}
+          {loading && (
+            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+              {Array.from({ length: 12 }).map((_, i) => (
+                <div
+                  key={i}
+                  className="aspect-[0.72] animate-pulse rounded-lg bg-neutral-900 border border-zinc-800"
+                />
+              ))}
+            </div>
+          )}
+
+          {/* État vide */}
+          {!loading && query.length >= 2 && filteredCards.length === 0 && (
+            <div className="rounded-xl border border-zinc-900 bg-neutral-900/40 p-10 text-center">
+              <p className="text-xs font-black uppercase text-zinc-400">
+                Aucune correspondance trouvée
+              </p>
+              <p className="mt-1 text-[11px] text-zinc-500">
+                Vérifiez l'orthographe ou modifiez les filtres.
+              </p>
+            </div>
+          )}
+
+          {/* Grille de cartes */}
+          {!loading && (
+            <div
+              className={
+                viewMode === "grid"
+                  ? "grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6"
+                  : "flex flex-col items-center gap-4"
+              }
+            >
+              {displayedCards.map((card) => (
+                <div
+                  key={card.id}
+                  className={
+                    viewMode === "large" ? "w-full max-w-md" : "w-full"
+                  }
+                >
+                  <CardResult card={card} />
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Bouton Charger Plus */}
+          {!loading && visible < filteredCards.length && (
+            <div className="text-center pt-4">
+              <button
+                onClick={() => setVisible((v) => v + PAGE_SIZE)}
+                className="rounded-lg border border-zinc-800 bg-neutral-900 px-6 py-2.5 text-[11px] font-black uppercase text-cyan-400 hover:bg-neutral-800 transition active:scale-95"
+              >
+                Charger plus de références
+              </button>
+            </div>
+          )}
+        </div>
+      </main>
+    </>
+  );
+}
