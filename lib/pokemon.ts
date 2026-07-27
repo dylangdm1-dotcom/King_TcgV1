@@ -136,9 +136,9 @@ function normalizeTCGdexCard(card: any, lang: LanguageCode, parentSet?: any): Po
       url: card.tcgplayer?.url || "",
       updatedAt: new Date().toISOString(),
       prices: {
-        holofoil: tcgplayerPrices.holofoil ? { market: tcgplayerPrices.holofoil.market ?? 0 } : undefined,
-        normal: tcgplayerPrices.normal ? { market: tcgplayerPrices.normal.market ?? 0 } : undefined,
-        reverseHolofoil: tcgplayerPrices.reverseHolofoil ? { market: tcgplayerPrices.reverseHolofoil.market ?? 0 } : undefined,
+        holofoil: tcgplayerPrices.holofoil ? { market: Number(tcgplayerPrices.holofoil.market ?? 0) } : undefined,
+        normal: tcgplayerPrices.normal ? { market: Number(tcgplayerPrices.normal.market ?? 0) } : undefined,
+        reverseHolofoil: tcgplayerPrices.reverseHolofoil ? { market: Number(tcgplayerPrices.reverseHolofoil.market ?? 0) } : undefined,
       },
     },
     quantity: 0,
