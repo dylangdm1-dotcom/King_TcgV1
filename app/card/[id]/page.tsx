@@ -3,7 +3,7 @@
 "use client";
 
 import { use, useEffect, useState } from "react";
-import { Zap, TrendingUp, HelpCircle } from "lucide-react";
+import { Zap, TrendingUp, HelpCircle, AlertCircle } from "lucide-react";
 import BackButton from "../../../components/BackButton";
 import Navbar from "../../../components/Navbar";
 import PriceGraph from "../../../components/PriceGraph";
@@ -56,6 +56,8 @@ export default function CardPage({ params }: Props) {
 
   const [card, setCard] = useState<PokemonCard | null>(null);
   const [isLoadingStats, setIsLoadingStats] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
   const [score, setScore] = useState(0);
   const [trend, setTrend] = useState<"up" | "down" | "stable">("stable");
   const [recommendation, setRecommendation] = useState("");
@@ -81,15 +83,20 @@ export default function CardPage({ params }: Props) {
     const load = async () => {
       try {
         setIsLoadingStats(true);
+        setError(null);
 
         // Récupération de la carte (mémoire, local storage ou API)
         const result = await getCardById(rawId);
 
-        if (!result || !isMounted) {
-          if (isMounted) setIsLoadingStats(false);
+        if (!result) {
+          if (isMounted) {
+            setError("Carte introuvable. Veuillez réessayer le scan.");
+            setIsLoadingStats(false);
+          }
           return;
         }
 
+        if (!isMounted) return;
         setCard(result);
 
         // Suivi des prix
@@ -101,20 +108,20 @@ export default function CardPage({ params }: Props) {
 
         // Historique marché local (30 derniers jours)
         const marketHistory = getMarketHistory(result.id) || [];
-        const daysHistory = getMarketHistoryDays(result.id, 30);
-        const formattedGraph = formatHistoryForGraph(daysHistory);
+        const daysHistory = getMarketHistoryDays(result.id, 30) || [];
+        const formattedGraph = formatHistoryForGraph(daysHistory) || [];
 
-        const graphHistory: ChartPoint[] = formattedGraph.map((point) => ({
-          date: point.day,
-          price: point.average,
+        const graphHistory: ChartPoint[] = formattedGraph.map((point: any) => ({
+          date: point.day ?? "",
+          price: point.average ?? 0,
         }));
 
         if (isMounted) setChartHistory(graphHistory);
 
-        // Calculs d'investissement
-        const t = getTrend(marketHistory);
-        const s = getInvestmentScore(result, marketHistory);
-        const r = getRecommendation(s);
+        // Calculs d'investissement sécurisés
+        const t = getTrend ? getTrend(marketHistory) : "stable";
+        const s = getInvestmentScore ? getInvestmentScore(result, marketHistory) : 5;
+        const r = getRecommendation ? getRecommendation(s) : "Conserver";
 
         if (isMounted) {
           setTrend(t);
@@ -122,23 +129,41 @@ export default function CardPage({ params }: Props) {
           setRecommendation(r);
 
           if (typeof predictPrice === "function") {
-            setPrediction(predictPrice(marketHistory, s));
+            try {
+              const pred = predictPrice(marketHistory, s);
+              if (pred) {
+                setPrediction({
+                  predictedPrice30d: pred.predictedPrice30d ?? 0,
+                  roi30d: pred.roi30d ?? 0,
+                  confidence: pred.confidence ?? 0,
+                });
+              }
+            } catch (pErr) {
+              console.warn("Erreur prédiction:", pErr);
+            }
           }
 
-          const opportunityRes = getPriceOpportunity(marketHistory);
+          let opportunityResText = "Indisponible";
+          try {
+            if (typeof getPriceOpportunity === "function") {
+              const opportunityRes = getPriceOpportunity(marketHistory);
+              opportunityResText = opportunityRes?.text ?? "Indisponible";
+            }
+          } catch {}
+
           setPriceInfo({
-            current: getCurrentPrice(marketHistory),
-            lowest: getLowestPrice(marketHistory),
-            highest: getHighestPrice(marketHistory),
-            variation: getVariationPercent(marketHistory),
-            opportunity: opportunityRes?.text ?? "Indisponible",
+            current: typeof getCurrentPrice === "function" ? getCurrentPrice(marketHistory) : 0,
+            lowest: typeof getLowestPrice === "function" ? getLowestPrice(marketHistory) : 0,
+            highest: typeof getHighestPrice === "function" ? getHighestPrice(marketHistory) : 0,
+            variation: typeof getVariationPercent === "function" ? getVariationPercent(marketHistory) : 0,
+            opportunity: opportunityResText,
           });
         }
-      } catch (error) {
-        console.error(
-          "Erreur lors du chargement des données de la carte :",
-          error
-        );
+      } catch (err) {
+        console.error("Erreur lors du chargement des données de la carte :", err);
+        if (isMounted) {
+          setError("Une erreur est survenue lors du chargement de la carte.");
+        }
       } finally {
         if (isMounted) setIsLoadingStats(false);
       }
@@ -152,7 +177,7 @@ export default function CardPage({ params }: Props) {
   }, [rawId]);
 
   // Écran de chargement
-  if (isLoadingStats || !card) {
+  if (isLoadingStats) {
     return (
       <>
         <Navbar />
@@ -168,10 +193,32 @@ export default function CardPage({ params }: Props) {
     );
   }
 
-  const market = getMarketData
+  // Écran d'erreur si la carte n'existe pas ou est introuvable
+  if (error || !card) {
+    return (
+      <>
+        <Navbar />
+        <main className="flex min-h-screen items-center justify-center bg-neutral-950 px-4">
+          <div className="glass-card max-w-sm w-full rounded-2xl p-8 text-center space-y-4 border border-red-500/20">
+            <AlertCircle className="mx-auto h-10 w-10 text-red-400" />
+            <p className="text-sm font-bold tracking-wide text-zinc-300">
+              {error || "Carte introuvable."}
+            </p>
+            <div className="pt-2">
+              <BackButton />
+            </div>
+          </div>
+        </main>
+      </>
+    );
+  }
+
+  // Obtenir les données marché en toute sécurité
+  const market = typeof getMarketData === "function"
     ? getMarketData(card)
     : { cardmarket: 0, ebay: 0, tcgplayer: 0, average: 0, priceTrend7d: 0, priceTrend30d: 0 };
-  const spread = getMarketSpread ? getMarketSpread(card) : 0;
+    
+  const spread = typeof getMarketSpread === "function" ? getMarketSpread(card) : 0;
 
   const refreshPrice = () => {
     try {
