@@ -4,6 +4,20 @@ import type { PokemonCard } from "./types";
 import { fetchPricesFromJustTCG } from "./priceProviders/justTcgProvider";
 
 /**
+ * Extraction de l'ID natif TCGPlayer / Cardmarket depuis un ID TCGdex
+ * (ex: tcgdex-fr-sv05-1 -> sv05-1)
+ */
+function extractCleanCardId(cardId: string): string {
+  if (!cardId) return "";
+  if (cardId.startsWith("tcgdex-")) {
+    const parts = cardId.split("-");
+    // Conserve uniquement la partie set-number (ex: sv05-001)
+    return parts.slice(2).join("-");
+  }
+  return cardId;
+}
+
+/**
  * ⚡ Fusionne proprement les prix externes d'une carte sans écraser
  * les métadonnées ou les structures existantes.
  */
@@ -11,8 +25,13 @@ export async function enrichCard(card: PokemonCard): Promise<PokemonCard> {
   if (!card?.id) return card;
 
   try {
-    const prices = await fetchPricesFromJustTCG(card.id);
-    if (!prices) return card;
+    const cleanId = extractCleanCardId(card.id);
+    const prices = await fetchPricesFromJustTCG(cleanId || card.id);
+
+    if (!prices) {
+      // Fallback : Si aucun prix externe n'est renvoyé mais que la carte a déjà des prix initiaux
+      return card;
+    }
 
     const updatedTcgplayer = prices.tcgplayer
       ? {
