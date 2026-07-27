@@ -20,22 +20,28 @@ export type MarketPrices = {
 // Taux de conversion approximatif USD -> EUR pour TCGPlayer
 const USD_TO_EUR = 0.92;
 
+/**
+ * Helper sécurisé pour parser les nombres
+ */
+function safeNumber(val: unknown): number {
+  const num = Number(val);
+  return !isNaN(num) && isFinite(num) && num > 0 ? num : 0;
+}
+
 //
 // 💰 Prix CardMarket réel
 //
 export function getCardMarketPrice(card?: PokemonCard | null): number {
-  if (!card) return 0;
+  if (!card?.cardmarket?.prices) return 0;
 
+  const prices = card.cardmarket.prices;
+  
   const price =
-    card.cardmarket?.prices?.averageSellPrice ??
-    card.cardmarket?.prices?.trendPrice ??
-    card.cardmarket?.prices?.lowPrice;
+    safeNumber(prices.averageSellPrice) ||
+    safeNumber(prices.trendPrice) ||
+    safeNumber(prices.lowPrice);
 
-  if (typeof price === "number" && price > 0) {
-    return Number(price.toFixed(2));
-  }
-
-  return 0;
+  return price > 0 ? Number(price.toFixed(2)) : 0;
 }
 
 //
@@ -48,13 +54,13 @@ export function getTCGPlayerPrice(card?: PokemonCard | null): number {
   
   // Extrait le prix du marché réel selon la finition disponible
   const price =
-    p.holofoil?.market ??
-    p.normal?.market ??
-    p.reverseHolofoil?.market ??
-    p.firstEditionHolofoil?.market ??
-    p.firstEditionNormal?.market;
+    safeNumber(p.holofoil?.market) ||
+    safeNumber(p.normal?.market) ||
+    safeNumber(p.reverseHolofoil?.market) ||
+    safeNumber(p.firstEditionHolofoil?.market) ||
+    safeNumber(p.firstEditionNormal?.market);
 
-  if (typeof price === "number" && price > 0) {
+  if (price > 0) {
     // Conversion USD -> EUR pour harmoniser l'affichage global
     return Number((price * USD_TO_EUR).toFixed(2));
   }
@@ -90,7 +96,7 @@ export function getAverageMarketPrice(card?: PokemonCard | null): number {
   const prices = [
     getCardMarketPrice(card),
     getTCGPlayerPrice(card),
-  ].filter((p) => typeof p === "number" && p > 0);
+  ].filter((p) => p > 0);
 
   if (!prices.length) {
     return getCardPrice(card);
@@ -106,8 +112,8 @@ export function getAverageMarketPrice(card?: PokemonCard | null): number {
 export function getPriceTrend7d(card?: PokemonCard | null): number {
   if (!card?.cardmarket?.prices) return 0;
   
-  const current = card.cardmarket.prices.trendPrice ?? card.cardmarket.prices.averageSellPrice ?? 0;
-  const avg7 = card.cardmarket.prices.avg7 ?? 0;
+  const current = safeNumber(card.cardmarket.prices.trendPrice) || safeNumber(card.cardmarket.prices.averageSellPrice);
+  const avg7 = safeNumber(card.cardmarket.prices.avg7);
 
   if (avg7 <= 0 || current <= 0) return 0;
   
@@ -121,8 +127,8 @@ export function getPriceTrend7d(card?: PokemonCard | null): number {
 export function getPriceTrend30d(card?: PokemonCard | null): number {
   if (!card?.cardmarket?.prices) return 0;
   
-  const current = card.cardmarket.prices.trendPrice ?? card.cardmarket.prices.averageSellPrice ?? 0;
-  const avg30 = card.cardmarket.prices.avg30 ?? 0;
+  const current = safeNumber(card.cardmarket.prices.trendPrice) || safeNumber(card.cardmarket.prices.averageSellPrice);
+  const avg30 = safeNumber(card.cardmarket.prices.avg30);
 
   if (avg30 <= 0 || current <= 0) return 0;
   
