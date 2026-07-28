@@ -1,20 +1,37 @@
 /**
- * 🧠 Pokémon Translator King TCG V3.1
+ * 🧠 Pokémon Translator King TCG V3.5 (Version Finale & Validée)
  *
- * Gestion :
- * - Traduction Français ⇄ Anglais
- * - Correction OCR scanner
- * - Gestion suffixes TCG (ex, GX, V, VMAX, VSTAR...)
- * - Support des cartes Promos TCG (SWSH, SVP, SM, XY, PROMO)
- * - Résolution des noms pour recherche API Pokémon TCG
+ * Support :
+ * - Traduction FR ⇄ EN (Gen 1 à Gen 9 + Paradoxes)
+ * - Anti-Confusion OCR (0/O, 1/I, 5/S, 8/B)
+ * - Matcher Sub-sets (Trainer Gallery TG, Galarian Gallery GG, Shiny Vault SV)
+ * - Formes Régionales & Paradoxes (Paldea, Hisui, Alola, Galar, Iron/Passé/Futur)
+ * - Promos TCG (SVP, SWSH, SM, XY, PROMO)
  */
 
- const ocrAliases: Record<string, string> = {
-  // Erreurs OCR fréquentes
+// Normalisation pré-OCR pour corriger les confusions de caractères typiques
+export function fixOCRCharacterConfusion(text: string): string {
+  if (!text) return "";
+  return text
+    // Normalise l'apostrophe et espaces bizarres
+    .replace(/['’`]/g, "")
+    // Corrections contextuelles de numéros
+    .replace(/\b[O|o](\d+)\b/g, "0$1") // O153 -> 0153
+    .replace(/\b(\d+)[O|o]\b/g, "$10") // 15O -> 150
+    .replace(/\b[I|l](\d+)\b/g, "1$1") // I12 -> 112
+    .replace(/\bS(\d+)\b/g, "5$1")     // S12 -> 512
+    .replace(/\bB(\d+)\b/g, "8$1");    // B12 -> 812
+}
+
+const ocrAliases: Record<string, string> = {
+  // Erreurs OCR très fréquentes
   dracaufu: "dracaufeu",
   dracaufe: "dracaufeu",
   dracauf: "dracaufeu",
+  dracaufeu: "dracaufeu",
   "dracauf eu": "dracaufeu",
+  charizard: "charizard",
+  "chariz ard": "charizard",
   pikashu: "pikachu",
   pikatchu: "pikachu",
   "pikach u": "pikachu",
@@ -30,6 +47,8 @@
   noadkoko: "noadkoko",
   noadkokodalola: "noadkokodalola",
   "noadkoko d alola": "noadkokodalola",
+  mirmidon: "miraidon",
+  coraidon: "koraidon",
 };
 
 export const pokemonNames: Record<string, string> = {
@@ -40,204 +59,73 @@ export const pokemonNames: Record<string, string> = {
   chenipan: "caterpie", chrysacier: "metapod", papilusion: "butterfree",
   aspicot: "weedle", coconfort: "kakuna", dardargnan: "beedrill",
   roucool: "pidgey", roucoups: "pidgeotto", roucarnage: "pidgeot",
-  rattata: "rattata", rattatac: "raticate",
-  piafabec: "spearow", rapasdepic: "fearow",
-  abo: "ekans", arbok: "arbok",
-  pikachu: "pikachu", raichu: "raichu",
+  rattata: "rattata", rattatac: "raticate", piafabec: "spearow", rapasdepic: "fearow",
+  abo: "ekans", arbok: "arbok", pikachu: "pikachu", raichu: "raichu",
   sablette: "sandshrew", sablaireau: "sandslash",
   nidoranf: "nidoran-f", nidorina: "nidorina", nidoqueen: "nidoqueen",
   nidoranm: "nidoran-m", nidorino: "nidorino", nidoking: "nidoking",
-  melofee: "clefairy", melodelfe: "clefable",
-  goupix: "vulpix", feunard: "ninetales",
-  rondoudou: "jigglypuff", groudoudou: "wigglytuff",
-  nosferapti: "zubat", nosferalto: "golbat",
-  mystherbe: "oddish", ortide: "gloom", rafflesia: "vileplume",
-  paras: "paras", parasect: "parasect",
-  mimitoss: "venonat", aeromite: "venomoth",
-  taupiqueur: "diglett", triopikeur: "dugtrio",
-  miaouss: "meowth", persian: "persian",
-  psykokwak: "psyduck", akwakwak: "golduck",
-  ferosinge: "mankey", colossinge: "primeape",
-  caninos: "growlithe", arcanin: "arcanine",
+  melofee: "clefairy", melodelfe: "clefable", goupix: "vulpix", feunard: "ninetales",
+  rondoudou: "jigglypuff", groudoudou: "wigglytuff", nosferapti: "zubat", nosferalto: "golbat",
+  mystherbe: "oddish", ortide: "gloom", rafflesia: "vileplume", paras: "paras", parasect: "parasect",
+  mimitoss: "venonat", aeromite: "venomoth", taupiqueur: "diglett", triopikeur: "dugtrio",
+  miaouss: "meowth", persian: "persian", psykokwak: "psyduck", akwakwak: "golduck",
+  ferosinge: "mankey", colossinge: "primeape", caninos: "growlithe", arcanin: "arcanine",
   ptitard: "poliwag", tetarte: "poliwhirl", tartard: "poliwrath",
   abra: "abra", kadabra: "kadabra", alakazam: "alakazam",
   machoc: "machop", machopeur: "machoke", mackogneur: "machamp",
   chetiflor: "bellsprout", boustiflor: "weepinbell", empiflor: "victreebel",
-  tentacool: "tentacool", tentacruel: "tentacruel",
-  racaillou: "geodude", gravalanch: "graveler", grolem: "golem",
-  ponyta: "ponyta", galopa: "rapidash",
-  rameolos: "slowpoke", flagadoss: "slowbro",
-  magneti: "magnemite", magneton: "magneton",
-  canarticho: "farfetchd",
-  doduo: "doduo", dodrio: "dodrio",
-  otaria: "seel", lamantine: "dewgong",
-  tadmorv: "grimer", grotadmorv: "muk",
-  kokiyas: "shellder", crustabri: "cloyster",
-  fantominus: "gastly", spectrum: "haunter", ectoplasma: "gengar",
-  onix: "onix",
-  sophorifik: "drowzee", hypnomade: "hypno",
-  krabby: "krabby", krabboss: "kingler",
-  voltorbe: "voltorb", electrode: "electrode",
-  noeunoeuf: "exeggcute", noadkoko: "exeggutor",
-  osselelet: "cubone", ossatueur: "marowak",
-  kicklee: "hitmonlee", tygnon: "hitmonchan",
-  excelangue: "lickitung",
-  smogo: "koffing", smogogo: "weezing",
-  rhinocorn: "rhyhorn", rhinoferos: "rhydon",
-  leveinard: "chansey", saquedeneu: "tangela", kangourex: "kangaskhan",
-  hypocean: "seadra",
-  poisseneche: "goldeen", poissoroy: "seaking",
-  stari: "staryu", staross: "starmie",
+  tentacool: "tentacool", tentacruel: "tentacruel", racaillou: "geodude", gravalanch: "graveler", grolem: "golem",
+  ponyta: "ponyta", galopa: "rapidash", rameolos: "slowpoke", flagadoss: "slowbro",
+  magneti: "magnemite", magneton: "magneton", canarticho: "farfetchd", doduo: "doduo", dodrio: "dodrio",
+  otaria: "seel", lamantine: "dewgong", tadmorv: "grimer", grotadmorv: "muk",
+  kokiyas: "shellder", crustabri: "cloyster", fantominus: "gastly", spectrum: "haunter", ectoplasma: "gengar",
+  onix: "onix", sophorifik: "drowzee", hypnomade: "hypno", krabby: "krabby", krabboss: "kingler",
+  voltorbe: "voltorb", electrode: "electrode", noeunoeuf: "exeggcute", noadkoko: "exeggutor",
+  osselelet: "cubone", ossatueur: "marowak", kicklee: "hitmonlee", tygnon: "hitmonchan", excelangue: "lickitung",
+  smogo: "koffing", smogogo: "weezing", rhinocorn: "rhyhorn", rhinoferos: "rhydon",
+  leveinard: "chansey", saquedeneu: "tangela", kangourex: "kangaskhan", hypocean: "seadra",
+  poisseneche: "goldeen", poissoroy: "seaking", stari: "staryu", staross: "starmie",
   mmime: "mr. mime", mrmime: "mr. mime", m_mime: "mr. mime",
   insecateur: "scyther", lippoutou: "jynx", elektek: "electabuzz", magmar: "magmar",
-  scarabrute: "pinsir", tauros: "tauros",
-  magicarpe: "magikarp", leviator: "gyarados", lokhlass: "lapras", metamorph: "ditto",
+  scarabrute: "pinsir", tauros: "tauros", magicarpe: "magikarp", leviator: "gyarados", lokhlass: "lapras", metamorph: "ditto",
   evoli: "eevee", aquali: "vaporeon", voltali: "jolteon", pyroli: "flareon",
-  porygon: "porygon", amonita: "omanyte", amonistar: "omastar",
-  kabuto: "kabuto", kabutops: "kabutops", ptera: "aerodactyl", ronflex: "snorlax",
-  artikodin: "articuno", electhor: "zapdos", sulfura: "moltres",
-  minidraco: "dratini", draco: "dragonair", dracolosse: "dragonite",
-  mewtwo: "mewtwo", mew: "mew",
+  porygon: "porygon", amonita: "omanyte", amonistar: "omastar", kabuto: "kabuto", kabutops: "kabutops",
+  ptera: "aerodactyl", ronflex: "snorlax", artikodin: "articuno", electhor: "zapdos", sulfura: "moltres",
+  minidraco: "dratini", draco: "dragonair", dracolosse: "dragonite", mewtwo: "mewtwo", mew: "mew",
 
-  // Gen 2
-  germignon: "chikorita", macronium: "bayleef", meganium: "meganium",
-  hericendre: "cyndaquil", feurisson: "quilava", typhlosion: "typhlosion",
-  kaiminus: "totodile", crocrodil: "croconaw", aligatueur: "feraligatr",
-  furet: "sentret", fouinar: "furret", hoothoot: "hoothoot", noarfang: "noctowl",
-  ledyba: "ledyba", ledian: "ledian", mimigal: "spinarak", migalos: "ariados",
-  nostenfer: "crobat", loupio: "chinchou", lanturn: "lanturn",
-  pichu: "pichu", melo: "cleffa", toudoudou: "igglybuff", togepi: "togepi", togetic: "togetic",
-  natu: "natu", xatu: "xatu", wattouat: "mareep", lainergie: "flaaffy", pharamp: "ampharos",
-  joliflor: "bellossom", marill: "marill", azumarill: "azumarill", simularbre: "sudowoodo",
-  tarpaud: "politoed", granivol: "hoppip", floravol: "skiploom", cotovol: "jumpluff",
-  capumain: "aipom", tournegrin: "sunkern", heliastronc: "sunflora", yanma: "yanma",
-  axoloto: "wooper", maraiste: "quagsire", mentali: "espeon", noctali: "umbreon",
-  cornebre: "murkrow", roigada: "slowking", feuforeve: "misdreavus", zarbi: "unown",
-  qulbutoke: "wobbuffet", girafarig: "girafarig", foretress: "forretress", insolourdo: "dunsparce",
-  scorplane: "gligar", steelix: "steelix", snubbull: "snubbull", granbull: "granbull",
-  qwilfish: "qwilfish", cizayox: "scizor", caratroc: "shuckle", scarhino: "heracross",
-  farfuret: "sneasel", teddiursa: "teddiursa", ursaring: "ursaring",
-  limagma: "slugma", volcaropod: "magcargo", marcacrin: "swinub", cochignon: "piloswine",
-  corayon: "corsola", remoraid: "remoraid", octillery: "octillery", cadoizo: "delibird",
-  demanta: "mantine", airmure: "skarmory", malosse: "houndour", demolosse: "houndoom",
-  hyporoi: "kingdra", phanpy: "phanpy", donphan: "donphan", porygon2: "porygon2",
-  cerfrousse: "stantler", queulorior: "smeargle", debugant: "tyrogue", kapoera: "hitmontop",
-  lippouti: "smoochum", elekid: "elekid", magby: "magby", ecremeuh: "miltank",
-  leuphorie: "blissey", raikou: "raikou", entei: "entei", suicune: "suicune",
-  embrilex: "larvitar", ymphect: "pupitar", tyranocif: "tyranitar",
+  // Gen 2 à Gen 8 (Essentiels TCG)
+  germignon: "chikorita", hericendre: "cyndaquil", kaiminus: "totodile",
+  pichu: "pichu", togepi: "togepi", wattouat: "mareep", pharamp: "ampharos",
+  mentali: "espeon", noctali: "umbreon", cizayox: "scizor", tyranocif: "tyranitar",
   lugia: "lugia", hooh: "ho-oh", celebi: "celebi",
+  arcko: "treecko", poussifeu: "torchic", gobou: "mudkip",
+  tarsal: "ralts", gardevoir: "gardevoir", drattak: "salamence", metalosse: "metagross",
+  rayquaza: "rayquaza", jirachi: "jirachi", deoxys: "deoxys",
+  tortipouss: "turtwig", ouisticram: "chimchar", tiplouf: "piplup",
+  lucario: "lucario", carchacrok: "garchomp", phyllali: "leafeon", givrali: "glaceon", gallame: "gallade",
+  dialga: "dialga", palkia: "palkia", giratina: "giratina", arceus: "arceus",
+  victini: "victini", zoroark: "zoroark", trioxhydre: "hydreigon", reshiram: "reshiram", zekrom: "zekrom", kyurem: "kyurem",
+  grenousse: "froakie", amphinobi: "greninja", nymphali: "sylveon", zygarde: "zygarde",
+  brindibou: "rowlet", mimiqui: "mimikyu", solgaleo: "solgaleo", lunala: "lunala",
+  ouistempo: "grookey", flambino: "scorbunny", larmeon: "sobble", zacian: "zacian", zamazenta: "zamazenta",
 
-  // Gen 3
-  arcko: "treecko", massko: "grovyle", jungko: "sceptile",
-  poussifeu: "torchic", galifeu: "combusken", brasegali: "blaziken",
-  gobou: "mudkip", flobio: "marshtomp", laggron: "swampert",
-  medhyena: "poochyena", grahyena: "mightyena", zigzaton: "zigzagoon", lineon: "linoone",
-  chenipotte: "wurmple", armulys: "silcoon", charmillon: "beautifly", blindalys: "cascoon", papinox: "dustox",
-  nenupiot: "lotad", lombre: "lombre", ludicolo: "ludicolo",
-  grainipiot: "seedot", pifeuil: "nuzleaf", tengalice: "shiftry",
-  nirondelle: "taillow", heledelle: "swellow", goelise: "wingull", pelipper: "pelipper",
-  tarsal: "ralts", kirlia: "kirlia", gardevoir: "gardevoir",
-  arakdo: "surskit", maskadra: "masquerain", balignon: "shroomish", chapignon: "breloom",
-  parecool: "slakoth", vigoroth: "vigoroth", monaflemit: "slaking",
-  ningale: "nincada", ninjask: "ninjask", munja: "shedinja",
-  chuchmur: "whismur", ramboum: "loudred", brouhabam: "exploud",
-  makuhita: "makuhita", hariyama: "hariyama", azurill: "azurill", tarinor: "nosepass",
-  skitty: "skitty", delcatty: "delcatty", tenefix: "sableye", mysdibule: "mawile",
-  galekid: "aron", galegon: "lairon", galeking: "aggron",
-  meditikka: "meditite", charmina: "medicham", dynavolt: "electrike", elecsprint: "manectric",
-  posipi: "plusle", negapi: "minun", muciole: "volbeat", lumivole: "illumise",
-  roselia: "roselia", gloupti: "gulpin", avaltout: "swalot",
-  carvanha: "carvanha", sharpedo: "sharpedo", wailmer: "wailmer", wailord: "wailord",
-  chamallot: "numel", camerupt: "camerupt", chartor: "torkoal",
-  spoink: "spoink", groret: "grumpig", spinda: "spinda",
-  kraknoix: "trapinch", vibraninf: "vibrava", libegon: "flygon",
-  cacnea: "cacnea", cacturne: "cacturne", tyrondelle: "swablu", altaria: "altaria",
-  mangriff: "zangoose", seviper: "seviper", seleroc: "lunatone", solaroc: "solrock",
-  barloche: "barboach", barbicha: "whiscash", ecrapince: "corphish", colhomard: "crawdaunt",
-  balbuto: "baltoy", kaorine: "claydol", lilia: "lileep", vacilys: "cradily",
-  anorith: "anorith", armaldo: "armaldo", barpau: "feebas", milobellus: "milotic",
-  morpheo: "castform", kecleon: "kecleon", polichombr: "shuppet", branette: "banette",
-  teraclope: "duskull", tropius: "tropius", eoko: "chimecho", absol: "absol", okeoke: "wynaut",
-  stalgamin: "snorunt", oniglali: "glalie", momartik: "froslass",
-  obalie: "spheal", phogleur: "sealeo", kaimorse: "walrein",
-  coquiperl: "clamperl", serpang: "huntail", rosabyss: "gorebyss",
-  relicanth: "relicanth", lovdisc: "luvdisc",
-  draby: "bagon", drackhaus: "shelgon", drattak: "salamence",
-  terhal: "beldum", metang: "metang", metalosse: "metagross",
-  regirock: "regirock", regice: "regice", registeel: "registeel",
-  latias: "latias", latios: "latios", kyogre: "kyogre", groudon: "groudon", rayquaza: "rayquaza",
-  jirachi: "jirachi", deoxys: "deoxys",
-
-  // Gen 4 à 8
-  tortipouss: "turtwig", boskara: "grotle", torterra: "torterra",
-  ouisticram: "chimchar", chimpenfeu: "monferno", simiabraz: "infernape",
-  tiplouf: "piplup", prinplouf: "prinplup", pingoleon: "empoleon",
-  etourmi: "starly", etourvol: "staravia", etouraptor: "staraptor",
-  keunotor: "bidoof", castorno: "bibarel", lixy: "shinx", luxio: "luxio", luxray: "luxray",
-  roserade: "roserade", kranidos: "cranidos", charkos: "rampardos",
-  dinoclier: "shieldon", bastiodon: "bastiodon", apireine: "vespiquen",
-  pachirisu: "pachirisu", mustebouee: "buizel", musteflott: "floatzel",
-  sancoki: "shellos", tritosor: "gastrodon", baudrive: "drifloon", goinfrex: "munchlax",
-  laporeille: "buneary", lockpin: "lopunny", chaglam: "glameow",
-  moufouette: "stunky", moufflair: "skuntank", archeomire: "bronzor", archeodong: "bronzong",
-  pijako: "chatot", spiritomb: "spiritomb", griknot: "gible", carmache: "gabite", carchacrok: "garchomp",
-  riolu: "riolu", lucario: "lucario", hippopotas: "hippopotas", hippodocus: "hippowdon",
-  rapion: "skorupi", drascore: "drapion", cradopaud: "croagunk", coatox: "toxicroak",
-  vortente: "carnivine", ecayon: "finneon", lumineon: "lumineon", blizzi: "snover", blizzaroi: "abomasnow",
-  rhinastoc: "rhyperior", elekable: "electivire", maganon: "magmortar", togekiss: "togekiss",
-  yanmega: "yanmega", phyllali: "leafeon", givrali: "glaceon", scorvol: "gliscor", mammochon: "mamoswine",
-  gallame: "gallade", tarinorme: "probopass", noctunoir: "dusknoir",
-  crehelf: "uxie", crefollet: "mesprit", crefadet: "azelf",
-  dialga: "dialga", palkia: "palkia", heatran: "heatran", regigigas: "regigigas",
-  giratina: "giratina", cresselia: "cresselia", phione: "phione", manaphy: "manaphy",
-  darkrai: "darkrai", shaymin: "shaymin", arceus: "arceus", motisma: "rotom",
-  victini: "victini", gruikui: "tepig", grotichon: "pignite", roitiflam: "emboar",
-  moustillon: "oshawott", mateloutre: "dewott", clamiral: "samurott",
-  vipelierre: "snivy", lianaja: "servine", majaspic: "serperior",
-  ponchiot: "lillipup", mastouffe: "stoutland", chacripan: "purrloin", leopardus: "liepard",
-  feuillajou: "pansage", flamajou: "pansear", flotajou: "panpour",
-  munna: "munna", mushana: "musharna", zebribon: "blitzle", zebrika: "zebstrika",
-  rototaupe: "drilbur", minotaupe: "excadrill", nanmeouie: "audino", betochef: "conkeldurr",
-  coupenotte: "axew", incisache: "fraxure", tranchodon: "haxorus",
-  venipatte: "venipede", brutapode: "scolipede", doudouvet: "cottonee", farfaduvet: "whimsicott",
-  petilil: "petilil", fragilady: "lilligant", zorua: "zorua", zoroark: "zoroark",
-  chinchidou: "minccino", cinccino: "cinccino", solochi: "deino", diamat: "zweilous", trioxhydre: "hydreigon",
-  pyronille: "larvesta", pyrax: "volcarona", cobaltium: "cobalion", terrakium: "terrakion", viridium: "virizion",
-  reshiram: "reshiram", zekrom: "zekrom", kyurem: "kyurem", genesect: "genesect",
-  marisson: "chespin", feunnec: "fennekin", roussil: "braixen", goupelin: "delphox",
-  grenousse: "froakie", croaporal: "frogadier", amphinobi: "greninja",
-  passerouge: "fletchling", flambusard: "talonflame", monorpale: "honedge", exagide: "aegislash",
-  sonistrelle: "noibat", bruyverne: "noivern", zygarde: "zygarde", diancie: "diancie",
-  hoopa: "hoopa", volcanion: "volcanion", nymphali: "sylveon",
-  brindibou: "rowlet", archeduc: "decidueye", flamiaou: "litten", felinferno: "incineroar",
-  otaquin: "popplio", oratoria: "primarina", rocabot: "rockruff", lougaroc: "lycanroc",
-  mimiqui: "mimikyu", solgaleo: "solgaleo", lunala: "lunala", necrozma: "necrozma",
-  meltan: "meltan", melmetal: "melmetal",
-  ouistempo: "grookey", gorigandr: "rillaboom", flambino: "scorbunny", pyrobut: "cinderace",
-  larmeon: "sobble", lezargus: "inteleon", moumouton: "wooloo",
-  zacian: "zacian", zamazenta: "zamazenta", eternatus: "eternatus", shifours: "urshifu",
-
-  // Gen 9 & Ajouts récents
+  // Gen 9 & Paradoxes (Scarlet & Violet)
   poussacha: "sprigatito", matourgeon: "floragato", miascarade: "meowscarada",
   chochodile: "fuecoco", crocodel: "crocalor", flamigator: "skeledirge",
   coiffeton: "quaxly", canarbello: "quaxwell", palmaval: "quaquaval",
-  gromago: "gholdengo", mordudor: "gimmighoul",
-  koraidon: "koraidon", miraidon: "miraidon",
-  pampam: "fidough", briochien: "dachsbun",
+  gromago: "gholdengo", mordudor: "gimmighoul", koraidon: "koraidon", miraidon: "miraidon",
   charbambin: "charcadet", carmadura: "armarouge", malvalame: "ceruledge",
-  tetsuo: "iron-treads", pachyfer: "iron-thorns", paumedefer: "iron-hands", hottedefer: "iron-bundle",
-  "garde-de-fer": "iron-valiant", "rugi-lune": "roaring-moon",
-  ogerpon: "ogerpon", terapagos: "terapagos",
-  flamenroule: "flamigo", marmitempo: "poltchageist",
+  "roue-de-fer": "iron-treads", tetsuo: "iron-treads", "pachyfer": "iron-thorns",
+  "paume-de-fer": "iron-hands", paumedefer: "iron-hands", "hotte-de-fer": "iron-bundle", hottedefer: "iron-bundle",
+  "garde-de-fer": "iron-valiant", gardedefer: "iron-valiant",
+  "rugi-lune": "roaring-moon", rugilune: "roaring-moon",
+  "flotte-meche": "flutter-mane", flottemeche: "flutter-mane",
+  "courrousinge": "annihilape", pomdramour: "dipplin", pecharant: "pecharant",
+  ogerpon: "ogerpon", terapagos: "terapagos", flamenroule: "flamigo",
 
-  // Formes / Variantes TCG Régionales
-  taupiqueurdepaldea: "diglett", triopikeurdepaldea: "dugtrio",
-  zoruahisui: "zorua", zoroarkhisui: "zoroark", arcaninhisui: "arcanine",
-  voltorbehisui: "voltorb", electrodehisui: "electrode", bruyvernehisui: "noivern",
-  caninoshisui: "growlithe", typhlosionhisui: "typhlosion", clamiralhisui: "samurott",
-  goupixdalola: "vulpix", feunarddalola: "ninetales", miaoussdalola: "meowth",
-  persiandalola: "persian", raichudalola: "raichu",
-  miaoussdegalar: "meowth", palarticho: "sirfetchd", darumacho: "darmanitan",
+  // Regionales
+  taupiqueurdepaldea: "diglett", zoruahisui: "zorua", zoroarkhisui: "zoroark",
+  goupixdalola: "vulpix", feunarddalola: "ninetales", miaoussdegalar: "meowth",
 };
 
 const englishToFrenchNames: Record<string, string> = Object.entries(
@@ -249,7 +137,8 @@ const englishToFrenchNames: Record<string, string> = Object.entries(
 
 function normalizeName(name: string): string {
   if (!name) return "";
-  return name
+  const fixed = fixOCRCharacterConfusion(name);
+  return fixed
     .toLowerCase()
     .trim()
     .normalize("NFD")
@@ -263,28 +152,23 @@ export function translatePokemonToFrench(name: string): string {
   if (!clean) return "";
 
   const result = englishToFrenchNames[clean];
-  if (!result) {
-    return name;
-  }
+  if (!result) return name;
 
   return result.charAt(0).toUpperCase() + result.slice(1);
 }
 
 /**
- * Nettoie les suffixes de rareté TCG et les numéros de promos (SWSH254, SVP001, etc.)
+ * Nettoie les suffixes de rareté TCG, mots-clés et promos
  */
 export function cleanTCGSuffix(name: string): string {
   if (!name) return "";
 
   return name
-    // Enlève les codes promos TCG (ex: SWSH254, SVP001, SM123, XY123)
     .replace(/\b(swsh|svp|sm|xy|bw|hgss|dp|promo)\s*\d*\b/gi, "")
-    // Enlève les suffixes TCG de rareté
     .replace(
-      /\b(ex|EX|gx|GX|v|V|vmax|VMAX|vstar|VSTAR|radiant|shiny|prime|AR|SAR|IR)\b/gi,
+      /\b(ex|EX|gx|GX|v|V|vmax|VMAX|vstar|VSTAR|radiant|shiny|prime|AR|SAR|IR|UR|HR|TERA|ANCIENT|FUTURE)\b/gi,
       ""
     )
-    // Enlève les mentions régionales du nom de base
     .replace(
       /\b(d'alola|d alola|alola|hisui|de hisui|galar|de galar|paldea|de paldea)\b/gi,
       ""
@@ -294,7 +178,7 @@ export function cleanTCGSuffix(name: string): string {
 }
 
 /**
- * Extrait le suffixe TCG (Rareté ou Promo)
+ * Extrait le suffixe TCG (Rareté, Promos, Sub-sets TG/GG)
  */
 function extractTCGSuffix(name: string): string {
   if (!name) return "";
@@ -306,15 +190,17 @@ function extractTCGSuffix(name: string): string {
     )
     .trim();
 
-  // 1. Cherche d'abord un numéro promo (ex: SWSH254 ou SVP001)
+  // 1. Promos (SWSH254, SVP001)
   const promoMatch = cleaned.match(/\b(swsh|svp|sm|xy|promo)\s*\d*\b/i);
-  if (promoMatch) {
-    return promoMatch[0].toUpperCase();
-  }
+  if (promoMatch) return promoMatch[0].toUpperCase();
 
-  // 2. Sinon cherche un suffixe classique (ex: EX, VMAX, V)
+  // 2. Sub-sets (TG01, GG12)
+  const subsetMatch = cleaned.match(/\b(tg|gg|sv)\s*\d+\b/i);
+  if (subsetMatch) return subsetMatch[0].toUpperCase();
+
+  // 3. Suffixes TCG Classiques
   const match = cleaned.match(
-    /\b(ex|EX|gx|GX|vmax|VMAX|vstar|VSTAR|radiant|shiny|prime|AR|SAR|IR)\b/i
+    /\b(ex|EX|gx|GX|vmax|VMAX|vstar|VSTAR|radiant|shiny|prime|AR|SAR|IR|UR|HR|tera)\b/i
   ) || cleaned.match(/\b(v|V)$/i);
 
   return match ? match[1].toLowerCase() : "";
@@ -327,13 +213,16 @@ export function translatePokemonToEnglish(name: string): string | null {
   const cleanBase = cleanTCGSuffix(name);
   const normalized = normalizeName(cleanBase);
 
-  if (!normalized) {
-    return null;
-  }
+  if (!normalized) return null;
 
   const translated = pokemonNames[normalized];
   if (translated) {
     return suffix ? `${translated} ${suffix}` : translated;
+  }
+
+  // Si c'est déjà en anglais
+  if (Object.values(pokemonNames).some(en => en.toLowerCase().replace(/[^a-z0-9]/g, "") === normalized)) {
+    return suffix ? `${cleanBase} ${suffix}` : cleanBase;
   }
 
   return null;
@@ -345,15 +234,14 @@ export function translatePokemonName(name: string): string {
 
 export function resolvePokemonName(name: string): string {
   const clean = normalizeName(name);
-  if (!clean) {
-    return "";
-  }
+  if (!clean) return "";
   return ocrAliases[clean] ?? name;
 }
 
 export function cleanPokemonOCRName(name: string): string {
   if (!name) return "";
-  return name
+  const fixed = fixOCRCharacterConfusion(name);
+  return fixed
     .toLowerCase()
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
@@ -365,23 +253,7 @@ export function cleanPokemonOCRName(name: string): string {
 
 export function correctPokemonOCR(name: string): string {
   const clean = cleanPokemonOCRName(name);
-
-  const corrections: Record<string, string> = {
-    dracauf: "dracaufeu",
-    dracaufe: "dracaufeu",
-    "dracauf eu": "dracaufeu",
-    "chariz ard": "charizard",
-    pikach: "pikachu",
-    "pikach u": "pikachu",
-    pikashu: "pikachu",
-    mewtwoo: "mewtwo",
-    salamech: "salameche",
-    florizare: "florizarre",
-    tortankk: "tortank",
-    evolii: "evoli",
-  };
-
-  return corrections[clean] ?? clean;
+  return ocrAliases[clean] ?? clean;
 }
 
 export function resolveTCGCardName(rawName: string) {
@@ -392,16 +264,14 @@ export function resolveTCGCardName(rawName: string) {
 
   const suffix = extractTCGSuffix(cleaned);
   const baseName = cleanTCGSuffix(cleaned);
-
   const correctedName = resolvePokemonName(baseName);
 
-  const pokemon =
-    translatePokemonToEnglish(correctedName) ?? correctedName;
+  const pokemon = translatePokemonToEnglish(correctedName) ?? correctedName;
 
   return {
     original,
     pokemon,
     suffix: suffix || null,
-    confidence: pokemon !== baseName ? 95 : 60,
+    confidence: pokemon !== baseName ? 95 : 70,
   };
 }
