@@ -3,7 +3,7 @@
  * Cache hybride (RAM + LocalStorage) avec normalisation OCR, support TTL et objets cartes.
  */
 
-import { logger } from "../logger";
+import { logger } from "./cache/logger";
 
 const STORAGE_KEY = "king_tcg_pokemon_cache";
 const MAX_CACHE_SIZE = 500;
