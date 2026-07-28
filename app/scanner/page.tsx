@@ -205,12 +205,18 @@ export default function ScannerPage() {
             </h1>
           </section>
 
+          {/* Zone de la vidéo et du scanner overlay */}
           <div className="relative aspect-[9/16] overflow-hidden rounded-xl border border-zinc-900 bg-neutral-950">
             <ScannerCamera
               ref={cameraRef}
               onReady={handleCameraReady}
             />
-            <ScannerOverlay scanning={scanning} />
+            {/* Overlay visuel avec transmission du statut et de la réussite */}
+            <ScannerOverlay 
+              scanning={scanning} 
+              hasResult={Boolean(detectedCard)} 
+              statusText={status}
+            />
           </div>
 
           <button
