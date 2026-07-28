@@ -5,13 +5,13 @@ import { CheckCircle2, Loader2, ScanLine } from "lucide-react";
 type Props = {
   scanning?: boolean;
   hasResult?: boolean;
-  message?: string;
+  statusText?: string;
 };
 
 export default function ScannerOverlay({
   scanning = false,
   hasResult = false,
-  message,
+  statusText,
 }: Props) {
   return (
     <div className="absolute inset-0 z-10 pointer-events-none select-none overflow-hidden">
@@ -39,7 +39,7 @@ export default function ScannerOverlay({
           }
         `}
       >
-        {/* Coins de cadrage stylisés HUD */}
+        {/* Coins de cadrage HUD */}
         {/* Haut Gauche */}
         <div
           className={`
@@ -123,11 +123,11 @@ export default function ScannerOverlay({
         )}
       </div>
 
-      {/* Message utilisateur & état bas de page */}
+      {/* Message dynamique en bas de l'overlay */}
       <div className="absolute bottom-[6%] inset-x-0 flex justify-center px-4">
         <div
           className={`
-            flex items-center gap-2.5 rounded-full border px-5 py-2.5 text-[11px] font-black uppercase tracking-widest shadow-2xl backdrop-blur-md transition-all duration-300
+            flex items-center gap-2.5 rounded-full border px-5 py-2.5 text-[10px] sm:text-[11px] font-black uppercase tracking-widest shadow-2xl backdrop-blur-md transition-all duration-300 text-center
             ${
               hasResult
                 ? "border-emerald-500/60 bg-emerald-950/90 text-emerald-400 shadow-emerald-900/30"
@@ -139,18 +139,18 @@ export default function ScannerOverlay({
         >
           {hasResult ? (
             <>
-              <CheckCircle2 className="w-4 h-4 text-emerald-400 animate-bounce" />
-              <span>{message || "Carte détectée ! Résultats ci-dessous 👇"}</span>
+              <CheckCircle2 className="w-4 h-4 shrink-0 text-emerald-400 animate-bounce" />
+              <span>{statusText || "Carte trouvée ! Redirection..."}</span>
             </>
           ) : scanning ? (
             <>
-              <Loader2 className="w-4 h-4 text-cyan-400 animate-spin" />
-              <span>{message || "Analyse de la carte en cours..."}</span>
+              <Loader2 className="w-4 h-4 shrink-0 text-cyan-400 animate-spin" />
+              <span>{statusText || "Analyse IA Gemini en cours..."}</span>
             </>
           ) : (
             <>
-              <ScanLine className="w-4 h-4 text-zinc-400" />
-              <span>{message || "Placez la carte dans le cadre"}</span>
+              <ScanLine className="w-4 h-4 shrink-0 text-zinc-400" />
+              <span>{statusText || "Alignez la carte dans le cadre"}</span>
             </>
           )}
         </div>
@@ -170,7 +170,7 @@ export default function ScannerOverlay({
         }
 
         .animate-scan {
-          animation: scanMove 2s ease-in-out infinite;
+          animation: scanMove 1.8s ease-in-out infinite;
         }
       `}</style>
     </div>
