@@ -14,8 +14,8 @@ const API_URL = "https://api.pokemontcg.io/v2/cards";
 const SETS_URL = "https://api.pokemontcg.io/v2/sets";
 const TCGDEX_URL = "https://api.tcgdex.net/v2";
 
-// ⚠️ Incrémenté en v6 pour FORCER le nettoyage du cache obsolète
-const CACHE_KEY = "king_tcg_cards_cache_v6";
+// ⚠️ Incrémenté en v7 pour forcer le rafraîchissement du cache avec le nouveau système de prix
+const CACHE_KEY = "king_tcg_cards_cache_v7";
 
 const cache = new Map<string, PokemonCard>();
 const searchCache = new Map<string, PokemonCard[]>();
@@ -23,7 +23,7 @@ const searchCache = new Map<string, PokemonCard[]>();
 export type LanguageCode = "fr" | "en" | "ja" | "zh-tw";
 
 /**
- * Nettoyage automatique des anciens caches localStorage sur mobile/desktop
+ * Nettoyage automatique des anciens caches localStorage
  */
 if (typeof window !== "undefined") {
   try {
@@ -34,6 +34,7 @@ if (typeof window !== "undefined") {
       "king_tcg_cards_cache_v3",
       "king_tcg_cards_cache_v4",
       "king_tcg_cards_cache_v5",
+      "king_tcg_cards_cache_v6",
     ];
     oldKeys.forEach((key) => localStorage.removeItem(key));
   } catch {}
@@ -58,7 +59,7 @@ function safePrice(val: any): number {
 }
 
 /**
- * Normalise les cartes pour garantir la présence des champs prix et prix calculé
+ * Normalise les cartes pour garantir la présence des champs prix et du prix calculé
  */
 function normalize(card: any): PokemonCard {
   const cmPrices = card.cardmarket?.prices || card.pricing?.cardmarket || {};
@@ -67,13 +68,29 @@ function normalize(card: any): PokemonCard {
   const avgSell = safePrice(cmPrices.averageSellPrice ?? cmPrices.avg);
   const trend = safePrice(cmPrices.trendPrice ?? cmPrices.trend);
   const low = safePrice(cmPrices.lowPrice ?? cmPrices.low);
+  const avg30 = safePrice(cmPrices.avg30);
+  const avg7 = safePrice(cmPrices.avg7);
 
-  const tcgHolo = safePrice(tcgPrices.holofoil?.market);
-  const tcgNormal = safePrice(tcgPrices.normal?.market);
-  const tcgReverse = safePrice(tcgPrices.reverseHolofoil?.market);
+  // Cotes USD TCGPlayer si Cardmarket FR/EUR est muet (Conversion USD -> EUR ~0.92)
+  const tcgHolo = safePrice(tcgPrices.holofoil?.market ?? tcgPrices.holofoil?.mid) * 0.92;
+  const tcgNormal = safePrice(tcgPrices.normal?.market ?? tcgPrices.normal?.mid) * 0.92;
+  const tcgReverse = safePrice(tcgPrices.reverseHolofoil?.market ?? tcgPrices.reverseHolofoil?.mid) * 0.92;
+  const tcgUnlimited = safePrice(tcgPrices.unlimitedHolofoil?.market) * 0.92;
 
-  // Estimation dynamique prioritaires EUR (Cardmarket) avec Fallback USD
-  const computedPrice = avgSell || trend || low || tcgHolo || tcgNormal || tcgReverse || 0;
+  // Cascade de fallback pour garantir d'afficher un prix réaliste
+  const rawComputed =
+    avgSell ||
+    trend ||
+    low ||
+    avg7 ||
+    avg30 ||
+    safePrice(tcgHolo) ||
+    safePrice(tcgNormal) ||
+    safePrice(tcgReverse) ||
+    safePrice(tcgUnlimited) ||
+    0;
+
+  const computedPrice = safePrice(rawComputed);
 
   return {
     ...card,
@@ -89,9 +106,9 @@ function normalize(card: any): PokemonCard {
           url: card.cardmarket.url || "",
           updatedAt: card.cardmarket.updatedAt || new Date().toISOString(),
           prices: {
-            averageSellPrice: avgSell,
+            averageSellPrice: avgSell || computedPrice,
             lowPrice: low,
-            trendPrice: trend,
+            trendPrice: trend || computedPrice,
             reverseHoloSell: safePrice(cmPrices.reverseHoloSell),
             reverseHoloLow: safePrice(cmPrices.reverseHoloLow),
             reverseHoloTrend: safePrice(cmPrices.reverseHoloTrend),
@@ -106,9 +123,9 @@ function normalize(card: any): PokemonCard {
           url: card.tcgplayer.url || "",
           updatedAt: card.tcgplayer.updatedAt || new Date().toISOString(),
           prices: {
-            holofoil: tcgPrices.holofoil ? { market: tcgHolo } : undefined,
-            normal: tcgPrices.normal ? { market: tcgNormal } : undefined,
-            reverseHolofoil: tcgPrices.reverseHolofoil ? { market: tcgReverse } : undefined,
+            holofoil: tcgPrices.holofoil ? { market: safePrice(tcgHolo) } : undefined,
+            normal: tcgPrices.normal ? { market: safePrice(tcgNormal) } : undefined,
+            reverseHolofoil: tcgPrices.reverseHolofoil ? { market: safePrice(tcgReverse) } : undefined,
           },
         }
       : undefined,
@@ -245,9 +262,9 @@ function removeDuplicates(cards: PokemonCard[]) {
       if (isNewOfficial && !isOldOfficial) {
         map.set(key, card);
       } else if (isNewOfficial === isOldOfficial) {
-        const hasPricesNew = (card.cardmarket?.prices?.averageSellPrice ?? 0) > 0 || (card.tcgplayer?.prices?.holofoil?.market ?? 0) > 0;
-        const hasPricesOld = (existing.cardmarket?.prices?.averageSellPrice ?? 0) > 0 || (existing.tcgplayer?.prices?.holofoil?.market ?? 0) > 0;
-        if (hasPricesNew && !hasPricesOld) {
+        const priceNew = card.computedPrice ?? 0;
+        const priceOld = existing.computedPrice ?? 0;
+        if (priceNew > 0 && priceOld === 0) {
           map.set(key, card);
         }
       }
@@ -383,14 +400,19 @@ export async function searchCards(
   let officialCards: PokemonCard[] = [];
 
   try {
-    // Garantir à la fois le terme FR et EN (ex: Dracaufeu ET Charizard)
-    const englishName = translatePokemonToEnglish(key) || key;
-    const frenchName = translatePokemonToFrench(key) || key;
-    const queryNames = Array.from(new Set([englishName, frenchName, key])).filter(Boolean);
+    // 🔥 TRAITEMENT SPÉCIAL DRACAUFEU / CHARIZARD & NOMS CLÉS
+    let queryNames: string[] = [];
+    if (key.includes("dracaufeu") || key.includes("charizard")) {
+      queryNames = ["Dracaufeu", "Charizard"];
+    } else {
+      const englishName = translatePokemonToEnglish(key) || key;
+      const frenchName = translatePokemonToFrench(key) || key;
+      queryNames = Array.from(new Set([englishName, frenchName, key])).filter(Boolean);
+    }
 
     logger.api(`[SEARCH ENGINE] Mots-clés interrogés en parallèle:`, queryNames);
 
-    // Lancement de requêtes parallèles pour charger Page 1 et Page 2 sur chaque variante de nom
+    // Requêtes parallèles : Page 1 & Page 2 pour couvrir toutes les éditions récentes
     const searchPromises = queryNames.flatMap((qName) => [
       fetchPage(`name:"*${qName}*"`, 1),
       fetchPage(`name:"*${qName}*"`, 2),
@@ -409,7 +431,7 @@ export async function searchCards(
 
   let finalCards = removeDuplicates(officialCards);
 
-  // Fallback TCGdex si 0 résultat ou très peu de résultats sur l'API officielle
+  // Fallback TCGdex si très peu de résultats sur l'API officielle
   if (finalCards.length < 3) {
     try {
       const targetLang = lang === "en" ? "en" : lang === "ja" ? "ja" : lang === "zh-tw" ? "zh-tw" : "fr";
@@ -428,7 +450,9 @@ export async function searchCards(
     }
   }
 
-  // Tri Strict V3.6 : Cartes officielles d'abord, puis Récentes -> Anciennes
+  // Tri V3.7 : 
+  // 1. Cartes officielles en premier
+  // 2. Date de sortie décroissante (Plus récentes -> Plus anciennes)
   finalCards.sort((a, b) => {
     const isOfficialA = !a.id.startsWith("tcgdex-") ? 1 : 0;
     const isOfficialB = !b.id.startsWith("tcgdex-") ? 1 : 0;
