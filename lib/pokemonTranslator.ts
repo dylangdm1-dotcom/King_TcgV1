@@ -9,6 +9,8 @@
  * - Promos TCG (SVP, SWSH, SM, XY, PROMO)
  */
 
+import { logger } from "./cache/logger";
+
 // Normalisation pré-OCR pour corriger les confusions de caractères typiques
 export function fixOCRCharacterConfusion(text: string): string {
   if (!text) return "";
@@ -59,7 +61,7 @@ export const pokemonNames: Record<string, string> = {
   chenipan: "caterpie", chrysacier: "metapod", papilusion: "butterfree",
   aspicot: "weedle", coconfort: "kakuna", dardargnan: "beedrill",
   roucool: "pidgey", roucoups: "pidgeotto", roucarnage: "pidgeot",
-  rattata: "rattata", rattatac: "raticate", piafabec: "spearow", rapasdepic: "fearow",
+  rattata: "raticate", piafabec: "spearow", rapasdepic: "fearow",
   abo: "ekans", arbok: "arbok", pikachu: "pikachu", raichu: "raichu",
   sablette: "sandshrew", sablaireau: "sandslash",
   nidoranf: "nidoran-f", nidorina: "nidorina", nidoqueen: "nidoqueen",
@@ -157,6 +159,11 @@ export function translatePokemonToFrench(name: string): string {
   return result.charAt(0).toUpperCase() + result.slice(1);
 }
 
+// 🟢 Alias exporté pour la route API /api/scan/route.ts
+export function getFrenchPokemonName(name: string): string {
+  return translatePokemonToFrench(name);
+}
+
 /**
  * Nettoie les suffixes de rareté TCG, mots-clés et promos
  */
@@ -175,6 +182,11 @@ export function cleanTCGSuffix(name: string): string {
     )
     .replace(/\s+/g, " ")
     .trim();
+}
+
+// 🟢 Alias exporté pour le nettoyage de recherche TCG
+export function cleanCardNameForSearch(name: string): string {
+  return cleanTCGSuffix(name);
 }
 
 /**
