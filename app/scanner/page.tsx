@@ -197,28 +197,31 @@ export default function ScannerPage() {
         }
       }
 
-      // 🛡️ Garde de sécurité TypeScript pour garantir l'existence de bestCard
+      // 🛡️ Garde de sécurité TypeScript stricte
       if (!bestCard) {
         setStatus("Erreur lors de la récupération de la carte.");
         triggerHaptic([100, 50, 100]);
         return;
       }
 
+      // Constante locale non-null pour garantir le typage TypeScript dans les callbacks
+      const card = bestCard;
+
       // 🎉 Succès de détection !
       triggerHaptic(60); // Vibration courte de confirmation
-      setStatus(`Trouvé : ${bestCard.name} (${bestCard.number || "N/A"})`);
+      setStatus(`Trouvé : ${card.name} (${card.number || "N/A"})`);
 
       // Traitement selon le mode sélectionné
       if (scanMode === "single") {
-        logger.scan(`Scan unique réussi ! Redirection vers la carte ID: ${bestCard.id}`);
+        logger.scan(`Scan unique réussi ! Redirection vers la carte ID: ${card.id}`);
         setTimeout(() => {
-          router.push(`/card/${bestCard.id}`);
+          router.push(`/card/${card.id}`);
         }, 400);
       } else {
-        // Mode Batch : Ajout à la liste et ouverture automatique du drawer s'il est fermé
+        // Mode Batch : Ajout à la liste et ouverture automatique du drawer
         const batchItem: ScannedBatchItem = {
-          id: `${bestCard.id}_${Date.now()}`,
-          card: bestCard,
+          id: `${card.id}_${Date.now()}`,
+          card: card,
           scannedAt: new Date(),
           confidence: scanResult.confidence,
         };
