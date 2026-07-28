@@ -3,7 +3,7 @@
  * Exécution parallèle optimisée avec tolérance aux pannes et cache unifié
  */
 
- import { logger } from "./logger";
+import { logger } from "./logger";
 import { getCachedCardData, setCachedCardData } from "../pokemonCache";
  
  export interface SearchTask<T> {
