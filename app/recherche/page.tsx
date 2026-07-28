@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState, useEffect } from "react";
+import { useMemo, useState, useEffect, useCallback } from "react";
 import {
   Search,
   Package,
@@ -10,6 +10,7 @@ import {
   Maximize2,
   Filter,
   Loader2,
+  Sparkles,
 } from "lucide-react";
 import Navbar from "../../components/Navbar";
 import CardResult from "@/components/cards/CardResult";
@@ -57,16 +58,14 @@ export default function Recherche() {
       try {
         const setsData = await getAllSets(selectedLanguage);
         
-        // 1. Ne garder que les séries valides ayant un ID (sans supprimer M5, M3, M2.5)
+        // 1. Ne garder que les séries valides ayant un ID
         const validSets = (setsData || []).filter((s) => Boolean(s && s.id && s.name));
 
         // 2. Tri du plus récent au plus ancien
         validSets.sort((a, b) => {
-          // Tri par date de sortie si disponible
           if (a.releaseDate && b.releaseDate) {
             return new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime();
           }
-          // Sinon fallback sur la comparaison de l'ID inversée
           return b.id.localeCompare(a.id, undefined, { numeric: true, sensitivity: "base" });
         });
 
@@ -96,7 +95,7 @@ export default function Recherche() {
     return groups;
   }, [allSetsList]);
 
-  // Liste des blocs préservant l'ordre chronologique de la première série du bloc
+  // Liste des blocs
   const availableBlocks = useMemo(() => Object.keys(groupedSets), [groupedSets]);
 
   // Liste des séries filtrées par le bloc sélectionné
@@ -105,9 +104,9 @@ export default function Recherche() {
     return groupedSets[selectedBlock] || [];
   }, [selectedBlock, groupedSets, allSetsList]);
 
-  // Recherche textuelle classique
-  async function handleSearch() {
-    const value = searchQuery.trim();
+  // Fonction centrale de recherche textuelle
+  const executeSearch = useCallback(async (searchTerm: string) => {
+    const value = searchTerm.trim();
     setQuery(value);
 
     if (value.length < 2) {
@@ -127,7 +126,20 @@ export default function Recherche() {
     } finally {
       setLoading(false);
     }
-  }
+  }, [selectedLanguage]);
+
+  // Debounce automatique sur la frappe (400ms)
+  useEffect(() => {
+    if (searchMode !== "text") return;
+
+    const timer = setTimeout(() => {
+      if (searchQuery.trim().length >= 2) {
+        executeSearch(searchQuery);
+      }
+    }, 400);
+
+    return () => clearTimeout(timer);
+  }, [searchQuery, searchMode, executeSearch]);
 
   // Recherche directe par Extension
   async function handleSetSelect(setId: string) {
@@ -173,14 +185,14 @@ export default function Recherche() {
       <main className="min-h-screen bg-black text-white">
         <div className="mx-auto max-w-7xl space-y-6 px-4 py-8">
           {/* Section Recherche */}
-          <section className="rounded-xl border border-zinc-900 bg-neutral-950 p-4 md:p-6">
+          <section className="rounded-xl border border-zinc-900 bg-neutral-950 p-4 md:p-6 shadow-2xl">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-zinc-900/80 pb-4">
               <div>
                 <h1 className="text-base font-black uppercase tracking-widest text-white flex items-center gap-2">
                   <Search className="w-5 h-5 text-cyan-400" /> Recherche de Carte Pokémon
                 </h1>
                 <p className="mt-1 text-[11px] font-medium text-zinc-500">
-                  Filtrez les bases TCG, analysez les cotations et recherchez vos Pokémon.
+                  Consultez la base de données TCG, comparez les prix FR/EN et trouvez vos cartes.
                 </p>
               </div>
 
@@ -200,7 +212,7 @@ export default function Recherche() {
                     onClick={() => setSelectedLanguage(lang.code as LanguageCode)}
                     className={`px-2.5 py-1 rounded text-[10px] font-black transition ${
                       selectedLanguage === lang.code
-                        ? "bg-cyan-500 text-black shadow"
+                        ? "bg-cyan-500 text-black shadow-lg shadow-cyan-500/20"
                         : "text-zinc-400 hover:text-white hover:bg-neutral-800"
                     }`}
                   >
@@ -216,7 +228,7 @@ export default function Recherche() {
                 onClick={() => setSearchMode("text")}
                 className={`rounded-lg px-3.5 py-2 text-[11px] font-black uppercase tracking-wider transition flex items-center gap-2 ${
                   searchMode === "text"
-                    ? "bg-cyan-500 text-black shadow-md"
+                    ? "bg-cyan-500 text-black shadow"
                     : "border border-zinc-800 bg-neutral-900 text-zinc-400 hover:text-white"
                 }`}
               >
@@ -226,7 +238,7 @@ export default function Recherche() {
                 onClick={() => setSearchMode("set")}
                 className={`rounded-lg px-3.5 py-2 text-[11px] font-black uppercase tracking-wider transition flex items-center gap-2 ${
                   searchMode === "set"
-                    ? "bg-cyan-500 text-black shadow-md"
+                    ? "bg-cyan-500 text-black shadow"
                     : "border border-zinc-800 bg-neutral-900 text-cyan-400 hover:bg-cyan-500/10"
                 }`}
               >
@@ -243,22 +255,25 @@ export default function Recherche() {
                       onChange={(e) => setSearchQuery(e.target.value)}
                       onKeyDown={(e) => {
                         if (e.key === "Enter") {
-                          handleSearch();
+                          executeSearch(searchQuery);
                         }
                       }}
-                      placeholder="Saisir un nom de Pokémon, un dresseur..."
-                      className="w-full rounded-lg border border-zinc-800 bg-neutral-900 px-4 py-3 text-xs font-bold text-white placeholder-zinc-600 outline-none transition focus:border-cyan-500"
+                      placeholder="Saisir un nom de Pokémon (ex: Dracaufeu, Pikachu, Mewtwo...)"
+                      className="w-full rounded-lg border border-zinc-800 bg-neutral-900 px-4 py-3 text-xs font-bold text-white placeholder-zinc-600 outline-none transition focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
                     />
+                    {loading && (
+                      <Loader2 className="absolute right-3 top-3.5 h-4 w-4 animate-spin text-cyan-400" />
+                    )}
                   </div>
 
                   <button
-                    onClick={handleSearch}
-                    disabled={loading}
-                    className="w-full rounded-lg bg-cyan-500 py-3 text-xs font-black uppercase tracking-widest text-black transition hover:bg-cyan-400 disabled:opacity-50 flex items-center justify-center gap-2"
+                    onClick={() => executeSearch(searchQuery)}
+                    disabled={loading || searchQuery.trim().length < 2}
+                    className="w-full rounded-lg bg-cyan-500 py-3 text-xs font-black uppercase tracking-widest text-black transition hover:bg-cyan-400 disabled:opacity-50 flex items-center justify-center gap-2 shadow-lg shadow-cyan-500/10"
                   >
                     {loading ? (
                       <>
-                        <Loader2 className="w-4 h-4 animate-spin" /> Recherche...
+                        <Loader2 className="w-4 h-4 animate-spin" /> Recherche en cours...
                       </>
                     ) : (
                       <>
@@ -329,11 +344,14 @@ export default function Recherche() {
             </div>
           </section>
 
-          {/* Barre d'outils */}
+          {/* Barre d'outils / Stats */}
           <section className="flex items-center justify-between gap-4 border-b border-zinc-900/60 pb-3">
-            <div className="rounded border border-zinc-900 bg-neutral-900 px-2.5 py-1 text-[9px] font-black uppercase tracking-wider text-zinc-400 flex items-center gap-1.5">
-              <Filter className="w-3 h-3 text-cyan-400" />
-              {filteredCards.length} Carte(s) trouvées
+            <div className="rounded-md border border-zinc-800 bg-neutral-900/80 px-3 py-1.5 text-[10px] font-black uppercase tracking-wider text-zinc-300 flex items-center gap-2">
+              <Filter className="w-3.5 h-3.5 text-cyan-400" />
+              <span>{filteredCards.length} Carte(s) disponible(s)</span>
+              {query && (
+                <span className="text-cyan-400 font-normal">pour "{query}"</span>
+              )}
             </div>
 
             <div className="flex gap-1 rounded-lg border border-zinc-900 bg-neutral-900 p-1">
@@ -365,26 +383,33 @@ export default function Recherche() {
             </div>
           </section>
 
-          {/* Loader */}
+          {/* Loader Skeleton */}
           {loading && (
             <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
               {Array.from({ length: 12 }).map((_, i) => (
                 <div
                   key={i}
-                  className="aspect-[0.72] animate-pulse rounded-lg bg-neutral-900 border border-zinc-800"
-                />
+                  className="aspect-[0.72] animate-pulse rounded-xl bg-neutral-900/80 border border-zinc-800/80 p-3 flex flex-col justify-between"
+                >
+                  <div className="w-full h-3/4 bg-zinc-800/50 rounded-lg" />
+                  <div className="space-y-1.5 mt-2">
+                    <div className="h-3 bg-zinc-800/50 rounded w-3/4" />
+                    <div className="h-2.5 bg-zinc-800/30 rounded w-1/2" />
+                  </div>
+                </div>
               ))}
             </div>
           )}
 
           {/* État vide */}
           {!loading && query.length >= 2 && filteredCards.length === 0 && (
-            <div className="rounded-xl border border-zinc-900 bg-neutral-900/40 p-10 text-center">
-              <p className="text-xs font-black uppercase text-zinc-400">
-                Aucune correspondance trouvée
+            <div className="rounded-xl border border-zinc-900 bg-neutral-950 p-12 text-center shadow-inner">
+              <Sparkles className="w-8 h-8 text-cyan-400/50 mx-auto mb-3 animate-pulse" />
+              <p className="text-xs font-black uppercase tracking-wider text-zinc-300">
+                Aucune carte trouvée pour "{query}"
               </p>
-              <p className="mt-1 text-[11px] text-zinc-500">
-                Vérifiez l'orthographe ou modifiez les filtres.
+              <p className="mt-1.5 text-[11px] text-zinc-500 max-w-sm mx-auto">
+                Essayez avec le nom anglais (ex: Charizard) ou ajustez vos filtres de recherche.
               </p>
             </div>
           )}
@@ -413,12 +438,12 @@ export default function Recherche() {
 
           {/* Bouton Charger Plus */}
           {!loading && visible < filteredCards.length && (
-            <div className="text-center pt-4">
+            <div className="text-center pt-6 pb-8">
               <button
                 onClick={() => setVisible((v) => v + PAGE_SIZE)}
-                className="rounded-lg border border-zinc-800 bg-neutral-900 px-6 py-2.5 text-[11px] font-black uppercase text-cyan-400 hover:bg-neutral-800 transition active:scale-95"
+                className="rounded-lg border border-zinc-800 bg-neutral-900 px-8 py-3 text-[11px] font-black uppercase text-cyan-400 hover:bg-neutral-800 hover:border-cyan-500/30 transition active:scale-95 shadow-lg"
               >
-                Charger plus de références
+                Afficher plus de cartes ({filteredCards.length - visible} restantes)
               </button>
             </div>
           )}
