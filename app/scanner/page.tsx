@@ -421,64 +421,67 @@ export default function ScannerPage() {
                       </p>
                     </div>
                   ) : (
-                    batchList.map((item) => (
-                      <div
-                        key={item.id}
-                        className="flex items-center justify-between p-2.5 bg-neutral-900/90 border border-zinc-800/80 rounded-lg hover:border-cyan-500/40 transition"
-                      >
-                        <div className="flex items-center gap-3">
-                          {item.card.image ? (
-                            <div className="relative w-9 h-12 rounded overflow-hidden border border-zinc-800 bg-black flex-shrink-0">
-                              <Image
-                                src={item.card.image}
-                                alt={item.card.name}
-                                fill
-                                className="object-cover"
-                                unoptimized
-                              />
-                            </div>
-                          ) : (
-                            <div className="w-9 h-12 rounded border border-zinc-800 bg-neutral-800 flex items-center justify-center text-[9px] text-zinc-500 flex-shrink-0">
-                              N/A
-                            </div>
-                          )}
+                    batchList.map((item) => {
+                      const imageUrl = item.card.images?.small || item.card.images?.large;
+                      return (
+                        <div
+                          key={item.id}
+                          className="flex items-center justify-between p-2.5 bg-neutral-900/90 border border-zinc-800/80 rounded-lg hover:border-cyan-500/40 transition"
+                        >
+                          <div className="flex items-center gap-3">
+                            {imageUrl ? (
+                              <div className="relative w-9 h-12 rounded overflow-hidden border border-zinc-800 bg-black flex-shrink-0">
+                                <Image
+                                  src={imageUrl}
+                                  alt={item.card.name}
+                                  fill
+                                  className="object-cover"
+                                  unoptimized
+                                />
+                              </div>
+                            ) : (
+                              <div className="w-9 h-12 rounded border border-zinc-800 bg-neutral-800 flex items-center justify-center text-[9px] text-zinc-500 flex-shrink-0">
+                                N/A
+                              </div>
+                            )}
 
-                          <div>
-                            <div className="text-xs font-black text-white line-clamp-1">
-                              {item.card.name}
-                            </div>
-                            <div className="text-[10px] text-zinc-400 flex items-center gap-1.5 mt-0.5">
-                              <span>N° {item.card.number || "---"}</span>
-                              {item.card.rarity && (
-                                <>
-                                  <span>•</span>
-                                  <span className="text-cyan-400 font-bold">
-                                    {item.card.rarity}
-                                  </span>
-                                </>
-                              )}
+                            <div>
+                              <div className="text-xs font-black text-white line-clamp-1">
+                                {item.card.name}
+                              </div>
+                              <div className="text-[10px] text-zinc-400 flex items-center gap-1.5 mt-0.5">
+                                <span>N° {item.card.number || "---"}</span>
+                                {item.card.rarity && (
+                                  <>
+                                    <span>•</span>
+                                    <span className="text-cyan-400 font-bold">
+                                      {item.card.rarity}
+                                    </span>
+                                  </>
+                                )}
+                              </div>
                             </div>
                           </div>
-                        </div>
 
-                        <div className="flex items-center gap-2">
-                          <button
-                            onClick={() => router.push(`/card/${item.card.id}`)}
-                            className="p-1.5 rounded text-zinc-400 hover:text-cyan-400 hover:bg-neutral-800 transition"
-                            title="Voir la fiche complète"
-                          >
-                            <ExternalLink className="w-4 h-4" />
-                          </button>
-                          <button
-                            onClick={() => removeBatchItem(item.id)}
-                            className="p-1.5 rounded text-zinc-500 hover:text-red-400 hover:bg-neutral-800 transition"
-                            title="Supprimer"
-                          >
-                            <Trash2 className="w-4 h-4" />
-                          </button>
+                          <div className="flex items-center gap-2">
+                            <button
+                              onClick={() => router.push(`/card/${item.card.id}`)}
+                              className="p-1.5 rounded text-zinc-400 hover:text-cyan-400 hover:bg-neutral-800 transition"
+                              title="Voir la fiche complète"
+                            >
+                              <ExternalLink className="w-4 h-4" />
+                            </button>
+                            <button
+                              onClick={() => removeBatchItem(item.id)}
+                              className="p-1.5 rounded text-zinc-500 hover:text-red-400 hover:bg-neutral-800 transition"
+                              title="Supprimer"
+                            >
+                              <Trash2 className="w-4 h-4" />
+                            </button>
+                          </div>
                         </div>
-                      </div>
-                    ))
+                      );
+                    })
                   )}
                 </div>
               </div>
