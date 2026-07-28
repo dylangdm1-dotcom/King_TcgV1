@@ -11,7 +11,9 @@ import {
 const API_URL = "https://api.pokemontcg.io/v2/cards";
 const SETS_URL = "https://api.pokemontcg.io/v2/sets";
 const TCGDEX_URL = "https://api.tcgdex.net/v2";
-const CACHE_KEY = "king_tcg_cards_cache_v4"; // Invalidation du cache précédent
+
+// ⚠️ Incrémenté en v5 pour FORCER le nettoyage du cache obsolète sur mobile
+const CACHE_KEY = "king_tcg_cards_cache_v5";
 
 const cache = new Map<string, PokemonCard>();
 const searchCache = new Map<string, PokemonCard[]>();
@@ -19,8 +21,23 @@ const searchCache = new Map<string, PokemonCard[]>();
 export type LanguageCode = "fr" | "en" | "ja" | "zh-tw";
 
 /**
- * Convertit n'importe quel format de date ("YYYY/MM/DD" ou "YYYY-MM-DD") en timestamp numérique.
- * Résout le problème de tri incohérent sur Safari et Chrome.
+ * Nettoyage automatique des anciens caches localStorage sur mobile/desktop
+ */
+if (typeof window !== "undefined") {
+  try {
+    const oldKeys = [
+      "king_tcg_cards_cache",
+      "king_tcg_cards_cache_v1",
+      "king_tcg_cards_cache_v2",
+      "king_tcg_cards_cache_v3",
+      "king_tcg_cards_cache_v4",
+    ];
+    oldKeys.forEach((key) => localStorage.removeItem(key));
+  } catch {}
+}
+
+/**
+ * Parsing ultra-sécurisé de date (compatible Safari iOS & Mobile)
  */
 function parseReleaseDate(dateStr?: string): number {
   if (!dateStr) return 0;
@@ -30,7 +47,15 @@ function parseReleaseDate(dateStr?: string): number {
 }
 
 /**
- * Normalise les données pour garantir la présence des champs de prix et d'images.
+ * Conversion sécurisée de tout type de prix en Number
+ */
+function safePrice(val: any): number {
+  const num = Number(val);
+  return !isNaN(num) && isFinite(num) && num > 0 ? Number(num.toFixed(2)) : 0;
+}
+
+/**
+ * Normalise les cartes pour garantir la présence des champs prix
  */
 function normalize(card: any): PokemonCard {
   const cmPrices = card.cardmarket?.prices || {};
@@ -49,15 +74,15 @@ function normalize(card: any): PokemonCard {
           url: card.cardmarket.url || "",
           updatedAt: card.cardmarket.updatedAt || new Date().toISOString(),
           prices: {
-            averageSellPrice: Number(cmPrices.averageSellPrice ?? cmPrices.avg ?? 0),
-            lowPrice: Number(cmPrices.lowPrice ?? cmPrices.low ?? 0),
-            trendPrice: Number(cmPrices.trendPrice ?? cmPrices.trend ?? 0),
-            reverseHoloSell: Number(cmPrices.reverseHoloSell ?? 0),
-            reverseHoloLow: Number(cmPrices.reverseHoloLow ?? 0),
-            reverseHoloTrend: Number(cmPrices.reverseHoloTrend ?? 0),
-            avg1: Number(cmPrices.avg1 ?? 0),
-            avg7: Number(cmPrices.avg7 ?? 0),
-            avg30: Number(cmPrices.avg30 ?? 0),
+            averageSellPrice: safePrice(cmPrices.averageSellPrice ?? cmPrices.avg),
+            lowPrice: safePrice(cmPrices.lowPrice ?? cmPrices.low),
+            trendPrice: safePrice(cmPrices.trendPrice ?? cmPrices.trend),
+            reverseHoloSell: safePrice(cmPrices.reverseHoloSell),
+            reverseHoloLow: safePrice(cmPrices.reverseHoloLow),
+            reverseHoloTrend: safePrice(cmPrices.reverseHoloTrend),
+            avg1: safePrice(cmPrices.avg1),
+            avg7: safePrice(cmPrices.avg7),
+            avg30: safePrice(cmPrices.avg30),
           },
         }
       : undefined,
@@ -66,9 +91,9 @@ function normalize(card: any): PokemonCard {
           url: card.tcgplayer.url || "",
           updatedAt: card.tcgplayer.updatedAt || new Date().toISOString(),
           prices: {
-            holofoil: tcgPrices.holofoil ? { market: Number(tcgPrices.holofoil.market ?? 0) } : undefined,
-            normal: tcgPrices.normal ? { market: Number(tcgPrices.normal.market ?? 0) } : undefined,
-            reverseHolofoil: tcgPrices.reverseHolofoil ? { market: Number(tcgPrices.reverseHolofoil.market ?? 0) } : undefined,
+            holofoil: tcgPrices.holofoil ? { market: safePrice(tcgPrices.holofoil.market) } : undefined,
+            normal: tcgPrices.normal ? { market: safePrice(tcgPrices.normal.market) } : undefined,
+            reverseHolofoil: tcgPrices.reverseHolofoil ? { market: safePrice(tcgPrices.reverseHolofoil.market) } : undefined,
           },
         }
       : undefined,
@@ -160,24 +185,24 @@ function normalizeTCGdexCard(card: any, lang: LanguageCode, parentSet?: any): Po
       url: card.cardmarket?.url || "",
       updatedAt: new Date().toISOString(),
       prices: {
-        averageSellPrice: Number(cardmarketPrices.averageSellPrice ?? cardmarketPrices.avg ?? 0),
-        lowPrice: Number(cardmarketPrices.lowPrice ?? cardmarketPrices.low ?? 0),
-        trendPrice: Number(cardmarketPrices.trendPrice ?? cardmarketPrices.trend ?? 0),
+        averageSellPrice: safePrice(cardmarketPrices.averageSellPrice ?? cardmarketPrices.avg),
+        lowPrice: safePrice(cardmarketPrices.lowPrice ?? cardmarketPrices.low),
+        trendPrice: safePrice(cardmarketPrices.trendPrice ?? cardmarketPrices.trend),
         reverseHoloSell: 0,
         reverseHoloLow: 0,
         reverseHoloTrend: 0,
-        avg1: Number(cardmarketPrices.avg1 ?? 0),
-        avg7: Number(cardmarketPrices.avg7 ?? 0),
-        avg30: Number(cardmarketPrices.avg30 ?? 0),
+        avg1: safePrice(cardmarketPrices.avg1),
+        avg7: safePrice(cardmarketPrices.avg7),
+        avg30: safePrice(cardmarketPrices.avg30),
       },
     },
     tcgplayer: {
       url: card.tcgplayer?.url || "",
       updatedAt: new Date().toISOString(),
       prices: {
-        holofoil: tcgplayerPrices.holofoil ? { market: Number(tcgplayerPrices.holofoil.market ?? 0) } : undefined,
-        normal: tcgplayerPrices.normal ? { market: Number(tcgplayerPrices.normal.market ?? 0) } : undefined,
-        reverseHolofoil: tcgplayerPrices.reverseHolofoil ? { market: Number(tcgplayerPrices.reverseHolofoil.market ?? 0) } : undefined,
+        holofoil: tcgplayerPrices.holofoil ? { market: safePrice(tcgplayerPrices.holofoil.market) } : undefined,
+        normal: tcgplayerPrices.normal ? { market: safePrice(tcgplayerPrices.normal.market) } : undefined,
+        reverseHolofoil: tcgplayerPrices.reverseHolofoil ? { market: safePrice(tcgplayerPrices.reverseHolofoil.market) } : undefined,
       },
     },
     quantity: 0,
@@ -349,7 +374,7 @@ export async function searchCardsFromScan(
 }
 
 /**
- * 🔍 RECHERCHE GLOBALE AVEC TRI PAR DATE DE SORTIE ET AFFICHAGE DES PRIX
+ * 🔍 RECHERCHE GLOBALE AVEC GARANTIE DU TRI ET DES PRIX
  */
 export async function searchCards(
   search = "",
@@ -368,9 +393,14 @@ export async function searchCards(
     const queryNames = Array.from(new Set([translatedName, key]));
     
     for (const qName of queryNames) {
-      const found = await fetchPage(`name:"*${qName}*"`, 1);
-      if (found.length) {
-        officialCards.push(...found.map(normalize));
+      // Pour les gros Pokémon comme Dracaufeu, charge page 1 ET page 2
+      const [p1, p2] = await Promise.all([
+        fetchPage(`name:"*${qName}*"`, 1),
+        fetchPage(`name:"*${qName}*"`, 2),
+      ]);
+      
+      if (p1.length || p2.length) {
+        officialCards.push(...[...p1, ...p2].map(normalize));
       }
     }
   } catch (err) {
@@ -379,7 +409,7 @@ export async function searchCards(
 
   let finalCards = removeDuplicates(officialCards);
 
-  // Fallback vers TCGdex si l'API officielle n'a renvoyé aucun résultat
+  // Fallback TCGdex uniquement si 0 résultat officiel
   if (finalCards.length === 0) {
     try {
       const targetLang = lang === "en" ? "en" : lang === "ja" ? "ja" : lang === "zh-tw" ? "zh-tw" : "fr";
@@ -398,7 +428,7 @@ export async function searchCards(
     }
   }
 
-  // Tri strict : Cartes de l'API officielle en premier, puis du plus récent au plus ancien
+  // Tri Strict : Cartes officielles d'abord, puis Récentes -> Anciennes
   finalCards.sort((a, b) => {
     const isOfficialA = !a.id.startsWith("tcgdex-") ? 1 : 0;
     const isOfficialB = !b.id.startsWith("tcgdex-") ? 1 : 0;
@@ -563,9 +593,6 @@ export function clearPokemonCache() {
   searchCache.clear();
 
   if (typeof window !== "undefined") {
-    localStorage.removeItem(CACHE_KEY);
-    localStorage.removeItem("king_tcg_cards_cache");
-    localStorage.removeItem("king_tcg_cards_cache_v2");
-    localStorage.removeItem("king_tcg_cards_cache_v3");
+    localStorage.clear();
   }
 }
