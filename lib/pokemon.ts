@@ -3,17 +3,19 @@
 import type { PokemonCard, CardScanResult } from "./types";
 import {
   translatePokemonToEnglish,
+  translatePokemonToFrench,
   correctPokemonOCR,
   cleanTCGSuffix,
   resolvePokemonName,
 } from "./pokemonTranslator";
+import { logger } from "./cache/logger";
 
 const API_URL = "https://api.pokemontcg.io/v2/cards";
 const SETS_URL = "https://api.pokemontcg.io/v2/sets";
 const TCGDEX_URL = "https://api.tcgdex.net/v2";
 
-// ⚠️ Incrémenté en v5 pour FORCER le nettoyage du cache obsolète sur mobile
-const CACHE_KEY = "king_tcg_cards_cache_v5";
+// ⚠️ Incrémenté en v6 pour FORCER le nettoyage du cache obsolète
+const CACHE_KEY = "king_tcg_cards_cache_v6";
 
 const cache = new Map<string, PokemonCard>();
 const searchCache = new Map<string, PokemonCard[]>();
@@ -31,6 +33,7 @@ if (typeof window !== "undefined") {
       "king_tcg_cards_cache_v2",
       "king_tcg_cards_cache_v3",
       "king_tcg_cards_cache_v4",
+      "king_tcg_cards_cache_v5",
     ];
     oldKeys.forEach((key) => localStorage.removeItem(key));
   } catch {}
@@ -55,16 +58,28 @@ function safePrice(val: any): number {
 }
 
 /**
- * Normalise les cartes pour garantir la présence des champs prix
+ * Normalise les cartes pour garantir la présence des champs prix et prix calculé
  */
 function normalize(card: any): PokemonCard {
-  const cmPrices = card.cardmarket?.prices || {};
-  const tcgPrices = card.tcgplayer?.prices || {};
+  const cmPrices = card.cardmarket?.prices || card.pricing?.cardmarket || {};
+  const tcgPrices = card.tcgplayer?.prices || card.pricing?.tcgplayer || {};
+
+  const avgSell = safePrice(cmPrices.averageSellPrice ?? cmPrices.avg);
+  const trend = safePrice(cmPrices.trendPrice ?? cmPrices.trend);
+  const low = safePrice(cmPrices.lowPrice ?? cmPrices.low);
+
+  const tcgHolo = safePrice(tcgPrices.holofoil?.market);
+  const tcgNormal = safePrice(tcgPrices.normal?.market);
+  const tcgReverse = safePrice(tcgPrices.reverseHolofoil?.market);
+
+  // Estimation dynamique prioritaires EUR (Cardmarket) avec Fallback USD
+  const computedPrice = avgSell || trend || low || tcgHolo || tcgNormal || tcgReverse || 0;
 
   return {
     ...card,
     quantity: card.quantity ?? 0,
     favorite: card.favorite ?? false,
+    computedPrice,
     images: {
       small: card.images?.small ?? "",
       large: card.images?.large ?? card.images?.small ?? "",
@@ -74,9 +89,9 @@ function normalize(card: any): PokemonCard {
           url: card.cardmarket.url || "",
           updatedAt: card.cardmarket.updatedAt || new Date().toISOString(),
           prices: {
-            averageSellPrice: safePrice(cmPrices.averageSellPrice ?? cmPrices.avg),
-            lowPrice: safePrice(cmPrices.lowPrice ?? cmPrices.low),
-            trendPrice: safePrice(cmPrices.trendPrice ?? cmPrices.trend),
+            averageSellPrice: avgSell,
+            lowPrice: low,
+            trendPrice: trend,
             reverseHoloSell: safePrice(cmPrices.reverseHoloSell),
             reverseHoloLow: safePrice(cmPrices.reverseHoloLow),
             reverseHoloTrend: safePrice(cmPrices.reverseHoloTrend),
@@ -91,9 +106,9 @@ function normalize(card: any): PokemonCard {
           url: card.tcgplayer.url || "",
           updatedAt: card.tcgplayer.updatedAt || new Date().toISOString(),
           prices: {
-            holofoil: tcgPrices.holofoil ? { market: safePrice(tcgPrices.holofoil.market) } : undefined,
-            normal: tcgPrices.normal ? { market: safePrice(tcgPrices.normal.market) } : undefined,
-            reverseHolofoil: tcgPrices.reverseHolofoil ? { market: safePrice(tcgPrices.reverseHolofoil.market) } : undefined,
+            holofoil: tcgPrices.holofoil ? { market: tcgHolo } : undefined,
+            normal: tcgPrices.normal ? { market: tcgNormal } : undefined,
+            reverseHolofoil: tcgPrices.reverseHolofoil ? { market: tcgReverse } : undefined,
           },
         }
       : undefined,
@@ -159,10 +174,7 @@ function normalizeTCGdexCard(card: any, lang: LanguageCode, parentSet?: any): Po
     smallImageUrl = `${baseUrl}/low.png`;
   }
 
-  const cardmarketPrices = card.cardmarket?.prices || card.pricing?.cardmarket || {};
-  const tcgplayerPrices = card.tcgplayer?.prices || card.pricing?.tcgplayer || {};
-
-  return {
+  return normalize({
     id: `tcgdex-${lang}-${cardId}`,
     name: card.name ?? "Carte Inconnue",
     supertype: card.category ?? "Pokemon",
@@ -181,33 +193,11 @@ function normalizeTCGdexCard(card: any, lang: LanguageCode, parentSet?: any): Po
       releaseDate: parentSet?.releaseDate || card.set?.releaseDate || "",
       images: { symbol: "", logo: parentSet?.logo ? `${parentSet.logo}.png` : "" },
     },
-    cardmarket: {
-      url: card.cardmarket?.url || "",
-      updatedAt: new Date().toISOString(),
-      prices: {
-        averageSellPrice: safePrice(cardmarketPrices.averageSellPrice ?? cardmarketPrices.avg),
-        lowPrice: safePrice(cardmarketPrices.lowPrice ?? cardmarketPrices.low),
-        trendPrice: safePrice(cardmarketPrices.trendPrice ?? cardmarketPrices.trend),
-        reverseHoloSell: 0,
-        reverseHoloLow: 0,
-        reverseHoloTrend: 0,
-        avg1: safePrice(cardmarketPrices.avg1),
-        avg7: safePrice(cardmarketPrices.avg7),
-        avg30: safePrice(cardmarketPrices.avg30),
-      },
-    },
-    tcgplayer: {
-      url: card.tcgplayer?.url || "",
-      updatedAt: new Date().toISOString(),
-      prices: {
-        holofoil: tcgplayerPrices.holofoil ? { market: safePrice(tcgplayerPrices.holofoil.market) } : undefined,
-        normal: tcgplayerPrices.normal ? { market: safePrice(tcgplayerPrices.normal.market) } : undefined,
-        reverseHolofoil: tcgplayerPrices.reverseHolofoil ? { market: safePrice(tcgplayerPrices.reverseHolofoil.market) } : undefined,
-      },
-    },
+    cardmarket: card.cardmarket || card.pricing?.cardmarket,
+    tcgplayer: card.tcgplayer || card.pricing?.tcgplayer,
     quantity: 0,
     favorite: false,
-  };
+  });
 }
 
 async function fetchPage(query: string, page = 1): Promise<any[]> {
@@ -236,7 +226,7 @@ async function fetchPage(query: string, page = 1): Promise<any[]> {
     const json = await response.json();
     return json.data ?? [];
   } catch (error) {
-    console.error("[Pokemon TCG API]", error);
+    logger.error("API", "Erreur lors de l'appel Pokemon TCG API", error);
     return [];
   }
 }
@@ -309,16 +299,18 @@ export async function searchCardsFromScan(
   let corrected = correctPokemonOCR(rawName);
   corrected = resolvePokemonName(corrected);
   const cleanBase = cleanTCGSuffix(corrected);
-  const translated = translatePokemonToEnglish(corrected);
-  const translatedBase = translatePokemonToEnglish(cleanBase);
+  const translatedEN = translatePokemonToEnglish(corrected);
+  const translatedFR = translatePokemonToFrench(corrected);
 
   const nameCandidates = Array.from(
     new Set(
-      [corrected, cleanBase, translated, translatedBase, rawName]
+      [corrected, cleanBase, translatedEN, translatedFR, rawName]
         .filter(Boolean)
         .map(String)
     )
   );
+
+  logger.api(`[SCAN MATCH] Recherche TCG pour candidates:`, nameCandidates);
 
   if (cleanNum && nameCandidates.length) {
     for (const name of nameCandidates) {
@@ -360,7 +352,7 @@ export async function searchCardsFromScan(
           }
         }
       } catch (e) {
-        console.error("[Scan Fallback TCGdex Error]", e);
+        logger.error("API", "[Scan Fallback TCGdex Error]", e);
       }
     }
   }
@@ -374,7 +366,7 @@ export async function searchCardsFromScan(
 }
 
 /**
- * 🔍 RECHERCHE GLOBALE AVEC GARANTIE DU TRI ET DES PRIX
+ * 🔍 RECHERCHE GLOBALE OPTIMISÉE AVEC GARANTIE DES PRIX & DUO FR/EN (Dracaufeu / Charizard)
  */
 export async function searchCards(
   search = "",
@@ -386,31 +378,39 @@ export async function searchCards(
   const cacheKey = `search_${lang}_${key}`;
   if (searchCache.has(cacheKey)) return searchCache.get(cacheKey)!;
 
+  logger.api(`[SEARCH ENGINE] Recherche globale pour "${key}" en langue ${lang}`);
+
   let officialCards: PokemonCard[] = [];
 
   try {
-    const translatedName = translatePokemonToEnglish(key) || key;
-    const queryNames = Array.from(new Set([translatedName, key]));
-    
-    for (const qName of queryNames) {
-      // Pour les gros Pokémon comme Dracaufeu, charge page 1 ET page 2
-      const [p1, p2] = await Promise.all([
-        fetchPage(`name:"*${qName}*"`, 1),
-        fetchPage(`name:"*${qName}*"`, 2),
-      ]);
-      
-      if (p1.length || p2.length) {
-        officialCards.push(...[...p1, ...p2].map(normalize));
+    // Garantir à la fois le terme FR et EN (ex: Dracaufeu ET Charizard)
+    const englishName = translatePokemonToEnglish(key) || key;
+    const frenchName = translatePokemonToFrench(key) || key;
+    const queryNames = Array.from(new Set([englishName, frenchName, key])).filter(Boolean);
+
+    logger.api(`[SEARCH ENGINE] Mots-clés interrogés en parallèle:`, queryNames);
+
+    // Lancement de requêtes parallèles pour charger Page 1 et Page 2 sur chaque variante de nom
+    const searchPromises = queryNames.flatMap((qName) => [
+      fetchPage(`name:"*${qName}*"`, 1),
+      fetchPage(`name:"*${qName}*"`, 2),
+    ]);
+
+    const resultsPages = await Promise.all(searchPromises);
+
+    resultsPages.forEach((pageResults) => {
+      if (pageResults && pageResults.length > 0) {
+        officialCards.push(...pageResults.map(normalize));
       }
-    }
+    });
   } catch (err) {
-    console.error("[Pokemon TCG API Search Error]", err);
+    logger.error("API", "[Pokemon TCG API Search Error]", err);
   }
 
   let finalCards = removeDuplicates(officialCards);
 
-  // Fallback TCGdex uniquement si 0 résultat officiel
-  if (finalCards.length === 0) {
+  // Fallback TCGdex si 0 résultat ou très peu de résultats sur l'API officielle
+  if (finalCards.length < 3) {
     try {
       const targetLang = lang === "en" ? "en" : lang === "ja" ? "ja" : lang === "zh-tw" ? "zh-tw" : "fr";
       const response = await fetch(`${TCGDEX_URL}/${targetLang}/cards?name=${encodeURIComponent(key)}`, {
@@ -420,15 +420,15 @@ export async function searchCards(
         const data = await response.json();
         if (Array.isArray(data)) {
           const tcgdexCards = data.slice(0, 100).map((c: any) => normalizeTCGdexCard(c, targetLang));
-          finalCards = removeDuplicates(tcgdexCards);
+          finalCards = removeDuplicates([...finalCards, ...tcgdexCards]);
         }
       }
     } catch (err) {
-      console.error("[TCGdex Search API Fallback]", err);
+      logger.error("API", "[TCGdex Search API Fallback]", err);
     }
   }
 
-  // Tri Strict : Cartes officielles d'abord, puis Récentes -> Anciennes
+  // Tri Strict V3.6 : Cartes officielles d'abord, puis Récentes -> Anciennes
   finalCards.sort((a, b) => {
     const isOfficialA = !a.id.startsWith("tcgdex-") ? 1 : 0;
     const isOfficialB = !b.id.startsWith("tcgdex-") ? 1 : 0;
@@ -468,7 +468,7 @@ export async function searchCardsBySetId(
     const found = await fetchPage(`set.id:"${cleanId}"`, 1);
     cards = removeDuplicates(found.map(normalize));
   } catch (error) {
-    console.error(`[Pokemon API] Erreur extension ${cleanId}:`, error);
+    logger.error("API", `Erreur extension ${cleanId}:`, error);
   }
 
   if (cards.length === 0) {
@@ -515,7 +515,7 @@ export async function getAllSets(lang: LanguageCode = "fr"): Promise<any[]> {
       if (json.data && json.data.length > 0) return json.data;
     }
   } catch (error) {
-    console.error("[Pokemon Sets API Error]", error);
+    logger.error("API", "[Pokemon Sets API Error]", error);
   }
 
   try {
