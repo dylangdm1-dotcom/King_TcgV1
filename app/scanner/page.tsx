@@ -12,8 +12,8 @@ import { searchCardsFromScan } from "../../lib/pokemon";
 import Navbar from "../../components/Navbar";
 
 // 🚀 V3.6 Integrations
-import { logger } from "../logger";
-import { getCachedCardData, setCachedCardData } from "../../lib/cache/pokemonCache";
+import { logger } from "@/lib/cache/logger";
+import { getCachedCardData, setCachedCardData } from "@/lib/pokemonCache";
 
 interface ScannerCameraHandle {
   getVideo: () => HTMLVideoElement | null;
