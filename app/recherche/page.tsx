@@ -104,7 +104,7 @@ export default function Recherche() {
     return groupedSets[selectedBlock] || [];
   }, [selectedBlock, groupedSets, allSetsList]);
 
-  // Fonction centrale de recherche textuelle
+  // Fonction centrale de recherche textuelle MANUELLE
   const executeSearch = useCallback(async (searchTerm: string) => {
     const value = searchTerm.trim();
     setQuery(value);
@@ -127,19 +127,6 @@ export default function Recherche() {
       setLoading(false);
     }
   }, [selectedLanguage]);
-
-  // Debounce automatique sur la frappe (400ms)
-  useEffect(() => {
-    if (searchMode !== "text") return;
-
-    const timer = setTimeout(() => {
-      if (searchQuery.trim().length >= 2) {
-        executeSearch(searchQuery);
-      }
-    }, 400);
-
-    return () => clearTimeout(timer);
-  }, [searchQuery, searchMode, executeSearch]);
 
   // Recherche directe par Extension
   async function handleSetSelect(setId: string) {
