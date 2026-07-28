@@ -23,7 +23,13 @@ export interface PokemonCard {
   types?: string[];
   hp?: string;
 
+  // 🆕 Champ calculé dynamiquement
+  computedPrice?: number;
+
   // 🆕 King TCG V3 - classification scanner
+  confidence?: number;
+  language?: string;
+
   cardType?:
     | "Pokemon"
     | "Trainer"
@@ -205,6 +211,10 @@ export type CollectionMap = Record<string, number>;
 
 export function getCardPrice(card?: PokemonCard | null): number {
   if (!card) return 0;
+
+  if (typeof card.computedPrice === "number") {
+    return card.computedPrice;
+  }
 
   // 1. Essai via TCGPlayer
   const tcgPrices = card.tcgplayer?.prices;
