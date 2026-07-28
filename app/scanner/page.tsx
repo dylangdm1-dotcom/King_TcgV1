@@ -12,8 +12,6 @@ import {
   Download,
   ExternalLink,
   Zap,
-  CheckCircle2,
-  XCircle,
   ChevronUp,
   ChevronDown,
 } from "lucide-react";
@@ -197,6 +195,13 @@ export default function ScannerPage() {
         if (bestCard.id) {
           setCachedCardData(`card_${bestCard.id}`, bestCard);
         }
+      }
+
+      // 🛡️ Garde de sécurité TypeScript pour garantir l'existence de bestCard
+      if (!bestCard) {
+        setStatus("Erreur lors de la récupération de la carte.");
+        triggerHaptic([100, 50, 100]);
+        return;
       }
 
       // 🎉 Succès de détection !
