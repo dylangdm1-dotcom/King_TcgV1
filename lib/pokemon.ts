@@ -262,8 +262,8 @@ function removeDuplicates(cards: PokemonCard[]) {
       if (isNewOfficial && !isOldOfficial) {
         map.set(key, card);
       } else if (isNewOfficial === isOldOfficial) {
-        const priceNew = card.computedPrice ?? 0;
-        const priceOld = existing.computedPrice ?? 0;
+        const priceNew = (card as any).computedPrice ?? 0;
+        const priceOld = (existing as any).computedPrice ?? 0;
         if (priceNew > 0 && priceOld === 0) {
           map.set(key, card);
         }
