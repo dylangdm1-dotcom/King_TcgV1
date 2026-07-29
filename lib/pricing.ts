@@ -10,8 +10,23 @@ import {
   getAverageMarketPrice,
   getMarketSpread,
   getAdjustedPriceByCondition,
-  getConditionMultiplier,
 } from "./marketEngine";
+
+/**
+ * Multiplicateur de prix selon l'état de la carte
+ */
+export function getConditionMultiplier(condition: string): number {
+  switch (condition?.toLowerCase()) {
+    case "mint": return 1.0;
+    case "near mint": return 0.9;
+    case "excellent": return 0.75;
+    case "good": return 0.6;
+    case "light played": return 0.5;
+    case "played": return 0.4;
+    case "poor": return 0.25;
+    default: return 0.9;
+  }
+}
 
 export {
   getMarketData,
@@ -21,8 +36,9 @@ export {
   getAverageMarketPrice,
   getMarketSpread,
   getAdjustedPriceByCondition,
-  getConditionMultiplier,
 };
+
+export { getConditionMultiplier };
 
 /**
  * Calcule la valeur maximale enregistrée parmi toutes les places de marché actives.
