@@ -82,8 +82,13 @@ export function addToCollection(id: string): CollectionMap {
   if (typeof window === "undefined") return {};
 
   const col = getCollection();
+  const currentEntry = col[id];
+  const currentQty =
+    typeof currentEntry === "number"
+      ? currentEntry
+      : (currentEntry as any)?.quantity || 0;
 
-  col[id] = (col[id] || 0) + 1;
+  col[id] = currentQty + 1;
 
   localStorage.setItem(COLLECTION_KEY, JSON.stringify(col));
 
@@ -95,21 +100,29 @@ export function addToCollection(id: string): CollectionMap {
 }
 
 export function getCardQuantity(id: string): number {
-  return getCollection()[id] || 0;
+  const entry = getCollection()[id];
+  if (!entry) return 0;
+  return typeof entry === "number" ? entry : (entry as any)?.quantity || 0;
 }
 
 export function removeFromCollection(id: string): CollectionMap {
   if (typeof window === "undefined") return {};
 
   const col = getCollection();
+  const currentEntry = col[id];
 
-  if (!col[id]) {
+  if (!currentEntry) {
     return col;
   }
 
-  col[id]--;
+  let currentQty =
+    typeof currentEntry === "number"
+      ? currentEntry
+      : (currentEntry as any)?.quantity || 0;
 
-  if (col[id] <= 0) {
+  currentQty--;
+
+  if (currentQty <= 0) {
     delete col[id];
 
     // Nettoyage optionnel des infos pour éviter les données fantômes
@@ -117,6 +130,12 @@ export function removeFromCollection(id: string): CollectionMap {
     if (infos[id]) {
       delete infos[id];
       saveCollectionInfos(infos);
+    }
+  } else {
+    if (typeof currentEntry === "number") {
+      col[id] = currentQty;
+    } else {
+      (col[id] as any).quantity = currentQty;
     }
   }
 
@@ -207,7 +226,8 @@ export function setCondition(id: string, condition: string) {
 }
 
 export function getCondition(id: string): string {
-  return getCondition(id) ? getCollectionInfo(id).condition : "Near Mint";
+  const info = getCollectionInfo(id);
+  return info?.condition ? info.condition : "Near Mint";
 }
 
 export function getPurchaseDate(id: string): string {
@@ -219,7 +239,9 @@ export function getTotalInvestment(): number {
   const infos = getCollectionInfos();
 
   return Object.keys(col).reduce((total, id) => {
-    const qty = col[id] || 0;
+    const entry = col[id];
+    const qty =
+      typeof entry === "number" ? entry : (entry as any)?.quantity || 0;
     const price = infos[id]?.buyPrice || 0;
     return total + price * qty;
   }, 0);
@@ -297,9 +319,17 @@ export function importBackup(
       localStorage.setItem(FAV_KEY, JSON.stringify(newFavs));
 
       const currentCol = getCollection();
-      const mergedCol = { ...currentCol };
+      const mergedCol: CollectionMap = { ...currentCol };
       Object.entries(parsed.collection || {}).forEach(([id, qty]) => {
-        mergedCol[id] = (mergedCol[id] || 0) + qty;
+        const parsedQty =
+          typeof qty === "number" ? qty : (qty as any)?.quantity || 1;
+        const existingEntry = mergedCol[id];
+        const existingQty =
+          typeof existingEntry === "number"
+            ? existingEntry
+            : (existingEntry as any)?.quantity || 0;
+
+        mergedCol[id] = existingQty + parsedQty;
       });
       localStorage.setItem(COLLECTION_KEY, JSON.stringify(mergedCol));
 
