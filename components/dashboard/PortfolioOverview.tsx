@@ -30,10 +30,10 @@ export default function PortfolioOverview({ cards }: Props) {
 
   const ownedCards = cards.filter((card) => collection[card.id]);
 
-  const totalCards = Object.values(collection).reduce(
-    (sum, qty) => sum + qty,
-    0
-  );
+  const totalCards = Object.values(collection).reduce((sum, entry: any) => {
+    const qty = typeof entry === "number" ? entry : (entry?.quantity || 1);
+    return sum + qty;
+  }, 0);
 
   const uniqueCards = ownedCards.length;
 
