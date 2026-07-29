@@ -48,7 +48,7 @@ export async function fetchPricesFromJustTCG(cardId: string): Promise<{
       return null;
     }
 
-    const cardData = response.data[0];
+    const cardData = response.data[0] as any;
     const prices = cardData.prices;
 
     if (!prices) return null;
