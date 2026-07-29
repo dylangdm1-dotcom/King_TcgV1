@@ -22,8 +22,8 @@ import {
   type LanguageCode,
 } from "../../lib/pokemon";
 import { filterCards, type SearchFilters as SearchFiltersType } from "../../lib/search";
+import { getCardPrice, type PokemonCard } from "../../lib/types";
 import { getAdjustedPriceByCondition } from "../../lib/marketEngine";
-import type { PokemonCard } from "../../lib/types";
 
 const PAGE_SIZE = 24;
 
@@ -411,7 +411,7 @@ export default function Recherche() {
               }
             >
               {displayedCards.map((card) => {
-                const basePrice = card.computedPrice ?? 0;
+                const basePrice = getCardPrice(card);
                 const adjustedPrice = getAdjustedPriceByCondition(basePrice, filters.condition ?? "Near Mint");
                 const cardWithAdjustedPrice = { ...card, computedPrice: adjustedPrice };
 
