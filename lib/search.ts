@@ -1,6 +1,7 @@
 // lib/search.ts
 
 import type { SearchFilters, PokemonCard } from "./types";
+import { getCardPrice } from "./types";
 import { getAdjustedPriceByCondition } from "./marketEngine";
 
 export type { SearchFilters };
@@ -19,7 +20,7 @@ function parseReleaseDate(dateStr?: string): number {
  * Récupère le prix effectif d'une carte en tenant compte de la condition (état) sélectionnée.
  */
 function getEffectivePrice(card: PokemonCard, condition?: string): number {
-  const basePrice = card.computedPrice ?? 0;
+  const basePrice = getCardPrice(card);
   return getAdjustedPriceByCondition(basePrice, condition ?? "Near Mint");
 }
 
