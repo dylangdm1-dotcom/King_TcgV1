@@ -12,6 +12,16 @@ import {
   getAdjustedPriceByCondition,
 } from "./marketEngine";
 
+export {
+  getMarketData,
+  getCardMarketPrice,
+  getTCGPlayerPrice,
+  getEbayPrice,
+  getAverageMarketPrice,
+  getMarketSpread,
+  getAdjustedPriceByCondition,
+};
+
 /**
  * Multiplicateur de prix selon l'état de la carte
  */
@@ -27,18 +37,6 @@ export function getConditionMultiplier(condition: string): number {
     default: return 0.9;
   }
 }
-
-export {
-  getMarketData,
-  getCardMarketPrice,
-  getTCGPlayerPrice,
-  getEbayPrice,
-  getAverageMarketPrice,
-  getMarketSpread,
-  getAdjustedPriceByCondition,
-};
-
-export { getConditionMultiplier };
 
 /**
  * Calcule la valeur maximale enregistrée parmi toutes les places de marché actives.
