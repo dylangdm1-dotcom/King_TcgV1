@@ -64,12 +64,15 @@ export default function BibliothequePage() {
       ),
     ])
       .then(([collectionResults, favoriteResults]) => {
-        setCollectionCards(
-          collectionResults.filter((c): c is CollectionCardType => c !== null)
+        const cleanCollection = collectionResults.filter(
+          (c): c is CollectionCardType => c !== null
         );
-        setFavoriteCards(
-          favoriteResults.filter((c): c is PokemonCard => c !== null)
+        const cleanFavorites = favoriteResults.filter(
+          (c): c is PokemonCard => c !== null
         );
+
+        setCollectionCards(cleanCollection);
+        setFavoriteCards(cleanFavorites);
         setLoading(false);
       })
       .catch((error) => {
