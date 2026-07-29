@@ -4,12 +4,12 @@ import type { PokemonCard } from "./types";
 import { getCardPrice } from "./types";
 
 //
-// 🧠 MARKET ENGINE
+// 🧠 MARKET ENGINE v4.00
 // Source unique des prix réels, prix planchers (Near Mint) et statistiques de tendances
 //
 
 export type MarketPrices = {
-  cardmarket: number;   // Premier prix Near Mint Cardmarket (ou fallback)
+  cardmarket: number;   // Premier prix Near Mint Cardmarket (lowPrice prioritaire)
   ebay: number;         // Premier prix Near Mint estimé eBay
   tcgplayer: number;    // Premier prix Near Mint TCGPlayer (converti EUR)
   average: number;      // Moyenne des premiers prix planchers Near Mint
@@ -17,7 +17,7 @@ export type MarketPrices = {
   priceTrend30d: number; // Statistique réelle d'évolution à 30 jours (%)
 };
 
-// Taux de conversion approximatif USD -> EUR pour TCGPlayer
+// Taux de conversion USD -> EUR pour TCGPlayer
 const USD_TO_EUR = 0.92;
 
 //
@@ -53,16 +53,17 @@ export function getAdjustedPriceByCondition(basePrice: number, condition: string
 }
 
 //
-// 💰 Premier prix CardMarket (Plancher Near Mint)
+// 💰 Premier prix CardMarket (Priorité absolue au Vrai Plancher Near Mint : lowPrice)
 //
 export function getCardMarketPrice(card?: PokemonCard | null): number {
   if (!card?.cardmarket?.prices) return 0;
 
   const prices = card.cardmarket.prices;
   
-  // Priorité absolue au 1er prix plancher (lowPrice), puis tendance / moyenne d'achat
+  // Priorité absolue au prix plancher (lowPrice) pour refléter l'entrée de marché NM
   const price =
     safeNumber(prices.lowPrice) ||
+    safeNumber(prices.reverseHoloLow) ||
     safeNumber(prices.trendPrice) ||
     safeNumber(prices.averageSellPrice) ||
     safeNumber(prices.avg1);
@@ -78,19 +79,20 @@ export function getTCGPlayerPrice(card?: PokemonCard | null): number {
 
   const p = card.tcgplayer.prices;
 
-  // Extrait la finition disponible (Priorité au prix le plus bas disponible - Low / Direct)
+  // Extrait la finition disponible en ciblant les prix bas (low / directLow)
   const extractLow = (target: any) => {
     if (!target) return 0;
     return (
       safeNumber(target.low) ||
       safeNumber(target.directLow) ||
-      safeNumber(target.market)
+      safeNumber(target.market) ||
+      safeNumber(target.mid)
     );
   };
   
   const price =
-    extractLow(p.holofoil) ||
     extractLow(p.normal) ||
+    extractLow(p.holofoil) ||
     extractLow(p.reverseHolofoil) ||
     extractLow(p.firstEditionHolofoil) ||
     extractLow(p.firstEditionNormal);
@@ -112,18 +114,16 @@ export function getEbayPrice(card?: PokemonCard | null): number {
   const cmPrice = getCardMarketPrice(card);
   const tcgPrice = getTCGPlayerPrice(card);
 
-  // Si on dispose des 2 marchés, estimation plancher basée sur la moyenne continentale
   if (cmPrice > 0 && tcgPrice > 0) {
-    return Number(((cmPrice + tcgPrice) / 2).toFixed(2));
+    return Number((Math.min(cmPrice, tcgPrice)).toFixed(2));
   }
   
-  // Fallback si une seule plateforme est disponible (application légère prime d'enchères +3%)
   const basePrice = cmPrice > 0 ? cmPrice : tcgPrice;
-  return basePrice > 0 ? Number((basePrice * 1.03).toFixed(2)) : 0;
+  return basePrice > 0 ? Number(basePrice.toFixed(2)) : 0;
 }
 
 //
-// 📊 Moyenne des premiers prix planchers des 3 plateformes (Near Mint)
+// 📊 Moyenne des premiers prix planchers des plateformes (Near Mint)
 //
 export function getAverageMarketPrice(card?: PokemonCard | null): number {
   if (!card) return 0;
@@ -138,12 +138,13 @@ export function getAverageMarketPrice(card?: PokemonCard | null): number {
     return getCardPrice(card);
   }
 
-  const sum = prices.reduce((a, b) => a + b, 0);
-  return Number((sum / prices.length).toFixed(2));
+  // Si on a plusieurs sources, on prend le plancher le plus pertinent ou la moyenne des planchers
+  const minValidPrice = Math.min(...prices);
+  return Number(minValidPrice.toFixed(2));
 }
 
 //
-// 📈 Vraie Tendance 7 Jours (Basée sur l'historique CardMarket / TCG)
+// 📈 Vraie Tendance 7 Jours
 //
 export function getPriceTrend7d(card?: PokemonCard | null): number {
   if (!card?.cardmarket?.prices) return 0;
@@ -158,7 +159,7 @@ export function getPriceTrend7d(card?: PokemonCard | null): number {
 }
 
 //
-// 📈 Vraie Tendance 30 Jours (Basée sur l'historique CardMarket / TCG)
+// 📈 Vraie Tendance 30 Jours
 //
 export function getPriceTrend30d(card?: PokemonCard | null): number {
   if (!card?.cardmarket?.prices) return 0;
@@ -173,7 +174,7 @@ export function getPriceTrend30d(card?: PokemonCard | null): number {
 }
 
 //
-// 📈 Écart de marché réel (Écart inter-plateformes)
+// 📈 Écart de marché réel
 //
 export function getMarketSpread(card?: PokemonCard | null): number {
   if (!card) return 0;
@@ -187,7 +188,7 @@ export function getMarketSpread(card?: PokemonCard | null): number {
 }
 
 //
-// 🔥 Données marché complètes et agrégées (Prix Planchers Near Mint + Moyenne)
+// 🔥 Données marché complètes et agrégées
 //
 export function getMarketData(card?: PokemonCard | null): MarketPrices {
   if (!card) {
@@ -217,7 +218,7 @@ export function getMarketData(card?: PokemonCard | null): MarketPrices {
 }
 
 //
-// 🚀 Calcul de performance du Portefeuille (Gain/Perte réel ajusté)
+// 🚀 Calcul de performance du Portefeuille
 //
 export function getMarketGrowth(
   card?: PokemonCard | null,
