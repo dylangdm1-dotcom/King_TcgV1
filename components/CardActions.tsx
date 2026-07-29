@@ -38,12 +38,16 @@ export default function CardActions({ cardId }: Props) {
 
   const addCard = () => {
     const updated = addToCollection(cardId);
-    setQuantity(updated[cardId] || 0);
+    const entry = updated[cardId] as any;
+    const qty = typeof entry === "number" ? entry : (entry?.quantity || 0);
+    setQuantity(qty);
   };
 
   const removeCard = () => {
     const updated = removeFromCollection(cardId);
-    setQuantity(updated[cardId] || 0);
+    const entry = updated[cardId] as any;
+    const qty = typeof entry === "number" ? entry : (entry?.quantity || 0);
+    setQuantity(qty);
   };
 
   return (
