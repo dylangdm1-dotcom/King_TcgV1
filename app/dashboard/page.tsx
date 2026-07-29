@@ -74,7 +74,7 @@ export default function DashboardPage() {
         })
       );
 
-      const valid = results.filter(Boolean) as CardWithMeta[];
+      const valid = results.filter(Boolean) as unknown as CardWithMeta[];
       setCards(valid);
 
       let invested = 0;
