@@ -1,7 +1,7 @@
 // lib/search.ts
 
 import type { SearchFilters, PokemonCard } from "./types";
-import { getCardPrice } from "./types";
+import { getAdjustedPriceByCondition } from "./marketEngine";
 
 export type { SearchFilters };
 
@@ -13,6 +13,14 @@ function parseReleaseDate(dateStr?: string): number {
   const cleanDate = String(dateStr).trim().replace(/\//g, "-");
   const time = new Date(cleanDate).getTime();
   return isNaN(time) ? 0 : time;
+}
+
+/**
+ * Récupère le prix effectif d'une carte en tenant compte de la condition (état) sélectionnée.
+ */
+function getEffectivePrice(card: PokemonCard, condition?: string): number {
+  const basePrice = card.computedPrice ?? 0;
+  return getAdjustedPriceByCondition(basePrice, condition ?? "Near Mint");
 }
 
 export function filterCards(
@@ -59,18 +67,22 @@ export function filterCards(
     });
   }
 
-  // 4. Tri
+  // 4. Tri (Intègre désormais la condition / l'état de la carte pour les prix)
   switch (filters.sort) {
     case "name":
       results.sort((a, b) => (a.name || "").localeCompare(b.name || ""));
       break;
 
     case "price-asc":
-      results.sort((a, b) => getCardPrice(a) - getCardPrice(b));
+      results.sort((a, b) => 
+        getEffectivePrice(a, filters.condition) - getEffectivePrice(b, filters.condition)
+      );
       break;
 
     case "price-desc":
-      results.sort((a, b) => getCardPrice(b) - getCardPrice(a));
+      results.sort((a, b) => 
+        getEffectivePrice(b, filters.condition) - getEffectivePrice(a, filters.condition)
+      );
       break;
 
     case "recent":
