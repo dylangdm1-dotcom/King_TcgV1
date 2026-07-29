@@ -148,7 +148,7 @@ export type SearchFilters = {
   rarity: string;
   set: string;
   sort: string;
-
+  condition?: string;
   query?: string;
   minPrice?: number;
   maxPrice?: number;
