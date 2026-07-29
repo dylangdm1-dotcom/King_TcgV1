@@ -14,8 +14,8 @@ const API_URL = "https://api.pokemontcg.io/v2/cards";
 const SETS_URL = "https://api.pokemontcg.io/v2/sets";
 const TCGDEX_URL = "https://api.tcgdex.net/v2";
 
-// ⚠️ Incrémenté en v8 pour forcer le rafraîchissement du cache avec le nouveau tri v4.00
-const CACHE_KEY = "king_tcg_cards_cache_v8";
+// ⚠️ Incrémenté en v8.1 pour forcer le rafraîchissement du cache avec la prise en charge multilingue des sets
+const CACHE_KEY = "king_tcg_cards_cache_v8_1";
 
 const cache = new Map<string, PokemonCard>();
 const searchCache = new Map<string, PokemonCard[]>();
@@ -36,6 +36,7 @@ if (typeof window !== "undefined") {
       "king_tcg_cards_cache_v5",
       "king_tcg_cards_cache_v6",
       "king_tcg_cards_cache_v7",
+      "king_tcg_cards_cache_v8",
     ];
     oldKeys.forEach((key) => localStorage.removeItem(key));
   } catch {}
@@ -382,9 +383,6 @@ export async function searchCardsFromScan(
   return cards;
 }
 
-/**
- * 🔍 RECHERCHE GLOBALE OPTIMISÉE v4.00 (Tri strict par date décroissante & multi-pages pour Dracaufeu)
- */
 export async function searchCards(
   search = "",
   lang: LanguageCode = "fr"
@@ -409,9 +407,6 @@ export async function searchCards(
       queryNames = Array.from(new Set([englishName, frenchName, key])).filter(Boolean);
     }
 
-    logger.api(`[SEARCH ENGINE] Mots-clés interrogés en parallèle (Pages 1 à 3):`, queryNames);
-
-    // Requêtes parallèles : Pages 1, 2 et 3 pour couvrir l'intégralité des cartes de gros Pokémon
     const searchPromises = queryNames.flatMap((qName) => [
       fetchPage(`name:"*${qName}*"`, 1),
       fetchPage(`name:"*${qName}*"`, 2),
@@ -431,7 +426,6 @@ export async function searchCards(
 
   let finalCards = removeDuplicates(officialCards);
 
-  // Fallback TCGdex si très peu de résultats sur l'API officielle
   if (finalCards.length < 3) {
     try {
       const targetLang = lang === "en" ? "en" : lang === "ja" ? "ja" : lang === "zh-tw" ? "zh-tw" : "fr";
@@ -450,11 +444,6 @@ export async function searchCards(
     }
   }
 
-  // Tri STRICT v4.00 : Indépendant des prix à 0
-  // 1. Cartes officielles d'abord (vs TCGdex)
-  // 2. Date de sortie décroissante (Plus récentes -> Plus anciennes)
-  // 3. ID de l'extension par ordre alphabétique inversé en cas d'égalité de date exacte
-  // 4. Numéro de carte décroissant
   finalCards.sort((a, b) => {
     const isOfficialA = !a.id.startsWith("tcgdex-") ? 1 : 0;
     const isOfficialB = !b.id.startsWith("tcgdex-") ? 1 : 0;
@@ -532,7 +521,39 @@ export async function searchCardsBySetId(
   return cards;
 }
 
+/**
+ * 🌍 RÉCUPÉRATION DES SÉRIES / EXTENSIONS MULTILANGUE v4.00
+ * Interroge l'API TCGdex en premier pour garantir des noms localisés par langue (FR, EN, JA, ZH)
+ * et bascule sur l'API officielle si nécessaire.
+ */
 export async function getAllSets(lang: LanguageCode = "fr"): Promise<any[]> {
+  // 1. Priorité à TCGdex pour garantir des noms parfaitement localisés selon la langue demandée
+  try {
+    const targetLang = lang === "en" ? "en" : lang === "ja" ? "ja" : lang === "zh-tw" ? "zh-tw" : "fr";
+    const response = await fetch(`${TCGDEX_URL}/${targetLang}/sets`, { cache: "force-cache" });
+    if (response.ok) {
+      const data = await response.json();
+      if (Array.isArray(data) && data.length > 0) {
+        const mappedSets = data.map((set: any) => ({
+          id: set.id,
+          name: set.name,
+          series: set.series?.name || "Pokémon TCG",
+          total: set.cardCount?.total ?? set.cardCount?.official ?? 0,
+          logo: set.logo ? `${set.logo}.png` : undefined,
+          symbol: set.symbol ? `${set.symbol}.png` : undefined,
+          releaseDate: set.releaseDate || "",
+        }));
+
+        // Tri décroissant par date de sortie (les plus récentes en premier)
+        mappedSets.sort((a: any, b: any) => parseReleaseDate(b.releaseDate) - parseReleaseDate(a.releaseDate));
+        return mappedSets;
+      }
+    }
+  } catch (error) {
+    logger.error("API", "[TCGdex Sets API Error - Fallback to Official]", error);
+  }
+
+  // 2. Fallback sur l'API officielle Pokémon TCG si TCGdex échoue
   try {
     const params = new URLSearchParams();
     params.set("pageSize", "300");
@@ -551,24 +572,6 @@ export async function getAllSets(lang: LanguageCode = "fr"): Promise<any[]> {
   } catch (error) {
     logger.error("API", "[Pokemon Sets API Error]", error);
   }
-
-  try {
-    const response = await fetch(`${TCGDEX_URL}/${lang}/sets`, { cache: "force-cache" });
-    if (response.ok) {
-      const data = await response.json();
-      if (Array.isArray(data)) {
-        return data.map((set: any) => ({
-          id: set.id,
-          name: set.name,
-          series: set.series?.name || "Pokémon TCG",
-          total: set.cardCount?.total ?? set.cardCount?.official ?? 0,
-          logo: set.logo ? `${set.logo}.png` : undefined,
-          symbol: set.symbol ? `${set.symbol}.png` : undefined,
-          releaseDate: set.releaseDate || "",
-        }));
-      }
-    }
-  } catch (err) {}
 
   return [];
 }
