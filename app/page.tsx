@@ -22,7 +22,14 @@ export default function Home() {
       const collection = getCollection();
       const ids = Object.keys(collection);
       setUniqueCards(ids.length);
-      setTotalCards(ids.reduce((sum, id) => sum + collection[id], 0));
+      
+      // CORRECTION ICI : on extrait proprement la quantité pour l'addition
+      setTotalCards(ids.reduce((sum, id) => {
+        const entry = collection[id] as any;
+        const qty = typeof entry === "number" ? entry : (entry?.quantity || 1);
+        return sum + qty;
+      }, 0));
+      
       setFavorites(getFavorites().length);
 
       let value = 0;
@@ -36,7 +43,10 @@ export default function Home() {
 
       cards.filter(Boolean).forEach((item: any) => {
         const market = getMarketData(item.card);
-        value += market.average * item.qty;
+        // SECURITE SUPPLEMENTAIRE ICI : même logique pour la valeur du portfolio
+        const qty = typeof item.qty === "number" ? item.qty : (item.qty?.quantity || 1);
+        const price = market?.average || 0;
+        value += price * qty;
       });
       setPortfolioValue(value);
     }
