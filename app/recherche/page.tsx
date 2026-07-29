@@ -1,4 +1,4 @@
-// "use client";
+"use client";
 
 import { useMemo, useState, useEffect, useCallback } from "react";
 import {
@@ -411,7 +411,6 @@ export default function Recherche() {
               }
             >
               {displayedCards.map((card) => {
-                // Application du prix ajusté selon la condition sélectionnée dans les filtres
                 const basePrice = card.computedPrice ?? 0;
                 const adjustedPrice = getAdjustedPriceByCondition(basePrice, filters.condition ?? "Near Mint");
                 const cardWithAdjustedPrice = { ...card, computedPrice: adjustedPrice };
