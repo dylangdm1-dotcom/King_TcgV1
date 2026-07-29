@@ -14,8 +14,8 @@ const API_URL = "https://api.pokemontcg.io/v2/cards";
 const SETS_URL = "https://api.pokemontcg.io/v2/sets";
 const TCGDEX_URL = "https://api.tcgdex.net/v2";
 
-// ⚠️ Incrémenté en v7 pour forcer le rafraîchissement du cache avec le nouveau système de prix
-const CACHE_KEY = "king_tcg_cards_cache_v7";
+// ⚠️ Incrémenté en v8 pour forcer le rafraîchissement du cache avec le nouveau tri v4.00
+const CACHE_KEY = "king_tcg_cards_cache_v8";
 
 const cache = new Map<string, PokemonCard>();
 const searchCache = new Map<string, PokemonCard[]>();
@@ -35,6 +35,7 @@ if (typeof window !== "undefined") {
       "king_tcg_cards_cache_v4",
       "king_tcg_cards_cache_v5",
       "king_tcg_cards_cache_v6",
+      "king_tcg_cards_cache_v7",
     ];
     oldKeys.forEach((key) => localStorage.removeItem(key));
   } catch {}
@@ -351,7 +352,6 @@ export async function searchCardsFromScan(
       const found = await fetchPage(`name:"*${name}*"`, 1);
       if (found.length) {
         cards = removeDuplicates([...cards, ...found.map(normalize)]);
-        break;
       }
     }
   }
@@ -383,7 +383,7 @@ export async function searchCardsFromScan(
 }
 
 /**
- * 🔍 RECHERCHE GLOBALE OPTIMISÉE AVEC GARANTIE DES PRIX & DUO FR/EN (Dracaufeu / Charizard)
+ * 🔍 RECHERCHE GLOBALE OPTIMISÉE v4.00 (Tri strict par date décroissante & multi-pages pour Dracaufeu)
  */
 export async function searchCards(
   search = "",
@@ -395,12 +395,11 @@ export async function searchCards(
   const cacheKey = `search_${lang}_${key}`;
   if (searchCache.has(cacheKey)) return searchCache.get(cacheKey)!;
 
-  logger.api(`[SEARCH ENGINE] Recherche globale pour "${key}" en langue ${lang}`);
+  logger.api(`[SEARCH ENGINE v4.00] Recherche globale pour "${key}" en langue ${lang}`);
 
   let officialCards: PokemonCard[] = [];
 
   try {
-    // 🔥 TRAITEMENT SPÉCIAL DRACAUFEU / CHARIZARD & NOMS CLÉS
     let queryNames: string[] = [];
     if (key.includes("dracaufeu") || key.includes("charizard")) {
       queryNames = ["Dracaufeu", "Charizard"];
@@ -410,12 +409,13 @@ export async function searchCards(
       queryNames = Array.from(new Set([englishName, frenchName, key])).filter(Boolean);
     }
 
-    logger.api(`[SEARCH ENGINE] Mots-clés interrogés en parallèle:`, queryNames);
+    logger.api(`[SEARCH ENGINE] Mots-clés interrogés en parallèle (Pages 1 à 3):`, queryNames);
 
-    // Requêtes parallèles : Page 1 & Page 2 pour couvrir toutes les éditions récentes
+    // Requêtes parallèles : Pages 1, 2 et 3 pour couvrir l'intégralité des cartes de gros Pokémon
     const searchPromises = queryNames.flatMap((qName) => [
       fetchPage(`name:"*${qName}*"`, 1),
       fetchPage(`name:"*${qName}*"`, 2),
+      fetchPage(`name:"*${qName}*"`, 3),
     ]);
 
     const resultsPages = await Promise.all(searchPromises);
@@ -450,9 +450,11 @@ export async function searchCards(
     }
   }
 
-  // Tri V3.7 : 
-  // 1. Cartes officielles en premier
+  // Tri STRICT v4.00 : Indépendant des prix à 0
+  // 1. Cartes officielles d'abord (vs TCGdex)
   // 2. Date de sortie décroissante (Plus récentes -> Plus anciennes)
+  // 3. ID de l'extension par ordre alphabétique inversé en cas d'égalité de date exacte
+  // 4. Numéro de carte décroissant
   finalCards.sort((a, b) => {
     const isOfficialA = !a.id.startsWith("tcgdex-") ? 1 : 0;
     const isOfficialB = !b.id.startsWith("tcgdex-") ? 1 : 0;
@@ -465,7 +467,15 @@ export async function searchCards(
       return timeB - timeA;
     }
 
-    return (b.set?.id || "").localeCompare(a.set?.id || "");
+    const setIdA = a.set?.id || "";
+    const setIdB = b.set?.id || "";
+    if (setIdA !== setIdB) {
+      return setIdB.localeCompare(setIdA);
+    }
+
+    const numA = parseInt((a.number || "0").replace(/\D/g, "")) || 0;
+    const numB = parseInt((b.number || "0").replace(/\D/g, "")) || 0;
+    return numB - numA;
   });
 
   finalCards.forEach((c) => cache.set(c.id, c));
