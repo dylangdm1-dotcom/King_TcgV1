@@ -1,9 +1,11 @@
-import { JustTCG } from "justtcg-js";
-import { CardPrice } from "../types";
+// lib/priceProviders/justTcgProvider.ts
 
-// Le client initialise automatiquement avec le token présent dans process.env.JUSTTCG_API_KEY
-// ou tu peux lui passer manuellement.
-const apiKey = process.env.NEXT_PUBLIC_JUSTTCG_API_KEY;
+import { JustTCG } from "justtcg-js";
+import type { CardPrice } from "../types";
+
+// Initialisation flexible (Clé serveur prioritaire, puis publique côté client)
+const apiKey =
+  process.env.JUSTTCG_API_KEY || process.env.NEXT_PUBLIC_JUSTTCG_API_KEY;
 
 const client = apiKey ? new JustTCG({ apiKey }) : null;
 
@@ -24,49 +26,61 @@ export async function fetchPricesFromJustTCG(cardId: string): Promise<{
   cardmarket?: { prices: { trendPrice?: number; lowPrice?: number } };
 } | null> {
   if (!client) {
-    console.warn("[JustTCG] Client non initialisé. Clé API manquante ou invalide.");
+    console.warn(
+      "[JustTCG] Client non initialisé. Clé API (JUSTTCG_API_KEY) manquante."
+    );
     return null;
   }
 
   try {
-    // Utilisation de l'API JustTCG officielle via son SDK
-    // On recherche par l'identifiant unique de la carte
+    // Appel via le SDK JustTCG
     const response = await client.v1.cards.get({
       cardId: cardId,
-      limit: 1
+      limit: 1,
     });
 
     if (response.error || !response.data || response.data.length === 0) {
-      console.warn(`[JustTCG] Impossible de trouver les prix pour la carte ${cardId}: ${response.error ?? 'Donnée vide'}`);
+      console.warn(
+        `[JustTCG] Aucun prix trouvé pour la carte ${cardId}: ${
+          response.error ?? "Résultat vide"
+        }`
+      );
       return null;
     }
 
-    // Extraction de la première carte correspondante
-    const cardData: any = response.data[0];
+    const cardData = response.data[0];
+    const prices = cardData.prices;
 
-    // Mapping des données du SDK officiel vers tes interfaces TCGPlayer / Cardmarket
+    if (!prices) return null;
+
+    // Mapping sécurisé vers l'interface CardPrice (plancher & marché)
     return {
       tcgplayer: {
         prices: {
           normal: {
-            market: cardData.prices?.marketPrice ?? cardData.prices?.cleanRawMarket,
-            low: cardData.prices?.lowPrice,
-            high: cardData.prices?.highPrice,
+            low: prices.lowPrice,
+            market: prices.marketPrice ?? prices.cleanRawMarket,
+            high: prices.highPrice,
+            directLow: prices.directLow ?? prices.lowPrice,
           },
           holofoil: {
-            market: cardData.prices?.foilPrice ?? cardData.prices?.marketPrice,
-          }
-        }
+            low: prices.foilLowPrice ?? prices.lowPrice,
+            market: prices.foilPrice ?? prices.marketPrice,
+          },
+        },
       },
       cardmarket: {
         prices: {
-          trendPrice: cardData.prices?.marketPrice, // Fallback propre sur le prix global moyen
-          lowPrice: cardData.prices?.lowPrice,
-        }
-      }
+          lowPrice: prices.lowPrice,
+          trendPrice: prices.marketPrice,
+        },
+      },
     };
   } catch (error) {
-    console.error(`[JustTCG SDK] Erreur réseau ou d'authentification pour ${cardId} :`, (error as Error).message);
+    console.error(
+      `[JustTCG SDK] Erreur pour la carte ${cardId}:`,
+      (error as Error).message
+    );
     return null;
   }
 }
