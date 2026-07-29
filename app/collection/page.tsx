@@ -21,14 +21,11 @@ import { getCardById } from "../../lib/pokemon";
 import { calculateRealMarketPrices } from "../../lib/priceTracker";
 import { PokemonCard } from "../../lib/types";
 
-// Type générique pour représenter une entrée de collection (objet ou nombre direct)
-type CollectionValue = number | { quantity?: number; [key: string]: unknown };
+// Type d'une carte de collection avec sa quantité/données de stockage
+type CollectionCardType = PokemonCard & { qty: any };
 
-// Extension du type PokemonCard avec la quantité/entrée de la collection
-type CollectionCardType = PokemonCard & { qty: CollectionValue };
-
-// Helper pour extraire de façon sûre le nombre d'exemplaires
-function getCardQuantity(qty: CollectionValue): number {
+// Extraction sécurisée de la quantité numérique
+function getCardQuantity(qty: any): number {
   if (typeof qty === "number") return qty;
   if (qty && typeof qty === "object" && typeof qty.quantity === "number") {
     return qty.quantity;
@@ -56,7 +53,7 @@ export default function BibliothequePage() {
             if (!card) return null;
             return {
               ...card,
-              qty: collection[id] as CollectionValue,
+              qty: collection[id],
             };
           } catch (err) {
             console.error("[King_TCG] Erreur chargement carte collection :", id, err);
@@ -77,12 +74,9 @@ export default function BibliothequePage() {
       ),
     ])
       .then(([collectionResults, favoriteResults]) => {
-        const cleanCollection = collectionResults.filter(
-          (c): c is CollectionCardType => c !== null
-        );
-        const cleanFavorites = favoriteResults.filter(
-          (c): c is PokemonCard => c !== null
-        );
+        // Nettoyage simple des nulls et assertion de type sûre
+        const cleanCollection = collectionResults.filter(Boolean) as CollectionCardType[];
+        const cleanFavorites = favoriteResults.filter(Boolean) as PokemonCard[];
 
         setCollectionCards(cleanCollection);
         setFavoriteCards(cleanFavorites);
