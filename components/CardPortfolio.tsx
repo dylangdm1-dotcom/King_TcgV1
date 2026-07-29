@@ -42,12 +42,16 @@ export default function CardPortfolio({ card, currentValue }: Props) {
 
   const add = () => {
     const updated = addToCollection(card.id);
-    setQuantity(updated[card.id] || 0);
+    const entry = updated[card.id] as any;
+    const qty = typeof entry === "number" ? entry : (entry?.quantity || 0);
+    setQuantity(qty);
   };
 
   const remove = () => {
     const updated = removeFromCollection(card.id);
-    setQuantity(updated[card.id] || 0);
+    const entry = updated[card.id] as any;
+    const qty = typeof entry === "number" ? entry : (entry?.quantity || 0);
+    setQuantity(qty);
   };
 
   const updateBuyPrice = (value: number) => {
