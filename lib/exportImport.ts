@@ -1,4 +1,5 @@
 import { getCollection, setCollection } from "./storage";
+import type { CollectionMap } from "./storage"; // Assurez-vous que le type est exporté, sinon utilisez "as any"
 
 //
 // 📤 EXPORT COLLECTION
@@ -29,17 +30,20 @@ export function importCollection(json: string): boolean {
     }
 
     // validation simple
-    const cleaned: Record<string, number> = {};
+    const cleaned: Record<string, any> = {};
 
     Object.entries(parsed.collection).forEach(([id, qty]) => {
-      const n = Number(qty);
+      // Gère si la quantité importée est un nombre direct ou un objet
+      const val = typeof qty === "object" && qty !== null ? (qty as any).quantity : Number(qty);
+      const n = Number(val);
 
       if (id && n > 0) {
-        cleaned[id] = n;
+        // On stocke sous la forme attendue par CollectionMap (soit un nombre, soit un objet selon votre structure)
+        cleaned[id] = typeof qty === "object" && qty !== null ? qty : n;
       }
     });
 
-    setCollection(cleaned);
+    setCollection(cleaned as CollectionMap);
 
     return true;
   } catch (e) {
