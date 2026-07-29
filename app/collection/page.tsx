@@ -16,18 +16,23 @@ import Navbar from "../../components/Navbar";
 import BackButton from "../../components/BackButton";
 import CardResult from "@/components/cards/CardResult";
 
-import { getCollection, getFavorites, CollectionEntry } from "@/lib/storage";
+import { getCollection, getFavorites } from "@/lib/storage";
 import { getCardById } from "../../lib/pokemon";
 import { calculateRealMarketPrices } from "../../lib/priceTracker";
 import { PokemonCard } from "../../lib/types";
 
-// Adapté selon le type réel retourné par getCollection()
-type CollectionCardType = PokemonCard & { qty: CollectionEntry | number };
+// Type générique pour représenter une entrée de collection (objet ou nombre direct)
+type CollectionValue = number | { quantity?: number; [key: string]: unknown };
 
-// Helper pour récupérer le nombre numérique exact de cartes
-function getCardQuantity(qty: CollectionEntry | number): number {
+// Extension du type PokemonCard avec la quantité/entrée de la collection
+type CollectionCardType = PokemonCard & { qty: CollectionValue };
+
+// Helper pour extraire de façon sûre le nombre d'exemplaires
+function getCardQuantity(qty: CollectionValue): number {
   if (typeof qty === "number") return qty;
-  if (qty && typeof qty.quantity === "number") return qty.quantity;
+  if (qty && typeof qty === "object" && typeof qty.quantity === "number") {
+    return qty.quantity;
+  }
   return 1;
 }
 
@@ -51,7 +56,7 @@ export default function BibliothequePage() {
             if (!card) return null;
             return {
               ...card,
-              qty: collection[id],
+              qty: collection[id] as CollectionValue,
             };
           } catch (err) {
             console.error("[King_TCG] Erreur chargement carte collection :", id, err);
@@ -116,7 +121,7 @@ export default function BibliothequePage() {
     }, 0);
   }, [collectionCards]);
 
-  // 📦 Total d'exemplaires physique
+  // 📦 Total d'exemplaires physiques
   const totalCardsCount = useMemo(() => {
     return collectionCards.reduce((sum, card) => sum + getCardQuantity(card.qty), 0);
   }, [collectionCards]);
