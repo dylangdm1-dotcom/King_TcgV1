@@ -51,8 +51,9 @@ export default function CardPortfolio({ card, currentValue }: Props) {
   };
 
   const updateBuyPrice = (value: number) => {
-    setBuyPriceState(value);
-    saveBuyPrice(card.id, value);
+    const val = Math.max(0, value);
+    setBuyPriceState(val);
+    saveBuyPrice(card.id, val);
   };
 
   const updateCondition = (value: string) => {
@@ -80,7 +81,8 @@ export default function CardPortfolio({ card, currentValue }: Props) {
           <div className="mt-2 flex items-center justify-between gap-2">
             <button
               onClick={remove}
-              className="flex h-8 w-8 items-center justify-center rounded-lg border border-zinc-800 bg-neutral-900/50 text-zinc-400 hover:text-white transition active:scale-95"
+              disabled={quantity <= 0}
+              className="flex h-8 w-8 items-center justify-center rounded-lg border border-zinc-800 bg-neutral-900/50 text-zinc-400 hover:text-white transition active:scale-95 disabled:opacity-30 disabled:pointer-events-none"
             >
               <Minus className="w-3.5 h-3.5" />
             </button>
@@ -123,28 +125,36 @@ export default function CardPortfolio({ card, currentValue }: Props) {
       {/* Édition caractéristiques à plat */}
       <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 pt-2 border-t border-zinc-900">
         <div>
-          <label className="text-[11px] font-bold uppercase tracking-wider text-zinc-500 block mb-2">Prix d'achat unitaire</label>
+          <label className="text-[11px] font-bold uppercase tracking-wider text-zinc-500 block mb-2">
+            Prix d'achat unitaire (€)
+          </label>
           <input
             type="number"
+            step="0.10"
+            min="0"
             value={buyPrice || ""}
             placeholder="0.00"
             onChange={(e) => updateBuyPrice(Number(e.target.value))}
-            className="w-full rounded-xl border border-zinc-900 bg-neutral-950/40 px-3 py-2.5 text-xs text-white placeholder-zinc-700 transition focus:border-zinc-800 focus:outline-none focus:bg-neutral-950"
+            className="w-full rounded-xl border border-zinc-900 bg-neutral-950/40 px-3 py-2.5 text-xs text-white placeholder-zinc-700 transition focus:border-cyan-500/50 focus:outline-none focus:bg-neutral-950 tabular-nums"
           />
         </div>
 
         <div>
-          <label className="text-[11px] font-bold uppercase tracking-wider text-zinc-500 block mb-2">État de la carte</label>
+          <label className="text-[11px] font-bold uppercase tracking-wider text-zinc-500 block mb-2">
+            État de la carte
+          </label>
           <select
             value={condition}
             onChange={(e) => updateCondition(e.target.value)}
-            className="w-full rounded-xl border border-zinc-900 bg-neutral-950/40 px-3 py-2.5 text-xs text-white transition focus:border-zinc-800 focus:outline-none focus:bg-neutral-950 appearance-none cursor-pointer"
+            className="w-full rounded-xl border border-zinc-900 bg-neutral-950/40 px-3 py-2.5 text-xs text-white transition focus:border-cyan-500/50 focus:outline-none focus:bg-neutral-950 appearance-none cursor-pointer"
           >
             <option value="Mint">Mint</option>
             <option value="Near Mint">Near Mint</option>
             <option value="Excellent">Excellent</option>
             <option value="Good">Good</option>
+            <option value="Light Played">Light Played</option>
             <option value="Played">Played</option>
+            <option value="Poor">Poor</option>
           </select>
         </div>
       </div>
