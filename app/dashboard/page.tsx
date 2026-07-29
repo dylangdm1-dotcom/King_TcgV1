@@ -1,14 +1,33 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { Wallet, TrendingUp, Zap, Trophy, Package, BarChart3, ChevronDown, ChevronUp } from "lucide-react";
+import { useEffect, useState, useRef } from "react";
+import { 
+  Wallet, 
+  TrendingUp, 
+  Zap, 
+  Trophy, 
+  Package, 
+  BarChart3, 
+  ChevronDown, 
+  ChevronUp,
+  Download,
+  Upload,
+  RefreshCw,
+  ShieldAlert,
+  Coins
+} from "lucide-react";
 import Navbar from "../../components/Navbar";
 import PortfolioChart from "../../components/dashboard/PortfolioChart";
 import TopMovers from "../../components/dashboard/TopMovers";
 import RecentAcquisitions from "../../components/dashboard/RecentAcquisitions";
 import BackButton from "../../components/BackButton";
 
-import { getCollection, getBuyPrice } from "../../lib/storage";
+import { 
+  getCollection, 
+  getBuyPrice, 
+  exportBackup, 
+  importBackup 
+} from "../../lib/storage";
 import { getCardById } from "../../lib/pokemon";
 import { getMarketHistory, type PricePoint } from "../../lib/priceHistory";
 import { getInvestmentScore } from "../../lib/investment";
@@ -28,6 +47,9 @@ export default function DashboardPage() {
   const [bestCard, setBestCard] = useState<CardWithMeta | null>(null);
   const [worstCard, setWorstCard] = useState<CardWithMeta | null>(null);
   const [expandedCardId, setExpandedCardId] = useState<string | null>(null);
+  const [importStatus, setImportStatus] = useState<string | null>(null);
+
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const loadDashboardData = async () => {
     try {
@@ -99,6 +121,28 @@ export default function DashboardPage() {
   
   const toggleDetails = (id: string) => setExpandedCardId(expandedCardId === id ? null : id);
 
+  // Gestion Import JSON
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const content = event.target?.result as string;
+      if (content) {
+        const success = importBackup(content, "merge");
+        if (success) {
+          setImportStatus("Sauvegarde importée et fusionnée avec succès !");
+          loadDashboardData();
+        } else {
+          setImportStatus("Erreur : Fichier de sauvegarde invalide.");
+        }
+        setTimeout(() => setImportStatus(null), 4000);
+      }
+    };
+    reader.readAsText(file);
+  };
+
   return (
     <>
       <Navbar />
@@ -107,12 +151,62 @@ export default function DashboardPage() {
           
           <div className="flex items-center justify-between">
             <BackButton />
+            
+            {/* Outils Export / Import de Sauvegarde V3.9 */}
+            <div className="flex items-center gap-2">
+              <button
+                onClick={exportBackup}
+                className="flex items-center gap-1.5 rounded-xl border border-zinc-800 bg-neutral-900 px-3 py-1.5 text-[11px] font-bold text-zinc-300 hover:border-cyan-500/50 hover:text-cyan-400 transition-all"
+                title="Télécharger une sauvegarde de la collection"
+              >
+                <Download className="w-3.5 h-3.5" /> Export Backup
+              </button>
+
+              <button
+                onClick={() => fileInputRef.current?.click()}
+                className="flex items-center gap-1.5 rounded-xl border border-zinc-800 bg-neutral-900 px-3 py-1.5 text-[11px] font-bold text-zinc-300 hover:border-cyan-500/50 hover:text-cyan-400 transition-all"
+                title="Importer un fichier de sauvegarde JSON"
+              >
+                <Upload className="w-3.5 h-3.5" /> Import
+              </button>
+
+              <input
+                type="file"
+                ref={fileInputRef}
+                onChange={handleFileUpload}
+                accept=".json"
+                className="hidden"
+              />
+            </div>
           </div>
 
+          {/* Feedback Import */}
+          {importStatus && (
+            <div className="rounded-xl border border-cyan-500/30 bg-cyan-950/20 p-3 text-center text-xs font-bold text-cyan-400">
+              {importStatus}
+            </div>
+          )}
+
           {/* En-tête Technique */}
-          <section className="rounded-xl border border-zinc-900 bg-neutral-950/40 p-4 sm:p-5">
-            <span className="text-[9px] font-black uppercase tracking-wider text-zinc-500">Dashboard Investissement</span>
-            <h1 className="mt-0.5 text-lg font-black uppercase tracking-tight text-white">Suivi Collection Actif</h1>
+          <section className="rounded-xl border border-zinc-900 bg-neutral-950/40 p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <span className="text-[9px] font-black uppercase tracking-wider text-zinc-500">Dashboard Investissement V3.9</span>
+              <h1 className="mt-0.5 text-lg font-black uppercase tracking-tight text-white">Suivi Collection Actif</h1>
+            </div>
+
+            {/* Total Investi & Profit Net */}
+            <div className="flex items-center gap-4 border-t sm:border-t-0 sm:border-l border-zinc-900 pt-3 sm:pt-0 sm:pl-5 text-xs">
+              <div>
+                <span className="text-zinc-500 text-[10px] block font-bold uppercase">Investissement</span>
+                <span className="font-black text-white tabular-nums">{investedValue.toFixed(2)} €</span>
+              </div>
+              <div>
+                <span className="text-zinc-500 text-[10px] block font-bold uppercase">Profit Net</span>
+                <span className={`font-black tabular-nums ${profitValue >= 0 ? "text-emerald-400" : "text-rose-400"}`}>
+                  {profitValue >= 0 ? "+" : ""}{profitValue.toFixed(2)} €
+                </span>
+              </div>
+            </div>
           </section>
 
           {/* Métriques KPI Uniformisées */}
@@ -175,13 +269,17 @@ export default function DashboardPage() {
               <div className="grid gap-3 content-start">
                 {bestCard && (
                   <div className="rounded-xl border border-zinc-900 bg-neutral-950/40 p-3.5">
-                    <span className="text-[9px] font-black uppercase tracking-wider text-emerald-500">PLus fort potentiel</span>
+                    <span className="text-[9px] font-black uppercase tracking-wider text-emerald-500 flex items-center gap-1">
+                      <Trophy className="w-3 h-3" /> Plus fort potentiel
+                    </span>
                     <h3 className="font-bold text-xs text-white truncate mt-0.5">{bestCard.name}</h3>
                   </div>
                 )}
                 {worstCard && (
                   <div className="rounded-xl border border-zinc-900 bg-neutral-950/40 p-3.5">
-                    <span className="text-[9px] font-black uppercase tracking-wider text-rose-500">Alerte volatilité / surveillance</span>
+                    <span className="text-[9px] font-black uppercase tracking-wider text-rose-500 flex items-center gap-1">
+                      <ShieldAlert className="w-3 h-3" /> Alerte volatilité / surveillance
+                    </span>
                     <h3 className="font-bold text-xs text-white truncate mt-0.5">{worstCard.name}</h3>
                   </div>
                 )}
@@ -199,7 +297,8 @@ export default function DashboardPage() {
               {cards.map((card) => {
                 const isExpanded = expandedCardId === card.id;
                 const marketData = getMarketData(card);
-                const netProfit = (marketData.average * card.qty) - (getBuyPrice(card.id) * card.qty);
+                const buyPrice = getBuyPrice(card.id);
+                const netProfit = (marketData.average * card.qty) - (buyPrice * card.qty);
                 const isProfitPositive = netProfit >= 0;
                 
                 return (
@@ -235,7 +334,7 @@ export default function DashboardPage() {
                         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-[11px]">
                           <div className="bg-neutral-950/60 rounded-lg p-2.5 border border-zinc-900">
                             <span className="text-zinc-500 font-medium block">Coût d'achat</span>
-                            <span className="text-zinc-300 font-bold mt-0.5 block tabular-nums">{getBuyPrice(card.id).toFixed(2)} €</span>
+                            <span className="text-zinc-300 font-bold mt-0.5 block tabular-nums">{buyPrice.toFixed(2)} €</span>
                           </div>
                           <div className="bg-neutral-950/60 rounded-lg p-2.5 border border-zinc-900">
                             <span className="text-zinc-500 font-medium block">Valeur Actuelle</span>
