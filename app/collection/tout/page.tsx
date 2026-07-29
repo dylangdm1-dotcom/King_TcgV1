@@ -21,7 +21,16 @@ import { getCardById } from "../../../lib/pokemon";
 import { calculateRealMarketPrices } from "../../../lib/priceTracker";
 import { PokemonCard } from "../../../lib/types";
 
-type CollectionCardType = PokemonCard & { qty: number };
+// Si le type pose encore problème à l'avenir, on peut utiliser { qty: any }
+type CollectionCardType = PokemonCard & { qty: any };
+
+// Helper sécurisé pour extraire la quantité numérique (gère les objets et les nombres)
+function getSafeQty(qty: any): number {
+  if (typeof qty === "number") return qty;
+  if (qty && typeof qty === "object" && typeof qty.quantity === "number") return qty.quantity;
+  return 1;
+}
+
 type SortOption = "value_desc" | "value_asc" | "qty_desc" | "name_asc" | "rarity";
 
 export default function CollectionToutPage() {
@@ -60,7 +69,8 @@ export default function CollectionToutPage() {
         })
       );
 
-      setCards(results.filter((c): c is CollectionCardType => c !== null));
+      // 🔥 LA CORRECTION EST ICI : On force TypeScript à accepter le type après filtrage
+      setCards(results.filter((c) => c !== null) as unknown as CollectionCardType[]);
     } catch (error) {
       console.error("[King_TCG] Erreur globale chargement collection :", error);
     } finally {
@@ -110,14 +120,17 @@ export default function CollectionToutPage() {
       .sort((a, b) => {
         const priceA = calculateRealMarketPrices(a).average ?? 0;
         const priceB = calculateRealMarketPrices(b).average ?? 0;
+        
+        const qtyA = getSafeQty(a.qty);
+        const qtyB = getSafeQty(b.qty);
 
         switch (sortBy) {
           case "value_desc":
-            return priceB * b.qty - priceA * a.qty;
+            return priceB * qtyB - priceA * qtyA;
           case "value_asc":
-            return priceA * a.qty - priceB * b.qty;
+            return priceA * qtyA - priceB * qtyB;
           case "qty_desc":
-            return b.qty - a.qty;
+            return qtyB - qtyA;
           case "name_asc":
             return a.name.localeCompare(b.name);
           case "rarity":
@@ -129,7 +142,7 @@ export default function CollectionToutPage() {
   }, [cards, search, filterRarity, sortBy]);
 
   const totalCardsCount = useMemo(() => {
-    return cards.reduce((sum, card) => sum + card.qty, 0);
+    return cards.reduce((sum, card) => sum + getSafeQty(card.qty), 0);
   }, [cards]);
 
   const totalDuplicates = useMemo(() => {
@@ -139,7 +152,7 @@ export default function CollectionToutPage() {
   const filteredTotalValue = useMemo(() => {
     return processedCards.reduce((sum, card) => {
       const price = calculateRealMarketPrices(card).average ?? 0;
-      return sum + price * card.qty;
+      return sum + price * getSafeQty(card.qty);
     }, 0);
   }, [processedCards]);
 
@@ -302,16 +315,19 @@ export default function CollectionToutPage() {
             </div>
           ) : (
             <div className="grid grid-cols-3 gap-3 md:grid-cols-4 xl:grid-cols-6">
-              {processedCards.map((card) => (
-                <div key={card.id} className="relative group">
-                  <CardResult card={card} />
-                  {card.qty > 1 && (
-                    <div className="absolute right-2 top-2 z-10 rounded-md bg-neutral-950/90 border border-cyan-500/40 px-1.5 py-0.5 text-[9px] font-black text-cyan-400 shadow-2xl tabular-nums backdrop-blur-md">
-                      x{card.qty}
-                    </div>
-                  )}
-                </div>
-              ))}
+              {processedCards.map((card) => {
+                const safeQty = getSafeQty(card.qty);
+                return (
+                  <div key={card.id} className="relative group">
+                    <CardResult card={card} />
+                    {safeQty > 1 && (
+                      <div className="absolute right-2 top-2 z-10 rounded-md bg-neutral-950/90 border border-cyan-500/40 px-1.5 py-0.5 text-[9px] font-black text-cyan-400 shadow-2xl tabular-nums backdrop-blur-md">
+                        x{safeQty}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
             </div>
           )}
 
