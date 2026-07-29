@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 
 import { useMemo, useState, useEffect, useCallback } from "react";
 import {
@@ -22,6 +22,7 @@ import {
   type LanguageCode,
 } from "../../lib/pokemon";
 import { filterCards, type SearchFilters as SearchFiltersType } from "../../lib/search";
+import { getAdjustedPriceByCondition } from "../../lib/marketEngine";
 import type { PokemonCard } from "../../lib/types";
 
 const PAGE_SIZE = 24;
@@ -49,6 +50,7 @@ export default function Recherche() {
     rarity: "all",
     set: "all",
     sort: "recent",
+    condition: "Near Mint", // État par défaut
   });
 
   // Recharger et trier la liste des extensions au changement de langue
@@ -272,7 +274,6 @@ export default function Recherche() {
               ) : (
                 /* Sélecteur d'extension hiérarchique (Bloc -> Série) */
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  {/* Étape 1 : Sélection du Bloc / Ère */}
                   <div>
                     <label className="block text-[10px] font-bold uppercase tracking-wider text-zinc-400 mb-1 flex items-center gap-1.5">
                       <Layers className="w-3.5 h-3.5 text-cyan-400" /> 1. Bloc / Ère
@@ -297,7 +298,6 @@ export default function Recherche() {
                     </select>
                   </div>
 
-                  {/* Étape 2 : Sélection de la Série finale */}
                   <div>
                     <label className="block text-[10px] font-bold uppercase tracking-wider text-zinc-400 mb-1 flex items-center gap-1.5">
                       <Package className="w-3.5 h-3.5 text-cyan-400" /> 2. Série / Extension
@@ -401,7 +401,7 @@ export default function Recherche() {
             </div>
           )}
 
-          {/* Grille de cartes */}
+          {/* Grille de cartes avec application dynamique du prix selon l'état choisi */}
           {!loading && (
             <div
               className={
@@ -410,16 +410,23 @@ export default function Recherche() {
                   : "flex flex-col items-center gap-4"
               }
             >
-              {displayedCards.map((card) => (
-                <div
-                  key={card.id}
-                  className={
-                    viewMode === "large" ? "w-full max-w-md" : "w-full"
-                  }
-                >
-                  <CardResult card={card} />
-                </div>
-              ))}
+              {displayedCards.map((card) => {
+                // Application du prix ajusté selon la condition sélectionnée dans les filtres
+                const basePrice = card.computedPrice ?? 0;
+                const adjustedPrice = getAdjustedPriceByCondition(basePrice, filters.condition ?? "Near Mint");
+                const cardWithAdjustedPrice = { ...card, computedPrice: adjustedPrice };
+
+                return (
+                  <div
+                    key={card.id}
+                    className={
+                      viewMode === "large" ? "w-full max-w-md" : "w-full"
+                    }
+                  >
+                    <CardResult card={cardWithAdjustedPrice} />
+                  </div>
+                );
+              })}
             </div>
           )}
 
