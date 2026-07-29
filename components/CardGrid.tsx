@@ -22,7 +22,13 @@ export default function CardGrid({ cards }: CardGridProps) {
 
   useEffect(() => {
     const syncStorage = () => {
-      setCollection(getCollection());
+      const rawCollection = getCollection();
+      const cleanCollection: Record<string, number> = {};
+      Object.keys(rawCollection).forEach((id) => {
+        const entry = rawCollection[id] as any;
+        cleanCollection[id] = typeof entry === "number" ? entry : (entry?.quantity || 1);
+      });
+      setCollection(cleanCollection);
       setFavorites(getFavorites());
     };
 
@@ -40,14 +46,22 @@ export default function CardGrid({ cards }: CardGridProps) {
     currentQty: number,
     delta: number
   ) => {
+    let rawUpdated: any;
     if (delta > 0) {
-      const updated = addToCollection(cardId);
-      setCollection(updated);
+      rawUpdated = addToCollection(cardId);
     } else if (currentQty > 0) {
-      const updated = removeFromCollection(cardId);
-      setCollection(updated);
+      rawUpdated = removeFromCollection(cardId);
+    } else {
+      return;
     }
 
+    const cleanCollection: Record<string, number> = {};
+    Object.keys(rawUpdated).forEach((id) => {
+      const entry = rawUpdated[id] as any;
+      cleanCollection[id] = typeof entry === "number" ? entry : (entry?.quantity || 1);
+    });
+
+    setCollection(cleanCollection);
     setFavorites(getFavorites());
   };
 
