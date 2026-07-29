@@ -1,3 +1,4 @@
+// components/SearchFilters.tsx
 "use client";
 
 import type { SearchFilters } from "../lib/search";
@@ -14,7 +15,7 @@ export default function SearchFiltersComponent({
   sets,
 }: Props) {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 p-3 my-6 rounded-xl border border-zinc-900 bg-neutral-950/20">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 p-3 my-6 rounded-xl border border-zinc-900 bg-neutral-950/20">
       
       {/* Catégories */}
       <select
@@ -51,6 +52,26 @@ export default function SearchFiltersComponent({
         <option value="Ultra">Ultra Rare</option>
         <option value="Secret">Secret Rare</option>
         <option value="Illustration">Illustration Rare</option>
+      </select>
+
+      {/* État de la carte (Condition) avec impact direct sur le prix */}
+      <select
+        className="h-10 px-3 rounded-xl border border-zinc-900 bg-neutral-950 text-cyan-400 text-xs font-bold cursor-pointer outline-none transition-all duration-150 focus:border-cyan-500/30 focus:text-white"
+        value={filters.condition ?? "Near Mint"}
+        onChange={(e) =>
+          onChange({
+            ...filters,
+            condition: e.target.value,
+          })
+        }
+      >
+        <option value="Mint">Mint (M - 1.15x)</option>
+        <option value="Near Mint">Near Mint (NM - 1.00x)</option>
+        <option value="Excellent">Excellent (EX - 0.85x)</option>
+        <option value="Good">Good (GD - 0.70x)</option>
+        <option value="Light Played">Light Played (LP - 0.60x)</option>
+        <option value="Played">Played (PL - 0.45x)</option>
+        <option value="Poor">Poor (PR - 0.25x)</option>
       </select>
 
       {/* Tri */}
