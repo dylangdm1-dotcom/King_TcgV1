@@ -41,7 +41,8 @@ export default function PortfolioOverview({ cards }: Props) {
   let value = 0;
 
   ownedCards.forEach((card) => {
-    const qty = collection[card.id];
+    const rawQty = collection[card.id];
+    const qty = typeof rawQty === "number" ? rawQty : ((rawQty as any)?.quantity || 1);
     const buy = getBuyPrice(card.id);
     const market = getMarketData(card);
 
@@ -58,7 +59,8 @@ export default function PortfolioOverview({ cards }: Props) {
     profit: number;
   }>(
     (best, card) => {
-      const qty = collection[card.id];
+      const rawQty = collection[card.id];
+      const qty = typeof rawQty === "number" ? rawQty : ((rawQty as any)?.quantity || 1);
       const buy = getBuyPrice(card.id);
       const market = getMarketData(card);
 
