@@ -16,12 +16,20 @@ import Navbar from "../../components/Navbar";
 import BackButton from "../../components/BackButton";
 import CardResult from "@/components/cards/CardResult";
 
-import { getCollection, getFavorites } from "@/lib/storage";
+import { getCollection, getFavorites, CollectionEntry } from "@/lib/storage";
 import { getCardById } from "../../lib/pokemon";
 import { calculateRealMarketPrices } from "../../lib/priceTracker";
 import { PokemonCard } from "../../lib/types";
 
-type CollectionCardType = PokemonCard & { qty: number };
+// Adapté selon le type réel retourné par getCollection()
+type CollectionCardType = PokemonCard & { qty: CollectionEntry | number };
+
+// Helper pour récupérer le nombre numérique exact de cartes
+function getCardQuantity(qty: CollectionEntry | number): number {
+  if (typeof qty === "number") return qty;
+  if (qty && typeof qty.quantity === "number") return qty.quantity;
+  return 1;
+}
 
 export default function BibliothequePage() {
   const [collectionCards, setCollectionCards] = useState<CollectionCardType[]>([]);
@@ -104,13 +112,13 @@ export default function BibliothequePage() {
     return collectionCards.reduce((sum, card) => {
       const market = calculateRealMarketPrices(card);
       const price = market.average ?? 0;
-      return sum + price * card.qty;
+      return sum + price * getCardQuantity(card.qty);
     }, 0);
   }, [collectionCards]);
 
   // 📦 Total d'exemplaires physique
   const totalCardsCount = useMemo(() => {
-    return collectionCards.reduce((sum, card) => sum + card.qty, 0);
+    return collectionCards.reduce((sum, card) => sum + getCardQuantity(card.qty), 0);
   }, [collectionCards]);
 
   // 👑 Top Asset (Carte ayant la plus grande valeur unitaire)
@@ -301,16 +309,19 @@ export default function BibliothequePage() {
               </div>
             ) : (
               <div className="grid grid-cols-3 gap-3 md:grid-cols-4 xl:grid-cols-6">
-                {lastThreeCollection.map((card) => (
-                  <div key={card.id} className="relative group">
-                    <CardResult card={card} />
-                    {card.qty > 1 && (
-                      <div className="absolute right-2 top-2 rounded bg-neutral-950/90 border border-cyan-500/40 px-1.5 py-0.5 text-[9px] font-black text-cyan-400 shadow-2xl z-10 tabular-nums backdrop-blur-md">
-                        x{card.qty}
-                      </div>
-                    )}
-                  </div>
-                ))}
+                {lastThreeCollection.map((card) => {
+                  const qtyNumber = getCardQuantity(card.qty);
+                  return (
+                    <div key={card.id} className="relative group">
+                      <CardResult card={card} />
+                      {qtyNumber > 1 && (
+                        <div className="absolute right-2 top-2 rounded bg-neutral-950/90 border border-cyan-500/40 px-1.5 py-0.5 text-[9px] font-black text-cyan-400 shadow-2xl z-10 tabular-nums backdrop-blur-md">
+                          x{qtyNumber}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
             )}
 
