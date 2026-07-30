@@ -1,3 +1,5 @@
+// app/scanner/page.tsx (ou components/ScannerPage.tsx)
+
 "use client";
 
 export const dynamic = "force-dynamic";
@@ -14,10 +16,12 @@ import {
   Zap,
   ChevronUp,
   ChevronDown,
+  Grid,
 } from "lucide-react";
 
 import ScannerCamera from "../../components/scanner/ScannerCamera";
 import ScannerOverlay from "../../components/scanner/ScannerOverlay";
+import QuadScannerModal from "../../components/QuadScannerModal"; // <-- Intégration V5 4 cartes
 import { captureFrame } from "../../lib/scanner/capture";
 import { searchCardsFromScan } from "../../lib/pokemon";
 import Navbar from "../../components/Navbar";
@@ -49,10 +53,11 @@ export default function ScannerPage() {
   );
   const [detectedCard, setDetectedCard] = useState<any>(null);
 
-  // 🎯 Nouveaux États : Mode de scan & Historique Batch
+  // 🎯 États : Mode de scan (single, batch, quad) & Historique Batch
   const [scanMode, setScanMode] = useState<"single" | "batch">("single");
   const [batchList, setBatchList] = useState<ScannedBatchItem[]>([]);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [isQuadModalOpen, setIsQuadModalOpen] = useState(false); // État modale V5
 
   // Utilitaire Haptique
   const triggerHaptic = useCallback((pattern: number | number[]) => {
@@ -197,7 +202,6 @@ export default function ScannerPage() {
         }
       }
 
-      // 🛡️ Garde de sécurité TypeScript stricte
       if (!bestCard) {
         setStatus("Erreur lors de la récupération de la carte.");
         triggerHaptic([100, 50, 100]);
@@ -206,11 +210,9 @@ export default function ScannerPage() {
 
       const card = bestCard;
 
-      // 🎉 Succès de détection !
       triggerHaptic(60);
       setStatus(`Trouvé : ${card.name} (${card.number || "N/A"})`);
 
-      // Traitement selon le mode sélectionné
       if (scanMode === "single") {
         logger.scan(`Scan unique réussi ! Redirection vers la carte ID: ${card.id}`);
         setTimeout(() => {
@@ -281,7 +283,7 @@ export default function ScannerPage() {
               </p>
             </div>
 
-            {/* Commutateur Mono / Multi */}
+            {/* Commutateur Mono / Multi & Bouton Quad Scan V5 */}
             <div className="flex items-center gap-1.5 bg-black/60 p-1 rounded-xl border border-zinc-800/80 w-full max-w-xs mt-1">
               <button
                 onClick={() => setScanMode("single")}
@@ -291,7 +293,7 @@ export default function ScannerPage() {
                     : "text-zinc-400 hover:text-white"
                 }`}
               >
-                <Zap className="w-3.5 h-3.5" /> Mono-scan
+                <Zap className="w-3.5 h-3.5" /> Mono
               </button>
               <button
                 onClick={() => setScanMode("batch")}
@@ -302,6 +304,13 @@ export default function ScannerPage() {
                 }`}
               >
                 <Layers className="w-3.5 h-3.5" /> Batch ({batchList.length})
+              </button>
+              <button
+                onClick={() => setIsQuadModalOpen(true)}
+                className="py-2 px-3 rounded-lg text-[10px] font-black uppercase tracking-wider bg-amber-500/20 border border-amber-500/40 text-amber-400 hover:bg-amber-500/30 transition flex items-center justify-center gap-1.5"
+                title="Scan Groupé 4 Cartes (Grille 2x2)"
+              >
+                <Grid className="w-3.5 h-3.5" /> 4x
               </button>
             </div>
           </section>
@@ -369,7 +378,6 @@ export default function ScannerPage() {
               isDrawerOpen ? "h-[65vh]" : "h-14"
             }`}
           >
-            {/* Poignée d'ouverture / fermeture du Tiroir */}
             <button
               onClick={() => setIsDrawerOpen(!isDrawerOpen)}
               className="w-full h-14 bg-neutral-900/90 border-b border-zinc-800 px-4 flex items-center justify-between text-xs font-black uppercase tracking-wider text-white active:bg-neutral-800"
@@ -390,10 +398,8 @@ export default function ScannerPage() {
               </div>
             </button>
 
-            {/* Contenu du Tiroir */}
             {isDrawerOpen && (
               <div className="p-4 h-[calc(65vh-3.5rem)] flex flex-col justify-between overflow-hidden">
-                {/* Entête d'actions Batch */}
                 {batchList.length > 0 && (
                   <div className="flex items-center justify-between mb-3 pb-2.5 border-b border-zinc-900">
                     <button
@@ -411,7 +417,6 @@ export default function ScannerPage() {
                   </div>
                 )}
 
-                {/* Liste déroulante des cartes scannées */}
                 <div className="flex-1 overflow-y-auto space-y-2.5 pr-1">
                   {batchList.length === 0 ? (
                     <div className="h-full flex flex-col items-center justify-center text-center text-zinc-600 space-y-2">
@@ -488,6 +493,35 @@ export default function ScannerPage() {
             )}
           </div>
         )}
+
+        {/* 📸 MODALE DU QUAD SCANNER (V5) */}
+        <QuadScannerModal
+          isOpen={isQuadModalOpen}
+          onClose={() => setIsQuadModalOpen(false)}
+          onCardsIdentified={(cards) => {
+            // Ajout des 4 cartes reconnues à la collection ou gestion selon vos besoins
+            logger.scan(`Scan groupé 4 cartes validé : ${cards.length} cartes identifiées.`);
+            setIsQuadModalOpen(false);
+          }}
+          identifyCardByImage={async (imageBase64) => {
+            // Appel de l'API de scan unitaire pour chaque quadrant découpé
+            try {
+              const response = await fetch("/api/scan", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ imageBase64 }),
+              });
+              const resData = await response.json();
+              if (resData.success && resData.data) {
+                const cards = await searchCardsFromScan(resData.data);
+                return cards?.[0] || null;
+              }
+            } catch (e) {
+              console.error("Erreur sur un crop du Quad Scan", e);
+            }
+            return null;
+          }}
+        />
       </main>
     </>
   );
