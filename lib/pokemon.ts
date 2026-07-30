@@ -14,17 +14,13 @@ const API_URL = "https://api.pokemontcg.io/v2/cards";
 const SETS_URL = "https://api.pokemontcg.io/v2/sets";
 const TCGDEX_URL = "https://api.tcgdex.net/v2";
 
-// ⚠️ Incrémenté en v8.1 pour forcer le rafraîchissement du cache avec la prise en charge multilingue des sets
-const CACHE_KEY = "king_tcg_cards_cache_v8_1";
+const CACHE_KEY = "king_tcg_cards_cache_v9_0";
 
 const cache = new Map<string, PokemonCard>();
 const searchCache = new Map<string, PokemonCard[]>();
 
 export type LanguageCode = "fr" | "en" | "ja" | "zh-tw";
 
-/**
- * Nettoyage automatique des anciens caches localStorage
- */
 if (typeof window !== "undefined") {
   try {
     const oldKeys = [
@@ -37,14 +33,12 @@ if (typeof window !== "undefined") {
       "king_tcg_cards_cache_v6",
       "king_tcg_cards_cache_v7",
       "king_tcg_cards_cache_v8",
+      "king_tcg_cards_cache_v8_1",
     ];
     oldKeys.forEach((key) => localStorage.removeItem(key));
   } catch {}
 }
 
-/**
- * Parsing ultra-sécurisé de date (compatible Safari iOS & Mobile)
- */
 function parseReleaseDate(dateStr?: string): number {
   if (!dateStr) return 0;
   const cleanDate = String(dateStr).trim().replace(/\//g, "-");
@@ -52,17 +46,11 @@ function parseReleaseDate(dateStr?: string): number {
   return isNaN(time) ? 0 : time;
 }
 
-/**
- * Conversion sécurisée de tout type de prix en Number
- */
 function safePrice(val: any): number {
   const num = Number(val);
   return !isNaN(num) && isFinite(num) && num > 0 ? Number(num.toFixed(2)) : 0;
 }
 
-/**
- * Normalise les cartes pour garantir la présence des champs prix et du prix calculé
- */
 function normalize(card: any): PokemonCard {
   const cmPrices = card.cardmarket?.prices || card.pricing?.cardmarket || {};
   const tcgPrices = card.tcgplayer?.prices || card.pricing?.tcgplayer || {};
@@ -73,13 +61,12 @@ function normalize(card: any): PokemonCard {
   const avg30 = safePrice(cmPrices.avg30);
   const avg7 = safePrice(cmPrices.avg7);
 
-  // Cotes USD TCGPlayer si Cardmarket FR/EUR est muet (Conversion USD -> EUR ~0.92)
   const tcgHolo = safePrice(tcgPrices.holofoil?.market ?? tcgPrices.holofoil?.mid) * 0.92;
   const tcgNormal = safePrice(tcgPrices.normal?.market ?? tcgPrices.normal?.mid) * 0.92;
   const tcgReverse = safePrice(tcgPrices.reverseHolofoil?.market ?? tcgPrices.reverseHolofoil?.mid) * 0.92;
   const tcgUnlimited = safePrice(tcgPrices.unlimitedHolofoil?.market) * 0.92;
 
-  // Cascade de fallback pour garantir d'afficher un prix réaliste
+  // On évite un prix par défaut arbitraire de 1.50 s'il n'y a vraiment aucune donnée de prix
   const rawComputed =
     avgSell ||
     trend ||
@@ -236,7 +223,6 @@ async function fetchPage(query: string, page = 1): Promise<any[]> {
 
   try {
     const response = await fetch(`${API_URL}?${params}`, {
-      cache: "force-cache",
       headers,
     });
 
@@ -275,6 +261,9 @@ function removeDuplicates(cards: PokemonCard[]) {
   return Array.from(map.values());
 }
 
+/**
+ * Algorithme de scoring affiné pour éviter les faux positifs (ex: Machopeur vs Morpeko)
+ */
 function scoreCard(card: PokemonCard, scan: CardScanResult) {
   let score = 0;
   
@@ -287,14 +276,15 @@ function scoreCard(card: PokemonCard, scan: CardScanResult) {
   const scanNumber = cleanCardNumber(scan.cardNumber);
   const cardNumber = cleanCardNumber(card.number);
 
+  // Le numéro de carte est le critère le plus discriminant pour éviter les confusions d'espèces
   if (scanNumber && cardNumber && scanNumber === cardNumber) {
-    score += 200;
+    score += 1000;
   }
 
   if (cardName === target) {
-    score += 100;
+    score += 400;
   } else if (target && cardName.includes(target)) {
-    score += 40;
+    score += 150;
   }
 
   if (
@@ -302,7 +292,7 @@ function scoreCard(card: PokemonCard, scan: CardScanResult) {
     card.set?.name &&
     normalizeText(card.set.name).includes(normalizeText(scan.setName))
   ) {
-    score += 80;
+    score += 300;
   }
 
   return score;
@@ -329,11 +319,12 @@ export async function searchCardsFromScan(
     )
   );
 
-  logger.api(`[SCAN MATCH] Recherche TCG pour candidates:`, nameCandidates);
+  logger.api(`[SCAN MATCH] Recherche TCG pour candidates:`, nameCandidates, "Numéro:", cleanNum);
 
+  // 1. Priorité absolue au duo Numéro + Nom exact si les deux sont détectés
   if (cleanNum && nameCandidates.length) {
     for (const name of nameCandidates) {
-      const found = await fetchPage(`number:"${cleanNum}" name:"*${name}*"`, 1);
+      const found = await fetchPage(`number:"${cleanNum}" name:"${name}"`, 1);
       if (found.length) {
         cards = removeDuplicates([...cards, ...found.map(normalize)]);
         break;
@@ -341,6 +332,7 @@ export async function searchCardsFromScan(
     }
   }
 
+  // 2. Si le numéro seul donne des résultats précis
   if (!cards.length && cleanNum) {
     const found = await fetchPage(`number:"${cleanNum}"`, 1);
     if (found.length) {
@@ -348,6 +340,7 @@ export async function searchCardsFromScan(
     }
   }
 
+  // 3. Recherche par nom étendu
   if (!cards.length && nameCandidates.length) {
     for (const name of nameCandidates) {
       const found = await fetchPage(`name:"*${name}*"`, 1);
@@ -357,6 +350,7 @@ export async function searchCardsFromScan(
     }
   }
 
+  // 4. Fallback TCGdex si l'API officielle ne trouve rien
   if (cards.length === 0 && nameCandidates.length > 0) {
     for (const name of nameCandidates) {
       try {
@@ -393,7 +387,7 @@ export async function searchCards(
   const cacheKey = `search_${lang}_${key}`;
   if (searchCache.has(cacheKey)) return searchCache.get(cacheKey)!;
 
-  logger.api(`[SEARCH ENGINE v4.00] Recherche globale pour "${key}" en langue ${lang}`);
+  logger.api(`[SEARCH ENGINE v9.0] Recherche globale pour "${key}" en langue ${lang}`);
 
   let officialCards: PokemonCard[] = [];
 
@@ -410,7 +404,6 @@ export async function searchCards(
     const searchPromises = queryNames.flatMap((qName) => [
       fetchPage(`name:"*${qName}*"`, 1),
       fetchPage(`name:"*${qName}*"`, 2),
-      fetchPage(`name:"*${qName}*"`, 3),
     ]);
 
     const resultsPages = await Promise.all(searchPromises);
@@ -429,9 +422,7 @@ export async function searchCards(
   if (finalCards.length < 3) {
     try {
       const targetLang = lang === "en" ? "en" : lang === "ja" ? "ja" : lang === "zh-tw" ? "zh-tw" : "fr";
-      const response = await fetch(`${TCGDEX_URL}/${targetLang}/cards?name=${encodeURIComponent(key)}`, {
-        cache: "force-cache",
-      });
+      const response = await fetch(`${TCGDEX_URL}/${targetLang}/cards?name=${encodeURIComponent(key)}`);
       if (response.ok) {
         const data = await response.json();
         if (Array.isArray(data)) {
@@ -444,6 +435,7 @@ export async function searchCards(
     }
   }
 
+  // Tri strict : Les plus récentes en premier, puis par numéro décroissant
   finalCards.sort((a, b) => {
     const isOfficialA = !a.id.startsWith("tcgdex-") ? 1 : 0;
     const isOfficialB = !b.id.startsWith("tcgdex-") ? 1 : 0;
@@ -496,7 +488,7 @@ export async function searchCardsBySetId(
 
   if (cards.length === 0) {
     try {
-      const response = await fetch(`${TCGDEX_URL}/${lang}/sets/${cleanId}`, { cache: "force-cache" });
+      const response = await fetch(`${TCGDEX_URL}/${lang}/sets/${cleanId}`);
       if (response.ok) {
         const setData = await response.json();
         if (setData.cards) {
@@ -521,16 +513,10 @@ export async function searchCardsBySetId(
   return cards;
 }
 
-/**
- * 🌍 RÉCUPÉRATION DES SÉRIES / EXTENSIONS MULTILANGUE v4.00
- * Interroge l'API TCGdex en premier pour garantir des noms localisés par langue (FR, EN, JA, ZH)
- * et bascule sur l'API officielle si nécessaire.
- */
 export async function getAllSets(lang: LanguageCode = "fr"): Promise<any[]> {
-  // 1. Priorité à TCGdex pour garantir des noms parfaitement localisés selon la langue demandée
   try {
     const targetLang = lang === "en" ? "en" : lang === "ja" ? "ja" : lang === "zh-tw" ? "zh-tw" : "fr";
-    const response = await fetch(`${TCGDEX_URL}/${targetLang}/sets`, { cache: "force-cache" });
+    const response = await fetch(`${TCGDEX_URL}/${targetLang}/sets`);
     if (response.ok) {
       const data = await response.json();
       if (Array.isArray(data) && data.length > 0) {
@@ -544,16 +530,14 @@ export async function getAllSets(lang: LanguageCode = "fr"): Promise<any[]> {
           releaseDate: set.releaseDate || "",
         }));
 
-        // Tri décroissant par date de sortie (les plus récentes en premier)
         mappedSets.sort((a: any, b: any) => parseReleaseDate(b.releaseDate) - parseReleaseDate(a.releaseDate));
         return mappedSets;
       }
     }
   } catch (error) {
-    logger.error("API", "[TCGdex Sets API Error - Fallback to Official]", error);
+    logger.error("API", "[TCGdex Sets API Error]", error);
   }
 
-  // 2. Fallback sur l'API officielle Pokémon TCG si TCGdex échoue
   try {
     const params = new URLSearchParams();
     params.set("pageSize", "300");
@@ -564,7 +548,7 @@ export async function getAllSets(lang: LanguageCode = "fr"): Promise<any[]> {
       headers["X-Api-Key"] = process.env.NEXT_PUBLIC_POKEMON_TCG_API_KEY;
     }
 
-    const response = await fetch(`${SETS_URL}?${params}`, { cache: "force-cache", headers });
+    const response = await fetch(`${SETS_URL}?${params}`, { headers });
     if (response.ok) {
       const json = await response.json();
       if (json.data && json.data.length > 0) return json.data;
@@ -596,14 +580,14 @@ export async function getCardById(id: string): Promise<PokemonCard | null> {
     const rawCardId = parts.slice(2).join("-");
 
     try {
-      const response = await fetch(`${TCGDEX_URL}/${lang}/cards/${rawCardId}`, { cache: "force-cache" });
+      const response = await fetch(`${TCGDEX_URL}/${lang}/cards/${rawCardId}`);
       if (!response.ok) return null;
 
       const data = await response.json();
       const card = normalizeTCGdexCard(data, lang);
 
       cache.set(targetId, card);
-      saveBrowserCache([card]);
+      saveBrowserCard([card]);
       return card;
     } catch (error) {
       return null;
