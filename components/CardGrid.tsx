@@ -84,12 +84,12 @@ export default function CardGrid({ cards }: CardGridProps) {
         return (
           <div
             key={card.id}
-            className="group relative flex flex-col justify-between rounded-xl border border-zinc-900 bg-neutral-950/40 p-3 transition-all duration-300 hover:border-zinc-800"
+            className="group relative flex flex-col justify-between rounded-2xl border border-zinc-900 bg-neutral-900/40 p-3 shadow-xl transition-all duration-300 hover:border-zinc-800"
           >
             {/* Bouton Favori */}
             <button
               onClick={() => handleFavorite(card.id)}
-              className="absolute top-5 right-5 z-10 rounded-lg border border-zinc-900 bg-neutral-950/80 p-2 text-zinc-500 backdrop-blur-md transition-all duration-200 hover:text-cyan-400 active:scale-95 cursor-pointer"
+              className="absolute top-5 right-5 z-10 rounded-xl border border-zinc-900 bg-neutral-950/80 p-2 text-zinc-500 backdrop-blur-md transition-all duration-200 hover:text-cyan-400 active:scale-95 cursor-pointer shadow-lg"
             >
               <Heart
                 className={`h-3.5 w-3.5 transition-colors ${
@@ -99,7 +99,7 @@ export default function CardGrid({ cards }: CardGridProps) {
             </button>
 
             <Link href={`/card/${card.id}`} className="block space-y-2.5">
-              <div className="relative flex aspect-[3/4] items-center justify-center overflow-hidden rounded-lg border border-zinc-900/30 bg-neutral-950">
+              <div className="relative flex aspect-[3/4] items-center justify-center overflow-hidden rounded-xl border border-zinc-900/40 bg-neutral-950/40 shadow-inner">
                 <img
                   src={card.images.small}
                   alt={card.name}
@@ -108,8 +108,8 @@ export default function CardGrid({ cards }: CardGridProps) {
                 />
 
                 {qty > 0 && (
-                  <div className="absolute bottom-2 left-2 flex items-center gap-1 rounded-md border border-cyan-500/20 bg-cyan-500/10 px-2 py-0.5 text-[10px] font-black text-cyan-400 backdrop-blur-sm">
-                    <Layers className="h-2.5 w-2.5" />
+                  <div className="absolute bottom-2.5 left-2.5 flex items-center gap-1 rounded-lg border border-cyan-500/20 bg-cyan-500/10 px-2 py-1 text-[10px] font-black text-cyan-400 backdrop-blur-md shadow-md">
+                    <Layers className="h-3 w-3" />
                     x{qty}
                   </div>
                 )}
@@ -137,13 +137,13 @@ export default function CardGrid({ cards }: CardGridProps) {
                 </span>
               </div>
 
-              <div className="flex items-center gap-1 rounded-lg border border-zinc-900 bg-neutral-950/60 p-0.5">
+              <div className="flex items-center gap-1 rounded-xl border border-zinc-900 bg-neutral-950/40 p-1 shadow-inner">
                 <button
                   onClick={() =>
                     handleQuantityChange(card.id, qty, -1)
                   }
                   disabled={qty === 0}
-                  className="flex flex-1 justify-center rounded-md bg-neutral-900/40 p-1.5 text-zinc-500 transition-colors hover:text-white disabled:cursor-not-allowed disabled:opacity-20"
+                  className="flex flex-1 justify-center rounded-lg bg-neutral-900/40 p-1.5 text-zinc-500 transition-colors hover:text-white disabled:cursor-not-allowed disabled:opacity-20 cursor-pointer"
                 >
                   <Minus className="h-3 w-3" />
                 </button>
@@ -156,7 +156,7 @@ export default function CardGrid({ cards }: CardGridProps) {
                   onClick={() =>
                     handleQuantityChange(card.id, qty, 1)
                   }
-                  className="flex flex-1 justify-center rounded-md bg-neutral-900/40 p-1.5 text-zinc-500 transition-colors hover:text-cyan-400"
+                  className="flex flex-1 justify-center rounded-lg bg-neutral-900/40 p-1.5 text-zinc-500 transition-colors hover:text-cyan-400 cursor-pointer"
                 >
                   <Plus className="h-3 w-3" />
                 </button>
