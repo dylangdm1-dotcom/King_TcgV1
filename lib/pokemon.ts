@@ -319,7 +319,7 @@ export async function searchCardsFromScan(
     )
   );
 
-  logger.api(`[SCAN MATCH] Recherche TCG pour candidates:`, nameCandidates, "Numéro:", cleanNum);
+  logger.api(`[SCAN MATCH] Recherche TCG pour candidates: ${nameCandidates.join(", ")} (Numéro: ${cleanNum})`);
 
   // 1. Priorité absolue au duo Numéro + Nom exact si les deux sont détectés
   if (cleanNum && nameCandidates.length) {
