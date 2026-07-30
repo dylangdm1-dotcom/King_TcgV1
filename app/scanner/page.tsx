@@ -16,12 +16,10 @@ import {
   Zap,
   ChevronUp,
   ChevronDown,
-  Grid,
 } from "lucide-react";
 
 import ScannerCamera from "@/components/scanner/ScannerCamera";
 import ScannerOverlay from "@/components/scanner/ScannerOverlay";
-import QuadScannerModal from "@/components/scanner/QuadScannerModal"; // 🛠️ Corrigé (chemin relatif ajusté vers components/scanner/)
 import { captureFrame } from "@/lib/scanner/capture";
 import { searchCardsFromScan } from "@/lib/pokemon";
 import Navbar from "@/components/Navbar";
@@ -53,11 +51,10 @@ export default function ScannerPage() {
   );
   const [detectedCard, setDetectedCard] = useState<any>(null);
 
-  // 🎯 États : Mode de scan (single, batch, quad) & Historique Batch
+  // 🎯 États : Mode de scan (single, batch) & Historique Batch
   const [scanMode, setScanMode] = useState<"single" | "batch">("single");
   const [batchList, setBatchList] = useState<ScannedBatchItem[]>([]);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const [isQuadModalOpen, setIsQuadModalOpen] = useState(false); // État modale V5
 
   // Utilitaire Haptique
   const triggerHaptic = useCallback((pattern: number | number[]) => {
@@ -74,6 +71,25 @@ export default function ScannerPage() {
     setReady(true);
     logger.scan("Caméra prête pour l'acquisition.");
   }, []);
+
+  // Gestion des cartes identifiées (reçu depuis le mode Mono ou le Quad Scan de ScannerCamera)
+  const handleCardsIdentified = useCallback((cards: PokemonCard[]) => {
+    if (!cards || cards.length === 0) return;
+
+    if (scanMode === "single") {
+      router.push(`/card/${cards[0].id}`);
+    } else {
+      const newBatchItems: ScannedBatchItem[] = cards.map((card) => ({
+        id: `${card.id}_${Date.now()}_${Math.random()}`,
+        card: card,
+        scannedAt: new Date(),
+        confidence: 0.95,
+      }));
+      setBatchList((prev) => [...newBatchItems, ...prev]);
+      setIsDrawerOpen(true);
+      setStatus(`${cards.length} carte(s) ajoutée(s) à la session batch.`);
+    }
+  }, [scanMode, router]);
 
   async function scan() {
     if (!cameraRef.current || scanning) {
@@ -261,6 +277,25 @@ export default function ScannerPage() {
     URL.revokeObjectURL(url);
   };
 
+  // Fonction helper pour identifier une image via l'API (utilisée par le ScannerCamera intégré)
+  const handleIdentifyCardByImage = async (imageBase64: string): Promise<PokemonCard | null> => {
+    try {
+      const response = await fetch("/api/scan", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ imageBase64 }),
+      });
+      const resData = await response.json();
+      if (resData.success && resData.data) {
+        const cards = await searchCardsFromScan(resData.data);
+        return cards?.[0] || null;
+      }
+    } catch (e) {
+      console.error("Erreur d'identification image", e);
+    }
+    return null;
+  };
+
   return (
     <>
       <Navbar />
@@ -283,7 +318,7 @@ export default function ScannerPage() {
               </p>
             </div>
 
-            {/* Commutateur Mono / Multi & Bouton Quad Scan V5 */}
+            {/* Commutateur Mono / Multi */}
             <div className="flex items-center gap-1.5 bg-black/60 p-1 rounded-xl border border-zinc-800/80 w-full max-w-xs mt-1">
               <button
                 onClick={() => setScanMode("single")}
@@ -305,19 +340,17 @@ export default function ScannerPage() {
               >
                 <Layers className="w-3.5 h-3.5" /> Batch ({batchList.length})
               </button>
-              <button
-                onClick={() => setIsQuadModalOpen(true)}
-                className="py-2 px-3 rounded-lg text-[10px] font-black uppercase tracking-wider bg-amber-500/20 border border-amber-500/40 text-amber-400 hover:bg-amber-500/30 transition flex items-center justify-center gap-1.5"
-                title="Scan Groupé 4 Cartes (Grille 2x2)"
-              >
-                <Grid className="w-3.5 h-3.5" /> 4x
-              </button>
             </div>
           </section>
 
-          {/* Zone Vidéo & Scanner Camera */}
+          {/* Zone Vidéo & Scanner Camera (Gère le mode caméra + modale 4 cartes en interne) */}
           <div className="relative aspect-[9/16] overflow-hidden rounded-2xl border border-zinc-900 bg-black shadow-2xl">
-            <ScannerCamera ref={cameraRef} onReady={handleCameraReady} />
+            <ScannerCamera
+              ref={cameraRef}
+              onReady={handleCameraReady}
+              onCardsIdentified={handleCardsIdentified}
+              identifyCardByImage={handleIdentifyCardByImage}
+            />
             <ScannerOverlay
               scanning={scanning}
               hasResult={Boolean(detectedCard)}
@@ -493,33 +526,6 @@ export default function ScannerPage() {
             )}
           </div>
         )}
-
-        {/* 📸 MODALE DU QUAD SCANNER (V5) */}
-        <QuadScannerModal
-          isOpen={isQuadModalOpen}
-          onClose={() => setIsQuadModalOpen(false)}
-          onCardsIdentified={(cards) => {
-            logger.scan(`Scan groupé 4 cartes validé : ${cards.length} cartes identifiées.`);
-            setIsQuadModalOpen(false);
-          }}
-          identifyCardByImage={async (imageBase64) => {
-            try {
-              const response = await fetch("/api/scan", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ imageBase64 }),
-              });
-              const resData = await response.json();
-              if (resData.success && resData.data) {
-                const cards = await searchCardsFromScan(resData.data);
-                return cards?.[0] || null;
-              }
-            } catch (e) {
-              console.error("Erreur sur un crop du Quad Scan", e);
-            }
-            return null;
-          }}
-        />
       </main>
     </>
   );
