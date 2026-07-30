@@ -81,7 +81,7 @@ const ScannerCamera = forwardRef<ScannerCameraHandle, ScannerCameraProps>(
               slot.status = "error";
               slot.errorMsg = "Non reconnue";
             }
-          } catch (e) {
+          } catch {
             slot.status = "error";
             slot.errorMsg = "Erreur IA";
           }
