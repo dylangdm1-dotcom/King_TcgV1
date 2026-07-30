@@ -118,7 +118,7 @@ export default function ScannerPage() {
       logger.gemini("Résultat de l'analyse Gemini", resData);
 
       if (!resData.success || !resData.data) {
-        setStatus("Carte non reconnue.");
+        setStatus(resData.error || "Carte non reconnue.");
         logger.warn("GEMINI", "Reconnaissance échouée ou incomplète.");
         triggerHaptic([100, 50, 100]);
         return;
@@ -149,7 +149,7 @@ export default function ScannerPage() {
         setName: setName ?? null,
         setSymbol: null,
         cardType: null,
-        language: language ?? null,
+        language: language ?? "fr",
         rarity: rarity ?? null,
         variant: variant ?? null,
         isFullArt: false,
@@ -166,24 +166,24 @@ export default function ScannerPage() {
         confidence: scanResult.confidence,
       });
 
-      setStatus(`IA : ${scanResult.cardName}`);
+      setStatus(`IA : ${scanResult.cardName} (${scanResult.language.toUpperCase()})`);
 
       /* 3 - Vérification du Cache local V3.6 */
-      const cacheKey = `scan_${scanResult.cardName}_${scanResult.cardNumber || "no_num"}_${scanResult.setName || "no_set"}`;
+      const cacheKey = `scan_${scanResult.cardName}_${scanResult.cardNumber || "no_num"}_${scanResult.setName || "no_set"}_${scanResult.language}`;
       let bestCard: PokemonCard | null = getCachedCardData<PokemonCard>(cacheKey) || null;
 
       if (bestCard) {
         logger.cache("Carte directement récupérée du cache V3.6 !", bestCard);
       } else {
-        /* 4 - Recherche API Pokémon TCG */
-        setStatus("Recherche dans la base TCG...");
-        logger.api("Lancement de la recherche TCG à partir du résultat Gemini", scanResult);
+        /* 4 - Recherche API Pokémon TCG ciblée sur la langue d'origine */
+        setStatus(`Recherche TCG (${scanResult.language.toUpperCase()})...`);
+        logger.api("Lancement de la recherche TCG multilingue", scanResult);
 
-        const cards = await searchCardsFromScan(scanResult);
+        const cards = await searchCardsFromScan(scanResult, scanResult.language);
 
         if (!cards || cards.length === 0) {
           setStatus(`Carte détectée (${scanResult.cardName}) mais introuvable.`);
-          logger.warn("API", `Aucun résultat trouvé pour ${scanResult.cardName}`);
+          logger.warn("API", `Aucun résultat trouvé pour ${scanResult.cardName} en ${scanResult.language}`);
           triggerHaptic([100, 50, 100]);
           return;
         }
@@ -346,7 +346,7 @@ export default function ScannerPage() {
             <div className="rounded-xl border border-zinc-800 bg-neutral-900/80 p-3 flex items-center justify-between">
               <div>
                 <div className="text-xs font-black uppercase text-white">
-                  {detectedCard.name}
+                  {detectedCard.name} {detectedCard.language ? `(${detectedCard.language.toUpperCase()})` : ""}
                 </div>
                 <div className="text-[10px] text-zinc-400 flex items-center gap-2 mt-0.5">
                   {detectedCard.number && <span>N° : {detectedCard.number}</span>}
