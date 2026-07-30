@@ -1,3 +1,5 @@
+// components/scanner/ScannerOverlay.tsx
+
 "use client";
 
 import { CheckCircle2, Loader2, ScanLine } from "lucide-react";
