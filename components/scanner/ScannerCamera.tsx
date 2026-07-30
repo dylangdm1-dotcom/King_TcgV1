@@ -9,8 +9,9 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import QuadScannerModal from "./QuadScannerModal";
 import type { PokemonCard } from "../lib/types";
+import { createQuadScanSession, processQuadScan, type QuadScanSession } from "../lib/scanner/quadScanner";
+import { X, Sparkles, Check, AlertCircle, Loader2 } from "lucide-react";
 
 export interface ScannerCameraHandle {
   getVideo: () => HTMLVideoElement | null;
@@ -19,7 +20,6 @@ export interface ScannerCameraHandle {
 interface ScannerCameraProps {
   onReady?: () => void;
   onCardsIdentified?: (cards: PokemonCard[]) => void;
-  // Fonction externe optionnelle pour identifier un crop unique par IA
   identifyCardByImage?: (imageBase64: string) => Promise<PokemonCard | null>;
 }
 
@@ -28,10 +28,11 @@ const ScannerCamera = forwardRef<ScannerCameraHandle, ScannerCameraProps>(
     const videoRef = useRef<HTMLVideoElement>(null);
     const onReadyRef = useRef(onReady);
 
-    // État pour afficher ou masquer la modale du Quad Scanner (V5)
-    const [isQuadModalOpen, setIsQuadModalOpen] = useState(false);
+    const [isQuadOpen, setIsQuadOpen] = useState(false);
+    const [quadSession, setQuadSession] = useState<QuadScanSession | null>(null);
+    const [isProcessing, setIsProcessing] = useState(false);
+    const [identifiedCards, setIdentifiedCards] = useState<PokemonCard[]>([]);
 
-    // Mettre à jour la ref pour toujours avoir la dernière version sans redéclencher l'effet
     useEffect(() => {
       onReadyRef.current = onReady;
     }, [onReady]);
@@ -40,29 +41,56 @@ const ScannerCamera = forwardRef<ScannerCameraHandle, ScannerCameraProps>(
       getVideo: () => videoRef.current,
     }));
 
-    // Capture instantanée du flux vidéo actuel sous forme d'image Base64 pour le Quad Scanner
-    const handleCaptureQuadImageFromVideo = (): string | null => {
+    const handleOpenQuadScanner = async () => {
       const video = videoRef.current;
-      if (!video) return null;
+      if (!video) return;
 
       const canvas = document.createElement("canvas");
       canvas.width = video.videoWidth || 1280;
       canvas.height = video.videoHeight || 720;
       const ctx = canvas.getContext("2d");
-      if (!ctx) return null;
+      if (!ctx) return;
 
       ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-      return canvas.toDataURL("image/jpeg", 0.90);
-    };
+      const base64Image = canvas.toDataURL("image/jpeg", 0.90);
 
-    const handleOpenQuadScanner = () => {
-      const base64Image = handleCaptureQuadImageFromVideo();
-      if (base64Image) {
-        // On peut stocker ou passer l'image directement, ou ouvrir la modale qui permettra d'importer/capturer
-        setIsQuadModalOpen(true);
-      } else {
-        setIsQuadModalOpen(true);
+      setIsQuadOpen(true);
+      setIsProcessing(true);
+      setIdentifiedCards([]);
+
+      const newSession = createQuadScanSession(base64Image);
+      const processed = await processQuadScan(newSession);
+      setQuadSession(processed);
+
+      const foundCards: PokemonCard[] = [];
+      const updatedSlots = [...processed.slots];
+
+      for (let i = 0; i < updatedSlots.length; i++) {
+        const slot = updatedSlots[i];
+        if (slot.croppedImageUri && identifyCardByImage) {
+          slot.status = "processing";
+          setQuadSession({ ...processed, slots: updatedSlots });
+
+          try {
+            const card = await identifyCardByImage(slot.croppedImageUri);
+            if (card) {
+              slot.status = "success";
+              slot.cardId = card.id;
+              foundCards.push(card);
+            } else {
+              slot.status = "error";
+              slot.errorMsg = "Non reconnue";
+            }
+          } catch (e) {
+            slot.status = "error";
+            slot.errorMsg = "Erreur IA";
+          }
+          setQuadSession({ ...processed, slots: updatedSlots });
+        }
       }
+
+      setIdentifiedCards(foundCards);
+      setIsProcessing(false);
     };
 
     useEffect(() => {
@@ -72,7 +100,6 @@ const ScannerCamera = forwardRef<ScannerCameraHandle, ScannerCameraProps>(
       async function startCamera() {
         try {
           let stream: MediaStream;
-
           try {
             stream = await navigator.mediaDevices.getUserMedia({
               video: {
@@ -83,8 +110,7 @@ const ScannerCamera = forwardRef<ScannerCameraHandle, ScannerCameraProps>(
               },
               audio: false,
             });
-          } catch (firstErr) {
-            console.warn("Échec configuration caméra HD, fallback vers config standard...", firstErr);
+          } catch {
             stream = await navigator.mediaDevices.getUserMedia({
               video: { facingMode: "environment" },
               audio: false,
@@ -98,34 +124,20 @@ const ScannerCamera = forwardRef<ScannerCameraHandle, ScannerCameraProps>(
 
           activeStream = stream;
           const video = videoRef.current;
-
           if (video) {
             video.srcObject = stream;
-
             video.onloadedmetadata = async () => {
               if (!isMounted) return;
-
               try {
                 await video.play();
-
-                const track = activeStream?.getVideoTracks()[0];
-                if (track) {
-                  const capabilities = (track.getCapabilities?.() || {}) as Record<string, any>;
-                  if ("focusMode" in capabilities) {
-                    await track.applyConstraints({
-                      advanced: [{ focusMode: "continuous" } as any],
-                    });
-                  }
-                }
               } catch (e) {
-                console.error("Erreur lecture flux vidéo :", e);
+                console.error(e);
               }
-
               onReadyRef.current?.();
             };
           }
         } catch (err) {
-          console.error("Erreur d'accès à la caméra :", err);
+          console.error(err);
         }
       }
 
@@ -149,7 +161,6 @@ const ScannerCamera = forwardRef<ScannerCameraHandle, ScannerCameraProps>(
           className="h-full w-full object-cover"
         />
 
-        {/* 🚀 Bouton Flottant V5 : Activer le Scan Groupé (4 Cartes) par-dessus la caméra */}
         <div className="absolute bottom-6 left-0 right-0 flex justify-center z-20 px-4">
           <button
             onClick={handleOpenQuadScanner}
@@ -159,22 +170,58 @@ const ScannerCamera = forwardRef<ScannerCameraHandle, ScannerCameraProps>(
           </button>
         </div>
 
-        {/* Modale du Quad Scanner connectée */}
-        {isQuadModalOpen && (
-          <QuadScannerModal
-            isOpen={isQuadModalOpen}
-            onClose={() => setIsQuadModalOpen(false)}
-            onCardsIdentified={(cards) => {
-              onCardsIdentified?.(cards);
-              setIsQuadModalOpen(false);
-            }}
-            identifyCardByImage={async (imgUri) => {
-              if (identifyCardByImage) {
-                return await identifyCardByImage(imgUri);
-              }
-              return null;
-            }}
-          />
+        {isQuadOpen && (
+          <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
+            <div className="bg-neutral-900 border border-zinc-800 w-full max-w-lg rounded-2xl overflow-hidden shadow-2xl flex flex-col max-h-[90vh]">
+              <div className="px-5 py-4 border-b border-zinc-800 flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <Sparkles className="w-4 h-4 text-amber-400" />
+                  <h3 className="text-sm font-black uppercase text-white">Scan Groupé (4 Cartes)</h3>
+                </div>
+                <button onClick={() => setIsQuadOpen(false)} className="p-1 rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-800">
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              <div className="p-5 flex-1 overflow-y-auto space-y-4">
+                {quadSession && (
+                  <div className="grid grid-cols-2 gap-3">
+                    {quadSession.slots.map((slot) => (
+                      <div key={slot.slot} className="bg-neutral-950 border border-zinc-800 rounded-xl p-3 flex flex-col items-center gap-2">
+                        <span className="text-[10px] font-black uppercase text-zinc-400">{slot.label}</span>
+                        {slot.croppedImageUri && (
+                          <div className="relative w-20 h-28 rounded-lg overflow-hidden border border-zinc-800 bg-black">
+                            <img src={slot.croppedImageUri} alt={slot.label} className="w-full h-full object-cover" />
+                          </div>
+                        )}
+                        <div className="flex items-center gap-1 text-[10px] font-bold">
+                          {slot.status === "processing" && <><Loader2 className="w-3 h-3 text-cyan-400 animate-spin" /><span className="text-cyan-400">Analyse...</span></>}
+                          {slot.status === "success" && <><Check className="w-3 h-3 text-emerald-400" /><span className="text-emerald-400">Trouvée</span></>}
+                          {slot.status === "error" && <><AlertCircle className="w-3 h-3 text-rose-400" /><span className="text-rose-400">{slot.errorMsg}</span></>}
+                          {slot.status === "empty" && <span className="text-zinc-600">En attente</span>}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {identifiedCards.length > 0 && !isProcessing && (
+                <div className="p-4 border-t border-zinc-800 bg-neutral-950 flex justify-between items-center">
+                  <span className="text-xs font-bold text-emerald-400">{identifiedCards.length} carte(s) prête(s)</span>
+                  <button
+                    onClick={() => {
+                      onCardsIdentified?.(identifiedCards);
+                      setIsQuadOpen(false);
+                    }}
+                    className="bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold px-5 py-2.5 rounded-xl text-xs uppercase tracking-wider transition"
+                  >
+                    Valider et Ajouter
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
         )}
       </div>
     );
