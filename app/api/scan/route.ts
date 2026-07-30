@@ -2,10 +2,30 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import { z } from "zod";
 
 // 🚀 V3.6 Integrations
 import { logger } from "@/lib/cache/logger";
 import { getCachedCardData, setCachedCardData } from "@/lib/pokemonCache";
+
+// Schéma Zod strict basé sur la structure attendue par l'application
+const CardScanResultSchema = z.object({
+  cardName: z.string().nullable().default(null),
+  pokemonName: z.string().nullable().default(null),
+  cardType: z.string().nullable().default(null),
+  language: z.string().nullable().default("fr"),
+  cardNumber: z.string().nullable().default(null),
+  setName: z.string().nullable().default(null),
+  setSymbol: z.string().nullable().default(null),
+  rarity: z.string().nullable().default(null),
+  variant: z.string().nullable().default(null),
+  isFullArt: z.boolean().default(false),
+  isSecretRare: z.boolean().default(false),
+  possibleNames: z.array(z.string()).default([]),
+  confidence: z.number().min(0).max(100).default(0),
+});
+
+export type CardScanResult = z.infer<typeof CardScanResultSchema>;
 
 export async function POST(req: NextRequest) {
   const startTime = Date.now();
@@ -161,7 +181,7 @@ Format obligatoire strict :
     }
 
     /*
-      3 - Parsing de la Réponse
+      3 - Parsing et Validation Zod de la Réponse
     */
     let rawResponse = result.response.text();
 
@@ -173,8 +193,24 @@ Format obligatoire strict :
     let parsedData;
 
     try {
-      parsedData = JSON.parse(rawResponse);
-    } catch {
+      const jsonParsed = JSON.parse(rawResponse);
+      
+      // Validation stricte et nettoyage via le schéma Zod
+      const validationResult = CardScanResultSchema.safeParse(jsonParsed);
+
+      if (!validationResult.success) {
+        logger.error("GEMINI", "Échec de la validation Zod sur la réponse de l'IA", validationResult.error.format());
+        return NextResponse.json(
+          {
+            error: "La structure renvoyée par l'IA ne correspond pas au format attendu.",
+            rawResponse,
+          },
+          { status: 422 }
+        );
+      }
+
+      parsedData = validationResult.data;
+    } catch (err) {
       logger.error("GEMINI", "Réponse JSON brute invalide de Gemini", rawResponse);
       return NextResponse.json(
         {
@@ -186,27 +222,6 @@ Format obligatoire strict :
         }
       );
     }
-
-    const defaults = {
-      cardName: null,
-      pokemonName: null,
-      cardType: null,
-      language: "fr",
-      cardNumber: null,
-      setName: null,
-      setSymbol: null,
-      rarity: null,
-      variant: null,
-      isFullArt: false,
-      isSecretRare: false,
-      possibleNames: [],
-      confidence: 0,
-    };
-
-    parsedData = {
-      ...defaults,
-      ...parsedData,
-    };
 
     // Vérification de la confiance de reconnaissance
     if (parsedData.confidence < 60 || (!parsedData.cardName && !parsedData.pokemonName)) {
