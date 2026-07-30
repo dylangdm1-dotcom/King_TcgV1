@@ -204,11 +204,10 @@ export default function ScannerPage() {
         return;
       }
 
-      // Constante locale non-null pour garantir le typage TypeScript dans les callbacks
       const card = bestCard;
 
       // 🎉 Succès de détection !
-      triggerHaptic(60); // Vibration courte de confirmation
+      triggerHaptic(60);
       setStatus(`Trouvé : ${card.name} (${card.number || "N/A"})`);
 
       // Traitement selon le mode sélectionné
@@ -218,7 +217,6 @@ export default function ScannerPage() {
           router.push(`/card/${card.id}`);
         }, 400);
       } else {
-        // Mode Batch : Ajout à la liste et ouverture automatique du drawer
         const batchItem: ScannedBatchItem = {
           id: `${card.id}_${Date.now()}`,
           card: card,
@@ -240,19 +238,16 @@ export default function ScannerPage() {
     }
   }
 
-  // Suppression d'un item du Batch
   const removeBatchItem = (id: string) => {
     setBatchList((prev) => prev.filter((item) => item.id !== id));
   };
 
-  // Vidage complet de la session
   const clearBatch = () => {
     if (confirm("Voulez-vous réinitialiser toute la session de scan ?")) {
       setBatchList([]);
     }
   };
 
-  // Export de la session en JSON
   const exportBatch = () => {
     const dataStr = JSON.stringify(batchList, null, 2);
     const blob = new Blob([dataStr], { type: "application/json" });
@@ -268,46 +263,51 @@ export default function ScannerPage() {
     <>
       <Navbar />
 
-      <main className="min-h-screen bg-black text-white pb-32">
-        <div className="mx-auto max-w-xl space-y-4 px-4 py-4">
+      <main className="min-h-screen bg-neutral-950 text-white pb-32 selection:bg-cyan-500/20">
+        <div className="mx-auto max-w-xl space-y-4 px-4 py-5">
           
-          {/* Header & Selecteur de Mode */}
-          <section className="rounded-xl border border-zinc-900 bg-neutral-950 p-3 text-center shadow-xl flex flex-col items-center gap-2">
-            <div className="flex items-center gap-1.5 text-cyan-400 text-[10px] font-black uppercase tracking-widest">
-              <Sparkles className="w-3.5 h-3.5" /> Gemini Vision V3.6
+          {/* Header & Sélecteur de Mode */}
+          <section className="rounded-2xl border border-zinc-900 bg-neutral-900/40 p-4 text-center shadow-xl flex flex-col items-center gap-3">
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-[9px] font-black uppercase tracking-widest">
+              <Sparkles className="w-3 h-3" /> Gemini Vision v4.00
             </div>
             
-            <h1 className="text-base font-black uppercase tracking-wider">
-              Scanner de Carte Pokémon
-            </h1>
+            <div>
+              <h1 className="text-lg font-black uppercase tracking-tight">
+                Scanner de Cartes
+              </h1>
+              <p className="text-[11px] text-zinc-400 mt-0.5">
+                Reconnaissance instantanée par intelligence artificielle.
+              </p>
+            </div>
 
             {/* Commutateur Mono / Multi */}
-            <div className="flex items-center gap-1 bg-neutral-900 p-1 rounded-lg border border-zinc-800 w-full max-w-xs mt-1">
+            <div className="flex items-center gap-1.5 bg-black/60 p-1 rounded-xl border border-zinc-800/80 w-full max-w-xs mt-1">
               <button
                 onClick={() => setScanMode("single")}
-                className={`flex-1 py-1.5 rounded text-[10px] font-black uppercase tracking-wider transition flex items-center justify-center gap-1.5 ${
+                className={`flex-1 py-2 rounded-lg text-[10px] font-black uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 ${
                   scanMode === "single"
                     ? "bg-cyan-500 text-black shadow-md shadow-cyan-500/20"
                     : "text-zinc-400 hover:text-white"
                 }`}
               >
-                <Zap className="w-3 h-3" /> Mono-scan
+                <Zap className="w-3.5 h-3.5" /> Mono-scan
               </button>
               <button
                 onClick={() => setScanMode("batch")}
-                className={`flex-1 py-1.5 rounded text-[10px] font-black uppercase tracking-wider transition flex items-center justify-center gap-1.5 ${
+                className={`flex-1 py-2 rounded-lg text-[10px] font-black uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 ${
                   scanMode === "batch"
                     ? "bg-cyan-500 text-black shadow-md shadow-cyan-500/20"
                     : "text-zinc-400 hover:text-white"
                 }`}
               >
-                <Layers className="w-3 h-3" /> Mode Batch ({batchList.length})
+                <Layers className="w-3.5 h-3.5" /> Batch ({batchList.length})
               </button>
             </div>
           </section>
 
           {/* Zone Vidéo & Scanner Camera */}
-          <div className="relative aspect-[9/16] overflow-hidden rounded-xl border border-zinc-900 bg-neutral-950 shadow-2xl">
+          <div className="relative aspect-[9/16] overflow-hidden rounded-2xl border border-zinc-900 bg-black shadow-2xl">
             <ScannerCamera ref={cameraRef} onReady={handleCameraReady} />
             <ScannerOverlay
               scanning={scanning}
@@ -320,7 +320,7 @@ export default function ScannerPage() {
           <button
             onClick={scan}
             disabled={!ready || scanning}
-            className="w-full rounded-xl bg-cyan-500 py-4 text-base font-black uppercase tracking-widest text-black disabled:opacity-40 transition active:scale-[0.98] shadow-lg shadow-cyan-500/10 flex items-center justify-center gap-2"
+            className="w-full rounded-xl bg-cyan-500 py-4 text-sm font-black uppercase tracking-widest text-black disabled:opacity-40 transition-all active:scale-[0.98] shadow-lg shadow-cyan-500/15 flex items-center justify-center gap-2"
           >
             {scanning ? (
               <>Analyse IA en cours...</>
@@ -332,9 +332,9 @@ export default function ScannerPage() {
           </button>
 
           {/* Console de Statut */}
-          <div className="rounded-xl border border-zinc-900 bg-neutral-950/60 p-3 text-center">
-            <span className="text-[10px] uppercase font-bold tracking-widest text-zinc-500 block">
-              Statut du Scan
+          <div className="rounded-xl border border-zinc-900 bg-neutral-900/40 p-3.5 text-center">
+            <span className="text-[9px] uppercase font-black tracking-widest text-zinc-500 block">
+              État du système
             </span>
             <p className="mt-1 text-xs font-bold text-cyan-400">
               {status}
@@ -343,18 +343,18 @@ export default function ScannerPage() {
 
           {/* Aperçu rapide de la dernière carte détectée */}
           {detectedCard && (
-            <div className="rounded-xl border border-zinc-800 bg-neutral-900/80 p-3 flex items-center justify-between">
+            <div className="rounded-xl border border-zinc-800 bg-neutral-900/80 p-3.5 flex items-center justify-between animate-fadeIn">
               <div>
                 <div className="text-xs font-black uppercase text-white">
                   {detectedCard.name} {detectedCard.language ? `(${detectedCard.language.toUpperCase()})` : ""}
                 </div>
-                <div className="text-[10px] text-zinc-400 flex items-center gap-2 mt-0.5">
+                <div className="text-[10px] text-zinc-400 flex items-center gap-2 mt-0.5 font-medium">
                   {detectedCard.number && <span>N° : {detectedCard.number}</span>}
                   {detectedCard.set && <span>• {detectedCard.set}</span>}
                 </div>
               </div>
               {detectedCard.confidence && (
-                <span className="text-[10px] font-black px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
+                <span className="text-[10px] font-black px-2 py-1 rounded-lg bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 tabular-nums">
                   {Math.round(detectedCard.confidence * 100)}%
                 </span>
               )}
@@ -372,18 +372,18 @@ export default function ScannerPage() {
             {/* Poignée d'ouverture / fermeture du Tiroir */}
             <button
               onClick={() => setIsDrawerOpen(!isDrawerOpen)}
-              className="w-full h-14 bg-neutral-900/90 border-b border-zinc-800/80 px-4 flex items-center justify-between text-xs font-black uppercase tracking-wider text-white"
+              className="w-full h-14 bg-neutral-900/90 border-b border-zinc-800 px-4 flex items-center justify-between text-xs font-black uppercase tracking-wider text-white active:bg-neutral-800"
             >
               <div className="flex items-center gap-2">
                 <Layers className="w-4 h-4 text-cyan-400" />
                 <span>Session de Scan ({batchList.length})</span>
               </div>
               <div className="flex items-center gap-2 text-zinc-400">
-                <span className="text-[10px] font-normal">
+                <span className="text-[10px] font-bold uppercase">
                   {isDrawerOpen ? "Masquer" : "Dérouler"}
                 </span>
                 {isDrawerOpen ? (
-                  <ChevronDown className="w-4 h-4" />
+                  <ChevronDown className="w-4 h-4 text-cyan-400" />
                 ) : (
                   <ChevronUp className="w-4 h-4" />
                 )}
@@ -395,29 +395,29 @@ export default function ScannerPage() {
               <div className="p-4 h-[calc(65vh-3.5rem)] flex flex-col justify-between overflow-hidden">
                 {/* Entête d'actions Batch */}
                 {batchList.length > 0 && (
-                  <div className="flex items-center justify-between mb-3 pb-2 border-b border-zinc-900">
+                  <div className="flex items-center justify-between mb-3 pb-2.5 border-b border-zinc-900">
                     <button
                       onClick={exportBatch}
-                      className="text-[10px] font-bold uppercase tracking-wider text-cyan-400 hover:text-cyan-300 flex items-center gap-1 bg-cyan-500/10 px-2.5 py-1.5 rounded border border-cyan-500/20"
+                      className="text-[10px] font-black uppercase tracking-wider text-cyan-400 hover:text-cyan-300 flex items-center gap-1.5 bg-cyan-500/10 px-3 py-1.5 rounded-lg border border-cyan-500/20 transition"
                     >
-                      <Download className="w-3 h-3" /> Exporter (.json)
+                      <Download className="w-3.5 h-3.5" /> Exporter (.json)
                     </button>
                     <button
                       onClick={clearBatch}
-                      className="text-[10px] font-bold uppercase tracking-wider text-red-400 hover:text-red-300 flex items-center gap-1 bg-red-500/10 px-2.5 py-1.5 rounded border border-red-500/20"
+                      className="text-[10px] font-black uppercase tracking-wider text-rose-400 hover:text-rose-300 flex items-center gap-1.5 bg-rose-500/10 px-3 py-1.5 rounded-lg border border-rose-500/20 transition"
                     >
-                      <Trash2 className="w-3 h-3" /> Réinitialiser
+                      <Trash2 className="w-3.5 h-3.5" /> Vider
                     </button>
                   </div>
                 )}
 
                 {/* Liste déroulante des cartes scannées */}
-                <div className="flex-1 overflow-y-auto space-y-2 pr-1">
+                <div className="flex-1 overflow-y-auto space-y-2.5 pr-1">
                   {batchList.length === 0 ? (
                     <div className="h-full flex flex-col items-center justify-center text-center text-zinc-600 space-y-2">
-                      <Layers className="w-8 h-8 opacity-30" />
-                      <p className="text-xs font-medium">
-                        Aucune carte scannée dans cette session.
+                      <Layers className="w-8 h-8 opacity-20 text-cyan-400" />
+                      <p className="text-xs font-bold uppercase tracking-wider text-zinc-500">
+                        Aucun actif dans la session
                       </p>
                     </div>
                   ) : (
@@ -426,35 +426,35 @@ export default function ScannerPage() {
                       return (
                         <div
                           key={item.id}
-                          className="flex items-center justify-between p-2.5 bg-neutral-900/90 border border-zinc-800/80 rounded-lg hover:border-cyan-500/40 transition"
+                          className="flex items-center justify-between p-3 bg-neutral-900/60 border border-zinc-900 rounded-xl hover:border-zinc-800 transition"
                         >
-                          <div className="flex items-center gap-3">
+                          <div className="flex items-center gap-3 min-w-0">
                             {imageUrl ? (
-                              <div className="relative w-9 h-12 rounded overflow-hidden border border-zinc-800 bg-black flex-shrink-0">
+                              <div className="relative w-8 h-11 rounded bg-black overflow-hidden border border-zinc-800 flex-shrink-0">
                                 <Image
                                   src={imageUrl}
                                   alt={item.card.name}
                                   fill
-                                  className="object-cover"
+                                  className="object-contain"
                                   unoptimized
                                 />
                               </div>
                             ) : (
-                              <div className="w-9 h-12 rounded border border-zinc-800 bg-neutral-800 flex items-center justify-center text-[9px] text-zinc-500 flex-shrink-0">
+                              <div className="w-8 h-11 rounded border border-zinc-800 bg-neutral-900 flex items-center justify-center text-[9px] text-zinc-600 flex-shrink-0">
                                 N/A
                               </div>
                             )}
 
-                            <div>
-                              <div className="text-xs font-black text-white line-clamp-1">
+                            <div className="min-w-0">
+                              <div className="text-xs font-black text-white truncate">
                                 {item.card.name}
                               </div>
-                              <div className="text-[10px] text-zinc-400 flex items-center gap-1.5 mt-0.5">
+                              <div className="text-[10px] text-zinc-400 flex items-center gap-1.5 mt-0.5 font-medium tabular-nums">
                                 <span>N° {item.card.number || "---"}</span>
                                 {item.card.rarity && (
                                   <>
                                     <span>•</span>
-                                    <span className="text-cyan-400 font-bold">
+                                    <span className="text-cyan-400 font-bold truncate">
                                       {item.card.rarity}
                                     </span>
                                   </>
@@ -463,17 +463,17 @@ export default function ScannerPage() {
                             </div>
                           </div>
 
-                          <div className="flex items-center gap-2">
+                          <div className="flex items-center gap-1 flex-shrink-0">
                             <button
                               onClick={() => router.push(`/card/${item.card.id}`)}
-                              className="p-1.5 rounded text-zinc-400 hover:text-cyan-400 hover:bg-neutral-800 transition"
-                              title="Voir la fiche complète"
+                              className="p-2 rounded-lg text-zinc-400 hover:text-cyan-400 hover:bg-neutral-800 transition"
+                              title="Voir la fiche"
                             >
                               <ExternalLink className="w-4 h-4" />
                             </button>
                             <button
                               onClick={() => removeBatchItem(item.id)}
-                              className="p-1.5 rounded text-zinc-500 hover:text-red-400 hover:bg-neutral-800 transition"
+                              className="p-2 rounded-lg text-zinc-500 hover:text-rose-400 hover:bg-neutral-800 transition"
                               title="Supprimer"
                             >
                               <Trash2 className="w-4 h-4" />
