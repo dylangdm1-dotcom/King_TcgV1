@@ -587,7 +587,7 @@ export async function getCardById(id: string): Promise<PokemonCard | null> {
       const card = normalizeTCGdexCard(data, lang);
 
       cache.set(targetId, card);
-      saveBrowserCard([card]);
+      saveBrowserCache([card]);
       return card;
     } catch (error) {
       return null;
