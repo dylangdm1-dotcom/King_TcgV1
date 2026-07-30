@@ -1,4 +1,4 @@
-// components/ScannerCamera.tsx
+// components/scanner/ScannerCamera.tsx
 
 "use client";
 
@@ -9,8 +9,8 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import type { PokemonCard } from "../lib/types";
-import { createQuadScanSession, processQuadScan, type QuadScanSession } from "../lib/scanner/quadScanner";
+import type { PokemonCard } from "../../lib/types";
+import { createQuadScanSession, processQuadScan, type QuadScanSession } from "../../lib/scanner/quadScanner";
 import { X, Sparkles, Check, AlertCircle, Loader2 } from "lucide-react";
 
 export interface ScannerCameraHandle {
