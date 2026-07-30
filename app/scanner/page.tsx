@@ -19,17 +19,17 @@ import {
   Grid,
 } from "lucide-react";
 
-import ScannerCamera from "../../components/scanner/ScannerCamera";
-import ScannerOverlay from "../../components/scanner/ScannerOverlay";
-import QuadScannerModal from "../../components/QuadScannerModal"; // <-- Intégration V5 4 cartes
-import { captureFrame } from "../../lib/scanner/capture";
-import { searchCardsFromScan } from "../../lib/pokemon";
-import Navbar from "../../components/Navbar";
+import ScannerCamera from "@/components/scanner/ScannerCamera";
+import ScannerOverlay from "@/components/scanner/ScannerOverlay";
+import QuadScannerModal from "@/components/scanner/QuadScannerModal"; // 🛠️ Corrigé (chemin relatif ajusté vers components/scanner/)
+import { captureFrame } from "@/lib/scanner/capture";
+import { searchCardsFromScan } from "@/lib/pokemon";
+import Navbar from "@/components/Navbar";
 
 // 🚀 V3.6 Integrations
 import { logger } from "@/lib/cache/logger";
 import { getCachedCardData, setCachedCardData } from "@/lib/pokemonCache";
-import type { PokemonCard } from "../../lib/types";
+import type { PokemonCard } from "@/lib/types";
 
 interface ScannerCameraHandle {
   getVideo: () => HTMLVideoElement | null;
@@ -499,12 +499,10 @@ export default function ScannerPage() {
           isOpen={isQuadModalOpen}
           onClose={() => setIsQuadModalOpen(false)}
           onCardsIdentified={(cards) => {
-            // Ajout des 4 cartes reconnues à la collection ou gestion selon vos besoins
             logger.scan(`Scan groupé 4 cartes validé : ${cards.length} cartes identifiées.`);
             setIsQuadModalOpen(false);
           }}
           identifyCardByImage={async (imageBase64) => {
-            // Appel de l'API de scan unitaire pour chaque quadrant découpé
             try {
               const response = await fetch("/api/scan", {
                 method: "POST",
