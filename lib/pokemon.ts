@@ -99,8 +99,7 @@ function normalize(card: any): PokemonCard {
 
   // Application du secours anti-zéro si aucun prix n'est retourné par les API
   if (rawComputed === 0) {
-    rawComputed = getFallbackPriceByRarity(card.rarity);
-    logger.warn("PRICING", `Aucun prix trouvé pour la carte "${card.name}" (${card.id}), application du fallback rareté (${card.rarity || 'Inconnue'}) : ${rawComputed}€`);
+    rawComputed = getFallbackPriceByRarity(card.rarity);logger.warn("API", `Aucun prix trouvé pour la carte "${card.name}" (${card.id}), application du fallback rareté (${card.rarity || 'Inconnue'}) : ${rawComputed}€`);
   }
 
   const computedPrice = safePrice(rawComputed);
