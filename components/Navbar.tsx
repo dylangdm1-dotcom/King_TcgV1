@@ -18,14 +18,14 @@ export default function Navbar() {
 
   return (
     <nav className="sticky top-0 z-50 border-b border-zinc-900 bg-neutral-950/80 backdrop-blur-md">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3.5">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 py-3.5">
         
         {/* Section Gauche : Bouton Retour + Logo */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3 sm:gap-4">
           {pathname !== "/" && (
             <button
               onClick={() => router.back()}
-              className="flex h-10 w-10 items-center justify-center rounded-xl border border-zinc-800 bg-zinc-900/50 text-zinc-400 transition-all hover:border-zinc-700 hover:bg-zinc-800 hover:text-white"
+              className="flex h-10 w-10 items-center justify-center rounded-xl border border-zinc-800 bg-neutral-900/50 text-zinc-400 transition-all hover:border-zinc-700 hover:bg-neutral-900 hover:text-white cursor-pointer"
               title="Retour"
             >
               <ArrowLeft className="w-5 h-5" />
@@ -33,11 +33,11 @@ export default function Navbar() {
           )}
 
           <Link href="/" className="group flex items-center gap-3 select-none">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-zinc-800 bg-zinc-900/30 text-xl shadow-md transition-all duration-300 group-hover:scale-105 group-hover:border-cyan-500/30">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-zinc-800 bg-neutral-900/40 text-xl shadow-lg transition-all duration-300 group-hover:scale-105 group-hover:border-cyan-500/30">
               👑
             </div>
             <div>
-              <p className="text-lg font-black tracking-tight text-white leading-tight">
+              <p className="text-base sm:text-lg font-black tracking-tight text-white leading-tight">
                 King<span className="text-cyan-400">_TCG</span>
               </p>
               <p className="text-[9px] font-bold uppercase tracking-[0.25em] text-zinc-500 leading-none mt-0.5">
@@ -48,7 +48,7 @@ export default function Navbar() {
         </div>
 
         {/* Section Droite : Liens de Navigation */}
-        <div className="flex items-center gap-2.5">
+        <div className="flex items-center gap-2">
           {links.map((link) => {
             const isActive = pathname === link.href;
 
@@ -59,7 +59,7 @@ export default function Navbar() {
                   key={link.href}
                   href={link.href}
                   title={link.label}
-                  className="flex h-10 px-4 items-center gap-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-black text-sm font-black shadow-lg shadow-cyan-500/10 transition-all duration-300 hover:scale-[1.03] cursor-pointer"
+                  className="flex h-10 px-3.5 sm:px-4 items-center gap-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-neutral-950 text-xs sm:text-sm font-black shadow-lg shadow-cyan-500/10 transition-all duration-300 hover:scale-[1.03] cursor-pointer"
                 >
                   {link.icon}
                   <span className="hidden sm:inline">Scanner</span>
@@ -75,8 +75,8 @@ export default function Navbar() {
                 title={link.label}
                 className={`flex h-10 w-10 items-center justify-center rounded-xl border transition-all duration-300 cursor-pointer ${
                   isActive
-                    ? "border-cyan-500/30 bg-zinc-900 text-cyan-400 shadow-sm shadow-cyan-500/5 scale-[1.02]"
-                    : "border-zinc-900 bg-zinc-900/20 text-zinc-400 hover:border-zinc-800 hover:bg-zinc-900/50 hover:text-white"
+                    ? "border-cyan-500/30 bg-neutral-900 text-cyan-400 shadow-sm shadow-cyan-500/5 scale-[1.02]"
+                    : "border-zinc-900 bg-neutral-900/20 text-zinc-400 hover:border-zinc-800 hover:bg-neutral-900/50 hover:text-white"
                 }`}
               >
                 {/* L'icône passe en Cyan brillant si l'onglet est actif */}
