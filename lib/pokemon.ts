@@ -14,7 +14,7 @@ const API_URL = "https://api.pokemontcg.io/v2/cards";
 const SETS_URL = "https://api.pokemontcg.io/v2/sets";
 const TCGDEX_URL = "https://api.tcgdex.net/v2";
 
-const CACHE_KEY = "king_tcg_cards_cache_v9_0";
+const CACHE_KEY = "king_tcg_cards_cache_v9_1";
 
 const cache = new Map<string, PokemonCard>();
 const searchCache = new Map<string, PokemonCard[]>();
@@ -34,6 +34,7 @@ if (typeof window !== "undefined") {
       "king_tcg_cards_cache_v7",
       "king_tcg_cards_cache_v8",
       "king_tcg_cards_cache_v8_1",
+      "king_tcg_cards_cache_v9_0",
     ];
     oldKeys.forEach((key) => localStorage.removeItem(key));
   } catch {}
@@ -51,6 +52,24 @@ function safePrice(val: any): number {
   return !isNaN(num) && isFinite(num) && num > 0 ? Number(num.toFixed(2)) : 0;
 }
 
+/**
+ * 🚀 Système de secours anti-zéro intelligent basé sur la rareté
+ */
+function getFallbackPriceByRarity(rarity?: string): number {
+  if (!rarity) return 0.50;
+  const r = rarity.toLowerCase();
+  if (r.includes("secret") || r.includes("rainbow") || r.includes("gold") || r.includes("VMAX") || r.includes("VSTAR")) {
+    return 15.00;
+  }
+  if (r.includes("ultra") || r.includes("illustration rare") || r.includes("ex") || r.includes("gx") || r.includes("v")) {
+    return 5.00;
+  }
+  if (r.includes("rare") || r.includes("holo")) {
+    return 1.50;
+  }
+  return 0.25; // Commune / Uncommon
+}
+
 function normalize(card: any): PokemonCard {
   const cmPrices = card.cardmarket?.prices || card.pricing?.cardmarket || {};
   const tcgPrices = card.tcgplayer?.prices || card.pricing?.tcgplayer || {};
@@ -66,8 +85,7 @@ function normalize(card: any): PokemonCard {
   const tcgReverse = safePrice(tcgPrices.reverseHolofoil?.market ?? tcgPrices.reverseHolofoil?.mid) * 0.92;
   const tcgUnlimited = safePrice(tcgPrices.unlimitedHolofoil?.market) * 0.92;
 
-  // On évite un prix par défaut arbitraire de 1.50 s'il n'y a vraiment aucune donnée de prix
-  const rawComputed =
+  let rawComputed =
     avgSell ||
     trend ||
     low ||
@@ -78,6 +96,12 @@ function normalize(card: any): PokemonCard {
     safePrice(tcgReverse) ||
     safePrice(tcgUnlimited) ||
     0;
+
+  // Application du secours anti-zéro si aucun prix n'est retourné par les API
+  if (rawComputed === 0) {
+    rawComputed = getFallbackPriceByRarity(card.rarity);
+    logger.warn("PRICING", `Aucun prix trouvé pour la carte "${card.name}" (${card.id}), application du fallback rareté (${card.rarity || 'Inconnue'}) : ${rawComputed}€`);
+  }
 
   const computedPrice = safePrice(rawComputed);
 
@@ -261,9 +285,6 @@ function removeDuplicates(cards: PokemonCard[]) {
   return Array.from(map.values());
 }
 
-/**
- * Algorithme de scoring affiné pour éviter les faux positifs (ex: Machopeur vs Morpeko)
- */
 function scoreCard(card: PokemonCard, scan: CardScanResult) {
   let score = 0;
   
@@ -276,7 +297,6 @@ function scoreCard(card: PokemonCard, scan: CardScanResult) {
   const scanNumber = cleanCardNumber(scan.cardNumber);
   const cardNumber = cleanCardNumber(card.number);
 
-  // Le numéro de carte est le critère le plus discriminant pour éviter les confusions d'espèces
   if (scanNumber && cardNumber && scanNumber === cardNumber) {
     score += 1000;
   }
@@ -321,7 +341,6 @@ export async function searchCardsFromScan(
 
   logger.api(`[SCAN MATCH] Recherche TCG pour candidates: ${nameCandidates.join(", ")} (Numéro: ${cleanNum})`);
 
-  // 1. Priorité absolue au duo Numéro + Nom exact si les deux sont détectés
   if (cleanNum && nameCandidates.length) {
     for (const name of nameCandidates) {
       const found = await fetchPage(`number:"${cleanNum}" name:"${name}"`, 1);
@@ -332,7 +351,6 @@ export async function searchCardsFromScan(
     }
   }
 
-  // 2. Si le numéro seul donne des résultats précis
   if (!cards.length && cleanNum) {
     const found = await fetchPage(`number:"${cleanNum}"`, 1);
     if (found.length) {
@@ -340,7 +358,6 @@ export async function searchCardsFromScan(
     }
   }
 
-  // 3. Recherche par nom étendu
   if (!cards.length && nameCandidates.length) {
     for (const name of nameCandidates) {
       const found = await fetchPage(`name:"*${name}*"`, 1);
@@ -350,7 +367,6 @@ export async function searchCardsFromScan(
     }
   }
 
-  // 4. Fallback TCGdex si l'API officielle ne trouve rien
   if (cards.length === 0 && nameCandidates.length > 0) {
     for (const name of nameCandidates) {
       try {
@@ -387,7 +403,7 @@ export async function searchCards(
   const cacheKey = `search_${lang}_${key}`;
   if (searchCache.has(cacheKey)) return searchCache.get(cacheKey)!;
 
-  logger.api(`[SEARCH ENGINE v9.0] Recherche globale pour "${key}" en langue ${lang}`);
+  logger.api(`[SEARCH ENGINE v9.1] Recherche globale pour "${key}" en langue ${lang}`);
 
   let officialCards: PokemonCard[] = [];
 
@@ -435,7 +451,6 @@ export async function searchCards(
     }
   }
 
-  // Tri strict : Les plus récentes en premier, puis par numéro décroissant
   finalCards.sort((a, b) => {
     const isOfficialA = !a.id.startsWith("tcgdex-") ? 1 : 0;
     const isOfficialB = !b.id.startsWith("tcgdex-") ? 1 : 0;
@@ -601,7 +616,7 @@ export async function getCardById(id: string): Promise<PokemonCard | null> {
     const json = await response.json();
     const card = normalize(json.data);
 
-    cache.set(targetId, card);
+    cache.set(card.id, card);
     saveBrowserCache([card]);
     return card;
   } catch {
