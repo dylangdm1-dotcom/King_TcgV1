@@ -1,4 +1,4 @@
-// app/scanner/page.tsx (ou components/ScannerPage.tsx)
+// app/scanner/page.tsx 
 
 "use client";
 
