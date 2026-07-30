@@ -11,7 +11,7 @@ import React, {
 } from "react";
 import type { PokemonCard } from "../../lib/types";
 import { createQuadScanSession, processQuadScan, type QuadScanSession } from "../../lib/scanner/quadScanner";
-import { X, Sparkles, Check, AlertCircle, Loader2 } from "lucide-react";
+import { X, Sparkles, Check, AlertCircle, Loader2, Grid } from "lucide-react";
 
 export interface ScannerCameraHandle {
   getVideo: () => HTMLVideoElement | null;
@@ -161,12 +161,14 @@ const ScannerCamera = forwardRef<ScannerCameraHandle, ScannerCameraProps>(
           className="h-full w-full object-cover"
         />
 
-        <div className="absolute bottom-6 left-0 right-0 flex justify-center z-20 px-4">
+        {/* Bouton Mode 4 Cartes positionné en haut à droite de la caméra pour éviter les chevauchements */}
+        <div className="absolute top-4 right-4 z-20">
           <button
             onClick={handleOpenQuadScanner}
-            className="bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold px-6 py-3 rounded-2xl shadow-xl flex items-center gap-2 border border-amber-400/40 backdrop-blur-md transition transform active:scale-95"
+            className="bg-neutral-900/90 hover:bg-neutral-800 text-amber-400 font-black text-[10px] uppercase px-3 py-2 rounded-xl shadow-xl flex items-center gap-1.5 border border-amber-500/40 backdrop-blur-md transition transform active:scale-95"
           >
-            <span>📸 Mode 4 Cartes (Grille 2x2)</span>
+            <Grid className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+            <span>Mode Scan 4 cartes (Grille 2x2)</span>
           </button>
         </div>
 
