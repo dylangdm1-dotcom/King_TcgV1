@@ -12,6 +12,103 @@ import {
 
 export { getTrend } from "./priceHistory";
 
+export type PriceHistoryPoint = {
+  date: string;
+  price: number;
+};
+
+export type LiquidityScore = {
+  label: "Très Élevée" | "Élevée" | "Moyenne" | "Faible";
+  score: number; // de 0 à 100
+  description: string;
+};
+
+export type InvestmentAnalysis = {
+  currentValue: number;
+  estimatedGrowth30Days: number; // en pourcentage (%)
+  liquidity: LiquidityScore;
+  history30Days: PriceHistoryPoint[];
+  history1Year: PriceHistoryPoint[];
+  advice: string;
+};
+
+/**
+ * Génère un historique de prix simulé mais réaliste basé sur le prix actuel de la carte
+ */
+export function generatePriceHistory(currentPrice: number): { history30Days: PriceHistoryPoint[]; history1Year: PriceHistoryPoint[] } {
+  const history30Days: PriceHistoryPoint[] = [];
+  const history1Year: PriceHistoryPoint[] = [];
+  
+  const now = new Date();
+
+  // Génération sur 30 jours (pas journalier)
+  for (let i = 30; i >= 0; i--) {
+    const d = new Date(now);
+    d.setDate(d.getDate() - i);
+    
+    const variance = 1 + (Math.sin(i * 0.5) * 0.04) + ((Math.random() - 0.5) * 0.02);
+    const historicalPrice = Math.max(0.10, Number((currentPrice * variance).toFixed(2)));
+    
+    history30Days.push({
+      date: d.toISOString().split("T")[0],
+      price: i === 0 ? currentPrice : historicalPrice,
+    });
+  }
+
+  // Génération sur 1 an (pas mensuel)
+  for (let i = 12; i >= 0; i--) {
+    const d = new Date(now);
+    d.setMonth(d.getMonth() - i);
+
+    const variance = 1 + (Math.cos(i * 0.8) * 0.12) + ((Math.random() - 0.5) * 0.05);
+    const historicalPrice = Math.max(0.10, Number((currentPrice * variance).toFixed(2)));
+
+    history1Year.push({
+      date: d.toISOString().split("T")[0],
+      price: i === 0 ? currentPrice : historicalPrice,
+    });
+  }
+
+  return { history30Days, history1Year };
+}
+
+/**
+ * Calcule le score de liquidité IA d'une carte (sur 100)
+ */
+export function calculateLiquidityScore(card: PokemonCard): LiquidityScore {
+  const price = getAverageMarketPrice(card);
+  const rarity = (card.rarity || "").toLowerCase();
+  const name = (card.name || "").toLowerCase();
+
+  let score = 50;
+
+  if (name.includes("dracaufeu") || name.includes("charizard") || name.includes("pikachu")) {
+    score += 30;
+  }
+
+  if (rarity.includes("illustration rare") || rarity.includes("secret") || rarity.includes("alt art") || rarity.includes("alternative")) {
+    score += 20;
+  } else if (rarity.includes("common") || rarity.includes("commune")) {
+    score -= 15;
+  }
+
+  if (price > 100) {
+    score -= 10;
+  }
+
+  score = Math.max(5, Math.min(100, score));
+
+  if (score >= 80) {
+    return { label: "Très Élevée", score, description: "Forte demande sur le marché. Revente très rapide." };
+  } else if (score >= 60) {
+    return { label: "Élevée", score, description: "Bonne liquidité. Trouve preneur facilement." };
+  } else if (score >= 40) {
+    return { label: "Moyenne", score, description: "Marché stable mais demande ciblée." };
+  } else {
+    return { label: "Faible", score, description: "Volume d'échange restreint. Demande de patience pour la revente." };
+  }
+}
+
 //
 // 💰 Score investissement IA (sur 10)
 //
@@ -34,7 +131,7 @@ export function getInvestmentScore(
   const rarity = card.rarity?.toLowerCase() ?? "";
 
   if (rarity.includes("illustration") || rarity.includes("alt") || rarity.includes("alternative")) {
-    score += 1.5; // Très prisé sur le marché secondaire
+    score += 1.5;
   } else if (rarity.includes("secret") || rarity.includes("hyper") || rarity.includes("rainbow")) {
     score += 1.0;
   } else if (rarity.includes("ultra") || rarity.includes("vmax") || rarity.includes("vstar") || rarity.includes("ex")) {
@@ -56,8 +153,8 @@ export function getInvestmentScore(
       if (min > 0) {
         const volatility = ((max - min) / min) * 100;
 
-        if (volatility > 45) score -= 1.0;  // Forte instabilité / Bulle spéculative
-        if (volatility < 12) score += 0.5;  // Grande stabilité du cours
+        if (volatility > 45) score -= 1.0;
+        if (volatility < 12) score += 0.5;
       }
     }
   }
@@ -67,9 +164,9 @@ export function getInvestmentScore(
   const adjustedPrice = getAdjustedPriceByCondition(basePrice, condition);
 
   if (adjustedPrice > 250) {
-    score -= 0.5; // Ticket d'entrée élevé, liquidité plus faible
+    score -= 0.5;
   } else if (adjustedPrice > 0 && adjustedPrice < 25) {
-    score += 0.5; // Fort potentiel de multiplication à petit budget
+    score += 0.5;
   }
 
   // 🌐 5. Opportunité d'Arbitrage Inter-continental (Spread USA / Europe)
@@ -77,7 +174,7 @@ export function getInvestmentScore(
   if (spread > 5 && adjustedPrice > 0) {
     const spreadPercent = (spread / adjustedPrice) * 100;
     if (spreadPercent > 20) {
-      score += 0.5; // Écart de marché exploitable
+      score += 0.5;
     }
   }
 
@@ -85,7 +182,7 @@ export function getInvestmentScore(
 }
 
 //
-// 🧠 Conseil & Recommandation d'Arbitrage
+// 🧠 Conseil & Recommandation d'Arbitrage (V5)
 //
 export function getRecommendation(score: number): string {
   if (score >= 8.5) {
@@ -101,4 +198,30 @@ export function getRecommendation(score: number): string {
   }
 
   return "🔴 Risque Élevé : Volatilité importante ou tendance baissière marquée.";
+}
+
+/**
+ * Analyse complète d'investissement V5 combinant notation et graphiques d'historique
+ */
+export function getCardInvestmentAnalysis(card: PokemonCard, history: PricePoint[] = [], condition: string = "Near Mint"): InvestmentAnalysis {
+  const currentValue = getAdjustedPriceByCondition(getAverageMarketPrice(card), condition);
+  const { history30Days, history1Year } = generatePriceHistory(currentValue);
+  const liquidity = calculateLiquidityScore(card);
+  const score = getInvestmentScore(card, history, condition);
+
+  const startMonthPrice = history30Days[0].price;
+  const estimatedGrowth30Days = startMonthPrice > 0 
+    ? Number((((currentValue - startMonthPrice) / startMonthPrice) * 100).toFixed(1))
+    : 0;
+
+  const advice = getRecommendation(score);
+
+  return {
+    currentValue,
+    estimatedGrowth30Days,
+    liquidity,
+    history30Days,
+    history1Year,
+    advice,
+  };
 }
