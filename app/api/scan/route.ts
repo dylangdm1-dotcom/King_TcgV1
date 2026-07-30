@@ -1,9 +1,10 @@
+// app/api/scan/route.ts
+
 import { NextRequest, NextResponse } from "next/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 // 🚀 V3.6 Integrations
 import { logger } from "@/lib/cache/logger";
-import { getFrenchPokemonName, cleanCardNameForSearch } from "@/lib/pokemonTranslator";
 import { getCachedCardData, setCachedCardData } from "@/lib/pokemonCache";
 
 export async function POST(req: NextRequest) {
@@ -61,67 +62,29 @@ export async function POST(req: NextRequest) {
     ];
 
     const prompt = `
-Tu es un expert professionnel Pokémon TCG spécialisé dans l'identification de cartes.
-
-Analyse UNIQUEMENT ce qui est visible sur l'image.
+Tu es un expert professionnel Pokémon TCG international. Tu dois identifier avec une précision absolue la carte présentée sur l'image.
 
 RÈGLES ABSOLUES :
-- Ne jamais inventer une information.
-- Ne jamais utiliser ta mémoire pour compléter.
-- Si une donnée n'est pas lisible => null.
-- Le numéro doit être uniquement celui visible sur la carte.
-- Le set doit uniquement être retourné s'il est lisible.
-- Retourne uniquement un JSON valide.
-- Aucun texte autour du JSON.
+- Respecte STRICTEMENT la langue d'origine visible sur la carte (Français, Anglais, Japonais, Chinois, etc.). Ne traduis JAMAIS le nom de la carte dans une autre langue. Conserve l'écriture originale exacte (ex: kanji japonais, caractères chinois, etc.).
+- Ne jamais inventer une information. Si une donnée n'est pas lisible => null.
+- Identifie parfaitement les variantes et suffixes importants visibles (ex: GX, V, VMAX, VSTAR, EX, Shining, Promo, Full Art, Alt Art, Secrète).
+- Retourne uniquement un JSON valide, sans aucun texte autour.
 
 Analyse :
 
-1. Nom complet visible de la carte.
-2. Nom du Pokémon si applicable.
-3. Type de carte :
-   - Pokemon
-   - Trainer
-   - Energy
-   - Unknown
+1. cardName : Le nom exact complet visible sur la carte dans sa langue originale (incluant les suffixes comme V, GX, etc.).
+2. pokemonName : Le nom du Pokémon principal dans sa langue originale.
+3. cardType : "Pokemon", "Trainer", "Energy" ou "Unknown".
+4. language : Code langue détecté ("fr", "en", "ja", "zh-cn", "zh-tw", "de", "es", "it" ou null).
+5. cardNumber : Le numéro de collection visible (ex: 123/182 ou promo number).
+6. setName : Le nom de l'extension visible.
+7. rarity : La rareté visible (Common, Uncommon, Rare, Holo Rare, Double Rare, Illustration Rare, Ultra Rare, Secret Rare, etc.).
+8. variant : "Full Art", "Alt Art", "Rainbow", "Gold", "Shiny", "Normal", ou "Unknown".
+9. isFullArt : boolean (true/false).
+10. isSecretRare : boolean (true/false).
+11. confidence : Score de 0 à 100 indiquant ta certitude.
 
-4. Langue :
-   FR, EN, JP, DE, ES, IT ou null.
-
-5. Numéro de collection visible :
-   Exemple : 123/182
-
-6. Extension :
-   - nom visible
-   - symbole visible
-
-7. Rareté visible :
-   Exemple :
-   Common
-   Uncommon
-   Rare
-   Holo Rare
-   Double Rare
-   Illustration Rare
-   Ultra Rare
-   Secret Rare
-
-8. Variantes :
-   - Full Art
-   - Alt Art
-   - Rainbow
-   - Gold
-   - Shiny
-   - Normal
-   - Unknown
-
-9. Score confiance :
-   - 0 à 100
-
-Si la confiance est inférieure à 80 :
-needsSecondPass = true
-
-Format obligatoire :
-
+Format obligatoire strict :
 {
   "cardName": null,
   "pokemonName": null,
@@ -135,8 +98,7 @@ Format obligatoire :
   "isFullArt": false,
   "isSecretRare": false,
   "possibleNames": [],
-  "confidence": 0,
-  "needsSecondPass": false
+  "confidence": 0
 }
 `;
 
@@ -151,7 +113,7 @@ Format obligatoire :
     let successfulModel = "";
     let isRateLimited = false;
 
-    logger.gemini(`Lancement de la reconnaissance IA parmi ${modelCandidates.length} candidats...`);
+    logger.gemini(`Lancement de la reconnaissance IA multilingue parmi ${modelCandidates.length} candidats...`);
 
     for (const modelName of modelCandidates) {
       try {
@@ -190,7 +152,7 @@ Format obligatoire :
         {
           error: isRateLimited
             ? "Quota Gemini dépassé temporairement"
-            : "Impossible d'analyser la carte",
+            : "Carte non reconnue. Veuillez réessayer avec un meilleur éclairage ou utiliser la recherche manuelle.",
         },
         {
           status: isRateLimited ? 429 : 500,
@@ -216,7 +178,7 @@ Format obligatoire :
       logger.error("GEMINI", "Réponse JSON brute invalide de Gemini", rawResponse);
       return NextResponse.json(
         {
-          error: "Réponse Gemini invalide",
+          error: "Impossible d'analyser la structure de la carte. Veuillez effectuer une recherche manuelle.",
           rawResponse,
         },
         {
@@ -229,7 +191,7 @@ Format obligatoire :
       cardName: null,
       pokemonName: null,
       cardType: null,
-      language: null,
+      language: "fr",
       cardNumber: null,
       setName: null,
       setSymbol: null,
@@ -239,7 +201,6 @@ Format obligatoire :
       isSecretRare: false,
       possibleNames: [],
       confidence: 0,
-      needsSecondPass: false,
     };
 
     parsedData = {
@@ -247,23 +208,19 @@ Format obligatoire :
       ...parsedData,
     };
 
-    /*
-      4 - Post-traitement V3.5 : Normalisation et Traduction du nom
-    */
-    const rawPokemonName = parsedData.pokemonName || parsedData.cardName;
-    if (rawPokemonName) {
-      const frName = getFrenchPokemonName(rawPokemonName);
-      const cleanedSearchName = cleanCardNameForSearch(rawPokemonName);
-
-      parsedData.frenchPokemonName = frName;
-      parsedData.cleanedSearchName = cleanedSearchName;
-
-      logger.translator(
-        `Détection OCR: "${rawPokemonName}" -> Nom FR: "${frName}" | Nom de recherche: "${cleanedSearchName}"`
+    // Vérification de la confiance de reconnaissance
+    if (parsedData.confidence < 60 || (!parsedData.cardName && !parsedData.pokemonName)) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: "Carte non reconnue avec certitude. Essayez de recadrer ou utilisez la recherche par nom/extension.",
+          data: parsedData,
+        },
+        { status: 404 }
       );
     }
 
-    // Sauvegarde dans le cache V3.6
+    // Sauvegarde dans le cache
     setCachedCardData(imageHash, parsedData, 1000 * 60 * 30); // Cache de 30 minutes
 
     return NextResponse.json({
@@ -277,7 +234,7 @@ Format obligatoire :
 
     return NextResponse.json(
       {
-        error: "Erreur serveur pendant le scan",
+        error: "Erreur technique lors de l'analyse de l'image. Veuillez utiliser la recherche manuelle.",
         details: error?.message || null,
       },
       {
