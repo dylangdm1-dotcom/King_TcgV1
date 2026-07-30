@@ -38,41 +38,42 @@ export default function AccountManagementPage() {
     <>
       <Navbar />
 
-      <main className="min-h-screen bg-black text-white pb-20 selection:bg-cyan-500/10">
+      <main className="min-h-screen bg-neutral-950 text-white pb-32 selection:bg-cyan-500/20">
         <div className="mx-auto max-w-3xl space-y-6 px-4 py-6 sm:px-6">
           
           <div className="flex items-center justify-between">
             <Link
               href="/parametres"
-              className="inline-flex items-center gap-1.5 text-zinc-500 hover:text-white transition-colors font-black text-[9px] uppercase tracking-wider bg-neutral-950/40 border border-zinc-900 px-3 py-2 rounded-xl"
+              className="inline-flex items-center gap-1.5 text-zinc-400 hover:text-white transition-colors font-black text-[9px] uppercase tracking-wider bg-neutral-900/60 border border-zinc-800 px-3.5 py-2 rounded-xl shadow-lg"
             >
               Retour aux Paramètres
             </Link>
           </div>
 
           {/* En-tête Technique */}
-          <section className="rounded-xl border border-zinc-900 bg-neutral-950/40 p-4 sm:p-5">
-            <span className="text-[9px] font-black uppercase tracking-wider text-zinc-500">Compte utilisateur</span>
-            <h1 className="mt-0.5 text-lg font-black uppercase tracking-tight text-white">Mon compte</h1>
+          <section className="rounded-2xl border border-zinc-900 bg-neutral-900/40 p-5 sm:p-6 shadow-xl">
+            <span className="text-[9px] font-black uppercase tracking-wider text-cyan-400 bg-cyan-500/10 border border-cyan-500/20 px-2.5 py-1 rounded-full">Compte utilisateur</span>
+            <h1 className="mt-2 text-lg font-black uppercase tracking-tight text-white">Mon compte</h1>
+            <p className="mt-0.5 text-[11px] text-zinc-400">Gérez votre profil, vos accès cloud et vos options d'abonnement.</p>
           </section>
 
           <div className="space-y-4">
             
             {/* SECTION 1 : AUTHENTIFICATION */}
-            <section className="rounded-xl border border-zinc-900 bg-neutral-950/40 p-5">
+            <section className="rounded-2xl border border-zinc-900 bg-neutral-900/40 p-5 sm:p-6 shadow-xl space-y-4">
               <div className="space-y-1">
                 <span className="text-[9px] font-black uppercase tracking-wider text-zinc-500">Sécurisation & Synchronisation</span>
                 <h2 className="text-sm font-black text-white uppercase tracking-tight">Compte & Synchronisation</h2>
-                <p className="text-xs text-zinc-400 font-medium leading-relaxed max-w-2xl pt-1">
+                <p className="text-xs text-zinc-300 font-medium leading-relaxed max-w-2xl pt-1">
                   La création de compte sera bientôt disponible pour vous permettre de sauvegarder automatiquement votre collection, sécuriser votre portefeuille, retrouver vos favoris et synchroniser l'ensemble de vos données sur tous vos appareils.
                 </p>
               </div>
 
-              <div className="mt-5 border-t border-zinc-900/60 pt-4">
+              <div className="border-t border-zinc-800/80 pt-4">
                 <button
                   onClick={handleGoogleLogin}
                   disabled={isAuthLoading}
-                  className="flex w-full sm:w-auto items-center justify-center gap-2.5 rounded-md bg-white px-4 py-2.5 text-xs font-black text-black transition-all active:scale-[0.98] disabled:opacity-50 cursor-pointer"
+                  className="flex w-full sm:w-auto items-center justify-center gap-2.5 rounded-xl bg-white px-5 py-3 text-xs font-black text-black transition-all hover:bg-zinc-100 active:scale-[0.98] disabled:opacity-50 cursor-pointer shadow-lg"
                 >
                   <svg className="h-3.5 w-3.5 shrink-0" viewBox="0 0 24 24">
                     <path
@@ -98,19 +99,19 @@ export default function AccountManagementPage() {
             </section>
 
             {/* SECTION 2 : SUBSCRIPTION LICENCE */}
-            <section className="rounded-xl border border-zinc-900 bg-neutral-950/40 p-5">
+            <section className="rounded-2xl border border-zinc-900 bg-neutral-900/40 p-5 sm:p-6 shadow-xl space-y-4">
               <div className="space-y-1">
                 <span className="text-[9px] font-black uppercase tracking-wider text-zinc-500">King_TCG Premium</span>
                 <h2 className="text-sm font-black text-white uppercase tracking-tight">Abonnement Premium</h2>
-                <p className="text-xs text-zinc-400 font-medium leading-relaxed max-w-2xl pt-1">
+                <p className="text-xs text-zinc-300 font-medium leading-relaxed max-w-2xl pt-1">
                   Le mode Premium donnera accès aux fonctionnalités avancées de King_TCG ainsi qu'aux futurs services en ligne.
                 </p>
               </div>
 
-              <div className="mt-5 border-t border-zinc-900/60 pt-4">
-                <div className="relative overflow-hidden rounded-xl border border-zinc-900 bg-neutral-950 p-5 max-w-md">
+              <div className="border-t border-zinc-800/80 pt-4">
+                <div className="relative overflow-hidden rounded-2xl border border-zinc-800 bg-neutral-900 p-5 sm:p-6 max-w-md shadow-xl">
                   
-                  <div className="absolute top-4 right-4 rounded bg-cyan-500/5 border border-cyan-500/20 px-2 py-0.5 text-[8px] font-black uppercase tracking-widest text-cyan-400">
+                  <div className="absolute top-4 right-4 rounded-full bg-cyan-500/10 border border-cyan-500/20 px-2.5 py-0.5 text-[8px] font-black uppercase tracking-widest text-cyan-400">
                     PREMIUM
                   </div>
 
@@ -118,13 +119,13 @@ export default function AccountManagementPage() {
                   
                   <div className="mt-1 flex items-baseline gap-1">
                     <span className="text-2xl font-black tracking-tight text-white tabular-nums">5,99 €</span>
-                    <span className="text-[10px] font-bold text-zinc-600 uppercase">/ mois</span>
+                    <span className="text-[10px] font-bold text-zinc-500 uppercase">/ mois</span>
                   </div>
 
-                  <ul className="mt-5 space-y-2 border-t border-zinc-900/60 pt-3">
+                  <ul className="mt-5 space-y-2.5 border-t border-zinc-800/80 pt-4">
                     {features.map((feat, index) => (
-                      <li key={index} className="flex items-start gap-2 text-xs text-zinc-400 font-medium leading-tight">
-                        <span className="text-cyan-500 font-black text-[11px] select-none shrink-0 mt-0.5">▪</span>
+                      <li key={index} className="flex items-start gap-2.5 text-xs text-zinc-300 font-medium leading-tight">
+                        <span className="text-cyan-400 font-black text-[11px] select-none shrink-0 mt-0.5">▪</span>
                         <span>{feat}</span>
                       </li>
                     ))}
@@ -133,7 +134,7 @@ export default function AccountManagementPage() {
                   <button
                     onClick={handleSubscribe}
                     disabled={isSubLoading}
-                    className="mt-5 w-full flex items-center justify-center rounded bg-cyan-500 hover:bg-cyan-400 text-black text-xs font-black py-2.5 transition-colors uppercase tracking-wider disabled:opacity-50 cursor-pointer"
+                    className="mt-6 w-full flex items-center justify-center rounded-xl bg-cyan-500 hover:bg-cyan-400 text-black text-xs font-black py-3 transition-colors uppercase tracking-wider disabled:opacity-50 cursor-pointer shadow-lg shadow-cyan-500/20 active:scale-[0.98]"
                   >
                     {isSubLoading ? "Ouverture..." : "Découvrir Premium"}
                   </button>
@@ -145,8 +146,8 @@ export default function AccountManagementPage() {
 
           {/* Pied de page King_TCG standardisé */}
           <footer className="mt-16 text-center border-t border-zinc-900 pt-6">
-            <p className="text-[9px] font-black text-zinc-700 uppercase tracking-[0.3em]">
-              King_TCG • Collection Manager • Version 1.x
+            <p className="text-[9px] font-black text-zinc-500 uppercase tracking-[0.3em]">
+              King_TCG • Collection Manager • Version 1.0
             </p>
           </footer>
         </div>
