@@ -601,7 +601,7 @@ export async function getCardById(id: string): Promise<PokemonCard | null> {
     const json = await response.json();
     const card = normalize(json.data);
 
-    cache.set(card.id, card);
+    cache.set(targetId, card);
     saveBrowserCache([card]);
     return card;
   } catch {
