@@ -171,24 +171,28 @@ export default function Recherche() {
     <>
       <Navbar />
 
-      <main className="min-h-screen bg-black text-white">
-        <div className="mx-auto max-w-7xl space-y-6 px-4 py-8">
+      <main className="min-h-screen bg-neutral-950 text-white pb-32 selection:bg-cyan-500/20">
+        <div className="mx-auto max-w-7xl space-y-6 px-4 py-5 sm:px-6 lg:px-8">
+          
           {/* Section Recherche */}
-          <section className="rounded-xl border border-zinc-900 bg-neutral-950 p-4 md:p-6 shadow-2xl">
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-zinc-900/80 pb-4">
+          <section className="rounded-2xl border border-zinc-900 bg-neutral-900/40 p-4 sm:p-6 shadow-xl space-y-5">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-zinc-800/80 pb-4">
               <div>
-                <h1 className="text-base font-black uppercase tracking-widest text-white flex items-center gap-2">
-                  <Search className="w-5 h-5 text-cyan-400" /> Recherche de Carte Pokémon
+                <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-[9px] font-black uppercase tracking-widest mb-1">
+                  <Sparkles className="w-3 h-3" /> Base de données v4.00
+                </div>
+                <h1 className="text-lg font-black uppercase tracking-tight text-white flex items-center gap-2">
+                  <Search className="w-5 h-5 text-cyan-400" /> Recherche & Index
                 </h1>
-                <p className="mt-1 text-[11px] font-medium text-zinc-500">
-                  Consultez la base de données TCG, comparez les prix FR/EN et trouvez vos cartes.
+                <p className="mt-0.5 text-[11px] text-zinc-400">
+                  Consultez la base TCG, comparez les prix par région et dénichez vos cartes.
                 </p>
               </div>
 
               {/* Sélecteur de Région/Langue */}
-              <div className="flex items-center gap-1 bg-neutral-900 p-1 rounded-lg border border-zinc-800">
-                <span className="text-[10px] font-bold text-zinc-500 uppercase px-2 flex items-center gap-1">
-                  <Globe className="w-3 h-3 text-cyan-400" /> Région :
+              <div className="flex items-center gap-1 bg-black/60 p-1.5 rounded-xl border border-zinc-800 self-start md:self-auto">
+                <span className="text-[10px] font-black uppercase tracking-wider text-zinc-500 px-2 flex items-center gap-1">
+                  <Globe className="w-3.5 h-3.5 text-cyan-400" /> Langue :
                 </span>
                 {[
                   { code: "fr", label: "🇫🇷 FR" },
@@ -199,9 +203,9 @@ export default function Recherche() {
                   <button
                     key={lang.code}
                     onClick={() => setSelectedLanguage(lang.code as LanguageCode)}
-                    className={`px-2.5 py-1 rounded text-[10px] font-black transition ${
+                    className={`px-3 py-1.5 rounded-lg text-[10px] font-black tracking-wider transition-all ${
                       selectedLanguage === lang.code
-                        ? "bg-cyan-500 text-black shadow-lg shadow-cyan-500/20"
+                        ? "bg-cyan-500 text-black shadow-md shadow-cyan-500/20"
                         : "text-zinc-400 hover:text-white hover:bg-neutral-800"
                     }`}
                   >
@@ -212,33 +216,33 @@ export default function Recherche() {
             </div>
 
             {/* Commutateur de Mode : Texte / Extension */}
-            <div className="mt-4 flex gap-2">
+            <div className="flex gap-2">
               <button
                 onClick={() => setSearchMode("text")}
-                className={`rounded-lg px-3.5 py-2 text-[11px] font-black uppercase tracking-wider transition flex items-center gap-2 ${
+                className={`rounded-xl px-4 py-2.5 text-[10px] font-black uppercase tracking-wider transition-all flex items-center gap-2 ${
                   searchMode === "text"
-                    ? "bg-cyan-500 text-black shadow"
-                    : "border border-zinc-800 bg-neutral-900 text-zinc-400 hover:text-white"
+                    ? "bg-cyan-500 text-black shadow-md shadow-cyan-500/20"
+                    : "border border-zinc-800 bg-black/40 text-zinc-400 hover:text-white"
                 }`}
               >
                 <Search className="w-3.5 h-3.5" /> Par Nom
               </button>
               <button
                 onClick={() => setSearchMode("set")}
-                className={`rounded-lg px-3.5 py-2 text-[11px] font-black uppercase tracking-wider transition flex items-center gap-2 ${
+                className={`rounded-xl px-4 py-2.5 text-[10px] font-black uppercase tracking-wider transition-all flex items-center gap-2 ${
                   searchMode === "set"
-                    ? "bg-cyan-500 text-black shadow"
-                    : "border border-zinc-800 bg-neutral-900 text-cyan-400 hover:bg-cyan-500/10"
+                    ? "bg-cyan-500 text-black shadow-md shadow-cyan-500/20"
+                    : "border border-zinc-800 bg-black/40 text-cyan-400 hover:bg-cyan-500/10"
                 }`}
               >
                 <Package className="w-3.5 h-3.5" /> Par Extension
               </button>
             </div>
 
-            <div className="mt-4 space-y-3">
+            <div className="space-y-3">
               {searchMode === "text" ? (
-                <>
-                  <div className="relative">
+                <div className="flex flex-col sm:flex-row gap-2.5">
+                  <div className="relative flex-1">
                     <input
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
@@ -247,22 +251,22 @@ export default function Recherche() {
                           executeSearch(searchQuery);
                         }
                       }}
-                      placeholder="Saisir un nom de Pokémon (ex: Dracaufeu, Pikachu, Mewtwo...)"
-                      className="w-full rounded-lg border border-zinc-800 bg-neutral-900 px-4 py-3 text-xs font-bold text-white placeholder-zinc-600 outline-none transition focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
+                      placeholder="Nom du Pokémon (ex: Dracaufeu, Pikachu...)"
+                      className="w-full rounded-xl border border-zinc-800 bg-black/60 px-4 py-3.5 text-xs font-bold text-white placeholder-zinc-600 outline-none transition focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
                     />
                     {loading && (
-                      <Loader2 className="absolute right-3 top-3.5 h-4 w-4 animate-spin text-cyan-400" />
+                      <Loader2 className="absolute right-3.5 top-4 h-4 w-4 animate-spin text-cyan-400" />
                     )}
                   </div>
 
                   <button
                     onClick={() => executeSearch(searchQuery)}
                     disabled={loading || searchQuery.trim().length < 2}
-                    className="w-full rounded-lg bg-cyan-500 py-3 text-xs font-black uppercase tracking-widest text-black transition hover:bg-cyan-400 disabled:opacity-50 flex items-center justify-center gap-2 shadow-lg shadow-cyan-500/10"
+                    className="rounded-xl bg-cyan-500 px-6 py-3.5 text-xs font-black uppercase tracking-widest text-black transition-all hover:bg-cyan-400 disabled:opacity-50 flex items-center justify-center gap-2 shadow-lg shadow-cyan-500/10 flex-shrink-0 active:scale-[0.98]"
                   >
                     {loading ? (
                       <>
-                        <Loader2 className="w-4 h-4 animate-spin" /> Recherche en cours...
+                        <Loader2 className="w-4 h-4 animate-spin" /> Recherche...
                       </>
                     ) : (
                       <>
@@ -270,12 +274,12 @@ export default function Recherche() {
                       </>
                     )}
                   </button>
-                </>
+                </div>
               ) : (
                 /* Sélecteur d'extension hiérarchique (Bloc -> Série) */
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-[10px] font-bold uppercase tracking-wider text-zinc-400 mb-1 flex items-center gap-1.5">
+                    <label className="block text-[10px] font-black uppercase tracking-wider text-zinc-500 mb-1.5 flex items-center gap-1.5">
                       <Layers className="w-3.5 h-3.5 text-cyan-400" /> 1. Bloc / Ère
                     </label>
                     <select
@@ -285,7 +289,7 @@ export default function Recherche() {
                         setSelectedSetId("");
                       }}
                       style={{ colorScheme: "dark" }}
-                      className="w-full rounded-lg border border-zinc-800 bg-neutral-900 text-white px-3 py-3 text-xs font-bold outline-none transition focus:border-cyan-400 appearance-none"
+                      className="w-full rounded-xl border border-zinc-800 bg-black/60 text-white px-3.5 py-3 text-xs font-bold outline-none transition focus:border-cyan-400 appearance-none"
                     >
                       <option value="all" className="bg-neutral-900 text-white">
                         -- Tous les Blocs ({availableBlocks.length}) --
@@ -299,14 +303,14 @@ export default function Recherche() {
                   </div>
 
                   <div>
-                    <label className="block text-[10px] font-bold uppercase tracking-wider text-zinc-400 mb-1 flex items-center gap-1.5">
+                    <label className="block text-[10px] font-black uppercase tracking-wider text-zinc-500 mb-1.5 flex items-center gap-1.5">
                       <Package className="w-3.5 h-3.5 text-cyan-400" /> 2. Série / Extension
                     </label>
                     <select
                       value={selectedSetId}
                       onChange={(e) => handleSetSelect(e.target.value)}
                       style={{ colorScheme: "dark" }}
-                      className="w-full rounded-lg border border-cyan-500/40 bg-neutral-900 text-cyan-300 px-3 py-3 text-xs font-bold outline-none transition focus:border-cyan-400 appearance-none"
+                      className="w-full rounded-xl border border-cyan-500/40 bg-black/60 text-cyan-300 px-3.5 py-3 text-xs font-bold outline-none transition focus:border-cyan-400 appearance-none"
                     >
                       <option value="" className="bg-neutral-900 text-white">
                         -- Choisir la série --
@@ -322,7 +326,7 @@ export default function Recherche() {
               )}
             </div>
 
-            <div className="mt-5">
+            <div className="pt-2 border-t border-zinc-800/80">
               <SearchFilters
                 filters={filters}
                 onChange={setFilters}
@@ -332,22 +336,22 @@ export default function Recherche() {
           </section>
 
           {/* Barre d'outils / Stats */}
-          <section className="flex items-center justify-between gap-4 border-b border-zinc-900/60 pb-3">
-            <div className="rounded-md border border-zinc-800 bg-neutral-900/80 px-3 py-1.5 text-[10px] font-black uppercase tracking-wider text-zinc-300 flex items-center gap-2">
+          <section className="flex items-center justify-between gap-4 border-b border-zinc-900 pb-3">
+            <div className="rounded-xl border border-zinc-800/80 bg-neutral-900/40 px-3.5 py-2 text-[10px] font-black uppercase tracking-wider text-zinc-300 flex items-center gap-2">
               <Filter className="w-3.5 h-3.5 text-cyan-400" />
-              <span>{filteredCards.length} Carte(s) disponible(s)</span>
+              <span>{filteredCards.length} actif(s)</span>
               {query && (
-                <span className="text-cyan-400 font-normal">pour "{query}"</span>
+                <span className="text-cyan-400 font-normal truncate max-w-[150px] sm:max-w-xs">pour "{query}"</span>
               )}
             </div>
 
-            <div className="flex gap-1 rounded-lg border border-zinc-900 bg-neutral-900 p-1">
+            <div className="flex gap-1 rounded-xl border border-zinc-800/80 bg-neutral-900/40 p-1">
               <button
                 onClick={() => setViewMode("grid")}
-                className={`rounded px-2.5 py-1 text-[10px] font-black uppercase flex items-center gap-1 transition ${
+                className={`rounded-lg px-3 py-1.5 text-[10px] font-black uppercase flex items-center gap-1.5 transition-all ${
                   viewMode === "grid"
-                    ? "bg-zinc-800 text-cyan-400"
-                    : "text-zinc-500 hover:text-white"
+                    ? "bg-cyan-500 text-black shadow-md shadow-cyan-500/20"
+                    : "text-zinc-400 hover:text-white"
                 }`}
                 title="Vue en grille"
               >
@@ -357,10 +361,10 @@ export default function Recherche() {
 
               <button
                 onClick={() => setViewMode("large")}
-                className={`rounded px-2.5 py-1 text-[10px] font-black uppercase flex items-center gap-1 transition ${
+                className={`rounded-lg px-3 py-1.5 text-[10px] font-black uppercase flex items-center gap-1.5 transition-all ${
                   viewMode === "large"
-                    ? "bg-zinc-800 text-cyan-400"
-                    : "text-zinc-500 hover:text-white"
+                    ? "bg-cyan-500 text-black shadow-md shadow-cyan-500/20"
+                    : "text-zinc-400 hover:text-white"
                 }`}
                 title="Vue large"
               >
@@ -376,12 +380,12 @@ export default function Recherche() {
               {Array.from({ length: 12 }).map((_, i) => (
                 <div
                   key={i}
-                  className="aspect-[0.72] animate-pulse rounded-xl bg-neutral-900/80 border border-zinc-800/80 p-3 flex flex-col justify-between"
+                  className="aspect-[0.72] animate-pulse rounded-2xl bg-neutral-900/40 border border-zinc-900 p-3 flex flex-col justify-between"
                 >
-                  <div className="w-full h-3/4 bg-zinc-800/50 rounded-lg" />
+                  <div className="w-full h-3/4 bg-zinc-800/40 rounded-xl" />
                   <div className="space-y-1.5 mt-2">
-                    <div className="h-3 bg-zinc-800/50 rounded w-3/4" />
-                    <div className="h-2.5 bg-zinc-800/30 rounded w-1/2" />
+                    <div className="h-3 bg-zinc-800/40 rounded w-3/4" />
+                    <div className="h-2.5 bg-zinc-800/20 rounded w-1/2" />
                   </div>
                 </div>
               ))}
@@ -390,13 +394,13 @@ export default function Recherche() {
 
           {/* État vide */}
           {!loading && query.length >= 2 && filteredCards.length === 0 && (
-            <div className="rounded-xl border border-zinc-900 bg-neutral-950 p-12 text-center shadow-inner">
+            <div className="rounded-2xl border border-zinc-900 bg-neutral-900/40 p-12 text-center shadow-inner">
               <Sparkles className="w-8 h-8 text-cyan-400/50 mx-auto mb-3 animate-pulse" />
               <p className="text-xs font-black uppercase tracking-wider text-zinc-300">
-                Aucune carte trouvée pour "{query}"
+                Aucun résultat pour "{query}"
               </p>
-              <p className="mt-1.5 text-[11px] text-zinc-500 max-w-sm mx-auto">
-                Essayez avec le nom anglais (ex: Charizard) ou ajustez vos filtres de recherche.
+              <p className="mt-1 text-[11px] text-zinc-500 max-w-sm mx-auto">
+                Vérifiez l'orthographe, essayez le nom en anglais ou modifiez vos critères.
               </p>
             </div>
           )}
@@ -434,7 +438,7 @@ export default function Recherche() {
             <div className="text-center pt-6 pb-8">
               <button
                 onClick={() => setVisible((v) => v + PAGE_SIZE)}
-                className="rounded-lg border border-zinc-800 bg-neutral-900 px-8 py-3 text-[11px] font-black uppercase text-cyan-400 hover:bg-neutral-800 hover:border-cyan-500/30 transition active:scale-95 shadow-lg"
+                className="rounded-xl border border-zinc-800 bg-neutral-900 px-8 py-3.5 text-[11px] font-black uppercase tracking-wider text-cyan-400 hover:bg-neutral-800 hover:border-cyan-500/30 transition active:scale-98 shadow-lg"
               >
                 Afficher plus de cartes ({filteredCards.length - visible} restantes)
               </button>
