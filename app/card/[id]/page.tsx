@@ -185,7 +185,7 @@ export default function CardPage() {
       <>
         <Navbar />
         <main className="flex min-h-screen items-center justify-center bg-neutral-950 px-4">
-          <div className="glass-card max-w-sm w-full rounded-2xl p-8 text-center space-y-4">
+          <div className="glass-card max-w-sm w-full rounded-2xl p-8 text-center space-y-4 shadow-xl">
             <div className="mx-auto h-10 w-10 animate-spin rounded-full border-2 border-zinc-800 border-t-cyan-400" />
             <p className="text-xs font-bold tracking-wide text-zinc-400">
               Calcul des indices financiers King_TCG...
@@ -202,7 +202,7 @@ export default function CardPage() {
       <>
         <Navbar />
         <main className="flex min-h-screen items-center justify-center bg-neutral-950 px-4">
-          <div className="glass-card max-w-sm w-full rounded-2xl p-8 text-center space-y-4 border border-red-500/20">
+          <div className="glass-card max-w-sm w-full rounded-2xl p-8 text-center space-y-4 border border-red-500/20 shadow-xl">
             <AlertCircle className="mx-auto h-10 w-10 text-red-400" />
             <p className="text-sm font-bold tracking-wide text-zinc-300">
               {error || "Carte introuvable."}
@@ -237,14 +237,14 @@ export default function CardPage() {
     <>
       <Navbar />
 
-      <main className="min-h-screen bg-neutral-950 pb-24 text-white selection:bg-cyan-500/20">
-        <div className="mx-auto max-w-7xl space-y-8 px-4 py-8 sm:px-6 lg:px-8">
+      <main className="min-h-screen bg-neutral-950 pb-32 text-white selection:bg-cyan-500/20">
+        <div className="mx-auto max-w-7xl space-y-6 px-4 py-6 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
             <BackButton />
           </div>
 
           {/* Section Vitrine de la Carte */}
-          <section className="glass-card rounded-2xl p-6 sm:p-8">
+          <section className="rounded-2xl border border-zinc-900 bg-neutral-900/40 p-5 sm:p-6 shadow-xl">
             <div className="relative z-10 space-y-6">
               <CardHero
                 image={
@@ -254,7 +254,7 @@ export default function CardPage() {
                 set={card.set?.name || "Extension Inconnue"}
                 rarity={card.rarity || "N/A"}
               />
-              <div className="grid grid-cols-1 gap-4 border-t border-zinc-900 pt-4 sm:grid-cols-2">
+              <div className="grid grid-cols-1 gap-4 border-t border-zinc-900 pt-5 sm:grid-cols-2">
                 <CardActions cardId={card.id} />
                 <CardPortfolio
                   card={card}
@@ -266,7 +266,7 @@ export default function CardPage() {
 
           {/* Grille de Données Marché & Statistiques */}
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-            <div className="glass-card rounded-xl p-6">
+            <div className="rounded-2xl border border-zinc-900 bg-neutral-900/40 p-5 sm:p-6 shadow-xl">
               <MarketPanel
                 cardmarket={market?.cardmarket}
                 ebay={market?.ebay}
@@ -277,7 +277,7 @@ export default function CardPage() {
               />
             </div>
 
-            <div className="glass-card rounded-xl p-6">
+            <div className="rounded-2xl border border-zinc-900 bg-neutral-900/40 p-5 sm:p-6 shadow-xl">
               <PriceStats
                 current={priceInfo.current}
                 lowest={priceInfo.lowest}
@@ -289,26 +289,26 @@ export default function CardPage() {
           </div>
 
           {/* Section Analyse Investissement */}
-          <section className="glass-card space-y-6 rounded-2xl p-6 sm:p-8">
+          <section className="rounded-2xl border border-zinc-900 bg-neutral-900/40 p-5 sm:p-6 shadow-xl space-y-5">
             <div>
-              <h2 className="text-xl font-black tracking-tight text-white">
+              <h2 className="text-sm font-black uppercase tracking-widest text-white">
                 🧠 Analyse Investissement
               </h2>
-              <p className="mt-1 text-[11px] font-bold uppercase tracking-wider text-zinc-500">
+              <p className="mt-0.5 text-[11px] font-medium text-zinc-400">
                 Indicateurs de volatilité et aides à la décision calculés en
                 temps réel.
               </p>
             </div>
 
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-              <div className="glass-card flex min-h-[100px] flex-col justify-between rounded-xl bg-neutral-950/40 p-5">
+              <div className="rounded-2xl border border-zinc-900 bg-neutral-900/40 p-4 sm:p-5 flex flex-col justify-between min-h-[105px] shadow-xl">
                 <div className="flex items-start justify-between">
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-zinc-500">
+                  <span className="text-[10px] font-black uppercase tracking-wider text-zinc-500">
                     Tendance
                   </span>
                   <TrendingUp className="h-4 w-4 text-cyan-400" />
                 </div>
-                <span className="mt-3 text-lg font-black text-white">
+                <span className="mt-2 text-lg font-black text-white">
                   {trend === "up"
                     ? "Hausse"
                     : trend === "down"
@@ -317,30 +317,31 @@ export default function CardPage() {
                 </span>
               </div>
 
-              <div className="glass-card flex min-h-[100px] flex-col justify-between rounded-xl bg-neutral-950/40 p-5">
+              <div className="rounded-2xl border border-zinc-900 bg-neutral-900/40 p-4 sm:p-5 flex flex-col justify-between min-h-[105px] shadow-xl">
                 <div className="flex items-start justify-between">
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-zinc-500">
+                  <span className="text-[10px] font-black uppercase tracking-wider text-zinc-500">
                     Score IA
                   </span>
                   <Zap className="h-4 w-4 text-cyan-400" />
                 </div>
-                <span className="mt-3 text-2xl font-black text-white">
-                  {score}
-                  <span className="text-xs font-normal text-zinc-500">
-                    {" "}
+                <div className="mt-2 flex items-baseline gap-1">
+                  <span className="text-2xl font-black text-white tabular-nums">
+                    {score}
+                  </span>
+                  <span className="text-xs font-bold text-zinc-500">
                     / 10
                   </span>
-                </span>
+                </div>
               </div>
 
-              <div className="glass-card flex min-h-[100px] flex-col justify-between rounded-xl bg-neutral-950/40 p-5">
+              <div className="rounded-2xl border border-zinc-900 bg-neutral-900/40 p-4 sm:p-5 flex flex-col justify-between min-h-[105px] shadow-xl">
                 <div className="flex items-start justify-between">
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-zinc-500">
+                  <span className="text-[10px] font-black uppercase tracking-wider text-zinc-500">
                     Conseil d'Arbitrage
                   </span>
                   <HelpCircle className="h-4 w-4 text-cyan-400" />
                 </div>
-                <span className="mt-3 text-xs font-bold leading-relaxed text-white">
+                <span className="mt-2 text-xs font-bold leading-relaxed text-white">
                   {recommendation}
                 </span>
               </div>
@@ -348,7 +349,7 @@ export default function CardPage() {
           </section>
 
           {/* Section Prédictions */}
-          <section className="glass-card rounded-2xl p-6">
+          <section className="rounded-2xl border border-zinc-900 bg-neutral-900/40 p-5 sm:p-6 shadow-xl">
             <PredictionPanel
               predictedPrice30d={prediction.predictedPrice30d}
               roi30d={prediction.roi30d}
@@ -358,16 +359,16 @@ export default function CardPage() {
 
           {/* Graphiques */}
           <div className="grid grid-cols-1 gap-6">
-            <section className="glass-card rounded-2xl p-6">
-              <h2 className="mb-6 text-sm font-bold uppercase tracking-widest text-zinc-400">
+            <section className="rounded-2xl border border-zinc-900 bg-neutral-900/40 p-5 sm:p-6 shadow-xl">
+              <h2 className="mb-4 text-xs font-black uppercase tracking-widest text-zinc-400">
                 📈 Évolution des cours (30 derniers jours)
               </h2>
-              <div className="overflow-hidden rounded-xl border border-zinc-900 bg-black/20 p-2">
+              <div className="overflow-hidden rounded-2xl border border-zinc-900 bg-black/40 p-3 shadow-xl">
                 <PriceChart history={chartHistory} />
               </div>
             </section>
 
-            <section className="glass-card rounded-2xl p-6">
+            <section className="rounded-2xl border border-zinc-900 bg-neutral-900/40 p-5 sm:p-6 shadow-xl">
               <PriceGraph cardId={card.id} />
             </section>
           </div>
