@@ -123,7 +123,7 @@ export function getEbayPrice(card?: PokemonCard | null): number {
 }
 
 //
-// 📊 Moyenne des premiers prix planchers des plateformes (Near Mint)
+// 📊 Moyenne des premiers prix planchers des plateformes (Near Mint) avec Fallback anti-0€
 //
 export function getAverageMarketPrice(card?: PokemonCard | null): number {
   if (!card) return 0;
@@ -134,13 +134,19 @@ export function getAverageMarketPrice(card?: PokemonCard | null): number {
 
   const prices = [cm, tcg, ebay].filter((p) => p > 0);
 
-  if (!prices.length) {
-    return getCardPrice(card);
+  if (prices.length > 0) {
+    const minValidPrice = Math.min(...prices);
+    return Number(minValidPrice.toFixed(2));
   }
 
-  // Si on a plusieurs sources, on prend le plancher le plus pertinent ou la moyenne des planchers
-  const minValidPrice = Math.min(...prices);
-  return Number(minValidPrice.toFixed(2));
+  // 🛡️ SÉCURITÉ ANTI-0€ POUR DRACAUFEU ET CARTES RÉCENTES/PROMOS :
+  const rarity = (card.rarity || "").toLowerCase();
+  
+  if (rarity.includes("secret") || rarity.includes("illustration rare")) return 15.00;
+  if (rarity.includes("ultra") || rarity.includes("holo") || rarity.includes("vmax") || rarity.includes("vstar")) return 3.50;
+  if (rarity.includes("rare")) return 1.50;
+  
+  return 0.50;
 }
 
 //
