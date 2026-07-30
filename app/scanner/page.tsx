@@ -179,7 +179,7 @@ export default function ScannerPage() {
         setStatus(`Recherche TCG (${scanResult.language.toUpperCase()})...`);
         logger.api("Lancement de la recherche TCG multilingue", scanResult);
 
-        const cards = await searchCardsFromScan(scanResult, scanResult.language);
+        const cards = await searchCardsFromScan(scanResult);
 
         if (!cards || cards.length === 0) {
           setStatus(`Carte détectée (${scanResult.cardName}) mais introuvable.`);
