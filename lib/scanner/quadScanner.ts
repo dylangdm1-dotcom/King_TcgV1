@@ -1,146 +1,270 @@
-// lib/scanner/quadScanner.ts
+// components/scanner/QuadScannerModal.tsx
 
-export type QuadSlotIndex = 0 | 1 | 2 | 3; // Haut-Gauche, Haut-Droite, Bas-Gauche, Bas-Droite
+"use client";
 
-export type QuadScanItem = {
-  slot: QuadSlotIndex;
-  label: string;
-  croppedImageUri: string | null;
-  status: "empty" | "processing" | "success" | "error";
-  cardId?: string;
-  errorMsg?: string;
-};
+import { useState } from "react";
+import { X, Grid, Sparkles, AlertCircle, CheckCircle2, ArrowRight } from "lucide-react";
+import {
+  createQuadScanSession,
+  processQuadScan,
+  updateQuadSlotResult,
+  type QuadScanSession,
+  type QuadSlotIndex,
+} from "@/lib/scanner/quadScanner";
+import type { PokemonCard } from "@/lib/types";
 
-export type QuadScanSession = {
-  id: string;
-  sourceImageUri: string;
-  createdAt: string;
-  slots: QuadScanItem[];
-};
-
-/**
- * Initialise une session de scan groupé de 4 cartes à partir d'une photo globale
- */
-export function createQuadScanSession(sourceImageUri: string): QuadScanSession {
-  return {
-    id: `quad_${Date.now()}`,
-    sourceImageUri,
-    createdAt: new Date().toISOString(),
-    slots: [
-      { slot: 0, label: "Haut - Gauche", croppedImageUri: null, status: "empty" },
-      { slot: 1, label: "Haut - Droite", croppedImageUri: null, status: "empty" },
-      { slot: 2, label: "Bas - Gauche", croppedImageUri: null, status: "empty" },
-      { slot: 3, label: "Bas - Droite", croppedImageUri: null, status: "empty" },
-    ],
-  };
+interface QuadScannerModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  onCardsIdentified: (cards: PokemonCard[]) => void;
+  identifyCardByImage: (imageBase64: string) => Promise<PokemonCard | null>;
 }
 
-/**
- * Découpe virtuellement l'image source en 4 quadrants (Grille 2x2) via un canvas HTML5
- * pour extraire chaque carte individuellement avant l'envoi à l'IA.
- */
-export async function cropQuadImage(sourceImageUri: string, slot: QuadSlotIndex): Promise<string> {
-  if (typeof window === "undefined") return sourceImageUri;
+export default function QuadScannerModal({
+  isOpen,
+  onClose,
+  onCardsIdentified,
+  identifyCardByImage,
+}: QuadScannerModalProps) {
+  const [step, setStep] = useState<"upload" | "processing" | "results">("upload");
+  const [session, setSession] = useState<QuadScanSession | null>(null);
+  const [identifiedCardsMap, setIdentifiedCardsMap] = useState<Record<number, PokemonCard>>({});
+  const [globalError, setGlobalError] = useState<string | null>(null);
 
-  return new Promise((resolve, reject) => {
-    const img = new Image();
-    img.crossOrigin = "anonymous";
-    img.onload = () => {
-      const canvas = document.createElement("canvas");
-      const ctx = canvas.getContext("2d");
-      if (!ctx) {
-        reject(new Error("Impossible d'initialiser le contexte canvas"));
-        return;
+  if (!isOpen) return null;
+
+  async function handleFileSelected(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setGlobalError(null);
+    const reader = new FileReader();
+
+    reader.onload = async () => {
+      try {
+        const base64Image = reader.result as string;
+        const newSession = createQuadScanSession(base64Image);
+        setSession(newSession);
+        setStep("processing");
+
+        // 1. Découpage des 4 quadrants via canvas
+        const processedSession = await processQuadScan(newSession);
+        setSession(processedSession);
+
+        const cardsMap: Record<number, PokemonCard> = {};
+
+        // 2. Analyse séquentielle ou parallèle par l'IA de chaque quadrant
+        for (const slotItem of processedSession.slots) {
+          if (!slotItem.croppedImageUri) continue;
+
+          try {
+            const card = await identifyCardByImage(slotItem.croppedImageUri);
+            if (card) {
+              cardsMap[slotItem.slot] = card;
+              setSession((prev) =>
+                prev ? updateQuadSlotResult(prev, slotItem.slot, card.id, true) : prev
+              );
+            } else {
+              setSession((prev) =>
+                prev ? updateQuadSlotResult(prev, slotItem.slot, "", false, "Carte non reconnue") : prev
+              );
+            }
+          } catch (err) {
+            setSession((prev) =>
+              prev ? updateQuadSlotResult(prev, slotItem.slot, "", false, "Erreur API") : prev
+            );
+          }
+        }
+
+        setIdentifiedCardsMap(cardsMap);
+        setStep("results");
+      } catch (err) {
+        console.error("Erreur lors du traitement du Quad Scan", err);
+        setGlobalError("Impossible de traiter l'image globale.");
+        setStep("upload");
       }
-
-      const halfWidth = img.width / 2;
-      const halfHeight = img.height / 2;
-
-      canvas.width = halfWidth;
-      canvas.height = halfHeight;
-
-      let sx = 0;
-      let sy = 0;
-
-      switch (slot) {
-        case 0: // Haut-Gauche
-          sx = 0; sy = 0;
-          break;
-        case 1: // Haut-Droite
-          sx = halfWidth; sy = 0;
-          break;
-        case 2: // Bas-Gauche
-          sx = 0; sy = halfHeight;
-          break;
-        case 3: // Bas-Droite
-          sx = halfWidth; sy = halfHeight;
-          break;
-      }
-
-      // Dessin du quart de l'image correspondante
-      ctx.drawImage(img, sx, sy, halfWidth, halfHeight, 0, 0, halfWidth, halfHeight);
-
-      resolve(canvas.toDataURL("image/jpeg", 0.90));
     };
 
-    img.onerror = (err) => reject(err);
-    img.src = sourceImageUri;
-  });
-}
+    reader.onerror = () => {
+      setGlobalError("Erreur de lecture du fichier.");
+    };
 
-/**
- * Prépare et découpe automatiquement les 4 quadrants d'une photo de groupe
- */
-export async function processQuadScan(session: QuadScanSession): Promise<QuadScanSession> {
-  const updatedSlots = await Promise.all(
-    session.slots.map(async (slotItem) => {
-      try {
-        const croppedUri = await cropQuadImage(session.sourceImageUri, slotItem.slot);
-        return {
-          ...slotItem,
-          croppedImageUri: croppedUri,
-          status: "processing" as const,
-        };
-      } catch (err) {
-        return {
-          ...slotItem,
-          status: "error" as const,
-          errorMsg: "Échec du découpage du quadrant",
-        };
-      }
-    })
+    reader.readAsDataURL(file);
+  }
+
+  function handleValidateAll() {
+    const validCards = Object.values(identifiedCardsMap);
+    onCardsIdentified(validCards);
+    handleReset();
+  }
+
+  function handleReset() {
+    setStep("upload");
+    setSession(null);
+    setIdentifiedCardsMap({});
+    setGlobalError(null);
+  }
+
+  return (
+    <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
+      <div className="bg-neutral-900 border border-zinc-800 rounded-2xl max-w-lg w-full p-6 space-y-6 shadow-2xl relative animate-fadeIn max-h-[90vh] overflow-y-auto">
+        <button
+          onClick={() => {
+            handleReset();
+            onClose();
+          }}
+          className="absolute top-4 right-4 text-zinc-400 hover:text-white transition"
+        >
+          <X className="w-5 h-5" />
+        </button>
+
+        {/* Header */}
+        <div className="flex items-center gap-3">
+          <div className="p-3 bg-amber-500/10 border border-amber-500/20 rounded-xl text-amber-400">
+            <Grid className="w-6 h-6" />
+          </div>
+          <div>
+            <h2 className="text-base font-black uppercase text-white">Scan Groupé (4 Cartes)</h2>
+            <p className="text-xs text-zinc-400">Optimisez vos ajouts en scannant une grille 2x2.</p>
+          </div>
+        </div>
+
+        {globalError && (
+          <div className="p-3 bg-rose-500/10 border border-rose-500/20 rounded-xl text-rose-400 text-xs font-bold flex items-center gap-2">
+            <AlertCircle className="w-4 h-4 flex-shrink-0" />
+            <span>{globalError}</span>
+          </div>
+        )}
+
+        {/* STEP 1 : UPLOAD */}
+        {step === "upload" && (
+          <div className="border-2 border-dashed border-zinc-700 hover:border-cyan-500 transition rounded-xl p-8 text-center flex flex-col items-center justify-center gap-3 bg-black/40">
+            <Sparkles className="w-8 h-8 text-cyan-400 animate-pulse" />
+            <div className="space-y-1">
+              <p className="text-xs font-bold text-white uppercase">Prendre ou importer une photo de groupe</p>
+              <p className="text-[10px] text-zinc-500">Disposez vos 4 cartes bien à plat dans le champ</p>
+            </div>
+
+            <label className="mt-2 cursor-pointer bg-cyan-500 hover:bg-cyan-400 text-black font-black text-xs uppercase px-5 py-3 rounded-xl transition shadow-lg shadow-cyan-500/20 inline-flex items-center gap-2">
+              <span>Sélectionner / Photographier</span>
+              <input
+                type="file"
+                accept="image/*"
+                capture="environment"
+                className="hidden"
+                onChange={FileSelected => handleFileSelected(FileSelected as any)}
+              />
+            </label>
+          </div>
+        )}
+
+        {/* STEP 2 : PROCESSING */}
+        {step === "processing" && session && (
+          <div className="space-y-4">
+            <div className="text-center space-y-2 py-4">
+              <div className="inline-block w-6 h-6 border-2 border-cyan-400 border-t-transparent rounded-full animate-spin" />
+              <p className="text-xs font-black uppercase text-cyan-400 tracking-wider">
+                Analyse IA des quadrants en cours...
+              </p>
+            </div>
+
+            <div className="grid grid-cols-2 gap-3">
+              {session.slots.map((slot) => (
+                <div
+                  key={slot.slot}
+                  className="p-3 bg-black/60 border border-zinc-800 rounded-xl flex items-center gap-3"
+                >
+                  {slot.croppedImageUri ? (
+                    <img
+                      src={slot.croppedImageUri}
+                      alt={slot.label}
+                      className="w-10 h-14 object-cover rounded border border-zinc-700"
+                    />
+                  ) : (
+                    <div className="w-10 h-14 bg-zinc-800 rounded animate-pulse" />
+                  )}
+                  <div className="min-w-0 flex-1">
+                    <p className="text-[10px] font-black uppercase text-zinc-400">{slot.label}</p>
+                    <p className="text-xs font-bold text-white mt-0.5 truncate">
+                      {slot.status === "processing" && "Analyse..."}
+                      {slot.status === "success" && "Trouvé !"}
+                      {slot.status === "error" && "Échec"}
+                      {slot.status === "empty" && "En attente"}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* STEP 3 : RESULTS */}
+        {step === "results" && session && (
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-black uppercase tracking-wider text-zinc-400">
+                Résultats ({Object.keys(identifiedCardsMap).length}/4 identifiées)
+              </span>
+              <button
+                onClick={handleReset}
+                className="text-[10px] font-bold text-cyan-400 hover:underline uppercase"
+              >
+                Recommencer
+              </button>
+            </div>
+
+            <div className="grid grid-cols-1 gap-2.5 max-h-60 overflow-y-auto pr-1">
+              {session.slots.map((slot) => {
+                const card = identifiedCardsMap[slot.slot];
+                return (
+                  <div
+                    key={slot.slot}
+                    className="p-3 bg-black/60 border border-zinc-800 rounded-xl flex items-center justify-between gap-3"
+                  >
+                    <div className="flex items-center gap-3 min-w-0">
+                      {slot.croppedImageUri && (
+                        <img
+                          src={slot.croppedImageUri}
+                          alt={slot.label}
+                          className="w-8 h-11 object-cover rounded border border-zinc-700 flex-shrink-0"
+                        />
+                      )}
+                      <div className="min-w-0">
+                        <p className="text-[9px] font-black uppercase text-zinc-500">{slot.label}</p>
+                        <p className="text-xs font-black text-white truncate">
+                          {card ? card.name : "Non identifiée"}
+                        </p>
+                        {card && (
+                          <p className="text-[10px] text-cyan-400 font-medium truncate">
+                            N° {card.number || "---"} {card.rarity ? `• ${card.rarity}` : ""}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+
+                    <div>
+                      {card ? (
+                        <CheckCircle2 className="w-5 h-5 text-emerald-400 flex-shrink-0" />
+                      ) : (
+                        <AlertCircle className="w-5 h-5 text-rose-400 flex-shrink-0" />
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            <button
+              onClick={handleValidateAll}
+              disabled={Object.keys(identifiedCardsMap).length === 0}
+              className="w-full bg-cyan-500 hover:bg-cyan-400 text-black font-black text-xs uppercase py-3.5 rounded-xl transition shadow-lg shadow-cyan-500/20 disabled:opacity-50 flex items-center justify-center gap-2"
+            >
+              <span>Valider et importer les cartes</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
   );
-
-  return {
-    ...session,
-    slots: updatedSlots,
-  };
-}
-
-/**
- * Met à jour le statut d'un quadrant spécifique après analyse par l'IA
- */
-export function updateQuadSlotResult(
-  session: QuadScanSession,
-  slot: QuadSlotIndex,
-  cardId: string,
-  success: boolean,
-  errorMsg?: string
-): QuadScanSession {
-  const updatedSlots = session.slots.map((item) => {
-    if (item.slot === slot) {
-      return {
-        ...item,
-        status: success ? ("success" as const) : ("error" as const),
-        cardId: success ? cardId : undefined,
-        errorMsg: errorMsg,
-      };
-    }
-    return item;
-  });
-
-  return {
-    ...session,
-    slots: updatedSlots,
-  };
 }
