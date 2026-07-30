@@ -158,7 +158,7 @@ export default function BibliothequePage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-black text-white pb-24 selection:bg-cyan-500/10">
+      <main className="min-h-screen bg-neutral-950 text-white pb-32 selection:bg-cyan-500/20">
         <div className="mx-auto max-w-7xl space-y-6 px-4 py-6 sm:px-6 lg:px-8">
           
           <div className="flex items-center justify-between">
@@ -166,30 +166,31 @@ export default function BibliothequePage() {
           </div>
 
           {/* En-tête Technique V3.8 */}
-          <section className="rounded-2xl border border-zinc-900 bg-gradient-to-br from-neutral-950 via-black to-neutral-950 p-5 shadow-2xl relative overflow-hidden">
+          <section className="rounded-2xl border border-zinc-900 bg-neutral-900/40 p-5 sm:p-6 shadow-xl relative overflow-hidden">
             <div className="absolute top-0 right-0 w-64 h-64 bg-cyan-500/5 rounded-full blur-3xl pointer-events-none" />
             
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 relative z-10">
               <div>
-                <span className="text-[10px] font-black uppercase tracking-widest text-cyan-400 flex items-center gap-1.5">
+                <span className="text-[9px] font-black uppercase tracking-widest text-cyan-400 bg-cyan-500/10 border border-cyan-500/20 px-2.5 py-1 rounded-full flex items-center gap-1.5 w-fit mb-2">
                   <ShieldCheck className="w-3.5 h-3.5" /> Gestion d'Actifs V3.8 Pro
                 </span>
-                <h1 className="mt-1 text-2xl font-black uppercase tracking-tight text-white">
+                <h1 className="text-lg font-black uppercase tracking-tight text-white">
                   Ma Bibliothèque TCG
                 </h1>
+                <p className="mt-0.5 text-[11px] text-zinc-400">Pilotez l'ensemble de vos actifs Pokémon, valeur de marché et favoris.</p>
               </div>
 
               {/* Raccourcis Rapides */}
               <div className="flex items-center gap-2">
                 <Link
                   href="/collection/tout"
-                  className="px-3.5 py-2 rounded-xl bg-cyan-500 text-black text-xs font-black uppercase tracking-wider flex items-center gap-1.5 hover:bg-cyan-400 transition active:scale-95 shadow-lg shadow-cyan-500/10"
+                  className="px-4 py-2.5 rounded-xl bg-cyan-500 text-black text-[10px] font-black uppercase tracking-wider flex items-center gap-1.5 hover:bg-cyan-400 transition active:scale-98 shadow-lg shadow-cyan-500/10"
                 >
                   <Layers className="w-3.5 h-3.5" /> Inventaire ({collectionCards.length})
                 </Link>
                 <Link
                   href="/favoris"
-                  className="px-3.5 py-2 rounded-xl bg-neutral-900 border border-zinc-800 text-white text-xs font-black uppercase tracking-wider flex items-center gap-1.5 hover:bg-neutral-800 transition active:scale-95"
+                  className="px-4 py-2.5 rounded-xl bg-neutral-900 border border-zinc-800 text-white text-[10px] font-black uppercase tracking-wider flex items-center gap-1.5 hover:bg-neutral-800 transition active:scale-98 shadow-lg"
                 >
                   <Bookmark className="w-3.5 h-3.5 text-yellow-400" /> Watchlist
                 </Link>
@@ -201,12 +202,12 @@ export default function BibliothequePage() {
           <section className="grid gap-3 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
             
             {/* KPI 1: Valeur Portfolio */}
-            <div className="rounded-xl border border-zinc-900 bg-neutral-950/60 p-4 flex flex-col justify-between min-h-[105px]">
+            <div className="rounded-2xl border border-zinc-900 bg-neutral-900/40 p-4 sm:p-5 flex flex-col justify-between min-h-[115px] shadow-xl">
               <div className="flex justify-between items-start">
-                <span className="text-zinc-500 text-[10px] font-black uppercase tracking-wider flex items-center gap-1">
-                  <TrendingUp className="w-3 h-3 text-cyan-400" /> Valeur Portfolio
+                <span className="text-zinc-500 text-[10px] font-black uppercase tracking-wider flex items-center gap-1.5">
+                  <TrendingUp className="w-3.5 h-3.5 text-cyan-400" /> Valeur Portfolio
                 </span>
-                <span className="text-[9px] font-black uppercase tracking-wider text-cyan-400 bg-cyan-500/10 border border-cyan-500/20 px-1.5 py-0.5 rounded">
+                <span className="text-[9px] font-black uppercase tracking-wider text-cyan-400 bg-cyan-500/10 border border-cyan-500/20 px-2 py-0.5 rounded-full">
                   Marché EUR
                 </span>
               </div>
@@ -216,12 +217,12 @@ export default function BibliothequePage() {
             </div>
 
             {/* KPI 2: Total Volume & Uniques */}
-            <div className="rounded-xl border border-zinc-900 bg-neutral-950/60 p-4 flex flex-col justify-between min-h-[105px]">
+            <div className="rounded-2xl border border-zinc-900 bg-neutral-900/40 p-4 sm:p-5 flex flex-col justify-between min-h-[115px] shadow-xl">
               <div className="flex justify-between items-start">
-                <span className="text-zinc-500 text-[10px] font-black uppercase tracking-wider flex items-center gap-1">
-                  <Layers className="w-3 h-3 text-zinc-400" /> Volume Physique
+                <span className="text-zinc-500 text-[10px] font-black uppercase tracking-wider flex items-center gap-1.5">
+                  <Layers className="w-3.5 h-3.5 text-zinc-400" /> Volume Physique
                 </span>
-                <span className="text-[9px] font-black uppercase tracking-wider text-zinc-400 bg-zinc-800/40 border border-zinc-800 px-1.5 py-0.5 rounded">
+                <span className="text-[9px] font-black uppercase tracking-wider text-zinc-400 bg-zinc-800/40 border border-zinc-800 px-2 py-0.5 rounded-full">
                   Stock
                 </span>
               </div>
@@ -236,19 +237,19 @@ export default function BibliothequePage() {
             </div>
 
             {/* KPI 3: Carte Majeure (Top Asset) */}
-            <div className="rounded-xl border border-zinc-900 bg-neutral-950/60 p-4 flex flex-col justify-between min-h-[105px]">
+            <div className="rounded-2xl border border-zinc-900 bg-neutral-900/40 p-4 sm:p-5 flex flex-col justify-between min-h-[115px] shadow-xl">
               <div className="flex justify-between items-start">
-                <span className="text-zinc-500 text-[10px] font-black uppercase tracking-wider flex items-center gap-1">
-                  <Award className="w-3 h-3 text-yellow-400" /> Top Actif
+                <span className="text-zinc-500 text-[10px] font-black uppercase tracking-wider flex items-center gap-1.5">
+                  <Award className="w-3.5 h-3.5 text-yellow-400" /> Top Actif
                 </span>
-                <span className="text-[9px] font-black uppercase tracking-wider text-yellow-400 bg-yellow-500/10 border border-yellow-500/20 px-1.5 py-0.5 rounded">
+                <span className="text-[9px] font-black uppercase tracking-wider text-yellow-400 bg-yellow-500/10 border border-yellow-500/20 px-2 py-0.5 rounded-full">
                   Star
                 </span>
               </div>
               <div className="mt-2">
                 {topValuedCard ? (
                   <div className="flex items-baseline justify-between">
-                    <span className="text-xs font-black text-white truncate max-w-[110px]">
+                    <span className="text-xs font-black text-white truncate max-w-[130px]">
                       {topValuedCard.name}
                     </span>
                     <span className="text-sm font-black text-yellow-400 tabular-nums">
@@ -262,12 +263,12 @@ export default function BibliothequePage() {
             </div>
 
             {/* KPI 4: Indice de Liquidité & Couverture */}
-            <div className="rounded-xl border border-zinc-900 bg-neutral-950/60 p-4 flex flex-col justify-between min-h-[105px]">
+            <div className="rounded-2xl border border-zinc-900 bg-neutral-900/40 p-4 sm:p-5 flex flex-col justify-between min-h-[115px] shadow-xl">
               <div className="flex justify-between items-start">
-                <span className="text-zinc-500 text-[10px] font-black uppercase tracking-wider flex items-center gap-1">
-                  <Activity className="w-3 h-3 text-emerald-400" /> Couverture Prix
+                <span className="text-zinc-500 text-[10px] font-black uppercase tracking-wider flex items-center gap-1.5">
+                  <Activity className="w-3.5 h-3.5 text-emerald-400" /> Couverture Prix
                 </span>
-                <span className="text-[9px] font-black uppercase tracking-wider text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-1.5 py-0.5 rounded">
+                <span className="text-[9px] font-black uppercase tracking-wider text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-full">
                   Liquidité
                 </span>
               </div>
@@ -285,10 +286,10 @@ export default function BibliothequePage() {
 
           {/* Section Collection */}
           <section className="space-y-4 pt-2">
-            <div className="flex justify-between items-end border-b border-zinc-900 pb-2">
+            <div className="flex justify-between items-end border-b border-zinc-900 pb-3">
               <h2 className="text-xs font-black uppercase tracking-widest text-white flex items-center gap-2">
                 <Layers className="w-4 h-4 text-cyan-400" /> Collection Récente 
-                <span className="text-zinc-600 font-bold">({collectionCards.length})</span>
+                <span className="text-zinc-500 font-bold">({collectionCards.length})</span>
               </h2>
               {collectionCards.length > 0 && (
                 <Link
@@ -303,18 +304,18 @@ export default function BibliothequePage() {
             {loading ? (
               <SkeletonGrid />
             ) : lastThreeCollection.length === 0 ? (
-              <div className="rounded-xl border border-zinc-900 bg-neutral-950/40 p-8 text-center text-xs text-zinc-600 font-medium italic">
+              <div className="rounded-2xl border border-zinc-900 bg-neutral-900/40 p-12 text-center text-xs text-zinc-500 font-medium italic shadow-xl">
                 Votre inventaire d'actifs est actuellement vide.
               </div>
             ) : (
-              <div className="grid grid-cols-3 gap-3 md:grid-cols-4 xl:grid-cols-6">
+              <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
                 {lastThreeCollection.map((card) => {
                   const qtyNumber = getCardQuantity(card.qty);
                   return (
                     <div key={card.id} className="relative group">
                       <CardResult card={card} />
                       {qtyNumber > 1 && (
-                        <div className="absolute right-2 top-2 rounded bg-neutral-950/90 border border-cyan-500/40 px-1.5 py-0.5 text-[9px] font-black text-cyan-400 shadow-2xl z-10 tabular-nums backdrop-blur-md">
+                        <div className="absolute right-3 top-3 rounded-lg bg-black/80 border border-cyan-500/40 px-2 py-0.5 text-[10px] font-black text-cyan-400 shadow-2xl z-10 tabular-nums backdrop-blur-md">
                           x{qtyNumber}
                         </div>
                       )}
@@ -324,9 +325,9 @@ export default function BibliothequePage() {
               </div>
             )}
 
-            <div className="rounded-xl border border-zinc-900 bg-neutral-950/40 p-3.5 text-xs text-zinc-400 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
-              <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+            <div className="rounded-2xl border border-zinc-900 bg-neutral-900/40 p-4 text-xs text-zinc-300 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 shadow-xl">
+              <div className="flex items-center gap-2.5">
+                <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse" />
                 <span>
                   Modèles uniques : <strong className="text-white">{collectionCards.length}</strong> | Cumul doublons : <strong className="text-white">{Math.max(0, totalCardsCount - collectionCards.length)}</strong>
                 </span>
@@ -342,10 +343,10 @@ export default function BibliothequePage() {
 
           {/* Section Watchlist (Favoris) */}
           <section className="space-y-4 pt-4">
-            <div className="flex justify-between items-end border-b border-zinc-900 pb-2">
+            <div className="flex justify-between items-end border-b border-zinc-900 pb-3">
               <h2 className="text-xs font-black uppercase tracking-widest text-white flex items-center gap-2">
                 <Bookmark className="w-4 h-4 text-yellow-400" /> Watchlist / Favoris 
-                <span className="text-zinc-600 font-bold">({favoriteCards.length})</span>
+                <span className="text-zinc-500 font-bold">({favoriteCards.length})</span>
               </h2>
               {favoriteCards.length > 0 && (
                 <Link
@@ -360,19 +361,19 @@ export default function BibliothequePage() {
             {loading ? (
               <SkeletonGrid />
             ) : lastThreeFavorites.length === 0 ? (
-              <div className="rounded-xl border border-zinc-900 bg-neutral-950/40 p-8 text-center text-xs text-zinc-600 font-medium italic">
+              <div className="rounded-2xl border border-zinc-900 bg-neutral-900/40 p-12 text-center text-xs text-zinc-500 font-medium italic shadow-xl">
                 Aucun actif en surveillance sous votre Watchlist.
               </div>
             ) : (
-              <div className="grid grid-cols-3 gap-3 md:grid-cols-4 xl:grid-cols-6">
+              <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
                 {lastThreeFavorites.map((card) => (
                   <CardResult key={card.id} card={card} />
                 ))}
               </div>
             )}
 
-            <div className="rounded-xl border border-zinc-900 bg-neutral-950/40 p-3 text-[11px] text-zinc-500">
-              <span className="font-bold text-zinc-300">Surveillance marché :</span>{" "}
+            <div className="rounded-2xl border border-zinc-900 bg-neutral-900/40 p-4 text-[11px] text-zinc-400 shadow-xl">
+              <span className="font-bold text-white">Surveillance marché :</span>{" "}
               {favoriteCards.filter((c) => (calculateRealMarketPrices(c).average ?? 0) > 0).length} actifs sous surveillance bénéficient d'un flux d'évaluation réactualisé.
             </div>
           </section>
@@ -385,11 +386,11 @@ export default function BibliothequePage() {
 
 function SkeletonGrid() {
   return (
-    <div className="grid grid-cols-3 gap-3 md:grid-cols-4 xl:grid-cols-6">
+    <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
       {Array.from({ length: 3 }).map((_, i) => (
         <div
           key={i}
-          className="aspect-[0.72] animate-pulse rounded-xl bg-neutral-950/60 border border-zinc-900/80"
+          className="aspect-[0.72] animate-pulse rounded-2xl bg-neutral-900/40 border border-zinc-900 p-3"
         />
       ))}
     </div>
