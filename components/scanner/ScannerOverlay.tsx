@@ -75,13 +75,13 @@ export default function ScannerOverlay({
         {/* Zone OCR Nom */}
         <div
           className={`
-            absolute left-[4%] top-[3.5%] flex h-[11%] w-[92%] items-center justify-between rounded-lg border px-2.5 transition-all
+            absolute left-[4%] top-[3.5%] flex h-[11%] w-[92%] items-center justify-between rounded-xl border px-2.5 transition-all shadow-md
             ${
               hasResult
                 ? "border-emerald-500/40 bg-emerald-500/20"
                 : scanning
                 ? "border-cyan-400/50 bg-cyan-500/15 animate-pulse"
-                : "border-zinc-700/40 bg-zinc-900/30"
+                : "border-zinc-700/40 bg-neutral-900/30"
             }
           `}
         >
@@ -98,13 +98,13 @@ export default function ScannerOverlay({
         {/* Zone OCR Numéro */}
         <div
           className={`
-            absolute bottom-[8.5%] left-[5%] flex h-[8.5%] w-[42%] items-center justify-between rounded-lg border border-dashed px-2 transition-all
+            absolute bottom-[8.5%] left-[5%] flex h-[8.5%] w-[42%] items-center justify-between rounded-xl border border-dashed px-2 transition-all shadow-md
             ${
               hasResult
                 ? "border-emerald-500/40 bg-emerald-500/20"
                 : scanning
                 ? "border-cyan-400/50 bg-cyan-500/15 animate-pulse"
-                : "border-zinc-700/40 bg-zinc-900/30"
+                : "border-zinc-700/40 bg-neutral-900/30"
             }
           `}
         >
@@ -127,7 +127,7 @@ export default function ScannerOverlay({
       <div className="absolute bottom-[6%] inset-x-0 flex justify-center px-4">
         <div
           className={`
-            flex items-center gap-2.5 rounded-full border px-5 py-2.5 text-[10px] sm:text-[11px] font-black uppercase tracking-widest shadow-2xl backdrop-blur-md transition-all duration-300 text-center
+            flex items-center gap-2.5 rounded-2xl border px-5 py-2.5 text-[10px] sm:text-[11px] font-black uppercase tracking-widest shadow-2xl backdrop-blur-md transition-all duration-300 text-center
             ${
               hasResult
                 ? "border-emerald-500/60 bg-emerald-950/90 text-emerald-400 shadow-emerald-900/30"
