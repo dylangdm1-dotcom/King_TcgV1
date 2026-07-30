@@ -6,6 +6,9 @@ import { getAdjustedPriceByCondition } from "./marketEngine";
 
 export type { SearchFilters };
 
+// Cache de mémoïsation pour éviter les recalculs inutiles sur de grandes collections
+const searchMemoCache = new Map<string, { hash: string; result: PokemonCard[] }>();
+
 /**
  * Convertit de manière sécurisée n'importe quelle date de release ("YYYY/MM/DD" ou "YYYY-MM-DD") en timestamp.
  */
@@ -28,12 +31,25 @@ export function filterCards(
   cards: PokemonCard[],
   filters: SearchFilters
 ): PokemonCard[] {
+  if (!cards || cards.length === 0) return [];
+
+  // Création d'une clé de cache basée sur l'état des filtres et la taille du tableau
+  const cacheKey = `${cards.length}_${JSON.stringify(filters)}`;
+  const firstCardId = cards[0]?.id || "";
+  const lastCardId = cards[cards.length - 1]?.id || "";
+  const currentHash = `${firstCardId}_${lastCardId}`;
+
+  const cached = searchMemoCache.get(cacheKey);
+  if (cached && cached.hash === currentHash) {
+    return cached.result;
+  }
+
   let results = [...cards];
 
   // 1. Catégorie (Supertype)
   if (filters.category && filters.category !== "all") {
     results = results.filter((card) => {
-      const supertype = card.supertype?.toLowerCase() ?? "";
+      const supertype = (card.supertype || "").toLowerCase().trim();
 
       switch (filters.category) {
         case "pokemon":
@@ -50,7 +66,7 @@ export function filterCards(
 
   // 2. Rareté
   if (filters.rarity && filters.rarity !== "all") {
-    const targetRarity = filters.rarity.toLowerCase();
+    const targetRarity = filters.rarity.toLowerCase().trim();
     results = results.filter((card) =>
       (card.rarity ?? "").toLowerCase().includes(targetRarity)
     );
@@ -68,7 +84,7 @@ export function filterCards(
     });
   }
 
-  // 4. Tri (Intègre désormais la condition / l'état de la carte pour les prix)
+  // 4. Tri (Intègre la condition / l'état de la carte pour les prix)
   switch (filters.sort) {
     case "name":
       results.sort((a, b) => (a.name || "").localeCompare(b.name || ""));
@@ -102,6 +118,9 @@ export function filterCards(
       });
       break;
   }
+
+  // Stockage dans le cache de performance
+  searchMemoCache.set(cacheKey, { hash: currentHash, result: results });
 
   return results;
 }
