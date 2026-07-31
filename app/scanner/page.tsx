@@ -39,26 +39,6 @@ interface ScannerCameraHandle {
   getVideo(): HTMLVideoElement | null;
 }
 
-interface ScanMetadata {
-  cardName: string;
-  pokemonName: string;
-  cardNumber: string | null;
-  setName: string | null;
-  language: string;
-  rarity: string | null;
-  variant: string | null;
-  isFullArt: boolean;
-  isSecretRare: boolean;
-  confidence: number;
-  needsSecondPass: boolean;
-}
-
-interface ConfidenceResult {
-  global: number;
-  name: number;
-  number: number;
-  set: number;
-}
 
 export interface ScannedBatchItem {
   id: string;
@@ -77,7 +57,7 @@ export default function ScannerPage() {
     "Alignez la carte dans le cadre et appuyez sur Scanner"
   );
   const [detectedCard, setDetectedCard] = useState<any>(null);
-  const [scanData, setScanData] = useState<ScanMetadata | null>(null);
+  const [scanData, setScanData] = useState<CardScanResult | null>(null);
   const [scanConfidence, setScanConfidence] = useState(0);
   const [needsRetry, setNeedsRetry] = useState(false);
 
@@ -445,7 +425,31 @@ export default function ScannerPage() {
       const resData = await response.json();
 
       if (resData.success && resData.data) {
-        const cards = await searchCardsFromScan(resData.data);
+        const data = resData.data;
+      
+        const scanResult: CardScanResult = {
+          cardName: data.cardName ?? data.pokemonName ?? "",
+          pokemonName: data.pokemonName ?? data.cardName ?? "",
+          cardNumber: data.cardNumber ?? null,
+      
+          setName: data.setName ?? null,
+          setSymbol: null,
+      
+          cardType: null,
+      
+          language: data.language ?? "fr",
+          rarity: data.rarity ?? null,
+          variant: data.variant ?? null,
+      
+          isFullArt: false,
+          isSecretRare: false,
+      
+          confidence: data.confidence ?? 0,
+          needsSecondPass: false,
+        };
+      
+        const cards = await searchCardsFromScan(scanResult);
+      
         return cards?.[0] || null;
       }
     } catch (e) {
