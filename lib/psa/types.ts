@@ -11,6 +11,9 @@ export type PSAGrade = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
 
 export type Currency = "EUR" | "USD";
 
+/**
+ * Historique des ventes d'une carte
+ */
 export interface PSASaleHistoryItem {
   date: string;
   soldPrice: number;
@@ -19,6 +22,9 @@ export interface PSASaleHistoryItem {
   currency?: Currency;
 }
 
+/**
+ * Prix marché par grade
+ */
 export interface PSAPrices {
   ungraded: number;
   psa7: number;
@@ -27,6 +33,9 @@ export interface PSAPrices {
   psa10: number;
 }
 
+/**
+ * Carte PSA dans la collection King TCG
+ */
 export interface PSACard {
   /**
    * ID interne King TCG
@@ -39,14 +48,21 @@ export interface PSACard {
   psaCertNumber: string;
 
   /**
-   * Informations de la carte
+   * Informations carte Pokémon
    */
   cardName: string;
   setName: string;
   cardNumber: string;
 
   /**
-   * Grade PSA
+   * Informations complémentaires
+   */
+  language?: string;
+  rarity?: string;
+  releaseYear?: number;
+
+  /**
+   * Grade PSA officiel
    */
   grade: PSAGrade;
 
@@ -61,7 +77,7 @@ export interface PSACard {
   estimatedValue: number;
 
   /**
-   * Prix payé (optionnel)
+   * Prix payé lors de l'achat
    */
   purchasePrice?: number;
 
@@ -71,49 +87,69 @@ export interface PSACard {
   purchaseDate?: string;
 
   /**
-   * Devise
+   * Devise utilisée
    */
   currency?: Currency;
 
   /**
-   * Cotations du marché
+   * Prix marché actuels
+   * Source future : PriceCharting
    */
-  prices?: PSAPrices;
+  marketPrices?: PSAPrices;
 
   /**
-   * Historique des ventes
+   * Historique ventes
    */
   salesHistory: PSASaleHistoryItem[];
 
   /**
-   * Lien futur vers la certification PSA
+   * Lien certification PSA
    */
   certificationUrl?: string;
 
   /**
-   * Date d'ajout dans King TCG
+   * Certification vérifiée
+   * Future connexion PSA
+   */
+  certVerified?: boolean;
+
+  /**
+   * Date ajout King TCG
    */
   createdAt: string;
 
   /**
-   * Dernière mise à jour
+   * Dernière modification
    */
   updatedAt?: string;
 }
 
+/**
+ * Sous-note IA d'un critère PSA
+ */
 export interface PSAEstimationSubGrade {
+  /**
+   * Note sur 10
+   */
   score: number;
+
+  /**
+   * Explication IA
+   */
   comment: string;
 }
 
+/**
+ * Résultat analyse IA gradation
+ */
 export interface PSAEstimationResult {
   /**
-   * Grade estimé par l'IA
+   * Grade PSA estimé
    */
   predictedGrade: PSAGrade;
 
   /**
-   * Niveau de confiance
+   * Confiance IA en %
    */
   confidence: number;
 
@@ -138,12 +174,20 @@ export interface PSAEstimationResult {
   weaknesses: string[];
 
   /**
-   * Version du moteur IA
+   * Version moteur IA
    */
   aiVersion?: string;
 
   /**
-   * Date d'analyse
+   * Images utilisées pour analyse
+   */
+  analyzedImages?: {
+    front?: string;
+    back?: string;
+  };
+
+  /**
+   * Date analyse
    */
   analyzedAt: string;
 }
