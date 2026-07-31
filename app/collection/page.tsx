@@ -25,18 +25,14 @@ import { PokemonCard } from "../../lib/types";
  * King TCG V5.0
  * Type carte collection avec quantité stockée
  */
-type CollectionCardType = PokemonCard & {
-  qty: number | {
-    quantity: number;
-  };
+ type CollectionCardType = PokemonCard & {
+  qty: ReturnType<typeof getCollection>[string];
 };
 
 /**
  * Extraction sécurisée quantité carte
  */
-function getCardQuantity(
-  qty: number | { quantity: number }
-): number {
+ function getCardQuantity(qty: any): number {
   if (typeof qty === "number") {
     return qty;
   }
@@ -112,13 +108,9 @@ export default function BibliothequePage() {
     ])
     .then(([collectionResults, favoriteResults]) => {
       const cleanCollection =
-        collectionResults.filter(
-          Boolean
-        ) as CollectionCardType[];
-      const cleanFavorites =
-        favoriteResults.filter(
-          Boolean
-        ) as PokemonCard[];
+  collectionResults.filter(
+    (card): card is CollectionCardType => card !== null
+  );
 
       setCollectionCards(cleanCollection);
       setFavoriteCards(cleanFavorites);
