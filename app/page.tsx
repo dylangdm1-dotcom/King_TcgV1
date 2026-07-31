@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import { 
   Layers, Library, Bookmark, Wallet, 
-  LayoutDashboard, Camera, Star, Video, Zap, Sparkles 
+  LayoutDashboard, Camera, Star, Video, Zap, Sparkles, Award 
 } from "lucide-react";
 import { getCollection, getFavorites } from "@/lib/storage";
 import { getCardById } from "@/lib/pokemon";
@@ -140,25 +140,33 @@ export default function Home() {
               href="/dashboard" 
               title="Tableau de bord" 
               subtitle="Suivi de portefeuille" 
-              icon={<LayoutDashboard className="w-5 h-5" />} 
+              icon={<LayoutDashboard className="w-5 h-5 text-cyan-400" />} 
             />
             <QuickCard 
               href="/scanner" 
               title="Scanner IA" 
               subtitle="Identifier une carte" 
-              icon={<Camera className="w-5 h-5" />} 
+              icon={<Camera className="w-5 h-5 text-cyan-400" />} 
             />
             <QuickCard 
               href="/collection" 
               title="Collection" 
               subtitle="Gérer vos cartes" 
-              icon={<Library className="w-5 h-5" />} 
+              icon={<Library className="w-5 h-5 text-cyan-400" />} 
             />
             <QuickCard 
               href="/favoris" 
               title="Favoris" 
               subtitle="Suivre vos pépites" 
-              icon={<Star className="w-5 h-5" />} 
+              icon={<Star className="w-5 h-5 text-cyan-400" />} 
+            />
+            {/* Nouveau Module PSA avec design cyan distinct */}
+            <QuickCard 
+              href="/psa" 
+              title="PSA (Gradation)" 
+              subtitle="Dalles & Estimation IA" 
+              icon={<Award className="w-5 h-5 text-cyan-400" />} 
+              isSpecial={true}
             />
           </div>
 
@@ -243,12 +251,16 @@ function Stat({ icon, title, value }: any) {
   );
 }
 
-function QuickCard({ href, icon, title, subtitle }: any) {
+function QuickCard({ href, icon, title, subtitle, isSpecial = false }: any) {
   return (
     <Link href={href} className="group block">
-      <div className="glass-card rounded-xl p-4 border border-zinc-900 bg-neutral-900/40 transition-all group-hover:border-cyan-500/40 group-hover:bg-neutral-900/80">
+      <div className={`glass-card rounded-xl p-4 border transition-all ${
+        isSpecial 
+          ? "border-cyan-500/40 bg-cyan-950/10 group-hover:border-cyan-400 group-hover:bg-cyan-950/20" 
+          : "border-zinc-900 bg-neutral-900/40 group-hover:border-cyan-500/40 group-hover:bg-neutral-900/80"
+      }`}>
         <div className="flex items-center gap-3">
-          <div className="text-zinc-400 group-hover:text-cyan-400 transition-colors p-2 rounded-lg bg-black/40 border border-zinc-800">
+          <div className="text-cyan-400 p-2 rounded-lg bg-black/40 border border-zinc-800 group-hover:scale-110 transition-transform">
             {icon}
           </div>
           <div>
