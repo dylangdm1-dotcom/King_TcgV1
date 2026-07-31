@@ -233,7 +233,7 @@ export const psaService = {
     const totalCount = cards.length;
 
     const totalValue = cards.reduce(
-      (total, card) => total + card.estimatedValue,
+      (total, card) => total + (card.estimatedValue ?? 0),
       0
     );
 
