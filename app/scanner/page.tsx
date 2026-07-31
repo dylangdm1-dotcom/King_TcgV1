@@ -38,6 +38,12 @@ import type { PokemonCard, CardScanResult } from "@/lib/types";
 interface ScannerCameraHandle {
   getVideo(): HTMLVideoElement | null;
 }
+interface ConfidenceResult {
+  global: number;
+  name: number;
+  number: number;
+  set: number;
+}
 
 
 export interface ScannedBatchItem {
