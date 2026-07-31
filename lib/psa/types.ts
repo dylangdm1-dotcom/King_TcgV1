@@ -5,7 +5,16 @@ export type PSAGrade = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
 export interface PSASaleHistoryItem {
   date: string;
   price: number;
-  source: string; // ex: eBay, PWCC, etc.
+  source: string; // ex: eBay, PriceCharting, PWCC
+  grade: number;
+}
+
+export interface PSAPrices {
+  ungraded: number;
+  psa7: number;
+  psa8: number;
+  psa9: number;
+  psa10: number;
 }
 
 export interface PSACard {
@@ -19,18 +28,19 @@ export interface PSACard {
   estimatedValue: number;
   purchasePrice?: number;
   purchaseDate?: string;
+  prices?: PSAPrices; // Cotations de marché style PriceCharting
   salesHistory: PSASaleHistoryItem[];
   createdAt: string;
 }
 
 export interface PSAEstimationSubGrade {
-  score: number; // sur 10
+  score: number;
   comment: string;
 }
 
 export interface PSAEstimationResult {
   predictedGrade: PSAGrade;
-  confidence: number; // 0 à 100
+  confidence: number;
   subGrades: {
     centering: PSAEstimationSubGrade;
     corners: PSAEstimationSubGrade;
