@@ -94,8 +94,9 @@ export default function CollectionToutPage() {
       );
 
       const cleaned = results.filter(
-        (card): card is CollectionCardType => card !== null
-      );
+        (card) => card !== null
+      ) as CollectionCardType[];
+      
       setCards(cleaned);
     } catch (error) {
       console.error(
