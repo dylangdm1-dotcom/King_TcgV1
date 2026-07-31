@@ -33,7 +33,7 @@ import {
   setCachedCardData,
 } from "@/lib/pokemonCache";
 
-import type { PokemonCard } from "@/lib/types";
+import type { PokemonCard, CardScanResult } from "@/lib/types";
 
 interface ScannerCameraHandle {
   getVideo(): HTMLVideoElement | null;
@@ -265,16 +265,23 @@ export default function ScannerPage() {
       // 3 - CREATION RESULTAT V5
       // =================================================
 
-      const scanResult: ScanMetadata = {
+      const scanResult: CardScanResult = {
         cardName: cardName ?? pokemonName ?? "",
         pokemonName: pokemonName ?? cardName ?? "",
         cardNumber: cardNumber ?? null,
+      
         setName: setName ?? null,
+        setSymbol: null,
+      
+        cardType: null,
+      
         language: language ?? "fr",
         rarity: rarity ?? null,
         variant: variant ?? null,
+      
         isFullArt: false,
         isSecretRare: false,
+      
         confidence: confidence ?? 0,
         needsSecondPass: false,
       };
