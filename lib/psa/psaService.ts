@@ -4,15 +4,17 @@ import { PSACard, PSAPrices } from "./types";
 
 const LOCAL_STORAGE_KEY = "king_tcg_psa_collection_v1";
 
-// Base de données de référence style PriceCharting / PriceMarket
-export const MOCK_PRICEMARKET_DATABASE: Array<{
+export interface PriceMarketItem {
   id: string;
   cardName: string;
   setName: string;
   cardNumber: string;
   imageUrl: string;
   prices: PSAPrices;
-}> = [
+}
+
+// Base de données de référence style PriceCharting / PriceMarket enrichie
+export const MOCK_PRICEMARKET_DATABASE: PriceMarketItem[] = [
   {
     id: "charizard-base-4",
     cardName: "Dracaufeu Holo",
@@ -37,6 +39,30 @@ export const MOCK_PRICEMARKET_DATABASE: Array<{
     imageUrl: "https://images.pokemontcg.io/swsh7/215_hires.png",
     prices: { ungraded: 750, psa7: 820, psa8: 950, psa9: 1300, psa10: 2400 },
   },
+  {
+    id: "mewtwo-ex-evo",
+    cardName: "Mewtwo EX",
+    setName: "XY Evolutions",
+    cardNumber: "12/108",
+    imageUrl: "https://images.pokemontcg.io/xy12/12_hires.png",
+    prices: { ungraded: 25, psa7: 45, psa8: 80, psa9: 160, psa10: 450 },
+  },
+  {
+    id: "rayquaza-vmax-alt",
+    cardName: "Rayquaza VMAX (Alt Art)",
+    setName: "Evolving Skies",
+    cardNumber: "218/203",
+    imageUrl: "https://images.pokemontcg.io/swsh7/218_hires.png",
+    prices: { ungraded: 320, psa7: 380, psa8: 450, psa9: 680, psa10: 1450 },
+  },
+  {
+    id: "lugia-neo-genesis",
+    cardName: "Lugia Neo Genesis Holo",
+    setName: "Neo Genesis",
+    cardNumber: "9/111",
+    imageUrl: "https://images.pokemontcg.io/neo1/9_hires.png",
+    prices: { ungraded: 180, psa7: 320, psa8: 550, psa9: 1200, psa10: 8500 },
+  }
 ];
 
 export const psaService = {
@@ -77,9 +103,9 @@ export const psaService = {
   },
 
   // Recherche dans le catalogue PriceMarket / PriceCharting
-  searchMarketPrices(query: string) {
+  searchMarketPrices(query: string): PriceMarketItem[] {
     if (!query || query.trim() === "") return MOCK_PRICEMARKET_DATABASE;
-    const q = query.toLowerCase();
+    const q = query.toLowerCase().trim();
     return MOCK_PRICEMARKET_DATABASE.filter(
       (item) =>
         item.cardName.toLowerCase().includes(q) ||
