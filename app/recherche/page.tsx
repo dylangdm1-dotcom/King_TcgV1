@@ -179,13 +179,13 @@ export default function Recherche() {
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-zinc-800/80 pb-4">
               <div>
                 <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-[9px] font-black uppercase tracking-widest mb-1">
-                  <Sparkles className="w-3 h-3" /> Base de données v4.00
+                  <Sparkles className="w-3 h-3" /> Base de données v5.0
                 </div>
                 <h1 className="text-lg font-black uppercase tracking-tight text-white flex items-center gap-2">
                   <Search className="w-5 h-5 text-cyan-400" /> Recherche & Index
                 </h1>
                 <p className="mt-0.5 text-[11px] text-zinc-400">
-                  Consultez la base TCG, comparez les prix par région et dénichez vos cartes.
+                  Index TCG intelligent, recherche multilingue et estimation marché dynamique.
                 </p>
               </div>
 
