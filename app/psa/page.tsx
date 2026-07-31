@@ -5,7 +5,6 @@
 import { useEffect, useMemo, useState } from "react";
 import {
   Award,
-  Search,
   Plus,
   ShieldCheck,
   Sparkles,
@@ -20,7 +19,7 @@ import {
   PriceChartingCard,
 } from "@/lib/psa/psaService";
 
-import { PSACard, PSAGrade } from "@/lib/psa/types";
+import { PSACard, PSAGrade, PSAPrices } from "@/lib/psa/types";
 
 export default function PSAPage() {
   const [activeTab, setActiveTab] = useState<
@@ -57,6 +56,8 @@ export default function PSAPage() {
   const [newGrade, setNewGrade] = useState<PSAGrade>(10);
   const [newPrice, setNewPrice] = useState(0);
   const [newImage, setNewImage] = useState("");
+  const [selectedMarketPrices, setSelectedMarketPrices] =
+  useState<PSAPrices | undefined>(undefined);
 
   /**
    * Chargement collection locale
@@ -94,6 +95,7 @@ export default function PSAPage() {
     setNewSet(card.setName);
     setNewNumber(card.cardNumber);
     setNewImage(card.imageUrl);
+    setSelectedMarketPrices(card.prices);
     setNewGrade(grade);
 
     const prices = card.prices;
@@ -134,6 +136,7 @@ export default function PSAPage() {
         imageUrl: newImage,
         estimatedValue: Number(newPrice),
         salesHistory: [],
+        marketPrices: selectedMarketPrices,
       });
 
       setCollection(psaService.getCollection());
