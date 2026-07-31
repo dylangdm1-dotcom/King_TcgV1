@@ -108,10 +108,15 @@ export default function BibliothequePage() {
     ])
     .then(([collectionResults, favoriteResults]) => {
       const cleanCollection =
-  collectionResults.filter(
-    (card): card is CollectionCardType => card !== null
-  );
-
+        collectionResults.filter(
+          (card): card is CollectionCardType => card !== null
+        );
+    
+      const cleanFavorites =
+        favoriteResults.filter(
+          (card): card is PokemonCard => card !== null
+        );
+    
       setCollectionCards(cleanCollection);
       setFavoriteCards(cleanFavorites);
       setLoading(false);
