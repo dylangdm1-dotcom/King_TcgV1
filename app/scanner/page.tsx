@@ -301,13 +301,15 @@ export default function ScannerPage() {
         ),
       });
 
-      setStatus(`IA : ${scanResult.cardName} (${scanResult.language.toUpperCase()})`);
+      setStatus(
+        `IA : ${scanResult.cardName} (${(scanResult.language ?? "FR").toUpperCase()})`
+      );
 
       // =================================================
       // 5 - CACHE V5
       // =================================================
 
-      const cacheKey = `scan_${scanResult.cardName}_${scanResult.cardNumber || "no_num"}_${scanResult.setName || "no_set"}_${scanResult.language}`;
+      const cacheKey = `scan_${scanResult.cardName}_${scanResult.cardNumber || "no_num"}_${scanResult.setName || "no_set"}_${scanResult.language ?? "fr"}`;
 
       let bestCard: PokemonCard | null =
         getCachedCardData<PokemonCard>(cacheKey) || null;
@@ -315,7 +317,7 @@ export default function ScannerPage() {
       if (bestCard) {
         logger.cache("Carte trouvée dans cache V5.", bestCard);
       } else {
-        setStatus(`Recherche TCG ${scanResult.language.toUpperCase()}...`);
+        setStatus(`Recherche TCG ${(scanResult.language ?? "FR").toUpperCase()}...`);
 
         logger.api("Recherche Pokémon TCG V5", scanResult);
 
