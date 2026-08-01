@@ -30,10 +30,19 @@ export default function PortfolioOverview({ cards }: Props) {
 
   const ownedCards = cards.filter((card) => collection[card.id]);
 
-  const totalCards = Object.values(collection).reduce((sum, entry: any) => {
-    const qty = typeof entry === "number" ? entry : (entry?.quantity || 1);
-    return sum + qty;
-  }, 0);
+  const totalCards: number = Object.values(collection).reduce<number>(
+    (sum, entry: any) => {
+      const qty =
+        typeof entry === "number"
+          ? entry
+          : typeof entry?.quantity === "number"
+            ? entry.quantity
+            : 1;
+
+      return sum + qty;
+    },
+    0
+  );
 
   const uniqueCards = ownedCards.length;
 
@@ -42,7 +51,14 @@ export default function PortfolioOverview({ cards }: Props) {
 
   ownedCards.forEach((card) => {
     const rawQty = collection[card.id];
-    const qty = typeof rawQty === "number" ? rawQty : ((rawQty as any)?.quantity || 1);
+
+    const qty =
+      typeof rawQty === "number"
+        ? rawQty
+        : typeof (rawQty as any)?.quantity === "number"
+          ? (rawQty as any).quantity
+          : 1;
+
     const buy = getBuyPrice(card.id);
     const market = getMarketData(card);
 
@@ -60,7 +76,14 @@ export default function PortfolioOverview({ cards }: Props) {
   }>(
     (best, card) => {
       const rawQty = collection[card.id];
-      const qty = typeof rawQty === "number" ? rawQty : ((rawQty as any)?.quantity || 1);
+
+      const qty =
+        typeof rawQty === "number"
+          ? rawQty
+          : typeof (rawQty as any)?.quantity === "number"
+            ? (rawQty as any).quantity
+            : 1;
+
       const buy = getBuyPrice(card.id);
       const market = getMarketData(card);
 
@@ -99,6 +122,7 @@ export default function PortfolioOverview({ cards }: Props) {
           <p className="text-[10px] font-black uppercase tracking-wider text-zinc-500">
             Volume global
           </p>
+
           <p className="mt-1 text-base font-black text-white tabular-nums">
             {totalCards}
           </p>
@@ -108,6 +132,7 @@ export default function PortfolioOverview({ cards }: Props) {
           <p className="text-[10px] font-black uppercase tracking-wider text-zinc-500">
             Réf. uniques
           </p>
+
           <p className="mt-1 text-base font-black text-white tabular-nums">
             {uniqueCards}
           </p>
