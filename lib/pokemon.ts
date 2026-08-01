@@ -1308,7 +1308,7 @@ export async function searchCardsFromScan(
         );
 
       logger.warn(
-        "PRICE",
+        "API",
         `[PRICE FALLBACK] ${card.name} #${card.number} → ${fallback}€`
       );
 
@@ -1657,7 +1657,7 @@ export async function searchCards(
           );
 
         logger.warn(
-          "PRICE",
+          "API",
           `[PRICE FALLBACK] ${card.name} #${card.number} → ${fallback}€`
         );
 
