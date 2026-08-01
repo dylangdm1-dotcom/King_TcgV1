@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 
 import {
   searchPricesFromJustTCG,
-} from "@/lib/priceProviders/justTcgProviders";
+} from "@/lib/priceProviders/justTcgProvider";
 
 /**
  * =====================================================
