@@ -17,54 +17,14 @@ export type {
   CollectionMap,
 } from "@/lib/types";
 
-import type { PokemonCard } from "@/lib/types";
+import { getCardPrice } from "@/lib/types";
 
 // =====================================================
-// 💰 PRIX PRINCIPAL
+// 💰 PRIX PRINCIPAL V5
+// =====================================================
+//
+// Une seule source de vérité pour le prix.
+// La logique complète se trouve dans lib/types.ts.
 // =====================================================
 
-export function getCardPrice(
-  card?: PokemonCard | null
-): number {
-  if (!card) {
-    return 0;
-  }
-
-  // ---------------------------------------------------
-  // 1. TCGPlayer
-  // ---------------------------------------------------
-
-  const tcgPrices = card.tcgplayer?.prices;
-
-  if (tcgPrices) {
-    const tcg =
-      tcgPrices.holofoil?.market ??
-      tcgPrices.normal?.market ??
-      tcgPrices.reverseHolofoil?.market ??
-      tcgPrices.firstEditionHolofoil?.market ??
-      tcgPrices.firstEditionNormal?.market;
-
-    if (typeof tcg === "number" && tcg > 0) {
-      return tcg;
-    }
-  }
-
-  // ---------------------------------------------------
-  // 2. CardMarket
-  // ---------------------------------------------------
-
-  const cmPrices = card.cardmarket?.prices;
-
-  if (cmPrices) {
-    const cm =
-      cmPrices.averageSellPrice ??
-      cmPrices.trendPrice ??
-      cmPrices.lowPrice;
-
-    if (typeof cm === "number" && cm > 0) {
-      return cm;
-    }
-  }
-
-  return 0;
-}
+export { getCardPrice };
