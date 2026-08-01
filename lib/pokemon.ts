@@ -1,3 +1,4 @@
+```ts
 // lib/pokemon.ts
 
 import type { PokemonCard, CardScanResult } from "./types";
@@ -21,6 +22,12 @@ const searchCache = new Map<string, PokemonCard[]>();
 
 export type LanguageCode = "fr" | "en" | "ja" | "zh-tw";
 
+/**
+ * =====================================================
+ * 🧹 NETTOYAGE DES ANCIENS CACHES
+ * =====================================================
+ */
+
 if (typeof window !== "undefined") {
   try {
     const oldKeys = [
@@ -36,56 +43,171 @@ if (typeof window !== "undefined") {
       "king_tcg_cards_cache_v8_1",
       "king_tcg_cards_cache_v9_0",
     ];
-    oldKeys.forEach((key) => localStorage.removeItem(key));
+
+    oldKeys.forEach((key) => {
+      localStorage.removeItem(key);
+    });
   } catch {}
 }
 
+/**
+ * =====================================================
+ * 📅 UTILITAIRES
+ * =====================================================
+ */
+
 function parseReleaseDate(dateStr?: string): number {
   if (!dateStr) return 0;
-  const cleanDate = String(dateStr).trim().replace(/\//g, "-");
+
+  const cleanDate = String(dateStr)
+    .trim()
+    .replace(/\//g, "-");
+
   const time = new Date(cleanDate).getTime();
+
   return isNaN(time) ? 0 : time;
 }
 
 function safePrice(val: any): number {
   const num = Number(val);
-  return !isNaN(num) && isFinite(num) && num > 0 ? Number(num.toFixed(2)) : 0;
+
+  return !isNaN(num) &&
+    isFinite(num) &&
+    num > 0
+    ? Number(num.toFixed(2))
+    : 0;
 }
 
 /**
- * 🚀 Système de secours anti-zéro intelligent basé sur la rareté
+ * =====================================================
+ * 💰 FALLBACK PRIX DE SÉCURITÉ
+ * =====================================================
+ *
+ * Utilisé uniquement après échec :
+ *
+ * 1. Pokémon TCG API
+ * 2. TCGdex
+ * 3. JustTCG
+ *
+ * Valeur de base King_TCG : 1,50 €
  */
-function getFallbackPriceByRarity(rarity?: string): number {
-  if (!rarity) return 0.50;
-  const r = rarity.toLowerCase();
-  if (r.includes("secret") || r.includes("rainbow") || r.includes("gold") || r.includes("VMAX") || r.includes("VSTAR")) {
+
+function getFallbackPriceByRarity(
+  rarity?: string
+): number {
+  const r = String(rarity || "").toLowerCase();
+
+  if (
+    r.includes("secret") ||
+    r.includes("rainbow") ||
+    r.includes("gold") ||
+    r.includes("vmax") ||
+    r.includes("vstar")
+  ) {
     return 15.00;
   }
-  if (r.includes("ultra") || r.includes("illustration rare") || r.includes("ex") || r.includes("gx") || r.includes("v")) {
+
+  if (
+    r.includes("ultra") ||
+    r.includes("illustration rare") ||
+    r.includes("special illustration") ||
+    r.includes("ex") ||
+    r.includes("gx") ||
+    r.includes(" v")
+  ) {
     return 5.00;
   }
-  if (r.includes("rare") || r.includes("holo")) {
+
+  if (
+    r.includes("rare") ||
+    r.includes("holo")
+  ) {
     return 1.50;
   }
-  return 0.25; // Commune / Uncommon
+
+  // Base marché King_TCG
+  return 1.50;
 }
 
+/**
+ * =====================================================
+ * 🧹 NORMALISATION CARTE
+ * =====================================================
+ */
+
 function normalize(card: any): PokemonCard {
-  const cmPrices = card.cardmarket?.prices || card.pricing?.cardmarket || {};
-  const tcgPrices = card.tcgplayer?.prices || card.pricing?.tcgplayer || {};
+  const cmPrices =
+    card.cardmarket?.prices ||
+    card.pricing?.cardmarket ||
+    {};
 
-  const avgSell = safePrice(cmPrices.averageSellPrice ?? cmPrices.avg);
-  const trend = safePrice(cmPrices.trendPrice ?? cmPrices.trend);
-  const low = safePrice(cmPrices.lowPrice ?? cmPrices.low);
-  const avg30 = safePrice(cmPrices.avg30);
-  const avg7 = safePrice(cmPrices.avg7);
+  const tcgPrices =
+    card.tcgplayer?.prices ||
+    card.pricing?.tcgplayer ||
+    {};
 
-  const tcgHolo = safePrice(tcgPrices.holofoil?.market ?? tcgPrices.holofoil?.mid) * 0.92;
-  const tcgNormal = safePrice(tcgPrices.normal?.market ?? tcgPrices.normal?.mid) * 0.92;
-  const tcgReverse = safePrice(tcgPrices.reverseHolofoil?.market ?? tcgPrices.reverseHolofoil?.mid) * 0.92;
-  const tcgUnlimited = safePrice(tcgPrices.unlimitedHolofoil?.market) * 0.92;
+  const avgSell = safePrice(
+    cmPrices.averageSellPrice ??
+      cmPrices.avg
+  );
 
-  let rawComputed =
+  const trend = safePrice(
+    cmPrices.trendPrice ??
+      cmPrices.trend
+  );
+
+  const low = safePrice(
+    cmPrices.lowPrice ??
+      cmPrices.low
+  );
+
+  const avg30 = safePrice(
+    cmPrices.avg30
+  );
+
+  const avg7 = safePrice(
+    cmPrices.avg7
+  );
+
+  /**
+   * TCGPlayer USD → EUR
+   */
+  const tcgHolo =
+    safePrice(
+      tcgPrices.holofoil?.market ??
+        tcgPrices.holofoil?.mid
+    ) * 0.92;
+
+  const tcgNormal =
+    safePrice(
+      tcgPrices.normal?.market ??
+        tcgPrices.normal?.mid
+    ) * 0.92;
+
+  const tcgReverse =
+    safePrice(
+      tcgPrices.reverseHolofoil?.market ??
+        tcgPrices.reverseHolofoil?.mid
+    ) * 0.92;
+
+  const tcgUnlimited =
+    safePrice(
+      tcgPrices.unlimitedHolofoil?.market
+    ) * 0.92;
+
+  /**
+   * ===================================================
+   * 💰 PRIORITÉ DES PRIX RÉELS
+   * ===================================================
+   *
+   * IMPORTANT :
+   * Aucun fallback de rareté ici.
+   *
+   * Cela permet à JustTCG d'être appelé lorsque
+   * les sources principales ne donnent aucun prix.
+   */
+
+  const rawComputed =
     avgSell ||
     trend ||
     low ||
@@ -97,738 +219,1958 @@ function normalize(card: any): PokemonCard {
     safePrice(tcgUnlimited) ||
     0;
 
-  // Application du secours anti-zéro si aucun prix n'est retourné par les API
-  if (rawComputed === 0) {
-    rawComputed = getFallbackPriceByRarity(card.rarity);
-    logger.warn("API", `Aucun prix trouvé pour la carte "${card.name}" (${card.id}), application du fallback rareté (${card.rarity || 'Inconnue'}) : ${rawComputed}€`);
-  }
-
-  const computedPrice = safePrice(rawComputed);
+  const computedPrice =
+    safePrice(rawComputed);
 
   return {
     ...card,
-    quantity: card.quantity ?? 0,
-    favorite: card.favorite ?? false,
+
+    quantity:
+      card.quantity ?? 0,
+
+    favorite:
+      card.favorite ?? false,
+
     computedPrice,
+
     images: {
-      small: card.images?.small ?? "",
-      large: card.images?.large ?? card.images?.small ?? "",
+      small:
+        card.images?.small ?? "",
+
+      large:
+        card.images?.large ??
+        card.images?.small ??
+        "",
     },
+
     cardmarket: card.cardmarket
       ? {
-          url: card.cardmarket.url || "",
-          updatedAt: card.cardmarket.updatedAt || new Date().toISOString(),
+          url:
+            card.cardmarket.url || "",
+
+          updatedAt:
+            card.cardmarket.updatedAt ||
+            new Date().toISOString(),
+
           prices: {
-            averageSellPrice: avgSell || computedPrice,
-            lowPrice: low,
-            trendPrice: trend || computedPrice,
-            reverseHoloSell: safePrice(cmPrices.reverseHoloSell),
-            reverseHoloLow: safePrice(cmPrices.reverseHoloLow),
-            reverseHoloTrend: safePrice(cmPrices.reverseHoloTrend),
-            avg1: safePrice(cmPrices.avg1),
-            avg7: safePrice(cmPrices.avg7),
-            avg30: safePrice(cmPrices.avg30),
+            averageSellPrice:
+              avgSell ||
+              computedPrice,
+
+            lowPrice:
+              low,
+
+            trendPrice:
+              trend ||
+              computedPrice,
+
+            reverseHoloSell:
+              safePrice(
+                cmPrices.reverseHoloSell
+              ),
+
+            reverseHoloLow:
+              safePrice(
+                cmPrices.reverseHoloLow
+              ),
+
+            reverseHoloTrend:
+              safePrice(
+                cmPrices.reverseHoloTrend
+              ),
+
+            avg1:
+              safePrice(
+                cmPrices.avg1
+              ),
+
+            avg7:
+              safePrice(
+                cmPrices.avg7
+              ),
+
+            avg30:
+              safePrice(
+                cmPrices.avg30
+              ),
           },
         }
       : undefined,
+
     tcgplayer: card.tcgplayer
       ? {
-          url: card.tcgplayer.url || "",
-          updatedAt: card.tcgplayer.updatedAt || new Date().toISOString(),
+          url:
+            card.tcgplayer.url || "",
+
+          updatedAt:
+            card.tcgplayer.updatedAt ||
+            new Date().toISOString(),
+
           prices: {
-            holofoil: tcgPrices.holofoil ? { market: safePrice(tcgHolo) } : undefined,
-            normal: tcgPrices.normal ? { market: safePrice(tcgNormal) } : undefined,
-            reverseHolofoil: tcgPrices.reverseHolofoil ? { market: safePrice(tcgReverse) } : undefined,
+            holofoil:
+              tcgPrices.holofoil
+                ? {
+                    market:
+                      safePrice(
+                        tcgHolo
+                      ),
+                  }
+                : undefined,
+
+            normal:
+              tcgPrices.normal
+                ? {
+                    market:
+                      safePrice(
+                        tcgNormal
+                      ),
+                  }
+                : undefined,
+
+            reverseHolofoil:
+              tcgPrices.reverseHolofoil
+                ? {
+                    market:
+                      safePrice(
+                        tcgReverse
+                      ),
+                  }
+                : undefined,
           },
         }
       : undefined,
   };
 }
 
-function saveBrowserCache(cards: PokemonCard[]) {
-  if (typeof window === "undefined") return;
+/**
+ * =====================================================
+ * 💾 CACHE NAVIGATEUR
+ * =====================================================
+ */
+
+function saveBrowserCache(
+  cards: PokemonCard[]
+) {
+  if (
+    typeof window === "undefined"
+  ) {
+    return;
+  }
+
   try {
-    const existing = loadBrowserCache();
-    const map = new Map<string, PokemonCard>();
-    existing.forEach((c) => map.set(c.id, c));
-    cards.forEach((c) => map.set(c.id, c));
-    localStorage.setItem(CACHE_KEY, JSON.stringify(Array.from(map.values())));
+    const existing =
+      loadBrowserCache();
+
+    const map =
+      new Map<string, PokemonCard>();
+
+    existing.forEach((c) => {
+      map.set(c.id, c);
+    });
+
+    cards.forEach((c) => {
+      map.set(c.id, c);
+    });
+
+    localStorage.setItem(
+      CACHE_KEY,
+      JSON.stringify(
+        Array.from(map.values())
+      )
+    );
   } catch {}
 }
 
 function loadBrowserCache(): PokemonCard[] {
-  if (typeof window === "undefined") return [];
+  if (
+    typeof window === "undefined"
+  ) {
+    return [];
+  }
+
   try {
-    const data = localStorage.getItem(CACHE_KEY);
-    if (!data) return [];
-    const parsed = JSON.parse(data);
-    return Array.isArray(parsed) ? parsed.map(normalize) : [];
+    const data =
+      localStorage.getItem(
+        CACHE_KEY
+      );
+
+    if (!data) {
+      return [];
+    }
+
+    const parsed =
+      JSON.parse(data);
+
+    return Array.isArray(parsed)
+      ? parsed.map(normalize)
+      : [];
   } catch {
     return [];
   }
 }
 
-function normalizeText(value: string) {
+/**
+ * =====================================================
+ * 🔤 NORMALISATION TEXTE
+ * =====================================================
+ */
+
+function normalizeText(
+  value: string
+) {
   return value
     .toLowerCase()
     .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
+    .replace(
+      /[\u0300-\u036f]/g,
+      ""
+    )
     .trim();
 }
 
-function cleanCardNumber(rawNumber: string | null | undefined): string | null {
-  if (!rawNumber) return null;
-  let clean = rawNumber.split("/")[0].trim();
-  if (/^\d+$/.test(clean)) {
-    clean = String(parseInt(clean, 10));
+function cleanCardNumber(
+  rawNumber:
+    | string
+    | null
+    | undefined
+): string | null {
+  if (!rawNumber) {
+    return null;
   }
+
+  let clean =
+    rawNumber
+      .split("/")[0]
+      .trim();
+
+  if (/^\d+$/.test(clean)) {
+    clean = String(
+      parseInt(clean, 10)
+    );
+  }
+
   return clean;
 }
 
-function normalizeTCGdexCard(card: any, lang: LanguageCode, parentSet?: any): PokemonCard {
-  const setId = card.set?.id || parentSet?.id || "";
-  const cardId = card.id || "";
-  const localId = card.localId || card.number || "";
+/**
+ * =====================================================
+ * 🃏 NORMALISATION TCGDEX
+ * =====================================================
+ */
+
+function normalizeTCGdexCard(
+  card: any,
+  lang: LanguageCode,
+  parentSet?: any
+): PokemonCard {
+  const setId =
+    card.set?.id ||
+    parentSet?.id ||
+    "";
+
+  const cardId =
+    card.id || "";
+
+  const localId =
+    card.localId ||
+    card.number ||
+    "";
 
   let imageUrl = "";
   let smallImageUrl = "";
 
   if (card.image) {
-    let cleanImage = String(card.image).trim().replace(/\/(high|low)(\.(png|webp|jpg))?$/, "");
-    imageUrl = `${cleanImage}/high.png`;
-    smallImageUrl = `${cleanImage}/low.png`;
+    const cleanImage =
+      String(card.image)
+        .trim()
+        .replace(
+          /\/(high|low)(\.(png|webp|jpg))?$/,
+          ""
+        );
+
+    imageUrl =
+      `${cleanImage}/high.png`;
+
+    smallImageUrl =
+      `${cleanImage}/low.png`;
   } else if (cardId) {
-    const cleanSetId = setId || cardId.split("-")[0];
-    const baseUrl = `https://assets.tcgdex.net/${lang}/${cleanSetId}/${localId}`;
-    imageUrl = `${baseUrl}/high.png`;
-    smallImageUrl = `${baseUrl}/low.png`;
+    const cleanSetId =
+      setId ||
+      cardId.split("-")[0];
+
+    const baseUrl =
+      `https://assets.tcgdex.net/${lang}/${cleanSetId}/${localId}`;
+
+    imageUrl =
+      `${baseUrl}/high.png`;
+
+    smallImageUrl =
+      `${baseUrl}/low.png`;
   }
 
   return normalize({
-    id: `tcgdex-${lang}-${cardId}`,
-    name: card.name ?? "Carte Inconnue",
-    supertype: card.category ?? "Pokemon",
-    number: String(localId),
-    rarity: card.rarity ?? "Rare",
+    id:
+      `tcgdex-${lang}-${cardId}`,
+
+    name:
+      card.name ??
+      "Carte Inconnue",
+
+    supertype:
+      card.category ??
+      "Pokemon",
+
+    number:
+      String(localId),
+
+    rarity:
+      card.rarity ??
+      "Rare",
+
     images: {
-      small: smallImageUrl || "/placeholder.png",
-      large: imageUrl || smallImageUrl || "/placeholder.png",
+      small:
+        smallImageUrl ||
+        "/placeholder.png",
+
+      large:
+        imageUrl ||
+        smallImageUrl ||
+        "/placeholder.png",
     },
+
     set: {
       id: setId,
-      name: card.set?.name || parentSet?.name || "Extension Pokémon",
-      series: card.set?.series?.name || parentSet?.series?.name || "Pokémon TCG",
-      printedTotal: parentSet?.cardCount?.official ?? card.set?.cardCount?.official ?? 0,
-      total: parentSet?.cardCount?.total ?? card.set?.cardCount?.total ?? 0,
-      releaseDate: parentSet?.releaseDate || card.set?.releaseDate || "",
-      images: { symbol: "", logo: parentSet?.logo ? `${parentSet.logo}.png` : "" },
+
+      name:
+        card.set?.name ||
+        parentSet?.name ||
+        "Extension Pokémon",
+
+      series:
+        card.set?.series?.name ||
+        parentSet?.series?.name ||
+        "Pokémon TCG",
+
+      printedTotal:
+        parentSet?.cardCount?.official ??
+        card.set?.cardCount?.official ??
+        0,
+
+      total:
+        parentSet?.cardCount?.total ??
+        card.set?.cardCount?.total ??
+        0,
+
+      releaseDate:
+        parentSet?.releaseDate ||
+        card.set?.releaseDate ||
+        "",
+
+      images: {
+        symbol: "",
+
+        logo:
+          parentSet?.logo
+            ? `${parentSet.logo}.png`
+            : "",
+      },
     },
-    cardmarket: card.cardmarket || card.pricing?.cardmarket,
-    tcgplayer: card.tcgplayer || card.pricing?.tcgplayer,
+
+    cardmarket:
+      card.cardmarket ||
+      card.pricing?.cardmarket,
+
+    tcgplayer:
+      card.tcgplayer ||
+      card.pricing?.tcgplayer,
+
     quantity: 0,
+
     favorite: false,
   });
 }
 
-async function fetchPage(query: string, page = 1): Promise<any[]> {
-  const params = new URLSearchParams();
-  params.set("q", query);
-  params.set("page", String(page));
-  params.set("pageSize", "250");
-  params.set("orderBy", "-set.releaseDate");
+/**
+ * =====================================================
+ * 🌐 POKÉMON TCG API
+ * =====================================================
+ */
+
+async function fetchPage(
+  query: string,
+  page = 1
+): Promise<any[]> {
+  const params =
+    new URLSearchParams();
+
+  params.set(
+    "q",
+    query
+  );
+
+  params.set(
+    "page",
+    String(page)
+  );
+
+  params.set(
+    "pageSize",
+    "250"
+  );
+
+  params.set(
+    "orderBy",
+    "-set.releaseDate"
+  );
 
   const headers: HeadersInit = {
-    "Content-Type": "application/json",
+    "Content-Type":
+      "application/json",
   };
 
-  if (process.env.NEXT_PUBLIC_POKEMON_TCG_API_KEY) {
-    headers["X-Api-Key"] = process.env.NEXT_PUBLIC_POKEMON_TCG_API_KEY;
+  if (
+    process.env
+      .NEXT_PUBLIC_POKEMON_TCG_API_KEY
+  ) {
+    headers["X-Api-Key"] =
+      process.env
+        .NEXT_PUBLIC_POKEMON_TCG_API_KEY;
   }
 
   try {
-    const response = await fetch(`${API_URL}?${params}`, {
-      headers,
-    });
+    const response =
+      await fetch(
+        `${API_URL}?${params}`,
+        {
+          headers,
+        }
+      );
 
-    if (!response.ok) return [];
+    if (!response.ok) {
+      return [];
+    }
 
-    const json = await response.json();
+    const json =
+      await response.json();
+
     return json.data ?? [];
   } catch (error) {
-    logger.error("API", "Erreur lors de l'appel Pokemon TCG API", error);
+    logger.error(
+      "API",
+      "Erreur lors de l'appel Pokemon TCG API",
+      error
+    );
+
     return [];
   }
 }
 
-function removeDuplicates(cards: PokemonCard[]) {
-  const map = new Map<string, PokemonCard>();
+/**
+ * =====================================================
+ * 🧹 SUPPRESSION DOUBLONS
+ * =====================================================
+ */
+
+function removeDuplicates(
+  cards: PokemonCard[]
+) {
+  const map =
+    new Map<string, PokemonCard>();
+
   cards.forEach((card) => {
-    const key = `${normalizeText(card.name)}_${cleanCardNumber(card.number)}_${card.set?.id}`;
+    const key =
+      `${normalizeText(card.name)}_${cleanCardNumber(
+        card.number
+      )}_${card.set?.id}`;
+
     if (!map.has(key)) {
       map.set(key, card);
-    } else {
-      const existing = map.get(key)!;
-      const isNewOfficial = !card.id.startsWith("tcgdex-");
-      const isOldOfficial = !existing.id.startsWith("tcgdex-");
+      return;
+    }
 
-      if (isNewOfficial && !isOldOfficial) {
+    const existing =
+      map.get(key)!;
+
+    const isNewOfficial =
+      !card.id.startsWith(
+        "tcgdex-"
+      );
+
+    const isOldOfficial =
+      !existing.id.startsWith(
+        "tcgdex-"
+      );
+
+    if (
+      isNewOfficial &&
+      !isOldOfficial
+    ) {
+      map.set(key, card);
+    } else if (
+      isNewOfficial ===
+      isOldOfficial
+    ) {
+      const priceNew =
+        (card as any)
+          .computedPrice ??
+        0;
+
+      const priceOld =
+        (existing as any)
+          .computedPrice ??
+        0;
+
+      if (
+        priceNew > 0 &&
+        priceOld === 0
+      ) {
         map.set(key, card);
-      } else if (isNewOfficial === isOldOfficial) {
-        const priceNew = (card as any).computedPrice ?? 0;
-        const priceOld = (existing as any).computedPrice ?? 0;
-        if (priceNew > 0 && priceOld === 0) {
-          map.set(key, card);
-        }
       }
     }
   });
-  return Array.from(map.values());
+
+  return Array.from(
+    map.values()
+  );
 }
 
-function scoreCard(card: PokemonCard, scan: CardScanResult) {
+/**
+ * =====================================================
+ * 🎯 SCORE DE CORRESPONDANCE
+ * =====================================================
+ */
+
+function scoreCard(
+  card: PokemonCard,
+  scan: CardScanResult
+) {
   let score = 0;
-  
-  if (!card.id.startsWith("tcgdex-")) {
+
+  if (
+    !card.id.startsWith(
+      "tcgdex-"
+    )
+  ) {
     score += 500;
   }
 
-  const cardName = normalizeText(card.name);
-  const target = normalizeText(scan.cardName ?? scan.pokemonName ?? "");
-  const scanNumber = cleanCardNumber(scan.cardNumber);
-  const cardNumber = cleanCardNumber(card.number);
+  const cardName =
+    normalizeText(
+      card.name
+    );
 
-  if (scanNumber && cardNumber && scanNumber === cardNumber) {
+  const target =
+    normalizeText(
+      scan.cardName ??
+        scan.pokemonName ??
+        ""
+    );
+
+  const scanNumber =
+    cleanCardNumber(
+      scan.cardNumber
+    );
+
+  const cardNumber =
+    cleanCardNumber(
+      card.number
+    );
+
+  if (
+    scanNumber &&
+    cardNumber &&
+    scanNumber === cardNumber
+  ) {
     score += 1000;
   }
 
-  if (cardName === target) {
+  if (
+    cardName === target
+  ) {
     score += 400;
-  } else if (target && cardName.includes(target)) {
+  } else if (
+    target &&
+    cardName.includes(target)
+  ) {
     score += 150;
   }
 
   if (
     scan.setName &&
     card.set?.name &&
-    normalizeText(card.set.name).includes(normalizeText(scan.setName))
+    normalizeText(
+      card.set.name
+    ).includes(
+      normalizeText(
+        scan.setName
+      )
+    )
   ) {
     score += 300;
   }
 
   return score;
 }
-/**
 
-* =====================================================
-* 💰 JUSTTCG PRICE ENRICHMENT V5
-* =====================================================
-*
-* Si une carte n'a pas de prix réel provenant des
-* sources principales, on interroge notre API serveur
-* JustTCG.
-*
-* La clé API n'est jamais exposée au navigateur.
-  */
+/**
+ * =====================================================
+ * 💰 JUSTTCG PRICE ENRICHMENT V5
+ * =====================================================
+ *
+ * Si une carte n'a pas de prix réel provenant des
+ * sources principales, on interroge notre API serveur
+ * JustTCG.
+ *
+ * La clé API n'est jamais exposée au navigateur.
+ */
 
 async function enrichCardWithJustTCG(
   card: PokemonCard
-  ): Promise<PokemonCard> {
+): Promise<PokemonCard> {
   try {
-  /**
-  * Si la carte possède déjà un prix réel,
-  * on ne fait pas inutilement une requête JustTCG.
-  */
-  const existingPrice =
-  (card as any).computedPrice ??
-  0;
-  
-  if (
-    typeof existingPrice === "number" &&
-    existingPrice > 0
-  ) {
-    return card;
-  }
-  
-  const response =
-    await fetch("/api/prices", {
-      method: "POST",
-  
-      headers: {
-        "Content-Type":
-          "application/json",
-      },
-  
-      body: JSON.stringify({
-        name: card.name,
-        number: card.number,
-        setName:
-          card.set?.name || "",
-        rarity:
-          card.rarity || "",
-      }),
-    });
-  
-  if (!response.ok) {
-    return card;
-  }
-  
-  const data =
-    await response.json();
-  
-  if (
-    !data?.success ||
-    !data?.found ||
-    typeof data.price !== "number" ||
-    data.price <= 0
-  ) {
-    return card;
-  }
-  
-  const justTcgPrice =
-    Number(data.price.toFixed(2));
-  
-  logger.api(
-    `[JUSTTCG V5] Prix trouvé pour ${card.name} #${card.number}: ${justTcgPrice}€`
-  );
-  
-  /**
-   * On injecte le prix JustTCG dans les structures
-   * existantes de King_TCG afin que marketEngine,
-   * investment et le reste de l'application puissent
-   * continuer à fonctionner sans changement majeur.
-   */
-  
-  return {
-    ...card,
-  
-    computedPrice:
-      justTcgPrice,
-  
-    cardmarket: {
-      ...(card.cardmarket || {}),
-  
-      prices: {
-        ...(card.cardmarket?.prices || {}),
-  
-        lowPrice:
-          card.cardmarket?.prices
-            ?.lowPrice ||
-          justTcgPrice,
-  
-        trendPrice:
-          card.cardmarket?.prices
-            ?.trendPrice ||
-          justTcgPrice,
-      },
-    },
-  
-    tcgplayer: {
-      ...(card.tcgplayer || {}),
-  
-      prices: {
-        ...(card.tcgplayer?.prices || {}),
-  
-        normal: {
-          ...(card.tcgplayer?.prices
-            ?.normal || {}),
-  
-          low:
-            card.tcgplayer?.prices
-              ?.normal?.low ||
+    /**
+     * Si la carte possède déjà un prix réel,
+     * aucune requête JustTCG n'est nécessaire.
+     */
+
+    const existingPrice =
+      (card as any)
+        .computedPrice ??
+      0;
+
+    if (
+      typeof existingPrice ===
+        "number" &&
+      existingPrice > 0
+    ) {
+      return card;
+    }
+
+    const response =
+      await fetch(
+        "/api/prices",
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type":
+              "application/json",
+          },
+
+          body: JSON.stringify({
+            name: card.name,
+
+            number:
+              card.number,
+
+            setName:
+              card.set?.name ||
+              "",
+
+            rarity:
+              card.rarity ||
+              "",
+          }),
+        }
+      );
+
+    if (!response.ok) {
+      return card;
+    }
+
+    const data =
+      await response.json();
+
+    if (
+      !data?.success ||
+      !data?.found ||
+      typeof data.price !==
+        "number" ||
+      data.price <= 0
+    ) {
+      return card;
+    }
+
+    const justTcgPrice =
+      Number(
+        data.price.toFixed(2)
+      );
+
+    logger.api(
+      `[JUSTTCG V5] Prix trouvé pour ${card.name} #${card.number}: ${justTcgPrice}€`
+    );
+
+    /**
+     * Injection du prix JustTCG dans les structures
+     * existantes de King_TCG.
+     */
+
+    return {
+      ...card,
+
+      computedPrice:
+        justTcgPrice,
+
+      cardmarket: {
+        ...(card.cardmarket ||
+          {}),
+
+        prices: {
+          ...(card.cardmarket
+            ?.prices || {}),
+
+          lowPrice:
+            card.cardmarket
+              ?.prices
+              ?.lowPrice ||
             justTcgPrice,
-  
-          market:
-            card.tcgplayer?.prices
-              ?.normal?.market ||
+
+          trendPrice:
+            card.cardmarket
+              ?.prices
+              ?.trendPrice ||
             justTcgPrice,
         },
       },
-    },
-  } as PokemonCard;
-  
+
+      tcgplayer: {
+        ...(card.tcgplayer ||
+          {}),
+
+        prices: {
+          ...(card.tcgplayer
+            ?.prices || {}),
+
+          normal: {
+            ...(card.tcgplayer
+              ?.prices
+              ?.normal || {}),
+
+            low:
+              card.tcgplayer
+                ?.prices
+                ?.normal
+                ?.low ||
+              justTcgPrice,
+
+            market:
+              card.tcgplayer
+                ?.prices
+                ?.normal
+                ?.market ||
+              justTcgPrice,
+          },
+        },
+      },
+    } as PokemonCard;
   } catch (error) {
-  logger.error(
-  "API",
-  "[JustTCG Enrichment Error]",
-  error
-  );
-  
-  return card;
-  
+    logger.error(
+      "API",
+      "[JustTCG Enrichment Error]",
+      error
+    );
+
+    return card;
   }
-  }
-  
-  /**
-  
-  * Enrichit uniquement les cartes sans prix.
-  *
-  * Limite volontaire à 20 cartes afin d'éviter de
-  * consommer inutilement le quota JustTCG.
-    */
-    async function enrichCardsWithJustTCG(
-    cards: PokemonCard[],
-    limit = 20
-    ): Promise<PokemonCard[]> {
-    if (!cards.length) {
+}
+
+/**
+ * =====================================================
+ * 💰 JUSTTCG — ENRICHISSEMENT PAR LOT
+ * =====================================================
+ *
+ * Enrichit uniquement les cartes sans prix.
+ *
+ * Limite volontaire à 20 cartes afin d'éviter de
+ * consommer inutilement le quota JustTCG.
+ */
+
+async function enrichCardsWithJustTCG(
+  cards: PokemonCard[],
+  limit = 20
+): Promise<PokemonCard[]> {
+  if (!cards.length) {
     return cards;
-    }
-  
+  }
+
   const result =
-  [...cards];
-  
+    [...cards];
+
   const candidates =
-  result
-  .filter((card) => {
-  const price =
-  (card as any)
-  .computedPrice ??
-  0;
-  
-      return (
-        typeof price !== "number" ||
-        price <= 0
-      );
-    })
-    .slice(0, limit);
-  
+    result
+      .filter((card) => {
+        const price =
+          (card as any)
+            .computedPrice ??
+          0;
+
+        return (
+          typeof price !==
+            "number" ||
+          price <= 0
+        );
+      })
+      .slice(0, limit);
+
   if (!candidates.length) {
-  return result;
+    return result;
   }
-  
+
   const enriched =
-  await Promise.all(
-  candidates.map((card) =>
-  enrichCardWithJustTCG(card)
-  )
-  );
-  
+    await Promise.all(
+      candidates.map(
+        (card) =>
+          enrichCardWithJustTCG(
+            card
+          )
+      )
+    );
+
   const enrichedMap =
-  new Map(
-  enriched.map((card) => [
-  card.id,
-  card,
-  ])
-  );
-  
+    new Map(
+      enriched.map((card) => [
+        card.id,
+        card,
+      ])
+    );
+
   return result.map(
-  (card) =>
-  enrichedMap.get(card.id) ||
-  card
+    (card) =>
+      enrichedMap.get(
+        card.id
+      ) || card
   );
-  }
-  
+}
+
+/**
+ * =====================================================
+ * 🔎 RECHERCHE DEPUIS LE SCAN
+ * =====================================================
+ */
 
 export async function searchCardsFromScan(
   scan: CardScanResult
 ): Promise<PokemonCard[]> {
   let cards: PokemonCard[] = [];
-  const cleanNum = cleanCardNumber(scan.cardNumber);
-  
-  const rawName = scan.cardName || scan.pokemonName || "";
-  let corrected = correctPokemonOCR(rawName);
-  corrected = resolvePokemonName(corrected);
-  const cleanBase = cleanTCGSuffix(corrected);
-  const translatedEN = translatePokemonToEnglish(corrected);
-  const translatedFR = translatePokemonToFrench(corrected);
 
-  const nameCandidates = Array.from(
-    new Set(
-      [corrected, cleanBase, translatedEN, translatedFR, rawName]
-        .filter(Boolean)
-        .map(String)
-    )
+  const cleanNum =
+    cleanCardNumber(
+      scan.cardNumber
+    );
+
+  const rawName =
+    scan.cardName ||
+    scan.pokemonName ||
+    "";
+
+  let corrected =
+    correctPokemonOCR(
+      rawName
+    );
+
+  corrected =
+    resolvePokemonName(
+      corrected
+    );
+
+  const cleanBase =
+    cleanTCGSuffix(
+      corrected
+    );
+
+  const translatedEN =
+    translatePokemonToEnglish(
+      corrected
+    );
+
+  const translatedFR =
+    translatePokemonToFrench(
+      corrected
+    );
+
+  const nameCandidates =
+    Array.from(
+      new Set(
+        [
+          corrected,
+          cleanBase,
+          translatedEN,
+          translatedFR,
+          rawName,
+        ]
+          .filter(Boolean)
+          .map(String)
+      )
+    );
+
+  logger.api(
+    `[SCAN MATCH] Recherche TCG pour candidates: ${nameCandidates.join(
+      ", "
+    )} (Numéro: ${cleanNum})`
   );
 
-  logger.api(`[SCAN MATCH] Recherche TCG pour candidates: ${nameCandidates.join(", ")} (Numéro: ${cleanNum})`);
+  /**
+   * ---------------------------------------------------
+   * Recherche numéro + nom
+   * ---------------------------------------------------
+   */
 
-  if (cleanNum && nameCandidates.length) {
-    for (const name of nameCandidates) {
-      const found = await fetchPage(`number:"${cleanNum}" name:"${name}"`, 1);
+  if (
+    cleanNum &&
+    nameCandidates.length
+  ) {
+    for (
+      const name of nameCandidates
+    ) {
+      const found =
+        await fetchPage(
+          `number:"${cleanNum}" name:"${name}"`,
+          1
+        );
+
       if (found.length) {
-        cards = removeDuplicates([...cards, ...found.map(normalize)]);
+        cards =
+          removeDuplicates([
+            ...cards,
+            ...found.map(normalize),
+          ]);
+
         break;
       }
     }
   }
 
-  if (!cards.length && cleanNum) {
-    const found = await fetchPage(`number:"${cleanNum}"`, 1);
+  /**
+   * ---------------------------------------------------
+   * Recherche par numéro
+   * ---------------------------------------------------
+   */
+
+  if (
+    !cards.length &&
+    cleanNum
+  ) {
+    const found =
+      await fetchPage(
+        `number:"${cleanNum}"`,
+        1
+      );
+
     if (found.length) {
-      cards = removeDuplicates([...cards, ...found.map(normalize)]);
+      cards =
+        removeDuplicates([
+          ...cards,
+          ...found.map(normalize),
+        ]);
     }
   }
 
-  if (!cards.length && nameCandidates.length) {
-    for (const name of nameCandidates) {
-      const found = await fetchPage(`name:"*${name}*"`, 1);
+  /**
+   * ---------------------------------------------------
+   * Recherche par nom
+   * ---------------------------------------------------
+   */
+
+  if (
+    !cards.length &&
+    nameCandidates.length
+  ) {
+    for (
+      const name of nameCandidates
+    ) {
+      const found =
+        await fetchPage(
+          `name:"*${name}*"`,
+          1
+        );
+
       if (found.length) {
-        cards = removeDuplicates([...cards, ...found.map(normalize)]);
+        cards =
+          removeDuplicates([
+            ...cards,
+            ...found.map(normalize),
+          ]);
+
+        break;
       }
     }
   }
 
-  if (cards.length === 0 && nameCandidates.length > 0) {
-    for (const name of nameCandidates) {
+  /**
+   * ---------------------------------------------------
+   * FALLBACK TCGDEX
+   * ---------------------------------------------------
+   */
+
+  if (
+    cards.length === 0 &&
+    nameCandidates.length > 0
+  ) {
+    for (
+      const name of nameCandidates
+    ) {
       try {
-        const res = await fetch(`${TCGDEX_URL}/fr/cards?name=${encodeURIComponent(name)}`);
+        const res =
+          await fetch(
+            `${TCGDEX_URL}/fr/cards?name=${encodeURIComponent(
+              name
+            )}`
+          );
+
         if (res.ok) {
-          const tcgdexData = await res.json();
-          if (Array.isArray(tcgdexData) && tcgdexData.length > 0) {
-            const formatted = tcgdexData.slice(0, 30).map((c) => normalizeTCGdexCard(c, "fr"));
-            cards = removeDuplicates([...cards, ...formatted]);
+          const tcgdexData =
+            await res.json();
+
+          if (
+            Array.isArray(
+              tcgdexData
+            ) &&
+            tcgdexData.length > 0
+          ) {
+            const formatted =
+              tcgdexData
+                .slice(0, 30)
+                .map((c) =>
+                  normalizeTCGdexCard(
+                    c,
+                    "fr"
+                  )
+                );
+
+            cards =
+              removeDuplicates([
+                ...cards,
+                ...formatted,
+              ]);
+
             break;
           }
         }
       } catch (e) {
-        logger.error("API", "[Scan Fallback TCGdex Error]", e);
+        logger.error(
+          "API",
+          "[Scan Fallback TCGdex Error]",
+          e
+        );
       }
     }
   }
 
-  cards.sort((a, b) => scoreCard(b, scan) - scoreCard(a, scan));
+  /**
+   * ---------------------------------------------------
+   * TRI PAR PERTINENCE
+   * ---------------------------------------------------
+   */
 
-  cards.forEach((c) => cache.set(c.id, c));
+  cards.sort(
+    (a, b) =>
+      scoreCard(b, scan) -
+      scoreCard(a, scan)
+  );
+
+  /**
+   * ===================================================
+   * 💰 JUSTTCG V5
+   * ===================================================
+   *
+   * Seulement pour les cartes sans prix réel.
+   */
+
+  cards =
+    await enrichCardsWithJustTCG(
+      cards,
+      20
+    );
+
+  /**
+   * ===================================================
+   * 💰 FALLBACK FINAL
+   * ===================================================
+   *
+   * Seulement si aucune source réelle n'a fourni
+   * de prix.
+   */
+
+  cards =
+    cards.map((card) => {
+      const price =
+        Number(
+          (card as any)
+            .computedPrice ?? 0
+        );
+
+      if (price > 0) {
+        return card;
+      }
+
+      const fallback =
+        getFallbackPriceByRarity(
+          card.rarity
+        );
+
+      logger.warn(
+        "PRICE",
+        `[PRICE FALLBACK] ${card.name} #${card.number} → ${fallback}€`
+      );
+
+      return {
+        ...card,
+
+        computedPrice:
+          fallback,
+
+        cardmarket: {
+          ...(card.cardmarket ||
+            {}),
+
+          prices: {
+            ...(card.cardmarket
+              ?.prices || {}),
+
+            lowPrice:
+              card.cardmarket
+                ?.prices
+                ?.lowPrice ||
+              fallback,
+
+            trendPrice:
+              card.cardmarket
+                ?.prices
+                ?.trendPrice ||
+              fallback,
+          },
+        },
+      };
+    });
+
+  /**
+   * ---------------------------------------------------
+   * CACHE
+   * ---------------------------------------------------
+   */
+
+  cards.forEach((c) =>
+    cache.set(c.id, c)
+  );
+
   saveBrowserCache(cards);
 
   return cards;
 }
 
+/**
+ * =====================================================
+ * 🔎 RECHERCHE GLOBALE
+ * =====================================================
+ */
+
 export async function searchCards(
   search = "",
   lang: LanguageCode = "fr"
 ): Promise<PokemonCard[]> {
-  const key = search.trim().toLowerCase();
-  if (!key) return [];
+  const key =
+    search
+      .trim()
+      .toLowerCase();
 
-  const cacheKey = `search_${lang}_${key}`;
-  if (searchCache.has(cacheKey)) return searchCache.get(cacheKey)!;
-
-  logger.api(`[SEARCH ENGINE v9.1] Recherche globale pour "${key}" en langue ${lang}`);
-
-  let officialCards: PokemonCard[] = [];
-
-  try {
-    let queryNames: string[] = [];
-    if (key.includes("dracaufeu") || key.includes("charizard")) {
-      queryNames = ["Dracaufeu", "Charizard"];
-    } else {
-      const englishName = translatePokemonToEnglish(key) || key;
-      const frenchName = translatePokemonToFrench(key) || key;
-      queryNames = Array.from(new Set([englishName, frenchName, key])).filter(Boolean);
-    }
-
-    const searchPromises = queryNames.flatMap((qName) => [
-      fetchPage(`name:"*${qName}*"`, 1),
-      fetchPage(`name:"*${qName}*"`, 2),
-    ]);
-
-    const resultsPages = await Promise.all(searchPromises);
-
-    resultsPages.forEach((pageResults) => {
-      if (pageResults && pageResults.length > 0) {
-        officialCards.push(...pageResults.map(normalize));
-      }
-    });
-  } catch (err) {
-    logger.error("API", "[Pokemon TCG API Search Error]", err);
+  if (!key) {
+    return [];
   }
 
-  let finalCards = removeDuplicates(officialCards);
+  const cacheKey =
+    `search_${lang}_${key}`;
 
-  if (finalCards.length < 3) {
+  if (
+    searchCache.has(
+      cacheKey
+    )
+  ) {
+    return searchCache.get(
+      cacheKey
+    )!;
+  }
+
+  logger.api(
+    `[SEARCH ENGINE v9.1] Recherche globale pour "${key}" en langue ${lang}`
+  );
+
+  let officialCards:
+    PokemonCard[] = [];
+
+  try {
+    let queryNames:
+      string[] = [];
+
+    if (
+      key.includes(
+        "dracaufeu"
+      ) ||
+      key.includes(
+        "charizard"
+      )
+    ) {
+      queryNames = [
+        "Dracaufeu",
+        "Charizard",
+      ];
+    } else {
+      const englishName =
+        translatePokemonToEnglish(
+          key
+        ) || key;
+
+      const frenchName =
+        translatePokemonToFrench(
+          key
+        ) || key;
+
+      queryNames =
+        Array.from(
+          new Set([
+            englishName,
+            frenchName,
+            key,
+          ])
+        ).filter(Boolean);
+    }
+
+    const searchPromises =
+      queryNames.flatMap(
+        (qName) => [
+          fetchPage(
+            `name:"*${qName}*"`,
+            1
+          ),
+
+          fetchPage(
+            `name:"*${qName}*"`,
+            2
+          ),
+        ]
+      );
+
+    const resultsPages =
+      await Promise.all(
+        searchPromises
+      );
+
+    resultsPages.forEach(
+      (pageResults) => {
+        if (
+          pageResults &&
+          pageResults.length > 0
+        ) {
+          officialCards.push(
+            ...pageResults.map(
+              normalize
+            )
+          );
+        }
+      }
+    );
+  } catch (err) {
+    logger.error(
+      "API",
+      "[Pokemon TCG API Search Error]",
+      err
+    );
+  }
+
+  let finalCards =
+    removeDuplicates(
+      officialCards
+    );
+
+  /**
+   * ---------------------------------------------------
+   * FALLBACK TCGDEX
+   * ---------------------------------------------------
+   */
+
+  if (
+    finalCards.length < 3
+  ) {
     try {
-      const targetLang = lang === "en" ? "en" : lang === "ja" ? "ja" : lang === "zh-tw" ? "zh-tw" : "fr";
-      const response = await fetch(`${TCGDEX_URL}/${targetLang}/cards?name=${encodeURIComponent(key)}`);
+      const targetLang =
+        lang === "en"
+          ? "en"
+          : lang === "ja"
+          ? "ja"
+          : lang === "zh-tw"
+          ? "zh-tw"
+          : "fr";
+
+      const response =
+        await fetch(
+          `${TCGDEX_URL}/${targetLang}/cards?name=${encodeURIComponent(
+            key
+          )}`
+        );
+
       if (response.ok) {
-        const data = await response.json();
-        if (Array.isArray(data)) {
-          const tcgdexCards = data.slice(0, 100).map((c: any) => normalizeTCGdexCard(c, targetLang));
-          finalCards = removeDuplicates([...finalCards, ...tcgdexCards]);
+        const data =
+          await response.json();
+
+        if (
+          Array.isArray(data)
+        ) {
+          const tcgdexCards =
+            data
+              .slice(0, 100)
+              .map((c: any) =>
+                normalizeTCGdexCard(
+                  c,
+                  targetLang
+                )
+              );
+
+          finalCards =
+            removeDuplicates([
+              ...finalCards,
+              ...tcgdexCards,
+            ]);
         }
       }
     } catch (err) {
-      logger.error("API", "[TCGdex Search API Fallback]", err);
+      logger.error(
+        "API",
+        "[TCGdex Search API Fallback]",
+        err
+      );
     }
   }
 
-  finalCards.sort((a, b) => {
-    const isOfficialA = !a.id.startsWith("tcgdex-") ? 1 : 0;
-    const isOfficialB = !b.id.startsWith("tcgdex-") ? 1 : 0;
-    if (isOfficialA !== isOfficialB) return isOfficialB - isOfficialA;
+  /**
+   * ---------------------------------------------------
+   * TRI GLOBAL
+   * ---------------------------------------------------
+   */
 
-    const timeA = parseReleaseDate(a.set?.releaseDate);
-    const timeB = parseReleaseDate(b.set?.releaseDate);
+  finalCards.sort(
+    (a, b) => {
+      const isOfficialA =
+        !a.id.startsWith(
+          "tcgdex-"
+        )
+          ? 1
+          : 0;
 
-    if (timeB !== timeA) {
-      return timeB - timeA;
+      const isOfficialB =
+        !b.id.startsWith(
+          "tcgdex-"
+        )
+          ? 1
+          : 0;
+
+      if (
+        isOfficialA !==
+        isOfficialB
+      ) {
+        return (
+          isOfficialB -
+          isOfficialA
+        );
+      }
+
+      const timeA =
+        parseReleaseDate(
+          a.set?.releaseDate
+        );
+
+      const timeB =
+        parseReleaseDate(
+          b.set?.releaseDate
+        );
+
+      if (
+        timeB !== timeA
+      ) {
+        return (
+          timeB - timeA
+        );
+      }
+
+      const setIdA =
+        a.set?.id || "";
+
+      const setIdB =
+        b.set?.id || "";
+
+      if (
+        setIdA !== setIdB
+      ) {
+        return setIdB.localeCompare(
+          setIdA
+        );
+      }
+
+      const numA =
+        parseInt(
+          (a.number || "0")
+            .replace(/\D/g, "")
+        ) || 0;
+
+      const numB =
+        parseInt(
+          (b.number || "0")
+            .replace(/\D/g, "")
+        ) || 0;
+
+      return numB - numA;
     }
+  );
 
-    const setIdA = a.set?.id || "";
-    const setIdB = b.set?.id || "";
-    if (setIdA !== setIdB) {
-      return setIdB.localeCompare(setIdA);
-    }
+  /**
+   * ===================================================
+   * 💰 JUSTTCG V5
+   * ===================================================
+   */
 
-    const numA = parseInt((a.number || "0").replace(/\D/g, "")) || 0;
-    const numB = parseInt((b.number || "0").replace(/\D/g, "")) || 0;
-    return numB - numA;
-  });
+  finalCards =
+    await enrichCardsWithJustTCG(
+      finalCards,
+      20
+    );
 
-  finalCards.forEach((c) => cache.set(c.id, c));
-  searchCache.set(cacheKey, finalCards);
-  saveBrowserCache(finalCards);
+  /**
+   * ===================================================
+   * 💰 FALLBACK FINAL
+   * ===================================================
+   */
+
+  finalCards =
+    finalCards.map(
+      (card) => {
+        const price =
+          Number(
+            (card as any)
+              .computedPrice ??
+              0
+          );
+
+        if (price > 0) {
+          return card;
+        }
+
+        const fallback =
+          getFallbackPriceByRarity(
+            card.rarity
+          );
+
+        logger.warn(
+          "PRICE",
+          `[PRICE FALLBACK] ${card.name} #${card.number} → ${fallback}€`
+        );
+
+        return {
+          ...card,
+
+          computedPrice:
+            fallback,
+
+          cardmarket: {
+            ...(card.cardmarket ||
+              {}),
+
+            prices: {
+              ...(card.cardmarket
+                ?.prices || {}),
+
+              lowPrice:
+                card.cardmarket
+                  ?.prices
+                  ?.lowPrice ||
+                fallback,
+
+              trendPrice:
+                card.cardmarket
+                  ?.prices
+                  ?.trendPrice ||
+                fallback,
+            },
+          },
+        };
+      }
+    );
+
+  /**
+   * ---------------------------------------------------
+   * CACHE
+   * ---------------------------------------------------
+   */
+
+  finalCards.forEach(
+    (c) =>
+      cache.set(
+        c.id,
+        c
+      )
+  );
+
+  searchCache.set(
+    cacheKey,
+    finalCards
+  );
+
+  saveBrowserCache(
+    finalCards
+  );
 
   return finalCards;
 }
+
+/**
+ * =====================================================
+ * 🔎 RECHERCHE PAR EXTENSION
+ * =====================================================
+ */
 
 export async function searchCardsBySetId(
   setId: string,
   lang: LanguageCode = "fr"
 ): Promise<PokemonCard[]> {
-  if (!setId) return [];
-
-  const cleanId = setId.trim().toLowerCase();
-  const cacheKey = `set_${cleanId}_${lang}`;
-
-  if (searchCache.has(cacheKey)) return searchCache.get(cacheKey)!;
-
-  let cards: PokemonCard[] = [];
-
-  try {
-    const found = await fetchPage(`set.id:"${cleanId}"`, 1);
-    cards = removeDuplicates(found.map(normalize));
-  } catch (error) {
-    logger.error("API", `Erreur extension ${cleanId}:`, error);
+  if (!setId) {
+    return [];
   }
 
-  if (cards.length === 0) {
+  const cleanId =
+    setId
+      .trim()
+      .toLowerCase();
+
+  const cacheKey =
+    `set_${cleanId}_${lang}`;
+
+  if (
+    searchCache.has(
+      cacheKey
+    )
+  ) {
+    return searchCache.get(
+      cacheKey
+    )!;
+  }
+
+  let cards:
+    PokemonCard[] = [];
+
+  try {
+    const found =
+      await fetchPage(
+        `set.id:"${cleanId}"`,
+        1
+      );
+
+    cards =
+      removeDuplicates(
+        found.map(normalize)
+      );
+  } catch (error) {
+    logger.error(
+      "API",
+      `Erreur extension ${cleanId}:`,
+      error
+    );
+  }
+
+  /**
+   * ---------------------------------------------------
+   * FALLBACK TCGDEX
+   * ---------------------------------------------------
+   */
+
+  if (
+    cards.length === 0
+  ) {
     try {
-      const response = await fetch(`${TCGDEX_URL}/${lang}/sets/${cleanId}`);
+      const response =
+        await fetch(
+          `${TCGDEX_URL}/${lang}/sets/${cleanId}`
+        );
+
       if (response.ok) {
-        const setData = await response.json();
+        const setData =
+          await response.json();
+
         if (setData.cards) {
-          cards = setData.cards.map((c: any) => normalizeTCGdexCard(c, lang, setData));
+          cards =
+            setData.cards.map(
+              (c: any) =>
+                normalizeTCGdexCard(
+                  c,
+                  lang,
+                  setData
+                )
+            );
         }
       }
     } catch (e) {}
   }
 
-  cards.sort((a, b) => {
-    const numA = parseInt((a.number || "0").replace(/\D/g, "")) || 0;
-    const numB = parseInt((b.number || "0").replace(/\D/g, "")) || 0;
-    return numA - numB;
-  });
+  cards.sort(
+    (a, b) => {
+      const numA =
+        parseInt(
+          (a.number || "0")
+            .replace(/\D/g, "")
+        ) || 0;
 
-  if (cards.length > 0) {
-    cards.forEach((c) => cache.set(c.id, c));
-    searchCache.set(cacheKey, cards);
-    saveBrowserCache(cards);
+      const numB =
+        parseInt(
+          (b.number || "0")
+            .replace(/\D/g, "")
+        ) || 0;
+
+      return numA - numB;
+    }
+  );
+
+  if (
+    cards.length > 0
+  ) {
+    cards.forEach(
+      (c) =>
+        cache.set(
+          c.id,
+          c
+        )
+    );
+
+    searchCache.set(
+      cacheKey,
+      cards
+    );
+
+    saveBrowserCache(
+      cards
+    );
   }
 
   return cards;
 }
 
-export async function getAllSets(lang: LanguageCode = "fr"): Promise<any[]> {
-  try {
-    const targetLang = lang === "en" ? "en" : lang === "ja" ? "ja" : lang === "zh-tw" ? "zh-tw" : "fr";
-    const response = await fetch(`${TCGDEX_URL}/${targetLang}/sets`);
-    if (response.ok) {
-      const data = await response.json();
-      if (Array.isArray(data) && data.length > 0) {
-        const mappedSets = data.map((set: any) => ({
-          id: set.id,
-          name: set.name,
-          series: set.series?.name || "Pokémon TCG",
-          total: set.cardCount?.total ?? set.cardCount?.official ?? 0,
-          logo: set.logo ? `${set.logo}.png` : undefined,
-          symbol: set.symbol ? `${set.symbol}.png` : undefined,
-          releaseDate: set.releaseDate || "",
-        }));
+/**
+ * =====================================================
+ * 📚 RÉCUPÉRATION DES EXTENSIONS
+ * =====================================================
+ */
 
-        mappedSets.sort((a: any, b: any) => parseReleaseDate(b.releaseDate) - parseReleaseDate(a.releaseDate));
+export async function getAllSets(
+  lang: LanguageCode = "fr"
+): Promise<any[]> {
+  try {
+    const targetLang =
+      lang === "en"
+        ? "en"
+        : lang === "ja"
+        ? "ja"
+        : lang === "zh-tw"
+        ? "zh-tw"
+        : "fr";
+
+    const response =
+      await fetch(
+        `${TCGDEX_URL}/${targetLang}/sets`
+      );
+
+    if (response.ok) {
+      const data =
+        await response.json();
+
+      if (
+        Array.isArray(data) &&
+        data.length > 0
+      ) {
+        const mappedSets =
+          data.map(
+            (set: any) => ({
+              id: set.id,
+
+              name: set.name,
+
+              series:
+                set.series?.name ||
+                "Pokémon TCG",
+
+              total:
+                set.cardCount?.total ??
+                set.cardCount
+                  ?.official ??
+                0,
+
+              logo:
+                set.logo
+                  ? `${set.logo}.png`
+                  : undefined,
+
+              symbol:
+                set.symbol
+                  ? `${set.symbol}.png`
+                  : undefined,
+
+              releaseDate:
+                set.releaseDate ||
+                "",
+            })
+          );
+
+        mappedSets.sort(
+          (a: any, b: any) =>
+            parseReleaseDate(
+              b.releaseDate
+            ) -
+            parseReleaseDate(
+              a.releaseDate
+            )
+        );
+
         return mappedSets;
       }
     }
   } catch (error) {
-    logger.error("API", "[TCGdex Sets API Error]", error);
+    logger.error(
+      "API",
+      "[TCGdex Sets API Error]",
+      error
+    );
   }
 
-  try {
-    const params = new URLSearchParams();
-    params.set("pageSize", "300");
-    params.set("orderBy", "-releaseDate");
+  /**
+   * ---------------------------------------------------
+   * FALLBACK POKÉMON TCG API
+   * ---------------------------------------------------
+   */
 
-    const headers: HeadersInit = { "Content-Type": "application/json" };
-    if (process.env.NEXT_PUBLIC_POKEMON_TCG_API_KEY) {
-      headers["X-Api-Key"] = process.env.NEXT_PUBLIC_POKEMON_TCG_API_KEY;
+  try {
+    const params =
+      new URLSearchParams();
+
+    params.set(
+      "pageSize",
+      "300"
+    );
+
+    params.set(
+      "orderBy",
+      "-releaseDate"
+    );
+
+    const headers:
+      HeadersInit = {
+        "Content-Type":
+          "application/json",
+      };
+
+    if (
+      process.env
+        .NEXT_PUBLIC_POKEMON_TCG_API_KEY
+    ) {
+      headers["X-Api-Key"] =
+        process.env
+          .NEXT_PUBLIC_POKEMON_TCG_API_KEY;
     }
 
-    const response = await fetch(`${SETS_URL}?${params}`, { headers });
+    const response =
+      await fetch(
+        `${SETS_URL}?${params}`,
+        {
+          headers,
+        }
+      );
+
     if (response.ok) {
-      const json = await response.json();
-      if (json.data && json.data.length > 0) return json.data;
+      const json =
+        await response.json();
+
+      if (
+        json.data &&
+        json.data.length > 0
+      ) {
+        return json.data;
+      }
     }
   } catch (error) {
-    logger.error("API", "[Pokemon Sets API Error]", error);
+    logger.error(
+      "API",
+      "[Pokemon Sets API Error]",
+      error
+    );
   }
 
   return [];
 }
 
-export async function getCardById(id: string): Promise<PokemonCard | null> {
-  const decodedId = decodeURIComponent(id);
+/**
+ * =====================================================
+ * 🃏 RÉCUPÉRATION CARTE PAR ID
+ * =====================================================
+ */
 
-  if (cache.has(decodedId)) return cache.get(decodedId)!;
-  if (cache.has(id)) return cache.get(id)!;
+export async function getCardById(
+  id: string
+): Promise<PokemonCard | null> {
+  const decodedId =
+    decodeURIComponent(id);
 
-  const stored = loadBrowserCache();
-  const saved = stored.find((card) => card.id === decodedId || card.id === id);
+  if (
+    cache.has(
+      decodedId
+    )
+  ) {
+    return cache.get(
+      decodedId
+    )!;
+  }
+
+  if (
+    cache.has(id)
+  ) {
+    return cache.get(
+      id
+    )!;
+  }
+
+  const stored =
+    loadBrowserCache();
+
+  const saved =
+    stored.find(
+      (card) =>
+        card.id ===
+          decodedId ||
+        card.id === id
+    );
+
   if (saved) {
-    cache.set(saved.id, saved);
+    cache.set(
+      saved.id,
+      saved
+    );
+
     return saved;
   }
 
-  const targetId = decodedId.startsWith("tcgdex-") ? decodedId : id;
-  if (targetId.startsWith("tcgdex-")) {
-    const parts = targetId.split("-");
-    const lang = (parts[1] === "zh" ? "zh-tw" : parts[1]) as LanguageCode;
-    const rawCardId = parts.slice(2).join("-");
+  const targetId =
+    decodedId.startsWith(
+      "tcgdex-"
+    )
+      ? decodedId
+      : id;
+
+  /**
+   * ---------------------------------------------------
+   * TCGDEX CARD
+   * ---------------------------------------------------
+   */
+
+  if (
+    targetId.startsWith(
+      "tcgdex-"
+    )
+  ) {
+    const parts =
+      targetId.split("-");
+
+    const lang =
+      (parts[1] === "zh"
+        ? "zh-tw"
+        : parts[1]) as LanguageCode;
+
+    const rawCardId =
+      parts
+        .slice(2)
+        .join("-");
 
     try {
-      const response = await fetch(`${TCGDEX_URL}/${lang}/cards/${rawCardId}`);
-      if (!response.ok) return null;
+      const response =
+        await fetch(
+          `${TCGDEX_URL}/${lang}/cards/${rawCardId}`
+        );
 
-      const data = await response.json();
-      const card = normalizeTCGdexCard(data, lang);
+      if (!response.ok) {
+        return null;
+      }
 
-      cache.set(targetId, card);
-      saveBrowserCache([card]);
+      const data =
+        await response.json();
+
+      const card =
+        normalizeTCGdexCard(
+          data,
+          lang
+        );
+
+      cache.set(
+        targetId,
+        card
+      );
+
+      saveBrowserCache([
+        card,
+      ]);
+
       return card;
     } catch (error) {
       return null;
     }
   }
 
+  /**
+   * ---------------------------------------------------
+   * POKÉMON TCG API CARD
+   * ---------------------------------------------------
+   */
+
   try {
-    const response = await fetch(`${API_URL}/${encodeURIComponent(decodedId)}`);
-    if (!response.ok) return null;
+    const response =
+      await fetch(
+        `${API_URL}/${encodeURIComponent(
+          decodedId
+        )}`
+      );
 
-    const json = await response.json();
-    const card = normalize(json.data);
+    if (!response.ok) {
+      return null;
+    }
 
-    cache.set(card.id, card);
-    saveBrowserCache([card]);
+    const json =
+      await response.json();
+
+    const card =
+      normalize(
+        json.data
+      );
+
+    cache.set(
+      card.id,
+      card
+    );
+
+    saveBrowserCache([
+      card,
+    ]);
+
     return card;
   } catch {
     return null;
   }
 }
 
+/**
+ * =====================================================
+ * 🧹 RESET CACHE
+ * =====================================================
+ */
+
 export function clearPokemonCache() {
   cache.clear();
   searchCache.clear();
 
-  if (typeof window !== "undefined") {
+  if (
+    typeof window !==
+    "undefined"
+  ) {
     localStorage.clear();
   }
 }
+```
