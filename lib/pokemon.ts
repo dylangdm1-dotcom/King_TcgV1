@@ -1,4 +1,3 @@
-```ts
 // lib/pokemon.ts
 
 import type { PokemonCard, CardScanResult } from "./types";
@@ -2173,4 +2172,3 @@ export function clearPokemonCache() {
     localStorage.clear();
   }
 }
-```
