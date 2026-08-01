@@ -317,6 +317,206 @@ function scoreCard(card: PokemonCard, scan: CardScanResult) {
 
   return score;
 }
+/**
+
+* =====================================================
+* 💰 JUSTTCG PRICE ENRICHMENT V5
+* =====================================================
+*
+* Si une carte n'a pas de prix réel provenant des
+* sources principales, on interroge notre API serveur
+* JustTCG.
+*
+* La clé API n'est jamais exposée au navigateur.
+  */
+
+async function enrichCardWithJustTCG(
+  card: PokemonCard
+  ): Promise<PokemonCard> {
+  try {
+  /**
+  * Si la carte possède déjà un prix réel,
+  * on ne fait pas inutilement une requête JustTCG.
+  */
+  const existingPrice =
+  (card as any).computedPrice ??
+  0;
+  
+  if (
+    typeof existingPrice === "number" &&
+    existingPrice > 0
+  ) {
+    return card;
+  }
+  
+  const response =
+    await fetch("/api/prices", {
+      method: "POST",
+  
+      headers: {
+        "Content-Type":
+          "application/json",
+      },
+  
+      body: JSON.stringify({
+        name: card.name,
+        number: card.number,
+        setName:
+          card.set?.name || "",
+        rarity:
+          card.rarity || "",
+      }),
+    });
+  
+  if (!response.ok) {
+    return card;
+  }
+  
+  const data =
+    await response.json();
+  
+  if (
+    !data?.success ||
+    !data?.found ||
+    typeof data.price !== "number" ||
+    data.price <= 0
+  ) {
+    return card;
+  }
+  
+  const justTcgPrice =
+    Number(data.price.toFixed(2));
+  
+  logger.api(
+    `[JUSTTCG V5] Prix trouvé pour ${card.name} #${card.number}: ${justTcgPrice}€`
+  );
+  
+  /**
+   * On injecte le prix JustTCG dans les structures
+   * existantes de King_TCG afin que marketEngine,
+   * investment et le reste de l'application puissent
+   * continuer à fonctionner sans changement majeur.
+   */
+  
+  return {
+    ...card,
+  
+    computedPrice:
+      justTcgPrice,
+  
+    cardmarket: {
+      ...(card.cardmarket || {}),
+  
+      prices: {
+        ...(card.cardmarket?.prices || {}),
+  
+        lowPrice:
+          card.cardmarket?.prices
+            ?.lowPrice ||
+          justTcgPrice,
+  
+        trendPrice:
+          card.cardmarket?.prices
+            ?.trendPrice ||
+          justTcgPrice,
+      },
+    },
+  
+    tcgplayer: {
+      ...(card.tcgplayer || {}),
+  
+      prices: {
+        ...(card.tcgplayer?.prices || {}),
+  
+        normal: {
+          ...(card.tcgplayer?.prices
+            ?.normal || {}),
+  
+          low:
+            card.tcgplayer?.prices
+              ?.normal?.low ||
+            justTcgPrice,
+  
+          market:
+            card.tcgplayer?.prices
+              ?.normal?.market ||
+            justTcgPrice,
+        },
+      },
+    },
+  } as PokemonCard;
+  
+  } catch (error) {
+  logger.error(
+  "API",
+  "[JustTCG Enrichment Error]",
+  error
+  );
+  
+  return card;
+  
+  }
+  }
+  
+  /**
+  
+  * Enrichit uniquement les cartes sans prix.
+  *
+  * Limite volontaire à 20 cartes afin d'éviter de
+  * consommer inutilement le quota JustTCG.
+    */
+    async function enrichCardsWithJustTCG(
+    cards: PokemonCard[],
+    limit = 20
+    ): Promise<PokemonCard[]> {
+    if (!cards.length) {
+    return cards;
+    }
+  
+  const result =
+  [...cards];
+  
+  const candidates =
+  result
+  .filter((card) => {
+  const price =
+  (card as any)
+  .computedPrice ??
+  0;
+  
+      return (
+        typeof price !== "number" ||
+        price <= 0
+      );
+    })
+    .slice(0, limit);
+  
+  if (!candidates.length) {
+  return result;
+  }
+  
+  const enriched =
+  await Promise.all(
+  candidates.map((card) =>
+  enrichCardWithJustTCG(card)
+  )
+  );
+  
+  const enrichedMap =
+  new Map(
+  enriched.map((card) => [
+  card.id,
+  card,
+  ])
+  );
+  
+  return result.map(
+  (card) =>
+  enrichedMap.get(card.id) ||
+  card
+  );
+  }
+  
 
 export async function searchCardsFromScan(
   scan: CardScanResult
