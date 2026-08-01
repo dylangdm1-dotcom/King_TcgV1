@@ -22,6 +22,7 @@ import { calculateRealMarketPrices } from "../../../lib/priceTracker";
 import { PokemonCard } from "../../../lib/types";
 
 interface CollectionCardType extends PokemonCard {
+  rarity?: string;
   qty: number | {
     quantity: number;
   };
