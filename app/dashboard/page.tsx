@@ -1,498 +1,455 @@
 // app/dashboard/page.tsx
 "use client";
 
-export const dynamic = "force-dynamic";
-
-import { useRef, useState, useCallback } from "react";
-import { useRouter } from "next/navigation";
-import Image from "next/image";
+import { useEffect, useState, useRef } from "react";
 import {
-  Sparkles,
-  Layers,
-  Trash2,
-  Download,
-  ExternalLink,
+  Wallet,
+  TrendingUp,
   Zap,
-  ChevronUp,
+  Trophy,
+  Package,
+  BarChart3,
   ChevronDown,
+  ChevronUp,
+  Download,
+  Upload,
+  ShieldAlert,
+  Sparkles,
 } from "lucide-react";
-import ScannerCamera from "@/components/scanner/ScannerCamera";
-import ScannerOverlay from "@/components/scanner/ScannerOverlay";
-import { captureFrame } from "@/lib/scanner/capture";
-import { searchCardsFromScan } from "@/lib/pokemon";
-import Navbar from "@/components/Navbar";
-import { logger } from "@/lib/cache/logger";
-import { getCachedCardData, setCachedCardData } from "@/lib/pokemonCache";
-import type { PokemonCard } from "@/lib/types";
-import type { CardScanResult } from "@/lib/types";
 
-interface ScannerCameraHandle {
-  getVideo: () => HTMLVideoElement | null;
-}
+import Navbar from "../../components/Navbar";
+import PortfolioChart from "../../components/dashboard/PortfolioChart";
+import TopMovers from "../../components/dashboard/TopMovers";
+import RecentAcquisitions from "../../components/dashboard/RecentAcquisitions";
+import BackButton from "../../components/BackButton";
 
-export interface ScannedBatchItem {
-  id: string;
-  card: PokemonCard;
-  scannedAt: Date;
-  confidence: number;
-}
+import {
+  getCollection,
+  getBuyPrice,
+  exportBackup,
+  importBackup,
+} from "../../lib/storage";
 
-export default function ScannerPage() {
-  const cameraRef = useRef<ScannerCameraHandle>(null);
-  const router = useRouter();
+import { getCardById } from "../../lib/pokemon";
+import {
+  getMarketHistory,
+  type PricePoint,
+} from "../../lib/priceHistory";
 
-  const [ready, setReady] = useState(false);
-  const [scanning, setScanning] = useState(false);
-  const [status, setStatus] = useState("Alignez la carte dans le cadre et lancez l'analyse IA V5");
-  const [detectedCard, setDetectedCard] = useState<any>(null);
-  const [scanMode, setScanMode] = useState<"single" | "batch">("single");
-  const [batchList, setBatchList] = useState<ScannedBatchItem[]>([]);
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+import { getInvestmentScore } from "../../lib/investment";
+import { getMarketData } from "../../lib/marketEngine";
 
-  const triggerHaptic = useCallback((pattern: number | number[]) => {
-    if (typeof window !== "undefined" && "vibrate" in navigator) {
-      try {
-        navigator.vibrate(pattern);
-      } catch {
-        // vibration non disponible
-      }
-    }
-  }, []);
+import type { PokemonCard } from "../../lib/types";
 
-  const handleCameraReady = useCallback(() => {
-    setReady(true);
-    logger.scan("Scanner IA King_TCG V5 : caméra prête.");
-  }, []);
+type CardWithMeta = PokemonCard & {
+  qty: number;
+  history: PricePoint[];
+};
 
-  const handleCardsIdentified = useCallback((cards: PokemonCard[]) => {
-    if (!cards || cards.length === 0) return;
+export default function DashboardPage() {
+  const [cards, setCards] = useState<CardWithMeta[]>([]);
+  const [portfolioValue, setPortfolioValue] = useState(0);
+  const [investedValue, setInvestedValue] = useState(0);
+  const [profitValue, setProfitValue] = useState(0);
+  const [bestCard, setBestCard] = useState<CardWithMeta | null>(null);
+  const [worstCard, setWorstCard] = useState<CardWithMeta | null>(null);
+  const [expandedCardId, setExpandedCardId] = useState<string | null>(null);
+  const [importStatus, setImportStatus] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
-    if (scanMode === "single") {
-      router.push(`/card/${cards[0].id}`);
-    } else {
-      const newBatchItems: ScannedBatchItem[] = cards.map((card) => ({
-        id: `${card.id}_${Date.now()}_${Math.random()}`,
-        card,
-        scannedAt: new Date(),
-        confidence: 0.95,
-      }));
-
-      setBatchList((prev) => [...newBatchItems, ...prev]);
-      setIsDrawerOpen(true);
-      setStatus(`${cards.length} carte(s) ajoutée(s) à la session V5.`);
-    }
-  }, [scanMode, router]);
-
-  async function scan() {
-    if (!cameraRef.current || scanning) return;
-
-    const video = cameraRef.current.getVideo();
-    if (!video) {
-      setStatus("Caméra indisponible.");
-      logger.error("SCAN", "Vidéo caméra introuvable.");
-      triggerHaptic([100, 50, 100]);
-      return;
-    }
-
-    setScanning(true);
-    setDetectedCard(null);
-
+  const loadDashboardData = async () => {
     try {
-      setStatus("Capture de la carte...");
-      logger.scan("Capture image scanner V5.");
+      const collection = getCollection();
+      const ids = Object.keys(collection);
 
-      const image64 = captureFrame(video);
-      if (!image64) {
-        setStatus("Impossible de capturer l'image.");
-        triggerHaptic([100, 50, 100]);
+      if (ids.length === 0) {
+        setCards([]);
+        setPortfolioValue(0);
+        setInvestedValue(0);
+        setProfitValue(0);
+        setBestCard(null);
+        setWorstCard(null);
         return;
       }
 
-      setStatus("Analyse IA Gemini Vision V5...");
-      logger.gemini("Envoi image vers moteur IA V5.");
+      const results = await Promise.all(
+        ids.map(async (id) => {
+          try {
+            const card = await getCardById(id);
+            if (!card) return null;
+            return {
+              ...card,
+              qty: collection[id],
+              history: getMarketHistory(id),
+            };
+          } catch (error) {
+            console.error(`[King_TCG V5] Erreur récupération carte ${id}:`, error);
+            return null;
+          }
+        })
+      );
 
-      const response = await fetch("/api/scan", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          imageBase64: image64,
-        }),
+      const valid = results.filter((card): card is CardWithMeta => card !== null);
+      setCards(valid);
+
+      let invested = 0;
+      let currentPortfolio = 0;
+
+      valid.forEach((card) => {
+        const market = getMarketData(card);
+        const buyPrice = getBuyPrice(card.id);
+        invested += buyPrice * card.qty;
+        currentPortfolio += market.average * card.qty;
       });
 
-      const resData = await response.json();
-      logger.gemini("Réponse Gemini V5", resData);
+      setInvestedValue(invested);
+      setPortfolioValue(currentPortfolio);
+      setProfitValue(currentPortfolio - invested);
 
-      if (!resData.success || !resData.data) {
-        setStatus(resData.error || "Carte non reconnue.");
-        triggerHaptic([100, 50, 100]);
-        return;
-      }
+      let best: CardWithMeta | null = null;
+      let worst: CardWithMeta | null = null;
 
-      const {
-        cardName,
-        pokemonName,
-        cardNumber,
-        setName,
-        language,
-        rarity,
-        variant,
-        confidence,
-      } = resData.data;
-
-      if (!cardName && !pokemonName) {
-        setStatus("Nom Pokémon illisible.");
-        triggerHaptic([100, 50, 100]);
-        return;
-      }
-
-      const scanResult: CardScanResult = {
-        cardName: cardName ?? pokemonName ?? "",
-        pokemonName: pokemonName ?? cardName ?? "",
-      
-        cardType: null,
-        language: language ?? "fr",
-      
-        cardNumber: cardNumber ?? null,
-      
-        setName: setName ?? null,
-        setSymbol: null,
-      
-        rarity: rarity ?? null,
-        variant: variant ?? null,
-      
-        isFullArt: false,
-        isSecretRare: false,
-      
-        possibleNames: [],
-      
-        confidence: confidence ?? 0,
-        needsSecondPass: false,
-      };
-
-      setDetectedCard({
-        name: scanResult.cardName,
-        number: scanResult.cardNumber ?? undefined,
-        set: scanResult.setName ?? undefined,
-        language: scanResult.language,
-        confidence: scanResult.confidence,
+      valid.forEach((card) => {
+        const score = getInvestmentScore(card, card.history);
+        if (!best || score > getInvestmentScore(best, best.history)) {
+          best = card;
+        }
+        if (!worst || score < getInvestmentScore(worst, worst.history)) {
+          worst = card;
+        }
       });
 
-      setStatus(`IA V5 : ${scanResult.cardName}`);
-
-      const cacheKey = `scan_${scanResult.cardName}_${scanResult.cardNumber || "no_num"}_${scanResult.setName || "no_set"}_${scanResult.language}`;
-      let bestCard: PokemonCard | null = getCachedCardData<PokemonCard>(cacheKey) || null;
-
-      if (bestCard) {
-        logger.cache("Carte récupérée depuis le cache V5.", bestCard);
-      } else {
-
-        if (!scanResult.language) {
-          setStatus("Langue de la carte introuvable.");
-          return;
-        }
-        
-        setStatus(`Recherche base TCG ${scanResult.language.toUpperCase()}...`);
-
-        logger.api("Recherche carte via moteur V5", scanResult);
-
-        const cards = await searchCardsFromScan(scanResult);
-
-        if (!cards || cards.length === 0) {
-          setStatus(`Carte détectée mais introuvable : ${scanResult.cardName}`);
-          logger.warn("API", "Aucun résultat trouvé.");
-          triggerHaptic([100, 50, 100]);
-          return;
-        }
-
-        bestCard = cards[0];
-        setCachedCardData(cacheKey, bestCard);
-
-        if (bestCard.id) {
-          setCachedCardData(`card_${bestCard.id}`, bestCard);
-        }
-      }
-
-      if (!bestCard) {
-        setStatus("Erreur récupération carte.");
-        return;
-      }
-
-      const card = bestCard;
-      triggerHaptic(60);
-      setStatus(`Trouvé : ${card.name} (${card.number || "N/A"})`);
-
-      if (scanMode === "single") {
-        logger.scan(`Scan V5 réussi : ${card.id}`);
-        setTimeout(() => {
-          router.push(`/card/${card.id}`);
-        }, 400);
-      } else {
-        const batchItem: ScannedBatchItem = {
-          id: `${card.id}_${Date.now()}`,
-          card,
-          scannedAt: new Date(),
-          confidence: scanResult.confidence,
-        };
-
-        setBatchList((prev) => [batchItem, ...prev]);
-        setIsDrawerOpen(true);
-        logger.scan(`Carte ajoutée au Batch V5 : ${card.name}`);
-      }
+      setBestCard(best);
+      setWorstCard(worst);
     } catch (error) {
-      logger.error("SCAN", "Erreur scanner V5", error);
-      setStatus("Erreur pendant l'analyse IA.");
-      triggerHaptic([100, 50, 100]);
-    } finally {
-      setScanning(false);
-    }
-  }
-
-  const removeBatchItem = (id: string) => {
-    setBatchList((prev) => prev.filter((item) => item.id !== id));
-  };
-
-  const clearBatch = () => {
-    if (confirm("Réinitialiser la session de scan ?")) {
-      setBatchList([]);
+      console.error("[King_TCG V5] Erreur rafraîchissement dashboard:", error);
     }
   };
 
-  const exportBatch = () => {
-    const dataStr = JSON.stringify(batchList, null, 2);
-    const blob = new Blob([dataStr], { type: "application/json" });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = `king_tcg_v5_scan_${new Date().toISOString().slice(0, 10)}.json`;
-    link.click();
-    URL.revokeObjectURL(url);
+  useEffect(() => {
+    loadDashboardData();
+    const refresh = () => loadDashboardData();
+    window.addEventListener("king_tcg_update", refresh);
+    return () => window.removeEventListener("king_tcg_update", refresh);
+  }, []);
+
+  const averageScore = cards.length > 0
+    ? cards.reduce((sum, card) => sum + getInvestmentScore(card, card.history), 0) / cards.length
+    : 0;
+
+  const roi = investedValue > 0 ? ((portfolioValue - investedValue) / investedValue) * 100 : 0;
+  const isRoiPositive = roi >= 0;
+
+  const toggleDetails = (id: string) => {
+    setExpandedCardId(expandedCardId === id ? null : id);
   };
 
-  const handleIdentifyCardByImage = async (imageBase64: string): Promise<PokemonCard | null> => {
-    try {
-      const response = await fetch("/api/scan", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          imageBase64,
-        }),
-      });
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
 
-      const resData = await response.json();
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const content = event.target?.result as string;
+      if (!content) return;
 
-      if (resData.success && resData.data) {
-        const cards = await searchCardsFromScan(resData.data);
-        return cards?.[0] || null;
+      const success = importBackup(content, "merge");
+      if (success) {
+        setImportStatus("Sauvegarde importée et fusionnée avec succès !");
+        loadDashboardData();
+        window.dispatchEvent(new Event("king_tcg_update"));
+      } else {
+        setImportStatus("Erreur : fichier de sauvegarde invalide.");
       }
-    } catch (e) {
-      console.error("Erreur identification image V5", e);
-    }
 
-    return null;
+      setTimeout(() => setImportStatus(null), 4000);
+    };
+
+    reader.readAsText(file);
+    e.target.value = "";
   };
 
   return (
     <>
       <Navbar />
       <main className="min-h-screen bg-neutral-950 text-white pb-32 selection:bg-cyan-500/20">
-        <div className="mx-auto max-w-xl space-y-4 px-4 py-5">
-          {/* Header Scanner V5 */}
-          <section className="rounded-2xl border border-zinc-900 bg-neutral-900/40 p-4 text-center shadow-xl flex flex-col items-center gap-3">
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-[9px] font-black uppercase tracking-widest">
-              <Sparkles className="w-3 h-3" />
-              Gemini Vision V5.0
+        <div className="mx-auto max-w-xl space-y-5 px-4 py-5">
+          {/* Navigation + sauvegarde */}
+          <div className="flex items-center justify-between">
+            <BackButton />
+            <div className="flex items-center gap-2">
+              <button
+                onClick={exportBackup}
+                className="flex items-center gap-1.5 rounded-xl border border-zinc-800 bg-neutral-900 px-3 py-2 text-[10px] font-black uppercase tracking-wider text-zinc-300 transition-all hover:border-cyan-500/50 hover:text-cyan-400 active:scale-[0.98]"
+                title="Exporter une sauvegarde"
+              >
+                <Download className="h-3.5 w-3.5 text-cyan-400" />
+                Exporter
+              </button>
+              <button
+                onClick={() => fileInputRef.current?.click()}
+                className="flex items-center gap-1.5 rounded-xl border border-zinc-800 bg-neutral-900 px-3 py-2 text-[10px] font-black uppercase tracking-wider text-zinc-300 transition-all hover:border-cyan-500/50 hover:text-cyan-400 active:scale-[0.98]"
+                title="Importer une sauvegarde JSON"
+              >
+                <Upload className="h-3.5 w-3.5 text-cyan-400" />
+                Importer
+              </button>
+              <input
+                type="file"
+                ref={fileInputRef}
+                onChange={handleFileUpload}
+                accept=".json"
+                className="hidden"
+              />
+            </div>
+          </div>
+
+          {/* Feedback import */}
+          {importStatus && (
+            <div className="animate-fadeIn rounded-xl border border-cyan-500/30 bg-cyan-950/20 p-3 text-center text-xs font-bold text-cyan-400">
+              {importStatus}
+            </div>
+          )}
+
+          {/* Header portefeuille */}
+          <section className="flex flex-col gap-3 rounded-2xl border border-zinc-900 bg-neutral-900/40 p-4 sm:p-5">
+            <div className="flex items-center justify-between">
+              <div className="inline-flex items-center gap-1.5 rounded-full border border-cyan-500/20 bg-cyan-500/10 px-2.5 py-0.5 text-[9px] font-black uppercase tracking-widest text-cyan-400">
+                <Sparkles className="h-3 w-3" />
+                Suivi Live V5
+              </div>
+              <span className="text-[10px] font-bold uppercase tracking-wider text-zinc-500">
+                {cards.length} {cards.length > 1 ? "actifs" : "actif"}
+              </span>
             </div>
             <div>
-              <h1 className="text-lg font-black uppercase tracking-tight">
-                Scanner IA King_TCG
+              <h1 className="text-lg font-black uppercase tracking-tight text-white">
+                Tableau de bord
               </h1>
-              <p className="text-[11px] text-zinc-400 mt-0.5">
-                Reconnaissance avancée des cartes Pokémon par intelligence artificielle.
+              <p className="mt-0.5 text-[11px] text-zinc-400">
+                Pilote la valeur de ta collection et surveille les tendances du marché.
               </p>
             </div>
-
-            {/* Sélecteur Mono / Batch */}
-            <div className="flex items-center gap-1.5 bg-black/60 p-1 rounded-xl border border-zinc-800/80 w-full max-w-xs mt-1">
-              <button
-                onClick={() => setScanMode("single")}
-                className={`flex-1 py-2 rounded-lg text-[10px] font-black uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 ${
-                  scanMode === "single"
-                    ? "bg-cyan-500 text-black shadow-md shadow-cyan-500/20"
-                    : "text-zinc-400 hover:text-white"
-                }`}
-              >
-                <Zap className="w-3.5 h-3.5" />
-                Mono
-              </button>
-              <button
-                onClick={() => setScanMode("batch")}
-                className={`flex-1 py-2 rounded-lg text-[10px] font-black uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 ${
-                  scanMode === "batch"
-                    ? "bg-cyan-500 text-black shadow-md shadow-cyan-500/20"
-                    : "text-zinc-400 hover:text-white"
-                }`}
-              >
-                <Layers className="w-3.5 h-3.5" />
-                Batch ({batchList.length})
-              </button>
+            {/* Investissement / Profit */}
+            <div className="grid grid-cols-2 gap-3 border-t border-zinc-800/80 pt-3 text-xs">
+              <div className="rounded-xl border border-zinc-800/60 bg-black/40 p-3">
+                <span className="block text-[10px] font-black uppercase tracking-wider text-zinc-500">
+                  Investissement
+                </span>
+                <span className="mt-0.5 block text-sm font-black tabular-nums text-white">
+                  {investedValue.toFixed(2)} €
+                </span>
+              </div>
+              <div className="rounded-xl border border-zinc-800/60 bg-black/40 p-3">
+                <span className="block text-[10px] font-black uppercase tracking-wider text-zinc-500">
+                  Profit Net
+                </span>
+                <span className={`mt-0.5 block text-sm font-black tabular-nums ${profitValue >= 0 ? "text-emerald-400" : "text-rose-400"}`}>
+                  {profitValue >= 0 ? "+" : ""}{profitValue.toFixed(2)} €
+                </span>
+              </div>
             </div>
           </section>
 
-          {/* Caméra */}
-          <div className="relative aspect-[9/16] overflow-hidden rounded-2xl border border-zinc-900 bg-black shadow-2xl">
-            <ScannerCamera
-              ref={cameraRef}
-              onReady={handleCameraReady}
-              onCardsIdentified={handleCardsIdentified}
-              identifyCardByImage={handleIdentifyCardByImage}
-            />
-            <ScannerOverlay
-              scanning={scanning}
-              hasResult={Boolean(detectedCard)}
-              statusText={status}
-            />
-          </div>
-
-          {/* Bouton scan */}
-          <button
-            onClick={scan}
-            disabled={!ready || scanning}
-            className="w-full rounded-xl bg-cyan-500 py-4 text-sm font-black uppercase tracking-widest text-black disabled:opacity-40 transition-all active:scale-[0.98] shadow-lg shadow-cyan-500/15 flex items-center justify-center gap-2"
-          >
-            {scanning
-              ? "Analyse IA V5 en cours..."
-              : scanMode === "single"
-              ? "Scanner & Consulter"
-              : "Ajouter à la Session"}
-          </button>
-
-          {/* Console système */}
-          <div className="rounded-xl border border-zinc-900 bg-neutral-900/40 p-3.5 text-center">
-            <span className="text-[9px] uppercase font-black tracking-widest text-zinc-500 block">
-              État du système V5
-            </span>
-            <p className="mt-1 text-xs font-bold text-cyan-400">
-              {status}
-            </p>
-          </div>
-
-          {/* Dernière carte détectée */}
-          {detectedCard && (
-            <div className="rounded-xl border border-zinc-800 bg-neutral-900/80 p-3.5 flex items-center justify-between animate-fadeIn">
-              <div>
-                <div className="text-xs font-black uppercase text-white">
-                  {detectedCard.name}
-                  {detectedCard.language ? ` (${detectedCard.language.toUpperCase()})` : ""}
-                </div>
-                <div className="text-[10px] text-zinc-400 flex items-center gap-2 mt-0.5 font-medium">
-                  {detectedCard.number && <span>N° {detectedCard.number}</span>}
-                  {detectedCard.set && <span>• {detectedCard.set}</span>}
-                </div>
-              </div>
-              {detectedCard.confidence && (
-                <span className="text-[10px] font-black px-2 py-1 rounded-lg bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
-                  {Math.round(detectedCard.confidence * 100)}%
+          {/* KPI */}
+          <section className="grid grid-cols-2 gap-3">
+            <div className="flex min-h-[95px] flex-col justify-between rounded-xl border border-zinc-900 bg-neutral-900/40 p-4">
+              <div className="flex items-start justify-between">
+                <span className="text-[10px] font-black uppercase tracking-wider text-zinc-500">
+                  Valeur actuelle
                 </span>
-              )}
-            </div>
-          )}
-        </div>
-
-        {/* Drawer Batch V5 */}
-        {scanMode === "batch" && (
-          <div
-            className={`fixed bottom-0 left-0 right-0 z-50 bg-neutral-950 border-t border-zinc-800 transition-all duration-300 shadow-2xl ${
-              isDrawerOpen ? "h-[65vh]" : "h-14"
-            }`}
-          >
-            <button
-              onClick={() => setIsDrawerOpen(!isDrawerOpen)}
-              className="w-full h-14 bg-neutral-900/90 border-b border-zinc-800 px-4 flex items-center justify-between text-xs font-black uppercase tracking-wider text-white"
-            >
-              <div className="flex items-center gap-2">
-                <Layers className="w-4 h-4 text-cyan-400" />
-                Session Scan V5 ({batchList.length})
+                <Wallet className="h-4 w-4 text-cyan-400" />
               </div>
-              {isDrawerOpen ? (
-                <ChevronDown className="w-4 h-4 text-cyan-400" />
-              ) : (
-                <ChevronUp className="w-4 h-4" />
-              )}
-            </button>
+              <div className="mt-2 text-lg font-black tabular-nums text-white">
+                {portfolioValue.toFixed(2)} €
+              </div>
+            </div>
 
-            {isDrawerOpen && (
-              <div className="p-4 h-[calc(65vh-3.5rem)] overflow-y-auto">
-                <div className="flex justify-between mb-3">
-                  <button
-                    onClick={exportBatch}
-                    className="text-[10px] font-black uppercase text-cyan-400 flex items-center gap-1"
-                  >
-                    <Download className="w-3 h-3" />
-                    Exporter
-                  </button>
-                  <button
-                    onClick={clearBatch}
-                    className="text-[10px] font-black uppercase text-rose-400 flex items-center gap-1"
-                  >
-                    <Trash2 className="w-3 h-3" />
-                    Vider
-                  </button>
+            <div className="flex min-h-[95px] flex-col justify-between rounded-xl border border-zinc-900 bg-neutral-900/40 p-4">
+              <div className="flex items-start justify-between">
+                <span className="text-[10px] font-black uppercase tracking-wider text-zinc-500">
+                  Rendement global
+                </span>
+                <TrendingUp className="h-4 w-4 text-cyan-400" />
+              </div>
+              <div className={`mt-2 text-lg font-black tabular-nums ${isRoiPositive ? "text-emerald-400" : "text-rose-400"}`}>
+                {isRoiPositive ? "+" : ""}{roi.toFixed(2)} %
+              </div>
+            </div>
+
+            <div className="flex min-h-[95px] flex-col justify-between rounded-xl border border-zinc-900 bg-neutral-900/40 p-4">
+              <div className="flex items-start justify-between">
+                <span className="text-[10px] font-black uppercase tracking-wider text-zinc-500">
+                  Score stratégique
+                </span>
+                <Zap className="h-4 w-4 text-cyan-400" />
+              </div>
+              <div className="mt-2 text-lg font-black tabular-nums text-white">
+                {averageScore.toFixed(1)}
+                <span className="ml-1 text-[10px] font-bold uppercase text-zinc-500">/ 10</span>
+              </div>
+            </div>
+
+            <div className="flex min-h-[95px] flex-col justify-between rounded-xl border border-zinc-900 bg-neutral-900/40 p-4">
+              <div className="flex items-start justify-between">
+                <span className="text-[10px] font-black uppercase tracking-wider text-zinc-500">
+                  Actif phare
+                </span>
+                <Trophy className="h-4 w-4 text-cyan-400" />
+              </div>
+              <div className="mt-2 truncate text-xs font-bold text-white">
+                {bestCard ? bestCard.name : <span className="font-medium italic text-zinc-600">Aucun actif</span>}
+              </div>
+            </div>
+          </section>
+
+          {/* Analyses */}
+          <div className="space-y-4 pt-2">
+            <h2 className="flex items-center gap-1.5 px-1 text-[10px] font-black uppercase tracking-widest text-zinc-500">
+              <BarChart3 className="h-3.5 w-3.5 text-cyan-400" />
+              Fluctuations & Analyses de Marché
+            </h2>
+            <div className="space-y-4">
+              <PortfolioChart />
+              <TopMovers />
+            </div>
+            <div className="space-y-3">
+              <RecentAcquisitions cards={cards} />
+              <div className="grid gap-3">
+                {bestCard && (
+                  <div className="flex items-center justify-between rounded-xl border border-zinc-900 bg-neutral-900/40 p-3.5">
+                    <div>
+                      <span className="flex items-center gap-1 text-[9px] font-black uppercase tracking-wider text-emerald-400">
+                        <Trophy className="h-3 w-3" />
+                        Plus fort potentiel
+                      </span>
+                      <h3 className="mt-0.5 truncate text-xs font-bold text-white">
+                        {bestCard.name}
+                      </h3>
+                    </div>
+                  </div>
+                )}
+                {worstCard && (
+                  <div className="flex items-center justify-between rounded-xl border border-zinc-900 bg-neutral-900/40 p-3.5">
+                    <div>
+                      <span className="flex items-center gap-1 text-[9px] font-black uppercase tracking-wider text-rose-400">
+                        <ShieldAlert className="h-3 w-3" />
+                        Actif à surveiller
+                      </span>
+                      <h3 className="mt-0.5 truncate text-xs font-bold text-white">
+                        {worstCard.name}
+                      </h3>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+
+          {/* Inventaire */}
+          <div className="space-y-4 pt-2">
+            <h2 className="flex items-center gap-1.5 px-1 text-[10px] font-black uppercase tracking-widest text-zinc-500">
+              <Package className="h-3.5 w-3.5 text-cyan-400" />
+              Inventaire des Actifs ({cards.length})
+            </h2>
+            <div className="space-y-2.5">
+              {cards.length === 0 ? (
+                <div className="rounded-xl border border-zinc-900 bg-neutral-900/40 p-6 text-center">
+                  <Package className="mx-auto mb-2 h-6 w-6 text-zinc-700" />
+                  <p className="text-xs font-bold text-zinc-500">
+                    Aucune carte dans ta collection.
+                  </p>
+                  <p className="mt-1 text-[10px] text-zinc-700">
+                    Ajoute des cartes via le scanner V5 ou la recherche.
+                  </p>
                 </div>
-
-                {batchList.map((item) => {
-                  const imageUrl = item.card.images?.small || item.card.images?.large;
+              ) : (
+                cards.map((card) => {
+                  const isExpanded = expandedCardId === card.id;
+                  const marketData = getMarketData(card);
+                  const buyPrice = getBuyPrice(card.id);
+                  const netProfit = marketData.average * card.qty - buyPrice * card.qty;
+                  const isProfitPositive = netProfit >= 0;
 
                   return (
                     <div
-                      key={item.id}
-                      className="flex items-center justify-between p-3 mb-2 bg-neutral-900 border border-zinc-900 rounded-xl"
+                      key={card.id}
+                      className={`rounded-xl border border-zinc-900 bg-neutral-900/40 transition-all duration-200 ${
+                        isExpanded
+                          ? "border-cyan-500/30 bg-neutral-900/80 p-4 shadow-lg shadow-cyan-500/5"
+                          : "p-3.5 hover:border-zinc-800"
+                      }`}
                     >
-                      <div className="flex items-center gap-3">
-                        {imageUrl && (
-                          <Image
-                            src={imageUrl}
-                            width={35}
-                            height={50}
-                            alt={item.card.name}
-                            className="rounded"
-                            unoptimized
-                          />
-                        )}
-                        <div>
-                          <p className="text-xs font-black">
-                            {item.card.name}
-                          </p>
-                          <p className="text-[10px] text-zinc-400">
-                            N° {item.card.number || "---"}
-                          </p>
+                      <div
+                        onClick={() => toggleDetails(card.id)}
+                        className="flex cursor-pointer select-none items-center justify-between gap-3"
+                      >
+                        <div className="flex min-w-0 items-center gap-3">
+                          <div className="flex h-10 w-7 shrink-0 items-center justify-center overflow-hidden rounded border border-zinc-800 bg-black p-0.5">
+                            <img
+                              src={card.images.small}
+                              alt={card.name}
+                              className="h-full object-contain"
+                            />
+                          </div>
+                          <div className="min-w-0">
+                            <h3 className="truncate text-xs font-bold tracking-tight text-white">
+                              {card.name}
+                            </h3>
+                            <p className="mt-0.5 text-[10px] font-medium tabular-nums text-zinc-400">
+                              Unit. : {marketData.average.toFixed(2)} €
+                            </p>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2 text-zinc-400">
+                          <span className="rounded border border-zinc-800 bg-black/60 px-2 py-0.5 text-[10px] font-black tabular-nums text-cyan-400">
+                            x{card.qty}
+                          </span>
+                          {isExpanded ? (
+                            <ChevronUp className="h-4 w-4 text-cyan-400" />
+                          ) : (
+                            <ChevronDown className="h-4 w-4 text-zinc-600" />
+                          )}
                         </div>
                       </div>
 
-                      <div className="flex gap-1">
-                        <button
-                          onClick={() => router.push(`/card/${item.card.id}`)}
-                          className="p-2 text-cyan-400"
-                        >
-                          <ExternalLink className="w-4 h-4" />
-                        </button>
-                        <button
-                          onClick={() => removeBatchItem(item.id)}
-                          className="p-2 text-rose-400"
-                        >
-                          <Trash2 className="w-4 h-4" />
-                        </button>
-                      </div>
+                      {isExpanded && (
+                        <div className="mt-3.5 border-t border-zinc-800/80 pt-3.5">
+                          <div className="grid grid-cols-3 gap-2 text-[10px]">
+                            <div className="rounded-lg border border-zinc-800/60 bg-black/60 p-2.5 text-center">
+                              <span className="block font-medium uppercase tracking-wider text-zinc-500">
+                                Achat
+                              </span>
+                              <span className="mt-1 block font-bold tabular-nums text-zinc-300">
+                                {buyPrice.toFixed(2)} €
+                              </span>
+                            </div>
+                            <div className="rounded-lg border border-zinc-800/60 bg-black/60 p-2.5 text-center">
+                              <span className="block font-medium uppercase tracking-wider text-zinc-500">
+                                Actuelle
+                              </span>
+                              <span className="mt-1 block font-bold tabular-nums text-white">
+                                {(marketData.average * card.qty).toFixed(2)} €
+                              </span>
+                            </div>
+                            <div className="rounded-lg border border-zinc-800/60 bg-black/60 p-2.5 text-center">
+                              <span className="block font-medium uppercase tracking-wider text-zinc-500">
+                                Profit Net
+                              </span>
+                              <span className={`mt-1 block font-black tabular-nums ${isProfitPositive ? "text-emerald-400" : "text-rose-400"}`}>
+                                {isProfitPositive ? "+" : ""}{netProfit.toFixed(2)} €
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      )}
                     </div>
                   );
-                })}
-              </div>
-            )}
+                })
+              )}
+            </div>
           </div>
-        )}
+        </div>
       </main>
     </>
   );
