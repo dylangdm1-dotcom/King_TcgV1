@@ -3,6 +3,27 @@ import { NextResponse } from "next/server";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
+interface PriceChartingPrices {
+  ungraded: number;
+  psa7: number;
+  psa8: number;
+  psa9: number;
+  psa10: number;
+}
+
+interface PriceChartingResult {
+  id: string;
+  cardName: string;
+  setName: string;
+  cardNumber: string;
+  imageUrl: string;
+  prices: PriceChartingPrices;
+  sourceUrl: string;
+  language?: string;
+  rarity?: string;
+  releaseYear?: number;
+}
+
 function decodeHtml(value: string): string {
   return value
     .replace(/<script[\s\S]*?<\/script>/gi, " ")
@@ -29,100 +50,314 @@ function decodeHtml(value: string): string {
     .trim();
 }
 
-function extractPrice(
-  html: string,
-  id: string
-): number | null {
-  const regex = new RegExp(
-    `<td[^>]*id=["']${id}["'][^>]*>[\\s\\S]*?<span[^>]*class=["'][^"']*price[^"']*["'][^>]*>\\s*\\$([0-9,]+(?:\\.[0-9]+)?)`,
-    "i"
-  );
+function parsePrice(value: string | undefined): number {
+  if (!value) return 0;
 
-  const match = html.match(regex);
+  const cleaned = value
+    .replace(/[$,]/g, "")
+    .replace(/[^\d.]/g, "");
 
-  if (!match) {
-    return null;
-  }
+  const number = Number(cleaned);
 
-  const value = Number(
-    match[1].replace(/,/g, "")
-  );
-
-  return Number.isFinite(value) ? value : null;
+  return Number.isFinite(number) ? number : 0;
 }
 
-function extractRecentSales(html: string) {
-  const rows =
-    html.match(
-      /<tr\b[^>]*id=["'][^"']+["'][^>]*>[\s\S]*?<\/tr>/gi
-    ) ?? [];
+function absoluteUrl(url: string): string {
+  if (!url) return "";
 
-  const sales = [];
+  if (url.startsWith("http://") || url.startsWith("https://")) {
+    return url;
+  }
 
-  for (const row of rows) {
-    const dateMatch =
-      row.match(
-        /<td[^>]*class=["'][^"']*\bdate\b[^"']*["'][^>]*>\s*([^<]+)\s*<\/td>/i
-      );
+  if (url.startsWith("//")) {
+    return `https:${url}`;
+  }
 
-    const titleMatch =
-      row.match(
-        /<td[^>]*class=["'][^"']*\btitle\b[^"']*["'][^>]*>[\s\S]*?<a[^>]*>([\s\S]*?)<\/a>/i
-      );
+  if (url.startsWith("/")) {
+    return `https://www.pricecharting.com${url}`;
+  }
 
-    const priceMatch =
-      row.match(
-        /<td[^>]*class=["'][^"']*\bnumeric\b[^"']*["'][^>]*>[\s\S]*?\$([0-9,]+(?:\.[0-9]+)?)/i
-      );
+  return `https://www.pricecharting.com/${url}`;
+}
 
-    if (!dateMatch || !titleMatch || !priceMatch) {
-      continue;
-    }
-
-    const title = decodeHtml(titleMatch[1]);
-
-    const price = Number(
-      priceMatch[1].replace(/,/g, "")
+/**
+ * Extrait une valeur située dans le HTML autour
+ * d'un terme donné.
+ */
+function extractPrice(
+  html: string,
+  labels: string[]
+): number {
+  for (const label of labels) {
+    const escaped = label.replace(
+      /[.*+?^${}()|[\]\\]/g,
+      "\\$&"
     );
 
-    if (!Number.isFinite(price)) {
-      continue;
+    const regex = new RegExp(
+      `${escaped}[\\s\\S]{0,1200}?\\$([0-9,]+(?:\\.[0-9]+)?)`,
+      "i"
+    );
+
+    const match = html.match(regex);
+
+    if (match?.[1]) {
+      return parsePrice(match[1]);
     }
+  }
 
-    const lowerTitle = title.toLowerCase();
+  return 0;
+}
 
-    /**
-     * On garde uniquement les ventes qui semblent
-     * correspondre à la fiche consultée.
-     *
-     * Cela évite notamment de remonter des cartes
-     * chinoises/japonaises ou d'autres variantes
-     * mélangées dans les résultats.
-     */
-    const isRelevant =
-      lowerTitle.includes("charizard") &&
-      (
-        lowerTitle.includes("vmax") ||
-        lowerTitle.includes("020/189") ||
-        lowerTitle.includes("#20")
-      );
+/**
+ * Extrait les prix connus de la fiche PriceCharting.
+ */
+function extractPrices(html: string): PriceChartingPrices {
+  return {
+    ungraded: extractPrice(html, [
+      "Ungraded",
+      "Ungraded Price",
+      "Loose Price",
+    ]),
 
-    if (!isRelevant) {
-      continue;
+    psa7: extractPrice(html, [
+      "Grade 7",
+      "PSA 7",
+    ]),
+
+    psa8: extractPrice(html, [
+      "Grade 8",
+      "PSA 8",
+    ]),
+
+    psa9: extractPrice(html, [
+      "Grade 9",
+      "PSA 9",
+    ]),
+
+    psa10: extractPrice(html, [
+      "PSA 10",
+      "Grade 10",
+    ]),
+  };
+}
+
+/**
+ * Extrait l'URL de l'image principale.
+ */
+function extractImageUrl(html: string): string {
+  const patterns = [
+    /<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["']/i,
+    /<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:image["']/i,
+    /<img[^>]+src=["']([^"']+)["'][^>]*>/i,
+  ];
+
+  for (const pattern of patterns) {
+    const match = html.match(pattern);
+
+    if (match?.[1]) {
+      return absoluteUrl(match[1]);
     }
+  }
 
-    sales.push({
-      date: dateMatch[1].trim(),
-      title,
-      priceUsd: price,
-    });
+  return "";
+}
 
-    if (sales.length >= 20) {
+/**
+ * Extrait le titre de la fiche.
+ */
+function extractTitle(html: string): string {
+  const ogTitle =
+    html.match(
+      /<meta[^>]+property=["']og:title["'][^>]+content=["']([^"']+)["']/i
+    )?.[1] ??
+    html.match(
+      /<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:title["']/i
+    )?.[1];
+
+  if (ogTitle) {
+    return decodeHtml(ogTitle);
+  }
+
+  const title =
+    html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1];
+
+  return title ? decodeHtml(title) : "";
+}
+
+/**
+ * Extrait quelques informations textuelles de la fiche.
+ */
+function extractCardInfo(
+  html: string,
+  query: string
+): {
+  cardName: string;
+  setName: string;
+  cardNumber: string;
+} {
+  const title = extractTitle(html);
+
+  let cardName = title
+    .replace(/\s*\|\s*PriceCharting.*$/i, "")
+    .trim();
+
+  if (!cardName) {
+    cardName = query;
+  }
+
+  let cardNumber = "";
+
+  const numberPatterns = [
+    /\b(\d{1,3}\/\d{1,3})\b/,
+    /#(\d{1,3})\b/,
+  ];
+
+  for (const pattern of numberPatterns) {
+    const match = html.match(pattern);
+
+    if (match?.[1]) {
+      cardNumber = match[1];
       break;
     }
   }
 
-  return sales;
+  let setName = "";
+
+  const pokemonSets = [
+    "Base Set",
+    "Jungle",
+    "Fossil",
+    "Team Rocket",
+    "Gym Heroes",
+    "Gym Challenge",
+    "Neo Genesis",
+    "Neo Discovery",
+    "Neo Revelation",
+    "Neo Destiny",
+    "EX Ruby & Sapphire",
+    "EX Sandstorm",
+    "EX Dragon",
+    "EX Team Magma vs Team Aqua",
+    "EX Hidden Legends",
+    "EX FireRed & LeafGreen",
+    "EX Team Rocket Returns",
+    "EX Deoxys",
+    "EX Emerald",
+    "EX Unseen Forces",
+    "EX Delta Species",
+    "EX Legend Maker",
+    "EX Holon Phantoms",
+    "EX Crystal Guardians",
+    "EX Dragon Frontiers",
+    "EX Power Keepers",
+    "Diamond & Pearl",
+    "Mysterious Treasures",
+    "Secret Wonders",
+    "Great Encounters",
+    "Majestic Dawn",
+    "Legends Awakened",
+    "Stormfront",
+    "Platinum",
+    "Rising Rivals",
+    "Supreme Victors",
+    "Arceus",
+    "HeartGold & SoulSilver",
+    "Unleashed",
+    "Undaunted",
+    "Triumphant",
+    "Black & White",
+    "Emerging Powers",
+    "Noble Victories",
+    "Next Destinies",
+    "Dark Explorers",
+    "Dragons Exalted",
+    "Boundaries Crossed",
+    "Plasma Storm",
+    "Plasma Freeze",
+    "Plasma Blast",
+    "Legendary Treasures",
+    "XY",
+    "Flashfire",
+    "Furious Fists",
+    "Phantom Forces",
+    "Primal Clash",
+    "Roaring Skies",
+    "Ancient Origins",
+    "BREAKthrough",
+    "BREAKpoint",
+    "Generations",
+    "Steam Siege",
+    "Evolutions",
+    "Sun & Moon",
+    "Guardians Rising",
+    "Burning Shadows",
+    "Shining Legends",
+    "Crimson Invasion",
+    "Ultra Prism",
+    "Forbidden Light",
+    "Celestial Storm",
+    "Lost Thunder",
+    "Team Up",
+    "Unbroken Bonds",
+    "Unified Minds",
+    "Hidden Fates",
+    "Cosmic Eclipse",
+    "Sword & Shield",
+    "Rebel Clash",
+    "Darkness Ablaze",
+    "Champion's Path",
+    "Vivid Voltage",
+    "Shining Fates",
+    "Battle Styles",
+    "Chilling Reign",
+    "Evolving Skies",
+    "Celebrations",
+    "Fusion Strike",
+    "Brilliant Stars",
+    "Astral Radiance",
+    "Pokémon GO",
+    "Lost Origin",
+    "Silver Tempest",
+    "Crown Zenith",
+    "Scarlet & Violet",
+    "Paldea Evolved",
+    "Obsidian Flames",
+    "151",
+    "Paradox Rift",
+    "Temporal Forces",
+    "Twilight Masquerade",
+    "Shrouded Fable",
+    "Stellar Crown",
+    "Surging Sparks",
+    "Prismatic Evolutions",
+  ];
+
+  const lowerHtml = html.toLowerCase();
+
+  for (const set of pokemonSets) {
+    if (lowerHtml.includes(set.toLowerCase())) {
+      setName = set;
+      break;
+    }
+  }
+
+  return {
+    cardName,
+    setName,
+    cardNumber,
+  };
+}
+
+/**
+ * Construit l'identifiant d'une fiche.
+ */
+function createId(url: string): string {
+  return url
+    .replace(/^https?:\/\//i, "")
+    .replace(/[^a-zA-Z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .toLowerCase();
 }
 
 export async function GET(request: Request) {
@@ -141,11 +376,12 @@ export async function GET(request: Request) {
   }
 
   /**
-   * Fiche actuellement validée pour le test.
+   * Pour le moment, on conserve la fiche PriceCharting
+   * qui a déjà été validée et dont l'extraction des prix
+   * fonctionne correctement.
    *
-   * IMPORTANT :
-   * pour l'instant on conserve cette URL afin
-   * de valider toute la chaîne d'extraction.
+   * La recherche générale sera branchée ensuite sur les
+   * résultats de recherche PriceCharting.
    */
   const productUrl =
     "https://www.pricecharting.com/game/pokemon-darkness-ablaze/charizard-vmax-20";
@@ -201,82 +437,48 @@ export async function GET(request: Request) {
       );
     }
 
-    /**
-     * Prix actuels uniquement.
-     *
-     * IMPORTANT :
-     * aucun historicalPrices ici.
-     * Aucun graphique d'évolution.
-     */
-    const prices = {
-      ungraded: extractPrice(
-        html,
-        "used_price"
-      ),
+    const prices = extractPrices(html);
 
-      grade7: extractPrice(
-        html,
-        "complete_price"
-      ),
+    const info = extractCardInfo(html, query);
 
-      grade8: extractPrice(
-        html,
-        "new_price"
-      ),
+    const imageUrl = extractImageUrl(html);
 
-      grade9: extractPrice(
-        html,
-        "graded_price"
-      ),
+    const card: PriceChartingResult = {
+      id: createId(productUrl),
 
-      grade9_5: extractPrice(
-        html,
-        "box_only_price"
-      ),
+      cardName:
+        info.cardName || "Charizard VMAX",
 
-      psa10: extractPrice(
-        html,
-        "manual_only_price"
-      ),
-    };
+      setName:
+        info.setName || "Darkness Ablaze",
 
-    /**
-     * Ventes récentes.
-     *
-     * Ce ne sont PAS des historiques de prix.
-     * Ce sont simplement les ventes récentes
-     * utilisées comme données de marché.
-     */
-    const recentSales =
-      extractRecentSales(html);
+      cardNumber:
+        info.cardNumber || "020/189",
 
-    return NextResponse.json({
-      success: true,
-
-      productUrl,
-
-      query,
+      imageUrl,
 
       prices,
 
-      recentSales,
+      sourceUrl: productUrl,
+    };
 
-      /**
-       * Indique clairement au frontend
-       * quelles données sont disponibles.
-       */
-      availableGrades: [
-        "ungraded",
-        "grade7",
-        "grade8",
-        "grade9",
-        "grade9_5",
-        "psa10",
-      ],
+    /**
+     * IMPORTANT :
+     *
+     * On retourne uniquement les prix actuels.
+     * Aucun historicalPrices.
+     * Aucun recentSales.
+     */
+    return NextResponse.json({
+      success: true,
+
+      query,
+
+      results: [card],
     });
   } catch (error) {
     console.error(
-      "PriceCharting product error:",
+      "PriceCharting search error:",
       error
     );
 
@@ -284,7 +486,7 @@ export async function GET(request: Request) {
       {
         success: false,
 
-        productUrl,
+        query,
 
         error:
           error instanceof Error
