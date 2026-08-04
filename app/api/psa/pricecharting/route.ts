@@ -72,76 +72,6 @@ function extractPrices(rowHtml: string): number[] {
   return matches.map((value) => money(value));
 }
 
-/**
- * Extrait le premier lien /game/ de la ligne.
- *
- * Exemple réel PriceCharting :
- *
- * /game/pokemon-darkness-ablaze/charizard-vmax-20
- */
-function extractGameLink(
-  rowHtml: string
-): {
-  sourceUrl: string;
-  title: string;
-} | null {
-  const match = rowHtml.match(
-    /<a[^>]+href=["'](\/game\/[^"']+)["'][^>]*>([\s\S]*?)<\/a>/i
-  );
-
-  if (!match) {
-    return null;
-  }
-
-  return {
-    sourceUrl: `https://www.pricecharting.com${match[1]}`,
-    title: decodeHtml(match[2]),
-  };
-}
-
-/**
- * Extrait le set.
- *
- * PriceCharting possède un deuxième lien dans la ligne :
- *
- * Pokemon Darkness Ablaze
- */
-function extractSetName(rowHtml: string): string {
-  const links: string[] = [];
-
-  const linkRegex =
-    /<a[^>]+href=["'][^"']+["'][^>]*>([\s\S]*?)<\/a>/gi;
-
-  let match: RegExpExecArray | null;
-
-  while ((match = linkRegex.exec(rowHtml)) !== null) {
-    const text = decodeHtml(match[1]);
-
-    if (text) {
-      links.push(text);
-    }
-  }
-
-  /**
-   * On cherche explicitement le lien contenant Pokemon.
-   */
-  const pokemonSet = links.find((value) =>
-    /^Pokemon\b/i.test(value)
-  );
-
-  return pokemonSet ?? "";
-}
-
-/**
- * Parse :
- *
- * Charizard VMAX #20
- *
- * en :
- *
- * cardName = Charizard VMAX
- * cardNumber = 20
- */
 function parseCardTitle(
   title: string
 ): {
@@ -151,7 +81,7 @@ function parseCardTitle(
   const cleanTitle = decodeHtml(title);
 
   const match = cleanTitle.match(
-    /^(.+?)\s+#([A-Za-z0-9./-]+)$/i
+    /^(.+?)\s+#([A-Za-z0-9./-]+)$/
   );
 
   if (!match) {
@@ -164,78 +94,113 @@ function parseCardTitle(
   };
 }
 
-/**
- * Parse les résultats de la page publique PriceCharting.
- *
- * Structure actuellement observée :
- *
- * Title | Set | Ungraded | Grade 7 | Grade 8
- *
- * Exemple :
- *
- * Charizard VMAX #20
- * Pokemon Darkness Ablaze
- * $40.00
- * $31.86
- * $40.28
- */
-function parseSearchResults(html: string): Result[] {
+function extractSetName(rowHtml: string): string {
+  const linkRegex =
+    /<a[^>]+href=["'][^"']+["'][^>]*>([\s\S]*?)<\/a>/gi;
+
+  const links: string[] = [];
+
+  let match: RegExpExecArray | null;
+
+  while ((match = linkRegex.exec(rowHtml)) !== null) {
+    const text = decodeHtml(match[1]);
+
+    if (text) {
+      links.push(text);
+    }
+  }
+
+  const pokemonSet = links.find((value) =>
+    /^Pokemon\b/i.test(value)
+  );
+
+  return pokemonSet ?? "";
+}
+
+function parseSearchResults(
+  html: string
+): {
+  results: Result[];
+  debug: {
+    htmlLength: number;
+    trCount: number;
+    gameLinkCount: number;
+    gameLinkExamples: string[];
+    titleExamples: string[];
+  };
+} {
   const results: Result[] = [];
   const seen = new Set<string>();
 
-  const rowRegex =
-    /<tr\b[^>]*>[\s\S]*?<\/tr>/gi;
+  const trMatches =
+    html.match(/<tr\b/gi) ?? [];
 
-  let rowMatch: RegExpExecArray | null;
+  const trCount = trMatches.length;
 
-  while ((rowMatch = rowRegex.exec(html)) !== null) {
-    const rowHtml = rowMatch[0];
+  /**
+   * IMPORTANT :
+   *
+   * On ne dépend plus de <tr> pour trouver les cartes.
+   *
+   * On cherche directement tous les liens /game/.
+   */
+  const linkRegex =
+    /<a[^>]+href=["'](\/game\/[^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi;
 
-    /**
-     * Une ligne de résultat Pokemon doit contenir
-     * un lien /game/.
-     */
-    if (!/href=["']\/game\//i.test(rowHtml)) {
-      continue;
+  const gameLinkExamples: string[] = [];
+  const titleExamples: string[] = [];
+
+  let linkMatch: RegExpExecArray | null;
+
+  while ((linkMatch = linkRegex.exec(html)) !== null) {
+    const sourcePath = linkMatch[1];
+    const rawTitle = linkMatch[2];
+
+    if (gameLinkExamples.length < 10) {
+      gameLinkExamples.push(sourcePath);
     }
 
-    const gameLink = extractGameLink(rowHtml);
+    const title = decodeHtml(rawTitle);
 
-    if (!gameLink) {
-      continue;
+    if (titleExamples.length < 10) {
+      titleExamples.push(title);
     }
 
-    const {
-      sourceUrl,
-      title,
-    } = gameLink;
+    const sourceUrl =
+      `https://www.pricecharting.com${sourcePath}`;
 
     if (seen.has(sourceUrl)) {
       continue;
     }
 
-    const card = parseCardTitle(title);
+    /**
+     * On retrouve la ligne <tr> contenant ce lien.
+     */
+    const rowStart =
+      html.lastIndexOf("<tr", linkMatch.index);
 
-    if (!card) {
-      console.log(
-        "PriceCharting: titre non reconnu:",
-        title
-      );
+    const rowEnd =
+      html.indexOf("</tr>", linkMatch.index);
 
+    if (rowStart === -1 || rowEnd === -1) {
       continue;
     }
 
-    const setName = extractSetName(rowHtml);
+    const rowHtml =
+      html.slice(rowStart, rowEnd + 5);
 
-    /**
-     * Si le set n'est pas trouvé, on ne rejette pas
-     * le résultat : la carte reste exploitable.
-     */
-    const prices = extractPrices(rowHtml);
+    const card =
+      parseCardTitle(title);
 
-    const ungraded = prices[0] ?? 0;
-    const psa7 = prices[1] ?? 0;
-    const psa8 = prices[2] ?? 0;
+    if (!card) {
+      continue;
+    }
+
+    const setName =
+      extractSetName(rowHtml);
+
+    const prices =
+      extractPrices(rowHtml);
 
     const result: Result = {
       id: sourceUrl,
@@ -245,9 +210,9 @@ function parseSearchResults(html: string): Result[] {
       imageUrl: "",
       sourceUrl,
       prices: {
-        ungraded,
-        psa7,
-        psa8,
+        ungraded: prices[0] ?? 0,
+        psa7: prices[1] ?? 0,
+        psa8: prices[2] ?? 0,
         psa9: 0,
         psa9_5: undefined,
         psa10: 0,
@@ -262,13 +227,24 @@ function parseSearchResults(html: string): Result[] {
     }
   }
 
-  return results;
+  return {
+    results,
+    debug: {
+      htmlLength: html.length,
+      trCount,
+      gameLinkCount: gameLinkExamples.length,
+      gameLinkExamples,
+      titleExamples,
+    },
+  };
 }
 
 export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url);
+  const { searchParams } =
+    new URL(request.url);
 
-  const query = searchParams.get("q")?.trim();
+  const query =
+    searchParams.get("q")?.trim();
 
   if (!query) {
     return NextResponse.json(
@@ -287,11 +263,13 @@ export async function GET(request: Request) {
     `&q=${encodeURIComponent(query)}`;
 
   try {
-    const controller = new AbortController();
+    const controller =
+      new AbortController();
 
-    const timeout = setTimeout(() => {
-      controller.abort();
-    }, 15000);
+    const timeout =
+      setTimeout(() => {
+        controller.abort();
+      }, 15000);
 
     let response: Response;
 
@@ -330,7 +308,8 @@ export async function GET(request: Request) {
       );
     }
 
-    const html = await response.text();
+    const html =
+      await response.text();
 
     if (!html || html.length < 1000) {
       throw new Error(
@@ -338,23 +317,31 @@ export async function GET(request: Request) {
       );
     }
 
-    console.log(
-      `PriceCharting HTML reçu: ${html.length} caractères`
-    );
-
-    const results = parseSearchResults(html);
+    const parsed =
+      parseSearchResults(html);
 
     console.log(
-      `PriceCharting résultats détectés: ${results.length}`
+      "PRICECHARTING DEBUG",
+      parsed.debug
     );
 
     return NextResponse.json({
       success: true,
-      source: "PriceCharting public search",
+      source:
+        "PriceCharting public search",
       query,
-      count: results.length,
+      count:
+        parsed.results.length,
       searchUrl,
-      results,
+      results:
+        parsed.results,
+
+      /**
+       * TEMPORAIRE :
+       * diagnostic du HTML reçu par Vercel.
+       */
+      debug:
+        parsed.debug,
     });
   } catch (error) {
     console.error(
@@ -370,12 +357,14 @@ export async function GET(request: Request) {
     return NextResponse.json(
       {
         success: false,
-        source: "PriceCharting public search",
+        source:
+          "PriceCharting public search",
         query,
         error:
           "Impossible de contacter la recherche publique PriceCharting depuis Vercel.",
         debug:
-          process.env.NODE_ENV === "development"
+          process.env.NODE_ENV ===
+          "development"
             ? message
             : undefined,
       },
