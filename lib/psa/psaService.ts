@@ -1,11 +1,24 @@
-// lib/psa/psaService.ts
 
 import { PSACard, PSAPrices, PSAGrade } from "./types";
 
 const LOCAL_STORAGE_KEY = "king_tcg_psa_collection_v1";
 
 /**
- * Résultat public PriceCharting récupéré côté serveur.
+ * Vente récente retournée par PriceCharting.
+ *
+ * Elle sert uniquement à l'affichage de la recherche.
+ * Elle n'est pas enregistrée dans l'historique personnel.
+ */
+export interface PriceChartingSale {
+  date: string;
+  title: string;
+  price: number;
+  currency: "EUR";
+  source: string;
+}
+
+/**
+ * Résultat public PriceCharting.
  */
 export interface PriceChartingCard {
   id: string;
@@ -18,6 +31,7 @@ export interface PriceChartingCard {
   language?: string;
   rarity?: string;
   releaseYear?: number;
+  recentSales: PriceChartingSale[];
 }
 
 export const psaService = {
@@ -33,7 +47,11 @@ export const psaService = {
 
       return Array.isArray(cards) ? cards : [];
     } catch (error) {
-      console.error("Impossible de charger la collection PSA :", error);
+      console.error(
+        "Impossible de charger la collection PSA :",
+        error
+      );
+
       return [];
     }
   },
@@ -42,43 +60,64 @@ export const psaService = {
     if (typeof window === "undefined") return;
 
     try {
-      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(cards));
+      localStorage.setItem(
+        LOCAL_STORAGE_KEY,
+        JSON.stringify(cards)
+      );
     } catch (error) {
-      console.error("Impossible de sauvegarder la collection PSA :", error);
+      console.error(
+        "Impossible de sauvegarder la collection PSA :",
+        error
+      );
     }
   },
 
   certificateExists(certNumber: string): boolean {
     return this.getCollection().some(
-      (card) => card.psaCertNumber === certNumber.trim()
+      (card) =>
+        card.psaCertNumber === certNumber.trim()
     );
   },
 
-  findByCertificate(certNumber: string): PSACard | undefined {
+  findByCertificate(
+    certNumber: string
+  ): PSACard | undefined {
     return this.getCollection().find(
-      (card) => card.psaCertNumber === certNumber.trim()
+      (card) =>
+        card.psaCertNumber === certNumber.trim()
     );
   },
 
-  addCard(card: Omit<PSACard, "id" | "createdAt">): PSACard {
+  addCard(
+    card: Omit<PSACard, "id" | "createdAt">
+  ): PSACard {
     const collection = this.getCollection();
 
-    const certNumber = card.psaCertNumber.trim();
+    const certNumber =
+      card.psaCertNumber.trim();
 
     if (!certNumber) {
-      throw new Error("Le numéro de certification PSA est obligatoire.");
+      throw new Error(
+        "Le numéro de certification PSA est obligatoire."
+      );
     }
 
     if (this.certificateExists(certNumber)) {
-      throw new Error("Cette certification PSA est déjà enregistrée.");
+      throw new Error(
+        "Cette certification PSA est déjà enregistrée."
+      );
     }
 
     const id =
-      typeof crypto !== "undefined" && crypto.randomUUID
+      typeof crypto !== "undefined" &&
+      crypto.randomUUID
         ? crypto.randomUUID()
-        : `psa_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
+        : `psa_${Date.now()}_${Math.random()
+            .toString(36)
+            .slice(2, 8)}`;
 
-    const now = new Date().toISOString();
+    const now =
+      new Date().toISOString();
 
     const newCard: PSACard = {
       ...card,
@@ -88,59 +127,85 @@ export const psaService = {
       updatedAt: now,
     };
 
-    this.saveCollection([newCard, ...collection]);
+    this.saveCollection([
+      newCard,
+      ...collection,
+    ]);
 
     return newCard;
   },
 
   removeCard(id: string): void {
-    const collection = this.getCollection();
+    const collection =
+      this.getCollection();
 
     this.saveCollection(
-      collection.filter((card) => card.id !== id)
+      collection.filter(
+        (card) => card.id !== id
+      )
     );
-  },
-    /**
-   * Recherche dans les pages publiques PriceCharting via notre route serveur.
-   * Aucun token/API PriceCharting n'est nécessaire pour cette première intégration.
-   */
-  async searchPriceCharting(query: string): Promise<PriceChartingCard[]> {
-    const search = query.trim();
-    if (!search) return [];
-
-    const response = await fetch(
-      `/api/psa/pricecharting?q=${encodeURIComponent(search)}`,
-      { cache: "no-store" }
-    );
-
-    const data = await response.json();
-
-    if (!response.ok || !data.success) {
-      throw new Error(data.error || "Recherche PriceCharting impossible.");
-    }
-
-    return Array.isArray(data.results) ? data.results : [];
   },
 
   /**
-   * Retourne les statistiques de la collection.
+   * Recherche PriceCharting uniquement dans
+   * le module PSA.
    */
+  async searchPriceCharting(
+    query: string
+  ): Promise<PriceChartingCard[]> {
+    const search = query.trim();
+
+    if (!search) return [];
+
+    const response =
+      await fetch(
+        `/api/psa/pricecharting?q=${encodeURIComponent(
+          search
+        )}`,
+        {
+          cache: "no-store",
+        }
+      );
+
+    const data =
+      await response.json();
+
+    if (!response.ok || !data.success) {
+      throw new Error(
+        data.error ||
+          "Recherche PriceCharting impossible."
+      );
+    }
+
+    return Array.isArray(data.results)
+      ? data.results
+      : [];
+  },
+
   calculateStats(cards: PSACard[]) {
-    const totalCount = cards.length;
+    const totalCount =
+      cards.length;
 
-    const totalValue = cards.reduce(
-      (total, card) => total + (card.estimatedValue ?? 0),
-      0
-    );
+    const totalValue =
+      cards.reduce(
+        (total, card) =>
+          total +
+          (card.estimatedValue ?? 0),
+        0
+      );
 
-    const totalSpent = cards.reduce(
-      (total, card) => total + (card.purchasePrice ?? 0),
-      0
-    );
+    const totalSpent =
+      cards.reduce(
+        (total, card) =>
+          total +
+          (card.purchasePrice ?? 0),
+        0
+      );
 
-    const gemMintCount = cards.filter(
-      (card) => card.grade === 10
-    ).length;
+    const gemMintCount =
+      cards.filter(
+        (card) => card.grade === 10
+      ).length;
 
     const averageValue =
       totalCount > 0
@@ -155,58 +220,51 @@ export const psaService = {
     const mostValuableCard =
       cards.length > 0
         ? [...cards].sort(
-            (a, b) => b.estimatedValue - a.estimatedValue
+            (a, b) =>
+              b.estimatedValue -
+              a.estimatedValue
           )[0]
         : null;
 
     return {
       totalCount,
-
       totalValue,
-
       totalSpent,
-
       averageValue,
-
       averagePurchasePrice,
-
-      netProfit: totalValue - totalSpent,
-
+      netProfit:
+        totalValue - totalSpent,
       gemMintCount,
-
       mostValuableCard,
     };
   },
 
-  /**
-   * Trie les cartes par valeur décroissante.
-   */
-  sortCollection(cards: PSACard[]): PSACard[] {
+  sortCollection(
+    cards: PSACard[]
+  ): PSACard[] {
     return [...cards].sort(
-      (a, b) => b.estimatedValue - a.estimatedValue
+      (a, b) =>
+        b.estimatedValue -
+        a.estimatedValue
     );
   },
 
-  /**
-   * Filtre par grade.
-   */
   filterByGrade(
     cards: PSACard[],
     grade: PSAGrade
   ): PSACard[] {
     return cards.filter(
-      (card) => card.grade === grade
+      (card) =>
+        card.grade === grade
     );
   },
 
-  /**
-   * Recherche dans la collection personnelle.
-   */
   searchCollection(
     cards: PSACard[],
     query: string
   ): PSACard[] {
-    const search = query.trim().toLowerCase();
+    const search =
+      query.trim().toLowerCase();
 
     if (!search) return cards;
 
@@ -220,7 +278,9 @@ export const psaService = {
         .join(" ")
         .toLowerCase();
 
-      return searchable.includes(search);
+      return searchable.includes(
+        search
+      );
     });
   },
 };
