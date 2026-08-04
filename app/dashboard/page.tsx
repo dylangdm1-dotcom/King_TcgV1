@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -16,7 +15,12 @@ import {
 } from "lucide-react";
 
 import Navbar from "@/components/Navbar";
-import { getCollection } from "@/lib/storage";
+import {
+  getCollection,
+  getBuyPrice,
+  getCondition,
+  getCardQuantity,
+} from "@/lib/storage";
 import { getCardById } from "@/lib/pokemon";
 import {
   getMarketData,
@@ -24,7 +28,6 @@ import {
 } from "@/lib/marketEngine";
 import type {
   CardCondition,
-  CollectionEntry,
   PokemonCard,
 } from "@/lib/types";
 
@@ -51,26 +54,6 @@ function formatEuro(value: number): string {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   });
-}
-
-function getQuantity(entry: CollectionEntry): number {
-  const quantity = Number(entry.quantity);
-
-  if (!Number.isFinite(quantity) || quantity <= 0) {
-    return 1;
-  }
-
-  return quantity;
-}
-
-function getBuyPrice(entry: CollectionEntry): number {
-  const buyPrice = Number(entry.buyPrice);
-
-  if (!Number.isFinite(buyPrice) || buyPrice < 0) {
-    return 0;
-  }
-
-  return buyPrice;
 }
 
 function getStrategicScore(
@@ -114,12 +97,12 @@ function getStrategicScore(
 }
 
 /**
- * Construit une estimation sur 7 jours à partir
- * du prix actuel et de la vraie tendance 7j fournie
- * par le Market Engine.
+ * Construit une projection sur 7 jours.
  *
+ * IMPORTANT :
+ * Ces valeurs sont des projections calculées à partir
+ * du prix actuel et de la tendance réelle 7j.
  * Ce ne sont PAS des données historiques.
- * Ce sont des points de projection.
  */
 function buildSevenDayProjection(
   currentPrice: number,
@@ -141,119 +124,467 @@ function buildSevenDayProjection(
       ? weeklyMultiplier
       : 1;
 
-  return Array.from({ length: 7 }, (_, index) => {
-    const progress = index / 6;
+  return Array.from(
+    { length: 7 },
+    (_, index) => {
+      const progress = index / 6;
 
-    const value =
-      currentPrice *
-      (1 + (safeMultiplier - 1) * progress);
+      const value =
+        currentPrice *
+        (1 +
+          (safeMultiplier - 1) *
+            progress);
 
-    return Number(value.toFixed(2));
-  });
+      return Number(
+        value.toFixed(2)
+      );
+    }
+  );
+}
+
+/**
+ * Graphique moderne de projection 7 jours.
+ */
+function SevenDayChart({
+  values,
+}: {
+  values: number[];
+}) {
+  if (!values.length) {
+    return (
+      <div className="h-56 flex items-center justify-center text-[11px] text-zinc-600 font-bold">
+        Données de marché insuffisantes.
+      </div>
+    );
+  }
+
+  const width = 700;
+  const height = 260;
+
+  const paddingX = 30;
+  const paddingTop = 25;
+  const paddingBottom = 35;
+
+  const minValue = Math.min(...values);
+  const maxValue = Math.max(...values);
+
+  const range =
+    maxValue - minValue || 1;
+
+  const points = values.map(
+    (value, index) => {
+      const x =
+        paddingX +
+        (index /
+          Math.max(
+            values.length - 1,
+            1
+          )) *
+          (width -
+            paddingX * 2);
+
+      const y =
+        paddingTop +
+        (1 -
+          (value - minValue) /
+            range) *
+          (height -
+            paddingTop -
+            paddingBottom);
+
+      return {
+        x,
+        y,
+        value,
+      };
+    }
+  );
+
+  const linePath = points
+    .map(
+      (point, index) =>
+        `${
+          index === 0
+            ? "M"
+            : "L"
+        } ${point.x} ${point.y}`
+    )
+    .join(" ");
+
+  const areaPath =
+    `${linePath} ` +
+    `L ${
+      points[
+        points.length - 1
+      ].x
+    } ${
+      height -
+      paddingBottom
+    } ` +
+    `L ${points[0].x} ${
+      height -
+      paddingBottom
+    } Z`;
+
+  const first = values[0];
+  const last =
+    values[values.length - 1];
+
+  const variation =
+    first > 0
+      ? ((last - first) /
+          first) *
+        100
+      : 0;
+
+  return (
+    <div className="relative w-full">
+      <div className="h-64 w-full">
+        <svg
+          viewBox={`0 0 ${width} ${height}`}
+          preserveAspectRatio="none"
+          className="h-full w-full overflow-visible"
+        >
+          <defs>
+            <linearGradient
+              id="sevenDayGradient"
+              x1="0"
+              y1="0"
+              x2="0"
+              y2="1"
+            >
+              <stop
+                offset="0%"
+                stopColor="rgb(34 211 238)"
+                stopOpacity="0.28"
+              />
+
+              <stop
+                offset="100%"
+                stopColor="rgb(34 211 238)"
+                stopOpacity="0"
+              />
+            </linearGradient>
+          </defs>
+
+          {/* Grille horizontale */}
+          {[0, 1, 2, 3].map(
+            (line) => {
+              const y =
+                paddingTop +
+                (line / 3) *
+                  (height -
+                    paddingTop -
+                    paddingBottom);
+
+              return (
+                <line
+                  key={line}
+                  x1={paddingX}
+                  x2={
+                    width -
+                    paddingX
+                  }
+                  y1={y}
+                  y2={y}
+                  stroke="currentColor"
+                  className="text-zinc-900"
+                  strokeWidth="1"
+                />
+              );
+            }
+          )}
+
+          {/* Zone sous la courbe */}
+          <path
+            d={areaPath}
+            fill="url(#sevenDayGradient)"
+          />
+
+          {/* Courbe */}
+          <path
+            d={linePath}
+            fill="none"
+            stroke="rgb(34 211 238)"
+            strokeWidth="3"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+
+          {/* Points */}
+          {points.map(
+            (point, index) => (
+              <g key={index}>
+                <circle
+                  cx={point.x}
+                  cy={point.y}
+                  r="7"
+                  fill="rgb(9 9 11)"
+                  stroke="rgb(34 211 238)"
+                  strokeWidth="2"
+                />
+
+                <circle
+                  cx={point.x}
+                  cy={point.y}
+                  r="2.5"
+                  fill="rgb(34 211 238)"
+                />
+
+                {/* Valeur */}
+                <text
+                  x={point.x}
+                  y={point.y - 14}
+                  textAnchor="middle"
+                  className="fill-zinc-500 text-[8px] font-bold"
+                >
+                  {formatEuro(
+                    point.value
+                  )}
+                  €
+                </text>
+              </g>
+            )
+          )}
+
+          {/* Labels jours */}
+          {points.map(
+            (point, index) => (
+              <text
+                key={`label-${index}`}
+                x={point.x}
+                y={
+                  height -
+                  10
+                }
+                textAnchor="middle"
+                className="fill-zinc-600 text-[9px] font-bold"
+              >
+                {
+                  [
+                    "Auj.",
+                    "+1j",
+                    "+2j",
+                    "+3j",
+                    "+4j",
+                    "+5j",
+                    "+6j",
+                  ][index]
+                }
+              </text>
+            )
+          )}
+        </svg>
+      </div>
+
+      {/* Résumé du graphique */}
+      <div className="mt-2 grid grid-cols-3 gap-3">
+        <div>
+          <p className="text-[8px] font-black uppercase tracking-widest text-zinc-600">
+            Départ
+          </p>
+
+          <p className="mt-1 text-xs font-bold text-zinc-400 tabular-nums">
+            {formatEuro(
+              first
+            )}{" "}
+            €
+          </p>
+        </div>
+
+        <div className="text-center">
+          <p className="text-[8px] font-black uppercase tracking-widest text-zinc-600">
+            Projection
+          </p>
+
+          <p
+            className={`mt-1 text-sm font-black tabular-nums ${
+              variation >= 0
+                ? "text-emerald-400"
+                : "text-rose-400"
+            }`}
+          >
+            {variation >= 0
+              ? "+"
+              : ""}
+            {variation.toFixed(
+              1
+            )}{" "}
+            %
+          </p>
+        </div>
+
+        <div className="text-right">
+          <p className="text-[8px] font-black uppercase tracking-widest text-zinc-600">
+            J+6
+          </p>
+
+          <p className="mt-1 text-xs font-bold text-white tabular-nums">
+            {formatEuro(
+              last
+            )}{" "}
+            €
+          </p>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default function DashboardPage() {
-  const [cards, setCards] = useState<DashboardCard[]>([]);
-  const [message, setMessage] = useState<string | null>(null);
-  const [expanded, setExpanded] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [cards, setCards] =
+    useState<DashboardCard[]>([]);
 
-  const fileRef = useRef<HTMLInputElement>(null);
+  const [message, setMessage] =
+    useState<string | null>(null);
+
+  const [expanded, setExpanded] =
+    useState<string | null>(null);
+
+  const [loading, setLoading] =
+    useState(true);
+
+  const fileRef =
+    useRef<HTMLInputElement>(null);
 
   const refresh = async () => {
     try {
       setLoading(true);
 
-      const collection = getCollection();
-      const ids = Object.keys(collection);
+      const collection =
+        getCollection();
+
+      const ids =
+        Object.keys(collection);
 
       if (!ids.length) {
         setCards([]);
         return;
       }
 
-      const loadedCards = await Promise.all(
-        ids.map(async (id): Promise<DashboardCard | null> => {
-          try {
-            const entry = collection[id];
+      const loadedCards =
+        await Promise.all(
+          ids.map(
+            async (
+              id
+            ): Promise<DashboardCard | null> => {
+              try {
+                const entry =
+                  collection[id];
 
-            if (!entry) {
-              return null;
+                if (!entry) {
+                  return null;
+                }
+
+                const card =
+                  await getCardById(id);
+
+                if (!card) {
+                  console.warn(
+                    `[King_TCG] Carte introuvable pour ${id}`
+                  );
+
+                  return null;
+                }
+
+                /*
+                 * IMPORTANT :
+                 *
+                 * La quantité vient de COLLECTION_KEY.
+                 * Le prix d'achat et l'état viennent
+                 * de COLLECTION_INFO_KEY.
+                 *
+                 * On ne lit donc PAS buyPrice depuis
+                 * collection[id].
+                 */
+                const qty =
+                  getCardQuantity(id);
+
+                const buyPrice =
+                  getBuyPrice(id);
+
+                const condition =
+                  getCondition(id);
+
+                const market: MarketPrices =
+                  getMarketData(
+                    card
+                  );
+
+                const currentPrice =
+                  Number.isFinite(
+                    market.average
+                  ) &&
+                  market.average >
+                    0
+                    ? market.average
+                    : 0;
+
+                const score =
+                  getStrategicScore(
+                    card,
+                    currentPrice
+                  );
+
+                return {
+                  id: card.id,
+                  name: card.name,
+                  number:
+                    card.number,
+                  rarity:
+                    card.rarity,
+                  images: {
+                    small:
+                      card.images
+                        ?.small ||
+                      "",
+                    large:
+                      card.images
+                        ?.large ||
+                      "",
+                  },
+                  condition:
+                    condition as CardCondition,
+                  qty,
+                  buyPrice,
+                  currentPrice,
+                  priceTrend7d:
+                    Number.isFinite(
+                      market.priceTrend7d
+                    )
+                      ? market.priceTrend7d
+                      : 0,
+                  priceTrend30d:
+                    Number.isFinite(
+                      market.priceTrend30d
+                    )
+                      ? market.priceTrend30d
+                      : 0,
+                  score,
+                };
+              } catch (error) {
+                console.error(
+                  `[King_TCG] Dashboard card error ${id}:`,
+                  error
+                );
+
+                return null;
+              }
             }
+          )
+        );
 
-            const card = await getCardById(id);
+      const validCards =
+        loadedCards.filter(
+          (
+            card
+          ): card is DashboardCard =>
+            card !== null
+        );
 
-            if (!card) {
-              console.warn(
-                `[King_TCG] Carte introuvable pour ${id}`
-              );
-              return null;
-            }
-
-            const market: MarketPrices =
-              getMarketData(card);
-
-            const qty = getQuantity(entry);
-
-            /*
-             * IMPORTANT :
-             * Le prix d'achat réel de la collection
-             * est entry.buyPrice.
-             */
-            const buyPrice = getBuyPrice(entry);
-
-            const currentPrice =
-              Number.isFinite(market.average) &&
-              market.average > 0
-                ? market.average
-                : 0;
-
-            const score = getStrategicScore(
-              card,
-              currentPrice
-            );
-
-            return {
-              id: card.id,
-              name: card.name,
-              number: card.number,
-              rarity: card.rarity,
-              images: {
-                small: card.images?.small || "",
-                large: card.images?.large || "",
-              },
-              condition:
-                entry.condition || "Near Mint",
-              qty,
-              buyPrice,
-              currentPrice,
-              priceTrend7d:
-                Number.isFinite(market.priceTrend7d)
-                  ? market.priceTrend7d
-                  : 0,
-              priceTrend30d:
-                Number.isFinite(market.priceTrend30d)
-                  ? market.priceTrend30d
-                  : 0,
-              score,
-            };
-          } catch (error) {
-            console.error(
-              `[King_TCG] Dashboard card error ${id}:`,
-              error
-            );
-
-            return null;
-          }
-        })
+      setCards(
+        validCards
       );
-
-      const validCards = loadedCards.filter(
-        (card): card is DashboardCard =>
-          card !== null
-      );
-
-      setCards(validCards);
     } catch (error) {
       console.error(
         "[King_TCG] Dashboard refresh error:",
@@ -267,11 +598,12 @@ export default function DashboardPage() {
   };
 
   useEffect(() => {
-    refresh();
+    void refresh();
 
-    const handler = () => {
-      void refresh();
-    };
+    const handler =
+      () => {
+        void refresh();
+      };
 
     window.addEventListener(
       "king_tcg_update",
@@ -296,240 +628,305 @@ export default function DashboardPage() {
     };
   }, []);
 
-  const stats = useMemo(() => {
-    let investment = 0;
-    let current = 0;
+  const stats =
+    useMemo(() => {
+      let investment = 0;
+      let current = 0;
 
-    for (const card of cards) {
-      investment +=
-        card.buyPrice * card.qty;
+      for (const card of cards) {
+        investment +=
+          card.buyPrice *
+          card.qty;
 
-      current +=
-        card.currentPrice * card.qty;
-    }
+        current +=
+          card.currentPrice *
+          card.qty;
+      }
 
-    const profit =
-      current - investment;
+      const profit =
+        current -
+        investment;
 
-    const performance =
-      investment > 0
-        ? (profit / investment) * 100
-        : 0;
+      const performance =
+        investment > 0
+          ? (profit /
+              investment) *
+            100
+          : 0;
 
-    return {
-      investment,
-      current,
-      profit,
-      performance,
-    };
-  }, [cards]);
+      return {
+        investment,
+        current,
+        profit,
+        performance,
+      };
+    }, [cards]);
 
-  const scoredCards = useMemo(() => {
-    return [...cards].sort(
-      (a, b) => b.score - a.score
-    );
-  }, [cards]);
+  const scoredCards =
+    useMemo(() => {
+      return [
+        ...cards,
+      ].sort(
+        (a, b) =>
+          b.score -
+          a.score
+      );
+    }, [cards]);
 
-  const strategicScoreGlobal = useMemo(() => {
-    if (!cards.length) {
-      return 0;
-    }
+  const strategicScoreGlobal =
+    useMemo(() => {
+      if (!cards.length) {
+        return 0;
+      }
 
-    return Number(
-      (
-        cards.reduce(
-          (sum, card) =>
-            sum + card.score,
-          0
-        ) / cards.length
-      ).toFixed(1)
-    );
-  }, [cards]);
+      return Number(
+        (
+          cards.reduce(
+            (
+              sum,
+              card
+            ) =>
+              sum +
+              card.score,
+            0
+          ) /
+          cards.length
+        ).toFixed(1)
+      );
+    }, [cards]);
 
-  const featured = scoredCards[0] || null;
+  const featured =
+    scoredCards[0] ||
+    null;
 
-  const topPerformances = useMemo(() => {
-    return [...cards]
-      .sort((a, b) => {
-        const gainA =
-          a.buyPrice > 0
-            ? ((a.currentPrice -
-                a.buyPrice) /
-                a.buyPrice) *
-              100
-            : 0;
+  const topPerformances =
+    useMemo(() => {
+      return [
+        ...cards,
+      ]
+        .sort(
+          (a, b) => {
+            const gainA =
+              a.buyPrice >
+              0
+                ? ((a.currentPrice -
+                    a.buyPrice) /
+                    a.buyPrice) *
+                  100
+                : 0;
 
-        const gainB =
-          b.buyPrice > 0
-            ? ((b.currentPrice -
-                b.buyPrice) /
-                b.buyPrice) *
-              100
-            : 0;
+            const gainB =
+              b.buyPrice >
+              0
+                ? ((b.currentPrice -
+                    b.buyPrice) /
+                    b.buyPrice) *
+                  100
+                : 0;
 
-        return gainB - gainA;
-      })
-      .slice(0, 3);
-  }, [cards]);
-
-  const averageTrend7d = useMemo(() => {
-    if (!cards.length) {
-      return 0;
-    }
-
-    const cardsWithTrend = cards.filter(
-      (card) =>
-        Number.isFinite(
-          card.priceTrend7d
+            return (
+              gainB -
+              gainA
+            );
+          }
         )
-    );
+        .slice(0, 3);
+    }, [cards]);
 
-    if (!cardsWithTrend.length) {
-      return 0;
-    }
+  const averageTrend7d =
+    useMemo(() => {
+      if (!cards.length) {
+        return 0;
+      }
 
-    return Number(
-      (
-        cardsWithTrend.reduce(
-          (sum, card) =>
-            sum + card.priceTrend7d,
-          0
-        ) /
-        cardsWithTrend.length
-      ).toFixed(1)
-    );
-  }, [cards]);
-
-  const exportData = () => {
-    try {
-      const data = JSON.stringify(
-        {
-          version: "King_TCG_V5",
-          exportedAt:
-            new Date().toISOString(),
-          cards,
-        },
-        null,
-        2
-      );
-
-      const blob = new Blob(
-        [data],
-        {
-          type: "application/json",
-        }
-      );
-
-      const url =
-        URL.createObjectURL(blob);
-
-      const link =
-        document.createElement("a");
-
-      link.href = url;
-
-      link.download =
-        `king_tcg_v5_dashboard_${new Date()
-          .toISOString()
-          .slice(0, 10)}.json`;
-
-      link.click();
-
-      URL.revokeObjectURL(url);
-
-      setMessage(
-        "Sauvegarde exportée avec succès."
-      );
-
-      setTimeout(
-        () => setMessage(null),
-        4000
-      );
-    } catch (error) {
-      console.error(error);
-
-      setMessage(
-        "Erreur lors de l'export."
-      );
-    }
-  };
-
-  const importData = (file: File) => {
-    const reader =
-      new FileReader();
-
-    reader.onload = () => {
-      try {
-        const raw =
-          reader.result;
-
-        if (
-          typeof raw !==
-          "string"
-        ) {
-          throw new Error(
-            "Fichier invalide"
-          );
-        }
-
-        const parsed =
-          JSON.parse(raw);
-
-        if (
-          !parsed ||
-          typeof parsed !==
-            "object"
-        ) {
-          throw new Error(
-            "Format invalide"
-          );
-        }
-
-        /*
-         * L'import reste volontairement
-         * séparé de la collection réelle.
-         * Il ne doit pas écraser les données
-         * de la collection.
-         */
-        if (
-          Array.isArray(
-            parsed.cards
-          )
-        ) {
-          localStorage.setItem(
-            "king_tcg_dashboard_import",
-            JSON.stringify(
-              parsed.cards
+      const cardsWithTrend =
+        cards.filter(
+          (card) =>
+            Number.isFinite(
+              card.priceTrend7d
             )
-          );
-        }
-
-        setMessage(
-          "Sauvegarde importée."
         );
 
-        void refresh();
+      if (
+        !cardsWithTrend.length
+      ) {
+        return 0;
+      }
+
+      return Number(
+        (
+          cardsWithTrend.reduce(
+            (
+              sum,
+              card
+            ) =>
+              sum +
+              card.priceTrend7d,
+            0
+          ) /
+          cardsWithTrend.length
+        ).toFixed(1)
+      );
+    }, [cards]);
+
+  const exportData =
+    () => {
+      try {
+        const data =
+          JSON.stringify(
+            {
+              version:
+                "King_TCG_V5",
+              exportedAt:
+                new Date().toISOString(),
+              cards,
+            },
+            null,
+            2
+          );
+
+        const blob =
+          new Blob(
+            [data],
+            {
+              type: "application/json",
+            }
+          );
+
+        const url =
+          URL.createObjectURL(
+            blob
+          );
+
+        const link =
+          document.createElement(
+            "a"
+          );
+
+        link.href = url;
+
+        link.download =
+          `king_tcg_v5_dashboard_${new Date()
+            .toISOString()
+            .slice(
+              0,
+              10
+            )}.json`;
+
+        link.click();
+
+        URL.revokeObjectURL(
+          url
+        );
+
+        setMessage(
+          "Sauvegarde exportée avec succès."
+        );
 
         setTimeout(
-          () => setMessage(null),
+          () =>
+            setMessage(
+              null
+            ),
           4000
         );
       } catch (error) {
-        console.error(error);
-
-        setMessage(
-          "Erreur : fichier de sauvegarde invalide."
+        console.error(
+          error
         );
 
-        setTimeout(
-          () => setMessage(null),
-          4000
+        setMessage(
+          "Erreur lors de l'export."
         );
       }
     };
 
-    reader.readAsText(file);
-  };
+  const importData =
+    (file: File) => {
+      const reader =
+        new FileReader();
+
+      reader.onload =
+        () => {
+          try {
+            const raw =
+              reader.result;
+
+            if (
+              typeof raw !==
+              "string"
+            ) {
+              throw new Error(
+                "Fichier invalide"
+              );
+            }
+
+            const parsed =
+              JSON.parse(raw);
+
+            if (
+              !parsed ||
+              typeof parsed !==
+                "object"
+            ) {
+              throw new Error(
+                "Format invalide"
+              );
+            }
+
+            /*
+             * L'import Dashboard reste
+             * séparé de la collection réelle.
+             */
+            if (
+              Array.isArray(
+                parsed.cards
+              )
+            ) {
+              localStorage.setItem(
+                "king_tcg_dashboard_import",
+                JSON.stringify(
+                  parsed.cards
+                )
+              );
+            }
+
+            setMessage(
+              "Sauvegarde importée."
+            );
+
+            void refresh();
+
+            setTimeout(
+              () =>
+                setMessage(
+                  null
+                ),
+              4000
+            );
+          } catch (error) {
+            console.error(
+              error
+            );
+
+            setMessage(
+              "Erreur : fichier de sauvegarde invalide."
+            );
+
+            setTimeout(
+              () =>
+                setMessage(
+                  null
+                ),
+              4000
+            );
+          }
+        };
+
+      reader.readAsText(
+        file
+      );
+    };
 
   return (
     <>
@@ -544,7 +941,9 @@ export default function DashboardPage() {
 
             <div className="flex items-center gap-2">
               <button
-                onClick={exportData}
+                onClick={
+                  exportData
+                }
                 className="flex items-center gap-1.5 rounded-xl border border-zinc-800 bg-neutral-900 px-3 py-2 text-[10px] font-black uppercase tracking-wider text-zinc-300 hover:border-cyan-500/50 hover:text-cyan-400 transition-all"
               >
                 <Download className="w-3.5 h-3.5 text-cyan-400" />
@@ -566,12 +965,17 @@ export default function DashboardPage() {
                 type="file"
                 accept=".json"
                 className="hidden"
-                onChange={(event) => {
+                onChange={(
+                  event
+                ) => {
                   const file =
-                    event.target.files?.[0];
+                    event.target
+                      .files?.[0];
 
                   if (file) {
-                    importData(file);
+                    importData(
+                      file
+                    );
                   }
 
                   event.currentTarget.value =
@@ -597,7 +1001,8 @@ export default function DashboardPage() {
 
               <span className="text-[10px] text-zinc-500 font-bold uppercase tracking-wider">
                 {cards.length}{" "}
-                {cards.length > 1
+                {cards.length >
+                1
                   ? "actifs"
                   : "actif"}
               </span>
@@ -605,12 +1010,15 @@ export default function DashboardPage() {
 
             <div>
               <h1 className="text-lg font-black uppercase tracking-tight text-white">
-                Tableau de bord V5
+                Tableau de bord
+                V5
               </h1>
 
               <p className="text-[11px] text-zinc-400 mt-0.5">
-                Pilote la valeur réelle de ta collection,
-                ton investissement et les tendances du marché.
+                Pilote la valeur réelle
+                de ta collection, ton
+                investissement et les
+                tendances du marché.
               </p>
             </div>
 
@@ -623,7 +1031,8 @@ export default function DashboardPage() {
                 <span className="font-black text-white text-sm tabular-nums mt-0.5 block">
                   {formatEuro(
                     stats.investment
-                  )} €
+                  )}{" "}
+                  €
                 </span>
               </div>
 
@@ -634,17 +1043,20 @@ export default function DashboardPage() {
 
                 <span
                   className={`font-black text-sm tabular-nums mt-0.5 block ${
-                    stats.profit >= 0
+                    stats.profit >=
+                    0
                       ? "text-emerald-400"
                       : "text-rose-400"
                   }`}
                 >
-                  {stats.profit >= 0
+                  {stats.profit >=
+                  0
                     ? "+"
                     : ""}
                   {formatEuro(
                     stats.profit
-                  )} €
+                  )}{" "}
+                  €
                 </span>
               </div>
             </div>
@@ -664,7 +1076,8 @@ export default function DashboardPage() {
               <div className="text-lg font-black text-white tabular-nums mt-2">
                 {formatEuro(
                   stats.current
-                )} €
+                )}{" "}
+                €
               </div>
             </div>
 
@@ -679,17 +1092,20 @@ export default function DashboardPage() {
 
               <div
                 className={`text-lg font-black tabular-nums mt-2 ${
-                  stats.performance >= 0
+                  stats.performance >=
+                  0
                     ? "text-emerald-400"
                     : "text-rose-400"
                 }`}
               >
-                {stats.performance >= 0
+                {stats.performance >=
+                0
                   ? "+"
                   : ""}
                 {stats.performance.toFixed(
                   2
-                )} %
+                )}{" "}
+                %
               </div>
             </div>
 
@@ -736,7 +1152,8 @@ export default function DashboardPage() {
           <div className="space-y-4 pt-2">
             <h2 className="text-[10px] font-black uppercase tracking-widest text-zinc-500 px-1 flex items-center gap-1.5">
               <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-              Fluctuations & Analyses de Marché V5
+              Fluctuations & Analyses
+              de Marché V5
             </h2>
 
             {/* COURBE 7 JOURS */}
@@ -744,145 +1161,115 @@ export default function DashboardPage() {
               <div className="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                 <div>
                   <p className="text-[10px] font-black uppercase tracking-wider text-zinc-500">
-                    Estimation du prix sur 7 jours
+                    Projection du prix
+                    sur 7 jours
                   </p>
 
                   <h2 className="mt-1 text-2xl sm:text-3xl font-black tracking-tight text-white tabular-nums">
                     {formatEuro(
                       stats.current
-                    )} €
+                    )}{" "}
+                    €
                   </h2>
 
                   <p className="mt-0.5 text-xs font-bold flex items-center gap-1">
                     <span
                       className={
-                        averageTrend7d >= 0
+                        averageTrend7d >=
+                        0
                           ? "text-emerald-400"
                           : "text-rose-400"
                       }
                     >
-                      {averageTrend7d >= 0
+                      {averageTrend7d >=
+                      0
                         ? "+"
                         : ""}
                       {averageTrend7d.toFixed(
                         1
-                      )} %
+                      )}{" "}
+                      %
                     </span>
 
                     <span className="text-[10px] font-medium text-zinc-600 uppercase tracking-wide">
-                      (Tendance réelle 7j)
+                      Tendance réelle 7j
                     </span>
                   </p>
                 </div>
 
-                <div className="self-start sm:self-center rounded border border-zinc-800 bg-neutral-950 px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-zinc-400">
-                  Projection V5
+                <div className="self-start sm:self-center rounded-xl border border-cyan-500/20 bg-cyan-500/5 px-3 py-2 text-right">
+                  <p className="text-[8px] font-black uppercase tracking-widest text-cyan-500/60">
+                    Modèle
+                  </p>
+
+                  <p className="text-[10px] font-black uppercase text-cyan-400">
+                    Projection V5
+                  </p>
                 </div>
               </div>
 
-              {cards.length > 0 &&
-              stats.current > 0 ? (
-                <div className="w-full overflow-hidden rounded-lg bg-neutral-950/60 p-5 border border-zinc-900/50">
-                  {(() => {
-                    const projection =
-                      buildSevenDayProjection(
-                        stats.current,
-                        averageTrend7d
-                      );
+              {cards.length >
+                0 &&
+              stats.current >
+                0 ? (
+                <div className="rounded-2xl border border-zinc-900 bg-black/40 p-4 sm:p-5">
+                  <SevenDayChart
+                    values={buildSevenDayProjection(
+                      stats.current,
+                      averageTrend7d
+                    )}
+                  />
 
-                    if (
-                      !projection.length
-                    ) {
-                      return (
-                        <div className="h-48 flex items-center justify-center text-[11px] text-zinc-600 font-bold">
-                          Données de marché insuffisantes.
-                        </div>
-                      );
-                    }
+                  <div className="mt-5 flex items-center justify-between border-t border-zinc-900 pt-4">
+                    <div>
+                      <p className="text-[8px] font-black uppercase tracking-widest text-zinc-600">
+                        Tendance marché
+                      </p>
 
-                    const min =
-                      Math.min(
-                        ...projection
-                      );
+                      <p
+                        className={`mt-1 text-xs font-black ${
+                          averageTrend7d >=
+                          0
+                            ? "text-emerald-400"
+                            : "text-rose-400"
+                        }`}
+                      >
+                        {averageTrend7d >=
+                        0
+                          ? "+"
+                          : ""}
+                        {averageTrend7d.toFixed(
+                          1
+                        )}{" "}
+                        %
+                      </p>
+                    </div>
 
-                    const max =
-                      Math.max(
-                        ...projection
-                      );
+                    <div className="rounded-xl border border-zinc-800 bg-zinc-950 px-3 py-2 text-right">
+                      <p className="text-[8px] font-black uppercase tracking-widest text-zinc-600">
+                        Base
+                      </p>
 
-                    const range =
-                      max - min;
-
-                    return (
-                      <div className="h-48 flex items-end gap-2">
-                        {projection.map(
-                          (
-                            value,
-                            index
-                          ) => {
-                            const height =
-                              range > 0
-                                ? 25 +
-                                  ((value -
-                                    min) /
-                                    range) *
-                                    65
-                                : 55;
-
-                            return (
-                              <div
-                                key={
-                                  index
-                                }
-                                className="flex-1 flex flex-col justify-end gap-2"
-                              >
-                                <div className="text-[8px] text-zinc-600 text-center truncate">
-                                  {formatEuro(
-                                    value
-                                  )} €
-                                </div>
-
-                                <div
-                                  className="rounded-t bg-cyan-500/60 w-full transition-all"
-                                  style={{
-                                    height: `${height}%`,
-                                  }}
-                                />
-
-                                <span className="text-[9px] text-zinc-600 text-center">
-                                  {
-                                    [
-                                      "Auj.",
-                                      "+1j",
-                                      "+2j",
-                                      "+3j",
-                                      "+4j",
-                                      "+5j",
-                                      "+6j",
-                                    ][
-                                      index
-                                    ]
-                                  }
-                                </span>
-                              </div>
-                            );
-                          }
-                        )}
-                      </div>
-                    );
-                  })()}
-
-                  <p className="mt-4 text-[9px] text-zinc-700 text-center uppercase tracking-wider">
-                    Projection calculée à partir de la tendance marché réelle 7j disponible.
-                  </p>
+                      <p className="text-[10px] font-black uppercase text-zinc-400">
+                        Marché réel 7j
+                      </p>
+                    </div>
+                  </div>
                 </div>
               ) : (
-                <div className="h-48 flex items-center justify-center rounded-lg bg-neutral-950/60 border border-zinc-900/50">
+                <div className="h-56 flex items-center justify-center rounded-2xl border border-zinc-900 bg-black/40">
                   <p className="text-[11px] text-zinc-600 font-bold">
-                    Aucune donnée de marché disponible.
+                    Aucune donnée de marché
+                    disponible.
                   </p>
                 </div>
               )}
+
+              <p className="mt-4 text-[9px] text-zinc-700 text-center uppercase tracking-wider">
+                Les valeurs futures sont
+                des projections et non des
+                prix historiques réels.
+              </p>
             </section>
 
             {/* TOP PERFORMANCES */}
@@ -896,11 +1283,15 @@ export default function DashboardPage() {
               </div>
 
               <div className="space-y-2">
-                {topPerformances.length > 0 ? (
+                {topPerformances.length >
+                0 ? (
                   topPerformances.map(
-                    (card) => {
+                    (
+                      card
+                    ) => {
                       const gain =
-                        card.buyPrice > 0
+                        card.buyPrice >
+                        0
                           ? ((card.currentPrice -
                               card.buyPrice) /
                               card.buyPrice) *
@@ -909,7 +1300,9 @@ export default function DashboardPage() {
 
                       return (
                         <div
-                          key={card.id}
+                          key={
+                            card.id
+                          }
                           className="flex items-center justify-between rounded-lg border border-zinc-900/60 bg-neutral-950/50 p-3"
                         >
                           <div className="min-w-0 flex-1 pr-3">
@@ -922,28 +1315,33 @@ export default function DashboardPage() {
                               Achat :{" "}
                               {formatEuro(
                                 card.buyPrice
-                              )} €
+                              )}{" "}
+                              €
                               {" · "}
                               Cours :{" "}
                               {formatEuro(
                                 card.currentPrice
-                              )} €
+                              )}{" "}
+                              €
                             </div>
                           </div>
 
                           <div
                             className={`font-black text-[10px] uppercase tracking-wider px-2 py-0.5 rounded ${
-                              gain >= 0
+                              gain >=
+                              0
                                 ? "text-emerald-400 bg-emerald-500/5 border border-emerald-500/10"
                                 : "text-rose-400 bg-rose-500/5 border border-rose-500/10"
                             }`}
                           >
-                            {gain >= 0
+                            {gain >=
+                            0
                               ? "+"
                               : ""}
                             {gain.toFixed(
                               1
-                            )} %
+                            )}{" "}
+                            %
                           </div>
                         </div>
                       );
@@ -951,7 +1349,8 @@ export default function DashboardPage() {
                   )
                 ) : (
                   <p className="text-zinc-600 font-bold text-[11px] py-1 italic">
-                    Aucune fluctuation d'actif à signaler.
+                    Aucune fluctuation
+                    d'actif à signaler.
                   </p>
                 )}
               </div>
@@ -963,18 +1362,21 @@ export default function DashboardPage() {
                 <History className="w-4 h-4 text-zinc-400" />
 
                 <h2 className="text-xs font-black uppercase tracking-widest text-zinc-400">
-                  Historique d'acquisition V5
+                  Historique d'acquisition
+                  V5
                 </h2>
               </div>
 
               <p className="text-[11px] font-bold text-zinc-600 py-1 italic">
                 {cards.length
                   ? `${cards.length} carte${
-                      cards.length > 1
+                      cards.length >
+                      1
                         ? "s"
                         : ""
                     } actuellement enregistrée${
-                      cards.length > 1
+                      cards.length >
+                      1
                         ? "s"
                         : ""
                     } dans ta collection.`
@@ -987,12 +1389,15 @@ export default function DashboardPage() {
           <div className="space-y-4 pt-2">
             <h2 className="text-[10px] font-black uppercase tracking-widest text-zinc-500 px-1 flex items-center gap-1.5">
               <Package className="w-3.5 h-3.5 text-cyan-400" />
-              Inventaire des Actifs V5 ({cards.length})
+              Inventaire des Actifs V5
+              ({cards.length})
             </h2>
 
             <div className="space-y-2.5">
               {scoredCards.map(
-                (card) => {
+                (
+                  card
+                ) => {
                   const isExpanded =
                     expanded ===
                     card.id;
@@ -1011,7 +1416,9 @@ export default function DashboardPage() {
 
                   return (
                     <div
-                      key={card.id}
+                      key={
+                        card.id
+                      }
                       className={`rounded-xl border border-zinc-900 bg-neutral-900/40 transition-all ${
                         isExpanded
                           ? "border-cyan-500/30 bg-neutral-900/80 p-4"
@@ -1059,7 +1466,8 @@ export default function DashboardPage() {
                               Unit. :{" "}
                               {formatEuro(
                                 card.currentPrice
-                              )} €
+                              )}{" "}
+                              €
                               {" · "}
                               {card.condition}
                             </p>
@@ -1068,7 +1476,10 @@ export default function DashboardPage() {
 
                         <div className="flex items-center gap-2 text-zinc-400">
                           <span className="text-[10px] font-black px-2 py-0.5 bg-black/60 border border-zinc-800 rounded text-cyan-400">
-                            x{card.qty}
+                            x
+                            {
+                              card.qty
+                            }
                           </span>
 
                           {isExpanded ? (
@@ -1090,7 +1501,8 @@ export default function DashboardPage() {
                               <span className="text-zinc-300 font-bold mt-1 block">
                                 {formatEuro(
                                   totalBuy
-                                )} €
+                                )}{" "}
+                                €
                               </span>
                             </div>
 
@@ -1102,7 +1514,8 @@ export default function DashboardPage() {
                               <span className="text-white font-bold mt-1 block">
                                 {formatEuro(
                                   totalCurrent
-                                )} €
+                                )}{" "}
+                                €
                               </span>
                             </div>
 
@@ -1125,7 +1538,8 @@ export default function DashboardPage() {
                                   : ""}
                                 {formatEuro(
                                   profit
-                                )} €
+                                )}{" "}
+                                €
                               </span>
                             </div>
                           </div>
@@ -1133,13 +1547,15 @@ export default function DashboardPage() {
                           <div className="mt-2 grid grid-cols-2 gap-2 text-[10px]">
                             <div className="bg-black/40 rounded-lg p-2 border border-zinc-800/50">
                               <span className="text-zinc-600 font-medium block uppercase tracking-wider">
-                                Prix d'achat unitaire
+                                Prix d'achat
+                                unitaire
                               </span>
 
                               <span className="text-zinc-300 font-bold mt-0.5 block">
                                 {formatEuro(
                                   card.buyPrice
-                                )} €
+                                )}{" "}
+                                €
                               </span>
                             </div>
 
@@ -1193,7 +1609,8 @@ export default function DashboardPage() {
                                   : ""}
                                 {
                                   card.priceTrend7d
-                                } %
+                                }{" "}
+                                %
                               </span>
                             </div>
 
@@ -1216,7 +1633,8 @@ export default function DashboardPage() {
                                   : ""}
                                 {
                                   card.priceTrend30d
-                                } %
+                                }{" "}
+                                %
                               </span>
                             </div>
 
@@ -1243,22 +1661,27 @@ export default function DashboardPage() {
               {loading && (
                 <div className="rounded-xl border border-zinc-900 bg-neutral-900/40 p-8 text-center">
                   <p className="text-xs font-bold text-zinc-500">
-                    Chargement de la collection...
+                    Chargement de la
+                    collection...
                   </p>
                 </div>
               )}
 
               {!loading &&
-                cards.length === 0 && (
+                cards.length ===
+                  0 && (
                   <div className="rounded-xl border border-zinc-900 bg-neutral-900/40 p-8 text-center">
                     <Package className="w-8 h-8 text-zinc-700 mx-auto mb-3" />
 
                     <p className="text-xs font-bold text-zinc-500">
-                      Aucun actif dans ton portefeuille.
+                      Aucun actif dans ton
+                      portefeuille.
                     </p>
 
                     <p className="text-[10px] text-zinc-700 mt-1">
-                      Ajoute des cartes depuis la section Scanner ou Recherche.
+                      Ajoute des cartes depuis
+                      la section Scanner ou
+                      Recherche.
                     </p>
                   </div>
                 )}
