@@ -15,7 +15,6 @@ import Navbar from "@/components/Navbar";
 
 import {
   psaService,
-  MOCK_PRICECHARTING_DATABASE,
   PriceChartingCard,
 } from "@/lib/psa/psaService";
 
@@ -41,9 +40,9 @@ export default function PSAPage() {
    * Recherche PriceCharting
    */
   const [priceChartingQuery, setPriceChartingQuery] = useState("");
-  const [priceChartingResults, setPriceChartingResults] = useState<PriceChartingCard[]>(
-    MOCK_PRICECHARTING_DATABASE
-  );
+  const [priceChartingResults, setPriceChartingResults] = useState<PriceChartingCard[]>([]);
+  const [priceChartingLoading, setPriceChartingLoading] = useState(false);
+  const [priceChartingError, setPriceChartingError] = useState("");
 
   /**
    * Modal ajout carte PSA
@@ -77,11 +76,32 @@ export default function PSAPage() {
   /**
    * Recherche carte PriceCharting
    */
-  const handlePriceChartingSearch = (event: React.FormEvent) => {
+  const handlePriceChartingSearch = async (event: React.FormEvent) => {
     event.preventDefault();
-    setPriceChartingResults(
-      psaService.searchPriceCharting(priceChartingQuery)
-    );
+
+    if (!priceChartingQuery.trim()) return;
+
+    setPriceChartingLoading(true);
+    setPriceChartingError("");
+
+    try {
+      const results = await psaService.searchPriceCharting(priceChartingQuery);
+      setPriceChartingResults(results);
+
+      if (results.length === 0) {
+        setPriceChartingError("Aucune carte PriceCharting trouvée.");
+      }
+    } catch (error) {
+      console.error("Erreur recherche PriceCharting", error);
+      setPriceChartingResults([]);
+      setPriceChartingError(
+        error instanceof Error
+          ? error.message
+          : "Impossible de récupérer les données PriceCharting."
+      );
+    } finally {
+      setPriceChartingLoading(false);
+    }
   };
 
   /**
@@ -376,6 +396,18 @@ export default function PSAPage() {
                 </form>
               </div>
 
+              {priceChartingLoading && (
+                <div className="rounded-2xl border border-cyan-500/20 bg-cyan-500/5 p-4 text-xs text-cyan-300">
+                  Recherche des données publiques PriceCharting...
+                </div>
+              )}
+
+              {priceChartingError && !priceChartingLoading && (
+                <div className="rounded-2xl border border-amber-500/20 bg-amber-500/5 p-4 text-xs text-amber-300">
+                  {priceChartingError}
+                </div>
+              )}
+
               <div className="space-y-4">
                 {priceChartingResults.map((card) => (
                   <div
@@ -399,8 +431,16 @@ export default function PSAPage() {
                           Carte : {card.cardNumber}
                         </p>
                         <p className="mt-2 text-xs text-cyan-400 font-bold">
-                          Non gradée : {card.prices.ungraded} €
+                          Non gradée : ${card.prices.ungraded.toLocaleString("en-US")} USD
                         </p>
+                        <a
+                          href={card.sourceUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="inline-block mt-1 text-[10px] text-zinc-500 hover:text-cyan-400 underline"
+                        >
+                          Voir la fiche PriceCharting ↗
+                        </a>
                       </div>
                     </div>
 
@@ -426,7 +466,7 @@ export default function PSAPage() {
                             PSA {item.grade}
                           </span>
                           <span className="text-sm font-black">
-                            {item.price} €
+                            {item.price > 0 ? `$${item.price.toLocaleString("en-US")}` : "—"}
                           </span>
                           <span className="block text-[9px] text-cyan-400 mt-1 uppercase">
                             Ajouter
