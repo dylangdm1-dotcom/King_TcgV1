@@ -29,6 +29,102 @@ function decodeHtml(value: string): string {
     .trim();
 }
 
+function extractPrice(
+  html: string,
+  id: string
+): number | null {
+  const regex = new RegExp(
+    `<td[^>]*id=["']${id}["'][^>]*>[\\s\\S]*?<span[^>]*class=["'][^"']*price[^"']*["'][^>]*>\\s*\\$([0-9,]+(?:\\.[0-9]+)?)`,
+    "i"
+  );
+
+  const match = html.match(regex);
+
+  if (!match) {
+    return null;
+  }
+
+  const value = Number(
+    match[1].replace(/,/g, "")
+  );
+
+  return Number.isFinite(value) ? value : null;
+}
+
+function extractRecentSales(html: string) {
+  const rows =
+    html.match(
+      /<tr\b[^>]*id=["'][^"']+["'][^>]*>[\s\S]*?<\/tr>/gi
+    ) ?? [];
+
+  const sales = [];
+
+  for (const row of rows) {
+    const dateMatch =
+      row.match(
+        /<td[^>]*class=["'][^"']*\bdate\b[^"']*["'][^>]*>\s*([^<]+)\s*<\/td>/i
+      );
+
+    const titleMatch =
+      row.match(
+        /<td[^>]*class=["'][^"']*\btitle\b[^"']*["'][^>]*>[\s\S]*?<a[^>]*>([\s\S]*?)<\/a>/i
+      );
+
+    const priceMatch =
+      row.match(
+        /<td[^>]*class=["'][^"']*\bnumeric\b[^"']*["'][^>]*>[\s\S]*?\$([0-9,]+(?:\.[0-9]+)?)/i
+      );
+
+    if (!dateMatch || !titleMatch || !priceMatch) {
+      continue;
+    }
+
+    const title = decodeHtml(titleMatch[1]);
+
+    const price = Number(
+      priceMatch[1].replace(/,/g, "")
+    );
+
+    if (!Number.isFinite(price)) {
+      continue;
+    }
+
+    const lowerTitle = title.toLowerCase();
+
+    /**
+     * On garde uniquement les ventes qui semblent
+     * correspondre à la fiche consultée.
+     *
+     * Cela évite notamment de remonter des cartes
+     * chinoises/japonaises ou d'autres variantes
+     * mélangées dans les résultats.
+     */
+    const isRelevant =
+      lowerTitle.includes("charizard") &&
+      (
+        lowerTitle.includes("vmax") ||
+        lowerTitle.includes("020/189") ||
+        lowerTitle.includes("#20")
+      );
+
+    if (!isRelevant) {
+      continue;
+    }
+
+    sales.push({
+      date: dateMatch[1].trim(),
+      title,
+      priceUsd: price,
+    });
+
+    if (sales.length >= 20) {
+      break;
+    }
+  }
+
+  return sales;
+}
+
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
 
@@ -45,8 +141,11 @@ export async function GET(request: Request) {
   }
 
   /**
-   * Fiche individuelle connue grâce au résultat
-   * validé précédemment pour Charizard VMAX #20.
+   * Fiche actuellement validée pour le test.
+   *
+   * IMPORTANT :
+   * pour l'instant on conserve cette URL afin
+   * de valider toute la chaîne d'extraction.
    */
   const productUrl =
     "https://www.pricecharting.com/game/pokemon-darkness-ablaze/charizard-vmax-20";
@@ -63,6 +162,7 @@ export async function GET(request: Request) {
     try {
       response = await fetch(productUrl, {
         method: "GET",
+
         headers: {
           Accept:
             "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
@@ -102,115 +202,81 @@ export async function GET(request: Request) {
     }
 
     /**
-     * Toutes les occurrences de "Grade"
-     * dans le HTML.
+     * Prix actuels uniquement.
+     *
+     * IMPORTANT :
+     * aucun historicalPrices ici.
+     * Aucun graphique d'évolution.
      */
-    const gradeMatches =
-      html.match(/.{0,300}Grade.{0,700}/gi) ?? [];
+    const prices = {
+      ungraded: extractPrice(
+        html,
+        "used_price"
+      ),
+
+      grade7: extractPrice(
+        html,
+        "complete_price"
+      ),
+
+      grade8: extractPrice(
+        html,
+        "new_price"
+      ),
+
+      grade9: extractPrice(
+        html,
+        "graded_price"
+      ),
+
+      grade9_5: extractPrice(
+        html,
+        "box_only_price"
+      ),
+
+      psa10: extractPrice(
+        html,
+        "manual_only_price"
+      ),
+    };
 
     /**
-     * Toutes les occurrences de "PSA".
+     * Ventes récentes.
+     *
+     * Ce ne sont PAS des historiques de prix.
+     * Ce sont simplement les ventes récentes
+     * utilisées comme données de marché.
      */
-    const psaMatches =
-      html.match(/.{0,300}PSA.{0,700}/gi) ?? [];
-
-    /**
-     * Contexte précis autour des termes recherchés.
-     */
-    const targets = [
-      "Grade 9",
-      "Grade 9.5",
-      "PSA 10",
-      "PSA10",
-      "grade9",
-      "grade9.5",
-      "psa10",
-    ];
-
-    const contexts: Record<string, string[]> = {};
-
-    for (const target of targets) {
-      const matches: string[] = [];
-
-      const regex = new RegExp(
-        `.{0,1000}${target.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}.{0,2000}`,
-        "gi"
-      );
-
-      let match: RegExpExecArray | null;
-
-      while ((match = regex.exec(html)) !== null) {
-        matches.push(
-          match[0]
-        );
-
-        if (matches.length >= 5) {
-          break;
-        }
-      }
-
-      contexts[target] = matches;
-    }
-
-    /**
-     * Quelques tableaux HTML.
-     */
-    const trMatches =
-      html.match(
-        /<tr\b[^>]*>[\s\S]*?<\/tr>/gi
-      ) ?? [];
-
-    const relevantRows =
-      trMatches
-        .filter((row) =>
-          /Grade|PSA|price|Price/i.test(row)
-        )
-        .slice(0, 30)
-        .map((row, index) => ({
-          index,
-          raw: row,
-          decoded: decodeHtml(row),
-        }));
-
-    /**
-     * Recherche des éléments contenant
-     * explicitement les valeurs monétaires.
-     */
-    const priceMatches =
-      html.match(
-        /.{0,300}\$[0-9,]+(?:\.[0-9]+)?.{0,700}/gi
-      ) ?? [];
+    const recentSales =
+      extractRecentSales(html);
 
     return NextResponse.json({
       success: true,
 
       productUrl,
 
-      htmlLength:
-        html.length,
+      query,
 
-      gradeMatchCount:
-        gradeMatches.length,
+      prices,
 
-      psaMatchCount:
-        psaMatches.length,
+      recentSales,
 
-      gradeExamples:
-        gradeMatches.slice(0, 20),
-
-      psaExamples:
-        psaMatches.slice(0, 20),
-
-      contexts,
-
-      relevantRows,
-
-      priceExamples:
-        priceMatches.slice(0, 30),
+      /**
+       * Indique clairement au frontend
+       * quelles données sont disponibles.
+       */
+      availableGrades: [
+        "ungraded",
+        "grade7",
+        "grade8",
+        "grade9",
+        "grade9_5",
+        "psa10",
+      ],
     });
   } catch (error) {
     console.error(
-      "PriceCharting product diagnostic error:",
+      "PriceCharting product error:",
       error
     );
 
