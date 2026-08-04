@@ -1,4 +1,3 @@
-
 import { NextResponse } from "next/server";
 
 export const runtime = "nodejs";
@@ -25,6 +24,11 @@ function decodeHtml(value: string): string {
   return value
     .replace(/<script[\s\S]*?<\/script>/gi, " ")
     .replace(/<style[\s\S]*?<\/style>/gi, " ")
+    .replace(/<br\s*\/?>/gi, " ")
+    .replace(/<\/p>/gi, " ")
+    .replace(/<\/div>/gi, " ")
+    .replace(/<\/td>/gi, " ")
+    .replace(/<\/th>/gi, " ")
     .replace(/<[^>]*>/g, " ")
     .replace(/&amp;/gi, "&")
     .replace(/&quot;/gi, '"')
@@ -34,6 +38,9 @@ function decodeHtml(value: string): string {
     .replace(/&gt;/gi, ">")
     .replace(/&#(\d+);/g, (_, code) =>
       String.fromCharCode(Number(code))
+    )
+    .replace(/&#x([0-9a-f]+);/gi, (_, code) =>
+      String.fromCharCode(parseInt(code, 16))
     )
     .replace(/\s+/g, " ")
     .trim();
@@ -51,31 +58,104 @@ function money(value: string | undefined): number {
   return Number.isFinite(parsed) ? parsed : 0;
 }
 
-function extractPrice(text: string, label: string): number {
-  const pattern = new RegExp(
-    `${label}\\s*\\$([0-9,]+(?:\\.[0-9]+)?)`,
-    "i"
+/**
+ * Extrait tous les prix présents dans une ligne du tableau.
+ *
+ * Exemple :
+ *
+ * Charizard VMAX #20
+ * Pokemon Darkness Ablaze
+ * $40.00
+ * $35.76
+ * $36.00
+ *
+ * => [40, 35.76, 36]
+ */
+function extractPrices(rowText: string): number[] {
+  const matches = rowText.match(
+    /\$[0-9,]+(?:\.[0-9]+)?/g
   );
 
-  return money(text.match(pattern)?.[1]);
-}
-
-function extractCellPrice(
-  rowText: string,
-  label: string
-): number {
-  const pattern = new RegExp(
-    `${label}\\s*:\\s*\\$([0-9,]+(?:\\.[0-9]+)?)`,
-    "i"
-  );
-
-  const match = rowText.match(pattern);
-
-  if (match?.[1]) {
-    return money(match[1]);
+  if (!matches) {
+    return [];
   }
 
-  return 0;
+  return matches.map((value) => money(value));
+}
+
+/**
+ * Parse le titre PriceCharting.
+ *
+ * Exemple :
+ *
+ * Charizard VMAX #20 Pokemon Darkness Ablaze
+ *
+ * devient :
+ *
+ * cardName   = Charizard VMAX
+ * cardNumber = 20
+ * setName    = Pokemon Darkness Ablaze
+ */
+function parseTitle(title: string): {
+  cardName: string;
+  cardNumber: string;
+  setName: string;
+} | null {
+  const cleanTitle = decodeHtml(title);
+
+  /**
+   * PriceCharting utilise généralement :
+   *
+   * NOM #NUMERO Pokemon SET
+   *
+   * Le numéro peut contenir :
+   * - chiffres
+   * - lettres
+   * - /
+   * - -
+   */
+  const match = cleanTitle.match(
+    /^(.+?)\s+#([A-Za-z0-9./-]+)\s+(Pokemon\s+.+)$/i
+  );
+
+  if (!match) {
+    return null;
+  }
+
+  return {
+    cardName: match[1].trim(),
+    cardNumber: match[2].trim(),
+    setName: match[3].trim(),
+  };
+}
+
+/**
+ * Récupère le titre depuis le lien /game/.
+ *
+ * Exemple HTML :
+ *
+ * <a href="/game/pokemon-darkness-ablaze/charizard-vmax-20">
+ *   Charizard VMAX #20 Pokemon Darkness Ablaze
+ * </a>
+ */
+function extractGameLink(
+  rowHtml: string
+): {
+  sourceUrl: string;
+  title: string;
+} | null {
+  const match = rowHtml.match(
+    /<a[^>]+href=["'](\/game\/pokemon-[^"']+)["'][^>]*>([\s\S]*?)<\/a>/i
+  );
+
+  if (!match) {
+    return null;
+  }
+
+  return {
+    sourceUrl: `https://www.pricecharting.com${match[1]}`,
+    title: decodeHtml(match[2]),
+  };
 }
 
 /**
@@ -83,115 +163,139 @@ function extractCellPrice(
  *
  * /search-products?type=prices&view=table&q=...
  *
- * PriceCharting affiche actuellement des lignes contenant :
+ * Structure actuelle :
  *
- * Charizard VMAX #20
- * Pokemon Darkness Ablaze
+ * <tr>
+ *   ...
+ *   <a href="/game/pokemon-...">
+ *      Card Name #20 Pokemon Set
+ *   </a>
+ *   ...
+ *   $40.00
+ *   $35.76
+ *   $36.00
+ *   ...
+ * </tr>
+ *
+ * La page de recherche expose actuellement :
+ *
+ * Title
+ * Set
  * Ungraded
  * Grade 7
  * Grade 8
  *
- * On reste volontairement sur la page de recherche.
- * Aucun fetch individuel n'est effectué.
+ * Les grades 9 / 9.5 / PSA 10 seront récupérés
+ * ultérieurement depuis la fiche individuelle.
  */
 function parseSearchResults(html: string): Result[] {
   const results: Result[] = [];
   const seen = new Set<string>();
 
   /**
-   * Chaque résultat possède un lien /game/...
+   * On travaille directement sur les lignes <tr>.
    *
-   * On récupère le bloc HTML autour du lien afin
-   * d'extraire toutes les informations du résultat.
+   * C'est beaucoup plus fiable que de prendre arbitrairement
+   * 1000 caractères avant et 5000 après le lien.
    */
-  const linkRegex =
-    /<a[^>]+href=["'](\/game\/pokemon-[^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi;
+  const rowRegex = /<tr\b[^>]*>[\s\S]*?<\/tr>/gi;
 
-  let match: RegExpExecArray | null;
+  let rowMatch: RegExpExecArray | null;
 
-  while ((match = linkRegex.exec(html)) !== null) {
-    const sourceUrl = `https://www.pricecharting.com${match[1]}`;
-
-    if (seen.has(sourceUrl)) continue;
-
-    seen.add(sourceUrl);
+  while ((rowMatch = rowRegex.exec(html)) !== null) {
+    const rowHtml = rowMatch[0];
 
     /**
-     * Cherche une zone raisonnablement proche du lien.
-     * Les résultats PriceCharting sont présentés sous forme
-     * de lignes/blocs dans la page de recherche.
+     * Une ligne de résultat Pokemon doit contenir
+     * un lien /game/pokemon-...
      */
-    const start = Math.max(0, match.index - 1000);
-    const end = Math.min(html.length, match.index + 5000);
-
-    const blockHtml = html.slice(start, end);
-    const blockText = decodeHtml(blockHtml);
-
-    /**
-     * Exemple attendu :
-     *
-     * Charizard VMAX #20
-     * Pokemon Darkness Ablaze
-     */
-    const cardMatch = blockText.match(
-      /([A-Za-zÀ-ÿ0-9'’.\-:()[\]\/+& ]+?)\s+#([A-Za-z0-9./-]+)\s+Pokemon\s+([^$]+?)(?=\s+Ungraded|\s+Grade\s+7|\s+Grade\s+8|$)/i
-    );
-
-    if (!cardMatch) {
+    if (!/href=["']\/game\/pokemon-/i.test(rowHtml)) {
       continue;
     }
 
-    const cardName = cardMatch[1].trim();
-    const cardNumber = cardMatch[2].trim();
-    const setName = `Pokemon ${cardMatch[3].trim()}`;
+    const gameLink = extractGameLink(rowHtml);
+
+    if (!gameLink) {
+      continue;
+    }
+
+    const {
+      sourceUrl,
+      title,
+    } = gameLink;
+
+    if (seen.has(sourceUrl)) {
+      continue;
+    }
 
     /**
-     * Les résultats en mode table contiennent les prix
-     * directement dans la recherche.
+     * Analyse du titre.
      */
-    const ungraded =
-      extractCellPrice(blockText, "Ungraded") ||
-      extractPrice(blockText, "Ungraded");
+    const parsedTitle = parseTitle(title);
 
-    const psa7 =
-      extractCellPrice(blockText, "Grade 7") ||
-      extractPrice(blockText, "Grade 7");
+    if (!parsedTitle) {
+      console.log(
+        "PriceCharting: titre non reconnu:",
+        title
+      );
 
-    const psa8 =
-      extractCellPrice(blockText, "Grade 8") ||
-      extractPrice(blockText, "Grade 8");
+      continue;
+    }
 
-    const psa9 =
-      extractCellPrice(blockText, "Grade 9") ||
-      extractPrice(blockText, "Grade 9");
+    /**
+     * Texte propre de la ligne.
+     */
+    const rowText = decodeHtml(rowHtml);
 
-    const psa9_5 =
-      extractCellPrice(blockText, "Grade 9.5") ||
-      extractPrice(blockText, "Grade 9\\.5");
+    /**
+     * Les trois premiers prix correspondent actuellement
+     * aux trois colonnes visibles :
+     *
+     * 1. Ungraded
+     * 2. Grade 7
+     * 3. Grade 8
+     */
+    const prices = extractPrices(rowText);
 
-    const psa10 =
-      extractCellPrice(blockText, "PSA 10") ||
-      extractPrice(blockText, "PSA 10");
+    const ungraded = prices[0] ?? 0;
+    const psa7 = prices[1] ?? 0;
+    const psa8 = prices[2] ?? 0;
 
-    results.push({
+    /**
+     * Pour cette première étape :
+     *
+     * Grade 9
+     * Grade 9.5
+     * PSA 10
+     *
+     * ne sont volontairement PAS inventés.
+     *
+     * Ils seront récupérés sur la fiche individuelle
+     * lors de la prochaine étape.
+     */
+    const result: Result = {
       id: sourceUrl,
-      cardName,
-      setName,
-      cardNumber,
+      cardName: parsedTitle.cardName,
+      setName: parsedTitle.setName,
+      cardNumber: parsedTitle.cardNumber,
       imageUrl: "",
       sourceUrl,
       prices: {
         ungraded,
         psa7,
         psa8,
-        psa9,
-        psa9_5: psa9_5 || undefined,
-        psa10,
+        psa9: 0,
+        psa9_5: undefined,
+        psa10: 0,
       },
-    });
+    };
+
+    results.push(result);
+    seen.add(sourceUrl);
 
     /**
-     * Prototype : maximum 20 résultats.
+     * Prototype :
+     * maximum 20 résultats.
      */
     if (results.length >= 20) {
       break;
@@ -203,6 +307,7 @@ function parseSearchResults(html: string): Result[] {
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
+
   const query = searchParams.get("q")?.trim();
 
   if (!query) {
@@ -216,10 +321,7 @@ export async function GET(request: Request) {
   }
 
   /**
-   * IMPORTANT :
-   *
-   * On utilise uniquement la recherche publique.
-   * Aucun accès aux fiches individuelles.
+   * Recherche publique PriceCharting.
    */
   const searchUrl =
     `https://www.pricecharting.com/search-products` +
@@ -242,13 +344,22 @@ export async function GET(request: Request) {
         headers: {
           Accept:
             "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-          "Accept-Language": "en-US,en;q=0.9",
-          "Cache-Control": "no-cache",
-          Pragma: "no-cache",
+
+          "Accept-Language":
+            "en-US,en;q=0.9",
+
+          "Cache-Control":
+            "no-cache",
+
+          Pragma:
+            "no-cache",
+
           "User-Agent":
             "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/150.0 Safari/537.36",
         },
+
         cache: "no-store",
+
         signal: controller.signal,
       });
     } finally {
@@ -269,7 +380,15 @@ export async function GET(request: Request) {
       );
     }
 
+    console.log(
+      `PriceCharting HTML reçu: ${html.length} caractères`
+    );
+
     const results = parseSearchResults(html);
+
+    console.log(
+      `PriceCharting résultats détectés: ${results.length}`
+    );
 
     return NextResponse.json({
       success: true,
