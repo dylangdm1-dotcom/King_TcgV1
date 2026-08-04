@@ -1,3 +1,5 @@
+// lib/priceAlerts.ts
+
 import type { PokemonCard } from "./types";
 import { getMarketHistory, type PricePoint } from "./priceHistory";
 import { getMarketData } from "./marketEngine";
@@ -11,70 +13,84 @@ export type PriceAlert = {
 };
 
 /**
- * 🧠 Calcule la variation en pourcentage à partir de l'historique réel
+ * Calcule la variation en pourcentage
+ * à partir de l'historique réel.
  */
-function getPriceChangePercent(history: PricePoint[]): number {
-  if (!history || history.length < 2) return 0;
+function getPriceChangePercent(
+  history: PricePoint[]
+): number {
+  if (!history || history.length < 2) {
+    return 0;
+  }
 
-  const first = history[0]?.average ?? 0;
-  const last = history[history.length - 1]?.average ?? 0;
+  const first = history[0].average;
+  const last =
+    history[history.length - 1].average;
 
-  if (first <= 0) return 0;
+  if (
+    !Number.isFinite(first) ||
+    !Number.isFinite(last) ||
+    first <= 0
+  ) {
+    return 0;
+  }
 
   return ((last - first) / first) * 100;
 }
 
 /**
- * 🚨 Analyse l'historique et le prix actuel d'une carte
+ * Analyse l'historique et le prix actuel
+ * d'une carte pour générer une alerte.
  *
  * IMPORTANT :
- * Le prix actuel utilise maintenant exactement la même source
- * que le Dashboard : getMarketData(card).
+ * Le prix actuel utilise exactement le même
+ * moteur que le Dashboard V5 :
  *
- * On ne passe plus par getCardMarketPrice().
+ * getMarketData(card).average
  */
-export function analyzeCardAlerts(card: PokemonCard): PriceAlert | null {
-  if (!card?.id) return null;
-
-  /*
-   * Historique utilisé pour calculer la variation.
-   */
-  const history = getMarketHistory(card.id);
-
-  if (!history || history.length < 2) return null;
-
-  const change = getPriceChangePercent(history);
-  const roundedChange = Number(change.toFixed(2));
-
-  /*
-   * 💰 NOUVEAU CHEMIN PRIX
-   *
-   * Même moteur que le Dashboard.
-   */
-  let currentPrice = 0;
-
-  try {
-    const market = getMarketData(card);
-
-    /*
-     * On privilégie la moyenne marché, exactement comme
-     * le Dashboard pour la valeur actuelle de la carte.
-     */
-    currentPrice = Number(market?.average ?? 0);
-
-    if (!Number.isFinite(currentPrice) || currentPrice < 0) {
-      currentPrice = 0;
-    }
-  } catch (error) {
-    console.warn(
-      `[King_TCG V5] Impossible de récupérer le prix marché pour ${card.id}:`,
-      error
-    );
-
-    currentPrice = 0;
+export function analyzeCardAlerts(
+  card: PokemonCard
+): PriceAlert | null {
+  if (!card?.id) {
+    return null;
   }
 
-  // 📉 Chute importante
+  // Historique de marché
+  const history =
+    getMarketHistory(card.id);
+
+  if (
+    !history ||
+    history.length < 2
+  ) {
+    return null;
+  }
+
+  const change =
+    getPriceChangePercent(history);
+
+  /*
+   * IMPORTANT :
+   * Même chemin de prix que Dashboard.
+   *
+   * Dashboard :
+   * getMarketData(card).average
+   *
+   * On utilise exactement la même source ici.
+   */
+  const market =
+    getMarketData(card);
+
+  const currentPrice =
+    Number.isFinite(market.average) &&
+    market.average > 0
+      ? market.average
+      : 0;
+
+  const roundedChange =
+    Number(change.toFixed(2));
+
+  // 📉 Baisse importante
   if (change <= -10) {
     return {
       cardId: card.id,
@@ -87,7 +103,7 @@ export function analyzeCardAlerts(card: PokemonCard): PriceAlert | null {
     };
   }
 
-  // 📈 Hausse forte
+  // 📈 Hausse importante
   if (change >= 10) {
     return {
       cardId: card.id,
@@ -98,8 +114,12 @@ export function analyzeCardAlerts(card: PokemonCard): PriceAlert | null {
     };
   }
 
-  // 💰 Opportunité d'achat
-  if (currentPrice > 0 && change > -5 && change < 0) {
+  // 💰 Opportunité
+  if (
+    currentPrice > 0 &&
+    change > -5 &&
+    change < 0
+  ) {
     return {
       cardId: card.id,
       cardName: card.name,
@@ -113,20 +133,26 @@ export function analyzeCardAlerts(card: PokemonCard): PriceAlert | null {
 }
 
 /**
- * 🔥 Analyse une collection ou un lot de cartes
+ * Analyse une collection de cartes
+ * pour générer les alertes actives.
  */
-export function generateAlerts(cards: PokemonCard[]): PriceAlert[] {
-  if (!Array.isArray(cards)) return [];
+export function generateAlerts(
+  cards: PokemonCard[]
+): PriceAlert[] {
+  if (!Array.isArray(cards)) {
+    return [];
+  }
 
   const alerts: PriceAlert[] = [];
 
-  cards.forEach((card) => {
-    const alert = analyzeCardAlerts(card);
+  for (const card of cards) {
+    const alert =
+      analyzeCardAlerts(card);
 
     if (alert) {
       alerts.push(alert);
     }
-  });
+  }
 
   return alerts;
 }
