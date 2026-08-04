@@ -58,20 +58,9 @@ function money(value: string | undefined): number {
   return Number.isFinite(parsed) ? parsed : 0;
 }
 
-/**
- * Extrait tous les prix présents dans une ligne du tableau.
- *
- * Exemple :
- *
- * Charizard VMAX #20
- * Pokemon Darkness Ablaze
- * $40.00
- * $35.76
- * $36.00
- *
- * => [40, 35.76, 36]
- */
-function extractPrices(rowText: string): number[] {
+function extractPrices(rowHtml: string): number[] {
+  const rowText = decodeHtml(rowHtml);
+
   const matches = rowText.match(
     /\$[0-9,]+(?:\.[0-9]+)?/g
   );
@@ -84,59 +73,11 @@ function extractPrices(rowText: string): number[] {
 }
 
 /**
- * Parse le titre PriceCharting.
+ * Extrait le premier lien /game/ de la ligne.
  *
- * Exemple :
+ * Exemple réel PriceCharting :
  *
- * Charizard VMAX #20 Pokemon Darkness Ablaze
- *
- * devient :
- *
- * cardName   = Charizard VMAX
- * cardNumber = 20
- * setName    = Pokemon Darkness Ablaze
- */
-function parseTitle(title: string): {
-  cardName: string;
-  cardNumber: string;
-  setName: string;
-} | null {
-  const cleanTitle = decodeHtml(title);
-
-  /**
-   * PriceCharting utilise généralement :
-   *
-   * NOM #NUMERO Pokemon SET
-   *
-   * Le numéro peut contenir :
-   * - chiffres
-   * - lettres
-   * - /
-   * - -
-   */
-  const match = cleanTitle.match(
-    /^(.+?)\s+#([A-Za-z0-9./-]+)\s+(Pokemon\s+.+)$/i
-  );
-
-  if (!match) {
-    return null;
-  }
-
-  return {
-    cardName: match[1].trim(),
-    cardNumber: match[2].trim(),
-    setName: match[3].trim(),
-  };
-}
-
-/**
- * Récupère le titre depuis le lien /game/.
- *
- * Exemple HTML :
- *
- * <a href="/game/pokemon-darkness-ablaze/charizard-vmax-20">
- *   Charizard VMAX #20 Pokemon Darkness Ablaze
- * </a>
+ * /game/pokemon-darkness-ablaze/charizard-vmax-20
  */
 function extractGameLink(
   rowHtml: string
@@ -145,7 +86,7 @@ function extractGameLink(
   title: string;
 } | null {
   const match = rowHtml.match(
-    /<a[^>]+href=["'](\/game\/pokemon-[^"']+)["'][^>]*>([\s\S]*?)<\/a>/i
+    /<a[^>]+href=["'](\/game\/[^"']+)["'][^>]*>([\s\S]*?)<\/a>/i
   );
 
   if (!match) {
@@ -159,46 +100,91 @@ function extractGameLink(
 }
 
 /**
- * Parse les résultats de la page publique :
+ * Extrait le set.
  *
- * /search-products?type=prices&view=table&q=...
+ * PriceCharting possède un deuxième lien dans la ligne :
  *
- * Structure actuelle :
+ * Pokemon Darkness Ablaze
+ */
+function extractSetName(rowHtml: string): string {
+  const links: string[] = [];
+
+  const linkRegex =
+    /<a[^>]+href=["'][^"']+["'][^>]*>([\s\S]*?)<\/a>/gi;
+
+  let match: RegExpExecArray | null;
+
+  while ((match = linkRegex.exec(rowHtml)) !== null) {
+    const text = decodeHtml(match[1]);
+
+    if (text) {
+      links.push(text);
+    }
+  }
+
+  /**
+   * On cherche explicitement le lien contenant Pokemon.
+   */
+  const pokemonSet = links.find((value) =>
+    /^Pokemon\b/i.test(value)
+  );
+
+  return pokemonSet ?? "";
+}
+
+/**
+ * Parse :
  *
- * <tr>
- *   ...
- *   <a href="/game/pokemon-...">
- *      Card Name #20 Pokemon Set
- *   </a>
- *   ...
- *   $40.00
- *   $35.76
- *   $36.00
- *   ...
- * </tr>
+ * Charizard VMAX #20
  *
- * La page de recherche expose actuellement :
+ * en :
  *
- * Title
- * Set
- * Ungraded
- * Grade 7
- * Grade 8
+ * cardName = Charizard VMAX
+ * cardNumber = 20
+ */
+function parseCardTitle(
+  title: string
+): {
+  cardName: string;
+  cardNumber: string;
+} | null {
+  const cleanTitle = decodeHtml(title);
+
+  const match = cleanTitle.match(
+    /^(.+?)\s+#([A-Za-z0-9./-]+)$/i
+  );
+
+  if (!match) {
+    return null;
+  }
+
+  return {
+    cardName: match[1].trim(),
+    cardNumber: match[2].trim(),
+  };
+}
+
+/**
+ * Parse les résultats de la page publique PriceCharting.
  *
- * Les grades 9 / 9.5 / PSA 10 seront récupérés
- * ultérieurement depuis la fiche individuelle.
+ * Structure actuellement observée :
+ *
+ * Title | Set | Ungraded | Grade 7 | Grade 8
+ *
+ * Exemple :
+ *
+ * Charizard VMAX #20
+ * Pokemon Darkness Ablaze
+ * $40.00
+ * $31.86
+ * $40.28
  */
 function parseSearchResults(html: string): Result[] {
   const results: Result[] = [];
   const seen = new Set<string>();
 
-  /**
-   * On travaille directement sur les lignes <tr>.
-   *
-   * C'est beaucoup plus fiable que de prendre arbitrairement
-   * 1000 caractères avant et 5000 après le lien.
-   */
-  const rowRegex = /<tr\b[^>]*>[\s\S]*?<\/tr>/gi;
+  const rowRegex =
+    /<tr\b[^>]*>[\s\S]*?<\/tr>/gi;
 
   let rowMatch: RegExpExecArray | null;
 
@@ -207,9 +193,9 @@ function parseSearchResults(html: string): Result[] {
 
     /**
      * Une ligne de résultat Pokemon doit contenir
-     * un lien /game/pokemon-...
+     * un lien /game/.
      */
-    if (!/href=["']\/game\/pokemon-/i.test(rowHtml)) {
+    if (!/href=["']\/game\//i.test(rowHtml)) {
       continue;
     }
 
@@ -228,12 +214,9 @@ function parseSearchResults(html: string): Result[] {
       continue;
     }
 
-    /**
-     * Analyse du titre.
-     */
-    const parsedTitle = parseTitle(title);
+    const card = parseCardTitle(title);
 
-    if (!parsedTitle) {
+    if (!card) {
       console.log(
         "PriceCharting: titre non reconnu:",
         title
@@ -242,42 +225,23 @@ function parseSearchResults(html: string): Result[] {
       continue;
     }
 
-    /**
-     * Texte propre de la ligne.
-     */
-    const rowText = decodeHtml(rowHtml);
+    const setName = extractSetName(rowHtml);
 
     /**
-     * Les trois premiers prix correspondent actuellement
-     * aux trois colonnes visibles :
-     *
-     * 1. Ungraded
-     * 2. Grade 7
-     * 3. Grade 8
+     * Si le set n'est pas trouvé, on ne rejette pas
+     * le résultat : la carte reste exploitable.
      */
-    const prices = extractPrices(rowText);
+    const prices = extractPrices(rowHtml);
 
     const ungraded = prices[0] ?? 0;
     const psa7 = prices[1] ?? 0;
     const psa8 = prices[2] ?? 0;
 
-    /**
-     * Pour cette première étape :
-     *
-     * Grade 9
-     * Grade 9.5
-     * PSA 10
-     *
-     * ne sont volontairement PAS inventés.
-     *
-     * Ils seront récupérés sur la fiche individuelle
-     * lors de la prochaine étape.
-     */
     const result: Result = {
       id: sourceUrl,
-      cardName: parsedTitle.cardName,
-      setName: parsedTitle.setName,
-      cardNumber: parsedTitle.cardNumber,
+      cardName: card.cardName,
+      setName,
+      cardNumber: card.cardNumber,
       imageUrl: "",
       sourceUrl,
       prices: {
@@ -293,10 +257,6 @@ function parseSearchResults(html: string): Result[] {
     results.push(result);
     seen.add(sourceUrl);
 
-    /**
-     * Prototype :
-     * maximum 20 résultats.
-     */
     if (results.length >= 20) {
       break;
     }
@@ -320,9 +280,6 @@ export async function GET(request: Request) {
     );
   }
 
-  /**
-   * Recherche publique PriceCharting.
-   */
   const searchUrl =
     `https://www.pricecharting.com/search-products` +
     `?type=prices` +
@@ -341,6 +298,7 @@ export async function GET(request: Request) {
     try {
       response = await fetch(searchUrl, {
         method: "GET",
+
         headers: {
           Accept:
             "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
