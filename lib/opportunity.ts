@@ -1,7 +1,11 @@
 import type { PokemonCard } from "./types";
 import type { PricePoint } from "./priceHistory";
+import {
+  getAverageMarketPrice,
+  getPriceTrend7d,
+  getPriceTrend30d,
+} from "./marketEngine";
 import { getInvestmentScore } from "./investment";
-import { getMarketData } from "./marketEngine";
 
 export type Opportunity = {
   id: string;
@@ -17,55 +21,60 @@ export type Opportunity = {
 
 /**
  * Analyse une carte et son historique pour déterminer
- * son potentiel d'opportunité.
+ * son potentiel d'investissement.
  *
- * SOURCE DU PRIX ACTUEL :
- * marketEngine = source officielle du prix actuel.
+ * IMPORTANT :
+ * Le Market Engine est la source de vérité pour :
+ * - le prix actuel
+ * - la tendance 7 jours
+ * - la tendance 30 jours
  *
- * HISTORIQUE :
- * utilisé uniquement pour calculer la tendance.
+ * L'historique local reste utilisé uniquement comme
+ * donnée complémentaire pour le score de volatilité.
  */
 export function getOpportunity(
   card: PokemonCard,
   history: PricePoint[]
 ): Opportunity {
+  /**
+   * 💰 Prix actuel réel
+   *
+   * On ne prend plus le dernier point de localStorage.
+   * Le prix actuel doit toujours venir du Market Engine.
+   */
+  const currentPrice = getAverageMarketPrice(card);
+
+  /**
+   * 📈 Tendances réelles du Market Engine
+   */
+  const trend7d = getPriceTrend7d(card);
+  const trend30d = getPriceTrend30d(card);
+
+  /**
+   * Tendance globale pondérée.
+   *
+   * Le 30 jours a davantage de poids afin d'éviter
+   * qu'une variation ponctuelle de 7 jours fausse
+   * complètement l'analyse.
+   */
+  const trend = Number(
+    (trend7d * 0.4 + trend30d * 0.6).toFixed(2)
+  );
+
+  /**
+   * 🧠 Score investissement
+   *
+   * On conserve le moteur d'investissement existant.
+   * Celui-ci utilise maintenant les données réelles du
+   * Market Engine pour ses tendances.
+   */
   const score = getInvestmentScore(card, history);
 
-  /*
-   * IMPORTANT :
-   * Le prix actuel doit toujours venir du marketEngine.
-   * On évite ainsi d'afficher un ancien point local
-   * comme s'il s'agissait du prix actuel.
-   */
-  const market = getMarketData(card);
-
-  const currentPrice =
-    Number.isFinite(market.average) &&
-    market.average > 0
-      ? market.average
-      : 0;
-
-  /*
-   * Calcul de la tendance à partir de l'historique.
-   */
-  let trend = 0;
-
-  if (history.length >= 2) {
-    const first = history[0]?.average || 0;
-    const last =
-      history[history.length - 1]?.average || 0;
-
-    if (first > 0 && last > 0) {
-      trend = Number(
-        (((last - first) / first) * 100).toFixed(2)
-      );
-    }
-  }
-
-  /*
-   * Potentiel :
-   * score d'investissement converti sur 100
-   * + tendance limitée pour éviter les aberrations.
+  /**
+   * 🎯 Potentiel
+   *
+   * Score converti sur 100 + tendance limitée
+   * pour éviter les aberrations.
    */
   const potential = Number(
     (
@@ -74,6 +83,9 @@ export function getOpportunity(
     ).toFixed(2)
   );
 
+  /**
+   * ⚠️ Niveau de risque
+   */
   let risk: "LOW" | "MEDIUM" | "HIGH" = "MEDIUM";
 
   if (score >= 8 && trend >= 0) {
@@ -84,27 +96,23 @@ export function getOpportunity(
     risk = "HIGH";
   }
 
-  let recommendation:
-    | "BUY"
-    | "HOLD"
-    | "SELL" = "HOLD";
-
+  /**
+   * 🧭 Recommandation
+   */
+  let recommendation: "BUY" | "HOLD" | "SELL" = "HOLD";
   let reason =
     "Carte stable, à conserver et surveiller.";
 
   if (score >= 8 && trend >= -5) {
     recommendation = "BUY";
-
     reason =
       "Excellent score d'investissement et marché sain ou en consolidation.";
   } else if (score < 4 || trend < -20) {
     recommendation = "SELL";
-
     reason =
       "Risque de dépréciation élevé ou indicateurs d'intérêt trop faibles.";
   } else if (trend > 25) {
     recommendation = "HOLD";
-
     reason =
       "Forte hausse récente, attention au sommet du canal. Conserver sans racheter.";
   }
@@ -123,7 +131,8 @@ export function getOpportunity(
 }
 
 /**
- * Classe le portefeuille complet selon le potentiel.
+ * 🔥 Classe le portefeuille complet selon
+ * le potentiel d'opportunité.
  */
 export function rankPortfolio(
   portfolio: {
@@ -137,13 +146,7 @@ export function rankPortfolio(
 
   return portfolio
     .map((item) =>
-      getOpportunity(
-        item.card,
-        item.history
-      )
+      getOpportunity(item.card, item.history)
     )
-    .sort(
-      (a, b) =>
-        b.potential - a.potential
-    );
+    .sort((a, b) => b.potential - a.potential);
 }
