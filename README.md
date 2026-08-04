@@ -1,6 +1,6 @@
 # 👑 King TCG — README Officiel
 
-**Version actuelle :** V3 — Scanner IA (Gemini Vision) en cours de finalisation  
+**Version actuelle :** V5 correction — Scanner IA (Gemini Vision) en cours de finalisation  
 **Stack :** Next.js App Router, React, TypeScript, TailwindCSS  
 **Intelligence Artificielle :** Google Gemini Vision  
 **APIs :** Pokémon TCG API (CardMarket, TCGPlayer), Canvas API, MediaDevices, LocalStorage  
@@ -148,7 +148,7 @@ La carte obtenant le score maximal est automatiquement sélectionnée.
 * Statistiques de collection : Valeur totale, ROI, historique d'achats/ventes, répartition.
 
 ### Version V5 — IA Avancée & Grading
-* Analyse IA de l'état : Centrage, coins, bords, surface, estimation de note PSA/BGS/CGC, détection des contrefaçons.
+* Analyse IA de l'état : Centrage, coins, bords, surface, estimation de note PSA/BGS/CGC.
 * Prévision de prix (30j, 90j, 1an) et indicateurs d'investissement (Acheter / Conserver / Vendre).
 
 ### Version V6 à 1.0 — Écosystème Complet
