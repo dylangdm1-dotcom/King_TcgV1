@@ -1,8 +1,6 @@
-// lib/priceAlerts.ts
-
 import type { PokemonCard } from "./types";
 import { getMarketHistory, type PricePoint } from "./priceHistory";
-import { getCardMarketPrice } from "./marketEngine";
+import { getMarketData } from "./marketEngine";
 
 export type PriceAlert = {
   cardId: string;
@@ -13,13 +11,13 @@ export type PriceAlert = {
 };
 
 /**
- * 🧠 Calcule la variation en pourcentage à partir de l'historique réel (PricePoint)
+ * 🧠 Calcule la variation en pourcentage à partir de l'historique réel
  */
 function getPriceChangePercent(history: PricePoint[]): number {
   if (!history || history.length < 2) return 0;
 
-  const first = history[0].average;
-  const last = history[history.length - 1].average;
+  const first = history[0]?.average ?? 0;
+  const last = history[history.length - 1]?.average ?? 0;
 
   if (first <= 0) return 0;
 
@@ -27,32 +25,69 @@ function getPriceChangePercent(history: PricePoint[]): number {
 }
 
 /**
- * 🚨 Analyse l'historique et le prix actuel d'une carte pour générer une alerte
+ * 🚨 Analyse l'historique et le prix actuel d'une carte
+ *
+ * IMPORTANT :
+ * Le prix actuel utilise maintenant exactement la même source
+ * que le Dashboard : getMarketData(card).
+ *
+ * On ne passe plus par getCardMarketPrice().
  */
 export function analyzeCardAlerts(card: PokemonCard): PriceAlert | null {
   if (!card?.id) return null;
 
-  // Récupération de l'historique avec le bon nom de fonction
+  /*
+   * Historique utilisé pour calculer la variation.
+   */
   const history = getMarketHistory(card.id);
 
   if (!history || history.length < 2) return null;
 
   const change = getPriceChangePercent(history);
-  const currentPrice = getCardMarketPrice(card);
   const roundedChange = Number(change.toFixed(2));
 
-  // 📉 Chute importante (Alerte baisse > 10%)
+  /*
+   * 💰 NOUVEAU CHEMIN PRIX
+   *
+   * Même moteur que le Dashboard.
+   */
+  let currentPrice = 0;
+
+  try {
+    const market = getMarketData(card);
+
+    /*
+     * On privilégie la moyenne marché, exactement comme
+     * le Dashboard pour la valeur actuelle de la carte.
+     */
+    currentPrice = Number(market?.average ?? 0);
+
+    if (!Number.isFinite(currentPrice) || currentPrice < 0) {
+      currentPrice = 0;
+    }
+  } catch (error) {
+    console.warn(
+      `[King_TCG V5] Impossible de récupérer le prix marché pour ${card.id}:`,
+      error
+    );
+
+    currentPrice = 0;
+  }
+
+  // 📉 Chute importante
   if (change <= -10) {
     return {
       cardId: card.id,
       cardName: card.name,
       type: "DROP",
       changePercent: roundedChange,
-      message: `📉 ${card.name} a chuté de ${Math.abs(roundedChange)}%`,
+      message: `📉 ${card.name} a chuté de ${Math.abs(
+        roundedChange
+      )}%`,
     };
   }
 
-  // 📈 Hausse forte (Alerte hausse > 10%)
+  // 📈 Hausse forte
   if (change >= 10) {
     return {
       cardId: card.id,
@@ -63,7 +98,7 @@ export function analyzeCardAlerts(card: PokemonCard): PriceAlert | null {
     };
   }
 
-  // 💰 Opportunité d'achat (Prix stable en baisse légère)
+  // 💰 Opportunité d'achat
   if (currentPrice > 0 && change > -5 && change < 0) {
     return {
       cardId: card.id,
@@ -78,15 +113,16 @@ export function analyzeCardAlerts(card: PokemonCard): PriceAlert | null {
 }
 
 /**
- * 🔥 Analyse une collection ou un lot de cartes pour générer la liste des alertes actives
+ * 🔥 Analyse une collection ou un lot de cartes
  */
 export function generateAlerts(cards: PokemonCard[]): PriceAlert[] {
   if (!Array.isArray(cards)) return [];
-  
+
   const alerts: PriceAlert[] = [];
 
   cards.forEach((card) => {
     const alert = analyzeCardAlerts(card);
+
     if (alert) {
       alerts.push(alert);
     }
