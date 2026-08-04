@@ -1,7 +1,6 @@
 // lib/priceAlerts.ts
 
 import type { PokemonCard } from "./types";
-import { getMarketHistory, type PricePoint } from "./priceHistory";
 import { getMarketData } from "./marketEngine";
 
 export type PriceAlert = {
@@ -13,128 +12,112 @@ export type PriceAlert = {
 };
 
 /**
- * Calcule la variation en pourcentage
- * à partir de l'historique réel.
- */
-function getPriceChangePercent(
-  history: PricePoint[]
-): number {
-  if (!history || history.length < 2) {
-    return 0;
-  }
-
-  const first = history[0].average;
-  const last =
-    history[history.length - 1].average;
-
-  if (
-    !Number.isFinite(first) ||
-    !Number.isFinite(last) ||
-    first <= 0
-  ) {
-    return 0;
-  }
-
-  return ((last - first) / first) * 100;
-}
-
-/**
- * Analyse l'historique et le prix actuel
- * d'une carte pour générer une alerte.
+ * 🚨 Analyse le marché V5 avec le même moteur que le Dashboard.
  *
  * IMPORTANT :
- * Le prix actuel utilise exactement le même
- * moteur que le Dashboard V5 :
+ * On n'utilise plus :
+ * - getMarketHistory()
+ * - getCardMarketPrice()
  *
- * getMarketData(card).average
+ * Le Dashboard utilise getMarketData(), donc Alert Center
+ * doit utiliser exactement la même source.
  */
 export function analyzeCardAlerts(
   card: PokemonCard
 ): PriceAlert | null {
-  if (!card?.id) {
+  if (!card?.id) return null;
+
+  try {
+    /**
+     * SOURCE UNIQUE DU MARCHÉ V5
+     *
+     * Même chemin que Dashboard :
+     * getMarketData(card)
+     */
+    const market = getMarketData(card);
+
+    if (!market) {
+      return null;
+    }
+
+    const currentPrice =
+      Number.isFinite(market.average) && market.average > 0
+        ? market.average
+        : 0;
+
+    /**
+     * Tendance réelle 7 jours fournie par le moteur V5.
+     *
+     * C'est exactement la valeur utilisée
+     * dans le Dashboard.
+     */
+    const change =
+      Number.isFinite(market.priceTrend7d)
+        ? market.priceTrend7d
+        : 0;
+
+    const roundedChange = Number(change.toFixed(2));
+
+    if (currentPrice <= 0) {
+      return null;
+    }
+
+    // 📉 BAISSE FORTE
+    if (change <= -10) {
+      return {
+        cardId: card.id,
+        cardName: card.name,
+        type: "DROP",
+        changePercent: roundedChange,
+        message: `📉 ${card.name} a chuté de ${Math.abs(
+          roundedChange
+        )}% sur les 7 derniers jours.`,
+      };
+    }
+
+    // 📈 HAUSSE FORTE
+    if (change >= 10) {
+      return {
+        cardId: card.id,
+        cardName: card.name,
+        type: "RISE",
+        changePercent: roundedChange,
+        message: `📈 ${card.name} a augmenté de ${roundedChange}% sur les 7 derniers jours.`,
+      };
+    }
+
+    // 💰 OPPORTUNITÉ
+    //
+    // On conserve la logique :
+    // petite baisse comprise entre 0 et -5%.
+    if (change > -5 && change < 0) {
+      return {
+        cardId: card.id,
+        cardName: card.name,
+        type: "OPPORTUNITY",
+        changePercent: roundedChange,
+        message: `💰 ${card.name} est en légère baisse de ${Math.abs(
+          roundedChange
+        )}% → opportunité potentielle.`,
+      };
+    }
+
+    return null;
+  } catch (error) {
+    console.error(
+      `[King_TCG V5] Erreur analyse alerte ${card.id}:`,
+      error
+    );
+
     return null;
   }
-
-  // Historique de marché
-  const history =
-    getMarketHistory(card.id);
-
-  if (
-    !history ||
-    history.length < 2
-  ) {
-    return null;
-  }
-
-  const change =
-    getPriceChangePercent(history);
-
-  /*
-   * IMPORTANT :
-   * Même chemin de prix que Dashboard.
-   *
-   * Dashboard :
-   * getMarketData(card).average
-   *
-   * On utilise exactement la même source ici.
-   */
-  const market =
-    getMarketData(card);
-
-  const currentPrice =
-    Number.isFinite(market.average) &&
-    market.average > 0
-      ? market.average
-      : 0;
-
-  const roundedChange =
-    Number(change.toFixed(2));
-
-  // 📉 Baisse importante
-  if (change <= -10) {
-    return {
-      cardId: card.id,
-      cardName: card.name,
-      type: "DROP",
-      changePercent: roundedChange,
-      message: `📉 ${card.name} a chuté de ${Math.abs(
-        roundedChange
-      )}%`,
-    };
-  }
-
-  // 📈 Hausse importante
-  if (change >= 10) {
-    return {
-      cardId: card.id,
-      cardName: card.name,
-      type: "RISE",
-      changePercent: roundedChange,
-      message: `📈 ${card.name} a augmenté de ${roundedChange}%`,
-    };
-  }
-
-  // 💰 Opportunité
-  if (
-    currentPrice > 0 &&
-    change > -5 &&
-    change < 0
-  ) {
-    return {
-      cardId: card.id,
-      cardName: card.name,
-      type: "OPPORTUNITY",
-      changePercent: roundedChange,
-      message: `💰 ${card.name} est stable en bas de canal (${roundedChange}%) → opportunité potentielle`,
-    };
-  }
-
-  return null;
 }
 
 /**
- * Analyse une collection de cartes
- * pour générer les alertes actives.
+ * 🔥 Analyse toute la collection.
+ *
+ * Toutes les cartes passent maintenant par le même
+ * marketEngine que le Dashboard.
  */
 export function generateAlerts(
   cards: PokemonCard[]
@@ -146,8 +129,7 @@ export function generateAlerts(
   const alerts: PriceAlert[] = [];
 
   for (const card of cards) {
-    const alert =
-      analyzeCardAlerts(card);
+    const alert = analyzeCardAlerts(card);
 
     if (alert) {
       alerts.push(alert);
