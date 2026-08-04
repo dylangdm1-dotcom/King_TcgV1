@@ -8,7 +8,7 @@ import {
   rankPortfolio,
   Opportunity,
 } from "../../lib/opportunity";
-import { getMarketHistory } from "../../lib/priceHistory";
+import { getMarketHistoryDays } from "../../lib/priceHistory";
 import { getAlerts } from "../../lib/alertEngine";
 import type { PokemonCard as Card } from "../../lib/types";
 import {
@@ -55,7 +55,7 @@ export default function OpportunityPage() {
 
             return {
               card,
-              history: getMarketHistory(id),
+              history: getMarketHistoryDays(card, 30),
             };
           } catch (error) {
             console.error(
