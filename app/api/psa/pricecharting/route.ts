@@ -1,3 +1,4 @@
+
 import { NextResponse } from "next/server";
 
 export const runtime = "nodejs";
@@ -8,10 +9,19 @@ interface PriceChartingPrices {
   psa7: number;
   psa8: number;
   psa9: number;
+  psa9_5?: number;
   psa10: number;
 }
 
-interface PriceChartingResult {
+interface RecentSale {
+  date: string;
+  title: string;
+  price: number;
+  currency: "EUR";
+  source: string;
+}
+
+interface PriceChartingCard {
   id: string;
   cardName: string;
   setName: string;
@@ -22,323 +32,549 @@ interface PriceChartingResult {
   language?: string;
   rarity?: string;
   releaseYear?: number;
+  recentSales: RecentSale[];
 }
 
-function decodeHtml(value: string): string {
+const PRICECHARTING_BASE =
+  "https://www.pricecharting.com";
+
+const FALLBACK_USD_TO_EUR = 0.86;
+
+function decodeHtml(
+  value: string
+): string {
   return value
-    .replace(/<script[\s\S]*?<\/script>/gi, " ")
-    .replace(/<style[\s\S]*?<\/style>/gi, " ")
-    .replace(/<br\s*\/?>/gi, " ")
-    .replace(/<\/p>/gi, " ")
-    .replace(/<\/div>/gi, " ")
-    .replace(/<\/td>/gi, " ")
-    .replace(/<\/th>/gi, " ")
-    .replace(/<[^>]*>/g, " ")
-    .replace(/&amp;/gi, "&")
-    .replace(/&quot;/gi, '"')
-    .replace(/&#39;/gi, "'")
-    .replace(/&nbsp;/gi, " ")
-    .replace(/&lt;/gi, "<")
-    .replace(/&gt;/gi, ">")
-    .replace(/&#(\d+);/g, (_, code) =>
-      String.fromCharCode(Number(code))
+    .replace(
+      /<script[\s\S]*?<\/script>/gi,
+      " "
     )
-    .replace(/&#x([0-9a-f]+);/gi, (_, code) =>
-      String.fromCharCode(parseInt(code, 16))
+    .replace(
+      /<style[\s\S]*?<\/style>/gi,
+      " "
     )
-    .replace(/\s+/g, " ")
+    .replace(
+      /<br\s*\/?>/gi,
+      " "
+    )
+    .replace(
+      /<\/p>/gi,
+      " "
+    )
+    .replace(
+      /<\/div>/gi,
+      " "
+    )
+    .replace(
+      /<\/td>/gi,
+      " "
+    )
+    .replace(
+      /<\/th>/gi,
+      " "
+    )
+    .replace(
+      /<[^>]*>/g,
+      " "
+    )
+    .replace(
+      /&amp;/gi,
+      "&"
+    )
+    .replace(
+      /&quot;/gi,
+      '"'
+    )
+    .replace(
+      /&#39;/gi,
+      "'"
+    )
+    .replace(
+      /&nbsp;/gi,
+      " "
+    )
+    .replace(
+      /&lt;/gi,
+      "<"
+    )
+    .replace(
+      /&gt;/gi,
+      ">"
+    )
+    .replace(
+      /&#(\d+);/g,
+      (_, code) =>
+        String.fromCharCode(
+          Number(code)
+        )
+    )
+    .replace(
+      /&#x([0-9a-f]+);/gi,
+      (_, code) =>
+        String.fromCharCode(
+          parseInt(code, 16)
+        )
+    )
+    .replace(
+      /\s+/g,
+      " "
+    )
     .trim();
 }
 
-function parsePrice(value: string | undefined): number {
-  if (!value) return 0;
-
-  const cleaned = value
-    .replace(/[$,]/g, "")
-    .replace(/[^\d.]/g, "");
-
-  const number = Number(cleaned);
-
-  return Number.isFinite(number) ? number : 0;
-}
-
-function absoluteUrl(url: string): string {
+function absoluteUrl(
+  url: string
+): string {
   if (!url) return "";
 
-  if (url.startsWith("http://") || url.startsWith("https://")) {
+  if (
+    /^https?:\/\//i.test(url)
+  ) {
     return url;
   }
 
-  if (url.startsWith("//")) {
+  if (
+    url.startsWith("//")
+  ) {
     return `https:${url}`;
   }
 
-  if (url.startsWith("/")) {
-    return `https://www.pricecharting.com${url}`;
+  if (
+    url.startsWith("/")
+  ) {
+    return `${PRICECHARTING_BASE}${url}`;
   }
 
-  return `https://www.pricecharting.com/${url}`;
+  return `${PRICECHARTING_BASE}/${url}`;
+}
+
+function parseNumber(
+  value?: string
+): number {
+  if (!value) return 0;
+
+  const normalized =
+    value
+      .replace(/\s/g, "")
+      .replace(/,/g, "");
+
+  const number =
+    Number(normalized);
+
+  return Number.isFinite(number)
+    ? number
+    : 0;
 }
 
 /**
- * Extrait une valeur située dans le HTML autour
- * d'un terme donné.
+ * Récupération du taux USD -> EUR.
+ *
+ * On tente un taux public.
+ * Si le service est indisponible,
+ * on utilise un fallback.
  */
+async function getUsdToEurRate(): Promise<number> {
+  try {
+    const controller =
+      new AbortController();
+
+    const timeout =
+      setTimeout(
+        () => controller.abort(),
+        5000
+      );
+
+    try {
+      const response =
+        await fetch(
+          "https://api.frankfurter.app/latest?from=USD&to=EUR",
+          {
+            cache: "no-store",
+            signal:
+              controller.signal,
+          }
+        );
+
+      if (!response.ok) {
+        return FALLBACK_USD_TO_EUR;
+      }
+
+      const data =
+        await response.json();
+
+      const rate =
+        Number(data?.rates?.EUR);
+
+      if (
+        Number.isFinite(rate) &&
+        rate > 0
+      ) {
+        return rate;
+      }
+    } finally {
+      clearTimeout(timeout);
+    }
+  } catch {
+    // Fallback volontaire.
+  }
+
+  return FALLBACK_USD_TO_EUR;
+}
+
+function usdToEur(
+  value: number,
+  rate: number
+): number {
+  if (!value) return 0;
+
+  return Number(
+    (value * rate).toFixed(2)
+  );
+}
+
 function extractPrice(
-  html: string,
+  text: string,
   labels: string[]
 ): number {
   for (const label of labels) {
-    const escaped = label.replace(
-      /[.*+?^${}()|[\]\\]/g,
-      "\\$&"
-    );
+    const escaped =
+      label.replace(
+        /[.*+?^${}()|[\]\\]/g,
+        "\\$&"
+      );
 
-    const regex = new RegExp(
-      `${escaped}[\\s\\S]{0,1200}?\\$([0-9,]+(?:\\.[0-9]+)?)`,
-      "i"
-    );
+    const regex =
+      new RegExp(
+        `${escaped}\\s*\\|?\\s*\\$\\s*([0-9,.]+)`,
+        "i"
+      );
 
-    const match = html.match(regex);
+    const match =
+      text.match(regex);
 
     if (match?.[1]) {
-      return parsePrice(match[1]);
+      return parseNumber(
+        match[1]
+      );
     }
   }
 
   return 0;
 }
 
-/**
- * Extrait les prix connus de la fiche PriceCharting.
- */
-function extractPrices(html: string): PriceChartingPrices {
+function extractPrices(
+  html: string,
+  rate: number
+): PriceChartingPrices {
+  const text =
+    decodeHtml(html);
+
   return {
-    ungraded: extractPrice(html, [
-      "Ungraded",
-      "Ungraded Price",
-      "Loose Price",
-    ]),
+    ungraded:
+      usdToEur(
+        extractPrice(
+          text,
+          [
+            "Non Classé",
+            "Ungraded",
+          ]
+        ),
+        rate
+      ),
 
-    psa7: extractPrice(html, [
-      "Grade 7",
-      "PSA 7",
-    ]),
+    psa7:
+      usdToEur(
+        extractPrice(
+          text,
+          ["Grade 7"]
+        ),
+        rate
+      ),
 
-    psa8: extractPrice(html, [
-      "Grade 8",
-      "PSA 8",
-    ]),
+    psa8:
+      usdToEur(
+        extractPrice(
+          text,
+          ["Grade 8"]
+        ),
+        rate
+      ),
 
-    psa9: extractPrice(html, [
-      "Grade 9",
-      "PSA 9",
-    ]),
+    psa9:
+      usdToEur(
+        extractPrice(
+          text,
+          ["Grade 9"]
+        ),
+        rate
+      ),
 
-    psa10: extractPrice(html, [
-      "PSA 10",
-      "Grade 10",
-    ]),
+    psa9_5:
+      usdToEur(
+        extractPrice(
+          text,
+          [
+            "Grade 9.5",
+            "Grade 9,5",
+          ]
+        ),
+        rate
+      ),
+
+    psa10:
+      usdToEur(
+        extractPrice(
+          text,
+          ["PSA 10"]
+        ),
+        rate
+      ),
   };
 }
 
 /**
- * Extrait l'URL de l'image principale.
+ * Extraction robuste de l'image principale.
  */
-function extractImageUrl(html: string): string {
-  const patterns = [
-    /<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["']/i,
-    /<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:image["']/i,
-    /<img[^>]+src=["']([^"']+)["'][^>]*>/i,
+function extractImageUrl(
+  html: string
+): string {
+  const candidates: string[] = [];
+
+  const attributes = [
+    "src",
+    "data-src",
+    "data-original",
+    "data-lazy-src",
   ];
 
-  for (const pattern of patterns) {
-    const match = html.match(pattern);
+  for (const attribute of attributes) {
+    const regex =
+      new RegExp(
+        `<img\\b[^>]*\\b${attribute}=["']([^"']+)["'][^>]*>`,
+        "gi"
+      );
 
-    if (match?.[1]) {
-      return absoluteUrl(match[1]);
+    let match: RegExpExecArray | null;
+
+    while (
+      (match =
+        regex.exec(html)) !== null
+    ) {
+      const url =
+        absoluteUrl(
+          match[1]
+        );
+
+      if (
+        url &&
+        !/logo|placeholder|avatar|icon|banner|adserver|sprite/i.test(
+          url
+        )
+      ) {
+        candidates.push(url);
+      }
     }
   }
 
-  return "";
+  /**
+   * srcset.
+   */
+  const srcsetRegex =
+    /\bsrcset=["']([^"']+)["']/gi;
+
+  let srcsetMatch: RegExpExecArray | null;
+
+  while (
+    (srcsetMatch =
+      srcsetRegex.exec(html)) !== null
+  ) {
+    const entries =
+      srcsetMatch[1]
+        .split(",")
+        .map(
+          (item) =>
+            item
+              .trim()
+              .split(/\s+/)[0]
+        );
+
+    for (const entry of entries) {
+      const url =
+        absoluteUrl(entry);
+
+      if (
+        url &&
+        !/logo|placeholder|avatar|icon|banner|adserver|sprite/i.test(
+          url
+        )
+      ) {
+        candidates.push(url);
+      }
+    }
+  }
+
+  /**
+   * og:image.
+   */
+  const ogImage =
+    html.match(
+      /<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["']/i
+    )?.[1] ??
+    html.match(
+      /<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:image["']/i
+    )?.[1];
+
+  if (ogImage) {
+    candidates.unshift(
+      absoluteUrl(ogImage)
+    );
+  }
+
+  /**
+   * Images Google Storage utilisées
+   * par PriceCharting.
+   */
+  const storageImage =
+    candidates.find(
+      (url) =>
+        /storage\.googleapis\.com/i.test(
+          url
+        )
+    );
+
+  if (storageImage) {
+    return storageImage;
+  }
+
+  return (
+    candidates[0] ?? ""
+  );
 }
 
-/**
- * Extrait le titre de la fiche.
- */
-function extractTitle(html: string): string {
-  const ogTitle =
+function extractTitle(
+  html: string
+): string {
+  const title =
     html.match(
       /<meta[^>]+property=["']og:title["'][^>]+content=["']([^"']+)["']/i
     )?.[1] ??
     html.match(
       /<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:title["']/i
+    )?.[1] ??
+    html.match(
+      /<title[^>]*>([\s\S]*?)<\/title>/i
     )?.[1];
 
-  if (ogTitle) {
-    return decodeHtml(ogTitle);
-  }
-
-  const title =
-    html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1];
-
-  return title ? decodeHtml(title) : "";
+  return title
+    ? decodeHtml(title)
+    : "";
 }
 
-/**
- * Extrait quelques informations textuelles de la fiche.
- */
 function extractCardInfo(
-  html: string,
-  query: string
+  html: string
 ): {
   cardName: string;
   setName: string;
   cardNumber: string;
 } {
-  const title = extractTitle(html);
+  const text =
+    decodeHtml(html);
 
-  let cardName = title
-    .replace(/\s*\|\s*PriceCharting.*$/i, "")
-    .trim();
+  let cardName =
+    extractTitle(html);
 
-  if (!cardName) {
-    cardName = query;
-  }
+  cardName =
+    cardName
+      .replace(
+        /\s*\|\s*Prix.*$/i,
+        ""
+      )
+      .replace(
+        /\s*\|\s*Prices.*$/i,
+        ""
+      )
+      .trim();
 
-  let cardNumber = "";
+  const headingMatch =
+    html.match(
+      /<h1[^>]*>\s*([\s\S]*?)\s*<\/h1>/i
+    );
 
-  const numberPatterns = [
-    /\b(\d{1,3}\/\d{1,3})\b/,
-    /#(\d{1,3})\b/,
-  ];
+  if (headingMatch?.[1]) {
+    const heading =
+      decodeHtml(
+        headingMatch[1]
+      );
 
-  for (const pattern of numberPatterns) {
-    const match = html.match(pattern);
-
-    if (match?.[1]) {
-      cardNumber = match[1];
-      break;
+    if (heading) {
+      cardName = heading;
     }
   }
 
   let setName = "";
 
-  const pokemonSets = [
-    "Base Set",
-    "Jungle",
-    "Fossil",
-    "Team Rocket",
-    "Gym Heroes",
-    "Gym Challenge",
-    "Neo Genesis",
-    "Neo Discovery",
-    "Neo Revelation",
-    "Neo Destiny",
-    "EX Ruby & Sapphire",
-    "EX Sandstorm",
-    "EX Dragon",
-    "EX Team Magma vs Team Aqua",
-    "EX Hidden Legends",
-    "EX FireRed & LeafGreen",
-    "EX Team Rocket Returns",
-    "EX Deoxys",
-    "EX Emerald",
-    "EX Unseen Forces",
-    "EX Delta Species",
-    "EX Legend Maker",
-    "EX Holon Phantoms",
-    "EX Crystal Guardians",
-    "EX Dragon Frontiers",
-    "EX Power Keepers",
-    "Diamond & Pearl",
-    "Mysterious Treasures",
-    "Secret Wonders",
-    "Great Encounters",
-    "Majestic Dawn",
-    "Legends Awakened",
-    "Stormfront",
-    "Platinum",
-    "Rising Rivals",
-    "Supreme Victors",
-    "Arceus",
-    "HeartGold & SoulSilver",
-    "Unleashed",
-    "Undaunted",
-    "Triumphant",
-    "Black & White",
-    "Emerging Powers",
-    "Noble Victories",
-    "Next Destinies",
-    "Dark Explorers",
-    "Dragons Exalted",
-    "Boundaries Crossed",
-    "Plasma Storm",
-    "Plasma Freeze",
-    "Plasma Blast",
-    "Legendary Treasures",
-    "XY",
-    "Flashfire",
-    "Furious Fists",
-    "Phantom Forces",
-    "Primal Clash",
-    "Roaring Skies",
-    "Ancient Origins",
-    "BREAKthrough",
-    "BREAKpoint",
-    "Generations",
-    "Steam Siege",
-    "Evolutions",
-    "Sun & Moon",
-    "Guardians Rising",
-    "Burning Shadows",
-    "Shining Legends",
-    "Crimson Invasion",
-    "Ultra Prism",
-    "Forbidden Light",
-    "Celestial Storm",
-    "Lost Thunder",
-    "Team Up",
-    "Unbroken Bonds",
-    "Unified Minds",
-    "Hidden Fates",
-    "Cosmic Eclipse",
-    "Sword & Shield",
-    "Rebel Clash",
-    "Darkness Ablaze",
-    "Champion's Path",
-    "Vivid Voltage",
-    "Shining Fates",
-    "Battle Styles",
-    "Chilling Reign",
-    "Evolving Skies",
-    "Celebrations",
-    "Fusion Strike",
-    "Brilliant Stars",
-    "Astral Radiance",
-    "Pokémon GO",
-    "Lost Origin",
-    "Silver Tempest",
-    "Crown Zenith",
-    "Scarlet & Violet",
-    "Paldea Evolved",
-    "Obsidian Flames",
-    "151",
-    "Paradox Rift",
-    "Temporal Forces",
-    "Twilight Masquerade",
-    "Shrouded Fable",
-    "Stellar Crown",
-    "Surging Sparks",
-    "Prismatic Evolutions",
-  ];
+  /**
+   * Exemple :
+   * Charizard VMAX #20
+   * Pokemon Darkness Ablaze
+   */
+  const detailsMatch =
+    text.match(
+      /(?:Pokemon|Pokémon)\s+([A-Za-z0-9&'’.\- ]+?)\s+(?:Details|Détails)/i
+    );
 
-  const lowerHtml = html.toLowerCase();
+  if (detailsMatch?.[1]) {
+    setName =
+      detailsMatch[1].trim();
+  }
 
-  for (const set of pokemonSets) {
-    if (lowerHtml.includes(set.toLowerCase())) {
-      setName = set;
-      break;
+  /**
+   * Fallback à partir du titre.
+   */
+  if (!setName) {
+    const titleMatch =
+      cardName.match(
+        /#(?:\d+|[A-Z0-9]+)\s+(?:Pokemon|Pokémon)\s+(.+)$/i
+      );
+
+    if (titleMatch?.[1]) {
+      setName =
+        titleMatch[1].trim();
+    }
+  }
+
+  let cardNumber = "";
+
+  const numberMatch =
+    text.match(
+      /(?:Numéro de carte|Card Number)\s*[:|]?\s*#?(\d{1,4}(?:\/\d{1,4})?)/i
+    );
+
+  if (numberMatch?.[1]) {
+    cardNumber =
+      numberMatch[1];
+  }
+
+  if (!cardNumber) {
+    const genericNumber =
+      cardName.match(
+        /#(\d{1,4}(?:\/\d{1,4})?)/
+      );
+
+    if (genericNumber?.[1]) {
+      cardNumber =
+        genericNumber[1];
+    }
+  }
+
+  if (!cardNumber) {
+    const genericNumber =
+      text.match(
+        /\b(\d{1,4}\/\d{1,4})\b/
+      );
+
+    if (genericNumber?.[1]) {
+      cardNumber =
+        genericNumber[1];
     }
   }
 
@@ -350,53 +586,259 @@ function extractCardInfo(
 }
 
 /**
- * Construit l'identifiant d'une fiche.
+ * Détermine le grade à partir du bloc de vente.
  */
-function createId(url: string): string {
+function detectSaleGrade(
+  title: string
+): 7 | 8 | 9 | 10 | undefined {
+  if (
+    /\bPSA\s*10\b/i.test(
+      title
+    )
+  ) {
+    return 10;
+  }
+
+  if (
+    /\bPSA\s*9\b/i.test(
+      title
+    )
+  ) {
+    return 9;
+  }
+
+  if (
+    /\bPSA\s*8\b/i.test(
+      title
+    )
+  ) {
+    return 8;
+  }
+
+  if (
+    /\bPSA\s*7\b/i.test(
+      title
+    )
+  ) {
+    return 7;
+  }
+
+  return undefined;
+}
+
+/**
+ * Extrait les 3 ventes les plus récentes.
+ *
+ * Important :
+ * elles sont uniquement retournées à l'interface.
+ * Aucun historique n'est enregistré.
+ */
+function extractRecentSales(
+  html: string,
+  rate: number
+): RecentSale[] {
+  const sales: RecentSale[] = [];
+
+  const rowRegex =
+    /<tr\b[^>]*>[\s\S]*?<\/tr>/gi;
+
+  const rows =
+    html.match(rowRegex) ?? [];
+
+  for (const row of rows) {
+    if (
+      !/20\d{2}-\d{2}-\d{2}/.test(
+        row
+      ) ||
+      !/\$[0-9,.]+/.test(
+        row
+      )
+    ) {
+      continue;
+    }
+
+    const decoded =
+      decodeHtml(row);
+
+    const dateMatch =
+      decoded.match(
+        /\b(20\d{2}-\d{2}-\d{2})\b/
+      );
+
+    const priceMatch =
+      decoded.match(
+        /\$([0-9,.]+)/
+      );
+
+    if (
+      !dateMatch ||
+      !priceMatch
+    ) {
+      continue;
+    }
+
+    const cells =
+      row.match(
+        /<td\b[^>]*>[\s\S]*?<\/td>/gi
+      ) ?? [];
+
+    let title = "";
+
+    if (cells.length >= 3) {
+      /**
+       * PriceCharting place le titre
+       * dans une cellule avant la cellule prix.
+       */
+      for (
+        let i = 0;
+        i < cells.length;
+        i++
+      ) {
+        const cell =
+          decodeHtml(
+            cells[i]
+          );
+
+        if (
+          cell &&
+          !/^\d{4}-\d{2}-\d{2}$/.test(
+            cell
+          ) &&
+          !/^\$[\d,.]+$/.test(
+            cell
+          ) &&
+          cell.length > 8
+        ) {
+          if (
+            /eBay|TCGPlayer|Pokemon|Pokémon|PSA/i.test(
+              cell
+            )
+          ) {
+            title = cell;
+          }
+        }
+      }
+    }
+
+    if (!title) {
+      title =
+        decoded
+          .replace(
+            dateMatch[1],
+            ""
+          )
+          .replace(
+            priceMatch[0],
+            ""
+          )
+          .replace(
+            /\[eBay\]|\[TCGPlayer\]/gi,
+            ""
+          )
+          .replace(
+            /\bReport It\b/gi,
+            ""
+          )
+          .trim();
+    }
+
+    const source =
+      /\[TCGPlayer\]/i.test(
+        decoded
+      )
+        ? "TCGPlayer"
+        : "eBay";
+
+    const priceUsd =
+      parseNumber(
+        priceMatch[1]
+      );
+
+    if (
+      !priceUsd ||
+      !title
+    ) {
+      continue;
+    }
+
+    const duplicate =
+      sales.some(
+        (sale) =>
+          sale.date ===
+            dateMatch[1] &&
+          sale.title ===
+            title &&
+          sale.price ===
+            usdToEur(
+              priceUsd,
+              rate
+            )
+      );
+
+    if (duplicate) {
+      continue;
+    }
+
+    sales.push({
+      date: dateMatch[1],
+      title,
+      price:
+        usdToEur(
+          priceUsd,
+          rate
+        ),
+      currency: "EUR",
+      source,
+    });
+
+    if (
+      sales.length >= 3
+    ) {
+      break;
+    }
+  }
+
+  return sales;
+}
+
+function createId(
+  url: string
+): string {
   return url
-    .replace(/^https?:\/\//i, "")
-    .replace(/[^a-zA-Z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "")
+    .replace(
+      /^https?:\/\//i,
+      ""
+    )
+    .replace(
+      /[^a-zA-Z0-9]+/g,
+      "-"
+    )
+    .replace(
+      /^-+|-+$/g,
+      ""
+    )
     .toLowerCase();
 }
 
-export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url);
+/**
+ * Recherche PriceCharting.
+ *
+ * On utilise volontairement la page FR.
+ * PriceCharting retourne plusieurs fiches.
+ */
+async function searchPriceCharting(
+  query: string
+) {
+  const searchUrl =
+    `${PRICECHARTING_BASE}/fr/search-products?` +
+    `q=${encodeURIComponent(
+      query
+    )}&type=prices`;
 
-  const query = searchParams.get("q")?.trim();
-
-  if (!query) {
-    return NextResponse.json(
+  const response =
+    await fetch(
+      searchUrl,
       {
-        success: false,
-        error: "Recherche vide.",
-      },
-      { status: 400 }
-    );
-  }
-
-  /**
-   * Pour le moment, on conserve la fiche PriceCharting
-   * qui a déjà été validée et dont l'extraction des prix
-   * fonctionne correctement.
-   *
-   * La recherche générale sera branchée ensuite sur les
-   * résultats de recherche PriceCharting.
-   */
-  const productUrl =
-    "https://www.pricecharting.com/game/pokemon-darkness-ablaze/charizard-vmax-20";
-
-  try {
-    const controller = new AbortController();
-
-    const timeout = setTimeout(() => {
-      controller.abort();
-    }, 15000);
-
-    let response: Response;
-
-    try {
-      response = await fetch(productUrl, {
         method: "GET",
 
         headers: {
@@ -404,81 +846,388 @@ export async function GET(request: Request) {
             "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
 
           "Accept-Language":
-            "en-US,en;q=0.9",
+            "fr-FR,fr;q=0.9,en;q=0.8",
+
+          "User-Agent":
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/150.0 Safari/537.36",
 
           "Cache-Control":
             "no-cache",
 
           Pragma:
             "no-cache",
-
-          "User-Agent":
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/150.0 Safari/537.36",
         },
 
         cache: "no-store",
-        signal: controller.signal,
-      });
-    } finally {
-      clearTimeout(timeout);
+      }
+    );
+
+  if (!response.ok) {
+    throw new Error(
+      `Recherche PriceCharting HTTP ${response.status}`
+    );
+  }
+
+  const html =
+    await response.text();
+
+  if (
+    !html ||
+    html.length < 1000
+  ) {
+    throw new Error(
+      "Réponse de recherche PriceCharting invalide."
+    );
+  }
+
+  const results: {
+    url: string;
+    title: string;
+    setName: string;
+    cardNumber: string;
+  }[] = [];
+
+  /**
+   * PriceCharting peut retourner les liens
+   * sous /fr/game/ ou /game/.
+   */
+  const linkRegex =
+    /<a\b[^>]*href=["']((?:\/fr)?\/game\/[^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi;
+
+  let match: RegExpExecArray | null;
+
+  while (
+    (match =
+      linkRegex.exec(
+        html
+      )) !== null
+  ) {
+    const url =
+      absoluteUrl(
+        match[1]
+      );
+
+    const title =
+      decodeHtml(
+        match[2]
+      );
+
+    if (
+      !title ||
+      !/\/game\//i.test(
+        url
+      )
+    ) {
+      continue;
     }
+
+    if (
+      /add to collection|ajouter|wishlist|collection/i.test(
+        title
+      )
+    ) {
+      continue;
+    }
+
+    if (
+      results.some(
+        (item) =>
+          item.url === url
+      )
+    ) {
+      continue;
+    }
+
+    const cardNumber =
+      title.match(
+        /#([A-Z0-9]+(?:\/[A-Z0-9]+)?)/i
+      )?.[1] ?? "";
+
+    let setName = "";
+
+    const pokemonMatch =
+      title.match(
+        /(?:Pokemon|Pokémon)\s+(.+)$/i
+      );
+
+    if (
+      pokemonMatch?.[1]
+    ) {
+      setName =
+        pokemonMatch[1]
+          .trim();
+    }
+
+    results.push({
+      url,
+      title,
+      setName,
+      cardNumber,
+    });
+
+    /**
+     * On laisse suffisamment de résultats
+     * pour les recherches ambiguës.
+     */
+    if (
+      results.length >= 20
+    ) {
+      break;
+    }
+  }
+
+  return results;
+}
+
+async function fetchProduct(
+  product: {
+    url: string;
+    title: string;
+    setName: string;
+    cardNumber: string;
+  },
+  rate: number
+): Promise<PriceChartingCard | null> {
+  const controller =
+    new AbortController();
+
+  const timeout =
+    setTimeout(
+      () =>
+        controller.abort(),
+      15000
+    );
+
+  try {
+    const response =
+      await fetch(
+        product.url,
+        {
+          method: "GET",
+
+          headers: {
+            Accept:
+              "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+
+            "Accept-Language":
+              "fr-FR,fr;q=0.9,en;q=0.8",
+
+            "User-Agent":
+              "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/150.0 Safari/537.36",
+
+            "Cache-Control":
+              "no-cache",
+
+            Pragma:
+              "no-cache",
+          },
+
+          cache: "no-store",
+
+          signal:
+            controller.signal,
+        }
+      );
 
     if (!response.ok) {
-      throw new Error(
-        `PriceCharting fiche HTTP ${response.status}`
-      );
+      return null;
     }
 
-    const html = await response.text();
+    const html =
+      await response.text();
 
-    if (!html || html.length < 1000) {
-      throw new Error(
-        "Réponse PriceCharting vide ou invalide."
-      );
+    if (
+      !html ||
+      html.length < 1000
+    ) {
+      return null;
     }
 
-    const prices = extractPrices(html);
+    const prices =
+      extractPrices(
+        html,
+        rate
+      );
 
-    const info = extractCardInfo(html, query);
+    const info =
+      extractCardInfo(
+        html
+      );
 
-    const imageUrl = extractImageUrl(html);
+    const imageUrl =
+      extractImageUrl(
+        html
+      );
 
-    const card: PriceChartingResult = {
-      id: createId(productUrl),
+    const recentSales =
+      extractRecentSales(
+        html,
+        rate
+      );
+
+    /**
+     * Une fiche sans aucun prix exploitable
+     * n'est pas intéressante pour le module PSA.
+     */
+    const hasPrice =
+      Object.values(
+        prices
+      ).some(
+        (value) =>
+          typeof value ===
+            "number" &&
+          value > 0
+      );
+
+    if (!hasPrice) {
+      return null;
+    }
+
+    return {
+      id:
+        createId(
+          product.url
+        ),
 
       cardName:
-        info.cardName || "Charizard VMAX",
+        info.cardName ||
+        product.title,
 
       setName:
-        info.setName || "Darkness Ablaze",
+        info.setName ||
+        product.setName,
 
       cardNumber:
-        info.cardNumber || "020/189",
+        info.cardNumber ||
+        product.cardNumber,
 
       imageUrl,
 
       prices,
 
-      sourceUrl: productUrl,
+      sourceUrl:
+        product.url,
+
+      language:
+        "fr",
+
+      recentSales,
     };
+  } finally {
+    clearTimeout(
+      timeout
+    );
+  }
+}
+
+export async function GET(
+  request: Request
+) {
+  const {
+    searchParams,
+  } = new URL(
+    request.url
+  );
+
+  const query =
+    searchParams
+      .get("q")
+      ?.trim();
+
+  if (!query) {
+    return NextResponse.json(
+      {
+        success: false,
+        error:
+          "Recherche vide.",
+      },
+      {
+        status: 400,
+      }
+    );
+  }
+
+  try {
+    /**
+     * Taux de change utilisé pour
+     * toute la recherche afin que
+     * toutes les cartes soient cohérentes.
+     */
+    const rate =
+      await getUsdToEurRate();
+
+    const searchResults =
+      await searchPriceCharting(
+        query
+      );
+
+    if (
+      searchResults.length ===
+      0
+    ) {
+      return NextResponse.json({
+        success: true,
+        query,
+        results: [],
+        resultCount: 0,
+        currency: "EUR",
+        language: "fr",
+      });
+    }
 
     /**
-     * IMPORTANT :
-     *
-     * On retourne uniquement les prix actuels.
-     * Aucun historicalPrices.
-     * Aucun recentSales.
+     * On limite le nombre de fiches
+     * récupérées en parallèle pour
+     * éviter de surcharger PriceCharting.
      */
+    const products =
+      searchResults.slice(
+        0,
+        12
+      );
+
+    const cards =
+      await Promise.all(
+        products.map(
+          (product) =>
+            fetchProduct(
+              product,
+              rate
+            )
+        )
+      );
+
+    const validCards =
+      cards.filter(
+        (
+          card
+        ): card is PriceChartingCard =>
+          card !== null
+      );
+
     return NextResponse.json({
       success: true,
 
       query,
 
-      results: [card],
+      results:
+        validCards,
+
+      resultCount:
+        validCards.length,
+
+      currency:
+        "EUR",
+
+      language:
+        "fr",
+
+      usdToEur:
+        rate,
     });
   } catch (error) {
     console.error(
-      "PriceCharting search error:",
+      "PriceCharting PSA search error:",
       error
     );
 
@@ -491,7 +1240,7 @@ export async function GET(request: Request) {
         error:
           error instanceof Error
             ? error.message
-            : "Erreur inconnue",
+            : "Erreur inconnue.",
       },
       {
         status: 502,
