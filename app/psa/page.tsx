@@ -9,6 +9,8 @@ import {
   ShieldCheck,
   Sparkles,
   Trash2,
+  ExternalLink,
+  ShoppingBag,
 } from "lucide-react";
 
 import Navbar from "@/components/Navbar";
@@ -18,82 +20,118 @@ import {
   PriceChartingCard,
 } from "@/lib/psa/psaService";
 
-import { PSACard, PSAGrade, PSAPrices } from "@/lib/psa/types";
+import {
+  PSACard,
+  PSAGrade,
+  PSAPrices,
+} from "@/lib/psa/types";
+
+function formatEUR(value: number): string {
+  if (!Number.isFinite(value) || value <= 0) {
+    return "—";
+  }
+
+  return `${value.toLocaleString("fr-FR", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  })} €`;
+}
+
+function formatSaleDate(date: string): string {
+  const parsed = new Date(date);
+
+  if (Number.isNaN(parsed.getTime())) {
+    return date;
+  }
+
+  return parsed.toLocaleDateString("fr-FR");
+}
 
 export default function PSAPage() {
   const [activeTab, setActiveTab] = useState<
     "collection" | "search" | "estimation"
   >("collection");
 
-  /**
-   * Collection personnelle PSA
-   */
   const [collection, setCollection] = useState<PSACard[]>([]);
 
-  /**
-   * Recherche collection
-   */
   const [collectionSearch, setCollectionSearch] = useState("");
-  const [filterGrade, setFilterGrade] = useState<"all" | PSAGrade>("all");
 
-  /**
-   * Recherche PriceCharting
-   */
-  const [priceChartingQuery, setPriceChartingQuery] = useState("");
-  const [priceChartingResults, setPriceChartingResults] = useState<PriceChartingCard[]>([]);
-  const [priceChartingLoading, setPriceChartingLoading] = useState(false);
-  const [priceChartingError, setPriceChartingError] = useState("");
+  const [filterGrade, setFilterGrade] =
+    useState<"all" | PSAGrade>("all");
 
-  /**
-   * Modal ajout carte PSA
-   */
-  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [priceChartingQuery, setPriceChartingQuery] =
+    useState("");
+
+  const [priceChartingResults, setPriceChartingResults] =
+    useState<PriceChartingCard[]>([]);
+
+  const [priceChartingLoading, setPriceChartingLoading] =
+    useState(false);
+
+  const [priceChartingError, setPriceChartingError] =
+    useState("");
+
+  const [isAddModalOpen, setIsAddModalOpen] =
+    useState(false);
+
   const [newCert, setNewCert] = useState("");
-  const [newName, setNewName] = useState("");
-  const [newSet, setNewSet] = useState("");
-  const [newNumber, setNewNumber] = useState("");
-  const [newGrade, setNewGrade] = useState<PSAGrade>(10);
-  const [newPrice, setNewPrice] = useState(0);
-  const [newImage, setNewImage] = useState("");
-  const [selectedMarketPrices, setSelectedMarketPrices] =
-  useState<PSAPrices | undefined>(undefined);
 
-  /**
-   * Chargement collection locale
-   */
+  const [newName, setNewName] = useState("");
+
+  const [newSet, setNewSet] = useState("");
+
+  const [newNumber, setNewNumber] = useState("");
+
+  const [newGrade, setNewGrade] = useState<PSAGrade>(10);
+
+  const [newPrice, setNewPrice] = useState(0);
+
+  const [newImage, setNewImage] = useState("");
+
+  const [selectedMarketPrices, setSelectedMarketPrices] =
+    useState<PSAPrices | undefined>(undefined);
+
   useEffect(() => {
     setCollection(psaService.getCollection());
   }, []);
 
-  /**
-   * Statistiques collection
-   */
   const stats = useMemo(
     () => psaService.calculateStats(collection),
     [collection]
   );
 
-  /**
-   * Recherche carte PriceCharting
-   */
-  const handlePriceChartingSearch = async (event: React.FormEvent) => {
+  const handlePriceChartingSearch = async (
+    event: React.FormEvent
+  ) => {
     event.preventDefault();
 
-    if (!priceChartingQuery.trim()) return;
+    const query = priceChartingQuery.trim();
+
+    if (!query) return;
 
     setPriceChartingLoading(true);
     setPriceChartingError("");
+    setPriceChartingResults([]);
 
     try {
-      const results = await psaService.searchPriceCharting(priceChartingQuery);
+      const results =
+        await psaService.searchPriceCharting(query);
+
       setPriceChartingResults(results);
 
       if (results.length === 0) {
-        setPriceChartingError("Aucune carte PriceCharting trouvée.");
+        setPriceChartingError(
+          "Aucune carte PriceCharting trouvée."
+        );
       }
     } catch (error) {
-      console.error("Erreur recherche PriceCharting", error);
+      console.error(
+        "Erreur recherche PriceCharting",
+        error
+      );
+
       setPriceChartingResults([]);
+
       setPriceChartingError(
         error instanceof Error
           ? error.message
@@ -104,9 +142,6 @@ export default function PSAPage() {
     }
   };
 
-  /**
-   * Sélection d'une carte du catalogue
-   */
   const handleSelectPriceChartingCard = (
     card: PriceChartingCard,
     grade: PSAGrade
@@ -115,31 +150,32 @@ export default function PSAPage() {
     setNewSet(card.setName);
     setNewNumber(card.cardNumber);
     setNewImage(card.imageUrl);
+
     setSelectedMarketPrices(card.prices);
+
     setNewGrade(grade);
 
-    const prices = card.prices;
-    const gradePrices: Record<PSAGrade, number> = {
-      1: prices.ungraded,
-      2: prices.ungraded,
-      3: prices.ungraded,
-      4: prices.ungraded,
-      5: prices.ungraded,
-      6: prices.ungraded,
-      7: prices.psa7,
-      8: prices.psa8,
-      9: prices.psa9,
-      10: prices.psa10,
+    const prices: Record<PSAGrade, number> = {
+      1: card.prices.ungraded,
+      2: card.prices.ungraded,
+      3: card.prices.ungraded,
+      4: card.prices.ungraded,
+      5: card.prices.ungraded,
+      6: card.prices.ungraded,
+      7: card.prices.psa7,
+      8: card.prices.psa8,
+      9: card.prices.psa9,
+      10: card.prices.psa10,
     };
 
-    setNewPrice(gradePrices[grade]);
+    setNewPrice(prices[grade]);
+
     setIsAddModalOpen(true);
   };
 
-  /**
-   * Ajout carte collection
-   */
-  const handleAddSubmit = (event: React.FormEvent) => {
+  const handleAddSubmit = (
+    event: React.FormEvent
+  ) => {
     event.preventDefault();
 
     if (!newCert.trim() || !newName.trim()) {
@@ -150,72 +186,102 @@ export default function PSAPage() {
       psaService.addCard({
         psaCertNumber: newCert.trim(),
         cardName: newName.trim(),
-        setName: newSet,
-        cardNumber: newNumber,
+        setName: newSet.trim(),
+        cardNumber: newNumber.trim(),
         grade: newGrade,
         imageUrl: newImage,
-        estimatedValue: Number(newPrice),
+        estimatedValue: Number(newPrice) || 0,
         salesHistory: [],
         marketPrices: selectedMarketPrices,
+        currency: "EUR",
       });
 
       setCollection(psaService.getCollection());
+
       setIsAddModalOpen(false);
+
       setNewCert("");
       setNewName("");
+      setNewSet("");
+      setNewNumber("");
+      setNewPrice(0);
+      setNewImage("");
+      setSelectedMarketPrices(undefined);
     } catch (error) {
-      console.error("Erreur ajout carte PSA", error);
+      console.error(
+        "Erreur ajout carte PSA",
+        error
+      );
+
+      alert(
+        error instanceof Error
+          ? error.message
+          : "Impossible d'ajouter cette carte."
+      );
     }
   };
 
-  /**
-   * Suppression carte
-   */
   const handleDelete = (id: string) => {
-    if (!confirm("Supprimer cette carte PSA de votre collection ?")) {
+    if (
+      !confirm(
+        "Supprimer cette carte PSA de votre collection ?"
+      )
+    ) {
       return;
     }
 
     psaService.removeCard(id);
+
     setCollection(psaService.getCollection());
   };
 
-  /**
-   * Filtrage collection
-   */
   const filteredCollection = useMemo(() => {
-    let cards = psaService.searchCollection(collection, collectionSearch);
+    let cards = psaService.searchCollection(
+      collection,
+      collectionSearch
+    );
 
     if (filterGrade !== "all") {
-      cards = cards.filter((card) => card.grade === filterGrade);
+      cards = cards.filter(
+        (card) => card.grade === filterGrade
+      );
     }
 
     return cards;
-  }, [collection, collectionSearch, filterGrade]);
+  }, [
+    collection,
+    collectionSearch,
+    filterGrade,
+  ]);
 
   return (
     <>
       <Navbar />
+
       <main className="min-h-screen bg-neutral-950 text-white pb-32">
         <div className="mx-auto max-w-5xl px-4 py-6 space-y-6">
 
-          {/* HEADER MODULE PSA */}
+          {/* HEADER */}
           <section className="rounded-2xl border border-zinc-900 bg-neutral-900/40 p-5 shadow-xl flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-3">
               <div className="p-3 rounded-xl bg-cyan-500/15 border border-cyan-500/20 text-cyan-400">
                 <Award className="w-7 h-7" />
               </div>
+
               <div>
                 <div className="flex items-center gap-2">
                   <h1 className="text-lg font-black uppercase">
                     Collection PSA
                   </h1>
+
                   <span className="px-2 py-0.5 rounded bg-cyan-500/15 border border-cyan-500/20 text-cyan-400 text-[9px] font-black uppercase">
                     Pokémon TCG
                   </span>
                 </div>
+
                 <p className="text-xs text-zinc-400 mt-1">
-                  Gestion de vos cartes gradées, valeurs marché et estimation IA.
+                  Gestion de vos cartes gradées,
+                  valeurs marché et estimation IA.
                 </p>
               </div>
             </div>
@@ -226,7 +292,10 @@ export default function PSAPage() {
                 setNewName("");
                 setNewSet("");
                 setNewNumber("");
+                setNewGrade(10);
                 setNewPrice(0);
+                setNewImage("");
+                setSelectedMarketPrices(undefined);
                 setIsAddModalOpen(true);
               }}
               className="w-full md:w-auto bg-cyan-500 hover:bg-cyan-400 text-black font-black text-xs uppercase px-5 py-3 rounded-xl transition flex items-center justify-center gap-2"
@@ -239,15 +308,27 @@ export default function PSAPage() {
           {/* NAVIGATION */}
           <div className="flex gap-2 bg-neutral-900/60 p-1.5 rounded-2xl border border-zinc-900">
             {[
-              { id: "collection", label: "Ma Collection" },
-              { id: "search", label: "Recherche Prix" },
-              { id: "estimation", label: "IA Grade" },
+              {
+                id: "collection",
+                label: "Ma Collection",
+              },
+              {
+                id: "search",
+                label: "Recherche Prix",
+              },
+              {
+                id: "estimation",
+                label: "IA Grade",
+              },
             ].map((tab) => (
               <button
                 key={tab.id}
                 onClick={() =>
                   setActiveTab(
-                    tab.id as "collection" | "search" | "estimation"
+                    tab.id as
+                      | "collection"
+                      | "search"
+                      | "estimation"
                   )
                 }
                 className={`flex-1 py-2.5 rounded-xl text-xs font-black uppercase transition ${
@@ -261,38 +342,53 @@ export default function PSAPage() {
             ))}
           </div>
 
-          {/* ONGLET COLLECTION */}
+          {/* COLLECTION */}
           {activeTab === "collection" && (
             <section className="space-y-6">
 
-              {/* STATISTIQUES */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                 <StatCard
                   title="Valeur totale"
-                  value={`${stats.totalValue.toLocaleString()} €`}
+                  value={`${stats.totalValue.toLocaleString(
+                    "fr-FR",
+                    {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
+                    }
+                  )} €`}
                 />
+
                 <StatCard
                   title="Cartes PSA"
                   value={stats.totalCount}
                 />
+
                 <StatCard
                   title="PSA 10"
                   value={stats.gemMintCount}
                 />
+
                 <StatCard
                   title="Plus-value"
-                  value={`${stats.netProfit >= 0 ? "+" : ""}${stats.netProfit} €`}
+                  value={`${stats.netProfit >= 0 ? "+" : ""}${stats.netProfit.toLocaleString(
+                    "fr-FR",
+                    {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
+                    }
+                  )} €`}
                 />
               </div>
 
-              {/* RECHERCHE COLLECTION */}
               <div className="flex flex-col md:flex-row gap-3">
                 <div className="flex-1">
                   <input
                     type="text"
                     placeholder="Rechercher une carte ou un certificat PSA..."
                     value={collectionSearch}
-                    onChange={(e) => setCollectionSearch(e.target.value)}
+                    onChange={(e) =>
+                      setCollectionSearch(e.target.value)
+                    }
                     className="w-full bg-neutral-900 border border-zinc-800 rounded-xl px-4 py-3 text-xs focus:outline-none focus:border-cyan-500"
                   />
                 </div>
@@ -303,203 +399,402 @@ export default function PSAPage() {
                     setFilterGrade(
                       e.target.value === "all"
                         ? "all"
-                        : (Number(e.target.value) as PSAGrade)
+                        : (Number(
+                            e.target.value
+                          ) as PSAGrade)
                     )
                   }
                   className="bg-neutral-900 border border-zinc-800 rounded-xl px-4 py-3 text-xs"
                 >
-                  <option value="all">Tous les grades</option>
-                  {[10, 9, 8, 7, 6, 5].map((grade) => (
-                    <option key={grade} value={grade}>
-                      PSA {grade}
-                    </option>
-                  ))}
+                  <option value="all">
+                    Tous les grades
+                  </option>
+
+                  {[10, 9, 8, 7, 6, 5].map(
+                    (grade) => (
+                      <option
+                        key={grade}
+                        value={grade}
+                      >
+                        PSA {grade}
+                      </option>
+                    )
+                  )}
                 </select>
               </div>
 
-              {/* LISTE */}
               {filteredCollection.length === 0 ? (
                 <div className="text-center py-16 rounded-2xl border border-zinc-900 bg-neutral-900/20">
                   <ShieldCheck className="mx-auto w-10 h-10 text-zinc-600" />
+
                   <p className="mt-3 text-xs text-zinc-400 uppercase font-bold">
                     Aucune carte PSA enregistrée
                   </p>
                 </div>
               ) : (
                 <div className="grid md:grid-cols-2 gap-4">
-                  {filteredCollection.map((card) => (
-                    <div
-                      key={card.id}
-                      className="bg-neutral-900/60 border border-zinc-800 rounded-2xl p-4 flex gap-4 items-center"
-                    >
-                      <img
-                        src={card.imageUrl}
-                        alt={card.cardName}
-                        className="w-16 h-24 object-cover rounded-lg"
-                      />
-                      <div className="flex-1">
-                        <span className="text-[10px] bg-red-600 px-2 py-1 rounded font-black">
-                          PSA {card.grade}
-                        </span>
-                        <h3 className="text-xs font-black mt-2">
-                          {card.cardName}
-                        </h3>
-                        <p className="text-[10px] text-zinc-400">
-                          {card.setName}
-                        </p>
-                        <p className="text-cyan-400 text-xs font-bold">
-                          {card.estimatedValue} €
-                        </p>
-                      </div>
-                      <button
-                        onClick={() => handleDelete(card.id)}
-                        className="text-zinc-500 hover:text-red-400"
+                  {filteredCollection.map(
+                    (card) => (
+                      <div
+                        key={card.id}
+                        className="bg-neutral-900/60 border border-zinc-800 rounded-2xl p-4 flex gap-4 items-center"
                       >
-                        <Trash2 className="w-4 h-4" />
-                      </button>
-                    </div>
-                  ))}
+                        {card.imageUrl ? (
+                          <img
+                            src={card.imageUrl}
+                            alt={card.cardName}
+                            className="w-16 h-24 object-cover rounded-lg"
+                            onError={(event) => {
+                              event.currentTarget.style.display =
+                                "none";
+                            }}
+                          />
+                        ) : (
+                          <div className="w-16 h-24 rounded-lg bg-neutral-950 border border-zinc-800 flex items-center justify-center">
+                            <Award className="w-6 h-6 text-zinc-700" />
+                          </div>
+                        )}
+
+                        <div className="flex-1 min-w-0">
+                          <span className="text-[10px] bg-red-600 px-2 py-1 rounded font-black">
+                            PSA {card.grade}
+                          </span>
+
+                          <h3 className="text-xs font-black mt-2 truncate">
+                            {card.cardName}
+                          </h3>
+
+                          <p className="text-[10px] text-zinc-400 truncate">
+                            {card.setName}
+                          </p>
+
+                          <p className="text-cyan-400 text-xs font-bold">
+                            {formatEUR(card.estimatedValue)}
+                          </p>
+                        </div>
+
+                        <button
+                          onClick={() =>
+                            handleDelete(card.id)
+                          }
+                          className="text-zinc-500 hover:text-red-400"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
+                      </div>
+                    )
+                  )}
                 </div>
               )}
             </section>
           )}
 
-          {/* ONGLET RECHERCHE PRICECHARTING */}
+          {/* PRICECHARTING SEARCH */}
           {activeTab === "search" && (
             <section className="space-y-6">
+
               <div className="bg-neutral-900/40 border border-zinc-900 rounded-2xl p-6 space-y-4">
                 <div>
                   <h2 className="text-sm font-black uppercase">
                     Recherche Prix Pokémon TCG
                   </h2>
+
                   <p className="text-xs text-zinc-400 mt-1">
-                    Consultez la valeur estimée des cartes selon leur état et leur grade PSA.
+                    Recherche des cartes, valeurs marché
+                    et dernières ventes PriceCharting.
                   </p>
                 </div>
 
-                <form onSubmit={handlePriceChartingSearch} className="flex gap-2">
-                  <div className="flex-1">
-                    <input
-                      type="text"
-                      placeholder="Exemple : Dracaufeu, Pikachu, Umbreon..."
-                      value={priceChartingQuery}
-                      onChange={(e) => setPriceChartingQuery(e.target.value)}
-                      className="w-full bg-neutral-950 border border-zinc-800 rounded-xl px-4 py-3 text-xs focus:outline-none focus:border-cyan-500"
-                    />
-                  </div>
+                <form
+                  onSubmit={handlePriceChartingSearch}
+                  className="flex flex-col md:flex-row gap-2"
+                >
+                  <input
+                    type="text"
+                    placeholder="Exemple : Dracaufeu, Pikachu, Umbreon..."
+                    value={priceChartingQuery}
+                    onChange={(e) =>
+                      setPriceChartingQuery(
+                        e.target.value
+                      )
+                    }
+                    className="flex-1 bg-neutral-950 border border-zinc-800 rounded-xl px-4 py-3 text-xs focus:outline-none focus:border-cyan-500"
+                  />
+
                   <button
                     type="submit"
-                    className="bg-cyan-500 hover:bg-cyan-400 text-black px-5 rounded-xl text-xs font-black uppercase"
+                    disabled={priceChartingLoading}
+                    className="bg-cyan-500 hover:bg-cyan-400 disabled:opacity-50 text-black px-5 py-3 rounded-xl text-xs font-black uppercase"
                   >
-                    Rechercher
+                    {priceChartingLoading
+                      ? "Recherche..."
+                      : "Rechercher"}
                   </button>
                 </form>
               </div>
 
               {priceChartingLoading && (
                 <div className="rounded-2xl border border-cyan-500/20 bg-cyan-500/5 p-4 text-xs text-cyan-300">
-                  Recherche des données publiques PriceCharting...
+                  Recherche des données publiques
+                  PriceCharting...
                 </div>
               )}
 
-              {priceChartingError && !priceChartingLoading && (
-                <div className="rounded-2xl border border-amber-500/20 bg-amber-500/5 p-4 text-xs text-amber-300">
-                  {priceChartingError}
-                </div>
-              )}
+              {priceChartingError &&
+                !priceChartingLoading && (
+                  <div className="rounded-2xl border border-amber-500/20 bg-amber-500/5 p-4 text-xs text-amber-300">
+                    {priceChartingError}
+                  </div>
+                )}
 
-              <div className="space-y-4">
+              <div className="space-y-5">
                 {priceChartingResults.map((card) => (
                   <div
                     key={card.id}
-                    className="bg-neutral-900/60 border border-zinc-800 rounded-2xl p-4 space-y-4"
+                    className="bg-neutral-900/60 border border-zinc-800 rounded-2xl p-5 space-y-5"
                   >
-                    <div className="flex gap-4">
-                      <img
-                        src={card.imageUrl}
-                        alt={card.cardName}
-                        className="w-20 h-28 object-cover rounded-xl border border-zinc-800"
-                      />
-                      <div>
-                        <h3 className="text-sm font-black">
-                          {card.cardName}
-                        </h3>
-                        <p className="text-xs text-zinc-400">
+
+                    {/* CARD HEADER */}
+                    <div className="flex flex-col md:flex-row gap-5">
+
+                      {/* IMAGE */}
+                      <div className="shrink-0">
+                        {card.imageUrl ? (
+                          <img
+                            src={card.imageUrl}
+                            alt={card.cardName}
+                            className="w-28 h-40 object-contain rounded-xl border border-zinc-800 bg-neutral-950"
+                            onError={(event) => {
+                              event.currentTarget.style.display =
+                                "none";
+
+                              const fallback =
+                                event.currentTarget
+                                  .nextElementSibling as HTMLElement | null;
+
+                              if (fallback) {
+                                fallback.style.display =
+                                  "flex";
+                              }
+                            }}
+                          />
+                        ) : null}
+
+                        <div
+                          style={{
+                            display: card.imageUrl
+                              ? "none"
+                              : "flex",
+                          }}
+                          className="w-28 h-40 rounded-xl border border-zinc-800 bg-neutral-950 items-center justify-center"
+                        >
+                          <div className="text-center px-2">
+                            <Award className="w-7 h-7 mx-auto text-zinc-700" />
+
+                            <span className="block mt-2 text-[9px] text-zinc-600 uppercase font-black">
+                              Image indisponible
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* INFO */}
+                      <div className="flex-1 min-w-0">
+                        <div className="flex flex-wrap items-center gap-2">
+                          <h3 className="text-base font-black">
+                            {card.cardName}
+                          </h3>
+
+                          {card.cardNumber && (
+                            <span className="text-[10px] px-2 py-1 rounded-lg bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
+                              {card.cardNumber}
+                            </span>
+                          )}
+                        </div>
+
+                        <p className="text-xs text-zinc-400 mt-2">
                           {card.setName}
                         </p>
-                        <p className="text-xs text-zinc-500">
-                          Carte : {card.cardNumber}
-                        </p>
-                        <p className="mt-2 text-xs text-cyan-400 font-bold">
-                          Non gradée : ${card.prices.ungraded.toLocaleString("en-US")} USD
-                        </p>
+
+                        {card.language && (
+                          <p className="text-[10px] text-zinc-500 mt-1">
+                            Langue : {card.language}
+                          </p>
+                        )}
+
+                        {card.rarity && (
+                          <p className="text-[10px] text-zinc-500">
+                            Rareté : {card.rarity}
+                          </p>
+                        )}
+
                         <a
                           href={card.sourceUrl}
                           target="_blank"
                           rel="noreferrer"
-                          className="inline-block mt-1 text-[10px] text-zinc-500 hover:text-cyan-400 underline"
+                          className="inline-flex items-center gap-1 mt-4 text-[10px] text-zinc-500 hover:text-cyan-400 underline"
                         >
-                          Voir la fiche PriceCharting ↗
+                          Voir la fiche PriceCharting
+                          <ExternalLink className="w-3 h-3" />
                         </a>
                       </div>
                     </div>
 
-                    {/* PRIX PAR GRADE PSA */}
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
-                      {[
-                        { grade: 7, price: card.prices.psa7 },
-                        { grade: 8, price: card.prices.psa8 },
-                        { grade: 9, price: card.prices.psa9 },
-                        { grade: 10, price: card.prices.psa10 },
-                      ].map((item) => (
-                        <button
-                          key={item.grade}
+                    {/* PRICES */}
+                    <div>
+                      <div className="flex items-center gap-2 mb-3">
+                        <div className="w-1 h-4 bg-cyan-500 rounded-full" />
+
+                        <h4 className="text-xs font-black uppercase">
+                          Prix marché
+                        </h4>
+
+                        <span className="text-[9px] text-zinc-600 uppercase">
+                          EUR
+                        </span>
+                      </div>
+
+                      <div className="grid grid-cols-2 md:grid-cols-5 gap-2">
+                        <PriceBox
+                          label="Non gradée"
+                          price={card.prices.ungraded}
+                        />
+
+                        <PriceBox
+                          label="PSA 7"
+                          price={card.prices.psa7}
                           onClick={() =>
                             handleSelectPriceChartingCard(
                               card,
-                              item.grade as PSAGrade
+                              7
                             )
                           }
-                          className="bg-neutral-950 border border-zinc-800 hover:border-cyan-500 rounded-xl p-3 transition"
-                        >
-                          <span className="block text-[10px] text-zinc-500 uppercase font-black">
-                            PSA {item.grade}
-                          </span>
-                          <span className="text-sm font-black">
-                            {item.price > 0 ? `$${item.price.toLocaleString("en-US")}` : "—"}
-                          </span>
-                          <span className="block text-[9px] text-cyan-400 mt-1 uppercase">
-                            Ajouter
-                          </span>
-                        </button>
-                      ))}
+                        />
+
+                        <PriceBox
+                          label="PSA 8"
+                          price={card.prices.psa8}
+                          onClick={() =>
+                            handleSelectPriceChartingCard(
+                              card,
+                              8
+                            )
+                          }
+                        />
+
+                        <PriceBox
+                          label="PSA 9"
+                          price={card.prices.psa9}
+                          onClick={() =>
+                            handleSelectPriceChartingCard(
+                              card,
+                              9
+                            )
+                          }
+                        />
+
+                        <PriceBox
+                          label="PSA 10"
+                          price={card.prices.psa10}
+                          onClick={() =>
+                            handleSelectPriceChartingCard(
+                              card,
+                              10
+                            )
+                          }
+                        />
+                      </div>
                     </div>
+
+                    {/* RECENT SALES */}
+                    {card.recentSales?.length > 0 && (
+                      <div className="border-t border-zinc-800 pt-5">
+                        <div className="flex items-center gap-2 mb-3">
+                          <ShoppingBag className="w-4 h-4 text-cyan-400" />
+
+                          <h4 className="text-xs font-black uppercase">
+                            3 dernières ventes
+                          </h4>
+
+                          <span className="text-[9px] text-zinc-600">
+                            Réalisées
+                          </span>
+                        </div>
+
+                        <div className="space-y-2">
+                          {card.recentSales
+                            .slice(0, 3)
+                            .map((sale, index) => (
+                              <div
+                                key={`${sale.date}-${index}`}
+                                className="flex flex-col md:flex-row md:items-center gap-2 md:gap-4 rounded-xl bg-neutral-950 border border-zinc-800 p-3"
+                              >
+                                <span className="text-[10px] text-zinc-500 shrink-0">
+                                  {formatSaleDate(
+                                    sale.date
+                                  )}
+                                </span>
+
+                                <span className="text-[10px] text-zinc-300 flex-1 line-clamp-2">
+                                  {sale.title}
+                                </span>
+
+                                <span className="text-xs font-black text-cyan-400 shrink-0">
+                                  {formatEUR(sale.price)}
+                                </span>
+
+                                <span className="text-[9px] text-zinc-600 uppercase shrink-0">
+                                  {sale.source}
+                                </span>
+                              </div>
+                            ))}
+                        </div>
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>
             </section>
           )}
 
-          {/* ONGLET IA ESTIMATION PSA */}
+          {/* IA */}
           {activeTab === "estimation" && (
             <section className="space-y-6">
               <div className="rounded-2xl border border-cyan-500/20 bg-gradient-to-br from-cyan-950/30 to-neutral-900 p-8 text-center space-y-5">
+
                 <Sparkles className="mx-auto w-10 h-10 text-amber-400" />
+
                 <div>
                   <h2 className="text-base font-black uppercase">
                     Estimation IA Grade PSA
                   </h2>
+
                   <p className="text-xs text-zinc-300 mt-2 max-w-lg mx-auto">
-                    Envoyez des photos haute qualité de votre carte Pokémon. L'intelligence artificielle analysera les critères utilisés par les graders.
+                    Envoyez des photos haute qualité
+                    de votre carte Pokémon.
+                    L'intelligence artificielle analysera
+                    les critères utilisés par les graders.
                   </p>
                 </div>
 
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                   {[
-                    { title: "Centering", desc: "Alignement du visuel" },
-                    { title: "Corners", desc: "État des coins" },
-                    { title: "Edges", desc: "Bords et usure" },
-                    { title: "Surface", desc: "Rayures et défauts" },
+                    {
+                      title: "Centering",
+                      desc: "Alignement du visuel",
+                    },
+                    {
+                      title: "Corners",
+                      desc: "État des coins",
+                    },
+                    {
+                      title: "Edges",
+                      desc: "Bords et usure",
+                    },
+                    {
+                      title: "Surface",
+                      desc: "Rayures et défauts",
+                    },
                   ].map((item) => (
                     <div
                       key={item.title}
@@ -508,6 +803,7 @@ export default function PSAPage() {
                       <span className="block text-[10px] text-cyan-400 font-black uppercase">
                         {item.title}
                       </span>
+
                       <span className="text-[10px] text-zinc-500">
                         {item.desc}
                       </span>
@@ -524,24 +820,29 @@ export default function PSAPage() {
               </div>
             </section>
           )}
-
         </div>
       </main>
 
-      {/* MODAL AJOUT CARTE PSA */}
+      {/* MODAL */}
       {isAddModalOpen && (
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
           <div className="bg-neutral-900 border border-zinc-800 rounded-2xl p-6 w-full max-w-md space-y-5">
+
             <h3 className="text-sm font-black uppercase">
               Ajouter une carte PSA
             </h3>
 
-            <form onSubmit={handleAddSubmit} className="space-y-4">
+            <form
+              onSubmit={handleAddSubmit}
+              className="space-y-4"
+            >
               <input
                 required
                 placeholder="Numéro certificat PSA"
                 value={newCert}
-                onChange={(e) => setNewCert(e.target.value)}
+                onChange={(e) =>
+                  setNewCert(e.target.value)
+                }
                 className="w-full bg-neutral-950 border border-zinc-800 rounded-xl px-4 py-3 text-xs"
               />
 
@@ -549,7 +850,27 @@ export default function PSAPage() {
                 required
                 placeholder="Nom de la carte"
                 value={newName}
-                onChange={(e) => setNewName(e.target.value)}
+                onChange={(e) =>
+                  setNewName(e.target.value)
+                }
+                className="w-full bg-neutral-950 border border-zinc-800 rounded-xl px-4 py-3 text-xs"
+              />
+
+              <input
+                placeholder="Extension"
+                value={newSet}
+                onChange={(e) =>
+                  setNewSet(e.target.value)
+                }
+                className="w-full bg-neutral-950 border border-zinc-800 rounded-xl px-4 py-3 text-xs"
+              />
+
+              <input
+                placeholder="Numéro de carte"
+                value={newNumber}
+                onChange={(e) =>
+                  setNewNumber(e.target.value)
+                }
                 className="w-full bg-neutral-950 border border-zinc-800 rounded-xl px-4 py-3 text-xs"
               />
 
@@ -557,12 +878,23 @@ export default function PSAPage() {
                 <select
                   value={newGrade}
                   onChange={(e) =>
-                    setNewGrade(Number(e.target.value) as PSAGrade)
+                    setNewGrade(
+                      Number(
+                        e.target.value
+                      ) as PSAGrade
+                    )
                   }
                   className="bg-neutral-950 border border-zinc-800 rounded-xl px-3 py-3 text-xs"
                 >
-                  {[10, 9, 8, 7, 6, 5, 4, 3, 2, 1].map((grade) => (
-                    <option key={grade} value={grade}>
+                  {[
+                    10, 9, 8, 7,
+                    6, 5, 4, 3,
+                    2, 1,
+                  ].map((grade) => (
+                    <option
+                      key={grade}
+                      value={grade}
+                    >
                       PSA {grade}
                     </option>
                   ))}
@@ -570,8 +902,16 @@ export default function PSAPage() {
 
                 <input
                   type="number"
+                  min="0"
+                  step="0.01"
                   value={newPrice}
-                  onChange={(e) => setNewPrice(Number(e.target.value))}
+                  onChange={(e) =>
+                    setNewPrice(
+                      Number(
+                        e.target.value
+                      )
+                    )
+                  }
                   placeholder="Valeur €"
                   className="bg-neutral-950 border border-zinc-800 rounded-xl px-3 py-3 text-xs"
                 />
@@ -580,11 +920,14 @@ export default function PSAPage() {
               <div className="flex justify-end gap-2 pt-3">
                 <button
                   type="button"
-                  onClick={() => setIsAddModalOpen(false)}
+                  onClick={() =>
+                    setIsAddModalOpen(false)
+                  }
                   className="px-4 py-2 text-xs text-zinc-400"
                 >
                   Annuler
                 </button>
+
                 <button
                   type="submit"
                   className="bg-cyan-500 text-black px-5 py-2 rounded-xl text-xs font-black uppercase"
@@ -600,9 +943,45 @@ export default function PSAPage() {
   );
 }
 
-/**
- * Carte statistique réutilisable
- */
+function PriceBox({
+  label,
+  price,
+  onClick,
+}: {
+  label: string;
+  price: number;
+  onClick?: () => void;
+}) {
+  const clickable = typeof onClick === "function";
+
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={!clickable}
+      className={`text-left rounded-xl p-3 border transition ${
+        clickable
+          ? "bg-neutral-950 border-zinc-800 hover:border-cyan-500 cursor-pointer"
+          : "bg-neutral-950 border-zinc-900 cursor-default"
+      }`}
+    >
+      <span className="block text-[9px] text-zinc-500 uppercase font-black">
+        {label}
+      </span>
+
+      <span className="block text-sm font-black mt-1">
+        {formatEUR(price)}
+      </span>
+
+      {clickable && (
+        <span className="block text-[8px] text-cyan-400 mt-1 uppercase font-black">
+          Ajouter
+        </span>
+      )}
+    </button>
+  );
+}
+
 function StatCard({
   title,
   value,
@@ -615,6 +994,7 @@ function StatCard({
       <span className="text-[10px] uppercase font-black text-zinc-500">
         {title}
       </span>
+
       <p className="text-xl font-black text-cyan-400 mt-1">
         {value}
       </p>
