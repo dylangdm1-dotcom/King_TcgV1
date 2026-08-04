@@ -1,4 +1,3 @@
-
 import { NextResponse } from "next/server";
 
 export const runtime = "nodejs";
@@ -35,186 +34,98 @@ interface PriceChartingCard {
   recentSales: RecentSale[];
 }
 
-const PRICECHARTING_BASE =
-  "https://www.pricecharting.com";
-
+const BASE = "https://www.pricecharting.com";
 const FALLBACK_USD_TO_EUR = 0.86;
 
-function decodeHtml(
-  value: string
-): string {
+function decodeHtml(value: string): string {
   return value
-    .replace(
-      /<script[\s\S]*?<\/script>/gi,
-      " "
+    .replace(/<script[\s\S]*?<\/script>/gi, " ")
+    .replace(/<style[\s\S]*?<\/style>/gi, " ")
+    .replace(/<br\s*\/?>/gi, " ")
+    .replace(/<\/p>/gi, " ")
+    .replace(/<\/div>/gi, " ")
+    .replace(/<\/td>/gi, " ")
+    .replace(/<\/th>/gi, " ")
+    .replace(/<[^>]*>/g, " ")
+    .replace(/&amp;/gi, "&")
+    .replace(/&quot;/gi, '"')
+    .replace(/&#39;/gi, "'")
+    .replace(/&nbsp;/gi, " ")
+    .replace(/&lt;/gi, "<")
+    .replace(/&gt;/gi, ">")
+    .replace(/&#(\d+);/g, (_, code) =>
+      String.fromCharCode(Number(code))
     )
-    .replace(
-      /<style[\s\S]*?<\/style>/gi,
-      " "
+    .replace(/&#x([0-9a-f]+);/gi, (_, code) =>
+      String.fromCharCode(parseInt(code, 16))
     )
-    .replace(
-      /<br\s*\/?>/gi,
-      " "
-    )
-    .replace(
-      /<\/p>/gi,
-      " "
-    )
-    .replace(
-      /<\/div>/gi,
-      " "
-    )
-    .replace(
-      /<\/td>/gi,
-      " "
-    )
-    .replace(
-      /<\/th>/gi,
-      " "
-    )
-    .replace(
-      /<[^>]*>/g,
-      " "
-    )
-    .replace(
-      /&amp;/gi,
-      "&"
-    )
-    .replace(
-      /&quot;/gi,
-      '"'
-    )
-    .replace(
-      /&#39;/gi,
-      "'"
-    )
-    .replace(
-      /&nbsp;/gi,
-      " "
-    )
-    .replace(
-      /&lt;/gi,
-      "<"
-    )
-    .replace(
-      /&gt;/gi,
-      ">"
-    )
-    .replace(
-      /&#(\d+);/g,
-      (_, code) =>
-        String.fromCharCode(
-          Number(code)
-        )
-    )
-    .replace(
-      /&#x([0-9a-f]+);/gi,
-      (_, code) =>
-        String.fromCharCode(
-          parseInt(code, 16)
-        )
-    )
-    .replace(
-      /\s+/g,
-      " "
-    )
+    .replace(/\s+/g, " ")
     .trim();
 }
 
-function absoluteUrl(
-  url: string
-): string {
+function absoluteUrl(url: string): string {
   if (!url) return "";
 
-  if (
-    /^https?:\/\//i.test(url)
-  ) {
+  if (/^https?:\/\//i.test(url)) {
     return url;
   }
 
-  if (
-    url.startsWith("//")
-  ) {
+  if (url.startsWith("//")) {
     return `https:${url}`;
   }
 
-  if (
-    url.startsWith("/")
-  ) {
-    return `${PRICECHARTING_BASE}${url}`;
+  if (url.startsWith("/")) {
+    return `${BASE}${url}`;
   }
 
-  return `${PRICECHARTING_BASE}/${url}`;
+  return `${BASE}/${url}`;
 }
 
-function parseNumber(
-  value?: string
-): number {
+function parseNumber(value?: string): number {
   if (!value) return 0;
 
-  const normalized =
-    value
-      .replace(/\s/g, "")
-      .replace(/,/g, "");
+  const normalized = value
+    .replace(/\s/g, "")
+    .replace(/,/g, "");
 
-  const number =
-    Number(normalized);
+  const parsed = Number(normalized);
 
-  return Number.isFinite(number)
-    ? number
-    : 0;
+  return Number.isFinite(parsed) ? parsed : 0;
 }
 
-/**
- * Récupération du taux USD -> EUR.
- *
- * On tente un taux public.
- * Si le service est indisponible,
- * on utilise un fallback.
- */
 async function getUsdToEurRate(): Promise<number> {
   try {
-    const controller =
-      new AbortController();
+    const controller = new AbortController();
 
-    const timeout =
-      setTimeout(
-        () => controller.abort(),
-        5000
-      );
+    const timeout = setTimeout(
+      () => controller.abort(),
+      5000
+    );
 
     try {
-      const response =
-        await fetch(
-          "https://api.frankfurter.app/latest?from=USD&to=EUR",
-          {
-            cache: "no-store",
-            signal:
-              controller.signal,
-          }
-        );
+      const response = await fetch(
+        "https://api.frankfurter.app/latest?from=USD&to=EUR",
+        {
+          cache: "no-store",
+          signal: controller.signal,
+        }
+      );
 
       if (!response.ok) {
         return FALLBACK_USD_TO_EUR;
       }
 
-      const data =
-        await response.json();
+      const data = await response.json();
+      const rate = Number(data?.rates?.EUR);
 
-      const rate =
-        Number(data?.rates?.EUR);
-
-      if (
-        Number.isFinite(rate) &&
-        rate > 0
-      ) {
+      if (Number.isFinite(rate) && rate > 0) {
         return rate;
       }
     } finally {
       clearTimeout(timeout);
     }
   } catch {
-    // Fallback volontaire.
+    // Fallback.
   }
 
   return FALLBACK_USD_TO_EUR;
@@ -236,25 +147,20 @@ function extractPrice(
   labels: string[]
 ): number {
   for (const label of labels) {
-    const escaped =
-      label.replace(
-        /[.*+?^${}()|[\]\\]/g,
-        "\\$&"
-      );
+    const escaped = label.replace(
+      /[.*+?^${}()|[\]\\]/g,
+      "\\$&"
+    );
 
-    const regex =
-      new RegExp(
-        `${escaped}\\s*\\|?\\s*\\$\\s*([0-9,.]+)`,
-        "i"
-      );
+    const regex = new RegExp(
+      `${escaped}\\s*(?:\\||:)??\\s*\\$\\s*([0-9,.]+)`,
+      "i"
+    );
 
-    const match =
-      text.match(regex);
+    const match = text.match(regex);
 
     if (match?.[1]) {
-      return parseNumber(
-        match[1]
-      );
+      return parseNumber(match[1]);
     }
   }
 
@@ -265,156 +171,83 @@ function extractPrices(
   html: string,
   rate: number
 ): PriceChartingPrices {
-  const text =
-    decodeHtml(html);
+  const text = decodeHtml(html);
 
   return {
-    ungraded:
-      usdToEur(
-        extractPrice(
-          text,
-          [
-            "Non Classé",
-            "Ungraded",
-          ]
-        ),
-        rate
-      ),
+    ungraded: usdToEur(
+      extractPrice(text, [
+        "Non Classé",
+        "Non classe",
+        "Ungraded",
+      ]),
+      rate
+    ),
 
-    psa7:
-      usdToEur(
-        extractPrice(
-          text,
-          ["Grade 7"]
-        ),
-        rate
-      ),
+    psa7: usdToEur(
+      extractPrice(text, [
+        "PSA 7",
+        "Grade 7",
+      ]),
+      rate
+    ),
 
-    psa8:
-      usdToEur(
-        extractPrice(
-          text,
-          ["Grade 8"]
-        ),
-        rate
-      ),
+    psa8: usdToEur(
+      extractPrice(text, [
+        "PSA 8",
+        "Grade 8",
+      ]),
+      rate
+    ),
 
-    psa9:
-      usdToEur(
-        extractPrice(
-          text,
-          ["Grade 9"]
-        ),
-        rate
-      ),
+    psa9: usdToEur(
+      extractPrice(text, [
+        "PSA 9",
+        "Grade 9",
+      ]),
+      rate
+    ),
 
-    psa9_5:
-      usdToEur(
-        extractPrice(
-          text,
-          [
-            "Grade 9.5",
-            "Grade 9,5",
-          ]
-        ),
-        rate
-      ),
+    psa9_5: usdToEur(
+      extractPrice(text, [
+        "PSA 9.5",
+        "PSA 9,5",
+        "Grade 9.5",
+        "Grade 9,5",
+      ]),
+      rate
+    ),
 
-    psa10:
-      usdToEur(
-        extractPrice(
-          text,
-          ["PSA 10"]
-        ),
-        rate
-      ),
+    psa10: usdToEur(
+      extractPrice(text, [
+        "PSA 10",
+        "Grade 10",
+      ]),
+      rate
+    ),
   };
 }
 
-/**
- * Extraction robuste de l'image principale.
- */
-function extractImageUrl(
-  html: string
-): string {
+function extractImageUrl(html: string): string {
   const candidates: string[] = [];
 
-  const attributes = [
-    "src",
-    "data-src",
-    "data-original",
-    "data-lazy-src",
-  ];
+  const imageRegex =
+    /<(?:img|source)\b[^>]*(?:src|data-src|data-original|data-lazy-src)=["']([^"']+)["'][^>]*>/gi;
 
-  for (const attribute of attributes) {
-    const regex =
-      new RegExp(
-        `<img\\b[^>]*\\b${attribute}=["']([^"']+)["'][^>]*>`,
-        "gi"
-      );
+  let match: RegExpExecArray | null;
 
-    let match: RegExpExecArray | null;
+  while ((match = imageRegex.exec(html)) !== null) {
+    const url = absoluteUrl(match[1]);
 
-    while (
-      (match =
-        regex.exec(html)) !== null
+    if (
+      url &&
+      !/logo|placeholder|avatar|icon|banner|adserver|sprite/i.test(
+        url
+      )
     ) {
-      const url =
-        absoluteUrl(
-          match[1]
-        );
-
-      if (
-        url &&
-        !/logo|placeholder|avatar|icon|banner|adserver|sprite/i.test(
-          url
-        )
-      ) {
-        candidates.push(url);
-      }
+      candidates.push(url);
     }
   }
 
-  /**
-   * srcset.
-   */
-  const srcsetRegex =
-    /\bsrcset=["']([^"']+)["']/gi;
-
-  let srcsetMatch: RegExpExecArray | null;
-
-  while (
-    (srcsetMatch =
-      srcsetRegex.exec(html)) !== null
-  ) {
-    const entries =
-      srcsetMatch[1]
-        .split(",")
-        .map(
-          (item) =>
-            item
-              .trim()
-              .split(/\s+/)[0]
-        );
-
-    for (const entry of entries) {
-      const url =
-        absoluteUrl(entry);
-
-      if (
-        url &&
-        !/logo|placeholder|avatar|icon|banner|adserver|sprite/i.test(
-          url
-        )
-      ) {
-        candidates.push(url);
-      }
-    }
-  }
-
-  /**
-   * og:image.
-   */
   const ogImage =
     html.match(
       /<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["']/i
@@ -429,30 +262,21 @@ function extractImageUrl(
     );
   }
 
-  /**
-   * Images Google Storage utilisées
-   * par PriceCharting.
-   */
-  const storageImage =
-    candidates.find(
-      (url) =>
-        /storage\.googleapis\.com/i.test(
-          url
-        )
-    );
-
-  if (storageImage) {
-    return storageImage;
-  }
+  const storageImage = candidates.find(
+    (url) =>
+      /storage\.googleapis\.com|googleusercontent\.com/i.test(
+        url
+      )
+  );
 
   return (
-    candidates[0] ?? ""
+    storageImage ??
+    candidates[0] ??
+    ""
   );
 }
 
-function extractTitle(
-  html: string
-): string {
+function extractTitle(html: string): string {
   const title =
     html.match(
       /<meta[^>]+property=["']og:title["'][^>]+content=["']([^"']+)["']/i
@@ -464,46 +288,25 @@ function extractTitle(
       /<title[^>]*>([\s\S]*?)<\/title>/i
     )?.[1];
 
-  return title
-    ? decodeHtml(title)
-    : "";
+  return title ? decodeHtml(title) : "";
 }
 
-function extractCardInfo(
-  html: string
-): {
-  cardName: string;
-  setName: string;
-  cardNumber: string;
-} {
-  const text =
-    decodeHtml(html);
+function extractCardInfo(html: string) {
+  const text = decodeHtml(html);
 
-  let cardName =
-    extractTitle(html);
+  let cardName = extractTitle(html)
+    .replace(/\s*\|\s*Prix.*$/i, "")
+    .replace(/\s*\|\s*Prices.*$/i, "")
+    .trim();
 
-  cardName =
-    cardName
-      .replace(
-        /\s*\|\s*Prix.*$/i,
-        ""
-      )
-      .replace(
-        /\s*\|\s*Prices.*$/i,
-        ""
-      )
-      .trim();
-
-  const headingMatch =
-    html.match(
-      /<h1[^>]*>\s*([\s\S]*?)\s*<\/h1>/i
-    );
+  const headingMatch = html.match(
+    /<h1[^>]*>([\s\S]*?)<\/h1>/i
+  );
 
   if (headingMatch?.[1]) {
-    const heading =
-      decodeHtml(
-        headingMatch[1]
-      );
+    const heading = decodeHtml(
+      headingMatch[1]
+    );
 
     if (heading) {
       cardName = heading;
@@ -512,69 +315,56 @@ function extractCardInfo(
 
   let setName = "";
 
-  /**
-   * Exemple :
-   * Charizard VMAX #20
-   * Pokemon Darkness Ablaze
-   */
-  const detailsMatch =
-    text.match(
-      /(?:Pokemon|Pokémon)\s+([A-Za-z0-9&'’.\- ]+?)\s+(?:Details|Détails)/i
-    );
+  const detailsMatch = text.match(
+    /(?:Pokemon|Pokémon)\s+(.+?)\s+(?:Details|Détails)\b/i
+  );
 
   if (detailsMatch?.[1]) {
-    setName =
-      detailsMatch[1].trim();
+    setName = detailsMatch[1].trim();
   }
 
-  /**
-   * Fallback à partir du titre.
-   */
   if (!setName) {
-    const titleMatch =
-      cardName.match(
-        /#(?:\d+|[A-Z0-9]+)\s+(?:Pokemon|Pokémon)\s+(.+)$/i
-      );
+    const pokemonMatch = text.match(
+      /(?:Pokemon|Pokémon)\s+([A-Za-zÀ-ÿ0-9&'’.\- ]{2,80})/i
+    );
 
-    if (titleMatch?.[1]) {
-      setName =
-        titleMatch[1].trim();
+    if (pokemonMatch?.[1]) {
+      setName = pokemonMatch[1]
+        .replace(
+          /\b(?:Prices?|Prix|Details?|Détails)\b.*$/i,
+          ""
+        )
+        .trim();
     }
   }
 
   let cardNumber = "";
 
-  const numberMatch =
-    text.match(
-      /(?:Numéro de carte|Card Number)\s*[:|]?\s*#?(\d{1,4}(?:\/\d{1,4})?)/i
-    );
+  const numberMatch = text.match(
+    /(?:Card Number|Numéro de carte)\s*[:|]?\s*#?\s*(\d{1,4}(?:\/\d{1,4})?)/i
+  );
 
   if (numberMatch?.[1]) {
-    cardNumber =
-      numberMatch[1];
+    cardNumber = numberMatch[1];
   }
 
   if (!cardNumber) {
-    const genericNumber =
-      cardName.match(
-        /#(\d{1,4}(?:\/\d{1,4})?)/
-      );
+    const fromTitle = cardName.match(
+      /#(\d{1,4}(?:\/\d{1,4})?)/i
+    );
 
-    if (genericNumber?.[1]) {
-      cardNumber =
-        genericNumber[1];
+    if (fromTitle?.[1]) {
+      cardNumber = fromTitle[1];
     }
   }
 
   if (!cardNumber) {
-    const genericNumber =
-      text.match(
-        /\b(\d{1,4}\/\d{1,4})\b/
-      );
+    const generic = text.match(
+      /\b(\d{1,4}\/\d{1,4})\b/
+    );
 
-    if (genericNumber?.[1]) {
-      cardNumber =
-        genericNumber[1];
+    if (generic?.[1]) {
+      cardNumber = generic[1];
     }
   }
 
@@ -585,95 +375,29 @@ function extractCardInfo(
   };
 }
 
-/**
- * Détermine le grade à partir du bloc de vente.
- */
-function detectSaleGrade(
-  title: string
-): 7 | 8 | 9 | 10 | undefined {
-  if (
-    /\bPSA\s*10\b/i.test(
-      title
-    )
-  ) {
-    return 10;
-  }
-
-  if (
-    /\bPSA\s*9\b/i.test(
-      title
-    )
-  ) {
-    return 9;
-  }
-
-  if (
-    /\bPSA\s*8\b/i.test(
-      title
-    )
-  ) {
-    return 8;
-  }
-
-  if (
-    /\bPSA\s*7\b/i.test(
-      title
-    )
-  ) {
-    return 7;
-  }
-
-  return undefined;
-}
-
-/**
- * Extrait les 3 ventes les plus récentes.
- *
- * Important :
- * elles sont uniquement retournées à l'interface.
- * Aucun historique n'est enregistré.
- */
 function extractRecentSales(
   html: string,
   rate: number
 ): RecentSale[] {
   const sales: RecentSale[] = [];
 
-  const rowRegex =
-    /<tr\b[^>]*>[\s\S]*?<\/tr>/gi;
-
   const rows =
-    html.match(rowRegex) ?? [];
+    html.match(
+      /<tr\b[^>]*>[\s\S]*?<\/tr>/gi
+    ) ?? [];
 
   for (const row of rows) {
-    if (
-      !/20\d{2}-\d{2}-\d{2}/.test(
-        row
-      ) ||
-      !/\$[0-9,.]+/.test(
-        row
-      )
-    ) {
-      continue;
-    }
+    const decoded = decodeHtml(row);
 
-    const decoded =
-      decodeHtml(row);
+    const dateMatch = decoded.match(
+      /\b(20\d{2}-\d{2}-\d{2})\b/
+    );
 
-    const dateMatch =
-      decoded.match(
-        /\b(20\d{2}-\d{2}-\d{2})\b/
-      );
+    const priceMatch = decoded.match(
+      /\$([0-9,.]+)/
+    );
 
-    const priceMatch =
-      decoded.match(
-        /\$([0-9,.]+)/
-      );
-
-    if (
-      !dateMatch ||
-      !priceMatch
-    ) {
+    if (!dateMatch || !priceMatch) {
       continue;
     }
 
@@ -684,96 +408,60 @@ function extractRecentSales(
 
     let title = "";
 
-    if (cells.length >= 3) {
-      /**
-       * PriceCharting place le titre
-       * dans une cellule avant la cellule prix.
-       */
-      for (
-        let i = 0;
-        i < cells.length;
-        i++
-      ) {
-        const cell =
-          decodeHtml(
-            cells[i]
-          );
+    for (const cell of cells) {
+      const cellText = decodeHtml(cell);
 
+      if (
+        cellText.length > 10 &&
+        !/^\$[\d,.]+$/.test(cellText) &&
+        !/^\d{4}-\d{2}-\d{2}$/.test(cellText)
+      ) {
         if (
-          cell &&
-          !/^\d{4}-\d{2}-\d{2}$/.test(
-            cell
-          ) &&
-          !/^\$[\d,.]+$/.test(
-            cell
-          ) &&
-          cell.length > 8
+          /pokemon|pokémon|psa|charizard|pikachu|umbreon|card|tcg/i.test(
+            cellText
+          )
         ) {
-          if (
-            /eBay|TCGPlayer|Pokemon|Pokémon|PSA/i.test(
-              cell
-            )
-          ) {
-            title = cell;
-          }
+          title = cellText;
+          break;
         }
       }
     }
 
     if (!title) {
-      title =
-        decoded
-          .replace(
-            dateMatch[1],
-            ""
-          )
-          .replace(
-            priceMatch[0],
-            ""
-          )
-          .replace(
-            /\[eBay\]|\[TCGPlayer\]/gi,
-            ""
-          )
-          .replace(
-            /\bReport It\b/gi,
-            ""
-          )
-          .trim();
+      title = decoded
+        .replace(dateMatch[1], "")
+        .replace(priceMatch[0], "")
+        .replace(
+          /\[eBay\]|\[TCGPlayer\]/gi,
+          ""
+        )
+        .replace(/\bReport It\b/gi, "")
+        .trim();
     }
 
-    const source =
-      /\[TCGPlayer\]/i.test(
-        decoded
-      )
-        ? "TCGPlayer"
-        : "eBay";
+    const priceUsd = parseNumber(
+      priceMatch[1]
+    );
 
-    const priceUsd =
-      parseNumber(
-        priceMatch[1]
-      );
-
-    if (
-      !priceUsd ||
-      !title
-    ) {
+    if (!title || !priceUsd) {
       continue;
     }
 
-    const duplicate =
-      sales.some(
-        (sale) =>
-          sale.date ===
-            dateMatch[1] &&
-          sale.title ===
-            title &&
-          sale.price ===
-            usdToEur(
-              priceUsd,
-              rate
-            )
-      );
+    const source =
+      /\[TCGPlayer\]/i.test(decoded)
+        ? "TCGPlayer"
+        : "eBay";
+
+    const price = usdToEur(
+      priceUsd,
+      rate
+    );
+
+    const duplicate = sales.some(
+      (sale) =>
+        sale.date === dateMatch[1] &&
+        sale.title === title
+    );
 
     if (duplicate) {
       continue;
@@ -782,18 +470,12 @@ function extractRecentSales(
     sales.push({
       date: dateMatch[1],
       title,
-      price:
-        usdToEur(
-          priceUsd,
-          rate
-        ),
+      price,
       currency: "EUR",
       source,
     });
 
-    if (
-      sales.length >= 3
-    ) {
+    if (sales.length >= 3) {
       break;
     }
   }
@@ -801,178 +483,263 @@ function extractRecentSales(
   return sales;
 }
 
-function createId(
-  url: string
-): string {
+function createId(url: string): string {
   return url
-    .replace(
-      /^https?:\/\//i,
-      ""
-    )
-    .replace(
-      /[^a-zA-Z0-9]+/g,
-      "-"
-    )
-    .replace(
-      /^-+|-+$/g,
-      ""
-    )
+    .replace(/^https?:\/\//i, "")
+    .replace(/[^a-zA-Z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
     .toLowerCase();
 }
 
-/**
- * Recherche PriceCharting.
- *
- * On utilise volontairement la page FR.
- * PriceCharting retourne plusieurs fiches.
- */
-async function searchPriceCharting(
-  query: string
+interface SearchProduct {
+  url: string;
+  title: string;
+  setName: string;
+  cardNumber: string;
+}
+
+function addSearchResult(
+  results: SearchProduct[],
+  url: string,
+  title: string
 ) {
-  const searchUrl =
-    `${PRICECHARTING_BASE}/fr/search-products?` +
-    `q=${encodeURIComponent(
-      query
-    )}&type=prices`;
-
-  const response =
-    await fetch(
-      searchUrl,
-      {
-        method: "GET",
-
-        headers: {
-          Accept:
-            "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-
-          "Accept-Language":
-            "fr-FR,fr;q=0.9,en;q=0.8",
-
-          "User-Agent":
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/150.0 Safari/537.36",
-
-          "Cache-Control":
-            "no-cache",
-
-          Pragma:
-            "no-cache",
-        },
-
-        cache: "no-store",
-      }
-    );
-
-  if (!response.ok) {
-    throw new Error(
-      `Recherche PriceCharting HTTP ${response.status}`
-    );
-  }
-
-  const html =
-    await response.text();
+  const cleanUrl = absoluteUrl(url);
+  const cleanTitle = decodeHtml(title);
 
   if (
-    !html ||
-    html.length < 1000
+    !cleanUrl ||
+    !/\/game\//i.test(cleanUrl) ||
+    !cleanTitle
   ) {
-    throw new Error(
-      "Réponse de recherche PriceCharting invalide."
-    );
+    return;
   }
 
-  const results: {
-    url: string;
-    title: string;
-    setName: string;
-    cardNumber: string;
-  }[] = [];
-
-  /**
-   * PriceCharting peut retourner les liens
-   * sous /fr/game/ ou /game/.
-   */
-  const linkRegex =
-    /<a\b[^>]*href=["']((?:\/fr)?\/game\/[^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi;
-
-  let match: RegExpExecArray | null;
-
-  while (
-    (match =
-      linkRegex.exec(
-        html
-      )) !== null
+  if (
+    /collection|wishlist|ajouter|add to/i.test(
+      cleanTitle
+    )
   ) {
-    const url =
-      absoluteUrl(
-        match[1]
+    return;
+  }
+
+  if (
+    results.some(
+      (item) => item.url === cleanUrl
+    )
+  ) {
+    return;
+  }
+
+  const cardNumber =
+    cleanTitle.match(
+      /#(\d{1,4}(?:\/\d{1,4})?)/i
+    )?.[1] ?? "";
+
+  const pokemonMatch =
+    cleanTitle.match(
+      /(?:Pokemon|Pokémon)\s+(.+)$/i
+    );
+
+  const setName =
+    pokemonMatch?.[1]?.trim() ?? "";
+
+  results.push({
+    url: cleanUrl,
+    title: cleanTitle,
+    setName,
+    cardNumber,
+  });
+}
+
+async function searchPriceCharting(
+  query: string
+): Promise<SearchProduct[]> {
+  const urls = [
+    `${BASE}/fr/search-products?q=${encodeURIComponent(
+      query
+    )}&type=prices`,
+    `${BASE}/search-products?q=${encodeURIComponent(
+      query
+    )}&type=prices`,
+  ];
+
+  const results: SearchProduct[] = [];
+
+  for (const searchUrl of urls) {
+    try {
+      const response = await fetch(
+        searchUrl,
+        {
+          method: "GET",
+          headers: {
+            Accept:
+              "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+            "Accept-Language":
+              "fr-FR,fr;q=0.9,en;q=0.8",
+            "User-Agent":
+              "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/150.0 Safari/537.36",
+            "Cache-Control":
+              "no-cache",
+            Pragma: "no-cache",
+          },
+          cache: "no-store",
+        }
       );
 
-    const title =
-      decodeHtml(
-        match[2]
-      );
+      if (!response.ok) {
+        continue;
+      }
 
-    if (
-      !title ||
-      !/\/game\//i.test(
-        url
-      )
-    ) {
-      continue;
+      const html =
+        await response.text();
+
+      if (!html) {
+        continue;
+      }
+
+      /*
+       * Méthode 1 :
+       * liens classiques <a href="/game/...">
+       */
+      const linkRegex =
+        /<a\b[^>]*href=["']([^"']*\/game\/[^"']*)["'][^>]*>([\s\S]*?)<\/a>/gi;
+
+      let match: RegExpExecArray | null;
+
+      while (
+        (match =
+          linkRegex.exec(html)) !== null
+      ) {
+        addSearchResult(
+          results,
+          match[1],
+          match[2]
+        );
+
+        if (results.length >= 30) {
+          break;
+        }
+      }
+
+      /*
+       * Méthode 2 :
+       * si PriceCharting utilise un attribut data
+       * ou une structure différente.
+       */
+      const rawUrlRegex =
+        /(?:href|data-href|data-url)=["']([^"']*\/game\/[^"']+)["']/gi;
+
+      while (
+        (match =
+          rawUrlRegex.exec(html)) !== null
+      ) {
+        const surrounding =
+          html.slice(
+            Math.max(
+              0,
+              match.index - 500
+            ),
+            Math.min(
+              html.length,
+              match.index + 1000
+            )
+          );
+
+        const titleMatch =
+          surrounding.match(
+            /<(?:a|div|span|td)[^>]*>([^<]{3,150})<\/(?:a|div|span|td)>/i
+          );
+
+        addSearchResult(
+          results,
+          match[1],
+          titleMatch?.[1] ??
+            query
+        );
+
+        if (results.length >= 30) {
+          break;
+        }
+      }
+
+      if (results.length >= 30) {
+        break;
+      }
+    } catch {
+      // On tente l'URL suivante.
     }
+  }
+
+  /*
+   * Fallback direct :
+   * si la recherche ne donne aucun résultat,
+   * on tente une URL de fiche connue via le moteur
+   * interne PriceCharting en supprimant certains
+   * caractères problématiques.
+   */
+  if (results.length === 0) {
+    const simplifiedQuery = query
+      .replace(/[^\p{L}\p{N}\s#/-]/gu, " ")
+      .replace(/\s+/g, " ")
+      .trim();
 
     if (
-      /add to collection|ajouter|wishlist|collection/i.test(
-        title
-      )
+      simplifiedQuery &&
+      simplifiedQuery !== query
     ) {
-      continue;
-    }
+      const fallbackUrl =
+        `${BASE}/fr/search-products?q=${encodeURIComponent(
+          simplifiedQuery
+        )}&type=prices`;
 
-    if (
-      results.some(
-        (item) =>
-          item.url === url
-      )
-    ) {
-      continue;
-    }
+      try {
+        const response =
+          await fetch(
+            fallbackUrl,
+            {
+              headers: {
+                Accept:
+                  "text/html,application/xhtml+xml",
+                "Accept-Language":
+                  "fr-FR,fr;q=0.9,en;q=0.8",
+                "User-Agent":
+                  "Mozilla/5.0",
+              },
+              cache: "no-store",
+            }
+          );
 
-    const cardNumber =
-      title.match(
-        /#([A-Z0-9]+(?:\/[A-Z0-9]+)?)/i
-      )?.[1] ?? "";
+        if (response.ok) {
+          const html =
+            await response.text();
 
-    let setName = "";
+          const linkRegex =
+            /<a\b[^>]*href=["']([^"']*\/game\/[^"']*)["'][^>]*>([\s\S]*?)<\/a>/gi;
 
-    const pokemonMatch =
-      title.match(
-        /(?:Pokemon|Pokémon)\s+(.+)$/i
-      );
+          let match: RegExpExecArray | null;
 
-    if (
-      pokemonMatch?.[1]
-    ) {
-      setName =
-        pokemonMatch[1]
-          .trim();
-    }
+          while (
+            (match =
+              linkRegex.exec(
+                html
+              )) !== null
+          ) {
+            addSearchResult(
+              results,
+              match[1],
+              match[2]
+            );
 
-    results.push({
-      url,
-      title,
-      setName,
-      cardNumber,
-    });
-
-    /**
-     * On laisse suffisamment de résultats
-     * pour les recherches ambiguës.
-     */
-    if (
-      results.length >= 20
-    ) {
-      break;
+            if (
+              results.length >= 30
+            ) {
+              break;
+            }
+          }
+        }
+      } catch {
+        // Aucun résultat.
+      }
     }
   }
 
@@ -980,54 +747,37 @@ async function searchPriceCharting(
 }
 
 async function fetchProduct(
-  product: {
-    url: string;
-    title: string;
-    setName: string;
-    cardNumber: string;
-  },
+  product: SearchProduct,
   rate: number
 ): Promise<PriceChartingCard | null> {
   const controller =
     new AbortController();
 
-  const timeout =
-    setTimeout(
-      () =>
-        controller.abort(),
-      15000
-    );
+  const timeout = setTimeout(
+    () => controller.abort(),
+    15000
+  );
 
   try {
-    const response =
-      await fetch(
-        product.url,
-        {
-          method: "GET",
-
-          headers: {
-            Accept:
-              "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-
-            "Accept-Language":
-              "fr-FR,fr;q=0.9,en;q=0.8",
-
-            "User-Agent":
-              "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/150.0 Safari/537.36",
-
-            "Cache-Control":
-              "no-cache",
-
-            Pragma:
-              "no-cache",
-          },
-
-          cache: "no-store",
-
-          signal:
-            controller.signal,
-        }
-      );
+    const response = await fetch(
+      product.url,
+      {
+        method: "GET",
+        headers: {
+          Accept:
+            "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+          "Accept-Language":
+            "fr-FR,fr;q=0.9,en;q=0.8",
+          "User-Agent":
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/150.0 Safari/537.36",
+          "Cache-Control":
+            "no-cache",
+          Pragma: "no-cache",
+        },
+        cache: "no-store",
+        signal: controller.signal,
+      }
+    );
 
     if (!response.ok) {
       return null;
@@ -1036,10 +786,7 @@ async function fetchProduct(
     const html =
       await response.text();
 
-    if (
-      !html ||
-      html.length < 1000
-    ) {
+    if (!html) {
       return null;
     }
 
@@ -1050,14 +797,10 @@ async function fetchProduct(
       );
 
     const info =
-      extractCardInfo(
-        html
-      );
+      extractCardInfo(html);
 
     const imageUrl =
-      extractImageUrl(
-        html
-      );
+      extractImageUrl(html);
 
     const recentSales =
       extractRecentSales(
@@ -1065,29 +808,12 @@ async function fetchProduct(
         rate
       );
 
-    /**
-     * Une fiche sans aucun prix exploitable
-     * n'est pas intéressante pour le module PSA.
+    /*
+     * On garde la fiche même si l'extraction
+     * d'un prix particulier échoue.
      */
-    const hasPrice =
-      Object.values(
-        prices
-      ).some(
-        (value) =>
-          typeof value ===
-            "number" &&
-          value > 0
-      );
-
-    if (!hasPrice) {
-      return null;
-    }
-
     return {
-      id:
-        createId(
-          product.url
-        ),
+      id: createId(product.url),
 
       cardName:
         info.cardName ||
@@ -1108,26 +834,22 @@ async function fetchProduct(
       sourceUrl:
         product.url,
 
-      language:
-        "fr",
+      language: "fr",
 
       recentSales,
     };
+  } catch {
+    return null;
   } finally {
-    clearTimeout(
-      timeout
-    );
+    clearTimeout(timeout);
   }
 }
 
 export async function GET(
   request: Request
 ) {
-  const {
-    searchParams,
-  } = new URL(
-    request.url
-  );
+  const { searchParams } =
+    new URL(request.url);
 
   const query =
     searchParams
@@ -1138,21 +860,13 @@ export async function GET(
     return NextResponse.json(
       {
         success: false,
-        error:
-          "Recherche vide.",
+        error: "Recherche vide.",
       },
-      {
-        status: 400,
-      }
+      { status: 400 }
     );
   }
 
   try {
-    /**
-     * Taux de change utilisé pour
-     * toute la recherche afin que
-     * toutes les cartes soient cohérentes.
-     */
     const rate =
       await getUsdToEurRate();
 
@@ -1161,9 +875,12 @@ export async function GET(
         query
       );
 
+    console.log(
+      `[PSA] PriceCharting query="${query}" results=${searchResults.length}`
+    );
+
     if (
-      searchResults.length ===
-      0
+      searchResults.length === 0
     ) {
       return NextResponse.json({
         success: true,
@@ -1172,18 +889,19 @@ export async function GET(
         resultCount: 0,
         currency: "EUR",
         language: "fr",
+        usdToEur: rate,
       });
     }
 
-    /**
-     * On limite le nombre de fiches
-     * récupérées en parallèle pour
-     * éviter de surcharger PriceCharting.
+    /*
+     * On teste jusqu'à 15 fiches.
+     * Cela permet de gérer les recherches
+     * ambiguës comme Charizard / Dracaufeu.
      */
     const products =
       searchResults.slice(
         0,
-        12
+        15
       );
 
     const cards =
@@ -1205,25 +923,35 @@ export async function GET(
           card !== null
       );
 
+    /*
+     * Évite les doublons exacts.
+     */
+    const uniqueCards =
+      validCards.filter(
+        (card, index, array) =>
+          array.findIndex(
+            (item) =>
+              item.sourceUrl ===
+              card.sourceUrl
+          ) === index
+      );
+
     return NextResponse.json({
       success: true,
 
       query,
 
       results:
-        validCards,
+        uniqueCards,
 
       resultCount:
-        validCards.length,
+        uniqueCards.length,
 
-      currency:
-        "EUR",
+      currency: "EUR",
 
-      language:
-        "fr",
+      language: "fr",
 
-      usdToEur:
-        rate,
+      usdToEur: rate,
     });
   } catch (error) {
     console.error(
@@ -1234,17 +962,14 @@ export async function GET(
     return NextResponse.json(
       {
         success: false,
-
         query,
-
+        results: [],
         error:
           error instanceof Error
             ? error.message
             : "Erreur inconnue.",
       },
-      {
-        status: 502,
-      }
+      { status: 502 }
     );
   }
 }
