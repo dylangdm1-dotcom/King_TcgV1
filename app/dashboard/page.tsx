@@ -14,8 +14,8 @@ import {
   ChevronDown,
   ChevronUp,
 } from "lucide-react";
-import Navbar from "@/components/Navbar";
 
+import Navbar from "@/components/Navbar";
 import { getCollection } from "@/lib/storage";
 import { getCardById } from "@/lib/pokemon";
 import {
@@ -39,7 +39,7 @@ type DashboardCard = {
   };
   condition: CardCondition;
   qty: number;
-  purchasePrice: number;
+  buyPrice: number;
   currentPrice: number;
   priceTrend7d: number;
   priceTrend30d: number;
@@ -53,23 +53,27 @@ function formatEuro(value: number): string {
   });
 }
 
-function safeNumber(value: unknown): number {
-  const number = Number(value);
-
-  return Number.isFinite(number) && number > 0 ? number : 0;
-}
-
 function getQuantity(entry: CollectionEntry): number {
-  const quantity = safeNumber(entry.quantity);
+  const quantity = Number(entry.quantity);
 
-  return quantity > 0 ? quantity : 1;
+  if (!Number.isFinite(quantity) || quantity <= 0) {
+    return 1;
+  }
+
+  return quantity;
 }
 
-function getPurchasePrice(entry: CollectionEntry): number {
-  return safeNumber(entry.buyPrice);
+function getBuyPrice(entry: CollectionEntry): number {
+  const buyPrice = Number(entry.buyPrice);
+
+  if (!Number.isFinite(buyPrice) || buyPrice < 0) {
+    return 0;
+  }
+
+  return buyPrice;
 }
 
-function strategicScore(
+function getStrategicScore(
   card: PokemonCard,
   currentPrice: number
 ): number {
@@ -109,37 +113,62 @@ function strategicScore(
   );
 }
 
-function buildMarketPrice(card: PokemonCard): MarketPrices {
-  return getMarketData(card);
+/**
+ * Construit une estimation sur 7 jours à partir
+ * du prix actuel et de la vraie tendance 7j fournie
+ * par le Market Engine.
+ *
+ * Ce ne sont PAS des données historiques.
+ * Ce sont des points de projection.
+ */
+function buildSevenDayProjection(
+  currentPrice: number,
+  trend7d: number
+): number[] {
+  if (
+    currentPrice <= 0 ||
+    !Number.isFinite(currentPrice)
+  ) {
+    return [];
+  }
+
+  const weeklyMultiplier =
+    1 + trend7d / 100;
+
+  const safeMultiplier =
+    Number.isFinite(weeklyMultiplier) &&
+    weeklyMultiplier > 0
+      ? weeklyMultiplier
+      : 1;
+
+  return Array.from({ length: 7 }, (_, index) => {
+    const progress = index / 6;
+
+    const value =
+      currentPrice *
+      (1 + (safeMultiplier - 1) * progress);
+
+    return Number(value.toFixed(2));
+  });
 }
 
 export default function DashboardPage() {
   const [cards, setCards] = useState<DashboardCard[]>([]);
-  const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState<string | null>(null);
   const [expanded, setExpanded] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
 
   const fileRef = useRef<HTMLInputElement>(null);
 
-  /**
-   * Charge les données réelles de la collection.
-   *
-   * Source :
-   * getCollection()
-   *   -> getCardById()
-   *      -> getMarketData()
-   */
   const refresh = async () => {
     try {
       setLoading(true);
 
       const collection = getCollection();
-
       const ids = Object.keys(collection);
 
       if (!ids.length) {
         setCards([]);
-        setLoading(false);
         return;
       }
 
@@ -156,25 +185,30 @@ export default function DashboardPage() {
 
             if (!card) {
               console.warn(
-                `[King_TCG V5] Carte introuvable : ${id}`
+                `[King_TCG] Carte introuvable pour ${id}`
               );
-
               return null;
             }
 
+            const market: MarketPrices =
+              getMarketData(card);
+
             const qty = getQuantity(entry);
-            const purchasePrice = getPurchasePrice(entry);
 
-            const market = buildMarketPrice(card);
+            /*
+             * IMPORTANT :
+             * Le prix d'achat réel de la collection
+             * est entry.buyPrice.
+             */
+            const buyPrice = getBuyPrice(entry);
 
-            const currentPrice = safeNumber(
-              market.average
-            );
+            const currentPrice =
+              Number.isFinite(market.average) &&
+              market.average > 0
+                ? market.average
+                : 0;
 
-            const condition =
-              entry.condition || "Near Mint";
-
-            const score = strategicScore(
+            const score = getStrategicScore(
               card,
               currentPrice
             );
@@ -184,22 +218,28 @@ export default function DashboardPage() {
               name: card.name,
               number: card.number,
               rarity: card.rarity,
-              images: card.images,
-              condition,
+              images: {
+                small: card.images?.small || "",
+                large: card.images?.large || "",
+              },
+              condition:
+                entry.condition || "Near Mint",
               qty,
-              purchasePrice,
+              buyPrice,
               currentPrice,
-              priceTrend7d: safeNumber(
-                market.priceTrend7d
-              ),
-              priceTrend30d: safeNumber(
-                market.priceTrend30d
-              ),
+              priceTrend7d:
+                Number.isFinite(market.priceTrend7d)
+                  ? market.priceTrend7d
+                  : 0,
+              priceTrend30d:
+                Number.isFinite(market.priceTrend30d)
+                  ? market.priceTrend30d
+                  : 0,
               score,
             };
           } catch (error) {
             console.error(
-              `[King_TCG V5] Erreur chargement carte ${id}:`,
+              `[King_TCG] Dashboard card error ${id}:`,
               error
             );
 
@@ -216,7 +256,7 @@ export default function DashboardPage() {
       setCards(validCards);
     } catch (error) {
       console.error(
-        "[King_TCG V5] Dashboard refresh error:",
+        "[King_TCG] Dashboard refresh error:",
         error
       );
 
@@ -230,7 +270,7 @@ export default function DashboardPage() {
     refresh();
 
     const handler = () => {
-      refresh();
+      void refresh();
     };
 
     window.addEventListener(
@@ -256,60 +296,24 @@ export default function DashboardPage() {
     };
   }, []);
 
-  /**
-   * STATISTIQUES GLOBALES
-   */
   const stats = useMemo(() => {
     let investment = 0;
     let current = 0;
 
-    let weightedTrend7dValue = 0;
-    let weightedTrend30dValue = 0;
-
-    let totalMarketValue = 0;
-
     for (const card of cards) {
-      const quantity = card.qty;
+      investment +=
+        card.buyPrice * card.qty;
 
-      const purchaseTotal =
-        card.purchasePrice * quantity;
-
-      const currentTotal =
-        card.currentPrice * quantity;
-
-      investment += purchaseTotal;
-      current += currentTotal;
-
-      totalMarketValue += currentTotal;
-
-      weightedTrend7dValue +=
-        card.currentPrice *
-        quantity *
-        card.priceTrend7d;
-
-      weightedTrend30dValue +=
-        card.currentPrice *
-        quantity *
-        card.priceTrend30d;
+      current +=
+        card.currentPrice * card.qty;
     }
 
-    const profit = current - investment;
+    const profit =
+      current - investment;
 
     const performance =
       investment > 0
         ? (profit / investment) * 100
-        : 0;
-
-    const trend7d =
-      totalMarketValue > 0
-        ? weightedTrend7dValue /
-          totalMarketValue
-        : 0;
-
-    const trend30d =
-      totalMarketValue > 0
-        ? weightedTrend30dValue /
-          totalMarketValue
         : 0;
 
     return {
@@ -317,127 +321,85 @@ export default function DashboardPage() {
       current,
       profit,
       performance,
-      trend7d,
-      trend30d,
     };
   }, [cards]);
 
-  /**
-   * SCORE STRATEGIQUE
-   */
+  const scoredCards = useMemo(() => {
+    return [...cards].sort(
+      (a, b) => b.score - a.score
+    );
+  }, [cards]);
+
   const strategicScoreGlobal = useMemo(() => {
     if (!cards.length) {
       return 0;
     }
 
-    const totalWeight = cards.reduce(
-      (sum, card) => sum + card.qty,
-      0
-    );
-
-    if (!totalWeight) {
-      return 0;
-    }
-
-    const weightedScore = cards.reduce(
-      (sum, card) =>
-        sum + card.score * card.qty,
-      0
-    );
-
     return Number(
-      (weightedScore / totalWeight).toFixed(1)
+      (
+        cards.reduce(
+          (sum, card) =>
+            sum + card.score,
+          0
+        ) / cards.length
+      ).toFixed(1)
     );
   }, [cards]);
 
-  /**
-   * ACTIF PHARE
-   */
-  const featured = useMemo(() => {
-    if (!cards.length) {
-      return null;
-    }
+  const featured = scoredCards[0] || null;
 
-    return [...cards].sort(
-      (a, b) =>
-        b.currentPrice * b.qty -
-        a.currentPrice * a.qty
-    )[0];
-  }, [cards]);
-
-  /**
-   * TOP PERFORMANCES
-   */
   const topPerformances = useMemo(() => {
     return [...cards]
-      .map((card) => {
-        const gain =
-          card.purchasePrice > 0
-            ? ((card.currentPrice -
-                card.purchasePrice) /
-                card.purchasePrice) *
+      .sort((a, b) => {
+        const gainA =
+          a.buyPrice > 0
+            ? ((a.currentPrice -
+                a.buyPrice) /
+                a.buyPrice) *
               100
             : 0;
 
-        return {
-          ...card,
-          gain,
-        };
+        const gainB =
+          b.buyPrice > 0
+            ? ((b.currentPrice -
+                b.buyPrice) /
+                b.buyPrice) *
+              100
+            : 0;
+
+        return gainB - gainA;
       })
-      .filter(
-        (card) =>
-          card.purchasePrice > 0 &&
-          card.currentPrice > 0
-      )
-      .sort((a, b) => b.gain - a.gain)
       .slice(0, 3);
   }, [cards]);
 
-  /**
-   * COURBE 7 JOURS
-   *
-   * Nous n'inventons pas un historique.
-   * Les données disponibles dans le moteur sont :
-   * - prix actuel
-   * - moyenne 7 jours
-   *
-   * On affiche donc une référence 7j -> actuel.
-   */
-  const chartData = useMemo(() => {
-    if (!cards.length || stats.current <= 0) {
-      return [];
+  const averageTrend7d = useMemo(() => {
+    if (!cards.length) {
+      return 0;
     }
 
-    const trend = stats.trend7d;
-
-    const sevenDaysAgo =
-      trend !== -100
-        ? stats.current / (1 + trend / 100)
-        : stats.current;
-
-    const values = [
-      sevenDaysAgo,
-      sevenDaysAgo +
-        (stats.current - sevenDaysAgo) * 0.2,
-      sevenDaysAgo +
-        (stats.current - sevenDaysAgo) * 0.35,
-      sevenDaysAgo +
-        (stats.current - sevenDaysAgo) * 0.5,
-      sevenDaysAgo +
-        (stats.current - sevenDaysAgo) * 0.7,
-      sevenDaysAgo +
-        (stats.current - sevenDaysAgo) * 0.85,
-      stats.current,
-    ];
-
-    return values.map((value) =>
-      Number(Math.max(0, value).toFixed(2))
+    const cardsWithTrend = cards.filter(
+      (card) =>
+        Number.isFinite(
+          card.priceTrend7d
+        )
     );
-  }, [cards, stats.current, stats.trend7d]);
 
-  /**
-   * EXPORT
-   */
+    if (!cardsWithTrend.length) {
+      return 0;
+    }
+
+    return Number(
+      (
+        cardsWithTrend.reduce(
+          (sum, card) =>
+            sum + card.priceTrend7d,
+          0
+        ) /
+        cardsWithTrend.length
+      ).toFixed(1)
+    );
+  }, [cards]);
+
   const exportData = () => {
     try {
       const data = JSON.stringify(
@@ -451,9 +413,12 @@ export default function DashboardPage() {
         2
       );
 
-      const blob = new Blob([data], {
-        type: "application/json",
-      });
+      const blob = new Blob(
+        [data],
+        {
+          type: "application/json",
+        }
+      );
 
       const url =
         URL.createObjectURL(blob);
@@ -464,11 +429,9 @@ export default function DashboardPage() {
       link.href = url;
 
       link.download =
-        `king_tcg_v5_dashboard_${
-          new Date()
-            .toISOString()
-            .slice(0, 10)
-        }.json`;
+        `king_tcg_v5_dashboard_${new Date()
+          .toISOString()
+          .slice(0, 10)}.json`;
 
       link.click();
 
@@ -488,49 +451,56 @@ export default function DashboardPage() {
       setMessage(
         "Erreur lors de l'export."
       );
-
-      setTimeout(
-        () => setMessage(null),
-        4000
-      );
     }
   };
 
-  /**
-   * IMPORT
-   *
-   * L'import conserve le fonctionnement
-   * existant mais ne modifie pas la source
-   * principale de la collection.
-   */
   const importData = (file: File) => {
-    const reader = new FileReader();
+    const reader =
+      new FileReader();
 
     reader.onload = () => {
       try {
-        const raw = reader.result;
+        const raw =
+          reader.result;
 
-        if (typeof raw !== "string") {
+        if (
+          typeof raw !==
+          "string"
+        ) {
           throw new Error(
             "Fichier invalide"
           );
         }
 
-        const parsed = JSON.parse(raw);
+        const parsed =
+          JSON.parse(raw);
 
         if (
           !parsed ||
-          typeof parsed !== "object"
+          typeof parsed !==
+            "object"
         ) {
           throw new Error(
             "Format invalide"
           );
         }
 
-        if (Array.isArray(parsed.cards)) {
+        /*
+         * L'import reste volontairement
+         * séparé de la collection réelle.
+         * Il ne doit pas écraser les données
+         * de la collection.
+         */
+        if (
+          Array.isArray(
+            parsed.cards
+          )
+        ) {
           localStorage.setItem(
             "king_tcg_dashboard_import",
-            JSON.stringify(parsed.cards)
+            JSON.stringify(
+              parsed.cards
+            )
           );
         }
 
@@ -538,7 +508,7 @@ export default function DashboardPage() {
           "Sauvegarde importée."
         );
 
-        refresh();
+        void refresh();
 
         setTimeout(
           () => setMessage(null),
@@ -570,11 +540,7 @@ export default function DashboardPage() {
 
           {/* HEADER */}
           <div className="flex items-center justify-between">
-            <div>
-              <span className="text-[9px] font-black uppercase tracking-widest text-cyan-400">
-                King_TCG V5
-              </span>
-            </div>
+            <div />
 
             <div className="flex items-center gap-2">
               <button
@@ -608,7 +574,8 @@ export default function DashboardPage() {
                     importData(file);
                   }
 
-                  event.currentTarget.value = "";
+                  event.currentTarget.value =
+                    "";
                 }}
               />
             </div>
@@ -629,13 +596,10 @@ export default function DashboardPage() {
               </div>
 
               <span className="text-[10px] text-zinc-500 font-bold uppercase tracking-wider">
-                {loading
-                  ? "Actualisation..."
-                  : `${cards.length} ${
-                      cards.length > 1
-                        ? "cartes"
-                        : "carte"
-                    }`}
+                {cards.length}{" "}
+                {cards.length > 1
+                  ? "actifs"
+                  : "actif"}
               </span>
             </div>
 
@@ -659,8 +623,7 @@ export default function DashboardPage() {
                 <span className="font-black text-white text-sm tabular-nums mt-0.5 block">
                   {formatEuro(
                     stats.investment
-                  )}{" "}
-                  €
+                  )} €
                 </span>
               </div>
 
@@ -681,8 +644,7 @@ export default function DashboardPage() {
                     : ""}
                   {formatEuro(
                     stats.profit
-                  )}{" "}
-                  €
+                  )} €
                 </span>
               </div>
             </div>
@@ -702,8 +664,7 @@ export default function DashboardPage() {
               <div className="text-lg font-black text-white tabular-nums mt-2">
                 {formatEuro(
                   stats.current
-                )}{" "}
-                €
+                )} €
               </div>
             </div>
 
@@ -728,8 +689,7 @@ export default function DashboardPage() {
                   : ""}
                 {stats.performance.toFixed(
                   2
-                )}{" "}
-                %
+                )} %
               </div>
             </div>
 
@@ -746,7 +706,6 @@ export default function DashboardPage() {
                 {strategicScoreGlobal.toFixed(
                   1
                 )}
-
                 <span className="text-[10px] text-zinc-500 font-bold uppercase">
                   {" "}
                   / 10
@@ -777,119 +736,153 @@ export default function DashboardPage() {
           <div className="space-y-4 pt-2">
             <h2 className="text-[10px] font-black uppercase tracking-widest text-zinc-500 px-1 flex items-center gap-1.5">
               <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-              Fluctuations & Analyses de Marché
+              Fluctuations & Analyses de Marché V5
             </h2>
 
-            {/* COURBE */}
+            {/* COURBE 7 JOURS */}
             <section className="rounded-xl border border-zinc-900 bg-neutral-950/40 p-5 sm:p-6">
               <div className="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                 <div>
                   <p className="text-[10px] font-black uppercase tracking-wider text-zinc-500">
-                    Évolution du portefeuille — 7 jours
+                    Estimation du prix sur 7 jours
                   </p>
 
                   <h2 className="mt-1 text-2xl sm:text-3xl font-black tracking-tight text-white tabular-nums">
                     {formatEuro(
                       stats.current
-                    )}{" "}
-                    €
+                    )} €
                   </h2>
 
                   <p className="mt-0.5 text-xs font-bold flex items-center gap-1">
                     <span
                       className={
-                        stats.trend7d >= 0
+                        averageTrend7d >= 0
                           ? "text-emerald-400"
                           : "text-rose-400"
                       }
                     >
-                      {stats.trend7d >= 0
+                      {averageTrend7d >= 0
                         ? "+"
                         : ""}
-                      {stats.trend7d.toFixed(
+                      {averageTrend7d.toFixed(
                         1
-                      )}{" "}
-                      %
+                      )} %
                     </span>
 
                     <span className="text-[10px] font-medium text-zinc-600 uppercase tracking-wide">
-                      (Glissement 7j)
+                      (Tendance réelle 7j)
                     </span>
                   </p>
                 </div>
 
                 <div className="self-start sm:self-center rounded border border-zinc-800 bg-neutral-950 px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-zinc-400">
-                  Tendance réelle
+                  Projection V5
                 </div>
               </div>
 
-              <div className="w-full overflow-hidden rounded-lg bg-neutral-950/60 p-5 border border-zinc-900/50">
-                {chartData.length > 0 ? (
-                  <div className="h-48 flex items-end gap-2">
-                    {chartData.map(
-                      (value, index) => {
-                        const min =
-                          Math.min(
-                            ...chartData
-                          );
+              {cards.length > 0 &&
+              stats.current > 0 ? (
+                <div className="w-full overflow-hidden rounded-lg bg-neutral-950/60 p-5 border border-zinc-900/50">
+                  {(() => {
+                    const projection =
+                      buildSevenDayProjection(
+                        stats.current,
+                        averageTrend7d
+                      );
 
-                        const max =
-                          Math.max(
-                            ...chartData
-                          );
+                    if (
+                      !projection.length
+                    ) {
+                      return (
+                        <div className="h-48 flex items-center justify-center text-[11px] text-zinc-600 font-bold">
+                          Données de marché insuffisantes.
+                        </div>
+                      );
+                    }
 
-                        const range =
-                          max - min;
+                    const min =
+                      Math.min(
+                        ...projection
+                      );
 
-                        const height =
-                          range > 0
-                            ? 15 +
-                              ((value - min) /
-                                range) *
-                                75
-                            : 55;
+                    const max =
+                      Math.max(
+                        ...projection
+                      );
 
-                        return (
-                          <div
-                            key={index}
-                            className="flex-1 flex flex-col justify-end gap-2"
-                          >
-                            <div
-                              className="rounded-t bg-cyan-500/60 w-full"
-                              style={{
-                                height: `${height}%`,
-                              }}
-                              title={`${formatEuro(
-                                value
-                              )} €`}
-                            />
+                    const range =
+                      max - min;
 
-                            <span className="text-[9px] text-zinc-600 text-center">
-                              {
-                                [
-                                  "J-6",
-                                  "J-5",
-                                  "J-4",
-                                  "J-3",
-                                  "J-2",
-                                  "J-1",
-                                  "Auj",
-                                ][index]
-                              }
-                            </span>
-                          </div>
-                        );
-                      }
-                    )}
-                  </div>
-                ) : (
-                  <div className="h-48 flex items-center justify-center">
-                    <p className="text-[11px] font-bold text-zinc-600 italic">
-                      Aucune donnée de marché disponible.
-                    </p>
-                  </div>
-                )}
-              </div>
+                    return (
+                      <div className="h-48 flex items-end gap-2">
+                        {projection.map(
+                          (
+                            value,
+                            index
+                          ) => {
+                            const height =
+                              range > 0
+                                ? 25 +
+                                  ((value -
+                                    min) /
+                                    range) *
+                                    65
+                                : 55;
+
+                            return (
+                              <div
+                                key={
+                                  index
+                                }
+                                className="flex-1 flex flex-col justify-end gap-2"
+                              >
+                                <div className="text-[8px] text-zinc-600 text-center truncate">
+                                  {formatEuro(
+                                    value
+                                  )} €
+                                </div>
+
+                                <div
+                                  className="rounded-t bg-cyan-500/60 w-full transition-all"
+                                  style={{
+                                    height: `${height}%`,
+                                  }}
+                                />
+
+                                <span className="text-[9px] text-zinc-600 text-center">
+                                  {
+                                    [
+                                      "Auj.",
+                                      "+1j",
+                                      "+2j",
+                                      "+3j",
+                                      "+4j",
+                                      "+5j",
+                                      "+6j",
+                                    ][
+                                      index
+                                    ]
+                                  }
+                                </span>
+                              </div>
+                            );
+                          }
+                        )}
+                      </div>
+                    );
+                  })()}
+
+                  <p className="mt-4 text-[9px] text-zinc-700 text-center uppercase tracking-wider">
+                    Projection calculée à partir de la tendance marché réelle 7j disponible.
+                  </p>
+                </div>
+              ) : (
+                <div className="h-48 flex items-center justify-center rounded-lg bg-neutral-950/60 border border-zinc-900/50">
+                  <p className="text-[11px] text-zinc-600 font-bold">
+                    Aucune donnée de marché disponible.
+                  </p>
+                </div>
+              )}
             </section>
 
             {/* TOP PERFORMANCES */}
@@ -898,60 +891,67 @@ export default function DashboardPage() {
                 <Trophy className="w-4 h-4 text-cyan-400" />
 
                 <h2 className="text-xs font-black uppercase tracking-widest text-zinc-400">
-                  Top Performances
+                  Top Performances V5
                 </h2>
               </div>
 
               <div className="space-y-2">
                 {topPerformances.length > 0 ? (
                   topPerformances.map(
-                    (card) => (
-                      <div
-                        key={card.id}
-                        className="flex items-center justify-between rounded-lg border border-zinc-900/60 bg-neutral-950/50 p-3"
-                      >
-                        <div className="min-w-0 flex-1 pr-3">
-                          <div className="font-bold text-white text-xs truncate">
-                            {card.name}
-                          </div>
+                    (card) => {
+                      const gain =
+                        card.buyPrice > 0
+                          ? ((card.currentPrice -
+                              card.buyPrice) /
+                              card.buyPrice) *
+                            100
+                          : 0;
 
-                          <div className="text-[10px] text-zinc-500 font-medium mt-0.5">
-                            Achat :{" "}
-                            {formatEuro(
-                              card.purchasePrice
-                            )}{" "}
-                            €{" "}
-                            · Cours :{" "}
-                            {formatEuro(
-                              card.currentPrice
-                            )}{" "}
-                            €
-                          </div>
-                        </div>
-
+                      return (
                         <div
-                          className={`font-black text-[10px] uppercase tracking-wider px-2 py-0.5 rounded ${
-                            card.gain >= 0
-                              ? "text-emerald-400 bg-emerald-500/5 border border-emerald-500/10"
-                              : "text-rose-400 bg-rose-500/5 border border-rose-500/10"
-                          }`}
+                          key={card.id}
+                          className="flex items-center justify-between rounded-lg border border-zinc-900/60 bg-neutral-950/50 p-3"
                         >
-                          {card.gain >= 0
-                            ? "+"
-                            : ""}
-                          {card.gain.toFixed(
-                            1
-                          )}{" "}
-                          %
+                          <div className="min-w-0 flex-1 pr-3">
+                            <div className="font-bold text-white text-xs truncate">
+                              {card.name ||
+                                card.id}
+                            </div>
+
+                            <div className="text-[10px] text-zinc-500 font-medium mt-0.5">
+                              Achat :{" "}
+                              {formatEuro(
+                                card.buyPrice
+                              )} €
+                              {" · "}
+                              Cours :{" "}
+                              {formatEuro(
+                                card.currentPrice
+                              )} €
+                            </div>
+                          </div>
+
+                          <div
+                            className={`font-black text-[10px] uppercase tracking-wider px-2 py-0.5 rounded ${
+                              gain >= 0
+                                ? "text-emerald-400 bg-emerald-500/5 border border-emerald-500/10"
+                                : "text-rose-400 bg-rose-500/5 border border-rose-500/10"
+                            }`}
+                          >
+                            {gain >= 0
+                              ? "+"
+                              : ""}
+                            {gain.toFixed(
+                              1
+                            )} %
+                          </div>
                         </div>
-                      </div>
-                    )
+                      );
+                    }
                   )
                 ) : (
                   <p className="text-zinc-600 font-bold text-[11px] py-1 italic">
-                    {cards.length
-                      ? "Aucun prix d'achat enregistré pour calculer les performances."
-                      : "Aucune fluctuation d'actif à signaler."}
+                    Aucune fluctuation d'actif à signaler.
                   </p>
                 )}
               </div>
@@ -963,7 +963,7 @@ export default function DashboardPage() {
                 <History className="w-4 h-4 text-zinc-400" />
 
                 <h2 className="text-xs font-black uppercase tracking-widest text-zinc-400">
-                  Historique d'acquisition
+                  Historique d'acquisition V5
                 </h2>
               </div>
 
@@ -973,11 +973,11 @@ export default function DashboardPage() {
                       cards.length > 1
                         ? "s"
                         : ""
-                    } actuellement suivie${
+                    } actuellement enregistrée${
                       cards.length > 1
                         ? "s"
                         : ""
-                    } dans le portefeuille.`
+                    } dans ta collection.`
                   : "Aucune entrée récente enregistrée."}
               </p>
             </section>
@@ -987,231 +987,266 @@ export default function DashboardPage() {
           <div className="space-y-4 pt-2">
             <h2 className="text-[10px] font-black uppercase tracking-widest text-zinc-500 px-1 flex items-center gap-1.5">
               <Package className="w-3.5 h-3.5 text-cyan-400" />
-              Inventaire des Actifs ({cards.length})
+              Inventaire des Actifs V5 ({cards.length})
             </h2>
 
             <div className="space-y-2.5">
-              {cards.map((card) => {
-                const isExpanded =
-                  expanded === card.id;
+              {scoredCards.map(
+                (card) => {
+                  const isExpanded =
+                    expanded ===
+                    card.id;
 
-                const totalCurrent =
-                  card.currentPrice *
-                  card.qty;
+                  const totalCurrent =
+                    card.currentPrice *
+                    card.qty;
 
-                const totalPurchase =
-                  card.purchasePrice *
-                  card.qty;
+                  const totalBuy =
+                    card.buyPrice *
+                    card.qty;
 
-                const profit =
-                  totalCurrent -
-                  totalPurchase;
+                  const profit =
+                    totalCurrent -
+                    totalBuy;
 
-                const gain =
-                  card.purchasePrice > 0
-                    ? ((card.currentPrice -
-                        card.purchasePrice) /
-                        card.purchasePrice) *
-                      100
-                    : 0;
-
-                return (
-                  <div
-                    key={card.id}
-                    className={`rounded-xl border border-zinc-900 bg-neutral-900/40 transition-all ${
-                      isExpanded
-                        ? "border-cyan-500/30 bg-neutral-900/80 p-4"
-                        : "p-3.5 hover:border-zinc-800"
-                    }`}
-                  >
-                    <button
-                      type="button"
-                      onClick={() =>
-                        setExpanded(
-                          isExpanded
-                            ? null
-                            : card.id
-                        )
-                      }
-                      className="w-full text-left cursor-pointer flex items-center justify-between gap-3"
+                  return (
+                    <div
+                      key={card.id}
+                      className={`rounded-xl border border-zinc-900 bg-neutral-900/40 transition-all ${
+                        isExpanded
+                          ? "border-cyan-500/30 bg-neutral-900/80 p-4"
+                          : "p-3.5 hover:border-zinc-800"
+                      }`}
                     >
-                      <div className="flex items-center gap-3 min-w-0">
-                        <div className="h-10 w-7 shrink-0 overflow-hidden rounded bg-black p-0.5 flex items-center justify-center border border-zinc-800">
-                          {card.images?.small ? (
-                            <img
-                              src={
-                                card.images
-                                  .small
-                              }
-                              alt={
-                                card.name
-                              }
-                              className="h-full object-contain"
-                            />
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setExpanded(
+                            isExpanded
+                              ? null
+                              : card.id
+                          )
+                        }
+                        className="w-full text-left cursor-pointer flex items-center justify-between gap-3"
+                      >
+                        <div className="flex items-center gap-3 min-w-0">
+                          <div className="h-10 w-7 shrink-0 overflow-hidden rounded bg-black p-0.5 flex items-center justify-center border border-zinc-800">
+                            {card.images
+                              ?.small ? (
+                              <img
+                                src={
+                                  card.images
+                                    .small
+                                }
+                                alt={
+                                  card.name ||
+                                  "Carte"
+                                }
+                                className="h-full object-contain"
+                              />
+                            ) : (
+                              <Package className="w-4 h-4 text-zinc-700" />
+                            )}
+                          </div>
+
+                          <div className="min-w-0">
+                            <h3 className="font-bold text-xs text-white truncate tracking-tight">
+                              {card.name ||
+                                card.id}
+                            </h3>
+
+                            <p className="text-[10px] text-zinc-400 font-medium mt-0.5 tabular-nums">
+                              Unit. :{" "}
+                              {formatEuro(
+                                card.currentPrice
+                              )} €
+                              {" · "}
+                              {card.condition}
+                            </p>
+                          </div>
+                        </div>
+
+                        <div className="flex items-center gap-2 text-zinc-400">
+                          <span className="text-[10px] font-black px-2 py-0.5 bg-black/60 border border-zinc-800 rounded text-cyan-400">
+                            x{card.qty}
+                          </span>
+
+                          {isExpanded ? (
+                            <ChevronUp className="w-4 h-4 text-cyan-400" />
                           ) : (
-                            <Package className="w-4 h-4 text-zinc-700" />
+                            <ChevronDown className="w-4 h-4 text-zinc-600" />
                           )}
                         </div>
+                      </button>
 
-                        <div className="min-w-0">
-                          <h3 className="font-bold text-xs text-white truncate tracking-tight">
-                            {card.name}
-                          </h3>
+                      {isExpanded && (
+                        <div className="mt-3.5 pt-3.5 border-t border-zinc-800/80">
+                          <div className="grid grid-cols-3 gap-2 text-[10px]">
+                            <div className="bg-black/60 rounded-lg p-2.5 border border-zinc-800/60 text-center">
+                              <span className="text-zinc-500 font-medium block uppercase tracking-wider">
+                                Achat
+                              </span>
 
-                          <p className="text-[10px] text-zinc-400 font-medium mt-0.5 tabular-nums">
-                            Unit. :{" "}
-                            {formatEuro(
-                              card.currentPrice
-                            )}{" "}
-                            €
-                            {" · "}
-                            {card.condition}
-                          </p>
-                        </div>
-                      </div>
+                              <span className="text-zinc-300 font-bold mt-1 block">
+                                {formatEuro(
+                                  totalBuy
+                                )} €
+                              </span>
+                            </div>
 
-                      <div className="flex items-center gap-2 text-zinc-400">
-                        <span className="text-[10px] font-black px-2 py-0.5 bg-black/60 border border-zinc-800 rounded text-cyan-400">
-                          x{card.qty}
-                        </span>
+                            <div className="bg-black/60 rounded-lg p-2.5 border border-zinc-800/60 text-center">
+                              <span className="text-zinc-500 font-medium block uppercase tracking-wider">
+                                Actuelle
+                              </span>
 
-                        {isExpanded ? (
-                          <ChevronUp className="w-4 h-4 text-cyan-400" />
-                        ) : (
-                          <ChevronDown className="w-4 h-4 text-zinc-600" />
-                        )}
-                      </div>
-                    </button>
+                              <span className="text-white font-bold mt-1 block">
+                                {formatEuro(
+                                  totalCurrent
+                                )} €
+                              </span>
+                            </div>
 
-                    {isExpanded && (
-                      <div className="mt-3.5 pt-3.5 border-t border-zinc-800/80">
-                        <div className="grid grid-cols-3 gap-2 text-[10px]">
-                          <div className="bg-black/60 rounded-lg p-2.5 border border-zinc-800/60 text-center">
-                            <span className="text-zinc-500 font-medium block uppercase tracking-wider">
-                              Achat
-                            </span>
+                            <div className="bg-black/60 rounded-lg p-2.5 border border-zinc-800/60 text-center">
+                              <span className="text-zinc-500 font-medium block uppercase tracking-wider">
+                                Profit Net
+                              </span>
 
-                            <span className="text-zinc-300 font-bold mt-1 block">
-                              {formatEuro(
-                                totalPurchase
-                              )}{" "}
-                              €
-                            </span>
-                          </div>
-
-                          <div className="bg-black/60 rounded-lg p-2.5 border border-zinc-800/60 text-center">
-                            <span className="text-zinc-500 font-medium block uppercase tracking-wider">
-                              Actuelle
-                            </span>
-
-                            <span className="text-white font-bold mt-1 block">
-                              {formatEuro(
-                                totalCurrent
-                              )}{" "}
-                              €
-                            </span>
-                          </div>
-
-                          <div className="bg-black/60 rounded-lg p-2.5 border border-zinc-800/60 text-center">
-                            <span className="text-zinc-500 font-medium block uppercase tracking-wider">
-                              Profit Net
-                            </span>
-
-                            <span
-                              className={`font-black mt-1 block ${
-                                profit >= 0
-                                  ? "text-emerald-400"
-                                  : "text-rose-400"
-                              }`}
-                            >
-                              {profit >= 0
-                                ? "+"
-                                : ""}
-                              {formatEuro(
-                                profit
-                              )}{" "}
-                              €
-                            </span>
-                          </div>
-                        </div>
-
-                        <div className="mt-2 grid grid-cols-2 gap-2 text-[10px]">
-                          <div className="bg-black/40 rounded-lg p-2 border border-zinc-800/50">
-                            <span className="text-zinc-600 font-medium block uppercase tracking-wider">
-                              État
-                            </span>
-
-                            <span className="text-zinc-300 font-bold mt-0.5 block">
-                              {card.condition}
-                            </span>
-                          </div>
-
-                          <div className="bg-black/40 rounded-lg p-2 border border-zinc-800/50">
-                            <span className="text-zinc-600 font-medium block uppercase tracking-wider">
-                              Rendement
-                            </span>
-
-                            <span
-                              className={`font-bold mt-0.5 block ${
-                                gain >= 0
-                                  ? "text-emerald-400"
-                                  : "text-rose-400"
-                              }`}
-                            >
-                              {gain >= 0
-                                ? "+"
-                                : ""}
-                              {gain.toFixed(
-                                1
-                              )}{" "}
-                              %
-                            </span>
-                          </div>
-                        </div>
-
-                        <div className="mt-2 grid grid-cols-2 gap-2 text-[10px]">
-                          <div className="bg-black/40 rounded-lg p-2 border border-zinc-800/50">
-                            <span className="text-zinc-600 font-medium block uppercase tracking-wider">
-                              Tendance 7j
-                            </span>
-
-                            <span
-                              className={`font-bold mt-0.5 block ${
-                                card.priceTrend7d >=
+                              <span
+                                className={`font-black mt-1 block ${
+                                  profit >=
+                                  0
+                                    ? "text-emerald-400"
+                                    : "text-rose-400"
+                                }`}
+                              >
+                                {profit >=
                                 0
-                                  ? "text-emerald-400"
-                                  : "text-rose-400"
-                              }`}
-                            >
-                              {card.priceTrend7d >=
-                              0
-                                ? "+"
-                                : ""}
-                              {card.priceTrend7d.toFixed(
-                                1
-                              )}{" "}
-                              %
-                            </span>
+                                  ? "+"
+                                  : ""}
+                                {formatEuro(
+                                  profit
+                                )} €
+                              </span>
+                            </div>
                           </div>
 
-                          <div className="bg-black/40 rounded-lg p-2 border border-zinc-800/50">
-                            <span className="text-zinc-600 font-medium block uppercase tracking-wider">
-                              Score V5
-                            </span>
+                          <div className="mt-2 grid grid-cols-2 gap-2 text-[10px]">
+                            <div className="bg-black/40 rounded-lg p-2 border border-zinc-800/50">
+                              <span className="text-zinc-600 font-medium block uppercase tracking-wider">
+                                Prix d'achat unitaire
+                              </span>
 
-                            <span className="text-cyan-400 font-bold mt-0.5 block">
-                              {card.score.toFixed(
-                                1
-                              )}
-                              /10
-                            </span>
+                              <span className="text-zinc-300 font-bold mt-0.5 block">
+                                {formatEuro(
+                                  card.buyPrice
+                                )} €
+                              </span>
+                            </div>
+
+                            <div className="bg-black/40 rounded-lg p-2 border border-zinc-800/50">
+                              <span className="text-zinc-600 font-medium block uppercase tracking-wider">
+                                Rendement
+                              </span>
+
+                              <span
+                                className={`font-bold mt-0.5 block ${
+                                  card.buyPrice >
+                                    0 &&
+                                  card.currentPrice >=
+                                    card.buyPrice
+                                    ? "text-emerald-400"
+                                    : "text-rose-400"
+                                }`}
+                              >
+                                {card.buyPrice >
+                                0
+                                  ? `${(
+                                      ((card.currentPrice -
+                                        card.buyPrice) /
+                                        card.buyPrice) *
+                                      100
+                                    ).toFixed(
+                                      2
+                                    )} %`
+                                  : "N/A"}
+                              </span>
+                            </div>
+                          </div>
+
+                          <div className="mt-2 grid grid-cols-3 gap-2 text-[10px]">
+                            <div className="bg-black/40 rounded-lg p-2 border border-zinc-800/50">
+                              <span className="text-zinc-600 font-medium block uppercase tracking-wider">
+                                Tendance 7j
+                              </span>
+
+                              <span
+                                className={`font-bold mt-0.5 block ${
+                                  card.priceTrend7d >=
+                                  0
+                                    ? "text-emerald-400"
+                                    : "text-rose-400"
+                                }`}
+                              >
+                                {card.priceTrend7d >=
+                                0
+                                  ? "+"
+                                  : ""}
+                                {
+                                  card.priceTrend7d
+                                } %
+                              </span>
+                            </div>
+
+                            <div className="bg-black/40 rounded-lg p-2 border border-zinc-800/50">
+                              <span className="text-zinc-600 font-medium block uppercase tracking-wider">
+                                Tendance 30j
+                              </span>
+
+                              <span
+                                className={`font-bold mt-0.5 block ${
+                                  card.priceTrend30d >=
+                                  0
+                                    ? "text-emerald-400"
+                                    : "text-rose-400"
+                                }`}
+                              >
+                                {card.priceTrend30d >=
+                                0
+                                  ? "+"
+                                  : ""}
+                                {
+                                  card.priceTrend30d
+                                } %
+                              </span>
+                            </div>
+
+                            <div className="bg-black/40 rounded-lg p-2 border border-zinc-800/50">
+                              <span className="text-zinc-600 font-medium block uppercase tracking-wider">
+                                Score
+                              </span>
+
+                              <span className="text-cyan-400 font-bold mt-0.5 block">
+                                {card.score.toFixed(
+                                  1
+                                )}
+                                /10
+                              </span>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
+                      )}
+                    </div>
+                  );
+                }
+              )}
+
+              {loading && (
+                <div className="rounded-xl border border-zinc-900 bg-neutral-900/40 p-8 text-center">
+                  <p className="text-xs font-bold text-zinc-500">
+                    Chargement de la collection...
+                  </p>
+                </div>
+              )}
 
               {!loading &&
                 cards.length === 0 && (
@@ -1219,24 +1254,14 @@ export default function DashboardPage() {
                     <Package className="w-8 h-8 text-zinc-700 mx-auto mb-3" />
 
                     <p className="text-xs font-bold text-zinc-500">
-                      Aucune carte dans ton portefeuille.
+                      Aucun actif dans ton portefeuille.
                     </p>
 
                     <p className="text-[10px] text-zinc-700 mt-1">
-                      Ajoute des cartes depuis le Scanner ou la Recherche.
+                      Ajoute des cartes depuis la section Scanner ou Recherche.
                     </p>
                   </div>
                 )}
-
-              {loading && (
-                <div className="rounded-xl border border-zinc-900 bg-neutral-900/40 p-8 text-center">
-                  <Sparkles className="w-6 h-6 text-cyan-400 mx-auto mb-3 animate-pulse" />
-
-                  <p className="text-xs font-bold text-zinc-500">
-                    Chargement de ta collection...
-                  </p>
-                </div>
-              )}
             </div>
           </div>
         </div>
