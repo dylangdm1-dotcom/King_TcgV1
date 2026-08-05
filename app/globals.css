@@ -1,0 +1,645 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ========================================================= */
+/* KING_TCG THEME - ÉPURÉ & SOMBRE */
+/* ========================================================= */
+:root {
+  --background: #09090b; /* Noir zinc très élégant */
+  --surface: #18181b;
+  --surface-light: #27272a;
+  --primary: #facc15;
+  --primary-dark: #eab308;
+  --blue: #06b6d4; /* Remplacé par un cyan discret */
+  --purple: #3f3f46; /* Remplacé par un gris neutre */
+  --success: #10b981;
+  --danger: #ef4444;
+  --text: #ffffff;
+  --text-muted: #71717a;
+  
+  --cyan-glow: rgba(6, 182, 212, 0.05);
+  --yellow-glow: rgba(250, 204, 21, 0.05);
+  --emerald-glow: rgba(16, 185, 129, 0.05);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+body {
+  /* Fini le bleu ! Un fond noir profond avec juste une très légère nuance au sommet */
+  background: radial-gradient(
+    circle at top,
+    #18181b,
+    #09090b 70%
+  );
+  color: var(--text);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+}
+
+/* ========================================================= */
+/* UTILITIES & GLASSMORPHISM MINIMALISTE */
+/* ========================================================= */
+.glass-card {
+  background: rgba(24, 24, 27, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  transition: all 0.25s ease;
+}
+
+.glass-card:hover {
+  border-color: rgba(6, 182, 212, 0.2);
+  box-shadow: 0 0 25px var(--cyan-glow);
+  transform: translateY(-1px);
+}
+
+.glass-card-yellow:hover {
+  border-color: rgba(250, 204, 21, 0.2);
+  box-shadow: 0 0 25px var(--yellow-glow);
+}
+
+.glass-card-emerald:hover {
+  border-color: rgba(16, 185, 129, 0.2);
+  box-shadow: 0 0 25px var(--emerald-glow);
+}
+
+@keyframes pulse-slow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 3s infinite ease-in-out;
+}
+
+/* Barre de défilement sobre */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #09090b;
+}
+::-webkit-scrollbar-thumb {
+  background: #27272a;
+  border-radius: 3px;
+}
+
+/* ========================================================= */
+/* GLOBAL CONTAINERS */
+/* ========================================================= */
+.page-container {
+  max-width: 1280px;
+  margin: auto;
+  padding: 35px 20px;
+}
+
+.search-container {
+  padding: 30px;
+}
+
+.home-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 40px 20px;
+}
+
+/* ========================================================= */
+/* SEARCH */
+/* ========================================================= */
+.search-header {
+  max-width: 900px;
+  margin: 0 auto 35px auto;
+  text-align: center;
+}
+
+.search-header h1 {
+  font-size: 42px;
+  margin-bottom: 10px;
+  color: var(--primary);
+}
+
+.search-header p {
+  color: var(--text-muted);
+  margin-bottom: 25px;
+}
+
+.search-title {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+.search-bar {
+  background: #141416;
+  border-radius: 16px;
+  padding: 8px;
+  display: flex;
+  gap: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  margin-bottom: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.search-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: white;
+  font-size: 16px;
+  padding: 12px;
+}
+
+.search-input:focus {
+  outline: 1px solid var(--primary);
+  border-radius: 8px;
+}
+
+.search-button {
+  background: var(--primary);
+  color: #09090b;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 24px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.search-button:hover {
+  background: var(--primary-dark);
+}
+
+/* ========================================================= */
+/* CARDS GRID */
+/* ========================================================= */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: #141416;
+  color: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, .4);
+  transition: .2s;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, .04);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  border-color: var(--primary);
+}
+
+.card img {
+  width: 100%;
+  display: block;
+}
+
+.card-content {
+  padding: 16px;
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.card-info {
+  color: var(--text-muted);
+  margin: 4px 0;
+  font-size: 13px;
+}
+
+.card-price {
+  margin-top: 12px;
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--success);
+}
+
+.card-link {
+  color: inherit;
+}
+
+/* ========================================================= */
+/* PREMIUM CARD STYLE */
+/* ========================================================= */
+.tc-card {
+  background: #141416;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, .4);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* ========================================================= */
+/* HERO - SOMBRE NET */
+/* ========================================================= */
+.hero {
+  text-align: center;
+  padding: 60px 20px;
+  border-radius: 24px;
+  background: #141416;
+  color: white;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .4);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.hero h1 {
+  font-size: 48px;
+  margin-bottom: 16px;
+  font-weight: 900;
+}
+
+.hero p {
+  font-size: 18px;
+  max-width: 600px;
+  margin: auto;
+  color: var(--text-muted);
+}
+
+.hero-buttons {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+/* ========================================================= */
+/* LE RESTE RESTE COMPATIBLE SANS COULEUR FLASH */
+/* ========================================================= */
+.panel {
+  background: #141416;
+  border-radius: 20px;
+  padding: 24px;
+  border: 1px solid rgba(255, 255, 255, .05);
+}
+
+.info-card {
+  background: #09090b;
+  border-radius: 12px;
+  padding: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.buy-badge { display: inline-block; background: #10b981; color: white; padding: 6px 12px; border-radius: 8px; font-weight: bold; font-size: 13px; }
+.hold-badge { display: inline-block; background: #f59e0b; color: white; padding: 6px 12px; border-radius: 8px; font-weight: bold; font-size: 13px; }
+.sell-badge { display: inline-block; background: #ef4444; color: white; padding: 6px 12px; border-radius: 8px; font-weight: bold; font-size: 13px; }
+
+.price-up { color: #10b981; font-weight: bold; }
+.price-down { color: #ef4444; font-weight: bold; }
+
+.image-card { background: #141416; border-radius: 20px; padding: 16px; border: 1px solid rgba(255, 255, 255, 0.04); }
+.image-card img { width: 100%; border-radius: 12px; }
+.chart-card { margin-top: 20px; background: #141416; border-radius: 20px; padding: 20px; border: 1px solid rgba(255, 255, 255, 0.04); }
+
+.collection-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 16px; }
+.collection-card { background: #141416; border-radius: 16px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.04); transition: 0.2s; }
+.collection-card:hover { transform: translateY(-4px); border-color: var(--primary); }
+.collection-card h3 { color: white; padding: 0 16px; font-size: 15px; }
+.collection-card p { color: var(--text-muted); padding: 0 16px; font-size: 13px; }
+.collection-card strong { display: block; padding: 16px; }
+
+.king-button { width: 100%; padding: 14px; border-radius: 12px; border: none; background: var(--primary); color: #09090b; font-weight: 800; font-size: 16px; cursor: pointer; transition: .2s; }
+.king-button:hover { background: var(--primary-dark); }
+
+.home-stats { margin-top: 30px; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+.stat-card { background: #141416; border-radius: 20px; padding: 24px; text-align: center; border: 1px solid rgba(255, 255, 255, .05); }
+.stat-card h2 { font-size: 42px; margin: 0 0 8px 0; color: var(--primary); }
+.stat-card h3 { font-size: 18px; margin-bottom: 6px; }
+.stat-card p { color: var(--text-muted); margin: 0; font-size: 14px; }
+
+@media(max-width: 700px) {
+  .hero h1 { font-size: 32px; }
+  .cards-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* =========================================================
+   KING_TCG DESIGN SYSTEM — MOBILE FIRST
+   ========================================================= */
+:root {
+  --kt-bg: #07080b;
+  --kt-surface: #101216;
+  --kt-surface-2: #15181e;
+  --kt-border: rgba(255,255,255,.075);
+  --kt-border-strong: rgba(255,255,255,.12);
+  --kt-accent: #22d3ee;
+  --kt-accent-soft: rgba(34,211,238,.10);
+  --kt-text: #f8fafc;
+  --kt-muted: #8b93a3;
+  --kt-radius: 18px;
+}
+
+body {
+  background:
+    radial-gradient(900px 420px at 50% -120px, rgba(34,211,238,.08), transparent 65%),
+    var(--kt-bg);
+  color: var(--kt-text);
+}
+
+::selection { background: rgba(34,211,238,.25); color: white; }
+
+/* Shared surfaces: one visual language across all modules */
+.glass-card,
+.tc-card,
+.panel,
+.image-card,
+.chart-card,
+.collection-card,
+.stat-card {
+  background: linear-gradient(180deg, rgba(20,23,29,.94), rgba(12,14,18,.94));
+  border-color: var(--kt-border);
+  box-shadow: 0 14px 40px rgba(0,0,0,.24);
+}
+
+.glass-card:hover,
+.collection-card:hover {
+  border-color: rgba(34,211,238,.24);
+  box-shadow: 0 18px 45px rgba(0,0,0,.32);
+}
+
+/* Consistent controls */
+input,
+select,
+textarea {
+  max-width: 100%;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: rgba(34,211,238,.55) !important;
+  box-shadow: 0 0 0 3px rgba(34,211,238,.07);
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Better touch targets without changing desktop layouts */
+@media (max-width: 767px) {
+  .page-container,
+  .home-container {
+    padding: 20px 14px 92px;
+  }
+
+  .search-container {
+    padding: 18px 14px 92px;
+  }
+
+  .search-header {
+    margin-bottom: 22px;
+  }
+
+  .search-header h1 {
+    font-size: 30px;
+    line-height: 1.05;
+  }
+
+  .search-header p {
+    font-size: 12px;
+    line-height: 1.55;
+  }
+
+  .search-bar {
+    padding: 6px;
+    gap: 7px;
+    border-radius: 14px;
+    margin-bottom: 18px;
+  }
+
+  .search-input {
+    min-width: 0;
+    font-size: 14px;
+    padding: 10px 8px;
+  }
+
+  .search-button {
+    min-height: 42px;
+    padding: 10px 14px;
+    border-radius: 11px;
+    font-size: 12px;
+  }
+
+  .cards-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .card-content {
+    padding: 11px;
+  }
+
+  .card-title { font-size: 14px; }
+  .card-price { font-size: 17px; }
+
+  .tc-card,
+  .panel {
+    border-radius: 16px;
+    padding: 14px;
+  }
+
+  .hero {
+    padding: 32px 16px;
+    border-radius: 18px;
+  }
+
+  .hero h1 { font-size: 31px; line-height: 1.05; }
+  .hero p { font-size: 14px; line-height: 1.55; }
+
+  /* Prevent wide tables/charts from breaking the viewport */
+  .overflow-x-auto {
+    scrollbar-width: thin;
+    max-width: 100%;
+  }
+
+  /* Common large headings */
+  h1 { overflow-wrap: anywhere; }
+
+  /* Compact stat cards */
+  .stat-card { padding: 16px; border-radius: 16px; }
+  .stat-card h2 { font-size: 30px; }
+}
+
+/* Safe bottom spacing for the mobile navigation */
+@media (max-width: 767px) {
+  main { padding-bottom: 88px !important; }
+}
+
+/* =========================================================
+   MOBILE NAVIGATION
+   ========================================================= */
+.kt-mobile-nav {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .kt-mobile-nav {
+    position: fixed;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    z-index: 100;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 4px;
+    padding: 7px;
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 20px;
+    background: rgba(12,14,18,.88);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    box-shadow: 0 18px 50px rgba(0,0,0,.55);
+  }
+
+  .kt-mobile-nav a {
+    min-width: 0;
+    min-height: 52px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    border-radius: 14px;
+    color: #7d8595;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .02em;
+    transition: .2s ease;
+  }
+
+  .kt-mobile-nav a.active {
+    color: var(--kt-accent);
+    background: var(--kt-accent-soft);
+  }
+
+  .kt-mobile-nav a.scan {
+    color: #061014;
+    background: var(--kt-accent);
+    box-shadow: 0 6px 20px rgba(34,211,238,.18);
+  }
+
+  .kt-mobile-nav svg { width: 18px; height: 18px; }
+}
+
+/* PSA / market cards stay readable on narrow screens */
+@media (max-width: 480px) {
+  .psa-result-card {
+    padding: 12px !important;
+  }
+
+  .psa-price-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .psa-card-image {
+    width: 92px !important;
+    height: 132px !important;
+  }
+}
+
+
+/* =========================================================
+   KING_TCG V5.0 — INTERACTIONS VISUELLES LÉGÈRES
+   ========================================================= */
+.kt-interactive-card {
+  position: relative;
+  isolation: isolate;
+  transform: translateZ(0);
+  transition:
+    transform .24s ease,
+    border-color .24s ease,
+    background-color .24s ease,
+    box-shadow .24s ease;
+}
+
+.kt-interactive-card::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  z-index: -1;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(115deg, transparent 18%, rgba(34,211,238,.55), transparent 58%);
+  background-size: 220% 100%;
+  opacity: 0;
+  pointer-events: none;
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  transition: opacity .24s ease;
+}
+
+@media (hover: hover) {
+  .kt-interactive-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(34,211,238,.28);
+    box-shadow: 0 16px 42px rgba(0,0,0,.28), 0 0 24px rgba(34,211,238,.05);
+  }
+
+  .kt-interactive-card:hover::before {
+    opacity: 1;
+    animation: kt-border-sweep 1.15s ease both;
+  }
+}
+
+@keyframes kt-border-sweep {
+  from { background-position: 120% 0; }
+  to { background-position: -120% 0; }
+}
+
+.kt-skeleton {
+  position: relative;
+  overflow: hidden;
+  background: rgba(39,39,42,.72);
+}
+
+.kt-skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.07), transparent);
+  animation: kt-shimmer 1.4s infinite;
+}
+
+@keyframes kt-shimmer {
+  100% { transform: translateX(100%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kt-interactive-card,
+  .kt-interactive-card::before,
+  .kt-skeleton::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
