@@ -41,12 +41,18 @@ export default function Navbar() {
             )}
           </div>
 
-          <Link href="/" className="kt-brand-lockup" aria-label="Accueil King TCG">
-            <Crown className="kt-brand-crown" strokeWidth={1.8} />
-            <span className="kt-brand-wordmark">
-              King<span>TCG</span>
+          <Link href="/" className="kt-brand-lockup" aria-label="Accueil King_TCG">
+            <span className="kt-brand-crown-frame" aria-hidden="true">
+              <Crown className="kt-brand-crown" strokeWidth={1.9} />
             </span>
-            <span className="kt-brand-subtitle">Market Intelligence</span>
+            <span className="kt-brand-copy">
+              <span className="kt-brand-wordmark">
+                King_<span>TCG</span>
+              </span>
+              <span className="kt-brand-subtitle">
+                Pokémon TCG • Market & Collection
+              </span>
+            </span>
           </Link>
 
           <div className="hidden items-center justify-end gap-1.5 md:flex">
