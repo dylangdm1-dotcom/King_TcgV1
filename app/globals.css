@@ -563,3 +563,83 @@ a {
     height: 132px !important;
   }
 }
+
+
+/* =========================================================
+   KING_TCG V5.0 — INTERACTIONS VISUELLES LÉGÈRES
+   ========================================================= */
+.kt-interactive-card {
+  position: relative;
+  isolation: isolate;
+  transform: translateZ(0);
+  transition:
+    transform .24s ease,
+    border-color .24s ease,
+    background-color .24s ease,
+    box-shadow .24s ease;
+}
+
+.kt-interactive-card::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  z-index: -1;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(115deg, transparent 18%, rgba(34,211,238,.55), transparent 58%);
+  background-size: 220% 100%;
+  opacity: 0;
+  pointer-events: none;
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  transition: opacity .24s ease;
+}
+
+@media (hover: hover) {
+  .kt-interactive-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(34,211,238,.28);
+    box-shadow: 0 16px 42px rgba(0,0,0,.28), 0 0 24px rgba(34,211,238,.05);
+  }
+
+  .kt-interactive-card:hover::before {
+    opacity: 1;
+    animation: kt-border-sweep 1.15s ease both;
+  }
+}
+
+@keyframes kt-border-sweep {
+  from { background-position: 120% 0; }
+  to { background-position: -120% 0; }
+}
+
+.kt-skeleton {
+  position: relative;
+  overflow: hidden;
+  background: rgba(39,39,42,.72);
+}
+
+.kt-skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.07), transparent);
+  animation: kt-shimmer 1.4s infinite;
+}
+
+@keyframes kt-shimmer {
+  100% { transform: translateX(100%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kt-interactive-card,
+  .kt-interactive-card::before,
+  .kt-skeleton::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
