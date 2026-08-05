@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { ArrowUpRight, ImageOff, Loader2 } from 'lucide-react';
 import { useState } from 'react';
-import { PokemonCard, getCardPrice } from '@/lib/types';
+import { PokemonCard, getCardPrice, hasMarketPrice } from '@/lib/types';
 
 interface Props {
   card: PokemonCard;
@@ -12,6 +12,7 @@ interface Props {
 
 export default function CardResult({ card, isPriceLoading = false }: Props) {
   const price = getCardPrice(card);
+  const priceAvailable = hasMarketPrice(card) || price > 0;
   const primaryImage = card.images?.large || card.images?.small || '';
   const fallbackImage = card.images?.small || '';
   const [imageSrc, setImageSrc] = useState(primaryImage);
@@ -82,15 +83,20 @@ export default function CardResult({ card, isPriceLoading = false }: Props) {
               <p className="text-[9px] font-black uppercase tracking-wider text-zinc-600">
                 Index prix
               </p>
-              {price > 0 ? (
+              {priceAvailable && price > 0 ? (
                 <p className="mt-0.5 text-sm font-black tracking-tight text-white tabular-nums">
                   {price.toFixed(2)} €
                 </p>
               ) : isPriceLoading ? (
-                <p className="mt-0.5 flex items-center gap-1.5 text-[10px] font-bold text-cyan-400">
+                <div className="mt-0.5 flex items-center gap-2 text-[10px] font-bold text-cyan-400">
                   <Loader2 className="h-3 w-3 animate-spin" />
-                  Synchronisation…
-                </p>
+                  <span>Synchronisation</span>
+                  <span className="flex items-center gap-0.5" aria-hidden="true">
+                    <span className="h-1 w-1 animate-pulse rounded-full bg-cyan-400" />
+                    <span className="h-1 w-1 animate-pulse rounded-full bg-cyan-400 [animation-delay:150ms]" />
+                    <span className="h-1 w-1 animate-pulse rounded-full bg-cyan-400 [animation-delay:300ms]" />
+                  </span>
+                </div>
               ) : (
                 <p className="mt-0.5 text-[11px] font-bold text-zinc-500 italic">
                   Non indexé
