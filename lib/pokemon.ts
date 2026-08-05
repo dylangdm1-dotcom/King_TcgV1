@@ -209,6 +209,15 @@ function saveBrowserCache(cards: PokemonCard[]) {
   } catch {}
 }
 
+
+async function enrichAndCacheCards(cards: PokemonCard[]): Promise<PokemonCard[]> {
+  if (!cards.length) return cards;
+
+  const enriched = await enrichCardsWithMarketPrices(cards);
+  enriched.forEach((card) => cache.set(card.id, card));
+  saveBrowserCache(enriched);
+  return enriched;
+}
 function loadBrowserCache(): PokemonCard[] {
   if (typeof window === "undefined") return [];
   try {
@@ -528,11 +537,10 @@ export async function searchCards(
     return numB - numA;
   });
 
-  finalCards.forEach((c) => cache.set(c.id, c));
-  searchCache.set(cacheKey, finalCards);
-  saveBrowserCache(finalCards);
+  const pricedCards = await enrichAndCacheCards(finalCards);
+  searchCache.set(cacheKey, pricedCards);
 
-  return finalCards;
+  return pricedCards;
 }
 
 export async function searchCardsBySetId(
@@ -574,9 +582,9 @@ export async function searchCardsBySetId(
   });
 
   if (cards.length > 0) {
-    cards.forEach((c) => cache.set(c.id, c));
-    searchCache.set(cacheKey, cards);
-    saveBrowserCache(cards);
+    const pricedCards = await enrichAndCacheCards(cards);
+    searchCache.set(cacheKey, pricedCards);
+    return pricedCards;
   }
 
   return cards;
@@ -633,7 +641,7 @@ async function ensureMarketPrices(card: PokemonCard): Promise<PokemonCard> {
   // Detail pages can be opened from an older browser cache. Refresh the
   // market payload so the detail view uses the same source-of-truth prices
   // as the search results instead of returning stale/missing values.
-  const [pricedCard] = await enrichCardsWithMarketPrices([card]);
+  const [pricedCard] = await enrichAndCacheCards([card]);
   return pricedCard ?? card;
 }
 
@@ -669,11 +677,10 @@ export async function getCardById(id: string): Promise<PokemonCard | null> {
 
       const data = await response.json();
       const card = normalizeTCGdexCard(data, lang);
-      const [pricedCard] = await enrichCardsWithMarketPrices([card]);
+      const [pricedCard] = await enrichAndCacheCards([card]);
       const finalCard = pricedCard ?? card;
 
       cache.set(targetId, finalCard);
-      saveBrowserCache([finalCard]);
       return finalCard;
     } catch (error) {
       return null;
@@ -686,11 +693,10 @@ export async function getCardById(id: string): Promise<PokemonCard | null> {
 
     const json = await response.json();
     const card = normalize(json.data);
-    const [pricedCard] = await enrichCardsWithMarketPrices([card]);
+    const [pricedCard] = await enrichAndCacheCards([card]);
     const finalCard = pricedCard ?? card;
 
     cache.set(card.id, finalCard);
-    saveBrowserCache([finalCard]);
     return finalCard;
   } catch {
     return null;
