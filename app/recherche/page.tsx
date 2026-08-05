@@ -256,17 +256,17 @@ export default function Recherche() {
     <>
       <Navbar />
 
-      <main className="min-h-screen bg-neutral-950 text-white pb-32 selection:bg-cyan-500/20">
-        <div className="mx-auto max-w-7xl space-y-6 px-4 py-5 sm:px-6 lg:px-8">
+      <main className="kt-app-shell selection:bg-cyan-500/20">
+        <div className="kt-page space-y-6">
           
           {/* Section Recherche */}
-          <section className="rounded-2xl border border-zinc-900 bg-neutral-900/40 p-4 sm:p-6 shadow-xl space-y-5">
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-zinc-800/80 pb-4">
+          <section className="kt-premium-card kt-rise-in space-y-5 p-4 sm:p-6">
+            <div className="flex flex-col justify-between gap-4 border-b border-white/[0.06] pb-5 md:flex-row md:items-center">
               <div>
-                <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-[9px] font-black uppercase tracking-widest mb-1">
+                <div className="kt-eyebrow mb-2">
                   <Sparkles className="w-3 h-3" /> Base de données v5.0
                 </div>
-                <h1 className="text-lg font-black uppercase tracking-tight text-white flex items-center gap-2">
+                <h1 className="flex items-center gap-2 text-xl font-black tracking-tight text-white sm:text-2xl">
                   <Search className="w-5 h-5 text-cyan-400" /> Recherche & Index
                 </h1>
                 <p className="mt-0.5 text-[11px] text-zinc-400">
@@ -275,7 +275,7 @@ export default function Recherche() {
               </div>
 
               {/* Sélecteur de Région/Langue */}
-              <div className="flex items-center gap-1 bg-black/60 p-1.5 rounded-xl border border-zinc-800 self-start md:self-auto">
+              <div className="flex self-start items-center gap-1 rounded-2xl border border-white/[0.07] bg-[#090c10]/85 p-1.5 md:self-auto">
                 <span className="text-[10px] font-black uppercase tracking-wider text-zinc-500 px-2 flex items-center gap-1">
                   <Globe className="w-3.5 h-3.5 text-cyan-400" /> Langue :
                 </span>
@@ -301,7 +301,7 @@ export default function Recherche() {
             </div>
 
             {/* Commutateur de Mode : Texte / Extension */}
-            <div className="flex gap-2">
+            <div className="inline-flex w-full gap-2 rounded-2xl border border-white/[0.06] bg-[#090c10]/70 p-1.5 sm:w-auto">
               <button
                 onClick={() => setSearchMode("text")}
                 className={`rounded-xl px-4 py-2.5 text-[10px] font-black uppercase tracking-wider transition-all flex items-center gap-2 ${
@@ -337,7 +337,7 @@ export default function Recherche() {
                         }
                       }}
                       placeholder="Nom du Pokémon (ex: Dracaufeu, Pikachu...)"
-                      className="w-full rounded-xl border border-zinc-800 bg-black/60 px-4 py-3.5 text-xs font-bold text-white placeholder-zinc-600 outline-none transition focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
+                      className="w-full rounded-2xl border border-white/[0.08] bg-[#080b0f]/90 px-4 py-4 text-xs font-bold text-white placeholder-zinc-600 outline-none transition focus:border-cyan-400/50 focus:ring-2 focus:ring-cyan-400/10"
                     />
                     {loading && (
                       <Loader2 className="absolute right-3.5 top-4 h-4 w-4 animate-spin text-cyan-400" />
@@ -347,7 +347,7 @@ export default function Recherche() {
                   <button
                     onClick={() => executeSearch(searchQuery)}
                     disabled={loading || searchQuery.trim().length < 2}
-                    className="rounded-xl bg-cyan-500 px-6 py-3.5 text-xs font-black uppercase tracking-widest text-black transition-all hover:bg-cyan-400 disabled:opacity-50 flex items-center justify-center gap-2 shadow-lg shadow-cyan-500/10 flex-shrink-0 active:scale-[0.98]"
+                    className="kt-primary-button flex-shrink-0 px-6 text-xs uppercase tracking-widest disabled:opacity-50"
                   >
                     {loading ? (
                       <>
@@ -421,7 +421,7 @@ export default function Recherche() {
           </section>
 
           {/* Barre d'outils / Stats */}
-          <section className="flex items-center justify-between gap-4 border-b border-zinc-900 pb-3">
+          <section className="kt-premium-card-soft flex items-center justify-between gap-4 p-3">
             <div className="rounded-xl border border-zinc-800/80 bg-neutral-900/40 px-3.5 py-2 text-[10px] font-black uppercase tracking-wider text-zinc-300 flex items-center gap-2">
               <Filter className="w-3.5 h-3.5 text-cyan-400" />
               <span>{filteredCards.length} actif(s)</span>
@@ -502,7 +502,7 @@ export default function Recherche() {
             <div
               className={
                 viewMode === "grid"
-                  ? "grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6"
+                  ? "grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6"
                   : "flex flex-col items-center gap-4"
               }
             >
@@ -534,7 +534,7 @@ export default function Recherche() {
             <div className="text-center pt-6 pb-8">
               <button
                 onClick={() => setVisible((v) => v + PAGE_SIZE)}
-                className="rounded-xl border border-zinc-800 bg-neutral-900 px-8 py-3.5 text-[11px] font-black uppercase tracking-wider text-cyan-400 hover:bg-neutral-800 hover:border-cyan-500/30 transition active:scale-98 shadow-lg"
+                className="kt-secondary-button px-8 text-[11px] uppercase tracking-wider"
               >
                 Afficher plus de cartes ({filteredCards.length - visible} restantes)
               </button>
