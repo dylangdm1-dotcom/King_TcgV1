@@ -206,36 +206,72 @@ export type CollectionMap = Record<string, CollectionEntry>;
 //
 // IMPORTANT : cette fonction ne fabrique jamais de prix.
 // 0 signifie "aucune donnée de marché disponible".
+function positivePrice(value: unknown): number | undefined {
+  const parsed = typeof value === "number" ? value : Number(value);
+  return Number.isFinite(parsed) && parsed > 0 ? parsed : undefined;
+}
+
+export function hasMarketPrice(card?: PokemonCard | null): boolean {
+  if (!card) return false;
+
+  const cm = card.cardmarket?.prices;
+  const tcg = card.tcgplayer?.prices;
+
+  const candidates: unknown[] = [
+    cm?.trendPrice,
+    cm?.averageSellPrice,
+    cm?.avg1,
+    cm?.avg7,
+    cm?.avg30,
+    cm?.lowPrice,
+    tcg?.normal?.market,
+    tcg?.holofoil?.market,
+    tcg?.reverseHolofoil?.market,
+    tcg?.firstEditionHolofoil?.market,
+    tcg?.firstEditionNormal?.market,
+  ];
+
+  return candidates.some((value) => positivePrice(value) !== undefined);
+}
+
 export function getCardPrice(card?: PokemonCard | null): number {
   if (!card) return 0;
 
   const cm = card.cardmarket?.prices;
-  const cmMarket =
+  const cmMarket = positivePrice(
     cm?.trendPrice ??
-    cm?.averageSellPrice ??
-    cm?.avg7 ??
-    cm?.avg30 ??
-    cm?.lowPrice;
+      cm?.averageSellPrice ??
+      cm?.avg7 ??
+      cm?.avg30 ??
+      cm?.lowPrice
+  );
 
   const tcg = card.tcgplayer?.prices;
   const variant = String(card.variant ?? "").toLowerCase();
-  const tcgMarket =
-    (variant.includes("alt") || variant.includes("full art") || variant.includes("rainbow") || variant.includes("gold") || variant.includes("shiny")
+  const preferredTcg =
+    variant.includes("alt") ||
+    variant.includes("full art") ||
+    variant.includes("rainbow") ||
+    variant.includes("gold") ||
+    variant.includes("shiny")
       ? tcg?.holofoil?.market
       : variant.includes("normal")
         ? tcg?.normal?.market
         : variant.includes("reverse")
           ? tcg?.reverseHolofoil?.market
-          : undefined) ??
-    tcg?.normal?.market ??
-    tcg?.holofoil?.market ??
-    tcg?.reverseHolofoil?.market ??
-    tcg?.firstEditionHolofoil?.market ??
-    tcg?.firstEditionNormal?.market;
+          : undefined;
+
+  const tcgMarket = positivePrice(
+    preferredTcg ??
+      tcg?.normal?.market ??
+      tcg?.holofoil?.market ??
+      tcg?.reverseHolofoil?.market ??
+      tcg?.firstEditionHolofoil?.market ??
+      tcg?.firstEditionNormal?.market
+  );
 
   const values = [cmMarket, tcgMarket].filter(
-    (value): value is number =>
-      typeof value === "number" && Number.isFinite(value) && value > 0
+    (value): value is number => value !== undefined
   );
 
   if (!values.length) return 0;
