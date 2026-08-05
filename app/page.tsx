@@ -107,8 +107,7 @@ export default function Home() {
             </h1>
 
             <p className="mx-auto max-w-sm text-xs text-zinc-400 leading-relaxed">
-              Scanner IA nouvelle génération, gestion intelligente de collection,
-              analyse du marché et suivi complet de votre patrimoine TCG.
+              Scannez, recherchez et organisez vos cartes Pokémon, puis suivez leur valeur grâce aux données de marché réunies dans une interface simple.
             </p>
 
             {/* Scanner IA */}
@@ -309,7 +308,7 @@ function Stat({
   value
 }: any) {
   return (
-    <div className="glass-card rounded-xl p-3.5 flex flex-col justify-between border border-zinc-900 bg-neutral-900/40">
+    <div className="kt-interactive-card glass-card rounded-xl p-3.5 flex flex-col justify-between border border-zinc-900 bg-neutral-900/40">
       <div className="flex justify-between items-start">
         <span className="text-[10px] font-bold uppercase tracking-wider text-zinc-400">
           {title}
@@ -339,7 +338,7 @@ function QuickCard({
       className="group block"
     >
       <div
-        className={`glass-card rounded-xl p-4 border transition-all ${
+        className={`kt-interactive-card glass-card rounded-xl p-4 border transition-all ${
           isSpecial
             ? "border-cyan-500/40 bg-cyan-950/10 group-hover:border-cyan-400 group-hover:bg-cyan-950/20"
             : "border-zinc-900 bg-neutral-900/40 group-hover:border-cyan-500/40 group-hover:bg-neutral-900/80"
