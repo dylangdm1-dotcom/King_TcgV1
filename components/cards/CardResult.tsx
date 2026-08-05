@@ -1,14 +1,15 @@
 'use client';
 
 import Link from 'next/link';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, Loader2 } from 'lucide-react';
 import { PokemonCard, getCardPrice } from '@/lib/types';
 
 interface Props {
   card: PokemonCard;
+  isPriceLoading?: boolean;
 }
 
-export default function CardResult({ card }: Props) {
+export default function CardResult({ card, isPriceLoading = false }: Props) {
   const price = getCardPrice(card);
 
   return (
@@ -63,6 +64,11 @@ export default function CardResult({ card }: Props) {
               {price > 0 ? (
                 <p className="mt-0.5 text-sm font-black tracking-tight text-white tabular-nums">
                   {price.toFixed(2)} €
+                </p>
+              ) : isPriceLoading ? (
+                <p className="mt-0.5 flex items-center gap-1.5 text-[10px] font-bold text-cyan-400">
+                  <Loader2 className="h-3 w-3 animate-spin" />
+                  Synchronisation…
                 </p>
               ) : (
                 <p className="mt-0.5 text-[11px] font-bold text-zinc-500 italic">
