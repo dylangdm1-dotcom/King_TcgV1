@@ -210,7 +210,7 @@ function saveBrowserCache(cards: PokemonCard[]) {
 }
 
 
-async function enrichAndCacheCards(cards: PokemonCard[]): Promise<PokemonCard[]> {
+export async function enrichAndCacheCards(cards: PokemonCard[]): Promise<PokemonCard[]> {
   if (!cards.length) return cards;
 
   const enriched = await enrichCardsWithMarketPrices(cards);
@@ -537,10 +537,15 @@ export async function searchCards(
     return numB - numA;
   });
 
-  const pricedCards = await enrichAndCacheCards(finalCards);
-  searchCache.set(cacheKey, pricedCards);
+  // La recherche retourne immédiatement les cartes normalisées.
+  // Les prix sont enrichis ensuite par lots, uniquement pour les cartes visibles.
+  // Cela évite qu'une recherche volumineuse ne laisse une partie des résultats
+  // sans prix à cause d'une limite globale de traitement.
+  finalCards.forEach((card) => cache.set(card.id, card));
+  saveBrowserCache(finalCards);
+  searchCache.set(cacheKey, finalCards);
 
-  return pricedCards;
+  return finalCards;
 }
 
 export async function searchCardsBySetId(
@@ -582,9 +587,12 @@ export async function searchCardsBySetId(
   });
 
   if (cards.length > 0) {
-    const pricedCards = await enrichAndCacheCards(cards);
-    searchCache.set(cacheKey, pricedCards);
-    return pricedCards;
+    // Même logique que la recherche par nom : résultat immédiat, puis
+    // enrichissement des cartes réellement affichées dans la page Recherche.
+    cards.forEach((card) => cache.set(card.id, card));
+    saveBrowserCache(cards);
+    searchCache.set(cacheKey, cards);
+    return cards;
   }
 
   return cards;
