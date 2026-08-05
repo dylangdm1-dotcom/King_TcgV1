@@ -152,7 +152,7 @@ function SevenDayChart({
 }) {
   if (!values.length) {
     return (
-      <div className="h-56 flex items-center justify-center text-[11px] text-zinc-600 font-bold">
+      <div className="flex h-56 items-center justify-center text-[11px] font-bold text-zinc-600">
         Données de marché insuffisantes.
       </div>
     );
@@ -160,82 +160,57 @@ function SevenDayChart({
 
   const width = 700;
   const height = 260;
-
   const paddingX = 30;
-  const paddingTop = 25;
-  const paddingBottom = 35;
+  const paddingTop = 28;
+  const paddingBottom = 34;
 
   const minValue = Math.min(...values);
   const maxValue = Math.max(...values);
+  const range = maxValue - minValue || 1;
 
-  const range =
-    maxValue - minValue || 1;
+  const points = values.map((value, index) => {
+    const x =
+      paddingX +
+      (index / Math.max(values.length - 1, 1)) *
+        (width - paddingX * 2);
 
-  const points = values.map(
-    (value, index) => {
-      const x =
-        paddingX +
-        (index /
-          Math.max(
-            values.length - 1,
-            1
-          )) *
-          (width -
-            paddingX * 2);
+    const y =
+      paddingTop +
+      (1 - (value - minValue) / range) *
+        (height - paddingTop - paddingBottom);
 
-      const y =
-        paddingTop +
-        (1 -
-          (value - minValue) /
-            range) *
-          (height -
-            paddingTop -
-            paddingBottom);
+    return { x, y, value };
+  });
 
-      return {
-        x,
-        y,
-        value,
-      };
+  // Courbe Bézier continue : les 7 valeurs sont conservées,
+  // sans donner l'impression de simples points reliés.
+  const linePath = points.reduce((path, point, index) => {
+    if (index === 0) {
+      return `M ${point.x} ${point.y}`;
     }
-  );
 
-  const linePath = points
-    .map(
-      (point, index) =>
-        `${
-          index === 0
-            ? "M"
-            : "L"
-        } ${point.x} ${point.y}`
-    )
-    .join(" ");
+    const previous = points[index - 1];
+    const midpoint = (previous.x + point.x) / 2;
 
+    return (
+      `${path} ` +
+      `C ${midpoint} ${previous.y}, ` +
+      `${midpoint} ${point.y}, ` +
+      `${point.x} ${point.y}`
+    );
+  }, "");
+
+  const baseline = height - paddingBottom;
   const areaPath =
     `${linePath} ` +
-    `L ${
-      points[
-        points.length - 1
-      ].x
-    } ${
-      height -
-      paddingBottom
-    } ` +
-    `L ${points[0].x} ${
-      height -
-      paddingBottom
-    } Z`;
+    `L ${points[points.length - 1].x} ${baseline} ` +
+    `L ${points[0].x} ${baseline} Z`;
 
   const first = values[0];
-  const last =
-    values[values.length - 1];
-
-  const variation =
-    first > 0
-      ? ((last - first) /
-          first) *
-        100
-      : 0;
+  const last = values[values.length - 1];
+  const variation = first > 0 ? ((last - first) / first) * 100 : 0;
+  const currentPoint = points[points.length - 1];
+  const dayLabels = ["Auj.", "+1j", "+2j", "+3j", "+4j", "+5j", "+6j"];
 
   return (
     <div className="relative w-full">
@@ -253,6 +228,7 @@ function SevenDayChart({
             </p>
           </div>
         </div>
+
         <div className="rounded-full border border-cyan-400/10 bg-cyan-400/[0.05] px-2.5 py-1 text-[9px] font-black uppercase tracking-wider text-cyan-400">
           J+6
         </div>
@@ -260,52 +236,46 @@ function SevenDayChart({
 
       <div className="relative overflow-hidden rounded-2xl border border-white/[0.06] bg-[#0b0f14] px-2 pt-3 shadow-inner sm:px-4">
         <div className="pointer-events-none absolute inset-x-0 top-0 h-20 bg-cyan-400/[0.025]" />
-        <div className="relative h-64 w-full">
-        <svg
-          viewBox={`0 0 ${width} ${height}`}
-          preserveAspectRatio="none"
-          className="h-full w-full overflow-visible"
-        >
-          <defs>
-            <linearGradient
-              id="sevenDayGradient"
-              x1="0"
-              y1="0"
-              x2="0"
-              y2="1"
-            >
-              <stop
-                offset="0%"
-                stopColor="rgb(34 211 238)"
-                stopOpacity="0.28"
-              />
 
-              <stop
-                offset="100%"
-                stopColor="rgb(34 211 238)"
-                stopOpacity="0"
-              />
-            </linearGradient>
-          </defs>
+        <div className="relative h-56 w-full sm:h-64">
+          <svg
+            viewBox={`0 0 ${width} ${height}`}
+            preserveAspectRatio="none"
+            className="h-full w-full overflow-visible"
+            aria-label="Courbe d'évolution projetée sur 7 jours"
+            role="img"
+          >
+            <defs>
+              <linearGradient
+                id="sevenDayGradient"
+                x1="0"
+                y1="0"
+                x2="0"
+                y2="1"
+              >
+                <stop
+                  offset="0%"
+                  stopColor="rgb(34 211 238)"
+                  stopOpacity="0.22"
+                />
+                <stop
+                  offset="100%"
+                  stopColor="rgb(34 211 238)"
+                  stopOpacity="0"
+                />
+              </linearGradient>
+            </defs>
 
-          {/* Grille horizontale */}
-          {[0, 1, 2, 3].map(
-            (line) => {
+            {[0, 1, 2, 3].map((line) => {
               const y =
                 paddingTop +
-                (line / 3) *
-                  (height -
-                    paddingTop -
-                    paddingBottom);
+                (line / 3) * (height - paddingTop - paddingBottom);
 
               return (
                 <line
                   key={line}
                   x1={paddingX}
-                  x2={
-                    width -
-                    paddingX
-                  }
+                  x2={width - paddingX}
                   y1={y}
                   y2={y}
                   stroke="currentColor"
@@ -313,111 +283,66 @@ function SevenDayChart({
                   strokeWidth="1"
                 />
               );
-            }
-          )}
+            })}
 
-          {/* Zone sous la courbe */}
-          <path
-            d={areaPath}
-            fill="url(#sevenDayGradient)"
-          />
+            <path d={areaPath} fill="url(#sevenDayGradient)" />
 
-          {/* Courbe */}
-          <path
-            d={linePath}
-            fill="none"
-            stroke="rgb(34 211 238)"
-            strokeWidth="3"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
+            <path
+              d={linePath}
+              fill="none"
+              stroke="rgb(34 211 238)"
+              strokeWidth="3"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
 
-          {/* Points */}
-          {points.map(
-            (point, index) => (
-              <g key={index}>
-                {index === points.length - 1 && (
-                  <circle
-                    cx={point.x}
-                    cy={point.y}
-                    r="11"
-                    fill="rgb(34 211 238)"
-                    fillOpacity="0.08"
-                  />
-                )}
-                <circle
-                  cx={point.x}
-                  cy={point.y}
-                  r={index === points.length - 1 ? "6.5" : "5"}
-                  fill="rgb(9 9 11)"
-                  stroke="rgb(34 211 238)"
-                  strokeWidth={index === points.length - 1 ? "2.5" : "1.5"}
-                />
-                <circle
-                  cx={point.x}
-                  cy={point.y}
-                  r="2"
-                  fill="rgb(34 211 238)"
-                />
+            <circle
+              cx={currentPoint.x}
+              cy={currentPoint.y}
+              r="10"
+              fill="rgb(34 211 238)"
+              fillOpacity="0.07"
+            />
+            <circle
+              cx={currentPoint.x}
+              cy={currentPoint.y}
+              r="4.5"
+              fill="rgb(9 9 11)"
+              stroke="rgb(34 211 238)"
+              strokeWidth="2"
+            />
 
-                {/* Valeur */}
-                <text
-                  x={point.x}
-                  y={point.y - 14}
-                  textAnchor="middle"
-                  className={index === points.length - 1
-                    ? "fill-white text-[8px] font-black"
-                    : "fill-zinc-600 text-[8px] font-bold"}
-                >
-                  {formatEuro(point.value)}€
-                </text>
-              </g>
-            )
-          )}
+            <text
+              x={currentPoint.x}
+              y={currentPoint.y - 13}
+              textAnchor="middle"
+              className="fill-white text-[8px] font-black"
+            >
+              {formatEuro(last)}€
+            </text>
 
-          {/* Labels jours */}
-          {points.map(
-            (point, index) => (
+            {points.map((point, index) => (
               <text
                 key={`label-${index}`}
                 x={point.x}
-                y={
-                  height -
-                  10
-                }
+                y={height - 10}
                 textAnchor="middle"
                 className="fill-zinc-600 text-[9px] font-bold"
               >
-                {
-                  [
-                    "Auj.",
-                    "+1j",
-                    "+2j",
-                    "+3j",
-                    "+4j",
-                    "+5j",
-                    "+6j",
-                  ][index]
-                }
+                {dayLabels[index]}
               </text>
-            )
-          )}
-        </svg>
+            ))}
+          </svg>
         </div>
       </div>
 
-      {/* Résumé du graphique */}
       <div className="mt-3 grid grid-cols-3 gap-2 rounded-2xl border border-white/[0.06] bg-white/[0.02] p-3">
         <div>
           <p className="text-[8px] font-black uppercase tracking-widest text-zinc-600">
             Départ
           </p>
-
-          <p className="mt-1 text-xs font-bold text-zinc-400 tabular-nums">
-            {formatEuro(
-              first
-            )}{" "}
-            €
+          <p className="mt-1 text-xs font-bold tabular-nums text-zinc-400">
+            {formatEuro(first)} €
           </p>
         </div>
 
@@ -425,21 +350,13 @@ function SevenDayChart({
           <p className="text-[8px] font-black uppercase tracking-widest text-zinc-600">
             Projection
           </p>
-
           <p
             className={`mt-1 text-sm font-black tabular-nums ${
-              variation >= 0
-                ? "text-emerald-400"
-                : "text-rose-400"
+              variation >= 0 ? "text-emerald-400" : "text-rose-400"
             }`}
           >
-            {variation >= 0
-              ? "+"
-              : ""}
-            {variation.toFixed(
-              1
-            )}{" "}
-            %
+            {variation >= 0 ? "+" : ""}
+            {variation.toFixed(1)} %
           </p>
         </div>
 
@@ -447,12 +364,8 @@ function SevenDayChart({
           <p className="text-[8px] font-black uppercase tracking-widest text-zinc-600">
             J+6
           </p>
-
-          <p className="mt-1 text-xs font-bold text-white tabular-nums">
-            {formatEuro(
-              last
-            )}{" "}
-            €
+          <p className="mt-1 text-xs font-bold tabular-nums text-white">
+            {formatEuro(last)} €
           </p>
         </div>
       </div>
