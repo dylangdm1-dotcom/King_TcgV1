@@ -280,8 +280,7 @@ export default function PSAPage() {
                 </div>
 
                 <p className="text-xs text-zinc-400 mt-1">
-                  Gestion de vos cartes gradées,
-                  valeurs marché et estimation IA.
+                  Centralisez vos cartes gradées, suivez leurs valeurs marché et retrouvez rapidement chaque certificat.
                 </p>
               </div>
             </div>
@@ -424,66 +423,83 @@ export default function PSAPage() {
               </div>
 
               {filteredCollection.length === 0 ? (
-                <div className="text-center py-16 rounded-2xl border border-zinc-900 bg-neutral-900/20">
-                  <ShieldCheck className="mx-auto w-10 h-10 text-zinc-600" />
+                <div className="text-center py-14 px-5 rounded-2xl border border-dashed border-zinc-800 bg-neutral-900/20">
+                  <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl border border-zinc-800 bg-neutral-950/70">
+                    <ShieldCheck className="w-6 h-6 text-zinc-600" />
+                  </div>
 
-                  <p className="mt-3 text-xs text-zinc-400 uppercase font-bold">
+                  <p className="mt-4 text-xs text-zinc-300 uppercase font-black">
                     Aucune carte PSA enregistrée
+                  </p>
+                  <p className="mx-auto mt-2 max-w-sm text-[11px] leading-relaxed text-zinc-500">
+                    Recherchez une carte gradée, choisissez son grade puis ajoutez-la à votre collection pour suivre sa valeur.
                   </p>
                 </div>
               ) : (
-                <div className="grid md:grid-cols-2 gap-4">
-                  {filteredCollection.map(
-                    (card) => (
-                      <div
-                        key={card.id}
-                        className="bg-neutral-900/60 border border-zinc-800 rounded-2xl p-4 flex gap-4 items-center"
-                      >
-                        {card.imageUrl ? (
-                          <img
-                            src={card.imageUrl}
-                            alt={card.cardName}
-                            className="w-16 h-24 object-cover rounded-lg"
-                            onError={(event) => {
-                              event.currentTarget.style.display =
-                                "none";
-                            }}
-                          />
-                        ) : (
-                          <div className="w-16 h-24 rounded-lg bg-neutral-950 border border-zinc-800 flex items-center justify-center">
-                            <Award className="w-6 h-6 text-zinc-700" />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {filteredCollection.map((card) => (
+                    <article
+                      key={card.id}
+                      className="kt-interactive-card group relative min-w-0 overflow-hidden rounded-2xl border border-zinc-800 bg-neutral-900/60 p-3.5 sm:p-4"
+                    >
+                      <div className="flex min-w-0 items-start gap-3 sm:gap-4">
+                        <div className="shrink-0">
+                          {card.imageUrl ? (
+                            <img
+                              src={card.imageUrl}
+                              alt={card.cardName}
+                              className="h-28 w-20 rounded-xl border border-zinc-800 bg-neutral-950 object-contain sm:h-32 sm:w-24"
+                              onError={(event) => {
+                                event.currentTarget.style.display = "none";
+                              }}
+                            />
+                          ) : (
+                            <div className="flex h-28 w-20 items-center justify-center rounded-xl border border-zinc-800 bg-neutral-950 sm:h-32 sm:w-24">
+                              <Award className="w-6 h-6 text-zinc-700" />
+                            </div>
+                          )}
+                        </div>
+
+                        <div className="min-w-0 flex-1">
+                          <div className="flex flex-wrap items-start justify-between gap-2">
+                            <span className="rounded-lg border border-red-400/25 bg-red-500/90 px-2 py-1 text-[10px] font-black text-white shadow-sm shadow-red-950/30">
+                              PSA {card.grade}
+                            </span>
+
+                            <button
+                              type="button"
+                              onClick={() => handleDelete(card.id)}
+                              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-zinc-800 bg-neutral-950/70 text-zinc-500 transition hover:border-red-400/30 hover:bg-red-500/10 hover:text-red-400 active:scale-95"
+                              aria-label={`Supprimer ${card.cardName} de la collection PSA`}
+                            >
+                              <Trash2 className="w-4 h-4" />
+                            </button>
                           </div>
-                        )}
 
-                        <div className="flex-1 min-w-0">
-                          <span className="text-[10px] bg-red-600 px-2 py-1 rounded font-black">
-                            PSA {card.grade}
-                          </span>
-
-                          <h3 className="text-xs font-black mt-2 truncate">
+                          <h3 className="mt-2 break-words text-sm font-black leading-snug text-white">
                             {card.cardName}
                           </h3>
 
-                          <p className="text-[10px] text-zinc-400 truncate">
-                            {card.setName}
-                          </p>
+                          <div className="mt-1 space-y-0.5 text-[10px] leading-relaxed text-zinc-400">
+                            <p className="break-words">{card.setName || "Extension non renseignée"}</p>
+                            {card.cardNumber && (
+                              <p className="break-all text-zinc-500">N° {card.cardNumber}</p>
+                            )}
+                            <p className="break-all text-zinc-600">Certificat : {card.psaCertNumber}</p>
+                          </div>
 
-                          <p className="text-cyan-400 text-xs font-bold">
-                            {formatEUR(card.estimatedValue)}
-                          </p>
+                          <div className="mt-3 rounded-xl border border-cyan-400/10 bg-cyan-400/[0.05] px-3 py-2.5">
+                            <p className="text-[8px] font-black uppercase tracking-widest text-zinc-500">
+                              Valeur estimée
+                            </p>
+                            <p className="mt-1 break-words text-sm font-black tabular-nums text-cyan-400">
+                              {formatEUR(card.estimatedValue)}
+                            </p>
+                          </div>
                         </div>
-
-                        <button
-                          onClick={() =>
-                            handleDelete(card.id)
-                          }
-                          className="text-zinc-500 hover:text-red-400"
-                        >
-                          <Trash2 className="w-4 h-4" />
-                        </button>
                       </div>
-                    )
-                  )}
+                    </article>
+                  ))}
                 </div>
               )}
             </section>
