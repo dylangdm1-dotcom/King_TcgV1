@@ -66,7 +66,7 @@ export default function PriceGraph({ card }: Props) {
         </span>
       </div>
 
-      <div className="rounded-xl border border-zinc-900 bg-neutral-950/20 p-2">
+      <div className="rounded-2xl border border-cyan-400/[0.10] bg-[linear-gradient(180deg,rgba(12,16,22,.96),rgba(7,10,14,.98))] p-3 shadow-[inset_0_1px_0_rgba(255,255,255,.025),0_18px_45px_rgba(0,0,0,.24)]">
         <div className="flex h-[280px] w-full items-center justify-center">
           {!mounted ? (
             <div className="flex items-center gap-2 text-[11px] font-bold text-zinc-600">
@@ -88,12 +88,13 @@ export default function PriceGraph({ card }: Props) {
               <AreaChart data={data} margin={{ top: 12, right: 14, left: -18, bottom: 2 }}>
                 <defs>
                   <linearGradient id="cardmarketArea" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#22d3ee" stopOpacity={0.2} />
-                    <stop offset="95%" stopColor="#22d3ee" stopOpacity={0} />
+                    <stop offset="0%" stopColor="#22d3ee" stopOpacity={0.34} />
+                    <stop offset="62%" stopColor="#22d3ee" stopOpacity={0.10} />
+                    <stop offset="100%" stopColor="#22d3ee" stopOpacity={0} />
                   </linearGradient>
                 </defs>
 
-                <CartesianGrid stroke="#171717" vertical={false} />
+                <CartesianGrid stroke="rgba(148,163,184,.10)" strokeDasharray="4 8" vertical={false} />
                 <XAxis
                   dataKey="label"
                   stroke="#525252"
@@ -114,9 +115,10 @@ export default function PriceGraph({ card }: Props) {
                 />
                 <Tooltip
                   contentStyle={{
-                    background: "#0a0a0a",
-                    border: "1px solid #27272a",
-                    borderRadius: 10,
+                    background: "rgba(7,10,14,.98)",
+                    border: "1px solid rgba(34,211,238,.18)",
+                    borderRadius: 14,
+                    boxShadow: "0 18px 44px rgba(0,0,0,.45)",
                   }}
                   itemStyle={{ color: "#22d3ee", fontSize: 11, fontWeight: 800 }}
                   labelStyle={{ color: "#a1a1aa", fontSize: 10, fontWeight: 700 }}
@@ -129,11 +131,11 @@ export default function PriceGraph({ card }: Props) {
                   type="monotone"
                   dataKey="price"
                   stroke="#22d3ee"
-                  strokeWidth={2.5}
+                  strokeWidth={4}
                   fill="url(#cardmarketArea)"
-                  dot={{ r: 3, fill: "#09090b", stroke: "#22d3ee", strokeWidth: 2 }}
-                  activeDot={{ r: 5 }}
-                  animationDuration={350}
+                  dot={{ r: 4, fill: "#071015", stroke: "#67e8f9", strokeWidth: 2.5 }}
+                  activeDot={{ r: 6, fill: "#22d3ee", stroke: "#08202a", strokeWidth: 3 }}
+                  animationDuration={650}
                 />
               </AreaChart>
             </ResponsiveContainer>
