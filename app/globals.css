@@ -5,23 +5,34 @@
 /* ========================================================= */
 /* KING_TCG THEME - ÉPURÉ & SOMBRE */
 /* ========================================================= */
+
 :root {
-  --background: #09090b; /* Noir zinc très élégant */
-  --surface: #18181b;
-  --surface-light: #27272a;
-  --primary: #facc15;
-  --primary-dark: #eab308;
-  --blue: #06b6d4; /* Remplacé par un cyan discret */
-  --purple: #3f3f46; /* Remplacé par un gris neutre */
+  --background: #050505;
+  --background-soft: #0b0b0e;
+  --surface: #111318;
+  --surface-elevated: #15181d;
+  --surface-premium: #1a1f26;
+  --border: rgba(122, 138, 160, 0.16);
+  --border-strong: rgba(34, 211, 238, 0.28);
+  --primary: #00d4ff;
+  --primary-dark: #00a3ff;
+  --blue: #00a3ff;
+  --purple: #1a1f26;
   --success: #10b981;
-  --danger: #ef4444;
+  --danger: #ff4d4d;
+  --warning: #ffb020;
   --text: #ffffff;
-  --text-muted: #71717a;
-  
-  --cyan-glow: rgba(6, 182, 212, 0.05);
-  --yellow-glow: rgba(250, 204, 21, 0.05);
-  --emerald-glow: rgba(16, 185, 129, 0.05);
+  --text-muted: #8b95a7;
+  --text-subtle: #596273;
+  --cyan-glow: rgba(0, 212, 255, 0.10);
+  --blue-glow: rgba(0, 163, 255, 0.08);
+  --emerald-glow: rgba(16, 185, 129, 0.08);
+  --kt-accent: #22d3ee;
+  --kt-accent-soft: rgba(34, 211, 238, 0.10);
+  --kt-radius: 18px;
+  --kt-shadow: 0 18px 55px rgba(0, 0, 0, 0.34);
 }
+
 
 * {
   box-sizing: border-box;
@@ -35,15 +46,14 @@ body {
 }
 
 body {
-  /* Fini le bleu ! Un fond noir profond avec juste une très légère nuance au sommet */
-  background: radial-gradient(
-    circle at top,
-    #18181b,
-    #09090b 70%
-  );
+  background:
+    radial-gradient(circle at 50% -10%, rgba(0, 163, 255, 0.09), transparent 34%),
+    radial-gradient(circle at 88% 12%, rgba(0, 212, 255, 0.045), transparent 24%),
+    linear-gradient(180deg, #07090c 0%, var(--background) 42%, #07080b 100%);
   color: var(--text);
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   overflow-x: hidden;
+  text-rendering: optimizeLegibility;
 }
 
 a {
@@ -642,4 +652,130 @@ a {
     animation: none !important;
     transition: none !important;
   }
+}
+
+/* =========================================================
+   KING_TCG PREMIUM UI — DESIGN SYSTEM V1
+   ========================================================= */
+.kt-app-shell {
+  min-height: 100vh;
+  color: #fff;
+  background: transparent;
+}
+
+.kt-page {
+  width: min(100%, 1180px);
+  margin: 0 auto;
+  padding: 22px 16px 110px;
+}
+
+.kt-premium-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--kt-radius);
+  background:
+    linear-gradient(145deg, rgba(255,255,255,.025), transparent 38%),
+    linear-gradient(180deg, rgba(21,24,29,.94), rgba(13,15,19,.96));
+  box-shadow: var(--kt-shadow), inset 0 1px 0 rgba(255,255,255,.025);
+}
+
+.kt-premium-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(110deg, transparent 25%, rgba(34,211,238,.025), transparent 62%);
+}
+
+.kt-premium-card-soft {
+  border: 1px solid rgba(122,138,160,.12);
+  border-radius: 16px;
+  background: rgba(17,19,24,.72);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.02);
+}
+
+.kt-section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: #7f8a9c;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+.kt-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  border: 1px solid rgba(34,211,238,.18);
+  border-radius: 999px;
+  background: rgba(34,211,238,.07);
+  padding: 6px 10px;
+  color: #67e8f9;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+
+.kt-primary-button {
+  display: inline-flex;
+  min-height: 46px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid rgba(103,232,249,.44);
+  border-radius: 14px;
+  background: linear-gradient(135deg, #22d3ee 0%, #0ea5e9 58%, #0284c7 100%);
+  color: #031015;
+  font-weight: 900;
+  box-shadow: 0 12px 34px rgba(14,165,233,.18), inset 0 1px 0 rgba(255,255,255,.35);
+  transition: transform .24s ease, filter .24s ease, box-shadow .24s ease;
+}
+
+.kt-primary-button:hover { filter: brightness(1.06); box-shadow: 0 16px 38px rgba(14,165,233,.24); }
+.kt-primary-button:active { transform: scale(.985); }
+
+.kt-secondary-button {
+  display: inline-flex;
+  min-height: 42px;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border: 1px solid rgba(34,211,238,.28);
+  border-radius: 13px;
+  background: rgba(10,15,20,.72);
+  color: #67e8f9;
+  font-weight: 800;
+  transition: border-color .24s ease, background .24s ease, color .24s ease;
+}
+
+.kt-secondary-button:hover { border-color: rgba(103,232,249,.5); background: rgba(34,211,238,.07); color: #fff; }
+
+.kt-stat-value {
+  color: #fff;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -.035em;
+}
+
+.kt-grid-glow {
+  background-image:
+    linear-gradient(rgba(255,255,255,.014) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.014) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: linear-gradient(to bottom, black, transparent 85%);
+}
+
+.kt-fade-in { animation: kt-fade-in .42s ease both; }
+.kt-rise-in { animation: kt-rise-in .48s cubic-bezier(.2,.8,.2,1) both; }
+
+@keyframes kt-fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes kt-rise-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+@media (max-width: 767px) {
+  .kt-page { padding: 16px 14px 98px; }
+  .kt-premium-card { border-radius: 16px; }
 }
