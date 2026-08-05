@@ -874,8 +874,8 @@ export default function DashboardPage() {
     <>
       <Navbar />
 
-      <main className="min-h-screen bg-neutral-950 text-white pb-32 selection:bg-cyan-500/20">
-        <div className="mx-auto max-w-xl space-y-5 px-4 py-5">
+      <main className="kt-app-shell pb-32 selection:bg-cyan-500/20">
+        <div className="kt-page max-w-xl space-y-5">
 
           {/* HEADER */}
           <div className="flex items-center justify-between">
@@ -886,7 +886,7 @@ export default function DashboardPage() {
                 onClick={
                   exportData
                 }
-                className="flex items-center gap-1.5 rounded-xl border border-zinc-800 bg-neutral-900 px-3 py-2 text-[10px] font-black uppercase tracking-wider text-zinc-300 hover:border-cyan-500/50 hover:text-cyan-400 transition-all"
+                className="flex items-center gap-1.5 kt-secondary-button px-3 py-2 text-[10px] font-black uppercase tracking-wider text-zinc-300 hover:border-cyan-500/50 hover:text-cyan-400 transition-all"
               >
                 <Download className="w-3.5 h-3.5 text-cyan-400" />
                 Exporter
@@ -896,7 +896,7 @@ export default function DashboardPage() {
                 onClick={() =>
                   fileRef.current?.click()
                 }
-                className="flex items-center gap-1.5 rounded-xl border border-zinc-800 bg-neutral-900 px-3 py-2 text-[10px] font-black uppercase tracking-wider text-zinc-300 hover:border-cyan-500/50 hover:text-cyan-400 transition-all"
+                className="flex items-center gap-1.5 kt-secondary-button px-3 py-2 text-[10px] font-black uppercase tracking-wider text-zinc-300 hover:border-cyan-500/50 hover:text-cyan-400 transition-all"
               >
                 <Upload className="w-3.5 h-3.5 text-cyan-400" />
                 Importer
@@ -934,11 +934,11 @@ export default function DashboardPage() {
           )}
 
           {/* MAIN HEADER */}
-          <section className="rounded-2xl border border-zinc-900 bg-neutral-900/40 p-4 sm:p-5 flex flex-col gap-3">
+          <section className="kt-premium-card kt-rise-in flex flex-col gap-3 p-4 sm:p-5">
             <div className="flex items-center justify-between">
               <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-[9px] font-black uppercase tracking-widest">
                 <Sparkles className="w-3 h-3" />
-                Suivi Live V5
+                Suivi portefeuille
               </div>
 
               <span className="text-[10px] text-zinc-500 font-bold uppercase tracking-wider">
@@ -953,19 +953,15 @@ export default function DashboardPage() {
             <div>
               <h1 className="text-lg font-black uppercase tracking-tight text-white">
                 Tableau de bord
-                V5
               </h1>
 
               <p className="text-[11px] text-zinc-400 mt-0.5">
-                Pilote la valeur réelle
-                de ta collection, ton
-                investissement et les
-                tendances du marché.
+                Visualisez la valeur de votre collection, votre investissement et les principales tendances du marché en un coup d’œil.
               </p>
             </div>
 
             <div className="grid grid-cols-2 gap-3 pt-3 border-t border-zinc-800/80">
-              <div className="bg-black/40 rounded-xl p-3 border border-zinc-800/60">
+              <div className="kt-premium-card-soft rounded-xl p-3">
                 <span className="text-zinc-500 text-[10px] block font-black uppercase tracking-wider">
                   Investissement
                 </span>
@@ -978,7 +974,7 @@ export default function DashboardPage() {
                 </span>
               </div>
 
-              <div className="bg-black/40 rounded-xl p-3 border border-zinc-800/60">
+              <div className="kt-premium-card-soft rounded-xl p-3">
                 <span className="text-zinc-500 text-[10px] block font-black uppercase tracking-wider">
                   Profit Net
                 </span>
@@ -1006,7 +1002,7 @@ export default function DashboardPage() {
 
           {/* KPI */}
           <section className="grid gap-3 grid-cols-2">
-            <div className="rounded-xl border border-zinc-900 bg-neutral-900/40 p-4 flex flex-col justify-between min-h-[95px]">
+            <div className="kt-premium-card kt-interactive-card flex min-h-[104px] flex-col justify-between rounded-[18px] p-4">
               <div className="flex justify-between items-start">
                 <span className="text-zinc-500 text-[10px] font-black uppercase tracking-wider">
                   Valeur Actuelle
@@ -1023,7 +1019,7 @@ export default function DashboardPage() {
               </div>
             </div>
 
-            <div className="rounded-xl border border-zinc-900 bg-neutral-900/40 p-4 flex flex-col justify-between min-h-[95px]">
+            <div className="kt-premium-card kt-interactive-card flex min-h-[104px] flex-col justify-between rounded-[18px] p-4">
               <div className="flex justify-between items-start">
                 <span className="text-zinc-500 text-[10px] font-black uppercase tracking-wider">
                   Rendement Global
@@ -1051,7 +1047,7 @@ export default function DashboardPage() {
               </div>
             </div>
 
-            <div className="rounded-xl border border-zinc-900 bg-neutral-900/40 p-4 flex flex-col justify-between min-h-[95px]">
+            <div className="kt-premium-card kt-interactive-card flex min-h-[104px] flex-col justify-between rounded-[18px] p-4">
               <div className="flex justify-between items-start">
                 <span className="text-zinc-500 text-[10px] font-black uppercase tracking-wider">
                   Score Stratégique
@@ -1071,7 +1067,7 @@ export default function DashboardPage() {
               </div>
             </div>
 
-            <div className="rounded-xl border border-zinc-900 bg-neutral-900/40 p-4 flex flex-col justify-between min-h-[95px]">
+            <div className="kt-premium-card kt-interactive-card flex min-h-[104px] flex-col justify-between rounded-[18px] p-4">
               <div className="flex justify-between items-start">
                 <span className="text-zinc-500 text-[10px] font-black uppercase tracking-wider">
                   Actif Phare
@@ -1094,12 +1090,11 @@ export default function DashboardPage() {
           <div className="space-y-4 pt-2">
             <h2 className="text-[10px] font-black uppercase tracking-widest text-zinc-500 px-1 flex items-center gap-1.5">
               <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-              Fluctuations & Analyses
-              de Marché V5
+              Fluctuations & analyses de marché
             </h2>
 
             {/* COURBE 7 JOURS */}
-            <section className="rounded-xl border border-zinc-900 bg-neutral-950/40 p-5 sm:p-6">
+            <section className="kt-premium-card rounded-[18px] p-5 sm:p-6">
               <div className="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                 <div>
                   <p className="text-[10px] font-black uppercase tracking-wider text-zinc-500">
@@ -1215,7 +1210,7 @@ export default function DashboardPage() {
             </section>
 
             {/* TOP PERFORMANCES */}
-            <section className="rounded-xl border border-zinc-900 bg-neutral-950/40 p-4 sm:p-5">
+            <section className="kt-premium-card rounded-[18px] p-4 sm:p-5">
               <div className="flex items-center gap-2 mb-4">
                 <Trophy className="w-4 h-4 text-cyan-400" />
 
@@ -1299,13 +1294,12 @@ export default function DashboardPage() {
             </section>
 
             {/* HISTORIQUE */}
-            <section className="rounded-xl border border-zinc-900 bg-neutral-950/40 p-4 sm:p-5">
+            <section className="kt-premium-card rounded-[18px] p-4 sm:p-5">
               <div className="flex items-center gap-2 mb-4">
                 <History className="w-4 h-4 text-zinc-400" />
 
                 <h2 className="text-xs font-black uppercase tracking-widest text-zinc-400">
                   Historique d'acquisition
-                  V5
                 </h2>
               </div>
 
@@ -1331,7 +1325,7 @@ export default function DashboardPage() {
           <div className="space-y-4 pt-2">
             <h2 className="text-[10px] font-black uppercase tracking-widest text-zinc-500 px-1 flex items-center gap-1.5">
               <Package className="w-3.5 h-3.5 text-cyan-400" />
-              Inventaire des Actifs V5
+              Inventaire des actifs
               ({cards.length})
             </h2>
 
@@ -1361,7 +1355,7 @@ export default function DashboardPage() {
                       key={
                         card.id
                       }
-                      className={`rounded-xl border border-zinc-900 bg-neutral-900/40 transition-all ${
+                      className={`kt-premium-card transition-all ${
                         isExpanded
                           ? "border-cyan-500/30 bg-neutral-900/80 p-4"
                           : "p-3.5 hover:border-zinc-800"
@@ -1435,7 +1429,7 @@ export default function DashboardPage() {
                       {isExpanded && (
                         <div className="mt-3.5 pt-3.5 border-t border-zinc-800/80">
                           <div className="grid grid-cols-3 gap-2 text-[10px]">
-                            <div className="bg-black/60 rounded-lg p-2.5 border border-zinc-800/60 text-center">
+                            <div className="kt-premium-card-soft rounded-xl p-2.5 text-center">
                               <span className="text-zinc-500 font-medium block uppercase tracking-wider">
                                 Achat
                               </span>
@@ -1448,7 +1442,7 @@ export default function DashboardPage() {
                               </span>
                             </div>
 
-                            <div className="bg-black/60 rounded-lg p-2.5 border border-zinc-800/60 text-center">
+                            <div className="kt-premium-card-soft rounded-xl p-2.5 text-center">
                               <span className="text-zinc-500 font-medium block uppercase tracking-wider">
                                 Actuelle
                               </span>
@@ -1461,7 +1455,7 @@ export default function DashboardPage() {
                               </span>
                             </div>
 
-                            <div className="bg-black/60 rounded-lg p-2.5 border border-zinc-800/60 text-center">
+                            <div className="kt-premium-card-soft rounded-xl p-2.5 text-center">
                               <span className="text-zinc-500 font-medium block uppercase tracking-wider">
                                 Profit Net
                               </span>
@@ -1487,7 +1481,7 @@ export default function DashboardPage() {
                           </div>
 
                           <div className="mt-2 grid grid-cols-2 gap-2 text-[10px]">
-                            <div className="bg-black/40 rounded-lg p-2 border border-zinc-800/50">
+                            <div className="kt-premium-card-soft rounded-xl p-2">
                               <span className="text-zinc-600 font-medium block uppercase tracking-wider">
                                 Prix d'achat
                                 unitaire
@@ -1501,7 +1495,7 @@ export default function DashboardPage() {
                               </span>
                             </div>
 
-                            <div className="bg-black/40 rounded-lg p-2 border border-zinc-800/50">
+                            <div className="kt-premium-card-soft rounded-xl p-2">
                               <span className="text-zinc-600 font-medium block uppercase tracking-wider">
                                 Rendement
                               </span>
@@ -1532,7 +1526,7 @@ export default function DashboardPage() {
                           </div>
 
                           <div className="mt-2 grid grid-cols-3 gap-2 text-[10px]">
-                            <div className="bg-black/40 rounded-lg p-2 border border-zinc-800/50">
+                            <div className="kt-premium-card-soft rounded-xl p-2">
                               <span className="text-zinc-600 font-medium block uppercase tracking-wider">
                                 Tendance 7j
                               </span>
@@ -1556,7 +1550,7 @@ export default function DashboardPage() {
                               </span>
                             </div>
 
-                            <div className="bg-black/40 rounded-lg p-2 border border-zinc-800/50">
+                            <div className="kt-premium-card-soft rounded-xl p-2">
                               <span className="text-zinc-600 font-medium block uppercase tracking-wider">
                                 Tendance 30j
                               </span>
@@ -1580,7 +1574,7 @@ export default function DashboardPage() {
                               </span>
                             </div>
 
-                            <div className="bg-black/40 rounded-lg p-2 border border-zinc-800/50">
+                            <div className="kt-premium-card-soft rounded-xl p-2">
                               <span className="text-zinc-600 font-medium block uppercase tracking-wider">
                                 Score
                               </span>
