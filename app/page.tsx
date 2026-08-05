@@ -91,22 +91,22 @@ export default function Home() {
     <>
       <Navbar />
 
-      <main className="min-h-screen bg-neutral-950 text-white pb-32">
+      <main className="kt-app-shell pb-32">
         {/* HERO V5.0 */}
-        <section className="relative overflow-hidden border-b border-zinc-900 py-10 px-4 text-center bg-gradient-to-b from-neutral-900/50 via-neutral-950 to-neutral-950">
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
+        <section className="relative overflow-hidden border-b border-cyan-400/[0.08] px-4 py-12 text-center sm:py-16">
+          <div className="absolute left-1/2 top-[-7rem] h-80 w-80 -translate-x-1/2 rounded-full bg-cyan-400/[0.11] blur-[90px] pointer-events-none" />
 
-          <div className="relative mx-auto max-w-xl space-y-3 z-10">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-3 py-1 text-[10px] font-black uppercase tracking-widest text-cyan-400">
+          <div className="relative z-10 mx-auto max-w-xl space-y-4 kt-rise-in">
+            <span className="kt-eyebrow">
               <Sparkles className="w-3 h-3" />
               King_TCG v5.0 • Intelligence Collection
             </span>
 
-            <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-white uppercase">
+            <h1 className="text-4xl font-black tracking-[-0.045em] text-white sm:text-6xl">
               King<span className="text-cyan-400">_TCG</span>
             </h1>
 
-            <p className="mx-auto max-w-sm text-xs text-zinc-400 leading-relaxed">
+            <p className="mx-auto max-w-md text-[13px] leading-6 text-zinc-400">
               Scannez, recherchez et organisez vos cartes Pokémon, puis suivez leur valeur grâce aux données de marché réunies dans une interface simple.
             </p>
 
@@ -114,7 +114,7 @@ export default function Home() {
             <div className="pt-2">
               <button
                 onClick={() => router.push("/scanner")}
-                className="w-full max-w-sm mx-auto rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 py-3.5 px-6 text-xs font-black uppercase tracking-wider text-black shadow-lg shadow-cyan-500/20 active:scale-[0.98] transition flex items-center justify-center gap-2 border border-cyan-400/30"
+                className="kt-primary-button mx-auto w-full max-w-sm px-6 py-3.5 text-xs uppercase tracking-[0.11em]"
               >
                 <Camera className="w-4 h-4 text-black" />
                 Scanner IA V5
@@ -126,7 +126,7 @@ export default function Home() {
             <div className="grid grid-cols-2 gap-3 pt-3 max-w-sm mx-auto">
               <Link
                 href="/alerts"
-                className="rounded-xl border border-red-500/40 bg-red-950/20 hover:bg-red-950/40 hover:border-red-400 transition-all py-3 px-3 flex items-center justify-center gap-2 shadow-lg shadow-red-500/5 active:scale-[0.98]"
+                className="kt-premium-card-soft flex items-center justify-center gap-2 px-3 py-3 transition hover:border-red-400/30 hover:bg-red-500/[0.05] active:scale-[0.98]"
               >
                 <Bell className="w-4 h-4 text-red-400" />
                 <span className="text-[10px] font-black uppercase tracking-wider text-red-300">
@@ -136,7 +136,7 @@ export default function Home() {
 
               <Link
                 href="/opportunity"
-                className="rounded-xl border border-amber-500/40 bg-amber-950/20 hover:bg-amber-950/40 hover:border-amber-400 transition-all py-3 px-3 flex items-center justify-center gap-2 shadow-lg shadow-amber-500/5 active:scale-[0.98]"
+                className="kt-premium-card-soft flex items-center justify-center gap-2 px-3 py-3 transition hover:border-amber-400/30 hover:bg-amber-500/[0.05] active:scale-[0.98]"
               >
                 <TrendingUp className="w-4 h-4 text-amber-400" />
                 <span className="text-[10px] font-black uppercase tracking-wider text-amber-300">
@@ -148,9 +148,9 @@ export default function Home() {
         </section>
 
         {/* Analyse Portfolio */}
-        <section className="mx-auto max-w-xl px-4 py-8 space-y-4">
+        <section className="mx-auto max-w-xl space-y-4 px-4 py-8 kt-fade-in">
           <div className="flex items-center justify-between">
-            <span className="text-[10px] font-black uppercase tracking-widest text-zinc-500">
+            <span className="kt-section-label">
               Analyse du Portfolio
             </span>
           </div>
@@ -183,8 +183,8 @@ export default function Home() {
         </section>
 
         {/* Modules King_TCG */}
-        <section className="mx-auto max-w-xl px-4 space-y-4">
-          <span className="text-[10px] font-black uppercase tracking-widest text-zinc-500 block px-1">
+        <section className="mx-auto max-w-xl space-y-4 px-4">
+          <span className="kt-section-label block px-1">
             Modules King_TCG
           </span>
 
@@ -227,7 +227,7 @@ export default function Home() {
             <QuickCard
               href="/psa"
               title="PSA Gradation"
-              subtitle=" Prix & estimation IA"
+              subtitle=" Prix, collection & analyse"
               icon={<Award className="w-5 h-5 text-cyan-400" />}
               isSpecial={true}
             />
@@ -235,7 +235,7 @@ export default function Home() {
 
           {/* ESPACE UTILISATEUR */}
           <div className="space-y-3 pt-2">
-            <div className="glass-card rounded-xl p-5 border border-zinc-900 bg-neutral-900/40">
+            <div className="kt-premium-card kt-interactive-card rounded-[18px] p-5">
               <div className="flex items-center gap-2.5 mb-2">
                 <div className="w-7 h-7 flex items-center justify-center bg-black/40 rounded-lg border border-zinc-800 text-cyan-400">
                   <Wallet className="w-4 h-4" />
@@ -252,14 +252,14 @@ export default function Home() {
 
               <Link
                 href="/parametres/compte"
-                className="block w-full text-center bg-cyan-500 hover:bg-cyan-400 text-black font-black uppercase tracking-wider py-2.5 rounded-lg text-[11px] transition-all shadow-md shadow-cyan-500/10"
+                className="kt-primary-button w-full py-2.5 text-[11px] uppercase tracking-wider"
               >
                 Accéder au compte
               </Link>
             </div>
 
             {/* WHATNOT */}
-            <div className="glass-card rounded-xl p-5 border border-zinc-900 bg-neutral-900/40">
+            <div className="kt-premium-card kt-interactive-card rounded-[18px] p-5">
               <div className="flex items-center gap-2.5 mb-2">
                 <div className="w-7 h-7 flex items-center justify-center bg-zinc-900 rounded-full border border-zinc-800 text-cyan-400">
                   <Video className="w-3.5 h-3.5" />
@@ -290,7 +290,7 @@ export default function Home() {
                 href="https://www.whatnot.com/fr-FR/user/dylangdm"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block w-full text-center bg-white text-black font-black uppercase tracking-wider py-2.5 rounded-lg text-[11px] hover:bg-zinc-200 transition-all shadow-md"
+                className="kt-secondary-button w-full py-2.5 text-[11px] uppercase tracking-wider"
               >
                 Voir les lives Pokémon
               </a>
@@ -308,7 +308,7 @@ function Stat({
   value
 }: any) {
   return (
-    <div className="kt-interactive-card glass-card rounded-xl p-3.5 flex flex-col justify-between border border-zinc-900 bg-neutral-900/40">
+    <div className="kt-premium-card kt-interactive-card flex min-h-[104px] flex-col justify-between rounded-[18px] p-4">
       <div className="flex justify-between items-start">
         <span className="text-[10px] font-bold uppercase tracking-wider text-zinc-400">
           {title}
@@ -318,7 +318,7 @@ function Stat({
         </div>
       </div>
 
-      <div className="mt-2 text-xl font-black tracking-tight text-white">
+      <div className="kt-stat-value mt-3 text-xl font-black">
         {value}
       </div>
     </div>
@@ -338,14 +338,14 @@ function QuickCard({
       className="group block"
     >
       <div
-        className={`kt-interactive-card glass-card rounded-xl p-4 border transition-all ${
+        className={`kt-premium-card kt-interactive-card rounded-[18px] p-4 transition-all ${
           isSpecial
-            ? "border-cyan-500/40 bg-cyan-950/10 group-hover:border-cyan-400 group-hover:bg-cyan-950/20"
-            : "border-zinc-900 bg-neutral-900/40 group-hover:border-cyan-500/40 group-hover:bg-neutral-900/80"
+            ? "border-cyan-400/25 bg-cyan-400/[0.035] group-hover:border-cyan-300/45"
+            : "border-white/[0.07] group-hover:border-cyan-400/25"
         }`}
       >
         <div className="flex items-center gap-3">
-          <div className="text-cyan-400 p-2 rounded-lg bg-black/40 border border-zinc-800 group-hover:scale-110 transition-transform">
+          <div className="rounded-xl border border-cyan-400/12 bg-cyan-400/[0.055] p-2.5 text-cyan-300 transition-transform group-hover:scale-105">
             {icon}
           </div>
 
