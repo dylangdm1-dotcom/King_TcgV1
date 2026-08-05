@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState, useEffect, useCallback } from "react";
+import { useMemo, useState, useEffect, useCallback, useRef } from "react";
 import {
   Search,
   Package,
@@ -19,6 +19,7 @@ import {
   searchCards,
   searchCardsBySetId,
   getAllSets,
+  enrichAndCacheCards,
   type LanguageCode,
 } from "../../lib/pokemon";
 import { filterCards, type SearchFilters as SearchFiltersType } from "../../lib/search";
@@ -32,6 +33,9 @@ export default function Recherche() {
 
   const [cards, setCards] = useState<PokemonCard[]>([]);
   const [loading, setLoading] = useState(false);
+  const [syncingPriceIds, setSyncingPriceIds] = useState<Set<string>>(new Set());
+  const attemptedPriceIdsRef = useRef<Set<string>>(new Set());
+  const priceSyncGenerationRef = useRef(0);
 
   const [visible, setVisible] = useState(PAGE_SIZE);
   const [viewMode, setViewMode] = useState<"grid" | "large">("grid");
@@ -117,6 +121,9 @@ export default function Recherche() {
     }
 
     setLoading(true);
+    attemptedPriceIdsRef.current = new Set();
+    priceSyncGenerationRef.current += 1;
+    setSyncingPriceIds(new Set());
 
     try {
       const results = await searchCards(value, selectedLanguage);
@@ -137,6 +144,9 @@ export default function Recherche() {
     const chosenSet = allSetsList.find((s) => s.id === setId);
     setQuery(chosenSet ? chosenSet.name : setId);
     setLoading(true);
+    attemptedPriceIdsRef.current = new Set();
+    priceSyncGenerationRef.current += 1;
+    setSyncingPriceIds(new Set());
 
     try {
       const results = await searchCardsBySetId(setId, selectedLanguage);
@@ -155,6 +165,57 @@ export default function Recherche() {
   );
 
   const displayedCards = filteredCards.slice(0, visible);
+
+  const displayedCardIds = useMemo(
+    () => displayedCards.map((card) => card.id).join("|"),
+    [displayedCards]
+  );
+
+  // Enrichit uniquement les cartes actuellement visibles (24 par page).
+  // Une nouvelle page déclenche uniquement la synchronisation des nouvelles cartes.
+  useEffect(() => {
+    if (loading || displayedCards.length === 0) return;
+
+    const pendingCards = displayedCards.filter(
+      (card) => !attemptedPriceIdsRef.current.has(card.id)
+    );
+
+    if (pendingCards.length === 0) return;
+
+    const generation = priceSyncGenerationRef.current;
+    pendingCards.forEach((card) => attemptedPriceIdsRef.current.add(card.id));
+
+    setSyncingPriceIds((current) => {
+      const next = new Set(current);
+      pendingCards.forEach((card) => next.add(card.id));
+      return next;
+    });
+
+    enrichAndCacheCards(pendingCards)
+      .then((enrichedCards) => {
+        if (generation !== priceSyncGenerationRef.current) return;
+
+        const enrichedById = new Map(
+          enrichedCards.map((card) => [card.id, card])
+        );
+
+        setCards((currentCards) =>
+          currentCards.map((card) => enrichedById.get(card.id) ?? card)
+        );
+      })
+      .catch((error) => {
+        console.error("[King_TCG] Erreur synchronisation prix visibles :", error);
+      })
+      .finally(() => {
+        if (generation !== priceSyncGenerationRef.current) return;
+
+        setSyncingPriceIds((current) => {
+          const next = new Set(current);
+          pendingCards.forEach((card) => next.delete(card.id));
+          return next;
+        });
+      });
+  }, [displayedCardIds, loading]);
 
   const sets = useMemo(() => {
     return Array.from(
@@ -404,6 +465,13 @@ export default function Recherche() {
             </div>
           )}
 
+          {syncingPriceIds.size > 0 && (
+            <div className="flex items-center gap-2 rounded-xl border border-cyan-500/15 bg-cyan-500/[0.05] px-3.5 py-2.5 text-[10px] font-bold text-cyan-300">
+              <Loader2 className="h-3.5 w-3.5 animate-spin" />
+              Synchronisation des prix des cartes visibles…
+            </div>
+          )}
+
           {/* Grille de cartes avec application dynamique du prix selon l'état choisi */}
           {!loading && (
             <div
@@ -426,7 +494,10 @@ export default function Recherche() {
                       viewMode === "large" ? "w-full max-w-md" : "w-full"
                     }
                   >
-                    <CardResult card={cardWithAdjustedPrice} />
+                    <CardResult
+                      card={cardWithAdjustedPrice}
+                      isPriceLoading={syncingPriceIds.has(card.id)}
+                    />
                   </div>
                 );
               })}
