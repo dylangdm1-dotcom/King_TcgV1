@@ -14,7 +14,6 @@ import {
 
 import Navbar from "../../components/Navbar";
 import BackButton from "../../components/BackButton";
-import CardResult from "@/components/cards/CardResult";
 
 import { getCollection, getFavorites } from "@/lib/storage";
 import { getCardById } from "../../lib/pokemon";
@@ -207,8 +206,8 @@ export default function BibliothequePage() {
       topValuedCard: topCard,
       topCardPrice: maxPrice > 0 ? maxPrice : 0,
       liquidityRatio: ratio,
-      lastThreeCollection: collectionCards.slice(0, 6),
-      lastThreeFavorites: favoriteCards.slice(0, 6),
+      lastThreeCollection: collectionCards.slice(0, 3),
+      lastThreeFavorites: favoriteCards.slice(0, 3),
     };
   }, [collectionCards, favoriteCards]);
 
@@ -369,37 +368,14 @@ export default function BibliothequePage() {
                 Votre inventaire est actuellement vide.
               </div>
             ) : (
-              <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
-                {lastThreeCollection.map((card) => {
-                  const quantity = getCardQuantity(card.qty);
-                  return (
-                    <div
-                      key={card.id}
-                      className="relative group"
-                    >
-                      <CardResult card={card} />
-                      {quantity > 1 && (
-                        <div
-                          className="
-                          absolute right-3 top-3
-                          rounded-lg
-                          bg-black/80
-                          border border-cyan-500/40
-                          px-2 py-0.5
-                          text-[10px]
-                          font-black
-                          text-cyan-400
-                          shadow-xl
-                          z-10
-                          backdrop-blur-md
-                          "
-                        >
-                          x{quantity}
-                        </div>
-                      )}
-                    </div>
-                  );
-                })}
+              <div className="grid grid-cols-3 gap-2.5 sm:gap-4">
+                {lastThreeCollection.map((card) => (
+                  <CompactPreviewCard
+                    key={card.id}
+                    card={card}
+                    quantity={getCardQuantity(card.qty)}
+                  />
+                ))}
               </div>
             )}
 
@@ -512,9 +488,9 @@ export default function BibliothequePage() {
                 Aucun actif surveillé.
               </div>
             ) : (
-              <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+              <div className="grid grid-cols-3 gap-2.5 sm:gap-4">
                 {lastThreeFavorites.map((card) => (
-                  <CardResult
+                  <CompactPreviewCard
                     key={card.id}
                     card={card}
                   />
@@ -551,6 +527,53 @@ export default function BibliothequePage() {
   );
 }
 
+function CompactPreviewCard({
+  card,
+  quantity,
+}: {
+  card: PokemonCard;
+  quantity?: number;
+}) {
+  const market = calculateRealMarketPrices(card);
+  const price = market.average ?? 0;
+
+  return (
+    <Link
+      href={`/card/${card.id}`}
+      className="kt-premium-panel kt-premium-card-lift group min-w-0 overflow-hidden rounded-[18px] p-2 sm:p-3"
+    >
+      <div className="relative aspect-[0.72] overflow-hidden rounded-[13px] border border-white/[0.08] bg-black/30">
+        <img
+          src={card.images?.small || card.images?.large}
+          alt={card.name}
+          className="h-full w-full object-contain transition duration-300 group-hover:scale-[1.025]"
+          loading="lazy"
+          onError={(event) => {
+            event.currentTarget.style.opacity = "0";
+          }}
+        />
+        {quantity && quantity > 1 ? (
+          <span className="absolute right-1.5 top-1.5 rounded-full border border-cyan-300/25 bg-black/80 px-1.5 py-0.5 text-[8px] font-black text-cyan-300 backdrop-blur-md">
+            x{quantity}
+          </span>
+        ) : null}
+      </div>
+
+      <div className="min-w-0 px-0.5 pb-0.5 pt-2">
+        <p className="truncate text-[9px] font-black text-white sm:text-[11px]">
+          {card.name}
+        </p>
+        <p className="mt-0.5 truncate text-[7px] font-bold uppercase tracking-wide text-zinc-600 sm:text-[8px]">
+          {card.set?.name || "Extension inconnue"}
+        </p>
+        <p className="mt-1 text-[10px] font-black tabular-nums text-cyan-300 sm:text-xs">
+          {price > 0 ? `${price.toFixed(2)} €` : "—"}
+        </p>
+      </div>
+    </Link>
+  );
+}
+
 /**
  * Skeleton chargement cartes
  * Portfolio sécurisé
@@ -560,11 +583,9 @@ function SkeletonGrid() {
     <div
       className="
       grid
-      grid-cols-2
-      gap-4
-      sm:grid-cols-3
-      md:grid-cols-4
-      lg:grid-cols-6
+      grid-cols-3
+      gap-2.5
+      sm:gap-4
       "
     >
       {Array.from({ length: 3 }).map((_, index) => (
@@ -572,11 +593,9 @@ function SkeletonGrid() {
           key={index}
           className="
           aspect-[0.72]
-          animate-pulse
-          rounded-2xl
-          bg-neutral-900/40
-          border border-zinc-900
-          p-3
+          kt-skeleton
+          rounded-[18px]
+          border border-white/[0.07]
           "
         />
       ))}
