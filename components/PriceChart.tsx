@@ -99,7 +99,7 @@ export default function PriceChart({ history }: Props) {
       </div>
 
       {/* Graphique */}
-      <div className="rounded-xl border border-zinc-900 bg-neutral-950/20 p-2">
+      <div className="rounded-2xl border border-cyan-400/[0.10] bg-[linear-gradient(180deg,rgba(12,16,22,.96),rgba(7,10,14,.98))] p-3 shadow-[inset_0_1px_0_rgba(255,255,255,.025),0_18px_45px_rgba(0,0,0,.24)]">
         <div className="flex h-[280px] w-full items-center justify-center">
           {!mounted ? (
             <div className="flex items-center gap-2 text-[11px] font-bold text-zinc-600">
@@ -118,8 +118,8 @@ export default function PriceChart({ history }: Props) {
                 }}
               >
                 <Recharts.CartesianGrid
-                  stroke="#171717"
-                  strokeDasharray="0 0"
+                  stroke="rgba(148,163,184,.10)"
+                  strokeDasharray="4 8"
                   vertical={false}
                 />
 
@@ -145,11 +145,11 @@ export default function PriceChart({ history }: Props) {
 
                 <Recharts.Tooltip
                   contentStyle={{
-                    background: "#0a0a0a",
-                    border: "1px solid #171717",
-                    borderRadius: 8,
+                    background: "rgba(7,10,14,.98)",
+                    border: "1px solid rgba(34,211,238,.18)",
+                    borderRadius: 14,
                     boxShadow:
-                      "0 20px 25px -5px rgba(0,0,0,.7)",
+                      "0 20px 48px rgba(0,0,0,.55)",
                   }}
                   itemStyle={{
                     fontSize: "11px",
@@ -172,13 +172,15 @@ export default function PriceChart({ history }: Props) {
                   type="monotone"
                   dataKey="price"
                   stroke="#22d3ee"
-                  strokeWidth={2}
+                  strokeWidth={4}
                   dot={false}
                   activeDot={{
-                    r: 4,
-                    stroke: "#0a0a0a",
-                    strokeWidth: 2,
+                    r: 6,
+                    fill: "#22d3ee",
+                    stroke: "#08202a",
+                    strokeWidth: 3,
                   }}
+                  animationDuration={650}
                 />
               </Recharts.LineChart>
             </Recharts.ResponsiveContainer>
