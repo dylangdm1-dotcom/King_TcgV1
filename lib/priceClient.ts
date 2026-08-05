@@ -21,7 +21,7 @@ export async function enrichCardsWithMarketPrices(
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        cards: cards.slice(0, 60).map((card) => ({
+        cards: cards.map((card) => ({
           id: card.id,
           name: card.name,
           number: card.number,
