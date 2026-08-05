@@ -1,4 +1,4 @@
-import type { PokemonCard } from "./types";
+import { getCardPrice, type PokemonCard } from "./types";
 
 type PriceResponse = {
   success?: boolean;
@@ -29,7 +29,13 @@ export async function enrichCardsWithMarketPrices(
           setName: card.set?.name,
           variant: card.variant,
           rarity: card.rarity,
-          language: "en",
+          language: card.id.startsWith("tcgdex-ja-")
+            ? "ja"
+            : card.id.startsWith("tcgdex-zh-")
+              ? "zh-tw"
+              : card.id.startsWith("tcgdex-fr-")
+                ? "fr"
+                : "en",
         })),
       }),
     });
@@ -43,10 +49,33 @@ export async function enrichCardsWithMarketPrices(
       const pricing = data.prices?.[card.id];
       if (!pricing) return card;
 
-      return {
+      const mergedCard: PokemonCard = {
         ...card,
-        cardmarket: pricing.cardmarket ?? card.cardmarket,
-        tcgplayer: pricing.tcgplayer ?? card.tcgplayer,
+        cardmarket: pricing.cardmarket
+          ? {
+              ...card.cardmarket,
+              ...pricing.cardmarket,
+              prices: {
+                ...card.cardmarket?.prices,
+                ...pricing.cardmarket.prices,
+              },
+            }
+          : card.cardmarket,
+        tcgplayer: pricing.tcgplayer
+          ? {
+              ...card.tcgplayer,
+              ...pricing.tcgplayer,
+              prices: {
+                ...card.tcgplayer?.prices,
+                ...pricing.tcgplayer.prices,
+              },
+            }
+          : card.tcgplayer,
+      };
+
+      return {
+        ...mergedCard,
+        computedPrice: getCardPrice(mergedCard),
       };
     });
   } catch {
