@@ -258,13 +258,13 @@ export default function PSAPage() {
     <>
       <Navbar />
 
-      <main className="min-h-screen bg-neutral-950 text-white pb-32">
-        <div className="mx-auto max-w-5xl px-4 py-6 space-y-6">
+      <main className="kt-premium-shell min-h-screen text-white pb-32">
+        <div className="mx-auto max-w-6xl px-4 py-6 space-y-6">
 
           {/* HEADER */}
-          <section className="rounded-2xl border border-zinc-900 bg-neutral-900/40 p-5 shadow-xl flex flex-col md:flex-row items-center justify-between gap-4">
+          <section className="kt-premium-panel rounded-[22px] p-5 sm:p-6 flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-3">
-              <div className="p-3 rounded-xl bg-cyan-500/15 border border-cyan-500/20 text-cyan-400">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-cyan-400/20 bg-cyan-400/[0.08] text-cyan-300 shadow-[0_0_28px_rgba(34,211,238,0.08)]">
                 <Award className="w-7 h-7" />
               </div>
 
@@ -297,15 +297,28 @@ export default function PSAPage() {
                 setSelectedMarketPrices(undefined);
                 setIsAddModalOpen(true);
               }}
-              className="w-full md:w-auto bg-cyan-500 hover:bg-cyan-400 text-black font-black text-xs uppercase px-5 py-3 rounded-xl transition flex items-center justify-center gap-2"
+              className="kt-premium-button w-full md:w-auto px-5 py-3 text-xs uppercase flex items-center justify-center gap-2"
             >
               <Plus className="w-4 h-4" />
               Ajouter une dalle PSA
             </button>
           </section>
 
+          <section className="grid gap-3 sm:grid-cols-3">
+            {[
+              ["Collection gradée", "Centralisez certificats, grades et valeurs estimées."],
+              ["Prix PriceCharting", "Comparez les repères PSA disponibles avant un ajout."],
+              ["Estimation IA", "Module préparé, sans présenter une note non officielle comme garantie."],
+            ].map(([title, description]) => (
+              <div key={title} className="kt-premium-panel rounded-[18px] p-4">
+                <p className="text-[10px] font-black uppercase tracking-[0.14em] text-cyan-300">{title}</p>
+                <p className="mt-1.5 text-[10px] leading-5 text-zinc-500">{description}</p>
+              </div>
+            ))}
+          </section>
+
           {/* NAVIGATION */}
-          <div className="flex gap-2 bg-neutral-900/60 p-1.5 rounded-2xl border border-zinc-900">
+          <div className="kt-premium-panel grid grid-cols-3 gap-1.5 rounded-[18px] p-1.5">
             {[
               {
                 id: "collection",
@@ -332,8 +345,8 @@ export default function PSAPage() {
                 }
                 className={`flex-1 py-2.5 rounded-xl text-xs font-black uppercase transition ${
                   activeTab === tab.id
-                    ? "bg-cyan-500 text-black"
-                    : "text-zinc-400 hover:text-white"
+                    ? "bg-cyan-400 text-black shadow-[0_8px_24px_rgba(34,211,238,0.18)]"
+                    : "text-zinc-500 hover:bg-white/[0.04] hover:text-white"
                 }`}
               >
                 {tab.label}
@@ -388,7 +401,7 @@ export default function PSAPage() {
                     onChange={(e) =>
                       setCollectionSearch(e.target.value)
                     }
-                    className="w-full bg-neutral-900 border border-zinc-800 rounded-xl px-4 py-3 text-xs focus:outline-none focus:border-cyan-500"
+                    className="w-full rounded-2xl border border-white/[0.08] bg-black/25 px-4 py-3 text-xs text-white outline-none transition focus:border-cyan-400/50 focus:bg-black/40"
                   />
                 </div>
 
@@ -403,7 +416,7 @@ export default function PSAPage() {
                           ) as PSAGrade)
                     )
                   }
-                  className="bg-neutral-900 border border-zinc-800 rounded-xl px-4 py-3 text-xs"
+                  className="rounded-2xl border border-white/[0.08] bg-black/25 px-4 py-3 text-xs text-white outline-none transition focus:border-cyan-400/50"
                 >
                   <option value="all">
                     Tous les grades
@@ -423,7 +436,7 @@ export default function PSAPage() {
               </div>
 
               {filteredCollection.length === 0 ? (
-                <div className="text-center py-14 px-5 rounded-2xl border border-dashed border-zinc-800 bg-neutral-900/20">
+                <div className="kt-premium-panel rounded-[22px] border-dashed py-14 px-5 text-center">
                   <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl border border-zinc-800 bg-neutral-950/70">
                     <ShieldCheck className="w-6 h-6 text-zinc-600" />
                   </div>
@@ -436,11 +449,11 @@ export default function PSAPage() {
                   </p>
                 </div>
               ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                   {filteredCollection.map((card) => (
                     <article
                       key={card.id}
-                      className="kt-interactive-card group relative min-w-0 overflow-hidden rounded-2xl border border-zinc-800 bg-neutral-900/60 p-3.5 sm:p-4"
+                      className="kt-premium-panel kt-premium-card-lift group relative min-w-0 overflow-hidden rounded-[22px] p-3.5 sm:p-4"
                     >
                       <div className="flex min-w-0 items-start gap-3 sm:gap-4">
                         <div className="shrink-0">
@@ -448,13 +461,13 @@ export default function PSAPage() {
                             <img
                               src={card.imageUrl}
                               alt={card.cardName}
-                              className="h-28 w-20 rounded-xl border border-zinc-800 bg-neutral-950 object-contain sm:h-32 sm:w-24"
+                              className="h-28 w-20 rounded-[16px] border border-white/[0.08] bg-black/30 object-contain shadow-[0_14px_34px_rgba(0,0,0,0.35)] sm:h-32 sm:w-24"
                               onError={(event) => {
                                 event.currentTarget.style.display = "none";
                               }}
                             />
                           ) : (
-                            <div className="flex h-28 w-20 items-center justify-center rounded-xl border border-zinc-800 bg-neutral-950 sm:h-32 sm:w-24">
+                            <div className="flex h-28 w-20 items-center justify-center rounded-[16px] border border-white/[0.08] bg-black/30 sm:h-32 sm:w-24">
                               <Award className="w-6 h-6 text-zinc-700" />
                             </div>
                           )}
@@ -462,14 +475,14 @@ export default function PSAPage() {
 
                         <div className="min-w-0 flex-1">
                           <div className="flex flex-wrap items-start justify-between gap-2">
-                            <span className="rounded-lg border border-red-400/25 bg-red-500/90 px-2 py-1 text-[10px] font-black text-white shadow-sm shadow-red-950/30">
+                            <span className="rounded-full border border-cyan-300/20 bg-cyan-400/[0.10] px-2.5 py-1 text-[10px] font-black text-cyan-200 shadow-[0_0_20px_rgba(34,211,238,0.08)]">
                               PSA {card.grade}
                             </span>
 
                             <button
                               type="button"
                               onClick={() => handleDelete(card.id)}
-                              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-zinc-800 bg-neutral-950/70 text-zinc-500 transition hover:border-red-400/30 hover:bg-red-500/10 hover:text-red-400 active:scale-95"
+                              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-white/[0.08] bg-black/25 text-zinc-500 transition hover:border-red-400/30 hover:bg-red-500/10 hover:text-red-400 active:scale-95"
                               aria-label={`Supprimer ${card.cardName} de la collection PSA`}
                             >
                               <Trash2 className="w-4 h-4" />
@@ -488,7 +501,7 @@ export default function PSAPage() {
                             <p className="break-all text-zinc-600">Certificat : {card.psaCertNumber}</p>
                           </div>
 
-                          <div className="mt-3 rounded-xl border border-cyan-400/10 bg-cyan-400/[0.05] px-3 py-2.5">
+                          <div className="mt-3 rounded-2xl border border-cyan-400/12 bg-cyan-400/[0.055] px-3 py-2.5">
                             <p className="text-[8px] font-black uppercase tracking-widest text-zinc-500">
                               Valeur estimée
                             </p>
@@ -509,7 +522,7 @@ export default function PSAPage() {
           {activeTab === "search" && (
             <section className="space-y-6">
 
-              <div className="bg-neutral-900/40 border border-zinc-900 rounded-2xl p-6 space-y-4">
+              <div className="kt-premium-panel rounded-[22px] p-5 sm:p-6 space-y-4">
                 <div>
                   <h2 className="text-sm font-black uppercase">
                     Recherche Prix Pokémon TCG
@@ -542,13 +555,13 @@ export default function PSAPage() {
                         e.target.value
                       )
                     }
-                    className="flex-1 bg-neutral-950 border border-zinc-800 rounded-xl px-4 py-3 text-xs focus:outline-none focus:border-cyan-500"
+                    className="flex-1 rounded-2xl border border-white/[0.08] bg-black/30 px-4 py-3 text-xs text-white outline-none transition focus:border-cyan-400/50"
                   />
 
                   <button
                     type="submit"
                     disabled={priceChartingLoading}
-                    className="bg-cyan-500 hover:bg-cyan-400 disabled:opacity-50 text-black px-5 py-3 rounded-xl text-xs font-black uppercase"
+                    className="kt-premium-button disabled:opacity-50 px-5 py-3 text-xs uppercase"
                   >
                     {priceChartingLoading
                       ? "Recherche..."
@@ -784,7 +797,7 @@ export default function PSAPage() {
           {/* IA */}
           {activeTab === "estimation" && (
             <section className="space-y-6">
-              <div className="rounded-2xl border border-cyan-500/20 bg-gradient-to-br from-cyan-950/30 to-neutral-900 p-8 text-center space-y-5">
+              <div className="kt-premium-panel rounded-[24px] p-7 sm:p-9 text-center space-y-5">
 
                 <Sparkles className="mx-auto w-10 h-10 text-amber-400" />
 
@@ -822,7 +835,7 @@ export default function PSAPage() {
                   ].map((item) => (
                     <div
                       key={item.title}
-                      className="bg-black/40 border border-zinc-800 rounded-xl p-3"
+                      className="rounded-2xl border border-white/[0.07] bg-black/25 p-3"
                     >
                       <span className="block text-[10px] text-cyan-400 font-black uppercase">
                         {item.title}
@@ -849,8 +862,8 @@ export default function PSAPage() {
 
       {/* MODAL */}
       {isAddModalOpen && (
-        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="bg-neutral-900 border border-zinc-800 rounded-2xl p-6 w-full max-w-md space-y-5">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4 backdrop-blur-xl">
+          <div className="kt-premium-panel w-full max-w-md rounded-[24px] p-6 space-y-5">
 
             <h3 className="text-sm font-black uppercase">
               Ajouter une carte PSA
@@ -867,7 +880,7 @@ export default function PSAPage() {
                 onChange={(e) =>
                   setNewCert(e.target.value)
                 }
-                className="w-full bg-neutral-950 border border-zinc-800 rounded-xl px-4 py-3 text-xs"
+                className="w-full rounded-2xl border border-white/[0.08] bg-black/30 px-4 py-3 text-xs text-white outline-none transition focus:border-cyan-400/50"
               />
 
               <input
@@ -877,7 +890,7 @@ export default function PSAPage() {
                 onChange={(e) =>
                   setNewName(e.target.value)
                 }
-                className="w-full bg-neutral-950 border border-zinc-800 rounded-xl px-4 py-3 text-xs"
+                className="w-full rounded-2xl border border-white/[0.08] bg-black/30 px-4 py-3 text-xs text-white outline-none transition focus:border-cyan-400/50"
               />
 
               <input
@@ -886,7 +899,7 @@ export default function PSAPage() {
                 onChange={(e) =>
                   setNewSet(e.target.value)
                 }
-                className="w-full bg-neutral-950 border border-zinc-800 rounded-xl px-4 py-3 text-xs"
+                className="w-full rounded-2xl border border-white/[0.08] bg-black/30 px-4 py-3 text-xs text-white outline-none transition focus:border-cyan-400/50"
               />
 
               <input
@@ -895,7 +908,7 @@ export default function PSAPage() {
                 onChange={(e) =>
                   setNewNumber(e.target.value)
                 }
-                className="w-full bg-neutral-950 border border-zinc-800 rounded-xl px-4 py-3 text-xs"
+                className="w-full rounded-2xl border border-white/[0.08] bg-black/30 px-4 py-3 text-xs text-white outline-none transition focus:border-cyan-400/50"
               />
 
               <div className="grid grid-cols-2 gap-3">
@@ -954,7 +967,7 @@ export default function PSAPage() {
 
                 <button
                   type="submit"
-                  className="bg-cyan-500 text-black px-5 py-2 rounded-xl text-xs font-black uppercase"
+                  className="bg-cyan-400 text-black shadow-[0_8px_24px_rgba(34,211,238,0.18)] px-5 py-2 rounded-xl text-xs font-black uppercase"
                 >
                   Enregistrer
                 </button>
@@ -1014,14 +1027,14 @@ function StatCard({
   value: string | number;
 }) {
   return (
-    <div className="bg-neutral-900/40 border border-zinc-900 rounded-xl p-4">
-      <span className="text-[10px] uppercase font-black text-zinc-500">
+    <div className="kt-premium-panel kt-premium-card-lift rounded-[18px] p-4">
+      <span className="text-[9px] font-black uppercase tracking-[0.14em] text-zinc-600">
         {title}
       </span>
-
-      <p className="text-xl font-black text-cyan-400 mt-1">
+      <p className="mt-2 break-words text-lg font-black tabular-nums text-white sm:text-xl">
         {value}
       </p>
+      <div className="mt-3 h-px bg-gradient-to-r from-cyan-400/35 to-transparent" />
     </div>
   );
 }
