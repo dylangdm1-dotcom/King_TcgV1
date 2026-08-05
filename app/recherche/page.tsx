@@ -23,7 +23,7 @@ import {
   type LanguageCode,
 } from "../../lib/pokemon";
 import { filterCards, type SearchFilters as SearchFiltersType } from "../../lib/search";
-import { getCardPrice, type PokemonCard } from "../../lib/types";
+import { getCardPrice, hasMarketPrice, type PokemonCard } from "../../lib/types";
 
 const PAGE_SIZE = 24;
 
@@ -35,7 +35,9 @@ export default function Recherche() {
   const [loading, setLoading] = useState(false);
   const [syncingPriceIds, setSyncingPriceIds] = useState<Set<string>>(new Set());
   const attemptedPriceIdsRef = useRef<Set<string>>(new Set());
+  const priceAttemptCountRef = useRef<Map<string, number>>(new Map());
   const priceSyncGenerationRef = useRef(0);
+  const [priceRetryTick, setPriceRetryTick] = useState(0);
 
   const [visible, setVisible] = useState(PAGE_SIZE);
   const [viewMode, setViewMode] = useState<"grid" | "large">("grid");
@@ -122,6 +124,7 @@ export default function Recherche() {
 
     setLoading(true);
     attemptedPriceIdsRef.current = new Set();
+    priceAttemptCountRef.current = new Map();
     priceSyncGenerationRef.current += 1;
     setSyncingPriceIds(new Set());
 
@@ -145,6 +148,7 @@ export default function Recherche() {
     setQuery(chosenSet ? chosenSet.name : setId);
     setLoading(true);
     attemptedPriceIdsRef.current = new Set();
+    priceAttemptCountRef.current = new Map();
     priceSyncGenerationRef.current += 1;
     setSyncingPriceIds(new Set());
 
@@ -176,14 +180,20 @@ export default function Recherche() {
   useEffect(() => {
     if (loading || displayedCards.length === 0) return;
 
-    const pendingCards = displayedCards.filter(
-      (card) => !attemptedPriceIdsRef.current.has(card.id)
-    );
+    const pendingCards = displayedCards.filter((card) => {
+      if (hasMarketPrice(card)) return false;
+      const attempts = priceAttemptCountRef.current.get(card.id) ?? 0;
+      return !attemptedPriceIdsRef.current.has(card.id) && attempts < 2;
+    });
 
     if (pendingCards.length === 0) return;
 
     const generation = priceSyncGenerationRef.current;
-    pendingCards.forEach((card) => attemptedPriceIdsRef.current.add(card.id));
+    pendingCards.forEach((card) => {
+      attemptedPriceIdsRef.current.add(card.id);
+      const attempts = priceAttemptCountRef.current.get(card.id) ?? 0;
+      priceAttemptCountRef.current.set(card.id, attempts + 1);
+    });
 
     setSyncingPriceIds((current) => {
       const next = new Set(current);
@@ -202,6 +212,21 @@ export default function Recherche() {
         setCards((currentCards) =>
           currentCards.map((card) => enrichedById.get(card.id) ?? card)
         );
+
+        const retryIds = enrichedCards
+          .filter((card) => {
+            const attempts = priceAttemptCountRef.current.get(card.id) ?? 0;
+            return !hasMarketPrice(card) && attempts < 2;
+          })
+          .map((card) => card.id);
+
+        if (retryIds.length > 0) {
+          window.setTimeout(() => {
+            if (generation !== priceSyncGenerationRef.current) return;
+            retryIds.forEach((id) => attemptedPriceIdsRef.current.delete(id));
+            setPriceRetryTick((tick) => tick + 1);
+          }, 1200);
+        }
       })
       .catch((error) => {
         console.error("[King_TCG] Erreur synchronisation prix visibles :", error);
@@ -215,7 +240,7 @@ export default function Recherche() {
           return next;
         });
       });
-  }, [displayedCardIds, loading]);
+  }, [displayedCardIds, loading, priceRetryTick]);
 
   const sets = useMemo(() => {
     return Array.from(
