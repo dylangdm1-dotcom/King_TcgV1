@@ -23,7 +23,6 @@ import {
 } from "../../lib/pokemon";
 import { filterCards, type SearchFilters as SearchFiltersType } from "../../lib/search";
 import { getCardPrice, type PokemonCard } from "../../lib/types";
-import { enrichCardsWithMarketPrices } from "../../lib/priceClient";
 
 const PAGE_SIZE = 24;
 
@@ -121,8 +120,7 @@ export default function Recherche() {
 
     try {
       const results = await searchCards(value, selectedLanguage);
-      const pricedResults = await enrichCardsWithMarketPrices(results);
-      setCards(pricedResults);
+      setCards(results);
       setVisible(PAGE_SIZE);
     } catch (error) {
       console.error("[King_TCG] Erreur recherche :", error);
@@ -142,8 +140,7 @@ export default function Recherche() {
 
     try {
       const results = await searchCardsBySetId(setId, selectedLanguage);
-      const pricedResults = await enrichCardsWithMarketPrices(results);
-      setCards(pricedResults);
+      setCards(results);
       setVisible(PAGE_SIZE);
     } catch (error) {
       console.error("[King_TCG] Erreur recherche extension :", error);
