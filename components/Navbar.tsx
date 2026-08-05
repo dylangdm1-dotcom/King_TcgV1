@@ -25,13 +25,13 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="sticky top-0 z-50 border-b border-white/[0.06] bg-[#0b0d11]/90 backdrop-blur-xl">
+      <nav className="sticky top-0 z-50 border-b border-cyan-400/[0.08] bg-[#07090c]/88 shadow-[0_12px_35px_rgba(0,0,0,.28)] backdrop-blur-2xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-3 py-2.5 sm:px-6 sm:py-3">
           <div className="flex min-w-0 items-center gap-2.5 sm:gap-4">
             {pathname !== "/" && (
               <button
                 onClick={() => router.back()}
-                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-white/[0.07] bg-white/[0.025] text-zinc-400 transition hover:text-white"
+                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-white/[0.08] bg-[#111318]/80 text-zinc-400 shadow-inner transition hover:border-cyan-400/25 hover:text-white"
                 title="Retour"
                 aria-label="Retour"
               >
@@ -44,7 +44,7 @@ export default function Navbar() {
               className="group flex min-w-0 items-center gap-2.5 select-none"
               aria-label="Accueil King_TCG"
             >
-              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-cyan-400/20 bg-cyan-400/[0.07] text-lg shadow-lg shadow-cyan-400/5">
+              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-cyan-300/25 bg-gradient-to-br from-cyan-300/14 to-sky-500/5 text-lg shadow-[0_0_24px_rgba(34,211,238,.08)]">
                 👑
               </div>
               <div className="min-w-0">
@@ -73,9 +73,9 @@ export default function Navbar() {
                   title={label}
                   className={`flex h-9 items-center gap-2 rounded-xl px-3 text-[11px] font-black transition ${
                     main
-                      ? "bg-cyan-400 text-[#071014] shadow-lg shadow-cyan-400/10 hover:bg-cyan-300"
+                      ? "bg-gradient-to-r from-cyan-300 to-sky-500 text-[#031015] shadow-lg shadow-cyan-400/15 hover:brightness-110"
                       : active
-                        ? "bg-white/[0.06] text-cyan-300"
+                        ? "border border-cyan-400/15 bg-cyan-400/[0.08] text-cyan-300"
                         : "text-zinc-400 hover:bg-white/[0.04] hover:text-white"
                   }`}
                 >
