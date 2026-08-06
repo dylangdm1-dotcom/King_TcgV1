@@ -3,6 +3,7 @@
 export const dynamic = "force-dynamic";
 
 import { useRef, useState, useCallback } from "react";
+import { AnimatePresence, motion } from "motion/react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
@@ -21,9 +22,11 @@ import {
   Languages,
   CheckCircle2,
   Loader2,
+  Grid2X2,
+  Images,
 } from "lucide-react";
 
-import ScannerCamera from "@/components/scanner/ScannerCamera";
+import ScannerCamera, { type ScannerCameraHandle } from "@/components/scanner/ScannerCamera";
 import ScannerOverlay from "@/components/scanner/ScannerOverlay";
 
 import { captureFrame } from "@/lib/scanner/capture";
@@ -38,10 +41,8 @@ import {
 } from "@/lib/pokemonCache";
 
 import type { PokemonCard, CardScanResult } from "@/lib/types";
+import { PremiumBadge, PremiumCard, PremiumSectionHeading } from "@/components/ui/PremiumPrimitives";
 
-interface ScannerCameraHandle {
-  getVideo(): HTMLVideoElement | null;
-}
 interface ConfidenceResult {
   global: number;
   name: number;
@@ -72,6 +73,7 @@ export default function ScannerPage() {
   const [needsRetry, setNeedsRetry] = useState(false);
 
   const [scanMode, setScanMode] = useState<"single" | "batch">("single");
+  const [batchCaptureMode, setBatchCaptureMode] = useState<"individual" | "grouped">("individual");
   const [batchList, setBatchList] = useState<ScannedBatchItem[]>([]);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
@@ -471,6 +473,16 @@ export default function ScannerPage() {
     return null;
   };
 
+  const handlePrimaryScan = () => {
+    if (scanMode === "batch" && batchCaptureMode === "grouped") {
+      setStatus("Capture groupée : analyse des quatre zones…");
+      void cameraRef.current?.openGroupedScanner();
+      return;
+    }
+
+    void scan();
+  };
+
   return (
     <>
       <Navbar />
@@ -522,24 +534,97 @@ export default function ScannerPage() {
           </section>
 
           <section className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-            <div className="kt-premium-panel rounded-[20px] p-4 text-left">
-              <div className="flex items-center gap-2 text-cyan-300">
-                <Camera className="h-4 w-4" />
-                <span className="text-[10px] font-black uppercase tracking-[0.16em]">Comment scanner</span>
+            <PremiumCard className="p-4 text-left">
+              <div className="flex items-start gap-3">
+                <div className="rounded-xl bg-cyan-400/[0.08] p-2 text-cyan-300">
+                  <Camera className="h-4 w-4" />
+                </div>
+                <PremiumSectionHeading
+                  eyebrow="Prise en main"
+                  title={scanMode === "single" ? "Une carte, une fiche complète" : "Plusieurs cartes, une seule session"}
+                  description={scanMode === "single"
+                    ? "Cadrez une carte entière pour obtenir l’identification et ouvrir sa fiche marché."
+                    : "Choisissez une capture individuelle ou une photo groupée de quatre cartes."}
+                />
               </div>
-              <div className="mt-3 space-y-2 text-[11px] leading-5 text-zinc-400">
-                <p><strong className="text-white">Mono</strong> — une carte pour une identification détaillée.</p>
-                <p><strong className="text-white">Batch</strong> — ajoutez plusieurs cartes à une même session.</p>
+            </PremiumCard>
+            <PremiumCard className="p-4 text-left">
+              <div className="flex items-start gap-3">
+                <div className="rounded-xl bg-violet-400/[0.08] p-2 text-violet-300">
+                  <Languages className="h-4 w-4" />
+                </div>
+                <PremiumSectionHeading
+                  eyebrow="Reconnaissance"
+                  title="FR / EN optimisées"
+                  description="Les cartes japonaises et chinoises sont détectées ; leur correspondance base continue de progresser."
+                />
               </div>
-            </div>
-            <div className="kt-premium-panel rounded-[20px] p-4 text-left">
-              <div className="flex items-center gap-2 text-cyan-300">
-                <Languages className="h-4 w-4" />
-                <span className="text-[10px] font-black uppercase tracking-[0.16em]">Langues</span>
-              </div>
-              <p className="mt-3 text-[11px] leading-5 text-zinc-400"><strong className="text-white">FR / EN</strong> optimisées. Les cartes japonaises et chinoises sont détectées, avec une recherche encore en amélioration.</p>
-            </div>
+            </PremiumCard>
           </section>
+
+          <AnimatePresence initial={false}>
+            {scanMode === "batch" && (
+              <motion.section
+                initial={{ opacity: 0, y: -8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.22 }}
+              >
+                <PremiumCard className="p-4">
+                  <div className="flex items-center justify-between gap-3">
+                    <PremiumSectionHeading
+                      eyebrow="Module Batch"
+                      title="Choisissez votre méthode de capture"
+                      description="Les résultats rejoignent la même session et peuvent ensuite être exportés."
+                    />
+                    <PremiumBadge tone="violet">{batchList.length} carte(s)</PremiumBadge>
+                  </div>
+
+                  <div className="mt-4 grid grid-cols-2 gap-2">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setBatchCaptureMode("individual");
+                        setStatus("Batch individuel : cadrez une carte puis ajoutez-la à la session.");
+                      }}
+                      className={`rounded-[18px] border p-3 text-left transition-all active:scale-[0.98] ${
+                        batchCaptureMode === "individual"
+                          ? "border-cyan-400/35 bg-cyan-400/[0.08]"
+                          : "border-white/[0.08] bg-[#1a212a] hover:border-white/[0.14]"
+                      }`}
+                    >
+                      <Images className={`h-5 w-5 ${batchCaptureMode === "individual" ? "text-cyan-300" : "text-zinc-400"}`} />
+                      <p className="mt-3 text-xs font-black text-white">Photos individuelles</p>
+                      <p className="mt-1 text-[10px] leading-4 text-zinc-400">Ajoutez les cartes une par une pour une précision maximale.</p>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setBatchCaptureMode("grouped");
+                        setStatus("Photo groupée : placez une carte dans chacune des quatre zones.");
+                      }}
+                      className={`rounded-[18px] border p-3 text-left transition-all active:scale-[0.98] ${
+                        batchCaptureMode === "grouped"
+                          ? "border-violet-400/35 bg-violet-400/[0.08]"
+                          : "border-white/[0.08] bg-[#1a212a] hover:border-white/[0.14]"
+                      }`}
+                    >
+                      <Grid2X2 className={`h-5 w-5 ${batchCaptureMode === "grouped" ? "text-violet-300" : "text-zinc-400"}`} />
+                      <p className="mt-3 text-xs font-black text-white">Une photo · 4 cartes</p>
+                      <p className="mt-1 text-[10px] leading-4 text-zinc-400">Placez quatre cartes séparées sur un fond uni et capturez-les ensemble.</p>
+                    </button>
+                  </div>
+
+                  {batchCaptureMode === "grouped" && (
+                    <div className="mt-3 rounded-2xl border border-amber-400/15 bg-amber-400/[0.06] px-3 py-2.5 text-[10px] leading-4 text-amber-100/80">
+                      Évitez les reflets, gardez les quatre cartes entièrement visibles et ne les superposez pas.
+                    </div>
+                  )}
+                </PremiumCard>
+              </motion.section>
+            )}
+          </AnimatePresence>
 
           {/* CAMERA */}
           <div className="kt-scan-grid relative aspect-[9/16] overflow-hidden rounded-[24px] border border-cyan-400/15 bg-black shadow-[0_24px_70px_rgba(0,0,0,.55)]">
@@ -554,12 +639,13 @@ export default function ScannerPage() {
               scanning={scanning}
               hasResult={Boolean(detectedCard)}
               statusText={status}
+              mode={scanMode === "batch" && batchCaptureMode === "grouped" ? "quad" : "single"}
             />
           </div>
 
           {/* BUTTON SCAN */}
           <button
-            onClick={scan}
+            onClick={handlePrimaryScan}
             disabled={!ready || scanning}
             className="w-full rounded-2xl bg-gradient-to-r from-cyan-400 to-cyan-500 py-4 text-sm font-black uppercase tracking-widest text-[#031014] disabled:opacity-40 transition-all hover:brightness-110 active:scale-[0.985] shadow-[0_14px_35px_rgba(34,211,238,.18)] flex items-center justify-center gap-2"
           >
@@ -567,8 +653,10 @@ export default function ScannerPage() {
               <><Loader2 className="h-4 w-4 animate-spin" /> Analyse en cours...</>
             ) : scanMode === "single" ? (
               <>Scanner & Consulter</>
+            ) : batchCaptureMode === "grouped" ? (
+              <><Grid2X2 className="h-4 w-4" /> Capturer les 4 cartes</>
             ) : (
-              <>Ajouter à la Session (+1)</>
+              <><Images className="h-4 w-4" /> Ajouter cette carte</>
             )}
           </button>
 
