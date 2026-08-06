@@ -475,7 +475,7 @@ export default function Recherche() {
             <div className={viewMode === "grid" ? "grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6" : "flex flex-col items-center gap-4"}>
               {displayedCards.map((card) => (
                 <div key={card.id} className={viewMode === "large" ? "w-full max-w-md" : "w-full"}>
-                  <CardResult card={{ ...card, computedPrice: getCardPrice(card) }} isPriceLoading={syncingPriceIds.has(card.id)} />
+                  <CardResult card={card} isPriceLoading={syncingPriceIds.has(card.id)}/>
                 </div>
               ))}
             </div>
