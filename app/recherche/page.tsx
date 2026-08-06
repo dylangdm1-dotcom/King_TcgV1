@@ -13,7 +13,6 @@ import {
   Sparkles,
   CalendarDays,
   ChevronDown,
-  Cards,
 } from "lucide-react";
 import Navbar from "../../components/Navbar";
 import CardResult from "@/components/cards/CardResult";
@@ -417,7 +416,7 @@ export default function Recherche() {
                               <div className="mt-3 min-w-0">
                                 <p className="line-clamp-2 text-[10px] font-black leading-4 text-white">{set.name}</p>
                                 <p className="mt-1 flex items-center gap-1 text-[8px] font-semibold uppercase tracking-wide text-zinc-500">
-                                  <Cards className="h-3 w-3" /> {set.total || set.printedTotal || "—"} cartes · {set.id.toUpperCase()}
+                                  <Layers className="h-3 w-3" /> {set.total || set.printedTotal || "—"} cartes · {set.id.toUpperCase()}
                                 </p>
                               </div>
                             </button>
