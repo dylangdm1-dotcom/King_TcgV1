@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 
 import Navbar from "@/components/Navbar";
+import PSAGradeCapture from "@/components/psa/PSAGradeCapture";
 
 import {
   psaService,
@@ -802,64 +803,31 @@ export default function PSAPage() {
           {/* IA */}
           {activeTab === "estimation" && (
             <section className="space-y-6">
-              <div className="kt-premium-panel rounded-[24px] p-7 sm:p-9 text-center space-y-5">
-
-                <Sparkles className="mx-auto w-10 h-10 text-amber-400" />
-
-                <div>
-                  <h2 className="text-base font-black uppercase">
-                    Estimation IA Grade PSA
-                  </h2>
-
-                  <p className="text-xs text-zinc-300 mt-2 max-w-lg mx-auto">
-                    Envoyez des photos haute qualité
-                    de votre carte Pokémon.
-                    L'intelligence artificielle analysera
-                    les critères utilisés par les graders.
-                  </p>
-                </div>
-
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                  {[
-                    {
-                      title: "Centering",
-                      desc: "Alignement du visuel",
-                    },
-                    {
-                      title: "Corners",
-                      desc: "État des coins",
-                    },
-                    {
-                      title: "Edges",
-                      desc: "Bords et usure",
-                    },
-                    {
-                      title: "Surface",
-                      desc: "Rayures et défauts",
-                    },
-                  ].map((item) => (
-                    <div
-                      key={item.title}
-                      className="rounded-2xl border border-white/[0.07] bg-black/25 p-3"
-                    >
-                      <span className="block text-[10px] text-cyan-400 font-black uppercase">
-                        {item.title}
-                      </span>
-
-                      <span className="text-[10px] text-zinc-500">
-                        {item.desc}
-                      </span>
+              <div className="kt-premium-panel rounded-[24px] p-5 sm:p-6">
+                <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+                  <div className="flex items-start gap-3">
+                    <div className="flex h-11 w-16 shrink-0 items-center justify-center rounded-2xl border border-white/[0.10] bg-white/[0.96] p-1.5">
+                      <img src="/brands/psa.svg" alt="PSA" className="h-full w-full object-contain" />
                     </div>
-                  ))}
+                    <div>
+                      <p className="text-[10px] font-black uppercase tracking-[0.16em] text-blue-300">
+                        PSA-1 · Capture guidée
+                      </p>
+                      <h2 className="mt-1 text-base font-black text-white">
+                        Estimation visuelle du grade
+                      </h2>
+                      <p className="mt-1 max-w-2xl text-[11px] leading-5 text-zinc-400">
+                        Préparez quatre vues complémentaires pour permettre une future analyse du centrage, des coins, des bords et de la surface.
+                      </p>
+                    </div>
+                  </div>
+                  <span className="self-start rounded-full border border-amber-300/15 bg-amber-400/[0.06] px-3 py-1.5 text-[9px] font-black uppercase tracking-wider text-amber-200">
+                    Estimation non officielle
+                  </span>
                 </div>
-
-                <button
-                  disabled
-                  className="bg-zinc-800 text-zinc-500 px-8 py-3 rounded-xl text-xs font-black uppercase cursor-not-allowed"
-                >
-                  Analyse IA bientôt disponible
-                </button>
               </div>
+
+              <PSAGradeCapture />
             </section>
           )}
         </div>
