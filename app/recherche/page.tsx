@@ -30,6 +30,47 @@ import { getCardPrice, hasMarketPrice, type PokemonCard } from "../../lib/types"
 
 const PAGE_SIZE = 24;
 
+const KNOWN_SET_RELEASE_DATES: Record<string, string> = {
+  // Extension japonaise MEGA M6 — Storm Emeralda.
+  m6: "2026-07-31",
+};
+
+function normalizedSetId(id?: string): string {
+  return String(id || "").trim().toLowerCase().replace(/[^a-z0-9]/g, "");
+}
+
+function effectiveReleaseDate(set: SetItem): string {
+  return set.releaseDate || KNOWN_SET_RELEASE_DATES[normalizedSetId(set.id)] || "";
+}
+
+function setCodeScore(id?: string): number {
+  const clean = normalizedSetId(id);
+  const match = clean.match(/^([a-z]+)(\d+)(?:[-.]?(\d+))?/);
+  if (!match) return 0;
+
+  const era: Record<string, number> = {
+    m: 900,
+    sv: 800,
+    swsh: 700,
+    sm: 600,
+    xy: 500,
+    bw: 400,
+    hgss: 300,
+    dp: 200,
+  };
+  return (era[match[1]] || 100) * 1_000_000 + Number(match[2] || 0) * 1_000 + Number(match[3] || 0);
+}
+
+function compareSetsNewestFirst(a: SetItem, b: SetItem): number {
+  const timeA = effectiveReleaseDate(a) ? new Date(effectiveReleaseDate(a)).getTime() : 0;
+  const timeB = effectiveReleaseDate(b) ? new Date(effectiveReleaseDate(b)).getTime() : 0;
+  if (timeA !== timeB) return timeB - timeA;
+
+  const codeDiff = setCodeScore(b.id) - setCodeScore(a.id);
+  if (codeDiff) return codeDiff;
+  return String(b.id).localeCompare(String(a.id), undefined, { numeric: true, sensitivity: "base" });
+}
+
 type SetItem = {
   id: string;
   name: string;
@@ -45,6 +86,7 @@ function getGeneration(set: SetItem): string {
   const year = Number(set.releaseDate?.slice(0, 4) || 0);
 
   if (text.includes("promo")) return "Promos";
+  if (text.includes("mega") || /^m\d+/i.test(set.id)) return "MEGA";
   if (text.includes("scarlet") || text.includes("violet") || text.includes("écarlate")) return "Écarlate & Violet";
   if (text.includes("sword") || text.includes("shield") || text.includes("épée") || text.includes("bouclier")) return "Épée & Bouclier";
   if (text.includes("sun") || text.includes("moon") || text.includes("soleil") || text.includes("lune")) return "Soleil & Lune";
@@ -98,13 +140,13 @@ export default function Recherche() {
       try {
         const setsData = await getAllSets(selectedLanguage);
         const validSets = (setsData || []).filter((set: any) => Boolean(set?.id && set?.name));
-        validSets.sort((a: SetItem, b: SetItem) => {
-          if (a.releaseDate && b.releaseDate) {
-            return new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime();
-          }
-          return b.id.localeCompare(a.id, undefined, { numeric: true, sensitivity: "base" });
+        validSets.forEach((set: SetItem) => {
+          const knownDate = KNOWN_SET_RELEASE_DATES[normalizedSetId(set.id)];
+          if (!set.releaseDate && knownDate) set.releaseDate = knownDate;
         });
+        validSets.sort(compareSetsNewestFirst);
         setAllSetsList(validSets);
+        setExpandedGeneration(null);
       } catch (error) {
         console.error("[King_TCG] Erreur chargement des séries :", error);
       } finally {
@@ -125,10 +167,12 @@ export default function Recherche() {
       if (!groups[generation]) groups[generation] = [];
       groups[generation].push(set);
     }
+    Object.values(groups).forEach((sets) => sets.sort(compareSetsNewestFirst));
     return groups;
   }, [allSetsList]);
 
   const generationOrder = [
+    "MEGA",
     "Écarlate & Violet",
     "Épée & Bouclier",
     "Soleil & Lune",
@@ -144,12 +188,6 @@ export default function Recherche() {
     () => generationOrder.filter((generation) => groupedSets[generation]?.length),
     [groupedSets]
   );
-
-  useEffect(() => {
-    if (!expandedGeneration && availableGenerations.length > 0) {
-      setExpandedGeneration(availableGenerations[0]);
-    }
-  }, [availableGenerations, expandedGeneration]);
 
   const visibleSetGroups = useMemo(() => {
     const normalized = setSearch.trim().toLowerCase();
@@ -394,51 +432,56 @@ export default function Recherche() {
 
                 <div className="space-y-3">
                   {visibleSetGroups.map(([generation, generationSets]) => {
-                    const expanded = expandedGeneration === generation || Boolean(setSearch) || selectedGeneration !== "all";
-                    const shownSets = expanded ? generationSets : generationSets.slice(0, 3);
+                    const expanded = expandedGeneration === generation;
+                    const newestSet = generationSets[0];
 
                     return (
-                      <section key={generation} className="overflow-hidden rounded-[20px] border border-white/[0.08] bg-[#151b23]">
+                      <section key={generation} className="min-w-0 max-w-full overflow-hidden rounded-[18px] border border-white/[0.08] bg-[#151b23]">
                         <button
                           type="button"
                           onClick={() => setExpandedGeneration(expandedGeneration === generation ? null : generation)}
-                          className="flex w-full items-center justify-between gap-3 px-4 py-3.5 text-left"
+                          className="flex w-full min-w-0 items-center justify-between gap-3 overflow-hidden px-4 py-3.5 text-left"
                         >
-                          <span>
-                            <span className="block text-xs font-black text-white">{generation}</span>
-                            <span className="mt-0.5 block text-[9px] font-semibold text-zinc-500">{generationSets.length} extension{generationSets.length > 1 ? "s" : ""}</span>
+                          <span className="min-w-0 flex-1">
+                            <span className="block truncate text-xs font-black text-white">{generation}</span>
+                            <span className="mt-0.5 flex min-w-0 items-center gap-1.5 text-[9px] font-semibold text-zinc-500">
+                              <span className="shrink-0">{generationSets.length} extension{generationSets.length > 1 ? "s" : ""}</span>
+                              {newestSet ? <span className="truncate">· dernière : {yearLabel(effectiveReleaseDate(newestSet))}</span> : null}
+                            </span>
                           </span>
                           <ChevronDown className={`h-4 w-4 text-zinc-500 transition ${expanded ? "rotate-180" : ""}`} />
                         </button>
 
-                        <div className="grid gap-1.5 border-t border-white/[0.06] p-2.5 lg:grid-cols-2">
-                          {shownSets.map((set) => (
-                            <button
-                              type="button"
-                              key={set.id}
-                              onClick={() => handleSetSelect(set.id)}
-                              className={`group flex min-h-[68px] items-center gap-3 rounded-xl border px-3 py-2.5 text-left transition ${selectedSetId === set.id ? "border-violet-300/40 bg-violet-300/[0.08]" : "border-white/[0.07] bg-[#1a212b] hover:border-white/[0.14] hover:bg-[#1d2530]"}`}
-                            >
-                              <span className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-white/[0.08] bg-black/20">
-                                {set.images?.symbol ? <img src={set.images.symbol} alt="" className="h-7 w-7 object-contain" /> : <Package className="h-4 w-4 text-violet-300" />}
-                              </span>
-
-                              <span className="min-w-0 flex-1">
-                                <span className="block truncate text-[11px] font-black text-white">{set.name}</span>
-                                <span className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-0.5 text-[8px] font-semibold uppercase tracking-wide text-zinc-500">
-                                  <span className="inline-flex items-center gap-1"><CalendarDays className="h-3 w-3 text-amber-300" /> {yearLabel(set.releaseDate)}</span>
-                                  <span>{set.series || generation}</span>
+                        {expanded ? (
+                          <div className="grid min-w-0 gap-1.5 border-t border-white/[0.06] p-2 sm:grid-cols-2 xl:grid-cols-3">
+                            {generationSets.map((set) => (
+                              <button
+                                type="button"
+                                key={set.id}
+                                onClick={() => handleSetSelect(set.id)}
+                                className={`group grid min-h-[62px] min-w-0 max-w-full grid-cols-[38px_minmax(0,1fr)_auto] items-center gap-2.5 overflow-hidden rounded-xl border px-2.5 py-2 text-left transition ${selectedSetId === set.id ? "border-violet-300/40 bg-violet-300/[0.08]" : "border-white/[0.07] bg-[#1a212b] hover:border-white/[0.14] hover:bg-[#1d2530]"}`}
+                              >
+                                <span className="flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-white/[0.08] bg-black/20">
+                                  {set.images?.symbol ? <img src={set.images.symbol} alt="" className="h-6 w-6 object-contain" /> : <Package className="h-4 w-4 text-violet-300" />}
                                 </span>
-                              </span>
 
-                              <span className="shrink-0 text-right">
-                                <span className="block text-[9px] font-black text-zinc-200">{set.total || set.printedTotal || "—"}</span>
-                                <span className="block text-[7px] font-bold uppercase tracking-wide text-zinc-600">cartes</span>
-                                <span className="mt-1 block text-[7px] font-black uppercase text-violet-300">{set.id}</span>
-                              </span>
-                            </button>
-                          ))}
-                        </div>
+                                <span className="min-w-0 overflow-hidden">
+                                  <span className="block truncate text-[10px] font-black text-white" title={set.name}>{set.name}</span>
+                                  <span className="mt-1 flex min-w-0 items-center gap-1.5 overflow-hidden text-[7px] font-semibold uppercase tracking-wide text-zinc-500">
+                                    <span className="inline-flex shrink-0 items-center gap-1"><CalendarDays className="h-2.5 w-2.5 text-amber-300" /> {yearLabel(effectiveReleaseDate(set))}</span>
+                                    <span className="truncate">{set.series || generation}</span>
+                                  </span>
+                                </span>
+
+                                <span className="shrink-0 pl-1 text-right">
+                                  <span className="block text-[8px] font-black text-zinc-200">{set.total || set.printedTotal || "—"}</span>
+                                  <span className="block text-[6px] font-bold uppercase tracking-wide text-zinc-600">cartes</span>
+                                  <span className="mt-0.5 block max-w-[54px] truncate text-[6px] font-black uppercase text-violet-300">{set.id}</span>
+                                </span>
+                              </button>
+                            ))}
+                          </div>
+                        ) : null}
                       </section>
                     );
                   })}
