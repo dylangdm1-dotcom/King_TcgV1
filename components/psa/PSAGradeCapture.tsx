@@ -13,6 +13,7 @@ import {
   CameraOff,
   Check,
   CheckCircle2,
+  ClipboardCheck,
   ChevronRight,
   ImagePlus,
   Info,
@@ -27,6 +28,7 @@ import {
 
 import type {
   PSAGradeAnalysis,
+  PSAManualReview,
   PSAPhotoId,
 } from "@/lib/psa/grading";
 
@@ -149,6 +151,17 @@ export default function PSAGradeCapture() {
   const [analysis, setAnalysis] = useState<PSAGradeAnalysis | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [analysisError, setAnalysisError] = useState("");
+  const [isRefining, setIsRefining] = useState(false);
+  const [isRefined, setIsRefined] = useState(false);
+  const [manualReview, setManualReview] = useState<PSAManualReview>({
+    whiteSpots: "0",
+    scratches: "none",
+    cornerDamage: "none",
+    edgeWhitening: "none",
+    majorDefect: false,
+    hiddenDefect: false,
+    notes: "",
+  });
 
   const videoRef = useRef<HTMLVideoElement>(null);
   const streamRef = useRef<MediaStream | null>(null);
@@ -302,6 +315,7 @@ export default function PSAGradeCapture() {
       [activeStep.id]: { dataUrl: reviewDataUrl, source: "camera" },
     }));
     setAnalysis(null);
+    setIsRefined(false);
     setAnalysisError("");
     setReviewDataUrl(null);
 
@@ -329,6 +343,7 @@ export default function PSAGradeCapture() {
         [activeStep.id]: { dataUrl, source: "gallery" },
       }));
       setAnalysis(null);
+      setIsRefined(false);
       setAnalysisError("");
 
       if (cameraOpen && activeStepIndex < CAPTURE_STEPS.length - 1) {
@@ -344,6 +359,7 @@ export default function PSAGradeCapture() {
   const removePhoto = (id: PSAPhotoId) => {
     setPhotos((current) => ({ ...current, [id]: null }));
     setAnalysis(null);
+    setIsRefined(false);
     setAnalysisError("");
   };
 
@@ -351,16 +367,26 @@ export default function PSAGradeCapture() {
     closeCapture();
     setPhotos(EMPTY_PHOTOS);
     setAnalysis(null);
+    setIsRefined(false);
+    setManualReview({
+      whiteSpots: "0",
+      scratches: "none",
+      cornerDamage: "none",
+      edgeWhitening: "none",
+      majorDefect: false,
+      hiddenDefect: false,
+      notes: "",
+    });
     setAnalysisError("");
     setActiveStepIndex(0);
   };
 
-  const analyzePhotos = async () => {
-    if (!isComplete || isAnalyzing) return;
+  const requestAnalysis = async (review?: PSAManualReview) => {
+    if (!isComplete || isAnalyzing || isRefining) return;
 
-    setIsAnalyzing(true);
+    review ? setIsRefining(true) : setIsAnalyzing(true);
     setAnalysisError("");
-    setAnalysis(null);
+    if (!review) setAnalysis(null);
 
     try {
       const response = await fetch("/api/psa-grade", {
@@ -371,6 +397,8 @@ export default function PSAGradeCapture() {
             id: step.id,
             imageBase64: photos[step.id]!.dataUrl,
           })),
+          manualReview: review,
+          previousAnalysis: review ? analysis : undefined,
         }),
       });
 
@@ -380,12 +408,18 @@ export default function PSAGradeCapture() {
       }
 
       setAnalysis(payload.data as PSAGradeAnalysis);
+      setIsRefined(Boolean(review));
     } catch (error: any) {
       setAnalysisError(error?.message || "Impossible d'analyser les photos.");
     } finally {
       setIsAnalyzing(false);
+      setIsRefining(false);
     }
   };
+
+  const analyzePhotos = () => requestAnalysis();
+  const refineAnalysis = () => requestAnalysis(manualReview);
+
 
   const estimateLabel = analysis
     ? !analysis.photoQuality.acceptable
@@ -562,6 +596,12 @@ export default function PSAGradeCapture() {
                   <p className="mt-2 max-w-xl text-[11px] leading-5 text-zinc-400">
                     {analysis.summary}
                   </p>
+                  {isRefined ? (
+                    <span className="mt-3 inline-flex items-center gap-1.5 rounded-full border border-violet-300/20 bg-violet-400/[0.08] px-2.5 py-1 text-[9px] font-black uppercase tracking-wider text-violet-200">
+                      <ClipboardCheck className="h-3 w-3" />
+                      Estimation affinée avec votre contrôle
+                    </span>
+                  ) : null}
                 </div>
 
                 <div className="min-w-[150px] rounded-[20px] border border-white/[0.08] bg-black/25 p-4 text-center">
@@ -663,6 +703,51 @@ export default function PSAGradeCapture() {
               </div>
             </article>
           </div>
+
+          {analysis.photoQuality.acceptable ? (
+            <article className="kt-premium-panel rounded-[22px] p-4 sm:p-5">
+              <div className="flex items-start gap-3">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl border border-violet-300/20 bg-violet-400/[0.08] text-violet-200">
+                  <ClipboardCheck className="h-5 w-5" />
+                </div>
+                <div>
+                  <h4 className="text-xs font-black text-white">Contrôle manuel rapide</h4>
+                  <p className="mt-1 text-[10px] leading-4 text-zinc-400">
+                    Confirmez les défauts que la caméra peut manquer. Ces réponses peuvent renforcer la confiance ou réduire le grade, mais ne garantissent jamais une note officielle.
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                <ManualSelect label="Points blancs" value={manualReview.whiteSpots} onChange={(value) => setManualReview((current) => ({ ...current, whiteSpots: value as PSAManualReview["whiteSpots"] }))} options={[["0", "Aucun"], ["1-2", "1 à 2"], ["3-5", "3 à 5"], ["6+", "6 ou plus"]]} />
+                <ManualSelect label="Rayures de surface" value={manualReview.scratches} onChange={(value) => setManualReview((current) => ({ ...current, scratches: value as PSAManualReview["scratches"] }))} options={[["none", "Aucune"], ["light", "Légères"], ["visible", "Visibles"], ["deep", "Profondes"]]} />
+                <ManualSelect label="Coins abîmés" value={manualReview.cornerDamage} onChange={(value) => setManualReview((current) => ({ ...current, cornerDamage: value as PSAManualReview["cornerDamage"] }))} options={[["none", "Aucun"], ["one", "Un coin"], ["multiple", "Plusieurs"]]} />
+                <ManualSelect label="Blanchiment des bords" value={manualReview.edgeWhitening} onChange={(value) => setManualReview((current) => ({ ...current, edgeWhitening: value as PSAManualReview["edgeWhitening"] }))} options={[["none", "Aucun"], ["light", "Léger"], ["marked", "Marqué"]]} />
+              </div>
+
+              <div className="mt-3 grid gap-2 sm:grid-cols-2">
+                <ManualToggle label="Pli, enfoncement ou défaut majeur" checked={manualReview.majorDefect} onChange={(checked) => setManualReview((current) => ({ ...current, majorDefect: checked }))} />
+                <ManualToggle label="Défaut difficile à voir sur les photos" checked={manualReview.hiddenDefect} onChange={(checked) => setManualReview((current) => ({ ...current, hiddenDefect: checked }))} />
+              </div>
+
+              <textarea
+                value={manualReview.notes}
+                onChange={(event) => setManualReview((current) => ({ ...current, notes: event.target.value.slice(0, 300) }))}
+                placeholder="Observation facultative : micro-rayure, point blanc précis, marque sur un coin…"
+                className="mt-3 min-h-[76px] w-full resize-none rounded-2xl border border-white/[0.08] bg-black/25 px-3 py-2.5 text-[10px] text-white outline-none transition placeholder:text-zinc-600 focus:border-violet-300/35"
+              />
+
+              <button
+                type="button"
+                onClick={refineAnalysis}
+                disabled={isRefining}
+                className="mt-3 flex w-full items-center justify-center gap-2 rounded-2xl border border-violet-300/25 bg-violet-400/[0.11] px-4 py-3 text-xs font-black text-violet-100 transition hover:bg-violet-400/[0.16] disabled:opacity-50"
+              >
+                {isRefining ? <Loader2 className="h-4 w-4 animate-spin" /> : <ClipboardCheck className="h-4 w-4" />}
+                {isRefining ? "Affinage Gemini…" : "Affiner l'estimation"}
+              </button>
+            </article>
+          ) : null}
 
           <div className="flex flex-col gap-2 sm:flex-row">
             <button
@@ -816,5 +901,26 @@ export default function PSAGradeCapture() {
         </div>
       ) : null}
     </div>
+  );
+}
+
+
+function ManualSelect({ label, value, options, onChange }: { label: string; value: string; options: [string, string][]; onChange: (value: string) => void }) {
+  return (
+    <label className="rounded-2xl border border-white/[0.07] bg-black/20 p-3">
+      <span className="block text-[9px] font-black uppercase tracking-wider text-zinc-500">{label}</span>
+      <select value={value} onChange={(event) => onChange(event.target.value)} className="mt-2 w-full rounded-xl border border-white/[0.08] bg-[#11151b] px-3 py-2 text-[10px] font-bold text-white outline-none focus:border-violet-300/35">
+        {options.map(([optionValue, optionLabel]) => <option key={optionValue} value={optionValue}>{optionLabel}</option>)}
+      </select>
+    </label>
+  );
+}
+
+function ManualToggle({ label, checked, onChange }: { label: string; checked: boolean; onChange: (checked: boolean) => void }) {
+  return (
+    <button type="button" onClick={() => onChange(!checked)} className={`flex min-h-[48px] items-center justify-between gap-3 rounded-2xl border px-3 py-2.5 text-left transition ${checked ? "border-rose-300/25 bg-rose-400/[0.08] text-rose-100" : "border-white/[0.07] bg-black/20 text-zinc-300"}`}>
+      <span className="text-[10px] font-bold leading-4">{label}</span>
+      <span className={`flex h-5 w-9 shrink-0 items-center rounded-full p-0.5 transition ${checked ? "bg-rose-400" : "bg-zinc-700"}`}><span className={`h-4 w-4 rounded-full bg-white transition-transform ${checked ? "translate-x-4" : "translate-x-0"}`} /></span>
+    </button>
   );
 }
