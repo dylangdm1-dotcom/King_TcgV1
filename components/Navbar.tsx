@@ -54,14 +54,13 @@ export default function Navbar() {
               href="/psa"
               title="Accès rapide PSA"
               aria-label="Accès rapide PSA"
-              className={`flex h-10 items-center gap-2 rounded-2xl border px-3 text-[10px] font-black uppercase tracking-wider transition ${
+              className={`flex h-11 min-w-[58px] items-center justify-center rounded-2xl border px-1.5 text-[10px] font-black uppercase tracking-wider transition ${
                 pathname === "/psa" || pathname.startsWith("/psa/")
                   ? "border-violet-300/35 bg-violet-300/[0.12] text-violet-100 shadow-[0_10px_26px_rgba(167,139,250,.14)]"
                   : "border-white/[0.09] bg-[#151b23] text-zinc-300 hover:border-violet-300/25 hover:text-white"
               }`}
             >
-              <img src="/brands/psa.png" alt="PSA" className="h-6 w-11 rounded-md bg-white p-0.5 object-contain" />
-              <span className="hidden sm:inline">PSA</span>
+              <img src="/brands/psa.png" alt="PSA" className="h-9 w-14 rounded-lg bg-white p-0.5 object-contain" />
             </Link>
             <NotificationBell />
             <div className="hidden items-center gap-1.5 md:flex">
