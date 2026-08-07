@@ -27,7 +27,7 @@ export default function Navbar() {
   return (
     <>
       <nav className="sticky top-0 z-50 border-b border-cyan-400/[0.08] bg-[#090d13]/94 shadow-[0_14px_38px_rgba(0,0,0,.34)] backdrop-blur-2xl">
-        <div className="relative mx-auto grid min-h-[64px] max-w-7xl grid-cols-[1fr_auto_1fr] items-center px-3 sm:px-6">
+        <div className="relative mx-auto flex min-h-[64px] max-w-7xl items-center justify-between px-3 sm:px-6">
           <div className="flex items-center justify-start">
             {pathname !== "/" && (
               <button
@@ -41,7 +41,7 @@ export default function Navbar() {
             )}
           </div>
 
-          <Link href="/" className="kt-brand-lockup kt-brand-lockup-image" aria-label="Accueil King_TCG">
+          <Link href="/" className="kt-brand-lockup kt-brand-lockup-image absolute left-1/2 -translate-x-1/2" aria-label="Accueil King_TCG">
             <img
               src="/brands/king-tcg-logo.png"
               alt="King_TCG — Pokémon TCG Market & Collection"
