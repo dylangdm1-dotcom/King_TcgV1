@@ -19,6 +19,15 @@ function parseReleaseDate(dateStr?: string): number {
   return isNaN(time) ? 0 : time;
 }
 
+
+function setCodeRecency(id?: string): number {
+  const clean = String(id || "").toLowerCase().replace(/[^a-z0-9]/g, "");
+  const match = clean.match(/^([a-z]+)(\d+)(?:[-.]?(\d+))?/);
+  if (!match) return 0;
+  const era: Record<string, number> = { m: 900, sv: 800, swsh: 700, sm: 600, xy: 500, bw: 400, hgss: 300, dp: 200 };
+  return (era[match[1]] || 100) * 1_000_000 + Number(match[2] || 0) * 1_000 + Number(match[3] || 0);
+}
+
 /**
  * Récupère le prix effectif d'une carte en tenant compte de la condition (état) sélectionnée.
  */
@@ -36,9 +45,9 @@ export function filterCards(
 
   // Création d'une clé de cache basée sur l'état des filtres et la taille du tableau
   const cacheKey = `${cards.length}_${JSON.stringify(filters)}`;
-  const firstCardId = cards[0]?.id || "";
-  const lastCardId = cards[cards.length - 1]?.id || "";
-  const currentHash = `${firstCardId}_${lastCardId}`;
+  const currentHash = cards
+    .map((card) => `${card.id}:${card.set?.releaseDate || ""}:${card.set?.id || ""}`)
+    .join("|");
 
   const cached = searchMemoCache.get(cacheKey);
   if (cached && cached.hash === currentHash) {
@@ -112,7 +121,10 @@ export function filterCards(
           return dateB - dateA;
         }
 
-        // En cas d'égalité de date, tri par numéro de carte
+        const setCodeDiff = setCodeRecency(b.set?.id) - setCodeRecency(a.set?.id);
+        if (setCodeDiff) return setCodeDiff;
+
+        // En cas d'égalité de date et d'extension, tri par numéro de carte
         const numA = parseInt((a.number || "0").replace(/\D/g, "")) || 0;
         const numB = parseInt((b.number || "0").replace(/\D/g, "")) || 0;
         return numA - numB;
