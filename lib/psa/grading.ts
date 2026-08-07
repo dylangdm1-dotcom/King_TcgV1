@@ -48,3 +48,13 @@ export type PSAGradeAnalysis = {
   disclaimer: string;
   modelUsed?: string;
 };
+
+export type PSAManualReview = {
+  whiteSpots: "0" | "1-2" | "3-5" | "6+";
+  scratches: "none" | "light" | "visible" | "deep";
+  cornerDamage: "none" | "one" | "multiple";
+  edgeWhitening: "none" | "light" | "marked";
+  majorDefect: boolean;
+  hiddenDefect: boolean;
+  notes: string;
+};
