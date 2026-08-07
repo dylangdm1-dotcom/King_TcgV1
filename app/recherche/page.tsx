@@ -365,11 +365,9 @@ export default function Recherche() {
           <section className="kt-premium-card kt-rise-in space-y-5 p-4 sm:p-6">
             <div className="flex flex-col justify-between gap-4 border-b border-white/[0.06] pb-5 md:flex-row md:items-center">
               <div>
-                <div className="mb-2 flex flex-wrap items-center gap-2">
+                <div className="mb-2 flex w-full items-center justify-between gap-3">
                   <div className="kt-eyebrow"><Sparkles className="h-3 w-3" /> Base cartes & marché</div>
-                  <div className="inline-flex h-7 items-center rounded-xl border border-white/[0.12] bg-white px-2 shadow-[0_6px_18px_rgba(0,0,0,.18)]">
-                    <img src="/brands/pokemon.png" alt="Pokémon" className="h-5 w-auto object-contain" />
-                  </div>
+                  <img src="/brands/pokemon.png" alt="Pokémon" className="h-7 w-auto max-w-[112px] shrink-0 object-contain" />
                 </div>
                 <h1 className="flex items-center gap-2 text-xl font-black tracking-tight text-white sm:text-2xl">
                   <Search className="h-5 w-5 text-cyan-300" /> Rechercher une carte
