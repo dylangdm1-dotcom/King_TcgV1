@@ -60,7 +60,10 @@ export default function CardResult({ card, isPriceLoading = false }: Props) {
         <div className="mt-3 rounded-2xl border border-emerald-300/10 bg-emerald-300/[0.045] p-2.5">
           <div className="flex items-end justify-between gap-2">
             <div>
-              <p className="text-[8px] font-black uppercase tracking-[0.15em] text-zinc-500">Cote actuelle (marché)</p>
+              <div className="flex items-center gap-1.5">
+                <p className="text-[8px] font-black uppercase tracking-[0.15em] text-zinc-500">Cote actuelle</p>
+                <span className="inline-flex rounded-full border border-emerald-300/25 bg-emerald-400/[0.10] px-1.5 py-0.5 text-[7px] font-black uppercase tracking-[0.1em] text-emerald-200">Marché</span>
+              </div>
               {priceAvailable && price > 0 ? (
                 <p className="mt-1 text-[16px] font-black tracking-tight text-emerald-200 tabular-nums">{price.toFixed(2)} €</p>
               ) : marketStatus === "syncing" ? (
