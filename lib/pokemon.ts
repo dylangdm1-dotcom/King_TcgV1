@@ -48,6 +48,26 @@ function parseReleaseDate(dateStr?: string): number {
   return isNaN(time) ? 0 : time;
 }
 
+const KNOWN_SET_RELEASE_DATES: Record<string, string> = {
+  m6: "2026-07-31",
+};
+
+function normalizedSetId(id?: string): string {
+  return String(id || "").trim().toLowerCase().replace(/[^a-z0-9]/g, "");
+}
+
+function setCodeRecency(id?: string): number {
+  const clean = normalizedSetId(id);
+  const match = clean.match(/^([a-z]+)(\d+)(?:[-.]?(\d+))?/);
+  if (!match) return 0;
+  const era: Record<string, number> = { m: 900, sv: 800, swsh: 700, sm: 600, xy: 500, bw: 400, hgss: 300, dp: 200 };
+  return (era[match[1]] || 100) * 1_000_000 + Number(match[2] || 0) * 1_000 + Number(match[3] || 0);
+}
+
+function effectiveSetReleaseDate(id?: string, releaseDate?: string): string {
+  return releaseDate || KNOWN_SET_RELEASE_DATES[normalizedSetId(id)] || "";
+}
+
 function safePrice(val: any): number {
   const num = Number(val);
   return !isNaN(num) && isFinite(num) && num > 0 ? Number(num.toFixed(2)) : 0;
@@ -297,7 +317,7 @@ function normalizeTCGdexCard(card: any, lang: LanguageCode, parentSet?: any): Po
       series: card.set?.series?.name || parentSet?.series?.name || parentSet?.series || undefined,
       printedTotal: parentSet?.cardCount?.official ?? card.set?.cardCount?.official ?? 0,
       total: parentSet?.cardCount?.total ?? card.set?.cardCount?.total ?? 0,
-      releaseDate: parentSet?.releaseDate || card.set?.releaseDate || "",
+      releaseDate: effectiveSetReleaseDate(setId, parentSet?.releaseDate || card.set?.releaseDate || ""),
       images: {
         symbol: card.set?.symbol ? `${card.set.symbol}.png` : parentSet?.symbol ? `${parentSet.symbol}.png` : "",
         logo: card.set?.logo ? `${card.set.logo}.png` : parentSet?.logo ? `${parentSet.logo}.png` : "",
@@ -561,7 +581,9 @@ export async function searchCards(
   finalCards.sort((a, b) => {
     const timeDiff = parseReleaseDate(b.set?.releaseDate) - parseReleaseDate(a.set?.releaseDate);
     if (timeDiff) return timeDiff;
-    const setDiff = String(b.set?.id || "").localeCompare(String(a.set?.id || ""));
+    const setCodeDiff = setCodeRecency(b.set?.id) - setCodeRecency(a.set?.id);
+    if (setCodeDiff) return setCodeDiff;
+    const setDiff = String(b.set?.id || "").localeCompare(String(a.set?.id || ""), undefined, { numeric: true });
     if (setDiff) return setDiff;
     return (parseInt((b.number || "0").replace(/\D/g, "")) || 0) -
       (parseInt((a.number || "0").replace(/\D/g, "")) || 0);
@@ -633,10 +655,16 @@ export async function getAllSets(lang: LanguageCode = "fr"): Promise<any[]> {
           total: set.cardCount?.total ?? set.cardCount?.official ?? 0,
           logo: set.logo ? `${set.logo}.png` : undefined,
           symbol: set.symbol ? `${set.symbol}.png` : undefined,
-          releaseDate: set.releaseDate || "",
+          releaseDate: effectiveSetReleaseDate(set.id, set.releaseDate || ""),
         }));
 
-        mappedSets.sort((a: any, b: any) => parseReleaseDate(b.releaseDate) - parseReleaseDate(a.releaseDate));
+        mappedSets.sort((a: any, b: any) => {
+          const dateDiff = parseReleaseDate(b.releaseDate) - parseReleaseDate(a.releaseDate);
+          if (dateDiff) return dateDiff;
+          const codeDiff = setCodeRecency(b.id) - setCodeRecency(a.id);
+          if (codeDiff) return codeDiff;
+          return String(b.id).localeCompare(String(a.id), undefined, { numeric: true });
+        });
         return mappedSets;
       }
     }
