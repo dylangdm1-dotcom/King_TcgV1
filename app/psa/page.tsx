@@ -2,7 +2,7 @@
 
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { FormEvent, ReactNode, useEffect, useMemo, useState } from "react";
 import {
   Award,
   Plus,
@@ -11,6 +11,11 @@ import {
   Trash2,
   ExternalLink,
   ShoppingBag,
+  Search,
+  ReceiptText,
+  TrendingUp,
+  BadgeEuro,
+  Gem,
 } from "lucide-react";
 
 import Navbar from "@/components/Navbar";
@@ -36,6 +41,12 @@ function formatEUR(value: number): string {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   })} €`;
+}
+
+function formatSignedEUR(value: number): string {
+  if (!Number.isFinite(value)) return "—";
+  const formatted = Math.abs(value).toLocaleString("fr-FR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  return `${value >= 0 ? "+" : "−"}${formatted} €`;
 }
 
 function formatSaleDate(date: string): string {
@@ -86,6 +97,7 @@ export default function PSAPage() {
   const [newGrade, setNewGrade] = useState<PSAGrade>(10);
 
   const [newPrice, setNewPrice] = useState(0);
+  const [newPurchasePrice, setNewPurchasePrice] = useState(0);
 
   const [newImage, setNewImage] = useState("");
 
@@ -102,7 +114,7 @@ export default function PSAPage() {
   );
 
   const handlePriceChartingSearch = async (
-    event: React.FormEvent
+    event: FormEvent
   ) => {
     event.preventDefault();
 
@@ -170,12 +182,13 @@ export default function PSAPage() {
     };
 
     setNewPrice(prices[grade]);
+    setNewPurchasePrice(0);
 
     setIsAddModalOpen(true);
   };
 
   const handleAddSubmit = (
-    event: React.FormEvent
+    event: FormEvent
   ) => {
     event.preventDefault();
 
@@ -192,6 +205,7 @@ export default function PSAPage() {
         grade: newGrade,
         imageUrl: newImage,
         estimatedValue: Number(newPrice) || 0,
+        purchasePrice: Number(newPurchasePrice) || 0,
         salesHistory: [],
         marketPrices: selectedMarketPrices,
         currency: "EUR",
@@ -206,6 +220,7 @@ export default function PSAPage() {
       setNewSet("");
       setNewNumber("");
       setNewPrice(0);
+      setNewPurchasePrice(0);
       setNewImage("");
       setSelectedMarketPrices(undefined);
     } catch (error) {
@@ -263,46 +278,42 @@ export default function PSAPage() {
         <div className="mx-auto max-w-6xl px-4 py-6 space-y-6">
 
           {/* HEADER */}
-          <section className="kt-premium-panel rounded-[22px] p-5 sm:p-6 flex flex-col md:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <div className="flex h-12 w-16 shrink-0 items-center justify-center rounded-2xl border border-white/[0.12] bg-white/[0.96] p-1.5 shadow-[0_12px_28px_rgba(0,0,0,0.3)]">
-                <img src="/brands/psa.svg" alt="PSA" className="h-full w-full object-contain" />
-              </div>
-
-              <div>
-                <div className="flex items-center gap-2">
-                  <h1 className="text-lg font-black uppercase">
-                    Collection PSA
-                  </h1>
-
-                  <span className="px-2 py-0.5 rounded bg-cyan-500/15 border border-cyan-500/20 text-cyan-400 text-[9px] font-black uppercase">
-                    Pokémon TCG
-                  </span>
+          <section className="rounded-[22px] border border-cyan-200/35 bg-[linear-gradient(145deg,rgba(22,27,35,.98),rgba(12,16,22,.98))] p-4 shadow-[0_18px_48px_rgba(0,0,0,.34),0_0_0_1px_rgba(255,255,255,.025)] sm:p-5">
+            <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+              <div className="flex min-w-0 items-center gap-3">
+                <div className="flex h-11 w-16 shrink-0 items-center justify-center rounded-2xl border border-cyan-200/40 bg-white p-1.5 shadow-[0_0_26px_rgba(34,211,238,.12)]">
+                  <img src="/brands/psa.svg" alt="PSA" className="h-full w-full object-contain" />
                 </div>
-
-                <p className="text-xs text-zinc-400 mt-1">
-                  Centralisez vos cartes gradées, suivez leurs valeurs marché et retrouvez rapidement chaque certificat.
-                </p>
+                <div className="min-w-0">
+                  <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+                    <h1 className="text-base font-black uppercase text-white sm:text-lg">Collection PSA</h1>
+                    <span className="whitespace-nowrap rounded-full border border-violet-300/20 bg-violet-400/[0.08] px-2 py-1 text-[8px] font-black uppercase tracking-wider text-violet-200">Pokémon TCG</span>
+                  </div>
+                  <p className="mt-1 max-w-2xl text-[10px] leading-4 text-zinc-400 sm:text-[11px]">
+                    Suivez certificats, prix d'achat, valeur estimée et plus-value de vos cartes gradées.
+                  </p>
+                </div>
               </div>
-            </div>
 
-            <button
-              onClick={() => {
-                setNewCert("");
-                setNewName("");
-                setNewSet("");
-                setNewNumber("");
-                setNewGrade(10);
-                setNewPrice(0);
-                setNewImage("");
-                setSelectedMarketPrices(undefined);
-                setIsAddModalOpen(true);
-              }}
-              className="kt-premium-button w-full md:w-auto px-5 py-3 text-xs uppercase flex items-center justify-center gap-2"
-            >
-              <Plus className="w-4 h-4" />
-              Ajouter une dalle PSA
-            </button>
+              <button
+                onClick={() => {
+                  setNewCert("");
+                  setNewName("");
+                  setNewSet("");
+                  setNewNumber("");
+                  setNewGrade(10);
+                  setNewPrice(0);
+                  setNewPurchasePrice(0);
+                  setNewImage("");
+                  setSelectedMarketPrices(undefined);
+                  setIsAddModalOpen(true);
+                }}
+                className="kt-premium-button flex w-full items-center justify-center gap-2 px-4 py-2.5 text-[10px] uppercase md:w-auto"
+              >
+                <Plus className="h-4 w-4" />
+                Ajouter une dalle
+              </button>
+            </div>
           </section>
 
           <section className="grid gap-3 sm:grid-cols-3">
@@ -311,7 +322,7 @@ export default function PSAPage() {
               ["Prix PriceCharting", "Comparez les repères PSA disponibles avant un ajout."],
               ["Estimation IA", "Module préparé, sans présenter une note non officielle comme garantie."],
             ].map(([title, description]) => (
-              <div key={title} className="kt-premium-panel rounded-[18px] p-4">
+              <div key={title} className="kt-premium-panel rounded-[16px] p-3.5">
                 <p className="text-[10px] font-black uppercase tracking-[0.14em] text-cyan-300">{title}</p>
                 <p className="mt-1.5 text-[10px] leading-5 text-zinc-500">{description}</p>
               </div>
@@ -365,37 +376,10 @@ export default function PSAPage() {
             <section className="space-y-6">
 
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                <StatCard
-                  title="Valeur totale"
-                  value={`${stats.totalValue.toLocaleString(
-                    "fr-FR",
-                    {
-                      minimumFractionDigits: 2,
-                      maximumFractionDigits: 2,
-                    }
-                  )} €`}
-                />
-
-                <StatCard
-                  title="Cartes PSA"
-                  value={stats.totalCount}
-                />
-
-                <StatCard
-                  title="PSA 10"
-                  value={stats.gemMintCount}
-                />
-
-                <StatCard
-                  title="Plus-value"
-                  value={`${stats.netProfit >= 0 ? "+" : ""}${stats.netProfit.toLocaleString(
-                    "fr-FR",
-                    {
-                      minimumFractionDigits: 2,
-                      maximumFractionDigits: 2,
-                    }
-                  )} €`}
-                />
+                <StatCard title="Valeur totale" value={formatEUR(stats.totalValue)} icon={<BadgeEuro className="h-4 w-4" />} tone="cyan" />
+                <StatCard title="Cartes PSA" value={stats.totalCount} icon={<Award className="h-4 w-4" />} tone="violet" />
+                <StatCard title="PSA 10" value={stats.gemMintCount} icon={<Gem className="h-4 w-4" />} tone="amber" />
+                <StatCard title="Plus-value" value={formatSignedEUR(stats.netProfit)} icon={<TrendingUp className="h-4 w-4" />} tone={stats.netProfit >= 0 ? "green" : "red"} />
               </div>
 
               <div className="flex flex-col md:flex-row gap-3">
@@ -459,7 +443,7 @@ export default function PSAPage() {
                   {filteredCollection.map((card) => (
                     <article
                       key={card.id}
-                      className="kt-premium-panel kt-premium-card-lift group relative min-w-0 overflow-hidden rounded-[22px] p-3.5 sm:p-4"
+                      className="group relative min-w-0 overflow-hidden rounded-[20px] border border-white/[0.09] bg-[linear-gradient(145deg,rgba(27,32,41,.96),rgba(17,21,28,.96))] p-3 shadow-[0_14px_36px_rgba(0,0,0,.24)] transition hover:border-cyan-200/20"
                     >
                       <div className="flex min-w-0 items-start gap-3 sm:gap-4">
                         <div className="shrink-0">
@@ -507,13 +491,15 @@ export default function PSAPage() {
                             <p className="break-all text-zinc-500">Certificat : {card.psaCertNumber}</p>
                           </div>
 
-                          <div className="mt-3 rounded-2xl border border-cyan-400/12 bg-cyan-400/[0.055] px-3 py-2.5">
-                            <p className="text-[8px] font-black uppercase tracking-widest text-zinc-500">
-                              Valeur estimée
-                            </p>
-                            <p className="mt-1 break-words text-sm font-black tabular-nums text-cyan-400">
-                              {formatEUR(card.estimatedValue)}
-                            </p>
+                          <div className="mt-3 grid grid-cols-3 gap-1.5">
+                            <ValueChip icon={<ReceiptText className="h-3.5 w-3.5" />} label="Achat" value={formatEUR(card.purchasePrice || 0)} tone="amber" />
+                            <ValueChip icon={<BadgeEuro className="h-3.5 w-3.5" />} label="Estimation" value={formatEUR(card.estimatedValue)} tone="cyan" />
+                            <ValueChip
+                              icon={<TrendingUp className="h-3.5 w-3.5" />}
+                              label="Plus-value"
+                              value={formatSignedEUR(card.estimatedValue - (card.purchasePrice || 0))}
+                              tone={(card.estimatedValue - (card.purchasePrice || 0)) >= 0 ? "green" : "red"}
+                            />
                           </div>
                         </div>
                       </div>
@@ -528,7 +514,7 @@ export default function PSAPage() {
           {activeTab === "search" && (
             <section className="space-y-6">
 
-              <div className="kt-premium-panel rounded-[22px] p-5 sm:p-6 space-y-4">
+              <div className="kt-premium-panel rounded-[20px] p-4 sm:p-5 space-y-4">
                 <div>
                   <h2 className="text-sm font-black uppercase">
                     Recherche Prix Pokémon TCG
@@ -567,11 +553,10 @@ export default function PSAPage() {
                   <button
                     type="submit"
                     disabled={priceChartingLoading}
-                    className="kt-premium-button disabled:opacity-50 px-5 py-3 text-xs uppercase"
+                    className="flex items-center justify-center gap-2 rounded-2xl border border-cyan-200/30 bg-cyan-400 px-5 py-3 text-xs font-black uppercase text-[#041014] shadow-[0_10px_28px_rgba(34,211,238,.18)] transition hover:bg-cyan-300 disabled:opacity-50"
                   >
-                    {priceChartingLoading
-                      ? "Recherche..."
-                      : "Rechercher"}
+                    {priceChartingLoading ? <Sparkles className="h-4 w-4 animate-pulse" /> : <Search className="h-4 w-4" />}
+                    {priceChartingLoading ? "Analyse des prix..." : "Analyser les prix"}
                   </button>
                 </form>
               </div>
@@ -594,7 +579,7 @@ export default function PSAPage() {
                 {priceChartingResults.map((card) => (
                   <div
                     key={card.id}
-                    className="psa-result-card bg-neutral-900/60 border border-zinc-800 rounded-2xl p-5 space-y-5"
+                    className="psa-result-card rounded-[20px] border border-white/[0.09] bg-[linear-gradient(145deg,rgba(27,32,41,.96),rgba(17,21,28,.96))] p-4 space-y-4"
                   >
 
                     {/* CARD HEADER */}
@@ -803,27 +788,19 @@ export default function PSAPage() {
           {/* IA */}
           {activeTab === "estimation" && (
             <section className="space-y-6">
-              <div className="kt-premium-panel rounded-[24px] p-5 sm:p-6">
-                <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+              <div className="kt-premium-panel rounded-[20px] p-4 sm:p-5">
+                <div className="grid gap-3 sm:grid-cols-[1fr_auto] sm:items-start">
                   <div className="flex items-start gap-3">
-                    <div className="flex h-11 w-16 shrink-0 items-center justify-center rounded-2xl border border-white/[0.10] bg-white/[0.96] p-1.5">
+                    <div className="flex h-10 w-16 shrink-0 items-center justify-center rounded-2xl border border-cyan-200/30 bg-white p-1.5">
                       <img src="/brands/psa.svg" alt="PSA" className="h-full w-full object-contain" />
                     </div>
                     <div>
-                      <p className="text-[10px] font-black uppercase tracking-[0.16em] text-blue-300">
-                        V5.01 · Caméra + Gemini
-                      </p>
-                      <h2 className="mt-1 text-base font-black text-white">
-                        Estimation visuelle du grade
-                      </h2>
-                      <p className="mt-1 max-w-2xl text-[11px] leading-5 text-zinc-400">
-                        Capturez quatre vues guidées puis lancez une estimation Gemini du centrage, des coins, des bords et de la surface.
-                      </p>
+                      <p className="text-[9px] font-black uppercase tracking-[0.16em] text-blue-300">V5.01 · Caméra + Gemini</p>
+                      <h2 className="mt-1 text-base font-black text-white">Estimation visuelle du grade</h2>
+                      <p className="mt-1 max-w-2xl text-[10px] leading-4 text-zinc-400">Quatre vues guidées, puis un contrôle manuel pour affiner les défauts difficiles à voir.</p>
                     </div>
                   </div>
-                  <span className="self-start rounded-full border border-amber-300/15 bg-amber-400/[0.06] px-3 py-1.5 text-[9px] font-black uppercase tracking-wider text-amber-200">
-                    Estimation non officielle
-                  </span>
+                  <span className="justify-self-start rounded-full border border-amber-300/15 bg-amber-400/[0.06] px-3 py-1.5 text-[9px] font-black uppercase tracking-wider text-amber-200 sm:mt-8 sm:justify-self-end">Estimation non officielle</span>
                 </div>
               </div>
 
@@ -915,17 +892,24 @@ export default function PSAPage() {
                   min="0"
                   step="0.01"
                   value={newPrice}
-                  onChange={(e) =>
-                    setNewPrice(
-                      Number(
-                        e.target.value
-                      )
-                    )
-                  }
-                  placeholder="Valeur €"
-                  className="bg-neutral-950 border border-zinc-800 rounded-xl px-3 py-3 text-xs"
+                  onChange={(e) => setNewPrice(Number(e.target.value))}
+                  placeholder="Valeur estimée €"
+                  className="rounded-xl border border-white/[0.08] bg-[#11151b] px-3 py-3 text-xs text-white"
                 />
               </div>
+
+              <label className="block">
+                <span className="mb-1.5 block text-[9px] font-black uppercase tracking-wider text-zinc-500">Prix d'achat</span>
+                <input
+                  type="number"
+                  min="0"
+                  step="0.01"
+                  value={newPurchasePrice}
+                  onChange={(e) => setNewPurchasePrice(Number(e.target.value))}
+                  placeholder="Montant payé €"
+                  className="w-full rounded-xl border border-amber-300/15 bg-amber-400/[0.05] px-3 py-3 text-xs text-white outline-none focus:border-amber-300/35"
+                />
+              </label>
 
               <div className="flex justify-end gap-2 pt-3">
                 <button
@@ -950,6 +934,21 @@ export default function PSAPage() {
         </div>
       )}
     </>
+  );
+}
+
+function ValueChip({ icon, label, value, tone }: { icon: ReactNode; label: string; value: string; tone: "amber" | "cyan" | "green" | "red" }) {
+  const tones = {
+    amber: "border-amber-300/15 bg-amber-400/[0.055] text-amber-200",
+    cyan: "border-cyan-300/15 bg-cyan-400/[0.055] text-cyan-200",
+    green: "border-emerald-300/15 bg-emerald-400/[0.055] text-emerald-200",
+    red: "border-rose-300/15 bg-rose-400/[0.055] text-rose-200",
+  };
+  return (
+    <div className={`min-w-0 rounded-xl border px-2 py-2 ${tones[tone]}`}>
+      <div className="flex items-center gap-1">{icon}<span className="truncate text-[7px] font-black uppercase tracking-wide opacity-70">{label}</span></div>
+      <p className="mt-1 truncate text-[10px] font-black tabular-nums text-white">{value}</p>
+    </div>
   );
 }
 
@@ -992,22 +991,22 @@ function PriceBox({
   );
 }
 
-function StatCard({
-  title,
-  value,
-}: {
-  title: string;
-  value: string | number;
-}) {
+function StatCard({ title, value, icon, tone }: { title: string; value: string | number; icon: ReactNode; tone: "cyan" | "violet" | "amber" | "green" | "red" }) {
+  const tones = {
+    cyan: "border-cyan-300/15 bg-cyan-400/[0.055] text-cyan-200",
+    violet: "border-violet-300/15 bg-violet-400/[0.055] text-violet-200",
+    amber: "border-amber-300/15 bg-amber-400/[0.055] text-amber-200",
+    green: "border-emerald-300/15 bg-emerald-400/[0.055] text-emerald-200",
+    red: "border-rose-300/15 bg-rose-400/[0.055] text-rose-200",
+  };
   return (
-    <div className="kt-premium-panel kt-premium-card-lift rounded-[18px] p-4">
-      <span className="text-[9px] font-black uppercase tracking-[0.14em] text-zinc-500">
-        {title}
-      </span>
-      <p className="mt-2 break-words text-lg font-black tabular-nums text-white sm:text-xl">
-        {value}
-      </p>
-      <div className="mt-3 h-px bg-gradient-to-r from-cyan-400/35 to-transparent" />
+    <div className={`rounded-[16px] border p-3 ${tones[tone]}`}>
+      <div className="flex items-center justify-between gap-2">
+        <span className="text-[8px] font-black uppercase tracking-[0.13em] opacity-70">{title}</span>
+        <span className="opacity-90">{icon}</span>
+      </div>
+      <p className="mt-2 truncate text-base font-black tabular-nums text-white">{value}</p>
     </div>
   );
 }
+
