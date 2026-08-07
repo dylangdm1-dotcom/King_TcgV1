@@ -319,19 +319,19 @@ export default function BibliothequePage() {
           </section>
 
           {/* Métriques KPIs Uniformisées V5.0 */}
-          <section className="grid grid-cols-3 gap-2 lg:grid-cols-4">
+          <section className="grid grid-cols-2 gap-2 sm:grid-cols-4">
             {/* KPI Valeur */}
-            <div className="kt-premium-panel kt-premium-card-lift rounded-[15px] p-2.5 sm:p-3 flex flex-col justify-between min-h-[82px]">
+            <div className="kt-premium-panel kt-premium-card-lift rounded-[15px] p-2 sm:p-3 flex flex-col justify-between min-h-[82px]">
               <div className="flex justify-between items-start">
-                <span className="text-zinc-500 text-[8px] sm:text-[9px] font-black uppercase tracking-wide flex items-center gap-1 min-w-0 whitespace-nowrap">
+                <span className="text-zinc-500 text-[7px] sm:text-[9px] font-black uppercase tracking-wide flex items-center gap-1 min-w-0 whitespace-nowrap">
                   <TrendingUp className="w-3.5 h-3.5 text-cyan-400" />
                   Valeur
                 </span>
-                <span className="text-[9px] font-black uppercase tracking-wider text-cyan-400 bg-cyan-500/10 border border-cyan-500/20 px-2 py-0.5 rounded-full">
+                <span className="text-[7px] sm:text-[9px] font-black uppercase tracking-wider text-cyan-400 bg-cyan-500/10 border border-cyan-500/20 px-2 py-0.5 rounded-full">
                   Marché EUR
                 </span>
               </div>
-              <div className="text-lg font-black text-white tabular-nums mt-2">
+              <div className="text-sm sm:text-lg font-black text-white tabular-nums mt-2">
                 {totalValue.toFixed(2)}
                 <span className="text-zinc-500 text-sm font-bold ml-1">
                   €
@@ -340,18 +340,18 @@ export default function BibliothequePage() {
             </div>
 
             {/* KPI Quantité physique */}
-            <div className="kt-premium-panel kt-premium-card-lift rounded-[15px] p-2.5 sm:p-3 flex flex-col justify-between min-h-[82px]">
+            <div className="kt-premium-panel kt-premium-card-lift rounded-[15px] p-2 sm:p-3 flex flex-col justify-between min-h-[82px]">
               <div className="flex justify-between items-start">
-                <span className="text-zinc-500 text-[8px] sm:text-[9px] font-black uppercase tracking-wide flex items-center gap-1 min-w-0 whitespace-nowrap">
+                <span className="text-zinc-500 text-[7px] sm:text-[9px] font-black uppercase tracking-wide flex items-center gap-1 min-w-0 whitespace-nowrap">
                   <Layers className="w-3.5 h-3.5 text-zinc-400" />
                   Volume
                 </span>
-                <span className="text-[9px] font-black uppercase tracking-wider text-zinc-400 bg-zinc-800/40 border border-zinc-800 px-2 py-0.5 rounded-full">
+                <span className="text-[7px] sm:text-[9px] font-black uppercase tracking-wider text-zinc-400 bg-zinc-800/40 border border-zinc-800 px-2 py-0.5 rounded-full">
                   Stock
                 </span>
               </div>
               <div className="flex items-baseline gap-2 mt-2">
-                <span className="text-lg font-black text-white tabular-nums">
+                <span className="text-sm sm:text-lg font-black text-white tabular-nums">
                   {totalCardsCount}
                 </span>
                 <span className="text-[10px] font-bold text-zinc-500">
@@ -361,20 +361,20 @@ export default function BibliothequePage() {
             </div>
 
             {/* Top Asset */}
-            <div className="kt-premium-panel kt-premium-card-lift rounded-[15px] p-2.5 sm:p-3 flex flex-col justify-between min-h-[82px]">
+            <div className="kt-premium-panel kt-premium-card-lift rounded-[15px] p-2 sm:p-3 flex flex-col justify-between min-h-[82px]">
               <div className="flex justify-between items-start">
-                <span className="text-zinc-500 text-[8px] sm:text-[9px] font-black uppercase tracking-wide flex items-center gap-1 min-w-0 whitespace-nowrap">
+                <span className="text-zinc-500 text-[7px] sm:text-[9px] font-black uppercase tracking-wide flex items-center gap-1 min-w-0 whitespace-nowrap">
                   <Award className="w-3.5 h-3.5 text-yellow-400" />
                   Top Actif
                 </span>
-                <span className="text-[9px] font-black uppercase tracking-wider text-yellow-400 bg-yellow-500/10 border border-yellow-500/20 px-2 py-0.5 rounded-full">
+                <span className="text-[7px] sm:text-[9px] font-black uppercase tracking-wider text-yellow-400 bg-yellow-500/10 border border-yellow-500/20 px-2 py-0.5 rounded-full">
                   Star
                 </span>
               </div>
               <div className="mt-2">
                 {topValuedCard ? (
                   <div className="flex items-end justify-between gap-2">
-                    <span className="text-base font-black text-yellow-300 tabular-nums">
+                    <span className="text-sm sm:text-base font-black text-yellow-300 tabular-nums">
                       {topCardPrice.toFixed(2)} €
                     </span>
                     <span className="max-w-[112px] truncate text-right text-[10px] font-black leading-4 text-white">
@@ -390,18 +390,18 @@ export default function BibliothequePage() {
             </div>
 
             {/* Liquidité prix */}
-            <div className="col-span-3 lg:col-span-1 kt-premium-panel kt-premium-card-lift rounded-[15px] p-2.5 sm:p-3 flex flex-col justify-between min-h-[82px]">
+            <div className="kt-premium-panel kt-premium-card-lift rounded-[15px] p-2 sm:p-3 flex flex-col justify-between min-h-[82px]">
               <div className="flex justify-between items-start">
-                <span className="text-zinc-500 text-[8px] sm:text-[9px] font-black uppercase tracking-wide flex items-center gap-1 min-w-0 whitespace-nowrap">
+                <span className="text-zinc-500 text-[7px] sm:text-[9px] font-black uppercase tracking-wide flex items-center gap-1 min-w-0 whitespace-nowrap">
                   <Activity className="w-3.5 h-3.5 text-emerald-400" />
                   Couverture
                 </span>
-                <span className="text-[9px] font-black uppercase tracking-wider text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-full">
+                <span className="text-[7px] sm:text-[9px] font-black uppercase tracking-wider text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-full">
                   Prix
                 </span>
               </div>
               <div className="flex items-baseline gap-2 mt-2">
-                <span className="text-lg font-black text-white tabular-nums">
+                <span className="text-sm sm:text-lg font-black text-white tabular-nums">
                   {liquidityRatio}%
                 </span>
                 <span className="text-[10px] font-bold text-zinc-500">
@@ -432,7 +432,7 @@ export default function BibliothequePage() {
                   </p>
                   <p className="mt-1 text-[10px] leading-4 text-zinc-500">Les extensions les plus avancées, mais encore incomplètes.</p>
                 </div>
-                <Link href="/recherche" className="text-[9px] font-black uppercase tracking-wider text-amber-300 hover:text-white">Explorer</Link>
+                <Link href="/recherche" className="text-[7px] sm:text-[9px] font-black uppercase tracking-wider text-amber-300 hover:text-white">Explorer</Link>
               </div>
 
               {extensionProgress.length ? (
@@ -459,7 +459,7 @@ export default function BibliothequePage() {
                     <button
                       type="button"
                       onClick={() => setShowAllExtensions((value) => !value)}
-                      className="mt-3 flex w-full items-center justify-center rounded-xl border border-amber-200/15 bg-amber-300/[0.06] px-3 py-2.5 text-[9px] font-black uppercase tracking-wider text-amber-200 transition hover:border-amber-200/30 hover:bg-amber-300/[0.1]"
+                      className="mt-3 flex w-full items-center justify-center rounded-xl border border-amber-200/15 bg-amber-300/[0.06] px-3 py-2.5 text-[7px] sm:text-[9px] font-black uppercase tracking-wider text-amber-200 transition hover:border-amber-200/30 hover:bg-amber-300/[0.1]"
                     >
                       {showAllExtensions ? "Réduire la liste" : `Voir toutes les extensions (${extensionProgress.length})`}
                     </button>
