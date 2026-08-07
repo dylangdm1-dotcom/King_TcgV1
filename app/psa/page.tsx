@@ -811,13 +811,13 @@ export default function PSAPage() {
                     </div>
                     <div>
                       <p className="text-[10px] font-black uppercase tracking-[0.16em] text-blue-300">
-                        PSA-1 · Capture guidée
+                        V5.01 · Caméra + Gemini
                       </p>
                       <h2 className="mt-1 text-base font-black text-white">
                         Estimation visuelle du grade
                       </h2>
                       <p className="mt-1 max-w-2xl text-[11px] leading-5 text-zinc-400">
-                        Préparez quatre vues complémentaires pour permettre une future analyse du centrage, des coins, des bords et de la surface.
+                        Capturez quatre vues guidées puis lancez une estimation Gemini du centrage, des coins, des bords et de la surface.
                       </p>
                     </div>
                   </div>
