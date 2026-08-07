@@ -9,6 +9,16 @@ export const maxDuration = 60;
 
 const PhotoIdSchema = z.enum(PSA_PHOTO_IDS);
 
+const ManualReviewSchema = z.object({
+  whiteSpots: z.enum(["0", "1-2", "3-5", "6+"]),
+  scratches: z.enum(["none", "light", "visible", "deep"]),
+  cornerDamage: z.enum(["none", "one", "multiple"]),
+  edgeWhitening: z.enum(["none", "light", "marked"]),
+  majorDefect: z.boolean(),
+  hiddenDefect: z.boolean(),
+  notes: z.string().max(300).default(""),
+});
+
 const CriterionSchema = z.object({
   score: z.coerce.number().min(0).max(10),
   label: z.string().max(80).default(""),
@@ -249,7 +259,7 @@ function extractJson(rawText: string): unknown {
   return JSON.parse(candidate);
 }
 
-const prompt = `
+const basePrompt = `
 Tu es un assistant d'inspection visuelle de cartes Pokémon TCG. Tu dois ESTIMER une plage de grade PSA uniquement à partir de quatre photographies. Cette estimation n'est ni une authentification, ni une note PSA officielle.
 
 PHOTOS FOURNIES DANS CET ORDRE :
@@ -271,6 +281,9 @@ RÈGLES ABSOLUES :
 - Retourne UNIQUEMENT un JSON valide, sans markdown ni texte autour.
 - Tous les textes doivent être en français.
 - Tous les champs du format ci-dessous sont obligatoires, même lorsqu'une liste est vide.
+- Utilise les repères suivants pour stabiliser les analyses : PSA 10 = quasi parfait sans défaut visible; PSA 9 = défaut mineur isolé; PSA 8 = plusieurs défauts légers; PSA 7 ou moins = usure visible, blanchiment marqué, rayure nette, pli ou enfoncement.
+- À photos équivalentes, évite les variations de plus d'un grade. Si le doute dépasse un grade, retourne une plage et réduis la confiance.
+- La confiance ne doit jamais dépasser 90 %. Elle ne peut dépasser 85 % que si les quatre photos sont nettes ET qu'un contrôle manuel cohérent confirme l'absence de défaut caché.
 
 FORMAT STRICT :
 {
@@ -309,6 +322,11 @@ export async function POST(req: NextRequest) {
 
     const body = await req.json();
     const photos = Array.isArray(body?.photos) ? (body.photos as IncomingPhoto[]) : [];
+    const manualReviewResult = body?.manualReview
+      ? ManualReviewSchema.safeParse(body.manualReview)
+      : null;
+    const manualReview = manualReviewResult?.success ? manualReviewResult.data : null;
+    const previousAnalysis = isRecord(body?.previousAnalysis) ? body.previousAnalysis : null;
 
     if (photos.length !== PSA_PHOTO_IDS.length) {
       return NextResponse.json({ error: "Les quatre photos sont obligatoires." }, { status: 400 });
@@ -338,6 +356,16 @@ export async function POST(req: NextRequest) {
     const imageParts = parsedPhotos.map((photo) => ({
       inlineData: { data: photo.parsed!.data, mimeType: photo.parsed!.mimeType },
     }));
+
+    const manualContext = manualReview
+      ? `\n\nCONTRÔLE MANUEL CONFIRMÉ PAR L'UTILISATEUR :\n${JSON.stringify(manualReview, null, 2)}\n\nRÈGLES POUR L'AFFINAGE :\n- Ces déclarations complètent les photos et ne doivent jamais être ignorées.\n- Tout pli, enfoncement, rayure profonde ou défaut majeur doit fortement pénaliser le grade.\n- Des points blancs, coins abîmés ou bords blanchis doivent réduire les critères correspondants de façon proportionnée.\n- Si l'utilisateur confirme zéro défaut supplémentaire et que les photos sont excellentes, la confiance peut augmenter modérément, sans dépasser 90 %.\n- Ne monte jamais automatiquement le grade uniquement parce que l'utilisateur déclare zéro défaut.\n- Explique dans summary comment le contrôle manuel a modifié ou confirmé l'estimation.`
+      : "";
+
+    const previousContext = manualReview && previousAnalysis
+      ? `\n\nANALYSE PHOTO PRÉCÉDENTE À STABILISER :\n${JSON.stringify(previousAnalysis).slice(0, 5000)}\nConserve une estimation proche sauf si le contrôle manuel justifie clairement une correction.`
+      : "";
+
+    const prompt = basePrompt + manualContext + previousContext;
 
     const genAI = new GoogleGenerativeAI(apiKey);
     const modelCandidates = [
