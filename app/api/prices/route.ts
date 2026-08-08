@@ -41,6 +41,33 @@ const FALLBACK_USD_TO_EUR = 0.92;
 const POSITIVE_CACHE_TTL = 12 * 60 * 60 * 1000;
 const NEGATIVE_CACHE_TTL = 10 * 60 * 1000;
 const priceCache = new Map<string, { expiresAt: number; payload: MarketPayload }>();
+
+function tcgdexLocales(language?: InputCard["language"]): string[] {
+  if (language === "ja") return ["ja"];
+  if (language === "zh-tw") return ["zh-tw", "zh-cn"];
+  if (language === "fr") return ["fr"];
+  return ["en"];
+}
+
+function normalizedSetId(value?: string): string {
+  return String(value ?? "").toLowerCase().replace(/[^a-z0-9]/g, "");
+}
+
+function detailMatchesInput(detail: any, card: InputCard): boolean {
+  const wantedNumber = normalizeNumber(card.number);
+  const actualNumber = normalizeNumber(detail?.localId ?? detail?.number);
+  if (wantedNumber && actualNumber !== wantedNumber) return false;
+
+  const wantedSet = normalizedSetId(card.setId);
+  if (!wantedSet) return true;
+
+  const actualSet =
+    normalizedSetId(detail?.set?.id) ||
+    normalizedSetId(String(detail?.id ?? "").split("-")[0]);
+
+  return actualSet === wantedSet;
+}
+
 let exchangeRateCache: { value: number; expiresAt: number } | null = null;
 
 function num(value: unknown): number | undefined {
@@ -209,39 +236,75 @@ function mapTcgdexPricing(card: any, usdToEur: number): MarketPayload {
 }
 
 async function fetchTcgdexCard(card: InputCard): Promise<{ payload: MarketPayload; sourceStatus: FetchResult["status"] }> {
-  const lang = card.language === "ja" ? "ja" : card.language === "zh-tw" ? "zh-tw" : card.language === "fr" ? "fr" : "en";
   const usdToEur = await getUsdToEurRate();
   let lastStatus: FetchResult["status"] = "not_found";
 
-  for (const candidate of tcgdexCandidates(card)) {
-    const result = await fetchJson(`${TCGDEX_BASE}/${lang}/cards/${encodeURIComponent(candidate)}`);
-    lastStatus = result.status;
-    if (result.data?.id) return { payload: mapTcgdexPricing(result.data, usdToEur), sourceStatus: "ok" };
+  for (const locale of tcgdexLocales(card.language)) {
+    for (const candidate of tcgdexCandidates(card)) {
+      const result = await fetchJson(
+        `${TCGDEX_BASE}/${locale}/cards/${encodeURIComponent(candidate)}`
+      );
+      lastStatus = result.status;
+      if (result.data?.id && detailMatchesInput(result.data, card)) {
+        return {
+          payload: mapTcgdexPricing(result.data, usdToEur),
+          sourceStatus: "ok",
+        };
+      }
+    }
+
+    if (!card.name) continue;
+
+    const listResult = await fetchJson(
+      `${TCGDEX_BASE}/${locale}/cards?name=${encodeURIComponent(card.name)}`
+    );
+    lastStatus = listResult.status;
+    const list = Array.isArray(listResult.data) ? listResult.data : [];
+    if (!list.length) continue;
+
+    const wantedName = normalizeName(card.name);
+    const wantedNumber = normalizeNumber(card.number);
+    const wantedSetId = normalizedSetId(card.setId);
+    const wantedSetName = normalizeName(card.setName);
+
+    const match = list.find((item: any) => {
+      const exactName = normalizeName(item.name) === wantedName;
+      const exactNumber = normalizeNumber(item.localId) === wantedNumber;
+      const itemSetId =
+        normalizedSetId(item.set?.id) ||
+        normalizedSetId(String(item.id ?? "").split("-")[0]);
+      const exactSet = !wantedSetId || itemSetId === wantedSetId;
+      const compatibleSetName =
+        !wantedSetName ||
+        normalizeName(item.set?.name) === wantedSetName;
+
+      return exactName && exactNumber && exactSet && compatibleSetName;
+    });
+
+    if (!match?.id) continue;
+
+    const detail = await fetchJson(
+      `${TCGDEX_BASE}/${locale}/cards/${encodeURIComponent(match.id)}`
+    );
+    if (detail.data?.id && detailMatchesInput(detail.data, card)) {
+      return {
+        payload: mapTcgdexPricing(detail.data, usdToEur),
+        sourceStatus: "ok",
+      };
+    }
+    lastStatus = detail.status;
   }
 
-  if (!card.name) return { payload: emptyPayload(), sourceStatus: lastStatus };
-  const listResult = await fetchJson(`${TCGDEX_BASE}/${lang}/cards?name=${encodeURIComponent(card.name)}`);
-  lastStatus = listResult.status;
-  const list = Array.isArray(listResult.data) ? listResult.data : [];
-  if (!list.length) return { payload: emptyPayload(lastStatus === "rate_limited" ? "rate_limited" : "not_listed"), sourceStatus: lastStatus };
-
-  const wantedName = normalizeName(card.name);
-  const wantedNumber = normalizeNumber(card.number);
-  const wantedSet = normalizeName(card.setName);
-  const match =
-    list.find((item: any) => normalizeNumber(item.localId) === wantedNumber && normalizeName(item.name) === wantedName) ??
-    list.find((item: any) => normalizeNumber(item.localId) === wantedNumber && (!wantedSet || normalizeName(item.set?.name).includes(wantedSet))) ??
-    list.find((item: any) => normalizeNumber(item.localId) === wantedNumber);
-
-  if (!match?.id) return { payload: emptyPayload(), sourceStatus: lastStatus };
-  const detail = await fetchJson(`${TCGDEX_BASE}/${lang}/cards/${encodeURIComponent(match.id)}`);
-  if (!detail.data?.id) {
-    return {
-      payload: emptyPayload(detail.status === "rate_limited" ? "rate_limited" : detail.status === "unavailable" ? "source_unavailable" : "not_listed"),
-      sourceStatus: detail.status,
-    };
-  }
-  return { payload: mapTcgdexPricing(detail.data, usdToEur), sourceStatus: "ok" };
+  return {
+    payload: emptyPayload(
+      lastStatus === "rate_limited"
+        ? "rate_limited"
+        : lastStatus === "unavailable"
+          ? "source_unavailable"
+          : "not_listed"
+    ),
+    sourceStatus: lastStatus,
+  };
 }
 
 function mapPokemonTcgPricing(card: any, usdToEur: number): MarketPayload {
@@ -309,8 +372,23 @@ async function fetchJustTcg(card: InputCard): Promise<MarketPayload> {
   const wantedSet = normalizeName(card.setName);
   const matched = list.find((item: any) => {
     const sameName = normalizeName(item.name) === wantedName;
-    const sameNumber = !wantedNumber || normalizeNumber(item.number) === wantedNumber;
-    const sameSet = !wantedSet || normalizeName(item.set_name).includes(wantedSet) || wantedSet.includes(normalizeName(item.set_name));
+    const sameNumber =
+      !wantedNumber || normalizeNumber(item.number) === wantedNumber;
+
+    const itemSetName = normalizeName(item.set_name);
+    const itemSetCode = normalizedSetId(
+      item.set_code ?? item.set_id ?? item.set?.id
+    );
+    const wantedSetCode = normalizedSetId(card.setId);
+
+    const sameSet =
+      wantedSetCode && itemSetCode
+        ? wantedSetCode === itemSetCode
+        : !wantedSet ||
+          itemSetName === wantedSet ||
+          itemSetName.includes(wantedSet) ||
+          wantedSet.includes(itemSetName);
+
     return sameName && sameNumber && sameSet;
   });
   if (!matched) return emptyPayload();
