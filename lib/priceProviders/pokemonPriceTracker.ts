@@ -20,8 +20,7 @@ export async function getPokemonPriceHistory(
 
   try {
     const apiKey =
-      process.env.POKEMON_PRICE_TRACKER_API_KEY ||
-      process.env.NEXT_PUBLIC_POKEMON_PRICE_TRACKER_API_KEY;
+      process.env.POKEMON_PRICE_TRACKER_API_KEY;
 
     // Si aucune clé API n'est configurée, on retourne un tableau vide pour éviter les erreurs d'appel
     if (!apiKey) {
