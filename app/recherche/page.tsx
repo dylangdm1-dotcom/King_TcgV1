@@ -27,58 +27,17 @@ import {
 } from "../../lib/pokemon";
 import { filterCards, type SearchFilters as SearchFiltersType } from "../../lib/search";
 import { getCardPrice, hasMarketPrice, type PokemonCard } from "../../lib/types";
+import {
+  UPCOMING_OFFICIAL_RELEASES,
+  classifySetGeneration,
+  compareCardsNewestFirst,
+  compareSetsNewestFirst,
+  effectiveSetReleaseDate,
+  isFutureRelease,
+  normalizeSetId,
+} from "../../lib/setCatalog";
 
 const PAGE_SIZE = 24;
-
-const KNOWN_SET_RELEASE_DATES: Record<string, string> = {
-  // Extension japonaise MEGA M6 — Storm Emeralda.
-  m6: "2026-07-31",
-};
-
-function normalizedSetId(id?: string): string {
-  return String(id || "").trim().toLowerCase().replace(/[^a-z0-9]/g, "");
-}
-
-function effectiveReleaseDate(set: SetItem): string {
-  return set.releaseDate || KNOWN_SET_RELEASE_DATES[normalizedSetId(set.id)] || "";
-}
-
-function setCodeScore(id?: string): number {
-  const clean = normalizedSetId(id);
-  const match = clean.match(/^([a-z]+)(\d+)(?:[-.]?(\d+))?/);
-  if (!match) return 0;
-
-  const era: Record<string, number> = {
-    m: 900,
-    sv: 800,
-    swsh: 700,
-    sm: 600,
-    xy: 500,
-    bw: 400,
-    hgss: 300,
-    dp: 200,
-  };
-  return (era[match[1]] || 100) * 1_000_000 + Number(match[2] || 0) * 1_000 + Number(match[3] || 0);
-}
-
-function compareSetsNewestFirst(a: SetItem, b: SetItem): number {
-  const timeA = effectiveReleaseDate(a) ? new Date(effectiveReleaseDate(a)).getTime() : 0;
-  const timeB = effectiveReleaseDate(b) ? new Date(effectiveReleaseDate(b)).getTime() : 0;
-  if (timeA !== timeB) return timeB - timeA;
-
-  const codeDiff = setCodeScore(b.id) - setCodeScore(a.id);
-  if (codeDiff) return codeDiff;
-  return String(b.id).localeCompare(String(a.id), undefined, { numeric: true, sensitivity: "base" });
-}
-
-function compareCardsNewestFirst(a: PokemonCard, b: PokemonCard): number {
-  const dateA = a.set?.releaseDate ? new Date(a.set.releaseDate).getTime() : 0;
-  const dateB = b.set?.releaseDate ? new Date(b.set.releaseDate).getTime() : 0;
-  if (dateA !== dateB) return dateB - dateA;
-  const setDiff = setCodeScore(b.set?.id) - setCodeScore(a.set?.id);
-  if (setDiff) return setDiff;
-  return String(b.number || "").localeCompare(String(a.number || ""), undefined, { numeric: true });
-}
 
 type SetItem = {
   id: string;
@@ -105,24 +64,7 @@ function localizedSetName(set: SetItem, lang: LanguageCode): string {
   return set.name;
 }
 function getGeneration(set: SetItem): string {
-  const text = `${set.series || ""} ${set.name || ""}`.toLowerCase();
-  const year = Number(set.releaseDate?.slice(0, 4) || 0);
-
-  if (text.includes("promo")) return "Promos";
-  if (text.includes("mega") || /^m\d+/i.test(set.id)) return "MEGA";
-  if (text.includes("scarlet") || text.includes("violet") || text.includes("écarlate")) return "Écarlate & Violet";
-  if (text.includes("sword") || text.includes("shield") || text.includes("épée") || text.includes("bouclier")) return "Épée & Bouclier";
-  if (text.includes("sun") || text.includes("moon") || text.includes("soleil") || text.includes("lune")) return "Soleil & Lune";
-  if (text.includes("xy")) return "XY";
-  if (text.includes("black") || text.includes("white") || text.includes("noir") || text.includes("blanc")) return "Noir & Blanc";
-  if (text.includes("heartgold") || text.includes("soulsilver")) return "HeartGold & SoulSilver";
-  if (text.includes("diamond") || text.includes("pearl") || text.includes("platine")) return "Diamant & Perle";
-  if (year >= 2023) return "Écarlate & Violet";
-  if (year >= 2020) return "Épée & Bouclier";
-  if (year >= 2017) return "Soleil & Lune";
-  if (year >= 2014) return "XY";
-  if (year >= 2011) return "Noir & Blanc";
-  return "Séries classiques";
+  return classifySetGeneration(set);
 }
 
 function yearLabel(date?: string) {
@@ -148,6 +90,7 @@ export default function Recherche() {
   const [selectedSetId, setSelectedSetId] = useState<string>("");
   const [setSearch, setSetSearch] = useState("");
   const [expandedGeneration, setExpandedGeneration] = useState<string | null>(null);
+  const [showUpcoming, setShowUpcoming] = useState(false);
   const initialSetHandledRef = useRef(false);
   const [filters, setFilters] = useState<SearchFiltersType>({
     category: "all",
@@ -164,7 +107,7 @@ export default function Recherche() {
         const setsData = await getAllSets(selectedLanguage);
         const validSets = (setsData || []).filter((set: any) => Boolean(set?.id && set?.name));
         validSets.forEach((set: SetItem) => {
-          const knownDate = KNOWN_SET_RELEASE_DATES[normalizedSetId(set.id)];
+          const knownDate = effectiveSetReleaseDate(set.id, set.releaseDate);
           if (!set.releaseDate && knownDate) set.releaseDate = knownDate;
         });
         validSets.sort(compareSetsNewestFirst);
@@ -186,6 +129,7 @@ export default function Recherche() {
   const groupedSets = useMemo(() => {
     const groups: Record<string, SetItem[]> = {};
     for (const set of allSetsList) {
+      if (isFutureRelease(set)) continue;
       const generation = getGeneration(set);
       if (!groups[generation]) groups[generation] = [];
       groups[generation].push(set);
@@ -357,6 +301,14 @@ export default function Recherche() {
     [cards]
   );
 
+  const upcomingReleases = useMemo(() => {
+    const languageReleases = UPCOMING_OFFICIAL_RELEASES.filter((release) => release.language === selectedLanguage);
+    return languageReleases.map((release) => ({
+      ...release,
+      set: allSetsList.find((set) => normalizeSetId(set.id) === normalizeSetId(release.id)),
+    }));
+  }, [allSetsList, selectedLanguage]);
+
   return (
     <>
       <Navbar />
@@ -414,6 +366,48 @@ export default function Recherche() {
                 <Layers className="h-3.5 w-3.5" /> Par extension
               </button>
             </div>
+
+            {upcomingReleases.length > 0 ? (
+              <section className="overflow-hidden rounded-2xl border border-amber-300/20 bg-amber-300/[0.04]">
+                <button
+                  type="button"
+                  onClick={() => setShowUpcoming((value) => !value)}
+                  className="flex w-full items-center justify-between gap-3 px-3.5 py-3 text-left"
+                >
+                  <span className="min-w-0">
+                    <span className="block text-[9px] font-black uppercase tracking-[0.16em] text-amber-300">À venir · informations officielles</span>
+                    <span className="mt-0.5 block truncate text-[11px] font-bold text-zinc-300">Extensions annoncées et cartes révélées avant leur sortie</span>
+                  </span>
+                  <ChevronDown className={`h-4 w-4 shrink-0 text-amber-300 transition ${showUpcoming ? "rotate-180" : ""}`} />
+                </button>
+                {showUpcoming ? (
+                  <div className="grid gap-2 border-t border-amber-300/10 p-2.5 sm:grid-cols-2">
+                    {upcomingReleases.map((release) => (
+                      <article key={release.id} className="rounded-xl border border-white/[0.08] bg-[#171d25] p-3">
+                        <div className="flex items-start justify-between gap-3">
+                          <div className="min-w-0">
+                            <span className="text-[8px] font-black uppercase tracking-wider text-violet-300">{release.id.toUpperCase()}</span>
+                            <h3 className="truncate text-xs font-black text-white">{release.name}</h3>
+                            <p className="mt-1 text-[10px] leading-4 text-zinc-400">Sortie {new Date(release.releaseDate).toLocaleDateString("fr-FR")} · Prix officiel {release.officialPrice}</p>
+                            <p className="text-[9px] text-zinc-500">{release.contents}</p>
+                          </div>
+                          <div className="flex shrink-0 flex-col gap-1.5">
+                            {release.set ? (
+                              <button type="button" onClick={() => { setSearchMode("set"); void handleSetSelect(release.set!.id); }} className="rounded-lg border border-cyan-300/20 bg-cyan-300/[0.08] px-2.5 py-1.5 text-[8px] font-black uppercase text-cyan-200">
+                                Cartes révélées
+                              </button>
+                            ) : null}
+                            <a href={release.officialUrl} target="_blank" rel="noreferrer" className="rounded-lg border border-white/[0.08] px-2.5 py-1.5 text-center text-[8px] font-black uppercase text-zinc-300">
+                              Officiel
+                            </a>
+                          </div>
+                        </div>
+                      </article>
+                    ))}
+                  </div>
+                ) : null}
+              </section>
+            ) : null}
 
             {searchMode === "text" ? (
               <div className="flex flex-col gap-3 sm:flex-row">
