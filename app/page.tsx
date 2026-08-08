@@ -278,16 +278,16 @@ export default function Home() {
               </p>
 
               <a
-                href="https://whatnot.com/invite/dylangdm"
+                href="https://whatnot.com/invite/dylang_tcg"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block mb-3 text-cyan-400 font-mono font-bold bg-black/60 border border-zinc-800 py-2 rounded-lg text-center text-xs tracking-widest hover:border-cyan-500/40 transition"
               >
-                DYLANGDM
+                Dylang_TCG
               </a>
 
               <a
-                href="https://www.whatnot.com/fr-FR/user/dylangdm"
+                href="https://whatnot.com/s/J0IWStNW"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="kt-secondary-button w-full py-2.5 text-[11px] uppercase tracking-wider"
