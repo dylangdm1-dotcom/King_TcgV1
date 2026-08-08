@@ -73,7 +73,7 @@ async function fetchBatch(cards: PokemonCard[]): Promise<PriceResponse | null> {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "X-King-TCG-Price-Version": "7",
+        "X-King-TCG-Price-Version": "8",
       },
       signal: controller.signal,
       body: JSON.stringify({
