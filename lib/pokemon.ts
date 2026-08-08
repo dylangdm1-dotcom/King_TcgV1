@@ -694,7 +694,7 @@ export async function searchCardsBySetId(
 
   const aliases = setIdAliases(setId);
   const cleanId = aliases[0] || normalizeSetId(setId);
-  const cacheKey = `set_v3_${cleanId}_${lang}`;
+  const cacheKey = `set_v4_${cleanId}_${lang}`;
   if (searchCache.has(cacheKey)) return searchCache.get(cacheKey)!;
 
   let cards: PokemonCard[] = [];
@@ -716,7 +716,7 @@ export async function searchCardsBySetId(
           setData.cards,
           lang,
           setData,
-          Math.min(setData.cards.length, 80)
+          Math.min(setData.cards.length, 24)
         );
         if (cards.length) break;
       } catch (error) {
@@ -762,20 +762,18 @@ export async function searchCardsBySetId(
     return numA - numB;
   });
 
-  // Les résultats par extension doivent être enrichis AVANT l'ouverture
-  // de la fiche. Cela évite une synchronisation tardive dans le composant carte.
-  const pricedCards = await enrichCardsWithMarketPrices(cards);
-
-  pricedCards.forEach((card) => cache.set(card.id, card));
-  saveBrowserCache(pricedCards);
-  searchCache.set(cacheKey, pricedCards);
+  // Retour rapide : la page Recherche synchronise ensuite uniquement les
+  // cartes réellement visibles, par lots limités, sans bloquer l'extension.
+  cards.forEach((card) => cache.set(card.id, card));
+  saveBrowserCache(cards);
+  searchCache.set(cacheKey, cards);
   if (resolvedSetId !== cleanId) {
     searchCache.set(
-      `set_v3_${normalizeSetId(resolvedSetId)}_${lang}`,
-      pricedCards
+      `set_v4_${normalizeSetId(resolvedSetId)}_${lang}`,
+      cards
     );
   }
-  return pricedCards;
+  return cards;
 }
 
 type CachedSetMetadata = {
