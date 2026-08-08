@@ -512,21 +512,46 @@ async function queryJustTcgGame(
   if (!usable.length) return emptyPayload();
 
   const rate = await usdToEur();
-  const pricesEur = usable
-    .map((variant: any) => safeNumber(variant?.price))
-    .filter((value): value is number => value !== undefined)
-    .map((value) => Number((value * rate).toFixed(2)));
+  const pricesEur: number[] = usable
+    .map(
+      (variant: any): number | undefined =>
+        safeNumber(variant?.price)
+    )
+    .filter(
+      (value: number | undefined): value is number =>
+        value !== undefined
+    )
+    .map(
+      (value: number) =>
+        Number((value * rate).toFixed(2))
+    );
 
   const medianNearMint = Number(median(pricesEur).toFixed(2));
   if (!medianNearMint) return emptyPayload();
 
   const averageField = (name: string) => {
-    const values = usable
-      .map((variant: any) => safeNumber(variant?.[name]))
-      .filter((value): value is number => value !== undefined)
-      .map((value) => Number((value * rate).toFixed(2)));
+    const values: number[] = usable
+      .map(
+        (variant: any): number | undefined =>
+          safeNumber(variant?.[name])
+      )
+      .filter(
+        (value: number | undefined): value is number =>
+          value !== undefined
+      )
+      .map(
+        (value: number) =>
+          Number((value * rate).toFixed(2))
+      );
     return values.length
-      ? Number((values.reduce((sum, value) => sum + value, 0) / values.length).toFixed(2))
+      ? Number(
+          (
+            values.reduce(
+              (sum: number, value: number) => sum + value,
+              0
+            ) / values.length
+          ).toFixed(2)
+        )
       : undefined;
   };
 
