@@ -35,7 +35,25 @@ async function eur(){if(fx&&fx.expires>Date.now())return fx.value;const r=await 
 function empty(status:MarketSyncStatus="not_listed"):MarketPayload{return{quotes:[],status,sources:{cardmarket:false,tcgplayer:false,justtcg:false,ebayListings:false,tcggo:false}}}
 function addQuote(payload:MarketPayload,quote:MarketQuote){if(!payload.quotes.some(q=>q.source===quote.source&&q.language===quote.language&&q.metric===quote.metric))payload.quotes.push(quote)}
 function identity(detail:any,card:InputCard){if(normNumber(detail?.localId??detail?.number)!==normNumber(card.number))return false;const wanted=normSet(card.setId);if(!wanted)return true;const actual=normSet(detail?.set?.id)||normSet(String(detail?.id||"").split("-")[0]);return actual===wanted}
-function ids(card:InputCard){const out=new Set<string>();const wrapped=String(card.id||"").match(/^tcgdex-(?:fr|en|ja|zh-tw|zh-cn)-(.+)$/i)?.[1];if(wrapped)out.add(wrapped);if(card.setId&&card.number)out.add(`${String(card.setId).toLowerCase()}-${cleanNumber(card.number)}`);return [...out]}
+function ids(card: InputCard): string[] {
+  const out = new Set<string>();
+
+  const wrapped = String(card.id || "").match(
+    /^tcgdex-(?:fr|en|ja|zh-tw|zh-cn)-(.+)$/i
+  )?.[1];
+
+  if (wrapped) {
+    out.add(wrapped);
+  }
+
+  if (card.setId && card.number) {
+    out.add(
+      `${String(card.setId).toLowerCase()}-${cleanNumber(card.number)}`
+    );
+  }
+
+  return Array.from(out);
+}
 function locales(lang?:CardLanguage){if(lang==="ja")return["ja"];if(lang==="zh-tw")return["zh-tw"];if(lang==="fr")return["fr"];return["en"]}
 
 async function tcgdex(card:InputCard):Promise<MarketPayload>{const p=empty();const rate=await eur();for(const locale of locales(card.language)){for(const id of ids(card)){const r=await json(`${TCGDEX}/${locale}/cards/${encodeURIComponent(id)}`);if(!r.data?.id||!identity(r.data,card))continue;const cm=r.data?.pricing?.cardmarket;const tcg=r.data?.pricing?.tcgplayer;
