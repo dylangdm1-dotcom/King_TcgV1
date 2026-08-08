@@ -17,6 +17,7 @@ import {
   effectiveSetReleaseDate,
   normalizeSetId,
   setCodeRecency,
+  setIdAliases,
 } from "./setCatalog";
 
 const TCGDEX_URL = "https://api.tcgdex.net/v2";
