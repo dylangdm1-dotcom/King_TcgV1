@@ -117,7 +117,7 @@ function normalizeSetId(value?: string): string {
 function tcgdexLocales(language?: CardLanguage): string[] {
   if (language === "ja") return ["ja"];
   if (language === "zh-tw") return ["zh-tw", "zh-cn"];
-  if (language === "fr") return ["fr"];
+  if (language === "fr") return ["fr", "en"];
   return ["en"];
 }
 
@@ -332,7 +332,11 @@ async function fetchTcgdexExact(card: InputCard): Promise<MarketPayload> {
       );
       lastStatus = result.status;
       if (result.data?.id && exactIdentity(result.data, card)) {
-        return mapTcgdexPricing(result.data, rate);
+        const mapped = mapTcgdexPricing(result.data, rate);
+        // Certaines fiches localisées existent mais ne contiennent aucun bloc
+        // pricing. Continuer alors vers le locale anglais permet de récupérer
+        // Cardmarket sans utiliser TCGplayer dans l'estimation française.
+        if (hasAnyPrice(mapped)) return mapped;
       }
     }
 
@@ -366,7 +370,8 @@ async function fetchTcgdexExact(card: InputCard): Promise<MarketPayload> {
     );
     lastStatus = detail.status;
     if (detail.data?.id && exactIdentity(detail.data, card)) {
-      return mapTcgdexPricing(detail.data, rate);
+      const mapped = mapTcgdexPricing(detail.data, rate);
+      if (hasAnyPrice(mapped)) return mapped;
     }
   }
 
@@ -627,7 +632,7 @@ async function fetchJustTcg(card: InputCard): Promise<MarketPayload> {
 }
 
 
-function buildLanguageEstimate(payload: MarketPayload, language: CardLanguage = "en"): MarketEstimatePayload {
+function buildLanguageEstimate(payload: MarketPayload, language: CardLanguage = "en"): MarketEstimatePayload | undefined {
   const included: Array<{ source: string; value: number }> = [];
   const excluded: Array<{ source: string; reason: string }> = [];
   const cm = payload.cardmarket?.prices ?? {};
@@ -661,7 +666,8 @@ function buildLanguageEstimate(payload: MarketPayload, language: CardLanguage = 
   }
 
   const values = included.map((item) => item.value);
-  const price = values.length ? Number(median(values).toFixed(2)) : 0;
+  if (!values.length) return undefined;
+  const price = Number(median(values).toFixed(2));
   return {
     price, language, currency: "EUR", condition: "Near Mint",
     confidence: values.length >= 3 ? "high" : values.length === 2 ? "medium" : values.length === 1 ? "limited" : "none",
@@ -713,7 +719,7 @@ export async function POST(request: Request) {
 
     const results = await mapWithConcurrency(uniqueCards, 3, async (card) => {
       const cacheKey = [
-        "prices-v7-language-safe",
+        "prices-v8-fr-cardmarket-fallback",
         card.id,
         card.language ?? "en",
         normalizeSetId(card.setId),
@@ -734,7 +740,8 @@ export async function POST(request: Request) {
       // JustTCG est toujours interrogé comme source indépendante,
       // et non uniquement comme remplacement de TCGPlayer.
       merged = mergePayload(merged, await fetchJustTcg(card));
-      merged.estimate = buildLanguageEstimate(merged, card.language ?? "en");
+      const estimate = buildLanguageEstimate(merged, card.language ?? "en");
+      if (estimate) merged.estimate = estimate;
 
       const ttl = hasAnyPrice(merged)
         ? POSITIVE_CACHE_TTL
@@ -750,7 +757,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({
       success: true,
-      version: "language-safe-price-v2",
+      version: "language-safe-price-v3",
       prices: Object.fromEntries(results),
     });
   } catch (error) {
