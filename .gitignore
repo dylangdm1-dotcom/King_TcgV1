@@ -33,3 +33,16 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Local/build files
+node_modules/
+.next/
+out/
+.vercel/
+.turbo/
+.cache/
+*.log
+Thumbs.db
+.env
+.env.local
+.env.*.local
