@@ -762,13 +762,20 @@ export async function searchCardsBySetId(
     return numA - numB;
   });
 
-  cards.forEach((card) => cache.set(card.id, card));
-  saveBrowserCache(cards);
-  searchCache.set(cacheKey, cards);
+  // Les résultats par extension doivent être enrichis AVANT l'ouverture
+  // de la fiche. Cela évite une synchronisation tardive dans le composant carte.
+  const pricedCards = await enrichCardsWithMarketPrices(cards);
+
+  pricedCards.forEach((card) => cache.set(card.id, card));
+  saveBrowserCache(pricedCards);
+  searchCache.set(cacheKey, pricedCards);
   if (resolvedSetId !== cleanId) {
-    searchCache.set(`set_v3_${normalizeSetId(resolvedSetId)}_${lang}`, cards);
+    searchCache.set(
+      `set_v3_${normalizeSetId(resolvedSetId)}_${lang}`,
+      pricedCards
+    );
   }
-  return cards;
+  return pricedCards;
 }
 
 type CachedSetMetadata = {
@@ -983,32 +990,19 @@ export async function getAllSets(lang: LanguageCode = "fr"): Promise<any[]> {
   return mergedSets.sort(compareSetsNewestFirst);
 }
 
-async function ensureMarketPrices(card: PokemonCard): Promise<PokemonCard> {
-  // Detail pages can be opened from an older browser cache. Refresh the
-  // market payload so the detail view uses the same source-of-truth prices
-  // as the search results instead of returning stale/missing values.
-  const [pricedCard] = await enrichAndCacheCards([card]);
-  return pricedCard ?? card;
-}
-
 export async function getCardById(id: string): Promise<PokemonCard | null> {
   const decodedId = decodeURIComponent(id);
 
   const cached = cache.get(decodedId) ?? cache.get(id);
   if (cached) {
-    const refreshed = await ensureMarketPrices(cached);
-    cache.set(cached.id, refreshed);
-    saveBrowserCache([refreshed]);
-    return refreshed;
+    return cached;
   }
 
   const stored = loadBrowserCache();
   const saved = stored.find((card) => card.id === decodedId || card.id === id);
   if (saved) {
-    const refreshed = await ensureMarketPrices(saved);
-    cache.set(saved.id, refreshed);
-    saveBrowserCache([refreshed]);
-    return refreshed;
+    cache.set(saved.id, saved);
+    return saved;
   }
 
   const targetId = decodedId.startsWith("tcgdex-") ? decodedId : id;
@@ -1023,11 +1017,11 @@ export async function getCardById(id: string): Promise<PokemonCard | null> {
 
       const data = await response.json();
       const card = normalizeTCGdexCard(data, lang);
-      const [pricedCard] = await enrichAndCacheCards([card]);
-      const finalCard = pricedCard ?? card;
 
-      cache.set(targetId, finalCard);
-      return finalCard;
+      cache.set(targetId, card);
+      cache.set(card.id, card);
+      saveBrowserCache([card]);
+      return card;
     } catch (error) {
       return null;
     }
@@ -1039,11 +1033,10 @@ export async function getCardById(id: string): Promise<PokemonCard | null> {
 
     const json = await response.json();
     const card = normalize(json.data);
-    const [pricedCard] = await enrichAndCacheCards([card]);
-    const finalCard = pricedCard ?? card;
 
-    cache.set(card.id, finalCard);
-    return finalCard;
+    cache.set(card.id, card);
+    saveBrowserCache([card]);
+    return card;
   } catch {
     return null;
   }
