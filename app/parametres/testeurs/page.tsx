@@ -43,7 +43,7 @@ const partners = [
       "Testeur basé en Belgique, il contribue aux retours terrain sur le scanner, la recherche de cartes, les prix et l’expérience mobile de King_TCG.",
     links: [
       {
-        label: "Whatnot · noeufnoeuf_tcg",
+        label: "Whatnot · noeunoeuf_tcg",
         href: "https://www.whatnot.com/s/EoqCPB03",
         icon: Video,
       },
