@@ -4,6 +4,7 @@ import Link from "next/link";
 import {
   ArrowLeft,
   ExternalLink,
+  Instagram,
   MessageCircle,
   ShieldCheck,
   Sparkles,
@@ -35,13 +36,24 @@ const partners = [
     active: true,
   },
   {
-    name: "Prochain partenaire",
-    role: "Profil en préparation",
-    platform: "Communauté TCG",
+    name: "noeufnoeuf_tcg",
+    role: "Testeur partenaire · Belgique",
+    platform: "Whatnot & Instagram",
     description:
-      "Un nouvel espace partenaire pourra être ajouté après validation du profil et des tests réalisés sur King_TCG.",
-    links: [],
-    active: false,
+      "Testeur basé en Belgique, il contribue aux retours terrain sur le scanner, la recherche de cartes, les prix et l’expérience mobile de King_TCG.",
+    links: [
+      {
+        label: "Whatnot · noeufnoeuf_tcg",
+        href: "https://www.whatnot.com/s/EoqCPB03",
+        icon: Video,
+      },
+      {
+        label: "Instagram · @noeunoeuf_tcg",
+        href: "https://www.instagram.com/noeunoeuf_tcg",
+        icon: Instagram,
+      },
+    ],
+    active: true,
   },
   {
     name: "Prochain partenaire",
