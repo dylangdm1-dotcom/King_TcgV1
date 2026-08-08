@@ -275,8 +275,18 @@ export default function ScannerPage() {
         confidence,
       } = resData.data;
 
-      if (!cardName && !pokemonName) {
-        setStatus("Nom Pokémon illisible.");
+      const fallbackName =
+        cardName ||
+        pokemonName ||
+        (Array.isArray(possibleNames) ? possibleNames[0] : null) ||
+        "";
+
+      const canMatchByIdentity = Boolean(
+        cardNumber && (setName || setSymbol)
+      );
+
+      if (!fallbackName && !canMatchByIdentity) {
+        setStatus("Nom, numéro et extension insuffisamment lisibles.");
         triggerHaptic([100, 50, 100]);
         return;
       }
@@ -286,8 +296,8 @@ export default function ScannerPage() {
       // =================================================
 
       const scanResult: CardScanResult = {
-        cardName: cardName ?? pokemonName ?? "",
-        pokemonName: pokemonName ?? cardName ?? "",
+        cardName: fallbackName,
+        pokemonName: pokemonName ?? cardName ?? fallbackName,
         cardNumber: cardNumber ?? null,
       
         setName: setName ?? null,
@@ -336,8 +346,14 @@ export default function ScannerPage() {
         ),
       });
 
+      const detectedLabel =
+        scanResult.cardName ||
+        (scanResult.cardNumber
+          ? `Carte n° ${scanResult.cardNumber}`
+          : "Carte détectée");
+
       setStatus(
-        `IA : ${scanResult.cardName} (${(scanResult.language ?? "FR").toUpperCase()})`
+        `IA : ${detectedLabel} (${(scanResult.language ?? "FR").toUpperCase()})`
       );
 
       // =================================================
