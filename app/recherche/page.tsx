@@ -466,7 +466,7 @@ export default function Recherche() {
                             <span className="block truncate text-xs font-black text-white">{generation}</span>
                             <span className="mt-0.5 flex min-w-0 items-center gap-1.5 text-[9px] font-semibold text-zinc-500">
                               <span className="shrink-0">{generationSets.length} extension{generationSets.length > 1 ? "s" : ""}</span>
-                              {newestSet ? <span className="truncate">· dernière : {yearLabel(effectiveSetReleaseDate(newestSet))}</span> : null}
+                              {newestSet ? <span className="truncate">· dernière : {yearLabel(effectiveSetReleaseDate(newestSet.id))}</span> : null}
                             </span>
                           </span>
                           <ChevronDown className={`h-4 w-4 text-zinc-500 transition ${expanded ? "rotate-180" : ""}`} />
