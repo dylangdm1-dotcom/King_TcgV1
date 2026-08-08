@@ -723,26 +723,77 @@ export async function searchCardsBySetId(
   return cards;
 }
 
-type CachedSetMetadata = { releaseDate?: string; series?: string; name?: string; savedAt: number };
+type CachedSetMetadata = {
+  releaseDate?: string;
+  series?: string;
+  name?: string;
+  savedAt: number;
+};
 
-function loadSetDetailsCache(lang: LanguageCode): Record<string, CachedSetMetadata> {
-  if (typeof window === "undefined") return {};
+function loadSetDetailsCache(
+  lang: LanguageCode
+): Record<string, CachedSetMetadata> {
+  if (typeof window === "undefined") {
+    return {};
+  }
+
   try {
-    const parsed = JSON.parse(localStorage.getItem(`king_tcg_set_details_v2_${lang}`) || "{}");
+    const raw = localStorage.getItem(
+      `king_tcg_set_details_v2_${lang}`
+    );
+
+    if (!raw) {
+      return {};
+    }
+
+    const parsed = JSON.parse(
+      raw
+    ) as Record<string, CachedSetMetadata>;
+
     const now = Date.now();
-    return Object.fromEntries(Object.entries(parsed).filter(([, value]: any) => now - Number(value?.savedAt || 0) < 7 * 24 * 60 * 60 * 1000));
+    const maxAge = 7 * 24 * 60 * 60 * 1000;
+
+    return Object.fromEntries(
+      Object.entries(parsed).filter(([, value]) => {
+        return (
+          value &&
+          typeof value === "object" &&
+          typeof value.savedAt === "number" &&
+          now - value.savedAt < maxAge
+        );
+      })
+    ) as Record<string, CachedSetMetadata>;
   } catch {
     return {};
   }
 }
 
-function saveSetDetailsCache(lang: LanguageCode, cacheValue: Record<string, CachedSetMetadata>) {
-  if (typeof window === "undefined") return;
-  try { localStorage.setItem(`king_tcg_set_details_v2_${lang}`, JSON.stringify(cacheValue)); } catch {}
+function saveSetDetailsCache(
+  lang: LanguageCode,
+  cacheValue: Record<string, CachedSetMetadata>
+) {
+  if (typeof window === "undefined") {
+    return;
+  }
+
+  try {
+    localStorage.setItem(
+      `king_tcg_set_details_v2_${lang}`,
+      JSON.stringify(cacheValue)
+    );
+  } catch {
+    // Le cache local est facultatif.
+  }
 }
 
 function readSeriesName(set: any): string {
-  return set?.series?.name || set?.serie?.name || set?.series || set?.serie || "";
+  return (
+    set?.series?.name ||
+    set?.serie?.name ||
+    set?.series ||
+    set?.serie ||
+    ""
+  );
 }
 
 async function hydrateRecentSetMetadata(lang: LanguageCode, sets: any[]): Promise<any[]> {
