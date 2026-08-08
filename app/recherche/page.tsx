@@ -244,7 +244,6 @@ export default function Recherche() {
 
     const pendingCards = displayedCards.filter((card) => {
       if (hasMarketPrice(card)) return false;
-      if (card.marketStatus === "not_listed") return false;
       const attempts = priceAttemptCountRef.current.get(card.id) ?? 0;
       return !attemptedPriceIdsRef.current.has(card.id) && attempts < 2;
     });
