@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { AlertTriangle, ArrowRight, Clock3, Hash, ImageOff, Loader2, TrendingUp } from 'lucide-react';
 import { useMemo, useState } from 'react';
-import { PokemonCard, getCardPrice, hasMarketPrice } from '@/lib/types';
+import { PokemonCard, getNormalizedMarketSummary } from '@/lib/types';
 
 interface Props {
   card: PokemonCard;
@@ -11,8 +11,9 @@ interface Props {
 }
 
 export default function CardResult({ card, isPriceLoading = false }: Props) {
-  const price = getCardPrice(card);
-  const priceAvailable = hasMarketPrice(card) || price > 0;
+  const market = getNormalizedMarketSummary(card);
+  const price = market.price;
+  const priceAvailable = market.status === "available" && price > 0;
   const imageCandidates = useMemo(
     () => Array.from(new Set([card.images?.large, card.images?.small, ...(card.imageCandidates ?? [])].filter(Boolean))) as string[],
     [card.images?.large, card.images?.small, card.imageCandidates]
@@ -20,7 +21,7 @@ export default function CardResult({ card, isPriceLoading = false }: Props) {
   const [imageIndex, setImageIndex] = useState(0);
   const imageSrc = imageCandidates[imageIndex] || '';
   const imageFailed = imageIndex >= imageCandidates.length || !imageSrc;
-  const marketStatus = isPriceLoading ? 'syncing' : card.marketStatus;
+  const marketStatus = isPriceLoading ? 'syncing' : market.status;
 
   return (
     <article className="kt-search-card group flex h-full flex-col overflow-hidden border-white/[0.10] bg-[#18212b] shadow-[0_18px_44px_rgba(0,0,0,.22)]">
