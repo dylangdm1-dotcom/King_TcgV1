@@ -50,6 +50,39 @@ interface ConfidenceResult {
   set: number;
 }
 
+const SCAN_REQUEST_TIMEOUT_MS = 35_000;
+
+async function requestScanAnalysis(imageBase64: string) {
+  const controller = new AbortController();
+  const timeout = window.setTimeout(() => controller.abort(), SCAN_REQUEST_TIMEOUT_MS);
+
+  try {
+    const response = await fetch("/api/scan", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ imageBase64 }),
+      signal: controller.signal,
+    });
+
+    const payload = await response.json().catch(() => ({}));
+    if (!response.ok) {
+      const message =
+        response.status === 429
+          ? "Quota Gemini temporairement atteint. Réessayez dans un instant."
+          : payload?.error || "Analyse de la carte indisponible.";
+      throw new Error(message);
+    }
+    return payload;
+  } catch (error: any) {
+    if (error?.name === "AbortError") {
+      throw new Error("Analyse trop longue. Les photos sont conservées, réessayez.");
+    }
+    throw error;
+  } finally {
+    window.clearTimeout(timeout);
+  }
+}
+
 
 export interface ScannedBatchItem {
   id: string;
@@ -216,17 +249,7 @@ export default function ScannerPage() {
       setStatus("Analyse IA Gemini V5...");
       logger.gemini("Envoi image vers /api/scan");
 
-      const response = await fetch("/api/scan", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          imageBase64: image64,
-        }),
-      });
-
-      const resData = await response.json();
+      const resData = await requestScanAnalysis(image64);
 
       logger.gemini("Réponse Gemini V5", resData);
 
@@ -383,9 +406,9 @@ export default function ScannerPage() {
         setIsDrawerOpen(true);
         logger.scan("Carte ajoutée au batch V5.");
       }
-    } catch (error) {
+    } catch (error: any) {
       logger.error("SCAN", "Erreur scan V5", error);
-      setStatus("Erreur pendant le scan.");
+      setStatus(error?.message || "Erreur pendant le scan.");
       triggerHaptic([100, 50, 100]);
     } finally {
       setScanning(false);
@@ -432,17 +455,7 @@ export default function ScannerPage() {
     imageBase64: string
   ): Promise<PokemonCard | null> => {
     try {
-      const response = await fetch("/api/scan", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          imageBase64,
-        }),
-      });
-
-      const resData = await response.json();
+      const resData = await requestScanAnalysis(imageBase64);
 
       if (resData.success && resData.data) {
         const data = resData.data;
@@ -473,8 +486,9 @@ export default function ScannerPage() {
       
         return cards?.[0] || null;
       }
-    } catch (e) {
-      console.error("Erreur identification image", e);
+    } catch (e: any) {
+      logger.error("SCAN", "Erreur identification image Batch", e);
+      setStatus(e?.message || "Une carte du lot n'a pas pu être identifiée.");
     }
 
     return null;
