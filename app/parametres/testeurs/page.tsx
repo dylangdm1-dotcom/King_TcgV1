@@ -17,10 +17,10 @@ import Navbar from "../../../components/Navbar";
 const partners = [
   {
     name: "LesFratesTCG",
-    role: "Testeur partenaire",
+    role: "Testeur partenaire · Corse",
     platform: "Whatnot & TikTok",
     description:
-      "Participe aux essais terrain du scanner, aux retours sur l’expérience collectionneur et à la vérification des parcours mobiles.",
+      "Testeurs basés en Corse, ils contribuent aux essais terrain du scanner, à l’expérience collectionneur et à l’amélioration des parcours mobiles.",
     links: [
       {
         label: "Whatnot · @lesfratetcg",
@@ -36,7 +36,7 @@ const partners = [
     active: true,
   },
   {
-    name: "noeufnoeuf_tcg",
+    name: "Noeunoeuf_tcg",
     role: "Testeur partenaire · Belgique",
     platform: "Whatnot & Instagram",
     description:
