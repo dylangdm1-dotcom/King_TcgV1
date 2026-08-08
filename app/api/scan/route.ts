@@ -95,7 +95,15 @@ function normalizePayload(value: unknown) {
     isFullArt: asBoolean(firstDefined(value, ["isFullArt", "is_full_art", "fullArt"])),
     isSecretRare: asBoolean(firstDefined(value, ["isSecretRare", "is_secret_rare", "secretRare"])),
     possibleNames,
-    confidence: Number(firstDefined(value, ["confidence", "confiance", "score"]) ?? 0),
+    confidence: (() => {
+      const rawConfidence = Number(
+        firstDefined(value, ["confidence", "confiance", "score"]) ?? 0
+      );
+      if (!Number.isFinite(rawConfidence)) return 0;
+      return rawConfidence > 0 && rawConfidence <= 1
+        ? Math.round(rawConfidence * 100)
+        : Math.max(0, Math.min(100, Math.round(rawConfidence)));
+    })(),
   };
 }
 
@@ -186,20 +194,33 @@ export async function POST(req: NextRequest) {
         }
 
         const data = parsed.data;
-        if (data.confidence < 55 || (!data.cardName && !data.pokemonName)) {
+        const hasName = Boolean(
+          data.cardName || data.pokemonName || data.possibleNames.length
+        );
+        const hasNumber = Boolean(data.cardNumber);
+        const hasSet = Boolean(data.setName || data.setSymbol);
+        const identitySignals = [hasName, hasNumber, hasSet].filter(Boolean).length;
+
+        if (identitySignals === 0) {
           return NextResponse.json(
             {
               success: false,
-              error: "Carte non reconnue avec certitude. Recadrez le numéro et le symbole d'extension.",
+              error:
+                "Aucune information exploitable détectée. Cadrez la carte entière avec le numéro visible.",
               data,
             },
-            { status: 404 }
+            { status: 422 }
           );
         }
 
-        setCachedCardData(imageHash, data, 1000 * 60 * 30);
+        const responseData = {
+          ...data,
+          needsReview: data.confidence < 55 || identitySignals < 2,
+        };
+
+        setCachedCardData(imageHash, responseData, 1000 * 60 * 30);
         logger.gemini(`Scan réussi en ${Date.now() - startTime} ms avec ${modelName}`);
-        return NextResponse.json({ success: true, modelUsed: modelName, fromCache: false, data });
+        return NextResponse.json({ success: true, modelUsed: modelName, fromCache: false, data: responseData });
       } catch (error: any) {
         const message = error?.message || String(error);
         if (message.includes("429") || error?.status === 429) rateLimited = true;
