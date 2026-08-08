@@ -12,10 +12,16 @@ import { logger } from "./cache/logger";
 import { normalizeSearchText, normalizeCardNumber } from "./pokemon/normalize";
 import { enrichCardsWithMarketPrices } from "./priceClient";
 import { findClosestPokemon } from "./levenshtein";
+import {
+  compareSetsNewestFirst,
+  effectiveSetReleaseDate,
+  normalizeSetId,
+  setCodeRecency,
+} from "./setCatalog";
 
 const TCGDEX_URL = "https://api.tcgdex.net/v2";
 
-const CACHE_KEY = "king_tcg_cards_cache_v11_data_final";
+const CACHE_KEY = "king_tcg_cards_cache_v12_set_catalog";
 
 const cache = new Map<string, PokemonCard>();
 const searchCache = new Map<string, PokemonCard[]>();
@@ -49,26 +55,6 @@ function parseReleaseDate(dateStr?: string): number {
   const cleanDate = String(dateStr).trim().replace(/\//g, "-");
   const time = new Date(cleanDate).getTime();
   return isNaN(time) ? 0 : time;
-}
-
-const KNOWN_SET_RELEASE_DATES: Record<string, string> = {
-  m6: "2026-07-31",
-};
-
-function normalizedSetId(id?: string): string {
-  return String(id || "").trim().toLowerCase().replace(/[^a-z0-9]/g, "");
-}
-
-function setCodeRecency(id?: string): number {
-  const clean = normalizedSetId(id);
-  const match = clean.match(/^([a-z]+)(\d+)(?:[-.]?(\d+))?/);
-  if (!match) return 0;
-  const era: Record<string, number> = { m: 900, sv: 800, swsh: 700, sm: 600, xy: 500, bw: 400, hgss: 300, dp: 200 };
-  return (era[match[1]] || 100) * 1_000_000 + Number(match[2] || 0) * 1_000 + Number(match[3] || 0);
-}
-
-function effectiveSetReleaseDate(id?: string, releaseDate?: string): string {
-  return releaseDate || KNOWN_SET_RELEASE_DATES[normalizedSetId(id)] || "";
 }
 
 function safePrice(val: any): number {
@@ -312,7 +298,7 @@ function tcgdexImageCandidates(card: any, lang: LanguageCode, setId: string, loc
 
 function normalizeTCGdexCard(card: any, lang: LanguageCode, parentSet?: any): PokemonCard {
   const setId = deriveTcgdexSetId(card, parentSet);
-  const setMeta = setMetadataCache.get(normalizedSetId(setId));
+  const setMeta = setMetadataCache.get(normalizeSetId(setId));
   const cardId = String(card.id || "");
   const localId = String(card.localId || card.number || "");
   const imageCandidates = tcgdexImageCandidates(card, lang, setId, localId);
@@ -593,7 +579,7 @@ function buildSearchNameCandidates(value: string): string[] {
 function applySetMetadataAndRecentSort(cards: PokemonCard[]): PokemonCard[] {
   cards.forEach((card) => {
     if (!card.set) return;
-    const meta = setMetadataCache.get(normalizedSetId(card.set.id));
+    const meta = setMetadataCache.get(normalizeSetId(card.set.id));
     if (!meta) return;
     card.set = {
       ...card.set,
@@ -737,6 +723,75 @@ export async function searchCardsBySetId(
   return cards;
 }
 
+type CachedSetMetadata = { releaseDate?: string; series?: string; name?: string; savedAt: number };
+
+function loadSetDetailsCache(lang: LanguageCode): Record<string, CachedSetMetadata> {
+  if (typeof window === "undefined") return {};
+  try {
+    const parsed = JSON.parse(localStorage.getItem(`king_tcg_set_details_v2_${lang}`) || "{}");
+    const now = Date.now();
+    return Object.fromEntries(Object.entries(parsed).filter(([, value]: any) => now - Number(value?.savedAt || 0) < 7 * 24 * 60 * 60 * 1000));
+  } catch {
+    return {};
+  }
+}
+
+function saveSetDetailsCache(lang: LanguageCode, cacheValue: Record<string, CachedSetMetadata>) {
+  if (typeof window === "undefined") return;
+  try { localStorage.setItem(`king_tcg_set_details_v2_${lang}`, JSON.stringify(cacheValue)); } catch {}
+}
+
+function readSeriesName(set: any): string {
+  return set?.series?.name || set?.serie?.name || set?.series || set?.serie || "";
+}
+
+async function hydrateRecentSetMetadata(lang: LanguageCode, sets: any[]): Promise<any[]> {
+  const cached = loadSetDetailsCache(lang);
+  const currentPrefixes = /^(?:m|me|sv|ev|csv|swsh|eb|sm|sl|xy|bw|nb)\d+/i;
+  const candidates = sets.filter((set) => {
+    const id = normalizeSetId(set.id);
+    const genericSeries = !set.series || set.series === "Pokémon TCG";
+    return !set.releaseDate || genericSeries || currentPrefixes.test(id);
+  });
+
+  for (const set of sets) {
+    const hit = cached[normalizeSetId(set.id)];
+    if (!hit) continue;
+    set.releaseDate = effectiveSetReleaseDate(set.id, set.releaseDate || hit.releaseDate || "");
+    if ((!set.series || set.series === "Pokémon TCG") && hit.series) set.series = hit.series;
+    if (!set.name && hit.name) set.name = hit.name;
+  }
+
+  const pending = candidates.filter((set) => !cached[normalizeSetId(set.id)]).sort(compareSetsNewestFirst);
+  const concurrency = 8;
+  for (let index = 0; index < pending.length; index += concurrency) {
+    const batch = pending.slice(index, index + concurrency);
+    const details = await Promise.all(batch.map(async (set) => {
+      try {
+        const response = await fetch(`${TCGDEX_URL}/${lang}/sets/${encodeURIComponent(set.id)}`);
+        if (!response.ok) return null;
+        const detail = await response.json();
+        return { set, detail };
+      } catch {
+        return null;
+      }
+    }));
+
+    for (const item of details) {
+      if (!item) continue;
+      const { set, detail } = item;
+      const series = readSeriesName(detail);
+      const releaseDate = effectiveSetReleaseDate(set.id, detail.releaseDate || set.releaseDate || "");
+      if (releaseDate) set.releaseDate = releaseDate;
+      if (series) set.series = series;
+      cached[normalizeSetId(set.id)] = { releaseDate, series, name: detail.name || set.name, savedAt: Date.now() };
+    }
+  }
+
+  saveSetDetailsCache(lang, cached);
+  return sets;
+}
+
 export async function getAllSets(lang: LanguageCode = "fr"): Promise<any[]> {
   const targetLang = lang === "en" ? "en" : lang === "ja" ? "ja" : lang === "zh-tw" ? "zh-tw" : "fr";
   let tcgdexSets: any[] = [];
@@ -750,7 +805,7 @@ export async function getAllSets(lang: LanguageCode = "fr"): Promise<any[]> {
         tcgdexSets = data.map((set: any) => ({
           id: set.id,
           name: set.name,
-          series: set.series?.name || "Pokémon TCG",
+          series: readSeriesName(set) || "Pokémon TCG",
           total: set.cardCount?.total ?? set.cardCount?.official ?? 0,
           printedTotal: set.cardCount?.official ?? 0,
           images: {
@@ -764,6 +819,20 @@ export async function getAllSets(lang: LanguageCode = "fr"): Promise<any[]> {
   } catch (error) {
     logger.error("API", "[TCGdex Sets API Error]", error);
   }
+
+  if (targetLang === "ja" && !tcgdexSets.some((set) => normalizeSetId(set.id) === "m6")) {
+    tcgdexSets.unshift({
+      id: "m6",
+      name: "ストームエメラルダ",
+      series: "MEGA",
+      total: 0,
+      printedTotal: 0,
+      releaseDate: "2026-07-31",
+      images: {},
+    });
+  }
+
+  tcgdexSets = await hydrateRecentSetMetadata(targetLang as LanguageCode, tcgdexSets);
 
   try {
     const response = await fetch("/api/cards/sets", { cache: "no-store" });
@@ -792,7 +861,7 @@ export async function getAllSets(lang: LanguageCode = "fr"): Promise<any[]> {
 
   const mergedSets = Array.from(merged.values());
   mergedSets.forEach((set: any) => {
-    setMetadataCache.set(normalizedSetId(set.id), {
+    setMetadataCache.set(normalizeSetId(set.id), {
       name: set.name,
       releaseDate: set.releaseDate || "",
       series: typeof set.series === "string" ? set.series : set.series?.name,
@@ -805,13 +874,7 @@ export async function getAllSets(lang: LanguageCode = "fr"): Promise<any[]> {
     if (key.startsWith("search_")) searchCache.delete(key);
   }
 
-  return mergedSets.sort((a: any, b: any) => {
-    const dateDiff = parseReleaseDate(b.releaseDate) - parseReleaseDate(a.releaseDate);
-    if (dateDiff) return dateDiff;
-    const codeDiff = setCodeRecency(b.id) - setCodeRecency(a.id);
-    if (codeDiff) return codeDiff;
-    return String(b.id).localeCompare(String(a.id), undefined, { numeric: true });
-  });
+  return mergedSets.sort(compareSetsNewestFirst);
 }
 
 async function ensureMarketPrices(card: PokemonCard): Promise<PokemonCard> {
