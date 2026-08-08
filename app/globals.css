@@ -1262,3 +1262,13 @@ main h1 { color: #fff; }
     padding: 3px 5px;
   }
 }
+
+/* Navbar King_TCG — logo sans contour, taille et position inchangées */
+.kt-brand-lockup-image {
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+.kt-brand-lockup-image:hover {
+  border-color: transparent !important;
+}
