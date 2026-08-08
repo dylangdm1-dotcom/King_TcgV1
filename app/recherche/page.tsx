@@ -488,7 +488,7 @@ export default function Recherche() {
                                 <span className="min-w-0 overflow-hidden">
                                   <span className="block truncate text-[10px] font-black text-white" title={set.name}>{localizedSetName(set, selectedLanguage)}</span>
                                   <span className="mt-1 flex min-w-0 items-center gap-1.5 overflow-hidden text-[7px] font-semibold uppercase tracking-wide text-zinc-500">
-                                    <span className="inline-flex shrink-0 items-center gap-1"><CalendarDays className="h-2.5 w-2.5 text-amber-300" /> {yearLabel(effectiveReleaseDate(set))}</span>
+                                    <span className="inline-flex shrink-0 items-center gap-1"><CalendarDays className="h-2.5 w-2.5 text-amber-300" /> {yearLabel(effectiveSetReleaseDate(set.id))}</span>
                                     <span className="truncate">{set.series || generation}</span>
                                   </span>
                                 </span>
