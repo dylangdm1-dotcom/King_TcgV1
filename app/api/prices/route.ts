@@ -39,11 +39,15 @@ type MarketPayload = {
     updatedAt?: string;
   };
   ebayListings?: {
-    median?: number;
-    sampleSize?: number;
-    url?: string;
-    updatedAt?: string;
-  };
+  median?: number;
+  sampleSize?: number;
+  exactSampleSize?: number;
+  language?: CardLanguage | "unknown";
+  condition?: "Near Mint" | "Unknown";
+  query?: string;
+  url?: string;
+  updatedAt?: string;
+ };
   quotes: MarketQuote[];
   estimate?: {
     price: number;
