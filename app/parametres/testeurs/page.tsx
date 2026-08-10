@@ -17,6 +17,7 @@ import Navbar from "../../../components/Navbar";
 const partners = [
   {
     name: "LesFratesTCG",
+    logo: "/partners/lesfratetcg.webp",
     role: "Testeur partenaire · Corse",
     platform: "Whatnot & TikTok",
     description:
@@ -37,6 +38,7 @@ const partners = [
   },
   {
     name: "Noeunoeuf_tcg",
+    logo: undefined,
     role: "Testeur partenaire · Belgique",
     platform: "Whatnot & Instagram",
     description:
@@ -57,6 +59,7 @@ const partners = [
   },
   {
     name: "Prochain partenaire",
+    logo: undefined,
     role: "Profil en préparation",
     platform: "Communauté TCG",
     description:
@@ -151,11 +154,23 @@ export default function TesteursPage() {
                     )}
                   </div>
 
-                  <h2 className="mt-5 text-base font-black text-white">{partner.name}</h2>
-                  <p className="mt-1 text-[9px] font-black uppercase tracking-[0.13em] text-cyan-300">
-                    {partner.role}
-                  </p>
-                  <p className="mt-1 text-[10px] font-bold text-zinc-500">{partner.platform}</p>
+                  <div className="mt-5 flex items-center gap-3">
+                    {partner.logo && (
+                      <img
+                        src={partner.logo}
+                        alt={`Logo ${partner.name}`}
+                        className="h-14 w-14 shrink-0 rounded-2xl border border-amber-300/20 object-cover shadow-[0_0_24px_rgba(251,191,36,0.10)]"
+                        loading="lazy"
+                      />
+                    )}
+                    <div className="min-w-0">
+                      <h2 className="text-base font-black text-white">{partner.name}</h2>
+                      <p className="mt-1 text-[9px] font-black uppercase tracking-[0.13em] text-cyan-300">
+                        {partner.role}
+                      </p>
+                      <p className="mt-1 text-[10px] font-bold text-zinc-500">{partner.platform}</p>
+                    </div>
+                  </div>
 
                   <p className="mt-4 min-h-[64px] text-[10px] leading-5 text-zinc-500">
                     {partner.description}
