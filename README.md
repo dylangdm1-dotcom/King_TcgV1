@@ -1,192 +1,272 @@
 # 👑 King_TCG --- README Officiel
 
-**Version actuelle :** V5.0 --- Accès anticipé\
-**Interface :** Premium Mobile / Audit global 2026\
-**Stack :** Next.js App Router, React, TypeScript, TailwindCSS\
-**IA :** Google Gemini\
-**Données :** TCGdex + Pokémon TCG API + JustTCG\
-**Stockage actuel :** LocalStorage + caches applicatifs
+**Version technique actuelle : V42 --- eBay officiel / Cote King_TCG /
+JP-CN / Images**\
+**Statut produit : V5.0 --- Accès anticipé**\
+**Stack : Next.js App Router, React, TypeScript, TailwindCSS**\
+**IA : Google Gemini**\
+**Données cartes : TCGdex + Pokémon TCG API (EN uniquement en
+fallback)**\
+**Marché : Cardmarket + TCGPlayer + JustTCG + eBay Browse API**\
+**Stockage actuel : LocalStorage + caches applicatifs et serveur**
 
 ------------------------------------------------------------------------
 
 ## Présentation
 
 King_TCG est un compagnon premium pour le Pokémon Trading Card Game
-centré sur la recherche multilingue, la gestion de collection, le suivi
-de valeur, le scanner assisté par IA et l'estimation visuelle PSA.
+centré sur la recherche multilingue, la collection, le suivi de valeur,
+l'analyse de marché, le scanner assisté par IA et l'estimation visuelle
+PSA.
 
-La V5.0 est actuellement distribuée en **accès anticipé**. L'objectif
-prioritaire est une expérience mobile simple, rapide et lisible, sans
-sacrifier les informations utiles aux collectionneurs.
-
-------------------------------------------------------------------------
-
-## Fonctionnalités disponibles
-
--   **Recherche de cartes : active** --- recherche par nom, langue et
-    extension, avec tri récent → ancien.
--   **Données multilingues : actives** --- FR / EN / JP / ZH selon la
-    couverture des sources.
--   **Collection : active** --- quantité, état, prix d'achat, favoris,
-    valeur et plus-value.
--   **Dashboard : actif** --- valeur actuelle, rendement, actifs phares,
-    historique et répartitions.
--   **Scanner Mono : actif** --- identification Gemini puis
-    correspondance avec la base de cartes.
--   **Scanner Batch 4 cartes : actif** --- capture guidée de quatre
-    cartes.
--   **Collection PSA : active** --- suivi des cartes gradées, valeur
-    d'achat et valeur estimée.
--   **Estimation PSA IA : active / expérimentale** --- 4 photos
-    guidées + Gemini + contrôle manuel structuré.
--   **Notifications : actives** --- accès depuis la Navbar.
--   **PriceCharting / sources marché : intégration selon disponibilité
-    des données.**
+La priorité actuelle est la **fiabilité des données** : une carte doit
+conserver sa bonne langue, son extension, son numéro et son visuel
+indépendamment de la disponibilité des prix.
 
 ------------------------------------------------------------------------
 
-## Architecture des données V5
+## Fonctionnalités principales
 
-### Cartes, extensions et images
-
-Ordre de priorité actuel :
-
-1.  **TCGdex** --- source multilingue principale pour cartes,
-    extensions, images et prix intégrés disponibles.
-2.  **Pokémon TCG API** --- complément serveur, principalement pour les
-    données anglaises, images et métadonnées manquantes.
-3.  Conservation systématique des métadonnées originales en cas d'échec
-    d'une source secondaire.
-
-Une erreur de prix ne doit jamais remplacer le nom, l'extension, le
-numéro, la rareté ou l'image d'une carte par des valeurs génériques.
-
-### Prix
-
-Ordre d'enrichissement :
-
-1.  Cardmarket / TCGPlayer déjà présents dans TCGdex.
-2.  Données complémentaires Pokémon TCG API lorsqu'elles sont
-    disponibles.
-3.  **JustTCG** comme secours ciblé, notamment pour les variantes Near
-    Mint compatibles.
-4.  **Annonces eBay** : lorsqu'une vraie source est disponible, la
-    valeur doit être présentée comme une médiane d'annonces actives
-    comparables et jamais comme un prix de vente réalisé.
-
-Les résultats sont traités par lots afin de respecter les quotas
-gratuits et les cartes visibles sont prioritaires.
-
-### Cache
-
--   Prix valides : cache longue durée (environ 12 h selon le flux).
--   Erreurs/absences temporaires : cache court afin de permettre une
-    nouvelle tentative.
--   Taux de conversion : cache dédié.
--   Les statuts doivent distinguer `Synchronisation`,
-    `Limite temporaire`, `Non cotée actuellement` et
-    `Source indisponible`.
+-   **Recherche cartes** par nom, langue et extension.
+-   **Catalogues multilingues** FR / EN / JP / CN.
+-   **Fiches cartes** chargées indépendamment des fournisseurs de prix.
+-   **Cote King_TCG** avec agrégation contrôlée des sources marché.
+-   **Cardmarket** comme référence principale du marché FR.
+-   **eBay officiel** via OAuth et Browse API.
+-   **JustTCG** avec prise en charge du marché Pokémon Japan lorsqu'il
+    est disponible.
+-   **TCGPlayer** principalement pour les données anglaises compatibles.
+-   **Historique King_TCG** sous les fiches cartes.
+-   **Projection 30 jours FR** basée sur la Cote King_TCG.
+-   **Prix de vente conseillé FR** basé sur la Cote King_TCG.
+-   **Collection** : quantité, état, prix d'achat, favoris, valeur et
+    plus-value.
+-   **Dashboard** : portefeuille, statistiques et projection 7 jours.
+-   **Scanner Mono / Batch** avec Gemini.
+-   **Collection PSA** et estimation PSA IA expérimentale.
+-   **Notifications** et navigation mobile premium.
 
 ------------------------------------------------------------------------
 
-## Variables d'environnement
+## Architecture Data actuelle
 
-Les secrets restent exclusivement côté serveur et ne doivent jamais
-utiliser le préfixe `NEXT_PUBLIC_`.
+### Principe fondamental
+
+Les données sont séparées en trois couches :
+
+1.  **Catalogue** --- identité, langue, extension, numéro, rareté,
+    image.
+2.  **Marché** --- prix et fournisseurs.
+3.  **Analytics** --- historique, tendances, projections et indicateurs.
+
+Une erreur ou une indisponibilité de prix ne doit **jamais** empêcher
+l'affichage d'une carte ni modifier sa langue, son extension ou son
+image.
+
+### Recherche
+
+La recherche ne déclenche plus automatiquement l'ensemble du moteur de
+prix.
+
+Elle privilégie :
+
+`Catalogue → résultats → ouverture fiche → détail carte → marché`
+
+Cela évite les rafales de requêtes et les divergences entre résultats et
+fiches.
+
+### Catalogues par langue
+
+-   **FR** : TCGdex FR uniquement pour le catalogue.
+-   **EN** : TCGdex EN avec fallback Pokémon TCG API autorisé.
+-   **JP** : TCGdex JP uniquement pour le catalogue.
+-   **CN** : TCGdex CN uniquement pour le catalogue.
+
+Les sources anglaises ne doivent jamais injecter une carte ou une
+extension anglaise dans un catalogue FR, JP ou CN.
+
+Les identifiants techniques TCGdex restent séparés des codes affichés.
+Exemple : un ID fournisseur `sv08.5` peut être affiché en français sous
+la forme `EV8.5` sans modifier l'identifiant utilisé pour interroger
+l'API.
+
+------------------------------------------------------------------------
+
+## Images
+
+TCGdex reste la source principale des visuels.
+
+Les fallbacks doivent respecter la langue de la carte. Une image
+anglaise ne doit pas être utilisée silencieusement pour remplacer une
+impression FR, JP ou CN.
+
+Pour les assets TCGdex reconstruits, le chemin doit conserver la
+structure :
+
+`langue / série / extension / carte`
+
+La V42 corrige notamment les fallbacks d'images utilisés lors des
+recherches JP par extension.
+
+------------------------------------------------------------------------
+
+## Cote King_TCG
+
+La Cote King_TCG est une estimation de marché et non une garantie de
+prix de vente.
+
+### Français
+
+Le marché FR utilise principalement :
+
+1.  **Cardmarket** comme ancre principale.
+2.  **eBay** comme source complémentaire lorsque les annonces
+    correspondent précisément à la carte.
+3.  Autres données compatibles lorsqu'elles sont réellement pertinentes.
+
+eBay n'est pas intégré sous forme de moyenne brute. Sa contribution est
+pondérée afin d'éviter qu'une annonce aberrante ou un petit nombre
+d'annonces ne déforme fortement la Cote King_TCG.
+
+Les annonces eBay actives ne sont jamais présentées comme des ventes
+réalisées.
+
+### Japonais
+
+Le moteur peut exploiter :
+
+-   JustTCG Pokémon Japan ;
+-   eBay avec filtrage JP ;
+-   références secondaires compatibles lorsqu'elles existent.
+
+Le nom anglais de la même carte peut être utilisé uniquement pour
+améliorer la recherche d'annonces marché. Il ne doit jamais modifier le
+nom, la langue ou le visuel affiché dans King_TCG.
+
+### Chinois
+
+Le moteur peut exploiter :
+
+-   eBay avec filtrage CN ;
+-   sources compatibles réellement disponibles ;
+-   références secondaires lorsque leur correspondance est suffisamment
+    fiable.
+
+Si aucune source comparable n'est disponible, King_TCG doit afficher une
+absence de cote plutôt qu'inventer un prix.
+
+------------------------------------------------------------------------
+
+## eBay officiel
+
+King_TCG utilise l'API officielle eBay côté serveur :
+
+`OAuth Client Credentials → Application Access Token → Browse API → item_summary/search`
+
+Le token est mis en cache et renouvelé automatiquement.
+
+Variables Vercel :
+
+``` env
+EBAY_CLIENT_ID=
+EBAY_CLIENT_SECRET=
+EBAY_MARKETPLACE_ID=EBAY_FR
+```
+
+Ne pas utiliser :
+
+-   Developer ID ;
+-   User Token pour ce flux ;
+-   préfixe `NEXT_PUBLIC_` pour les secrets.
+
+Les vraies valeurs ne doivent jamais être enregistrées dans Git, le
+README ou le code source.
+
+------------------------------------------------------------------------
+
+## Autres variables d'environnement
 
 ``` env
 GEMINI_API_KEY=
 POKEMON_TCG_API_KEY=
 JUSTTCG_API_KEY=
+EBAY_CLIENT_ID=
+EBAY_CLIENT_SECRET=
+EBAY_MARKETPLACE_ID=EBAY_FR
 ```
 
-Ne jamais enregistrer les valeurs réelles dans Git, le README ou le code
-source.
+Toutes les clés privées restent exclusivement côté serveur.
 
 ------------------------------------------------------------------------
 
-## Recherche V5
+## Lecture du marché FR
 
-La recherche est pensée en priorité pour le mobile :
+Pour le français, la **Cote King_TCG** est la référence centrale des
+éléments analytiques de la fiche.
 
--   langues FR / EN / JP / ZH ;
--   recherche par nom ;
--   sélection par extension ;
--   modules de générations fermés par défaut ;
--   extensions et cartes triées du plus récent au plus ancien ;
--   interface compacte ;
--   protection contre les noms japonais/chinois trop longs ;
--   récupération progressive des prix ;
--   plusieurs fallbacks d'image.
+Le prix de vente conseillé utilise actuellement une cible légère
+au-dessus de la cote, par défaut autour de **+1 %**.
 
-Les extensions françaises constituent la priorité de qualité du
-catalogue. Les nouvelles extensions doivent pouvoir apparaître via les
-sources distantes sans nécessiter une liste statique exhaustive dans
-l'interface.
+Exemple :
+
+`Cote King_TCG 312,27 € → prix conseillé ≈ 315,39 €`
+
+La projection 30 jours part également de la Cote King_TCG actuelle afin
+d'éviter qu'un ancien historique ou une moyenne provenant d'une autre
+source devienne la valeur de départ.
 
 ------------------------------------------------------------------------
 
-## Scanner IA
+## Historique King_TCG
 
-### Scanner Mono
+L'historique affiché sous la fiche utilise les observations King_TCG
+enregistrées.
 
-Pipeline général :
-
-`Caméra → Capture → Gemini → résultat structuré → moteur de correspondance → données carte → prix`
-
-Gemini est utilisé pour comprendre la carte photographiée. La
-correspondance finale avec le catalogue reste séparée afin de limiter
-les faux positifs et de profiter des mêmes données que la recherche
-standard.
-
-### Scanner multilingue
-
-Le scanner exploite notamment :
-
--   langue détectée ;
--   nom original ;
--   numéro de carte ;
--   code / extension ;
--   variante ;
--   candidats provenant du moteur de données commun.
-
-Pour JP/ZH, le numéro et l'extension doivent être privilégiés par
-rapport à une traduction approximative du nom.
-
-### Batch
-
-Le mode Batch permet une capture de quatre cartes avec quatre zones
-guidées. Les étapes mobiles sont volontairement courtes :
-`Photo → Carte → Match → Prix`.
+Lorsque l'historique réel est encore insuffisant, l'interface peut
+reconstruire une série indicative à partir de la cote actuelle et des
+tendances disponibles. Cette reconstruction doit rester identifiable
+comme une estimation et ne doit pas être présentée comme une succession
+de ventes historiques réelles.
 
 ------------------------------------------------------------------------
 
-## PSA / IA Grade
+## Dashboard et projection portefeuille
 
-L'estimation PSA est une fonctionnalité expérimentale et **non
-officielle**.
+La projection portefeuille 7 jours utilise une tendance **pondérée par
+la valeur des positions et leur quantité**.
 
-Parcours :
+Une carte importante dans le portefeuille influence donc davantage la
+projection qu'une carte de faible valeur.
 
-1.  Face avant.
-2.  Face arrière.
-3.  Inclinaison avant.
-4.  Inclinaison arrière.
-5.  Analyse Gemini.
-6.  Contrôle manuel structuré des défauts difficiles à confirmer sur
-    photo.
-7.  Estimation affinée.
+La courbe peut inclure une micro-volatilité visuelle bornée entre les
+jours afin d'éviter une trajectoire artificiellement parfaitement
+droite, tout en conservant :
 
-Critères analysés : centrage, coins, bords, surface, défauts visibles et
-qualité des photos.
+-   la valeur actuelle comme point de départ ;
+-   la tendance calculée comme direction générale ;
+-   aucune prétention à prédire exactement les futurs prix.
 
-Le contrôle manuel utilise uniquement des choix structurés (points
-blancs, rayures, coins, bords, pli/enfoncement, défaut difficile à
-voir). **Aucun champ de texte libre n'est utilisé.**
+Si une carte légère ne contient pas encore sa cote complète, le
+dashboard peut utiliser le dernier point King_TCG enregistré localement
+plutôt que relancer toutes les APIs de marché au chargement.
 
-La confiance ne constitue jamais une garantie de grade officiel et
-l'application doit refuser ou nuancer l'estimation lorsque les photos
-sont insuffisantes.
+------------------------------------------------------------------------
+
+## Cache et performances
+
+Principes :
+
+-   le catalogue et les prix ont des responsabilités séparées ;
+-   les recherches ne doivent pas déclencher une synchronisation marché
+    massive ;
+-   les prix sont chargés principalement à l'ouverture de la fiche ;
+-   les erreurs temporaires utilisent des caches courts ;
+-   les données valides peuvent utiliser des caches plus longs ;
+-   une indisponibilité eBay, Cardmarket, JustTCG ou TCGPlayer ne doit
+    jamais casser la fiche.
+
+`clearPokemonCache()` doit uniquement supprimer les clés de cache
+King_TCG concernées et ne doit jamais utiliser `localStorage.clear()`.
 
 ------------------------------------------------------------------------
 
@@ -194,170 +274,200 @@ sont insuffisantes.
 
 ``` text
 app/
-├── page.tsx                 # Accueil / accès anticipé
-├── recherche/               # Recherche cartes et extensions
-├── scanner/                 # Scanner Mono / Batch
-├── collection/              # Collection principale
-├── dashboard/               # Portfolio et statistiques
-├── card/[id]/               # Fiche détaillée d'une carte
-├── psa/                     # Collection PSA + IA Grade
-├── favoris/                 # Favoris
-├── reglages/                # Réglages / fonctionnalités
+├── page.tsx
+├── recherche/
+├── scanner/
+├── collection/
+├── dashboard/
+├── card/[id]/
+├── psa/
+├── favoris/
+├── reglages/
 └── api/
-    ├── scan/                # Gemini Scanner
-    ├── psa-grade/           # Gemini estimation PSA
-    ├── cards/               # Proxy serveur catalogue
-    └── prices/              # Agrégation / normalisation des prix
+    ├── scan/
+    ├── psa-grade/
+    ├── cards/
+    └── prices/
 ```
 
-Modules importants :
+Modules Data importants :
 
 ``` text
-components/
-├── cards/
-├── scanner/
-├── psa/
-└── Navbar.tsx
-
 lib/
 ├── pokemon.ts
 ├── pokemonTranslator.ts
-├── pokemon/
-│   ├── normalize.ts
-│   └── ocrAliases.ts
-├── scanner/
-├── psa/
 ├── priceClient.ts
+├── marketEngine.ts
+├── pricing.ts
+├── priceHistory.ts
+├── priceTracker.ts
 └── types.ts
 ```
 
-------------------------------------------------------------------------
-
-## pokemonTranslator --- transition en cours
-
-`lib/pokemonTranslator.ts` reste temporairement présent pour préserver
-la compatibilité des recherches existantes.
-
-La V5 a commencé à extraire ses responsabilités vers des modules plus
-petits :
-
--   `lib/pokemon/normalize.ts` --- normalisation des chaînes et suffixes
-    ;
--   `lib/pokemon/ocrAliases.ts` --- erreurs OCR réellement utiles ;
--   index multilingue dynamique à poursuivre afin de réduire
-    progressivement le dictionnaire statique.
-
-Le fichier historique ne doit pas être supprimé avant validation
-complète du nouveau moteur FR/EN/JP/ZH.
+Les anciens modules marché encore présents doivent être supprimés ou
+fusionnés uniquement après validation qu'ils ne sont plus utilisés.
 
 ------------------------------------------------------------------------
 
-## Design V5
+## Scanner IA
 
-Direction artistique : premium mobile, sombre, lisible et identifiable.
+### Scanner Mono
 
-Principes :
+Pipeline :
 
--   noir profond comme fond ;
--   cyan/bleu King_TCG comme couleur de marque ;
--   vert réservé principalement aux valeurs positives ;
--   rouge aux pertes / alertes négatives ;
+`Caméra → Capture → Gemini → résultat structuré → matching catalogue → carte → marché`
+
+Gemini identifie les informations visibles, mais la correspondance
+finale reste effectuée avec le catalogue commun.
+
+### JP / CN
+
+Pour les cartes japonaises et chinoises, le numéro, l'extension et les
+identifiants fiables doivent être privilégiés par rapport à une
+traduction approximative du nom.
+
+### Batch
+
+Le mode Batch permet une capture guidée de quatre cartes.
+
+------------------------------------------------------------------------
+
+## PSA / IA Grade
+
+L'estimation PSA est expérimentale et non officielle.
+
+Parcours principal :
+
+1.  Face avant.
+2.  Face arrière.
+3.  Inclinaison avant.
+4.  Inclinaison arrière.
+5.  Analyse Gemini.
+6.  Contrôle manuel structuré.
+7.  Estimation affinée.
+
+L'application ne doit jamais présenter cette estimation comme un grade
+PSA officiel.
+
+------------------------------------------------------------------------
+
+## Design
+
+Direction artistique :
+
+-   fond noir profond ;
+-   cyan / bleu King_TCG ;
+-   vert pour les valeurs positives ;
+-   rouge pour les pertes et alertes ;
 -   violet et orange comme accents secondaires ;
+-   interface mobile premium ;
 -   cartes compactes ;
--   suppression des espaces verticaux inutiles ;
--   vrais logos de services lorsque les assets sont disponibles ;
--   priorité absolue à l'utilisation sur téléphone.
-
-La Navbar utilise la couronne King_TCG et un sous-titre court
-`Pokémon Trading Card`.
-
-------------------------------------------------------------------------
-
-## Audit mobile actuel
-
-La passe d'audit V5 a notamment couvert :
-
--   Navbar et accueil ;
--   Dashboard ;
--   portefeuille détaillé ;
--   recherche et extensions ;
--   fiche carte ;
--   réglages ;
--   PSA ;
--   Scanner Mono / Batch.
-
-La Collection principale est actuellement considérée comme l'une des
-zones visuelles les plus abouties et doit être modifiée avec prudence.
+-   priorité à la lisibilité ;
+-   vrais logos des marketplaces lorsqu'ils sont disponibles.
 
 ------------------------------------------------------------------------
 
 ## Règles de développement
 
-1.  Ne jamais supprimer une fonctionnalité, un bouton ou un raccourci
-    existant sans décision explicite.
-2.  Préserver les métadonnées d'une carte même lorsqu'une source de prix
-    échoue.
-3.  Garder les clés API côté serveur.
-4.  Réutiliser le moteur de données commun plutôt que créer des
-    catalogues divergents entre Recherche et Scanner.
-5.  Ne jamais inventer un prix pour remplir une donnée manquante.
-6.  Optimiser d'abord pour mobile.
-7.  Tester `npm run build` après chaque Sprint.
-8.  Pour les modifications importantes, fournir la liste exacte des
-    fichiers modifiés et des nouveaux assets.
+1.  Ne jamais casser le catalogue pour corriger un prix.
+2.  Ne jamais utiliser une source EN comme carte FR/JP/CN.
+3.  Préserver identité, extension, numéro, rareté et image même si le
+    marché échoue.
+4.  Garder les clés API exclusivement côté serveur.
+5.  Ne jamais inventer un prix manquant.
+6.  Éviter les appels prix massifs depuis la recherche.
+7.  Charger la fiche indépendamment du marché.
+8.  Tester les langues séparément.
+9.  Tester `npm run build` avant déploiement.
+10. Ne pas multiplier les moteurs ou caches sans nécessité.
+11. Ranger les notes et fichiers Markdown techniques dans `docs/`.
+12. Conserver uniquement `README.md` à la racine.
 
 ------------------------------------------------------------------------
 
 ## Tests de non-régression prioritaires
 
-Après une modification Data / Scanner :
+Après une modification Data ou Marché :
 
--   recherche FR récente ;
+-   recherche FR par nom ;
+-   recherche FR par extension ;
+-   absence de doublons EN en FR ;
+-   séries spéciales FR comme `EV8.5` ;
 -   recherche EN ;
--   carte JP récente ;
--   carte ZH si disponible ;
--   recherche par extension ;
--   image / extension / numéro / rareté ;
--   Cardmarket / TCGPlayer / JustTCG ;
--   fiche détaillée ;
--   ajout Collection ;
+-   recherche JP par nom ;
+-   recherche JP par extension et images ;
+-   recherche CN par nom et extension ;
+-   ouverture de fiche dans chaque langue ;
+-   Cardmarket ;
+-   eBay ;
+-   JustTCG ;
+-   TCGPlayer lorsqu'il est pertinent ;
+-   Cote King_TCG ;
+-   historique King_TCG ;
+-   projection FR 30 jours ;
+-   dashboard et projection portefeuille 7 jours ;
+-   collection ;
 -   Scanner Mono ;
 -   PSA IA Grade ;
--   build Next.js.
+-   `npm run build`.
 
 ------------------------------------------------------------------------
 
-## Roadmap immédiate
+## État V42
 
-### Data V5
+### Validé récemment
 
--   compléter et fiabiliser les extensions françaises récentes ;
--   améliorer les fallbacks d'images ;
--   réduire les écarts entre prix Recherche et fiche détaillée ;
--   poursuivre l'index multilingue dynamique ;
--   intégrer proprement la médiane des annonces eBay actives lorsqu'une
-    source gratuite fiable est disponible.
+-   séparation Recherche / Marché ;
+-   fiches indépendantes des erreurs de prix ;
+-   catalogues FR/EN/JP/CN isolés ;
+-   suppression des doublons EN injectés en FR ;
+-   correction des séries spéciales FR et IDs techniques ;
+-   eBay Production fonctionnel en FR ;
+-   eBay intégré à la Cote King_TCG FR avec pondération ;
+-   historique King_TCG ;
+-   projection portefeuille 7 jours restaurée ;
+-   projection FR 30 jours basée sur la Cote King_TCG ;
+-   fichiers techniques `.md` rangés dans `docs/`.
 
-### Scanner
+### En cours de validation
 
-Une fois la fondation Data stabilisée :
-
--   reconnecter et calibrer le Scanner JP/ZH sur le catalogue commun ;
--   améliorer le matching numéro + extension ;
--   mesurer la stabilité sur les extensions les plus récentes.
-
-### PSA
-
--   continuer les tests de répétabilité du grade ;
--   améliorer la stabilité de confiance ;
--   conserver l'approche hybride photos + contrôle manuel structuré.
+-   couverture complète des recherches Évoli et autres Pokémon avec de
+    nombreuses impressions ;
+-   images JP en recherche par extension après correction V42 ;
+-   couverture prix JP ;
+-   couverture prix CN ;
+-   qualité du filtrage eBay JP/CN ;
+-   pondération finale des différentes sources marché.
 
 ------------------------------------------------------------------------
 
-## État du projet
+## Priorités suivantes
 
-**King_TCG V5.0 --- Accès anticipé**\
-Base fonctionnelle : Recherche, Collection, Dashboard, Scanner Gemini,
-Batch, PSA Collection et estimation PSA IA.\
-Priorité actuelle : qualité des données, couverture multilingue, prix
-gratuits, stabilité mobile et calibration du Scanner.
+1.  Valider V42 sur FR / JP / CN.
+2.  Stabiliser la couverture prix JP et CN.
+3.  Vérifier les images de toutes les extensions JP.
+4.  Mesurer la qualité réelle des résultats eBay avant d'augmenter leur
+    poids.
+5.  Continuer à simplifier les anciens modules marché sans modifier les
+    fonctions validées.
+6.  Reprendre le Scanner uniquement après stabilisation complète du
+    moteur Data / Marché.
+
+------------------------------------------------------------------------
+
+## Organisation du projet
+
+Les documents techniques, audits, historiques de versions et notes de
+migration doivent être placés dans :
+
+``` text
+docs/
+```
+
+La racine doit rester lisible. `README.md` est le seul document Markdown
+principal conservé à la racine.
+
+------------------------------------------------------------------------
+
+**King_TCG --- Pokémon Trading Card Companion**\
+**V42 technique / V5.0 Accès anticipé**
