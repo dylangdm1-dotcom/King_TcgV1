@@ -200,23 +200,27 @@ export default function CardPage() {
             marketCard.dataLanguage === "ja" ||
             marketCard.dataLanguage === "zh-tw";
 
-          setPriceInfo({
-            current: useLiveMarket
-              ? liveMarket.average
-              : (typeof getCurrentPrice === "function" ? getCurrentPrice(marketHistory) : 0),
-            lowest: useLiveMarket
-              ? liveMarket.minimum
-              : (typeof getLowestPrice === "function" ? getLowestPrice(marketHistory) : 0),
-            highest: useLiveMarket
-              ? liveMarket.maximum
-              : (typeof getHighestPrice === "function" ? getHighestPrice(marketHistory) : 0),
-            variation: useLiveMarket
-              ? (liveMarket.priceTrend7d || 0)
-              : (typeof getVariationPercent === "function" ? getVariationPercent(marketHistory) : 0),
-            opportunity: useLiveMarket
-              ? `Cote actuelle ${liveMarket.average.toFixed(2)} € · ${liveMarket.validSourceCount} source(s) compatible(s).`
-              : opportunityResText,
-          });
+         setPriceInfo({
+  current: useLiveMarket
+    ? (liveMarket.average ?? 0)
+    : (typeof getCurrentPrice === "function" ? getCurrentPrice(marketHistory) : 0),
+
+  lowest: useLiveMarket
+    ? (liveMarket.minimum ?? 0)
+    : (typeof getLowestPrice === "function" ? getLowestPrice(marketHistory) : 0),
+
+  highest: useLiveMarket
+    ? (liveMarket.maximum ?? 0)
+    : (typeof getHighestPrice === "function" ? getHighestPrice(marketHistory) : 0),
+
+  variation: useLiveMarket
+    ? (liveMarket.priceTrend7d ?? 0)
+    : (typeof getVariationPercent === "function" ? getVariationPercent(marketHistory) : 0),
+
+  opportunity: useLiveMarket
+    ? `Cote actuelle ${(liveMarket.average ?? 0).toFixed(2)} € · ${liveMarket.validSourceCount} source(s) compatible(s).`
+    : opportunityResText,
+});
         }
       } catch (err) {
         console.error("Erreur lors du chargement des données de la carte :", err);
