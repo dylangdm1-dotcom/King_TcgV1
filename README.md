@@ -471,3 +471,10 @@ principal conservé à la racine.
 
 **King_TCG --- Pokémon Trading Card Companion**\
 **V42 technique / V5.0 Accès anticipé**
+
+## V78 — CN public dual fallback + JP TCGdex isolation
+- CN keeps V77 public PokéWallet primary + browser direct fallback when the server path fails.
+- JP no longer calls the authenticated PokéWallet regional catalogue for either the set list or set-card fallback.
+- PokéWallet 429/502 can therefore no longer break the JP catalogue path.
+- TCGdex remains JP primary; curated recent JP entries remain display-only until TCGdex exposes matching cards.
+- FR/EN and pricing engine unchanged.
