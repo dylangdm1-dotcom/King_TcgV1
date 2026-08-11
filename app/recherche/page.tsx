@@ -73,7 +73,10 @@ function displaySetEra(set: SetItem, lang: LanguageCode, fallback: string): stri
 }
 
 function getGeneration(set: SetItem, lang: LanguageCode = "fr"): string {
-  if ((lang === "ja" || lang === "zh-tw") && set.unclassified) return "À trier";
+  // V66 recovery mode: JP/CN are intentionally kept in one raw bucket.
+  // No classification/whitelist is allowed until the regional catalogues are
+  // manually validated again. This must never affect the provider set id.
+  if (lang === "ja" || lang === "zh-tw") return "À trier";
   const era = set.displayMeta?.era || getSetDisplayMeta(lang, set.id, set.name)?.era;
   if (era) {
     if (era === "Mega Evolution" || era === "Méga-Évolution") return "MEGA";
@@ -100,6 +103,19 @@ function normalizeCatalogText(value?: string): string {
 }
 
 function buildCuratedVisibleSets(sets: SetItem[], lang: LanguageCode): SetItem[] {
+  // V66 recovery mode for JP/CN: expose the complete raw provider catalogue
+  // exactly as received. No whitelist, no curated ordering, no synthetic
+  // grouping and no dedupe in the UI. Every provider id remains clickable.
+  if (lang === "ja" || lang === "zh-tw") {
+    return sets.map((set) => ({
+      ...set,
+      providerIds: Array.isArray(set.providerIds) && set.providerIds.length
+        ? set.providerIds
+        : [String(set.id)],
+      unclassified: true,
+    }));
+  }
+
   if (lang === "en") return [...sets].sort(compareSetsNewestFirst);
 
   const catalog = getSetDisplayCatalog(lang);
@@ -118,34 +134,7 @@ function buildCuratedVisibleSets(sets: SetItem[], lang: LanguageCode): SetItem[]
       });
   }
 
-  // JP / CN: never whitelist, replace or synthesize provider sets here.
-  // The provider catalogue is the source of truth for clickability, cards and prices.
-  // Known rows only receive a display label/order; unknown rows stay visible under
-  // a temporary "À trier" section so nothing usable can disappear again.
-  const catalogOrder = new Map<SetDisplayMeta, number>();
-  catalog.forEach((meta, index) => catalogOrder.set(meta, index));
-
-  const rows = sets.map((set) => {
-    const meta = getSetDisplayMeta(lang, set.id, set.name);
-    return {
-      ...set,
-      providerIds: [String(set.id)],
-      displayMeta: meta,
-      unclassified: !meta,
-    } as SetItem;
-  });
-
-  rows.sort((a, b) => {
-    if (a.unclassified !== b.unclassified) return a.unclassified ? 1 : -1;
-    if (!a.unclassified && !b.unclassified && a.displayMeta && b.displayMeta) {
-      const ai = catalogOrder.get(a.displayMeta) ?? Number.MAX_SAFE_INTEGER;
-      const bi = catalogOrder.get(b.displayMeta) ?? Number.MAX_SAFE_INTEGER;
-      if (ai !== bi) return ai - bi;
-    }
-    return compareSetsNewestFirst(a, b);
-  });
-
-  return rows;
+  return [...sets].sort(compareSetsNewestFirst);
 }
 
 function yearLabel(date?: string) {
@@ -209,7 +198,7 @@ export default function Recherche() {
   const groupedSets = useMemo(() => {
     const groups: Record<string, SetItem[]> = {};
     for (const set of allSetsList) {
-      if (isFutureRelease(set)) continue;
+      if (selectedLanguage !== "ja" && selectedLanguage !== "zh-tw" && isFutureRelease(set)) continue;
       const generation = getGeneration(set, selectedLanguage);
       if (!groups[generation]) groups[generation] = [];
       groups[generation].push(set);
@@ -220,7 +209,7 @@ export default function Recherche() {
   const availableGenerations = useMemo(() => {
     const ordered: string[] = [];
     for (const set of allSetsList) {
-      if (isFutureRelease(set)) continue;
+      if (selectedLanguage !== "ja" && selectedLanguage !== "zh-tw" && isFutureRelease(set)) continue;
       const generation = getGeneration(set, selectedLanguage);
       if (!ordered.includes(generation)) ordered.push(generation);
     }
