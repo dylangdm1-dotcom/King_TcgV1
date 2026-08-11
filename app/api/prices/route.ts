@@ -1816,6 +1816,29 @@ async function fromPokeWallet(card: InputCard): Promise<MarketPayload> {
   const apiKey = process.env.POKEWALLET_API_KEY;
   if (!apiKey || !card.name) return emptyPayload();
 
+  let item: any = null;
+  let lastStatus: FetchStatus = "not_found";
+
+  // Cards loaded from the regional catalogue already carry the unique
+  // PokéWallet card id. Use /cards/:id first: it is the strongest possible
+  // identity and returns the exact CardMarket/TCGPlayer payload without a
+  // second fuzzy search by translated set/name. This is especially important
+  // for Simplified Chinese releases where several products share display codes.
+  const providerCardId = String(card.id || "").match(
+    /^pokewallet-(?:ja|zh-tw)-(.+)$/i
+  )?.[1];
+  if (providerCardId) {
+    const setCode = String(card.setId || "").trim();
+    const direct = await fetchJson(
+      `${POKEWALLET}/cards/${encodeURIComponent(providerCardId)}${setCode ? `?set_code=${encodeURIComponent(setCode)}` : ""}`,
+      { headers: { "X-API-Key": apiKey } }
+    );
+    lastStatus = direct.status;
+    if (direct.data && matchesPokeWallet(direct.data, card)) {
+      item = direct.data;
+    }
+  }
+
   const queries = Array.from(
     new Set(
       [
@@ -1826,10 +1849,7 @@ async function fromPokeWallet(card: InputCard): Promise<MarketPayload> {
     )
   );
 
-  let item: any = null;
-  let lastStatus: FetchStatus = "not_found";
-
-  for (const query of queries) {
+  if (!item) for (const query of queries) {
     const result = await fetchJson(
       `${POKEWALLET}/search?q=${encodeURIComponent(query)}&limit=100`,
       { headers: { "X-API-Key": apiKey } }
@@ -1852,11 +1872,16 @@ async function fromPokeWallet(card: InputCard): Promise<MarketPayload> {
   const visibleLanguages = Array.isArray(item?.images?.languages)
     ? item.images.languages.map((value: unknown) => String(value).toLowerCase())
     : [];
+  // A successful matchesPokeWallet() already proves card number + set identity.
+  // Some CardMarket-only JP/CN rows do not expose images.languages at all; in
+  // that case absence of image metadata must not erase an otherwise exact
+  // regional price. If languages are present, keep the strict language check.
+  const noImageLanguageMetadata = visibleLanguages.length === 0;
   const languageCompatible =
     card.language === "en" ||
     (card.language === "fr" && visibleLanguages.includes("fr")) ||
-    (card.language === "ja" && (visibleLanguages.includes("ja") || visibleLanguages.includes("jap"))) ||
-    (card.language === "zh-tw" && (visibleLanguages.includes("zh") || visibleLanguages.includes("chn")));
+    (card.language === "ja" && (noImageLanguageMetadata || visibleLanguages.includes("ja") || visibleLanguages.includes("jap"))) ||
+    (card.language === "zh-tw" && (noImageLanguageMetadata || visibleLanguages.includes("zh") || visibleLanguages.includes("chn") || visibleLanguages.includes("cn")));
 
   const wantedPrinting = normalizedPrinting(card.printingVariant);
   const cmPrices = (Array.isArray(item?.cardmarket?.prices)
@@ -2164,7 +2189,7 @@ export async function POST(request: Request) {
     const results = await mapWithConcurrency(cards, 3, async (card) => {
       const language = card.language ?? "en";
       const cacheKey = [
-        "price-v55-fr-ebay-cn-market",
+        "price-v61-direct-pokewallet-cn-jp-ids",
         card.id,
         language,
         normalizedSet(card.setId),
