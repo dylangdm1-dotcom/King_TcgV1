@@ -72,7 +72,18 @@ function displaySetEra(set: SetItem, lang: LanguageCode, fallback: string): stri
   return getSetDisplayMeta(lang, set.id, set.name)?.era || set.series || fallback;
 }
 
+function hasAnniversaryOrMovieSeriesMarker(set: SetItem): boolean {
+  // Some Japanese promo / anniversary / movie families expose provider series
+  // labels such as "1st", "3rd", "8th", "22nd", "24th", "25th", etc.
+  // Keep this purely visual: provider IDs, card loading and market paths are untouched.
+  const markerText = `${set.series || ""}`.trim();
+  return /(?:^|\s)\d{1,3}(?:st|nd|rd|th)(?:\s|$)/i.test(markerText);
+}
+
 function getGeneration(set: SetItem, lang: LanguageCode = "fr"): string {
+  if (lang === "ja" && set.unclassified && hasAnniversaryOrMovieSeriesMarker(set)) {
+    return "Anniversary & Movies";
+  }
   if ((lang === "ja" || lang === "zh-tw") && set.unclassified) return "À trier";
   const era = set.displayMeta?.era || getSetDisplayMeta(lang, set.id, set.name)?.era;
   if (era) {
