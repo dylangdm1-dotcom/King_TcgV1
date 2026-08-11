@@ -72,30 +72,7 @@ function displaySetEra(set: SetItem, lang: LanguageCode, fallback: string): stri
   return getSetDisplayMeta(lang, set.id, set.name)?.era || set.series || fallback;
 }
 
-function hasAnniversaryOrMovieSeriesMarker(set: SetItem): boolean {
-  // Provider catalogues do not always expose the ordinal in the same field.
-  // Build the marker from every non-destructive display/provider metadata field
-  // so labels such as "3rd", "20 th", "24TH Movie", etc. are caught reliably.
-  const markerText = [
-    set.series,
-    set.name,
-    set.id,
-    set.providerSetId,
-    ...(set.providerIds || []),
-  ]
-    .filter(Boolean)
-    .join(" ")
-    .normalize("NFKC");
-
-  const englishOrdinal = /(?:^|[^a-z0-9])\d{1,3}\s*(?:st|nd|rd|th)(?=$|[^a-z0-9])/i;
-  const japaneseOrdinal = /第\s*\d{1,3}\s*(?:弾|期)/;
-  return englishOrdinal.test(markerText) || japaneseOrdinal.test(markerText);
-}
-
 function getGeneration(set: SetItem, lang: LanguageCode = "fr"): string {
-  if (lang === "ja" && set.unclassified && hasAnniversaryOrMovieSeriesMarker(set)) {
-    return "Anniversary & Movies";
-  }
   if ((lang === "ja" || lang === "zh-tw") && set.unclassified) return "À trier";
   const era = set.displayMeta?.era || getSetDisplayMeta(lang, set.id, set.name)?.era;
   if (era) {
