@@ -1863,7 +1863,7 @@ function fromEmbeddedMarket(card: InputCard): MarketPayload {
         currency: "EUR",
         language: card.language ?? "en",
         condition: "Near Mint",
-        metric: "trend",
+        metric: "trend_europe",
         classification: "exact",
         compatible: true,
         confidence: "high",
