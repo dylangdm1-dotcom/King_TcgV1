@@ -145,6 +145,7 @@ export default function ScannerPage() {
 
   const [scanMode, setScanMode] = useState<"single" | "batch">("single");
   const [batchCaptureMode, setBatchCaptureMode] = useState<"individual" | "grouped">("individual");
+  const [groupedLanguage, setGroupedLanguage] = useState<"fr" | "en" | "ja" | "zh-tw">("fr");
   const [batchList, setBatchList] = useState<ScannedBatchItem[]>([]);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [quotaUsed, setQuotaUsed] = useState(0);
@@ -616,7 +617,9 @@ export default function ScannerPage() {
       
           cardType: data.cardType ?? "Unknown",
       
-          language: data.language ?? "fr",
+          // Quad : les 4 cartes utilisent la langue choisie pour la session.
+          // Le moteur IA reste inchangé ; on ne modifie que le catalogue ciblé.
+          language: groupedLanguage,
           rarity: data.rarity ?? null,
           variant: data.variant ?? null,
       
@@ -654,7 +657,8 @@ export default function ScannerPage() {
       return;
     }
     if (scanMode === "batch" && batchCaptureMode === "grouped") {
-      setStatus("Capture groupée : analyse des quatre zones…");
+      const label = groupedLanguage === "fr" ? "FR" : groupedLanguage === "en" ? "EN" : groupedLanguage === "ja" ? "JP" : "CN";
+      setStatus(`Capture groupée ${label} : analyse des quatre zones…`);
       void cameraRef.current?.openGroupedScanner();
       return;
     }
@@ -805,8 +809,43 @@ export default function ScannerPage() {
                   </div>
 
                   {batchCaptureMode === "grouped" && (
-                    <div className="mt-3 rounded-2xl border border-amber-400/15 bg-amber-400/[0.06] px-3 py-2.5 text-[10px] leading-4 text-amber-100/80">
-                      Évitez les reflets, gardez les quatre cartes entièrement visibles et ne les superposez pas.
+                    <div className="mt-3 space-y-3">
+                      <div className="rounded-2xl border border-violet-400/15 bg-violet-400/[0.05] p-3">
+                        <div className="flex items-center gap-2">
+                          <Languages className="h-4 w-4 text-violet-300" />
+                          <div>
+                            <p className="text-[9px] font-black uppercase tracking-[0.14em] text-violet-300">Langue des 4 cartes</p>
+                            <p className="mt-0.5 text-[10px] text-zinc-400">Les quatre cartes doivent être de la même langue pour cibler le bon catalogue.</p>
+                          </div>
+                        </div>
+                        <div className="mt-3 grid grid-cols-4 gap-1.5">
+                          {[
+                            ["fr", "FR"],
+                            ["en", "EN"],
+                            ["ja", "JP"],
+                            ["zh-tw", "CN"],
+                          ].map(([value, label]) => (
+                            <button
+                              key={value}
+                              type="button"
+                              onClick={() => {
+                                setGroupedLanguage(value as "fr" | "en" | "ja" | "zh-tw");
+                                setStatus(`Quad ${label} : placez jusqu’à 4 cartes ${label} dans les zones.`);
+                              }}
+                              className={`rounded-xl border px-2 py-2 text-[10px] font-black transition-all ${
+                                groupedLanguage === value
+                                  ? "border-violet-300/50 bg-violet-400/15 text-violet-200"
+                                  : "border-white/[0.08] bg-black/20 text-zinc-400"
+                              }`}
+                            >
+                              {label}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                      <div className="rounded-2xl border border-amber-400/15 bg-amber-400/[0.06] px-3 py-2.5 text-[10px] leading-4 text-amber-100/80">
+                        Évitez les reflets, gardez les quatre cartes entièrement visibles et ne les superposez pas.
+                      </div>
                     </div>
                   )}
                 </PremiumCard>
