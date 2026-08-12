@@ -602,41 +602,90 @@ export default function ScannerPage() {
     imageBase64: string
   ): Promise<PokemonCard | null> => {
     try {
+      // Le Quad garde exactement le moteur IA V88/V85.
+      // Seule la résolution finale est alignée sur Mono/Batch pour éviter
+      // qu'un simple nom renvoie vers une autre édition du même Pokémon.
       const resData = await requestScanAnalysis(imageBase64);
 
-      if (resData.success && resData.data) {
-        const data = resData.data;
-      
-        const scanResult: CardScanResult = {
-          cardName: data.cardName ?? data.pokemonName ?? "",
-          pokemonName: data.pokemonName ?? data.cardName ?? "",
-          cardNumber: data.cardNumber ?? null,
-      
-          setName: data.setName ?? null,
-          setSymbol: data.setSymbol ?? null,
-      
-          cardType: data.cardType ?? "Unknown",
-      
-          // Quad : les 4 cartes utilisent la langue choisie pour la session.
-          // Le moteur IA reste inchangé ; on ne modifie que le catalogue ciblé.
-          language: groupedLanguage,
-          rarity: data.rarity ?? null,
-          variant: data.variant ?? null,
-      
-          isFullArt: Boolean(data.isFullArt),
-          isSecretRare: Boolean(data.isSecretRare),
-          possibleNames: Array.isArray(data.possibleNames) ? data.possibleNames : [],
-      
-          confidence: data.confidence ?? 0,
-          needsSecondPass: false,
-        };
-      
-        const cards = await searchCardsForScan(scanResult);
-      
-        return cards?.[0] || null;
-      }
+      if (!resData.success || !resData.data) return null;
+
+      const data = resData.data;
+      const fallbackName =
+        data.cardName ||
+        data.pokemonName ||
+        (Array.isArray(data.possibleNames) ? data.possibleNames[0] : null) ||
+        "";
+
+      const scanResult: CardScanResult = {
+        cardName: fallbackName,
+        pokemonName: data.pokemonName ?? data.cardName ?? fallbackName,
+        cardNumber: data.cardNumber ?? null,
+        setName: data.setName ?? null,
+        setSymbol: data.setSymbol ?? null,
+        cardType: data.cardType ?? "Unknown",
+        // Quad : catalogue imposé par la langue choisie pour les 4 cartes.
+        language: groupedLanguage,
+        rarity: data.rarity ?? null,
+        variant: data.variant ?? null,
+        isFullArt: Boolean(data.isFullArt),
+        isSecretRare: Boolean(data.isSecretRare),
+        possibleNames: Array.isArray(data.possibleNames) ? data.possibleNames : [],
+        confidence: data.confidence ?? 0,
+        needsSecondPass: false,
+      };
+
+      const cacheKey = `scan_${scanResult.cardName}_${scanResult.cardNumber || "no_num"}_${scanResult.setName || "no_set"}_${scanResult.language ?? "fr"}`;
+      const cached = getCachedCardData<PokemonCard>(cacheKey) || null;
+      if (cached) return cached;
+
+      const cards = await searchCardsForScan(scanResult);
+      if (!cards?.length) return null;
+
+      const cleanNumber = (value?: string | null) =>
+        String(value ?? "")
+          .toLowerCase()
+          .split("/")[0]
+          .replace(/[^a-z0-9]/g, "")
+          .replace(/^0+(?=\d)/, "");
+      const cleanText = (value?: string | null) =>
+        String(value ?? "")
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .toLowerCase()
+          .replace(/[^a-z0-9\u3040-\u30ff\u3400-\u9fff]+/g, " ")
+          .trim();
+
+      const wantedNumber = cleanNumber(scanResult.cardNumber);
+      const wantedSet = cleanText(scanResult.setName || scanResult.setSymbol);
+
+      // Quand le Quad a réussi à lire un numéro et/ou une extension,
+      // on préfère une concordance réellement confirmée à cards[0].
+      const confirmed = cards.find((card) => {
+        const numberOk = !wantedNumber || cleanNumber(card.number) === wantedNumber;
+        const cardSetId = cleanText(card.set?.id);
+        const cardSetName = cleanText(card.set?.name);
+        const setOk =
+          !wantedSet ||
+          cardSetId === wantedSet ||
+          cardSetName === wantedSet ||
+          cardSetId.includes(wantedSet) ||
+          cardSetName.includes(wantedSet) ||
+          wantedSet.includes(cardSetId) ||
+          wantedSet.includes(cardSetName);
+        return numberOk && setOk;
+      });
+
+      const bestCard = confirmed || cards[0];
+      if (!bestCard) return null;
+
+      // Même cache que le Mono/Batch : le lien réutilise ensuite exactement
+      // l'identité King_TCG résolue, et non un résultat Quad séparé.
+      setCachedCardData(cacheKey, bestCard);
+      if (bestCard.id) setCachedCardData(`card_${bestCard.id}`, bestCard);
+
+      return bestCard;
     } catch (e: any) {
-      logger.error("SCAN", "Erreur identification image Batch", e);
+      logger.error("SCAN", "Erreur identification image Quad", e);
       setStatus(e?.message || "Une carte du lot n'a pas pu être identifiée.");
     }
 
