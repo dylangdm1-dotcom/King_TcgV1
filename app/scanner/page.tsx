@@ -42,18 +42,6 @@ import {
 
 import type { PokemonCard, CardScanResult } from "@/lib/types";
 import { PremiumBadge, PremiumCard, PremiumSectionHeading } from "@/components/ui/PremiumPrimitives";
-import {
-  SCANNER_MAX_BATCH_CARDS,
-  SCANNER_MONTHLY_SESSION_LIMIT,
-  clearStoredBatchSession,
-  consumeScannerSessionQuota,
-  createBatchSession,
-  getScannerQuota,
-  loadBatchSession,
-  saveBatchSession,
-  type ScannerLanguage,
-  type StoredBatchSession,
-} from "@/lib/scanner/sessionStore";
 
 interface ConfidenceResult {
   global: number;
@@ -64,7 +52,45 @@ interface ConfidenceResult {
 
 const SCAN_REQUEST_TIMEOUT_MS = 35_000;
 
-async function requestScanAnalysis(imageBase64: string, expectedLanguage?: ScannerLanguage) {
+const SCANNER_MONTHLY_LIMIT = 50;
+const SCANNER_BATCH_LIMIT = 4;
+const SCANNER_QUOTA_KEY = "king_tcg_scanner_quota_v1";
+const SCANNER_BATCH_KEY = "king_tcg_scanner_batch_v1";
+const SCANNER_BATCH_QUOTA_KEY = "king_tcg_scanner_batch_quota_v1";
+
+function getScannerPeriod(now = new Date()) {
+  const year = now.getFullYear();
+  const month = now.getMonth();
+  const start = now.getDate() >= 5 ? new Date(year, month, 5) : new Date(year, month - 1, 5);
+  const end = new Date(start.getFullYear(), start.getMonth() + 1, 5);
+  return { start: start.toISOString(), end: end.toISOString() };
+}
+
+function readQuota() {
+  const period = getScannerPeriod();
+  if (typeof window === "undefined") return { used: 0, ...period };
+  try {
+    const raw = window.localStorage.getItem(SCANNER_QUOTA_KEY);
+    const parsed = raw ? JSON.parse(raw) : null;
+    if (!parsed || parsed.start !== period.start || parsed.end !== period.end) {
+      const fresh = { used: 0, ...period };
+      window.localStorage.setItem(SCANNER_QUOTA_KEY, JSON.stringify(fresh));
+      window.localStorage.removeItem(SCANNER_BATCH_QUOTA_KEY);
+      return fresh;
+    }
+    return { used: Math.max(0, Number(parsed.used) || 0), ...period };
+  } catch {
+    return { used: 0, ...period };
+  }
+}
+
+function writeQuota(used: number) {
+  const next = { ...getScannerPeriod(), used: Math.max(0, Math.min(SCANNER_MONTHLY_LIMIT, used)) };
+  try { window.localStorage.setItem(SCANNER_QUOTA_KEY, JSON.stringify(next)); } catch {}
+  return next;
+}
+
+async function requestScanAnalysis(imageBase64: string) {
   const controller = new AbortController();
   const timeout = window.setTimeout(() => controller.abort(), SCAN_REQUEST_TIMEOUT_MS);
 
@@ -72,7 +98,7 @@ async function requestScanAnalysis(imageBase64: string, expectedLanguage?: Scann
     const response = await fetch("/api/scan", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ imageBase64, expectedLanguage }),
+      body: JSON.stringify({ imageBase64 }),
       signal: controller.signal,
     });
 
@@ -103,12 +129,6 @@ export interface ScannedBatchItem {
   confidence: number;
 }
 
-function confidence01(value: unknown) {
-  const numeric = Number(value);
-  if (!Number.isFinite(numeric) || numeric <= 0) return 0;
-  return Math.max(0, Math.min(1, numeric > 1 ? numeric / 100 : numeric));
-}
-
 export default function ScannerPage() {
   const cameraRef = useRef<ScannerCameraHandle>(null);
   const router = useRouter();
@@ -126,76 +146,58 @@ export default function ScannerPage() {
   const [scanMode, setScanMode] = useState<"single" | "batch">("single");
   const [batchCaptureMode, setBatchCaptureMode] = useState<"individual" | "grouped">("individual");
   const [batchList, setBatchList] = useState<ScannedBatchItem[]>([]);
-  const [batchSession, setBatchSession] = useState<StoredBatchSession | null>(null);
-  const [groupedLanguage, setGroupedLanguage] = useState<ScannerLanguage>("fr");
-  const [quota, setQuota] = useState(() => ({
-    periodStart: "",
-    periodEnd: "",
-    sessionsUsed: 0,
-    remaining: SCANNER_MONTHLY_SESSION_LIMIT,
-    limit: SCANNER_MONTHLY_SESSION_LIMIT,
-  }));
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [quotaUsed, setQuotaUsed] = useState(0);
+  const [quotaEnd, setQuotaEnd] = useState("");
+  const [batchQuotaConsumed, setBatchQuotaConsumed] = useState(false);
 
   useEffect(() => {
-    const restored = loadBatchSession();
-    if (restored) {
-      setBatchSession(restored);
-      if (restored.language) setGroupedLanguage(restored.language);
-      setBatchList(
-        restored.items.map((item) => ({
-          ...item,
-          scannedAt: new Date(item.scannedAt),
-        }))
-      );
-    }
-    setQuota(getScannerQuota());
+    const quota = readQuota();
+    setQuotaUsed(quota.used);
+    setQuotaEnd(quota.end);
+    try {
+      const raw = window.localStorage.getItem(SCANNER_BATCH_KEY);
+      if (raw) {
+        const items = JSON.parse(raw);
+        if (Array.isArray(items)) {
+          setBatchList(items.slice(0, SCANNER_BATCH_LIMIT).map((item: any) => ({
+            ...item,
+            scannedAt: new Date(item.scannedAt),
+          })));
+        }
+      }
+      setBatchQuotaConsumed(window.localStorage.getItem(SCANNER_BATCH_QUOTA_KEY) === "1");
+    } catch {}
   }, []);
 
   useEffect(() => {
-    if (!batchSession) return;
-    saveBatchSession({
-      ...batchSession,
-      language: groupedLanguage,
-      items: batchList.map((item) => ({
-        ...item,
-        scannedAt: item.scannedAt.toISOString(),
-      })),
-    });
-  }, [batchList, batchSession, groupedLanguage]);
+    try {
+      window.localStorage.setItem(
+        SCANNER_BATCH_KEY,
+        JSON.stringify(batchList.map((item) => ({ ...item, scannedAt: item.scannedAt.toISOString() })))
+      );
+    } catch {}
+  }, [batchList]);
 
-  const quotaBlocked = quota.remaining <= 0;
-  const quotaResetLabel = quota.periodEnd
-    ? new Date(quota.periodEnd).toLocaleDateString("fr-FR", { day: "2-digit", month: "long", year: "numeric" })
-    : "le prochain 5 du mois";
+  const quotaBlocked = quotaUsed >= SCANNER_MONTHLY_LIMIT;
 
-  const ensureQuotaForSession = useCallback((mode: "single" | "batch" | "quad") => {
-    const current = getScannerQuota();
-    if (current.remaining <= 0) {
-      setQuota(current);
-      setStatus(`Quota gratuit atteint (${current.limit}/${current.limit}). Renouvellement le ${new Date(current.periodEnd).toLocaleDateString("fr-FR")}.`);
+  const consumeSuccessfulSession = useCallback((mode: "single" | "batch") => {
+    if (mode === "batch" && batchQuotaConsumed) return true;
+    const current = readQuota();
+    if (current.used >= SCANNER_MONTHLY_LIMIT) {
+      setQuotaUsed(current.used);
+      setQuotaEnd(current.end);
       return false;
     }
-
-    if (mode === "single") {
-      setQuota(consumeScannerSessionQuota());
-      return true;
-    }
-
-    let session = batchSession;
-    if (!session) {
-      session = createBatchSession(groupedLanguage);
-      setBatchSession(session);
-    }
-    if (!session.quotaConsumed) {
-      const next = consumeScannerSessionQuota();
-      const consumed = { ...session, quotaConsumed: true, language: groupedLanguage };
-      setBatchSession(consumed);
-      saveBatchSession(consumed);
-      setQuota(next);
+    const next = writeQuota(current.used + 1);
+    setQuotaUsed(next.used);
+    setQuotaEnd(next.end);
+    if (mode === "batch") {
+      setBatchQuotaConsumed(true);
+      try { window.localStorage.setItem(SCANNER_BATCH_QUOTA_KEY, "1"); } catch {}
     }
     return true;
-  }, [batchSession, groupedLanguage]);
+  }, [batchQuotaConsumed]);
 
   // =====================================================
   // HAPTIC FEEDBACK
@@ -246,28 +248,36 @@ export default function ScannerPage() {
       }
 
       if (scanMode === "single") {
+        if (!consumeSuccessfulSession("single")) {
+          setStatus("Quota gratuit atteint. Renouvellement le 5 du mois.");
+          return;
+        }
         router.push(`/card/${cards[0].id}`);
       } else {
-        const available = Math.max(0, SCANNER_MAX_BATCH_CARDS - batchList.length);
-        const accepted = cards.slice(0, available);
-        if (!accepted.length) {
-          setStatus("Session pleine : supprimez une carte ou démarrez une nouvelle session.");
+        const remaining = Math.max(0, SCANNER_BATCH_LIMIT - batchList.length);
+        const acceptedCards = cards.slice(0, remaining);
+        if (!acceptedCards.length) {
+          setStatus("Session batch pleine (4/4). Videz la session pour recommencer.");
           setIsDrawerOpen(true);
           return;
         }
-        const newBatchItems = accepted.map((card) => ({
+        if (!consumeSuccessfulSession("batch")) {
+          setStatus("Quota gratuit atteint. Renouvellement le 5 du mois.");
+          return;
+        }
+        const newBatchItems = acceptedCards.map((card) => ({
           id: `${card.id}_${Date.now()}_${Math.random()}`,
           card,
           scannedAt: new Date(),
           confidence: 0.95,
         }));
 
-        setBatchList((prev) => [...prev, ...newBatchItems].slice(0, SCANNER_MAX_BATCH_CARDS));
+        setBatchList((prev) => [...newBatchItems, ...prev].slice(0, SCANNER_BATCH_LIMIT));
         setIsDrawerOpen(true);
-        setStatus(`${accepted.length} carte(s) ajoutée(s) à la session (${Math.min(SCANNER_MAX_BATCH_CARDS, batchList.length + accepted.length)}/${SCANNER_MAX_BATCH_CARDS}).`);
+        setStatus(`${acceptedCards.length} carte(s) ajoutée(s) à la session batch.`);
       }
     },
-    [scanMode, router, batchList.length]
+    [scanMode, router, batchList.length, consumeSuccessfulSession]
   );
 
   // =====================================================
@@ -307,21 +317,28 @@ export default function ScannerPage() {
     if (!cameraRef.current || scanning) {
       return;
     }
-    if (scanMode === "batch" && batchList.length >= SCANNER_MAX_BATCH_CARDS) {
-      setStatus("Session batch pleine (4/4). Supprimez une carte ou démarrez une nouvelle session.");
+
+    const currentQuota = readQuota();
+    if (currentQuota.used >= SCANNER_MONTHLY_LIMIT) {
+      setQuotaUsed(currentQuota.used);
+      setQuotaEnd(currentQuota.end);
+      setStatus(`Quota gratuit atteint (${SCANNER_MONTHLY_LIMIT}/${SCANNER_MONTHLY_LIMIT}). Renouvellement le ${new Date(currentQuota.end).toLocaleDateString("fr-FR")}.`);
+      return;
+    }
+    if (scanMode === "batch" && batchList.length >= SCANNER_BATCH_LIMIT) {
+      setStatus("Session batch pleine (4/4). Videz la session pour recommencer.");
       setIsDrawerOpen(true);
       return;
     }
+
     const video = cameraRef.current.getVideo();
 
-    if (!video || video.readyState < 2 || video.videoWidth <= 0 || video.videoHeight <= 0) {
-      setStatus("Caméra en cours d’initialisation. Réessayez dans un instant.");
-      logger.warn("SCAN", "Vidéo caméra pas encore prête.");
-      triggerHaptic([80, 40, 80]);
+    if (!video) {
+      setStatus("Caméra non disponible.");
+      logger.error("SCAN", "Vidéo caméra indisponible.");
+      triggerHaptic([100, 50, 100]);
       return;
     }
-
-    if (!ensureQuotaForSession(scanMode === "single" ? "single" : "batch")) return;
 
     setScanning(true);
     resetScanState();
@@ -413,7 +430,7 @@ export default function ScannerPage() {
         isSecretRare: Boolean(isSecretRare),
         possibleNames: Array.isArray(possibleNames) ? possibleNames : [],
       
-        confidence: confidence01(confidence),
+        confidence: confidence ?? 0,
         needsSecondPass: false,
       };
 
@@ -505,20 +522,28 @@ export default function ScannerPage() {
       // =================================================
 
       if (scanMode === "single") {
+        if (!consumeSuccessfulSession("single")) {
+          setStatus("Quota gratuit atteint. Renouvellement le 5 du mois.");
+          return;
+        }
         logger.scan(`Scan V5 réussi ${card.id}`);
 
         setTimeout(() => {
           router.push(`/card/${card.id}`);
         }, 400);
       } else {
+        if (!consumeSuccessfulSession("batch")) {
+          setStatus("Quota gratuit atteint. Renouvellement le 5 du mois.");
+          return;
+        }
         const batchItem: ScannedBatchItem = {
           id: `${card.id}_${Date.now()}`,
           card,
           scannedAt: new Date(),
-          confidence: confidence01(scanResult.confidence),
+          confidence: scanConfidence,
         };
 
-        setBatchList((prev) => [...prev, batchItem].slice(0, SCANNER_MAX_BATCH_CARDS));
+        setBatchList((prev) => [batchItem, ...prev].slice(0, SCANNER_BATCH_LIMIT));
         setIsDrawerOpen(true);
         logger.scan("Carte ajoutée au batch V5.");
       }
@@ -542,9 +567,11 @@ export default function ScannerPage() {
   const clearBatch = () => {
     if (confirm("Voulez-vous réinitialiser toute la session de scan ?")) {
       setBatchList([]);
-      clearStoredBatchSession();
-      setBatchSession(null);
-      setStatus("Session batch réinitialisée. Une nouvelle session comptera 1 scan à sa première analyse.");
+      setBatchQuotaConsumed(false);
+      try {
+        window.localStorage.removeItem(SCANNER_BATCH_KEY);
+        window.localStorage.removeItem(SCANNER_BATCH_QUOTA_KEY);
+      } catch {}
     }
   };
 
@@ -574,7 +601,7 @@ export default function ScannerPage() {
     imageBase64: string
   ): Promise<PokemonCard | null> => {
     try {
-      const resData = await requestScanAnalysis(imageBase64, groupedLanguage);
+      const resData = await requestScanAnalysis(imageBase64);
 
       if (resData.success && resData.data) {
         const data = resData.data;
@@ -589,7 +616,7 @@ export default function ScannerPage() {
       
           cardType: data.cardType ?? "Unknown",
       
-          language: groupedLanguage,
+          language: data.language ?? "fr",
           rarity: data.rarity ?? null,
           variant: data.variant ?? null,
       
@@ -597,7 +624,7 @@ export default function ScannerPage() {
           isSecretRare: Boolean(data.isSecretRare),
           possibleNames: Array.isArray(data.possibleNames) ? data.possibleNames : [],
       
-          confidence: confidence01(data.confidence),
+          confidence: data.confidence ?? 0,
           needsSecondPass: false,
         };
       
@@ -614,14 +641,20 @@ export default function ScannerPage() {
   };
 
   const handlePrimaryScan = () => {
+    const currentQuota = readQuota();
+    if (currentQuota.used >= SCANNER_MONTHLY_LIMIT) {
+      setQuotaUsed(currentQuota.used);
+      setQuotaEnd(currentQuota.end);
+      setStatus(`Quota gratuit atteint (${SCANNER_MONTHLY_LIMIT}/${SCANNER_MONTHLY_LIMIT}). Renouvellement le ${new Date(currentQuota.end).toLocaleDateString("fr-FR")}.`);
+      return;
+    }
+    if (scanMode === "batch" && batchList.length >= SCANNER_BATCH_LIMIT) {
+      setStatus("Session batch pleine (4/4). Videz la session pour recommencer.");
+      setIsDrawerOpen(true);
+      return;
+    }
     if (scanMode === "batch" && batchCaptureMode === "grouped") {
-      if (batchList.length >= SCANNER_MAX_BATCH_CARDS) {
-        setStatus("Session pleine (4/4). Videz-la avant un nouveau Quad Scan.");
-        setIsDrawerOpen(true);
-        return;
-      }
-      if (!ensureQuotaForSession("quad")) return;
-      setStatus(`Quad Scan ${groupedLanguage.toUpperCase()} : analyse des quatre zones…`);
+      setStatus("Capture groupée : analyse des quatre zones…");
       void cameraRef.current?.openGroupedScanner();
       return;
     }
@@ -654,7 +687,6 @@ export default function ScannerPage() {
             {/* MODE SWITCH */}
             <div className="flex items-center gap-1.5 bg-black/45 p-1.5 rounded-2xl border border-white/[0.07] w-full max-w-xs mt-1 shadow-inner">
               <button
-                type="button"
                 onClick={() => setScanMode("single")}
                 className={`flex-1 py-2 rounded-lg text-[10px] font-black uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 ${
                   scanMode === "single"
@@ -667,7 +699,6 @@ export default function ScannerPage() {
               </button>
 
               <button
-                type="button"
                 onClick={() => setScanMode("batch")}
                 className={`flex-1 py-2 rounded-lg text-[10px] font-black uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 ${
                   scanMode === "batch"
@@ -681,21 +712,14 @@ export default function ScannerPage() {
             </div>
           </section>
 
-          <PremiumCard className={`p-4 ${quotaBlocked ? "border-rose-400/30" : ""}`}>
-            <div className="flex items-center justify-between gap-3">
-              <div>
-                <p className="text-[9px] font-black uppercase tracking-[0.16em] text-cyan-300">Quota scanner</p>
-                <p className="mt-1 text-sm font-black text-white">{quota.sessionsUsed} / {quota.limit} sessions utilisées</p>
-                <p className="mt-1 text-[10px] text-zinc-400">Renouvellement le {quotaResetLabel}. Batch/Quad jusqu’à 4 cartes = 1 session.</p>
-              </div>
-              <PremiumBadge tone={quotaBlocked ? "amber" : "cyan"}>{quota.remaining} restantes</PremiumBadge>
+          <div className="kt-premium-panel rounded-[18px] px-4 py-3 flex items-center justify-between gap-3">
+            <div>
+              <p className="text-[9px] font-black uppercase tracking-widest text-zinc-500">Quota scanner</p>
+              <p className="mt-0.5 text-xs font-black text-white">{quotaUsed} / {SCANNER_MONTHLY_LIMIT} sessions</p>
+              <p className="mt-0.5 text-[9px] text-zinc-500">Renouvellement le {quotaEnd ? new Date(quotaEnd).toLocaleDateString("fr-FR") : "5 du mois"}</p>
             </div>
-            {quotaBlocked && (
-              <div className="mt-3 rounded-xl border border-rose-400/20 bg-rose-400/[0.07] px-3 py-2.5 text-[10px] font-bold leading-4 text-rose-200">
-                Quota gratuit atteint. Vous pouvez consulter le scanner et vos résultats mémorisés, mais lancer une nouvelle session sera disponible au prochain renouvellement.
-              </div>
-            )}
-          </PremiumCard>
+            <PremiumBadge tone={quotaBlocked ? "amber" : "cyan"}>{Math.max(0, SCANNER_MONTHLY_LIMIT - quotaUsed)} restantes</PremiumBadge>
+          </div>
 
           <section className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             <PremiumCard className="p-4 text-left">
@@ -719,8 +743,8 @@ export default function ScannerPage() {
                 </div>
                 <PremiumSectionHeading
                   eyebrow="Reconnaissance"
-                  title="FR / EN / JP / CN"
-                  description="Le scanner raccorde désormais chaque résultat au catalogue de sa langue, sans fallback vers une autre impression."
+                  title="FR / EN optimisées"
+                  description="Les cartes japonaises et chinoises sont détectées ; leur correspondance base continue de progresser."
                 />
               </div>
             </PremiumCard>
@@ -738,8 +762,8 @@ export default function ScannerPage() {
                   <div className="flex items-start justify-between gap-3">
                     <div className="min-w-0">
                       <p className="text-[9px] font-black uppercase tracking-[0.16em] text-violet-300">Module Batch</p>
-                      <h2 className="mt-1 truncate text-sm font-black text-white">Session persistante · {batchList.length}/{SCANNER_MAX_BATCH_CARDS}</h2>
-                      <p className="mt-1 text-[10px] leading-4 text-zinc-400">Les résultats restent mémorisés quand vous ouvrez une fiche puis revenez au scanner.</p>
+                      <h2 className="mt-1 truncate text-sm font-black text-white">Choisissez votre méthode de capture</h2>
+                      <p className="mt-1 text-[10px] leading-4 text-zinc-400">Les résultats rejoignent la même session et peuvent ensuite être exportés.</p>
                     </div>
                     <div className="shrink-0 whitespace-nowrap"><PremiumBadge tone="violet">{batchList.length} carte(s)</PremiumBadge></div>
                   </div>
@@ -781,37 +805,8 @@ export default function ScannerPage() {
                   </div>
 
                   {batchCaptureMode === "grouped" && (
-                    <div className="mt-3 space-y-3">
-                      <div>
-                        <p className="mb-2 text-[9px] font-black uppercase tracking-[0.14em] text-zinc-400">Langue des 4 cartes</p>
-                        <div className="grid grid-cols-4 gap-1.5">
-                          {([
-                            ["fr", "FR"],
-                            ["en", "EN"],
-                            ["ja", "JP"],
-                            ["zh-tw", "CN"],
-                          ] as Array<[ScannerLanguage, string]>).map(([value, label]) => (
-                            <button
-                              key={value}
-                              type="button"
-                              onClick={() => {
-                                setGroupedLanguage(value);
-                                setStatus(`Quad Scan ${label} : les quatre cartes doivent être de la même langue.`);
-                              }}
-                              className={`rounded-xl border px-2 py-2 text-[10px] font-black transition ${
-                                groupedLanguage === value
-                                  ? "border-violet-400/40 bg-violet-400/[0.12] text-violet-200"
-                                  : "border-white/[0.08] bg-black/20 text-zinc-400"
-                              }`}
-                            >
-                              {label}
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-                      <div className="rounded-2xl border border-amber-400/15 bg-amber-400/[0.06] px-3 py-2.5 text-[10px] leading-4 text-amber-100/80">
-                        Pour une meilleure précision, utilisez quatre cartes de la même langue. Évitez les reflets et ne superposez pas les cartes.
-                      </div>
+                    <div className="mt-3 rounded-2xl border border-amber-400/15 bg-amber-400/[0.06] px-3 py-2.5 text-[10px] leading-4 text-amber-100/80">
+                      Évitez les reflets, gardez les quatre cartes entièrement visibles et ne les superposez pas.
                     </div>
                   )}
                 </PremiumCard>
@@ -838,9 +833,8 @@ export default function ScannerPage() {
 
           {/* BUTTON SCAN */}
           <button
-            type="button"
             onClick={handlePrimaryScan}
-            disabled={scanning || quotaBlocked || (scanMode === "batch" && batchList.length >= SCANNER_MAX_BATCH_CARDS)}
+            disabled={!ready || scanning}
             className="w-full rounded-2xl bg-gradient-to-r from-cyan-400 to-cyan-500 py-4 text-sm font-black uppercase tracking-widest text-[#031014] disabled:opacity-40 transition-all hover:brightness-110 active:scale-[0.985] shadow-[0_14px_35px_rgba(34,211,238,.18)] flex items-center justify-center gap-2"
           >
             {scanning ? (
@@ -952,7 +946,7 @@ export default function ScannerPage() {
             >
               <div className="flex items-center gap-2">
                 <Layers className="w-4 h-4 text-cyan-400" />
-                <span>Session de Scan ({batchList.length}/{SCANNER_MAX_BATCH_CARDS})</span>
+                <span>Session de Scan ({batchList.length}/{SCANNER_BATCH_LIMIT})</span>
               </div>
 
               {isDrawerOpen ? (
@@ -979,7 +973,7 @@ export default function ScannerPage() {
                       className="text-[10px] font-black uppercase tracking-wider text-red-400 bg-red-500/10 px-3 py-1.5 rounded-lg border border-red-500/20 flex items-center gap-1.5"
                     >
                       <Trash2 className="w-3.5 h-3.5" />
-                      Nouvelle session
+                      Vider
                     </button>
                   </div>
                 )}
@@ -998,11 +992,7 @@ export default function ScannerPage() {
                         key={item.id}
                         className="flex items-center justify-between bg-neutral-900/60 border border-white/[0.08] rounded-xl p-2.5"
                       >
-                        <button
-                          type="button"
-                          onClick={() => router.push(`/card/${item.card.id}`)}
-                          className="flex min-w-0 flex-1 items-center gap-3 text-left"
-                        >
+                        <div className="flex items-center gap-3">
                           {item.card.images?.small && (
                             <div className="relative w-10 h-14 rounded-lg overflow-hidden bg-neutral-800 flex-shrink-0">
                               <Image
@@ -1013,26 +1003,34 @@ export default function ScannerPage() {
                               />
                             </div>
                           )}
-                          <div className="min-w-0">
-                            <h4 className="truncate text-xs font-black uppercase text-white">
+                          <div>
+                            <h4 className="text-xs font-black uppercase text-white">
                               {item.card.name}
                             </h4>
-                            <p className="truncate text-[10px] text-zinc-400">
+                            <p className="text-[10px] text-zinc-400">
                               N° {item.card.number} • {item.card.set?.name}
                             </p>
-                            <p className="mt-1 flex items-center gap-1 text-[9px] font-bold text-cyan-300">
-                              <ExternalLink className="h-3 w-3" /> Ouvrir la fiche · session conservée
-                            </p>
                           </div>
-                        </button>
+                        </div>
 
-                        <button
-                          onClick={() => removeBatchItem(item.id)}
-                          className="p-2 text-zinc-500 hover:text-red-400 transition-colors"
-                          aria-label="Supprimer de la session"
-                        >
-                          <Trash2 className="w-4 h-4" />
-                        </button>
+                        <div className="flex items-center gap-1">
+                          <button
+                            type="button"
+                            onClick={() => router.push(`/card/${item.card.id}`)}
+                            className="p-2 text-cyan-400 hover:text-cyan-300 transition-colors"
+                            aria-label="Ouvrir la fiche"
+                          >
+                            <ExternalLink className="w-4 h-4" />
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => removeBatchItem(item.id)}
+                            className="p-2 text-zinc-500 hover:text-red-400 transition-colors"
+                            aria-label="Supprimer de la session"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        </div>
                       </div>
                     ))
                   )}
