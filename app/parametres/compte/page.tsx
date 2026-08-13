@@ -108,10 +108,10 @@ export default function AccountManagementPage() {
               </span>
               <div>
                 <h1 className="flex items-center gap-2 text-xl font-black tracking-tight sm:text-2xl">
-                  Gestion du compte
+                  Compte King_TCG
                 </h1>
                 <p className="mt-1 text-[13px] font-medium leading-5 text-zinc-200">
-                  Gérez votre profil, vos quotas et votre abonnement King_TCG.
+                  Gérez votre compte et choisissez l’offre adaptée à votre collection.
                 </p>
               </div>
             </div>
@@ -125,7 +125,38 @@ export default function AccountManagementPage() {
             </button>
           </header>
 
-          <section className="relative overflow-hidden rounded-[20px] border border-[#f5c451]/45 bg-[#111821] p-5 shadow-[0_20px_60px_rgba(0,0,0,.32),0_0_35px_rgba(245,196,81,.04)] sm:p-7">
+          <section>
+            <div className="mb-3 flex items-center gap-3">
+              <ShieldCheck className="h-4 w-4 text-emerald-300" />
+              <h2 className="whitespace-nowrap text-[13px] font-black uppercase tracking-[0.08em] text-emerald-300">
+                Compte Normal
+              </h2>
+              <span className="h-px flex-1 bg-gradient-to-r from-emerald-400/35 to-transparent" />
+            </div>
+
+            <div className="rounded-[18px] border border-emerald-400/15 bg-[#0d141c] p-5 sm:p-6">
+              <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                  <p className="text-lg font-black text-white">Gratuit · 0 € / mois</p>
+                  <p className="mt-1 max-w-2xl text-[12px] leading-5 text-zinc-200">
+                    L’essentiel de King_TCG pour rechercher, suivre et gérer votre collection au quotidien.
+                  </p>
+                </div>
+                <div className="rounded-[14px] border border-emerald-400/15 bg-emerald-400/[0.05] px-4 py-2.5 text-center">
+                  <p className="text-[10px] font-black uppercase tracking-[0.08em] text-emerald-300">Quota scanner</p>
+                  <p className="mt-1 text-sm font-black text-white">30 scans / mois</p>
+                </div>
+              </div>
+
+              <ul className="mt-5 grid gap-2.5 sm:grid-cols-2">
+                {normalFeatures.map((feature) => (
+                  <NormalFeatureRow key={feature}>{feature}</NormalFeatureRow>
+                ))}
+              </ul>
+            </div>
+          </section>
+
+          <section className="relative overflow-hidden rounded-[20px] border border-[#f5c451]/45 bg-[#0d141c] p-6 shadow-[0_20px_60px_rgba(0,0,0,.34),0_0_38px_rgba(245,196,81,.055)] sm:p-7">
             <div className="pointer-events-none absolute -left-20 -top-24 h-56 w-56 rounded-full bg-[#f5c451]/[0.055] blur-3xl" />
             <div className="pointer-events-none absolute -bottom-28 -right-20 h-64 w-64 rounded-full bg-[#f5c451]/[0.05] blur-3xl" />
 
@@ -134,7 +165,7 @@ export default function AccountManagementPage() {
                 <Crown className="h-7 w-7" />
               </span>
               <h2 className="mt-3 text-xl font-black tracking-tight text-white sm:text-2xl">
-                <span className="text-[#f5c451]">Premium</span> King_TCG
+                <span className="text-[#f5c451]">PREMIUM</span> KING_TCG
               </h2>
               <p className="mt-1 text-[12px] font-medium text-zinc-200">
                 Débloquez les fonctions avancées de King_TCG.
@@ -146,7 +177,7 @@ export default function AccountManagementPage() {
               </div>
 
               <span className="mt-3 rounded-full border border-[#f5c451]/25 bg-[#f5c451]/[0.07] px-3 py-1 text-[10px] font-black uppercase tracking-[0.08em] text-[#f5c451]">
-                Abonnement mensuel
+                Sans engagement · annulable à tout moment
               </span>
             </div>
           </section>
@@ -160,7 +191,7 @@ export default function AccountManagementPage() {
               <span className="h-px flex-1 bg-gradient-to-r from-cyan-400/45 to-transparent" />
             </div>
 
-            <div className="overflow-hidden rounded-[18px] border border-white/[0.1] bg-[#111821] shadow-[0_18px_48px_rgba(0,0,0,.24)]">
+            <div className="overflow-hidden rounded-[18px] border border-white/[0.1] bg-[#0d141c] shadow-[0_18px_48px_rgba(0,0,0,.28)]">
               {premiumHighlights.map((feature, index) => {
                 const Icon = feature.icon;
                 return (
@@ -190,39 +221,11 @@ export default function AccountManagementPage() {
               className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-[15px] border border-cyan-200/30 bg-gradient-to-r from-cyan-400 via-sky-500 to-blue-600 px-4 py-3.5 text-[12px] font-black uppercase tracking-[0.07em] text-white shadow-[0_16px_38px_rgba(14,165,233,.2)] transition hover:brightness-110"
             >
               <Crown className="h-4 w-4" />
-              Passer Premium · 4,99 € / mois
+              <span className="flex flex-col items-center leading-tight">
+                <span>Passer Premium</span>
+                <span className="mt-0.5 text-[10px] font-bold normal-case tracking-normal">4,99 € / mois</span>
+              </span>
             </button>
-          </section>
-
-          <section>
-            <div className="mb-3 flex items-center gap-3">
-              <ShieldCheck className="h-4 w-4 text-emerald-300" />
-              <h2 className="whitespace-nowrap text-[13px] font-black uppercase tracking-[0.08em] text-emerald-300">
-                Compte Normal
-              </h2>
-              <span className="h-px flex-1 bg-gradient-to-r from-emerald-400/35 to-transparent" />
-            </div>
-
-            <div className="rounded-[18px] border border-emerald-400/15 bg-[#111821] p-5 sm:p-6">
-              <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                <div>
-                  <p className="text-lg font-black text-white">Gratuit · 0 € / mois</p>
-                  <p className="mt-1 max-w-2xl text-[12px] leading-5 text-zinc-200">
-                    L’essentiel de King_TCG pour rechercher, suivre et gérer votre collection au quotidien.
-                  </p>
-                </div>
-                <div className="rounded-[14px] border border-emerald-400/15 bg-emerald-400/[0.05] px-4 py-2.5 text-center">
-                  <p className="text-[10px] font-black uppercase tracking-[0.08em] text-emerald-300">Quota scanner</p>
-                  <p className="mt-1 text-sm font-black text-white">30 scans / mois</p>
-                </div>
-              </div>
-
-              <ul className="mt-5 grid gap-2.5 sm:grid-cols-2">
-                {normalFeatures.map((feature) => (
-                  <NormalFeatureRow key={feature}>{feature}</NormalFeatureRow>
-                ))}
-              </ul>
-            </div>
           </section>
 
           <section className="rounded-[18px] border border-white/[0.09] bg-[#111821] p-4 sm:p-5">
