@@ -24,6 +24,7 @@ import {
   Loader2,
   Grid2X2,
   Images,
+  Crown,
 } from "lucide-react";
 
 import ScannerCamera, { type ScannerCameraHandle } from "@/components/scanner/ScannerCamera";
@@ -144,6 +145,7 @@ export default function ScannerPage() {
   const [needsRetry, setNeedsRetry] = useState(false);
 
   const [scanMode, setScanMode] = useState<"single" | "batch">("single");
+  const [premiumModesOpen, setPremiumModesOpen] = useState(false);
   const [batchCaptureMode, setBatchCaptureMode] = useState<"individual" | "grouped">("individual");
   const [groupedLanguage, setGroupedLanguage] = useState<"fr" | "en" | "ja" | "zh-tw">("fr");
   const [batchList, setBatchList] = useState<ScannedBatchItem[]>([]);
@@ -756,30 +758,79 @@ export default function ScannerPage() {
             </div>
 
             {/* MODE SWITCH */}
-            <div className="flex items-center gap-1.5 bg-black/45 p-1.5 rounded-2xl border border-white/[0.07] w-full max-w-xs mt-1 shadow-inner">
-              <button
-                onClick={() => setScanMode("single")}
-                className={`flex-1 py-2 rounded-lg text-[10px] font-black uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 ${
-                  scanMode === "single"
-                    ? "bg-cyan-500 text-black shadow-md shadow-cyan-500/20"
-                    : "text-zinc-400 hover:text-white"
-                }`}
-              >
-                <Zap className="w-3.5 h-3.5" />
-                Mono
-              </button>
+            <div className="w-full max-w-xs mt-1 space-y-2">
+              <div className="flex items-center gap-1.5 bg-black/45 p-1.5 rounded-2xl border border-white/[0.07] shadow-inner">
+                <button
+                  onClick={() => setScanMode("single")}
+                  className={`flex-1 py-2 rounded-lg text-[10px] font-black uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 ${
+                    scanMode === "single"
+                      ? "bg-cyan-500 text-black shadow-md shadow-cyan-500/20"
+                      : "text-zinc-400 hover:text-white"
+                  }`}
+                >
+                  <Zap className="w-3.5 h-3.5" />
+                  Mono
+                </button>
 
-              <button
-                onClick={() => setScanMode("batch")}
-                className={`flex-1 py-2 rounded-lg text-[10px] font-black uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 ${
-                  scanMode === "batch"
-                    ? "bg-cyan-500 text-black shadow-md shadow-cyan-500/20"
-                    : "text-zinc-400 hover:text-white"
-                }`}
-              >
-                <Layers className="w-3.5 h-3.5" />
-                Batch ({batchList.length})
-              </button>
+                <button
+                  onClick={() => setPremiumModesOpen((open) => !open)}
+                  className={`flex-1 py-2 rounded-lg text-[10px] font-black uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 ${
+                    scanMode === "batch" || premiumModesOpen
+                      ? "border border-violet-400/30 bg-violet-400/10 text-violet-200 shadow-md shadow-violet-500/10"
+                      : "text-zinc-400 hover:text-white"
+                  }`}
+                >
+                  <Crown className="w-3.5 h-3.5 text-violet-300" />
+                  Premium
+                  {premiumModesOpen ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
+                </button>
+              </div>
+
+              <AnimatePresence initial={false}>
+                {premiumModesOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -6 }}
+                    transition={{ duration: 0.18 }}
+                    className="grid grid-cols-2 gap-2 rounded-2xl border border-violet-400/20 bg-violet-400/[0.05] p-2"
+                  >
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setScanMode("batch");
+                        setBatchCaptureMode("individual");
+                        setPremiumModesOpen(false);
+                        setStatus("Batch Premium : scannez jusqu’à 4 cartes à la suite.");
+                      }}
+                      className="rounded-xl border border-cyan-400/20 bg-cyan-400/[0.06] px-3 py-2.5 text-left transition-all hover:border-cyan-300/35"
+                    >
+                      <div className="flex items-center gap-1.5 text-cyan-300">
+                        <Layers className="h-4 w-4" />
+                        <span className="text-[10px] font-black uppercase tracking-wide">Batch</span>
+                      </div>
+                      <p className="mt-1 text-[9px] leading-4 text-zinc-400">Scan multiple · jusqu’à 4 cartes d’affilée.</p>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setScanMode("batch");
+                        setBatchCaptureMode("grouped");
+                        setPremiumModesOpen(false);
+                        setStatus("Quadra Scan Premium : placez 4 cartes dans une seule photo.");
+                      }}
+                      className="rounded-xl border border-violet-400/25 bg-violet-400/[0.08] px-3 py-2.5 text-left transition-all hover:border-violet-300/40"
+                    >
+                      <div className="flex items-center gap-1.5 text-violet-300">
+                        <Grid2X2 className="h-4 w-4" />
+                        <span className="text-[10px] font-black uppercase tracking-wide">Quadra Scan</span>
+                      </div>
+                      <p className="mt-1 text-[9px] leading-4 text-zinc-400">Une photo · jusqu’à 4 cartes.</p>
+                    </button>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           </section>
 
@@ -832,47 +883,20 @@ export default function ScannerPage() {
                 <PremiumCard className="p-4">
                   <div className="flex items-start justify-between gap-3">
                     <div className="min-w-0">
-                      <p className="text-[9px] font-black uppercase tracking-[0.16em] text-violet-300">Module Batch</p>
-                      <h2 className="mt-1 truncate text-sm font-black text-white">Choisissez votre méthode de capture</h2>
-                      <p className="mt-1 text-[10px] leading-4 text-zinc-400">Les résultats rejoignent la même session et peuvent ensuite être exportés.</p>
+                      <div className="flex items-center gap-1.5">
+                        <Crown className="h-3.5 w-3.5 text-violet-300" />
+                        <p className="text-[9px] font-black uppercase tracking-[0.16em] text-violet-300">Mode Premium</p>
+                      </div>
+                      <h2 className="mt-1 truncate text-sm font-black text-white">
+                        {batchCaptureMode === "grouped" ? "Quadra Scan" : "Batch · Scan multiples"}
+                      </h2>
+                      <p className="mt-1 text-[10px] leading-4 text-zinc-400">
+                        {batchCaptureMode === "grouped"
+                          ? "Capturez jusqu’à 4 cartes sur une seule photo."
+                          : "Scannez jusqu’à 4 cartes à la suite dans la même session."}
+                      </p>
                     </div>
-                    <div className="shrink-0 whitespace-nowrap"><PremiumBadge tone="violet">{batchList.length} carte(s)</PremiumBadge></div>
-                  </div>
-
-                  <div className="mt-4 grid grid-cols-2 gap-2">
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setBatchCaptureMode("individual");
-                        setStatus("Batch individuel : cadrez une carte puis ajoutez-la à la session.");
-                      }}
-                      className={`rounded-[18px] border p-3 text-left transition-all active:scale-[0.98] ${
-                        batchCaptureMode === "individual"
-                          ? "border-cyan-400/35 bg-cyan-400/[0.08]"
-                          : "border-white/[0.08] bg-[#1a212a] hover:border-white/[0.14]"
-                      }`}
-                    >
-                      <Images className={`h-5 w-5 ${batchCaptureMode === "individual" ? "text-cyan-300" : "text-zinc-400"}`} />
-                      <p className="mt-3 text-xs font-black text-white">Photos individuelles</p>
-                      <p className="mt-1 text-[10px] leading-4 text-zinc-400">Ajoutez les cartes une par une pour une précision maximale.</p>
-                    </button>
-
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setBatchCaptureMode("grouped");
-                        setStatus("Photo groupée : placez une carte dans chacune des quatre zones.");
-                      }}
-                      className={`rounded-[18px] border p-3 text-left transition-all active:scale-[0.98] ${
-                        batchCaptureMode === "grouped"
-                          ? "border-violet-400/35 bg-violet-400/[0.08]"
-                          : "border-white/[0.08] bg-[#1a212a] hover:border-white/[0.14]"
-                      }`}
-                    >
-                      <Grid2X2 className={`h-5 w-5 ${batchCaptureMode === "grouped" ? "text-violet-300" : "text-zinc-400"}`} />
-                      <p className="mt-3 text-xs font-black text-white">Une photo · 4 cartes</p>
-                      <p className="mt-1 text-[10px] leading-4 text-zinc-400">Placez quatre cartes séparées sur un fond uni et capturez-les ensemble.</p>
-                    </button>
+                    <div className="shrink-0 whitespace-nowrap"><PremiumBadge tone="violet">{batchList.length}/4</PremiumBadge></div>
                   </div>
 
                   {batchCaptureMode === "grouped" && (
