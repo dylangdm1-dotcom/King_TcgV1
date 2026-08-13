@@ -122,7 +122,7 @@ export default function AccountManagementPage() {
                     <div>
                       <p className="text-[10px] font-black uppercase tracking-[0.14em] text-cyan-300">Compte Premium</p>
                       <div className="mt-1 flex items-end gap-1.5">
-                        <h2 className="text-lg font-black text-white">6,99 €</h2>
+                        <h2 className="text-lg font-black text-white">4,99 €</h2>
                         <span className="pb-0.5 text-[10px] font-bold text-zinc-200">/ mois</span>
                       </div>
                     </div>
