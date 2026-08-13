@@ -269,22 +269,27 @@ export default function Recherche() {
       <Navbar />
       <main className="kt-app-shell selection:bg-cyan-500/20">
         <div className="kt-page space-y-6">
-          <section className="kt-premium-card kt-rise-in space-y-5 p-4 sm:p-6">
+          <section className="kt-rise-in relative space-y-5 overflow-hidden rounded-[22px] border border-cyan-400/25 bg-[#0a1118] p-4 shadow-[0_20px_55px_rgba(0,0,0,.28),0_0_36px_rgba(34,211,238,.045)] sm:p-6">
+            <div className="pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full bg-cyan-400/[0.045] blur-3xl" />
+            <div className="pointer-events-none absolute left-1/3 top-0 h-px w-40 bg-cyan-300/60 shadow-[0_0_12px_rgba(34,211,238,.7)]" />
             <div className="flex flex-col justify-between gap-4 border-b border-white/[0.06] pb-5 md:flex-row md:items-center">
               <div className="min-w-0 flex-1">
                 <div className="mb-2 flex w-full items-center justify-between gap-4">
-                  <div className="kt-eyebrow"><Sparkles className="h-3 w-3" /> Recherche de cartes</div>
+                  <div className="inline-flex items-center gap-1.5 rounded-full border border-cyan-400/20 bg-cyan-400/[0.06] px-2.5 py-1 text-[9px] font-black uppercase tracking-[0.14em] text-cyan-300"><Sparkles className="h-3 w-3" /> Recherche de cartes</div>
                   <img src="/brands/pokemon.png" alt="Pokémon" className="h-9 w-auto max-w-[150px] shrink-0 object-contain sm:h-10 sm:max-w-[176px]" />
                 </div>
                 <h1 className="flex items-center gap-2 text-xl font-black tracking-tight text-white sm:text-2xl">
-                  <Search className="h-5 w-5 text-cyan-300" /> Rechercher une carte
+                  <span className="flex h-9 w-9 items-center justify-center rounded-xl border border-cyan-400/25 bg-cyan-400/[0.07] text-cyan-300">
+                    <Search className="h-4.5 w-4.5" />
+                  </span>
+                  Rechercher une carte
                 </h1>
-                <p className="mt-1 max-w-2xl text-[11px] leading-5 text-zinc-100">
-                  Recherchez par nom ou parcourez les extensions par génération. Les prix visibles se synchronisent ensuite automatiquement.
+                <p className="mt-2 max-w-2xl text-[11px] leading-5 text-zinc-300">
+                  Recherchez par nom ou parcourez les extensions par génération. Les cotations restent disponibles dans la fiche de chaque carte.
                 </p>
               </div>
 
-              <div className="flex self-start items-center gap-1.5 rounded-2xl border border-white/[0.09] bg-[#1a212b] p-1.5 md:self-auto">
+              <div className="flex self-start items-center gap-1.5 rounded-2xl border border-cyan-400/15 bg-[#0d151e] p-1.5 shadow-[0_0_22px_rgba(34,211,238,.035)] md:self-auto">
                 <span className="flex items-center gap-1.5 px-1.5 text-[10px] font-bold uppercase tracking-[0.11em] text-zinc-200">
                   <Globe className="h-3.5 w-3.5" /> Langue :
                 </span>
@@ -299,7 +304,7 @@ export default function Recherche() {
                     title={lang.title}
                     aria-label={lang.title}
                     onClick={() => setSelectedLanguage(lang.code as LanguageCode)}
-                    className={`flex h-8 w-9 items-center justify-center rounded-lg text-base transition ${selectedLanguage === lang.code ? "bg-white text-[#0a1017] shadow" : "text-zinc-200 hover:bg-white/[0.05] hover:text-white"}`}
+                    className={`flex h-8 w-9 items-center justify-center rounded-lg border text-base transition ${selectedLanguage === lang.code ? "border-cyan-300/45 bg-cyan-400/[0.12] text-white shadow-[0_0_16px_rgba(34,211,238,.08)]" : "border-transparent text-zinc-300 hover:border-white/[0.08] hover:bg-white/[0.04] hover:text-white"}`}
                   >
                     {lang.label}
                   </button>
@@ -307,16 +312,16 @@ export default function Recherche() {
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-2 rounded-2xl border border-white/[0.07] bg-[#171d25] p-1.5">
+            <div className="grid grid-cols-2 gap-2 rounded-2xl border border-cyan-400/12 bg-[#0c141c] p-1.5">
               <button
                 onClick={() => setSearchMode("text")}
-                className={`flex items-center justify-center gap-2 rounded-xl px-3 py-2.5 text-[10px] font-bold uppercase tracking-[0.11em] transition ${searchMode === "text" ? "bg-white text-[#0a1017]" : "text-zinc-200 hover:text-white"}`}
+                className={`flex items-center justify-center gap-2 rounded-xl border px-3 py-2.5 text-[10px] font-bold uppercase tracking-[0.11em] transition ${searchMode === "text" ? "border-cyan-300/40 bg-cyan-400/[0.10] text-cyan-200 shadow-[0_0_18px_rgba(34,211,238,.06)]" : "border-transparent text-zinc-300 hover:bg-white/[0.03] hover:text-white"}`}
               >
                 <Search className="h-3.5 w-3.5" /> Par nom
               </button>
               <button
                 onClick={() => setSearchMode("set")}
-                className={`flex items-center justify-center gap-2 rounded-xl px-3 py-2.5 text-[10px] font-bold uppercase tracking-[0.11em] transition ${searchMode === "set" ? "bg-white text-[#0a1017]" : "text-zinc-200 hover:text-white"}`}
+                className={`flex items-center justify-center gap-2 rounded-xl border px-3 py-2.5 text-[10px] font-bold uppercase tracking-[0.11em] transition ${searchMode === "set" ? "border-cyan-300/40 bg-cyan-400/[0.10] text-cyan-200 shadow-[0_0_18px_rgba(34,211,238,.06)]" : "border-transparent text-zinc-300 hover:bg-white/[0.03] hover:text-white"}`}
               >
                 <Layers className="h-3.5 w-3.5" /> Par extension
               </button>
@@ -372,7 +377,7 @@ export default function Recherche() {
                     onChange={(event) => setSearchQuery(event.target.value)}
                     onKeyDown={(event) => event.key === "Enter" && executeSearch(searchQuery)}
                     placeholder="Dracaufeu, Pikachu, Ectoplasma…"
-                    className="w-full rounded-2xl border border-white/[0.09] bg-[#18202a] px-4 py-4 text-xs font-bold text-white outline-none transition placeholder:text-zinc-600 focus:border-cyan-300/45 focus:ring-2 focus:ring-cyan-300/10"
+                    className="w-full rounded-2xl border border-cyan-400/20 bg-[#0c151e] px-4 py-4 text-xs font-bold text-white outline-none transition placeholder:text-zinc-600 focus:border-cyan-300/55 focus:ring-2 focus:ring-cyan-300/10"
                   />
                   {loading ? <Loader2 className="absolute right-4 top-4 h-4 w-4 animate-spin text-cyan-300" /> : null}
                 </div>
@@ -389,13 +394,13 @@ export default function Recherche() {
                       value={setSearch}
                       onChange={(event) => setSetSearch(event.target.value)}
                       placeholder="Rechercher une extension, une année ou un code…"
-                      className="w-full rounded-2xl border border-white/[0.09] bg-[#18202a] py-3.5 pl-11 pr-4 text-xs font-bold text-white outline-none placeholder:text-zinc-600 focus:border-violet-300/40"
+                      className="w-full rounded-2xl border border-cyan-400/20 bg-[#0c151e] py-3.5 pl-11 pr-4 text-xs font-bold text-white outline-none placeholder:text-zinc-600 focus:border-cyan-300/50"
                     />
                   </div>
                   <select
                     value={selectedGeneration}
                     onChange={(event) => setSelectedGeneration(event.target.value)}
-                    className="rounded-2xl border border-white/[0.09] bg-[#171d25] px-4 py-3.5 text-xs font-bold text-white outline-none"
+                    className="rounded-2xl border border-cyan-400/20 bg-[#0c151e] px-4 py-3.5 text-xs font-bold text-white outline-none"
                     style={{ colorScheme: "dark" }}
                   >
                     <option value="all">Toutes les générations</option>
@@ -469,18 +474,18 @@ export default function Recherche() {
             </div>
           </section>
 
-          <section className="kt-premium-card-soft flex items-center justify-between gap-4 p-3">
-            <div className="flex min-w-0 items-center gap-2 rounded-xl border border-white/[0.08] bg-[#171d25] px-3.5 py-2 text-[10px] font-bold uppercase tracking-[0.11em] text-zinc-300">
-              <Filter className="h-3.5 w-3.5 shrink-0 text-violet-300" />
+          <section className="flex items-center justify-between gap-4 rounded-[16px] border border-cyan-400/14 bg-[#0a1118] p-3 shadow-[0_14px_34px_rgba(0,0,0,.20)]">
+            <div className="flex min-w-0 items-center gap-2 rounded-xl border border-cyan-400/14 bg-cyan-400/[0.035] px-3.5 py-2 text-[10px] font-bold uppercase tracking-[0.11em] text-zinc-300">
+              <Filter className="h-3.5 w-3.5 shrink-0 text-cyan-300" />
               <span>{filteredCards.length} résultat{filteredCards.length > 1 ? "s" : ""}</span>
               {query ? <span className="truncate font-normal text-zinc-200">· {query}</span> : null}
             </div>
 
-            <div className="flex gap-1 rounded-xl border border-white/[0.08] bg-[#171d25] p-1">
-              <button onClick={() => setViewMode("grid")} className={`rounded-lg px-3 py-1.5 text-[10px] font-black uppercase transition ${viewMode === "grid" ? "bg-white text-[#0a1017]" : "text-zinc-200"}`}>
+            <div className="flex gap-1 rounded-xl border border-cyan-400/14 bg-[#0c141c] p-1">
+              <button onClick={() => setViewMode("grid")} className={`rounded-lg border px-3 py-1.5 text-[10px] font-black uppercase transition ${viewMode === "grid" ? "border-cyan-300/40 bg-cyan-400/[0.10] text-cyan-200" : "border-transparent text-zinc-300"}`}>
                 <LayoutGrid className="h-3.5 w-3.5" />
               </button>
-              <button onClick={() => setViewMode("large")} className={`rounded-lg px-3 py-1.5 text-[10px] font-black uppercase transition ${viewMode === "large" ? "bg-white text-[#0a1017]" : "text-zinc-200"}`}>
+              <button onClick={() => setViewMode("large")} className={`rounded-lg border px-3 py-1.5 text-[10px] font-black uppercase transition ${viewMode === "large" ? "border-cyan-300/40 bg-cyan-400/[0.10] text-cyan-200" : "border-transparent text-zinc-300"}`}>
                 <Maximize2 className="h-3.5 w-3.5" />
               </button>
             </div>
@@ -529,7 +534,7 @@ export default function Recherche() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.24, delay: Math.min(index, 10) * 0.018 }}
-                  className={viewMode === "large" ? "w-full max-w-md" : "w-full"}
+                  className={viewMode === "large" ? "w-full max-w-md rounded-[20px] border border-cyan-400/10 bg-cyan-400/[0.018] p-1 shadow-[0_14px_34px_rgba(0,0,0,.16)]" : "w-full rounded-[20px] border border-cyan-400/10 bg-cyan-400/[0.018] p-1 shadow-[0_14px_34px_rgba(0,0,0,.16)]"}
                 >
                   <CardResult card={card} />
                 </motion.div>
