@@ -113,19 +113,6 @@ export default function AccountManagementPage() {
                   </p>
                 </div>
               </div>
-
-              <button
-                type="button"
-                className="inline-flex w-full items-center justify-center gap-2.5 rounded-[14px] border border-cyan-400/35 bg-[#0d1822] px-4 py-3 text-[11px] font-black text-white shadow-[0_0_24px_rgba(34,211,238,.06)] transition hover:border-cyan-300/60 hover:bg-[#10212c] sm:w-auto"
-              >
-                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-white text-[13px] font-black text-black">
-                  G
-                </span>
-                <span className="text-left">
-                  <span className="block text-[10px] font-bold text-zinc-300">Connexion rapide</span>
-                  <span className="block">Continuer avec Google</span>
-                </span>
-              </button>
             </div>
           </header>
 
@@ -190,61 +177,89 @@ export default function AccountManagementPage() {
                 </div>
               </article>
 
-              <article className="relative overflow-hidden rounded-[20px] border-2 border-[#f5c451]/80 bg-[#0d141c] p-5 shadow-[0_20px_60px_rgba(0,0,0,.30),0_0_34px_rgba(245,196,81,.065)] sm:p-6">
-                <div className="pointer-events-none absolute -left-16 -top-20 h-52 w-52 rounded-full bg-[#f5c451]/[0.055] blur-3xl" />
+              <article className="relative overflow-hidden rounded-[20px] border border-[#f5c451]/60 bg-[#0d141c] p-5 shadow-[0_20px_60px_rgba(0,0,0,.34),0_0_42px_rgba(245,196,81,.07)] sm:p-6">
+                <div className="pointer-events-none absolute -left-20 -top-24 h-56 w-56 rounded-full bg-[#f5c451]/[0.055] blur-3xl" />
+                <div className="pointer-events-none absolute -bottom-28 -right-20 h-64 w-64 rounded-full bg-[#f5c451]/[0.05] blur-3xl" />
 
-                <div className="relative">
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="flex items-center gap-3">
-                      <span className="flex h-11 w-11 items-center justify-center rounded-2xl border border-[#f5c451]/30 bg-[#f5c451]/[0.08] text-[#f5c451]">
-                        <Crown className="h-5 w-5" />
-                      </span>
-                      <div>
-                        <p className="text-[10px] font-black uppercase tracking-[0.11em] text-[#f5c451]">
-                          Compte Premium
-                        </p>
-                        <h3 className="mt-1 text-xl font-black text-white">Premium</h3>
-                      </div>
-                    </div>
-                    <span className="rounded-full border border-[#f5c451]/30 bg-[#f5c451]/[0.08] px-3 py-1 text-[10px] font-black text-[#f5c451]">
-                      4,99 € / mois
-                    </span>
-                  </div>
+                <div className="relative flex flex-col items-center text-center">
+                  <span className="flex h-12 w-12 items-center justify-center rounded-2xl border border-[#f5c451]/30 bg-[#f5c451]/[0.08] text-[#f5c451] shadow-[0_0_28px_rgba(245,196,81,.09)]">
+                    <Crown className="h-7 w-7" />
+                  </span>
 
-                  <p className="mt-4 text-[12px] leading-5 text-zinc-200">
-                    Toutes les fonctions avancées de King_TCG avec des limites élargies.
+                  <h3 className="mt-3 text-xl font-black tracking-tight text-white sm:text-2xl">
+                    <span className="text-[#f5c451]">PREMIUM</span> KING_TCG
+                  </h3>
+
+                  <p className="mt-1 text-[12px] font-medium text-zinc-200">
+                    Débloquez les fonctions avancées de King_TCG.
                   </p>
 
-                  <div className="mt-4 rounded-[14px] border border-[#f5c451]/22 bg-[#f5c451]/[0.055] px-4 py-3">
+                  <div className="mt-4 flex items-end justify-center gap-2">
+                    <span className="text-3xl font-black tracking-tight text-white sm:text-4xl">
+                      4,99 €
+                    </span>
+                    <span className="pb-1 text-sm font-bold text-zinc-200">/ mois</span>
+                  </div>
+
+                  <span className="mt-3 rounded-full border border-[#f5c451]/25 bg-[#f5c451]/[0.07] px-3 py-1 text-[10px] font-black uppercase tracking-[0.08em] text-[#f5c451]">
+                    Sans engagement · annulable à tout moment
+                  </span>
+
+                  <div className="mt-4 w-full rounded-[14px] border border-[#f5c451]/22 bg-[#f5c451]/[0.055] px-4 py-3">
                     <div className="flex items-center justify-between gap-3">
-                      <div>
+                      <div className="text-left">
                         <p className="text-[10px] font-black uppercase tracking-[0.08em] text-[#f5c451]">
                           Mono · Batch · Quadra
                         </p>
-                        <p className="mt-1 text-[11px] text-zinc-300">Quota global partagé</p>
+                        <p className="mt-1 text-[11px] text-zinc-300">
+                          Quota global partagé
+                        </p>
                       </div>
                       <p className="text-right text-xl font-black text-white">
                         500 <span className="text-[11px] font-bold text-zinc-300">scans / mois</span>
                       </p>
                     </div>
                   </div>
+                </div>
 
-                  <ul className="mt-5 space-y-2.5">
-                    {premiumHighlights.map((feature) => (
-                      <FeatureRow key={feature.title} premium>
-                        <span>
-                          <span className="font-black text-white">{feature.title}</span>
-                          <span className="block text-[10px] leading-4 text-zinc-300">
-                            {feature.description}
-                          </span>
+                <div className="relative mt-5 border-t border-[#f5c451]/18 pt-5">
+                  <div className="mb-3 flex items-center gap-3">
+                    <Sparkles className="h-4 w-4 text-[#f5c451]" />
+                    <h4 className="whitespace-nowrap text-[12px] font-black uppercase tracking-[0.08em] text-[#f5c451]">
+                      Ce qui est inclus
+                    </h4>
+                    <span className="h-px flex-1 bg-gradient-to-r from-[#f5c451]/45 to-transparent" />
+                  </div>
+
+                  <div className="overflow-hidden rounded-[16px] border border-[#f5c451]/18 bg-black/15">
+                    {premiumHighlights.map((feature, index) => (
+                      <div
+                        key={feature.title}
+                        className={`flex items-center gap-3 px-3.5 py-3 ${
+                          index > 0 ? "border-t border-white/[0.08]" : ""
+                        }`}
+                      >
+                        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-[#f5c451]/22 bg-[#f5c451]/[0.06] text-[#f5c451]">
+                          <feature.icon className="h-4.5 w-4.5" />
                         </span>
-                      </FeatureRow>
+                        <div className="min-w-0 flex-1 text-left">
+                          <p className="text-[11px] font-black text-white sm:text-[12px]">
+                            {feature.title}
+                          </p>
+                          <p className="mt-0.5 text-[10px] leading-4 text-zinc-300">
+                            {feature.description}
+                          </p>
+                        </div>
+                        <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-[#f5c451]/35 text-[#f5c451]">
+                          <Check className="h-3.5 w-3.5" />
+                        </span>
+                      </div>
                     ))}
-                  </ul>
+                  </div>
 
                   <button
                     type="button"
-                    className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-[14px] border border-[#f5c451]/50 bg-gradient-to-r from-[#8a5b08] via-[#b77908] to-[#7a4b05] px-4 py-3.5 text-[11px] font-black uppercase tracking-[0.06em] text-white shadow-[0_14px_34px_rgba(245,196,81,.11)] transition hover:brightness-110"
+                    className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-[14px] border border-[#f5c451]/50 bg-gradient-to-r from-[#8a5b08] via-[#b77908] to-[#7a4b05] px-4 py-3.5 text-[11px] font-black uppercase tracking-[0.06em] text-white shadow-[0_14px_34px_rgba(245,196,81,.11)] transition hover:brightness-110"
                   >
                     <Crown className="h-4 w-4" />
                     Passer Premium · 4,99 € / mois
@@ -263,7 +278,7 @@ export default function AccountManagementPage() {
               <span className="h-px flex-1 bg-gradient-to-r from-[#f5c451]/35 to-transparent" />
             </div>
 
-            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid grid-cols-2 gap-3">
               <div className="rounded-[16px] border border-cyan-400/18 bg-cyan-400/[0.04] p-4 text-center">
                 <span className="mx-auto flex h-10 w-10 items-center justify-center rounded-xl border border-cyan-400/25 bg-cyan-400/[0.08] text-cyan-300">
                   <ScanLine className="h-5 w-5" />
