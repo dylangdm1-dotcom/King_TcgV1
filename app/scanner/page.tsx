@@ -776,12 +776,12 @@ export default function ScannerPage() {
                   onClick={() => setPremiumModesOpen((open) => !open)}
                   className={`flex-1 py-2 rounded-lg text-[10px] font-black uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 ${
                     scanMode === "batch" || premiumModesOpen
-                      ? "border border-violet-400/30 bg-violet-400/10 text-violet-200 shadow-md shadow-violet-500/10"
+                      ? "border border-amber-400/30 bg-amber-400/10 text-amber-200 shadow-md shadow-amber-500/10"
                       : "text-zinc-400 hover:text-white"
                   }`}
                 >
-                  <Crown className="w-3.5 h-3.5 text-violet-300" />
-                  Premium
+                  <Crown className="w-3.5 h-3.5 text-amber-300" />
+                  <span className="text-amber-300">Premium</span>
                   {premiumModesOpen ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
                 </button>
               </div>
@@ -884,8 +884,8 @@ export default function ScannerPage() {
                   <div className="flex items-start justify-between gap-3">
                     <div className="min-w-0">
                       <div className="flex items-center gap-1.5">
-                        <Crown className="h-3.5 w-3.5 text-violet-300" />
-                        <p className="text-[9px] font-black uppercase tracking-[0.16em] text-violet-300">Mode Premium</p>
+                        <Crown className="h-3.5 w-3.5 text-amber-300" />
+                        <p className="text-[9px] font-black uppercase tracking-[0.16em] text-amber-300">Mode Premium</p>
                       </div>
                       <h2 className="mt-1 truncate text-sm font-black text-white">
                         {batchCaptureMode === "grouped" ? "Quadra Scan" : "Batch · Scan multiples"}
