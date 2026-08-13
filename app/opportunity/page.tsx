@@ -129,7 +129,7 @@ export default function OpportunityPage() {
       <>
         <Navbar />
 
-        <main className="min-h-screen bg-[#07090d] text-white pb-24">
+        <main className="kt-premium-shell min-h-screen pb-24 text-white">
           <div className="mx-auto w-full max-w-7xl space-y-5 px-4 py-5 sm:px-6 lg:px-8">
 
             <section className="rounded-2xl border border-white/[0.07] bg-[#151c25] p-5">
@@ -138,7 +138,7 @@ export default function OpportunityPage() {
               <div className="mt-2 h-4 w-full max-w-xl animate-pulse rounded bg-zinc-900" />
             </section>
 
-            <section className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+            <section className="grid grid-cols-3 gap-2.5">
               {Array.from({ length: 3 }).map((_, index) => (
                 <div
                   key={index}
@@ -178,26 +178,29 @@ export default function OpportunityPage() {
     <>
       <Navbar />
 
-      <main className="min-h-screen bg-[#07090d] text-white pb-24 selection:bg-cyan-500/10">
+      <main className="kt-premium-shell min-h-screen pb-28 text-white selection:bg-cyan-500/10">
         <div className="mx-auto w-full max-w-7xl space-y-6 px-4 py-5 sm:px-6 sm:py-6 lg:px-8">
 
           {/* HERO */}
-          <section className="relative overflow-hidden rounded-2xl border border-white/[0.07] bg-gradient-to-br from-[#11151d] via-[#0d1118] to-[#090b10] p-5 shadow-xl sm:rounded-3xl sm:p-7">
-            <div className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full bg-cyan-500/[0.06] blur-3xl" />
-            <div className="pointer-events-none absolute -bottom-24 left-1/3 h-64 w-64 rounded-full bg-emerald-500/[0.04] blur-3xl" />
+          <section className="relative overflow-hidden rounded-[22px] border border-cyan-400/25 bg-[#0a1118] p-5 shadow-[0_20px_52px_rgba(0,0,0,.27),0_0_34px_rgba(34,211,238,.045)] sm:p-6">
+            <div className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-cyan-400/[0.055] blur-3xl" />
+            <div className="pointer-events-none absolute bottom-0 left-1/3 h-px w-36 bg-cyan-300/55 shadow-[0_0_12px_rgba(34,211,238,.7)]" />
 
             <div className="relative">
-              <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/20 bg-cyan-500/10 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.11em] text-cyan-400">
+              <div className="inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/[0.06] px-3 py-1.5 text-[9px] font-black uppercase tracking-[0.13em] text-cyan-300">
                 <Sparkles className="h-3.5 w-3.5" />
-                Opportunity Engine V5
+                Market Intelligence
               </div>
 
-              <h1 className="mt-4 text-2xl font-black tracking-tight text-white sm:text-4xl">
-                Analyse des opportunités
+              <h1 className="mt-3 flex items-center gap-3 text-2xl font-black tracking-tight text-white sm:text-[30px]">
+                <span className="flex h-11 w-11 items-center justify-center rounded-[15px] border border-cyan-400/25 bg-cyan-400/[0.07] text-cyan-300">
+                  <Activity className="h-5 w-5" />
+                </span>
+                Opportunités
               </h1>
 
-              <p className="mt-2 max-w-2xl text-xs leading-5 text-zinc-100 sm:text-sm sm:leading-6">
-                Analyse les cartes de ta collection et de tes favoris avec les mêmes tendances que le Dashboard. Les cartes sans signal marché exploitable sont ignorées.
+              <p className="mt-2 max-w-2xl text-[11px] leading-5 text-zinc-300 sm:text-xs">
+                Classe les signaux exploitables de votre collection et de vos favoris selon leur recommandation et leur tendance.
               </p>
             </div>
           </section>
@@ -239,7 +242,7 @@ export default function OpportunityPage() {
 
 
           {/* LÉGENDE COULEURS */}
-          <section className="flex flex-wrap gap-2 rounded-2xl border border-white/[0.07] bg-white/[0.02] p-3 text-[10px] font-bold">
+          <section className="flex flex-wrap gap-2 rounded-[15px] border border-cyan-400/10 bg-[#0a1118] p-3 text-[9px] font-bold">
             <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-400/15 bg-emerald-400/[0.05] px-2.5 py-1 text-emerald-300"><span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />Achat / potentiel positif</span>
             <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-400/15 bg-amber-400/[0.05] px-2.5 py-1 text-amber-300"><span className="h-1.5 w-1.5 rounded-full bg-amber-400" />Sous observation</span>
             <span className="inline-flex items-center gap-1.5 rounded-full border border-rose-400/15 bg-rose-400/[0.05] px-2.5 py-1 text-rose-300"><span className="h-1.5 w-1.5 rounded-full bg-rose-400" />Vente / risque</span>
@@ -248,8 +251,8 @@ export default function OpportunityPage() {
 
           {/* ALERTES */}
           <section className="space-y-3">
-            <div className="flex items-center gap-2 border-b border-white/[0.07] pb-2">
-              <Bell className="h-4 w-4 text-cyan-400" />
+            <div className="flex items-center gap-2 rounded-[15px] border border-cyan-400/10 bg-[#0a1118] px-4 py-3">
+              <Bell className="h-4 w-4 text-cyan-300" />
 
               <div>
                 <h2 className="text-xs font-black uppercase tracking-widest text-white">
@@ -294,7 +297,7 @@ export default function OpportunityPage() {
                   return (
                     <div
                       key={`${alert.type}-${index}`}
-                      className={`rounded-2xl border p-3.5 sm:p-4 ${alertStyles}`}
+                      className={`rounded-[15px] border p-3.5 shadow-[0_12px_30px_rgba(0,0,0,.16)] sm:p-4 ${alertStyles}`}
                     >
                       <div className="flex items-start gap-3">
                         <div className="mt-0.5 shrink-0">
@@ -421,7 +424,7 @@ function SummaryCard({
 }) {
   return (
     <div
-      className={`rounded-2xl border p-4 sm:p-5 ${className}`}
+      className={`rounded-[16px] border p-3 shadow-[0_12px_30px_rgba(0,0,0,.18)] sm:p-4 ${className}`}
     >
       <div className="flex items-center gap-3">
         <div
@@ -481,7 +484,7 @@ function OpportunitySection({
 
         <div className="min-w-0">
           <h2
-            className={`text-xs font-black uppercase tracking-widest ${titleClass}`}
+            className={`text-[11px] font-black uppercase tracking-[0.12em] ${titleClass}`}
           >
             {title}
           </h2>
@@ -492,7 +495,7 @@ function OpportunitySection({
         </div>
       </div>
 
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3">
         {children}
       </div>
     </section>
@@ -522,16 +525,16 @@ function OpportunityCard({
 
   return (
     <article
-      className={`rounded-2xl border bg-[#151c25] p-4 transition-all duration-200 hover:border-white/[0.14] hover:bg-[#18202a] sm:p-5 ${borderClass}`}
+      className={`relative overflow-hidden rounded-[18px] border bg-[#0a1118] p-4 shadow-[0_16px_38px_rgba(0,0,0,.22)] transition duration-200 hover:-translate-y-0.5 hover:border-white/[0.16] hover:shadow-[0_20px_44px_rgba(0,0,0,.28)] sm:p-5 ${borderClass}`}
     >
       {/* NOM + SCORE */}
       <div className="flex items-start justify-between gap-3">
-        <h3 className="min-w-0 flex-1 break-words text-sm font-black uppercase leading-5 tracking-tight text-white">
+        <h3 className="min-w-0 flex-1 break-words text-[14px] font-black leading-5 tracking-tight text-white">
           {op.name}
         </h3>
 
         <span
-          className={`shrink-0 rounded-lg border px-2 py-1 text-[10px] font-black tracking-wider ${scoreClass}`}
+          className={`shrink-0 rounded-full border px-2.5 py-1 text-[10px] font-black tracking-wider ${scoreClass}`}
         >
           {op.score}/10
         </span>
