@@ -128,6 +128,50 @@ return {
 
 }, [alerts]);
 
+const getPremiumAlertInsight = (alert: PriceAlert) => {
+const magnitude = Math.abs(alert.changePercent);
+
+if (alert.type === "RISE") {
+  if (magnitude >= 100) {
+    return {
+      cause: "accélération exceptionnelle du prix, soutenue par un déséquilibre marqué entre offre et demande",
+      reading: "mouvement très puissant : la hausse peut rester soutenue, mais une correction rapide devient aussi plus probable",
+    };
+  }
+
+  if (magnitude >= 25) {
+    return {
+      cause: "progression nette des prix avec une pression acheteuse sensiblement plus forte",
+      reading: "tendance haussière solide à court terme, à confirmer sur les prochaines mises à jour du marché",
+    };
+  }
+
+  return {
+    cause: "demande en progression et prix récents orientés à la hausse",
+    reading: "dynamique positive, avec une hausse encore mesurée et potentiellement durable",
+  };
+}
+
+if (alert.type === "DROP") {
+  if (magnitude >= 25) {
+    return {
+      cause: "pression vendeuse importante et recul rapide des prix observés",
+      reading: "baisse marquée : mieux vaut attendre une stabilisation avant de considérer le mouvement comme terminé",
+    };
+  }
+
+  return {
+    cause: "offre plus présente et prix récents orientés à la baisse",
+    reading: "repli à surveiller : le marché peut encore chercher un nouveau niveau d’équilibre",
+  };
+}
+
+return {
+  cause: "prix revenu dans une zone plus attractive par rapport à sa dynamique récente",
+  reading: "signal intéressant, mais l’opportunité mérite encore une confirmation avant d’être considérée comme forte",
+};
+};
+
 const getAlertConfig = (type: PriceAlert["type"]) => {
 switch (type) {
 case "RISE":
@@ -332,7 +376,7 @@ return (
                   />
 
                   <div className="relative">
-                    <div className="flex items-start justify-between gap-4">
+                    <div className="grid grid-cols-[44px_minmax(0,1fr)_auto] items-center gap-3">
                       <div
                         className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl"
                         style={{
@@ -342,6 +386,10 @@ return (
                       >
                         <Icon className="h-5 w-5" />
                       </div>
+
+                      <h2 className="min-w-0 truncate text-center text-lg font-bold tracking-tight text-white">
+                        {alert.cardName}
+                      </h2>
 
                       <div
                         className="inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[11px] font-bold"
@@ -356,21 +404,15 @@ return (
                       </div>
                     </div>
 
-                    <div className="mt-5">
-                      <h2 className="text-lg font-bold tracking-tight text-white">
-                        {alert.cardName}
-                      </h2>
-
-                      <p className="mt-2 text-sm leading-6 text-zinc-400">
-                        {alert.message}
-                      </p>
-                    </div>
-
-                    <div className="mt-4 flex items-center justify-end border-t border-white/[0.06] pt-3">
+                    <div className="mt-3 flex justify-center">
                       <div className="text-lg font-bold" style={{ color: config.accent }}>
                         {alert.changePercent > 0 ? "+" : ""}{alert.changePercent.toFixed(2)}%
                       </div>
                     </div>
+
+                    <p className="mt-1.5 text-center text-sm leading-6 text-zinc-400">
+                      {alert.message}
+                    </p>
 
                     <div className="mt-3">
                       <button
@@ -387,12 +429,16 @@ return (
                         <ChevronDown className={`h-3.5 w-3.5 transition-transform ${premiumOpen[alert.cardId] ? "rotate-180" : ""}`} />
                       </button>
 
-                      {hasPremiumAccess && premiumOpen[alert.cardId] && (
-                        <div className="mt-2 space-y-1.5 rounded-xl border border-amber-400/10 bg-black/20 px-3 py-2.5 text-[11px]">
-                          <p className="text-zinc-300">🔎 Cause : <span className="font-bold text-white">{alert.type === "RISE" ? "demande + ventes en hausse" : alert.type === "DROP" ? "pression vendeuse + prix en baisse" : "repli du prix + zone d’achat"}</span></p>
-                          <p className="text-zinc-300">🧠 Lecture : <span className="font-bold text-white">{alert.type === "RISE" ? "hausse probablement durable" : alert.type === "DROP" ? "baisse à surveiller" : "opportunité à confirmer"}</span></p>
-                        </div>
-                      )}
+                      {hasPremiumAccess && premiumOpen[alert.cardId] && (() => {
+                        const premiumInsight = getPremiumAlertInsight(alert);
+
+                        return (
+                          <div className="mt-2 space-y-2 rounded-xl border border-amber-400/10 bg-black/20 px-3 py-2.5 text-[11px] leading-5">
+                            <p className="text-zinc-300">🔎 Cause : <span className="font-bold text-white">{premiumInsight.cause}</span></p>
+                            <p className="text-zinc-300">🧠 Lecture : <span className="font-bold text-white">{premiumInsight.reading}</span></p>
+                          </div>
+                        );
+                      })()}
                     </div>
                   </div>
                 </article>
