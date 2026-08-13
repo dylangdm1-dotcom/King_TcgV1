@@ -739,381 +739,415 @@ export default function ScannerPage() {
     <>
       <Navbar />
 
-      <main className="kt-premium-shell min-h-screen text-white pb-32 selection:bg-cyan-500/20">
-        <div className="mx-auto max-w-xl space-y-4 px-4 py-5">
-          {/* HEADER V5 */}
-          <section className="kt-premium-panel rounded-[18px] p-5 text-center flex flex-col items-center gap-4">
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-[10px] font-bold uppercase tracking-[0.11em]">
-              <Sparkles className="w-3 h-3" />
-              Vision IA
-            </div>
+      <main className="kt-premium-shell min-h-screen pb-32 text-white selection:bg-cyan-500/20">
+        <div className="mx-auto max-w-6xl space-y-5 px-4 py-5 sm:px-6">
 
-            <div>
-              <h1 className="text-lg font-black uppercase tracking-tight">
-                Scanner de Cartes
-              </h1>
-              <p className="text-[11px] text-zinc-100 mt-0.5">
-                Identifiez une carte puis ouvrez sa fiche marché complète.
-              </p>
-            </div>
+          {/* HERO */}
+          <section className="relative overflow-hidden rounded-[22px] border border-cyan-400/25 bg-[#0a1118] p-5 shadow-[0_20px_52px_rgba(0,0,0,.27),0_0_34px_rgba(34,211,238,.045)] sm:p-6">
+            <div className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-cyan-400/[0.055] blur-3xl" />
+            <div className="pointer-events-none absolute bottom-0 left-1/3 h-px w-36 bg-cyan-300/55 shadow-[0_0_12px_rgba(34,211,238,.7)]" />
 
-            {/* MODE SWITCH */}
-            <div className="w-full max-w-xs mt-1 space-y-2">
-              <div className="flex items-center gap-1.5 bg-black/45 p-1.5 rounded-2xl border border-white/[0.07] shadow-inner">
-                <button
-                  onClick={() => setScanMode("single")}
-                  className={`flex-1 py-2 rounded-lg text-[10px] font-bold uppercase tracking-[0.11em] transition-all flex items-center justify-center gap-1.5 ${
-                    scanMode === "single"
-                      ? "bg-cyan-500 text-black shadow-md shadow-cyan-500/20"
-                      : "text-zinc-100 hover:text-white"
-                  }`}
-                >
-                  <Zap className="w-3.5 h-3.5" />
-                  Mono
-                </button>
-
-                <button
-                  onClick={() => setPremiumModesOpen((open) => !open)}
-                  className={`flex-1 py-2 rounded-lg text-[10px] font-bold uppercase tracking-[0.11em] transition-all flex items-center justify-center gap-1.5 ${
-                    scanMode === "batch" || premiumModesOpen
-                      ? "border border-amber-400/30 bg-amber-400/10 text-amber-200 shadow-md shadow-amber-500/10"
-                      : "text-zinc-100 hover:text-white"
-                  }`}
-                >
-                  <Crown className="w-3.5 h-3.5 text-amber-300" />
-                  <span className="text-amber-300">Premium</span>
-                  {premiumModesOpen ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
-                </button>
-              </div>
-
-              <AnimatePresence initial={false}>
-                {premiumModesOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -6 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -6 }}
-                    transition={{ duration: 0.18 }}
-                    className="grid grid-cols-2 gap-2 rounded-2xl border border-violet-400/20 bg-violet-400/[0.05] p-2"
-                  >
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setScanMode("batch");
-                        setBatchCaptureMode("individual");
-                        setPremiumModesOpen(false);
-                        setStatus("Batch Premium : scannez jusqu’à 4 cartes à la suite.");
-                      }}
-                      className="rounded-xl border border-cyan-400/20 bg-cyan-400/[0.06] px-3 py-2.5 text-left transition-all hover:border-cyan-300/35"
-                    >
-                      <div className="flex items-center gap-1.5 text-cyan-300">
-                        <Layers className="h-4 w-4" />
-                        <span className="text-[10px] font-bold uppercase tracking-[0.11em]">Batch</span>
-                      </div>
-                      <p className="mt-1 text-[10px] leading-4 text-zinc-100">Jusqu’à 4 cartes scannées à la suite.</p>
-                    </button>
-
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setScanMode("batch");
-                        setBatchCaptureMode("grouped");
-                        setPremiumModesOpen(false);
-                        setStatus("Quadra Scan Premium : placez 4 cartes dans une seule photo.");
-                      }}
-                      className="rounded-xl border border-violet-400/25 bg-violet-400/[0.08] px-3 py-2.5 text-left transition-all hover:border-violet-300/40"
-                    >
-                      <div className="flex items-center gap-1.5 text-violet-300">
-                        <Grid2X2 className="h-4 w-4" />
-                        <span className="text-[10px] font-bold uppercase tracking-[0.11em]">Quadra Scan</span>
-                      </div>
-                      <p className="mt-1 text-[10px] leading-4 text-zinc-100">Jusqu’à 4 cartes sur une seule photo.</p>
-                    </button>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          </section>
-
-          <div className="kt-premium-panel rounded-[18px] px-4 py-3 flex items-center justify-between gap-3">
-            <div>
-              <p className="text-[10px] font-bold uppercase tracking-[0.11em] text-zinc-200">Quota scanner</p>
-              <p className="mt-0.5 text-xs font-black text-white">{quotaUsed} / {SCANNER_MONTHLY_LIMIT} sessions</p>
-              <p className="mt-0.5 text-[10px] text-zinc-200">Renouvellement le {quotaEnd ? new Date(quotaEnd).toLocaleDateString("fr-FR") : "5 du mois"}</p>
-            </div>
-            <PremiumBadge tone={quotaBlocked ? "amber" : "cyan"}>{Math.max(0, SCANNER_MONTHLY_LIMIT - quotaUsed)} restantes</PremiumBadge>
-          </div>
-
-          <section className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-            <PremiumCard className="p-4 text-left">
-              <div className="flex items-start gap-3">
-                <div className="rounded-xl bg-cyan-400/[0.08] p-2 text-cyan-300">
-                  <Camera className="h-4 w-4" />
-                </div>
-                <PremiumSectionHeading
-                  eyebrow="Prise en main"
-                  title={scanMode === "single" ? "Une carte, une fiche complète" : "Plusieurs cartes, une seule session"}
-                  description={scanMode === "single"
-                    ? "Cadrez une carte entière pour obtenir l’identification et ouvrir sa fiche marché."
-                    : "Choisissez une capture individuelle ou une photo groupée de quatre cartes."}
-                />
-              </div>
-            </PremiumCard>
-            <PremiumCard className="p-4 text-left">
-              <div className="flex items-start gap-3">
-                <div className="rounded-xl bg-violet-400/[0.08] p-2 text-violet-300">
-                  <Languages className="h-4 w-4" />
-                </div>
-                <PremiumSectionHeading
-                  eyebrow="Reconnaissance"
-                  title="FR / EN optimisées"
-                  description="Les cartes japonaises et chinoises sont détectées ; leur correspondance base continue de progresser."
-                />
-              </div>
-            </PremiumCard>
-          </section>
-
-          <AnimatePresence initial={false}>
-            {scanMode === "batch" && (
-              <motion.section
-                initial={{ opacity: 0, y: -8 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: 0.22 }}
-              >
-                <PremiumCard className="p-4">
-                  <div className="flex items-start justify-between gap-3">
-                    <div className="min-w-0">
-                      <div className="flex items-center gap-1.5">
-                        <Crown className="h-3.5 w-3.5 text-amber-300" />
-                        <p className="text-[10px] font-black uppercase tracking-[0.16em] text-amber-300">Mode Premium</p>
-                      </div>
-                      <h2 className="mt-1 truncate text-sm font-black text-white">
-                        {batchCaptureMode === "grouped" ? "Quadra Scan" : "Batch · Scan multiples"}
-                      </h2>
-                      <p className="mt-1 text-[10px] leading-4 text-zinc-100">
-                        {batchCaptureMode === "grouped"
-                          ? "Capturez jusqu’à 4 cartes sur une seule photo."
-                          : "Scannez jusqu’à 4 cartes à la suite dans la même session."}
-                      </p>
-                    </div>
-                    <div className="shrink-0 whitespace-nowrap"><PremiumBadge tone="violet">{batchList.length}/4</PremiumBadge></div>
-                  </div>
-
-                  {batchCaptureMode === "grouped" && (
-                    <div className="mt-3 space-y-3">
-                      <div className="rounded-2xl border border-violet-400/15 bg-violet-400/[0.05] p-3">
-                        <div className="flex items-center gap-2">
-                          <Languages className="h-4 w-4 text-violet-300" />
-                          <div>
-                            <p className="text-[10px] font-black uppercase tracking-[0.14em] text-violet-300">Langue des 4 cartes</p>
-                            <p className="mt-0.5 text-[10px] text-zinc-100">Les quatre cartes doivent être de la même langue pour cibler le bon catalogue.</p>
-                          </div>
-                        </div>
-                        <div className="mt-3 grid grid-cols-4 gap-1.5">
-                          {[
-                            ["fr", "FR"],
-                            ["en", "EN"],
-                            ["ja", "JP"],
-                            ["zh-tw", "CN"],
-                          ].map(([value, label]) => (
-                            <button
-                              key={value}
-                              type="button"
-                              onClick={() => {
-                                setGroupedLanguage(value as "fr" | "en" | "ja" | "zh-tw");
-                                setStatus(`Quad ${label} : placez jusqu’à 4 cartes ${label} dans les zones.`);
-                              }}
-                              className={`rounded-xl border px-2 py-2 text-[10px] font-black transition-all ${
-                                groupedLanguage === value
-                                  ? "border-violet-300/50 bg-violet-400/15 text-violet-200"
-                                  : "border-white/[0.08] bg-white/[0.035] text-zinc-100"
-                              }`}
-                            >
-                              {label}
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-                      <div className="rounded-2xl border border-amber-400/15 bg-amber-400/[0.06] px-3 py-2.5 text-[10px] leading-4 text-amber-100/80">
-                        Évitez les reflets, gardez les quatre cartes entièrement visibles et ne les superposez pas.
-                      </div>
-                    </div>
-                  )}
-                </PremiumCard>
-              </motion.section>
-            )}
-          </AnimatePresence>
-
-          {/* CAMERA */}
-          <div className="kt-scan-grid relative aspect-[9/16] overflow-hidden rounded-[24px] border border-cyan-400/15 bg-black shadow-[0_24px_70px_rgba(0,0,0,.55)]">
-            <ScannerCamera
-              ref={cameraRef}
-              onReady={handleCameraReady}
-              onCardsIdentified={handleCardsIdentified}
-              onCardIdentified={handleQuadCardIdentified}
-              identifyCardByImage={handleIdentifyCardByImage}
-            />
-
-            <ScannerOverlay
-              scanning={scanning}
-              hasResult={Boolean(detectedCard)}
-              statusText={status}
-              mode={scanMode === "batch" && batchCaptureMode === "grouped" ? "quad" : "single"}
-            />
-          </div>
-
-          {/* BUTTON SCAN */}
-          <button
-            onClick={handlePrimaryScan}
-            disabled={!ready || scanning}
-            className="w-full rounded-2xl bg-gradient-to-r from-cyan-400 to-cyan-500 py-4 text-sm font-black uppercase tracking-widest text-[#031014] disabled:opacity-40 transition-all hover:brightness-110 active:scale-[0.985] shadow-[0_14px_35px_rgba(34,211,238,.18)] flex items-center justify-center gap-2"
-          >
-            {scanning ? (
-              <><Loader2 className="h-4 w-4 animate-spin" /> Analyse en cours...</>
-            ) : scanMode === "single" ? (
-              <>Scanner & Consulter</>
-            ) : batchCaptureMode === "grouped" ? (
-              <><Grid2X2 className="h-4 w-4" /> Capturer les 4 cartes</>
-            ) : (
-              <><Images className="h-4 w-4" /> Ajouter cette carte</>
-            )}
-          </button>
-
-          {/* STATUS */}
-          <div className="kt-premium-panel rounded-[18px] p-4 text-center">
-            <span className="text-[10px] uppercase font-black tracking-widest text-zinc-200 block">
-              État du système
-            </span>
-            <p className="mt-1 text-xs font-bold text-cyan-300">{status}</p>
-            {scanning && (
-              <div className="mt-3 grid grid-cols-4 gap-1.5">
-                {["Photo", "Carte", "Match", "Prix"].map((step, index) => (
-                  <div key={step} className="rounded-lg border border-cyan-400/15 bg-cyan-400/[0.06] px-1.5 py-2 text-[10px] font-bold uppercase tracking-[0.11em] text-cyan-300 animate-pulse" style={{ animationDelay: `${index * 120}ms` }}>
-                    {step}
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* APERÇU CARTE DÉTECTÉE */}
-          {detectedCard && (
-            <div className="kt-premium-panel rounded-[18px] p-4 flex items-center justify-between animate-fadeIn">
-              <div>
-                <div className="text-xs font-black uppercase text-white">
-                  {detectedCard.name}
-                  {detectedCard.language
-                    ? ` (${detectedCard.language.toUpperCase()})`
-                    : ""}
-                </div>
-
-                <div className="text-[10px] text-zinc-100 flex items-center gap-2 mt-0.5 font-medium">
-                  {detectedCard.number && (
-                    <span>N° : {detectedCard.number}</span>
-                  )}
-                  {detectedCard.set && (
-                    <span>• {detectedCard.set}</span>
-                  )}
-                </div>
-              </div>
-
-              {detectedCard.confidence && (
-                <span className="text-[10px] font-black px-2 py-1 rounded-lg bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 tabular-nums">
-                  {Math.round(detectedCard.confidence * 100)}%
+            <div className="relative flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex items-center gap-4">
+                <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-[18px] border border-cyan-400/25 bg-cyan-400/[0.075] text-cyan-300 shadow-[0_0_26px_rgba(34,211,238,.07)]">
+                  <Camera className="h-7 w-7" />
                 </span>
-              )}
-            </div>
-          )}
+                <div>
+                  <div className="inline-flex items-center gap-1.5 rounded-full border border-cyan-400/20 bg-cyan-400/[0.06] px-2.5 py-1 text-[9px] font-black uppercase tracking-[0.14em] text-cyan-300">
+                    <Sparkles className="h-3 w-3" />
+                    Vision IA
+                  </div>
+                  <h1 className="mt-2 text-2xl font-black tracking-tight text-white sm:text-[28px]">
+                    Scanner
+                  </h1>
+                  <p className="mt-1 text-[11px] leading-5 text-zinc-300">
+                    Cadrez une carte, lancez l’analyse et ouvrez directement sa fiche King_TCG.
+                  </p>
+                </div>
+              </div>
 
-          {/* CONFIDENCE V5 */}
-          {scanData && (
-            <div className="kt-premium-panel rounded-[18px] p-4 space-y-3">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <ShieldCheck className="w-4 h-4 text-cyan-400" />
-                  <span className="text-xs font-black uppercase">
-                    Validation IA V5
+              <div className="flex min-w-[180px] items-center justify-between gap-3 rounded-[15px] border border-cyan-400/16 bg-cyan-400/[0.04] px-4 py-3">
+                <div>
+                  <p className="text-[8px] font-black uppercase tracking-[0.12em] text-zinc-400">
+                    Quota actuel
+                  </p>
+                  <p className="mt-1 text-sm font-black text-white">
+                    {quotaUsed} / {SCANNER_MONTHLY_LIMIT}
+                  </p>
+                </div>
+                <PremiumBadge tone={quotaBlocked ? "amber" : "cyan"}>
+                  {Math.max(0, SCANNER_MONTHLY_LIMIT - quotaUsed)} restantes
+                </PremiumBadge>
+              </div>
+            </div>
+          </section>
+
+          {/* MODES */}
+          <section className="grid grid-cols-3 gap-2 rounded-[18px] border border-white/[0.08] bg-[#0a1118] p-2 shadow-[0_14px_34px_rgba(0,0,0,.18)]">
+            <button
+              type="button"
+              onClick={() => {
+                setScanMode("single");
+                setStatus("Appuyez sur Scanner pour capturer et identifier votre carte");
+              }}
+              className={`flex min-w-0 flex-col items-center justify-center gap-1 rounded-[14px] border px-2 py-3 transition ${
+                scanMode === "single"
+                  ? "border-cyan-300/45 bg-cyan-400/[0.10] text-cyan-200 shadow-[0_0_20px_rgba(34,211,238,.055)]"
+                  : "border-transparent bg-white/[0.015] text-zinc-300 hover:border-white/[0.08]"
+              }`}
+            >
+              <Zap className="h-4 w-4" />
+              <span className="text-[10px] font-black uppercase tracking-[0.10em]">Mono</span>
+              <span className="hidden text-[8px] font-semibold text-zinc-500 sm:block">1 carte</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => {
+                setScanMode("batch");
+                setBatchCaptureMode("individual");
+                setPremiumModesOpen(false);
+                setStatus("Batch Premium : scannez jusqu’à 4 cartes à la suite.");
+              }}
+              className={`flex min-w-0 flex-col items-center justify-center gap-1 rounded-[14px] border px-2 py-3 transition ${
+                scanMode === "batch" && batchCaptureMode === "individual"
+                  ? "border-amber-300/40 bg-amber-400/[0.08] text-amber-200 shadow-[0_0_20px_rgba(245,196,81,.045)]"
+                  : "border-transparent bg-white/[0.015] text-zinc-300 hover:border-white/[0.08]"
+              }`}
+            >
+              <Layers className="h-4 w-4" />
+              <span className="text-[10px] font-black uppercase tracking-[0.10em]">Batch</span>
+              <span className="hidden text-[8px] font-semibold text-amber-300/70 sm:block">Premium · 4 cartes</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => {
+                setScanMode("batch");
+                setBatchCaptureMode("grouped");
+                setPremiumModesOpen(false);
+                setStatus("Quadra Scan Premium : placez 4 cartes dans une seule photo.");
+              }}
+              className={`flex min-w-0 flex-col items-center justify-center gap-1 rounded-[14px] border px-2 py-3 transition ${
+                scanMode === "batch" && batchCaptureMode === "grouped"
+                  ? "border-violet-300/40 bg-violet-400/[0.09] text-violet-200 shadow-[0_0_20px_rgba(167,139,250,.05)]"
+                  : "border-transparent bg-white/[0.015] text-zinc-300 hover:border-white/[0.08]"
+              }`}
+            >
+              <Grid2X2 className="h-4 w-4" />
+              <span className="text-[10px] font-black uppercase tracking-[0.10em]">Quadra</span>
+              <span className="hidden text-[8px] font-semibold text-violet-300/70 sm:block">Premium · 1 photo</span>
+            </button>
+          </section>
+
+          <div className="grid items-start gap-4 lg:grid-cols-[minmax(0,1fr)_340px]">
+            {/* CAMERA / ACTION */}
+            <section className="space-y-3">
+              {scanMode === "batch" && batchCaptureMode === "grouped" && (
+                <div className="rounded-[16px] border border-violet-400/18 bg-[#0a1118] p-3">
+                  <div className="flex items-center justify-between gap-3">
+                    <div className="flex min-w-0 items-center gap-2">
+                      <Languages className="h-4 w-4 shrink-0 text-violet-300" />
+                      <div>
+                        <p className="text-[9px] font-black uppercase tracking-[0.12em] text-violet-300">
+                          Langue du Quad
+                        </p>
+                        <p className="text-[9px] text-zinc-400">
+                          Les 4 cartes doivent utiliser le même catalogue.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="grid shrink-0 grid-cols-4 gap-1">
+                      {[
+                        ["fr", "FR"],
+                        ["en", "EN"],
+                        ["ja", "JP"],
+                        ["zh-tw", "CN"],
+                      ].map(([value, label]) => (
+                        <button
+                          key={value}
+                          type="button"
+                          onClick={() => {
+                            setGroupedLanguage(value as "fr" | "en" | "ja" | "zh-tw");
+                            setStatus(`Quad ${label} : placez jusqu’à 4 cartes ${label} dans les zones.`);
+                          }}
+                          className={`rounded-lg border px-2 py-1.5 text-[9px] font-black transition ${
+                            groupedLanguage === value
+                              ? "border-violet-300/45 bg-violet-400/[0.12] text-violet-200"
+                              : "border-white/[0.07] bg-white/[0.02] text-zinc-400"
+                          }`}
+                        >
+                          {label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              <div className="relative mx-auto aspect-[9/16] w-full max-w-xl overflow-hidden rounded-[24px] border border-cyan-400/22 bg-black shadow-[0_26px_70px_rgba(0,0,0,.58),0_0_30px_rgba(34,211,238,.035)]">
+                <div className="pointer-events-none absolute inset-x-16 top-0 z-20 h-px bg-cyan-300/70 shadow-[0_0_14px_rgba(34,211,238,.85)]" />
+
+                <ScannerCamera
+                  ref={cameraRef}
+                  onReady={handleCameraReady}
+                  onCardsIdentified={handleCardsIdentified}
+                  onCardIdentified={handleQuadCardIdentified}
+                  identifyCardByImage={handleIdentifyCardByImage}
+                />
+
+                <ScannerOverlay
+                  scanning={scanning}
+                  hasResult={Boolean(detectedCard)}
+                  statusText={status}
+                  mode={scanMode === "batch" && batchCaptureMode === "grouped" ? "quad" : "single"}
+                />
+              </div>
+
+              <button
+                onClick={handlePrimaryScan}
+                disabled={!ready || scanning}
+                className="flex w-full items-center justify-center gap-2 rounded-[16px] border border-cyan-300/35 bg-cyan-400 px-4 py-4 text-[11px] font-black uppercase tracking-[0.12em] text-[#031014] shadow-[0_14px_35px_rgba(34,211,238,.18)] transition hover:bg-cyan-300 active:scale-[0.99] disabled:opacity-40"
+              >
+                {scanning ? (
+                  <>
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                    Analyse en cours...
+                  </>
+                ) : scanMode === "single" ? (
+                  <>
+                    <Camera className="h-4 w-4" />
+                    Scanner & consulter
+                  </>
+                ) : batchCaptureMode === "grouped" ? (
+                  <>
+                    <Grid2X2 className="h-4 w-4" />
+                    Capturer les 4 cartes
+                  </>
+                ) : (
+                  <>
+                    <Images className="h-4 w-4" />
+                    Ajouter cette carte
+                  </>
+                )}
+              </button>
+            </section>
+
+            {/* SIDE PANEL */}
+            <aside className="space-y-3 lg:sticky lg:top-24">
+              <section className="rounded-[18px] border border-cyan-400/14 bg-[#0a1118] p-4 shadow-[0_16px_38px_rgba(0,0,0,.20)]">
+                <div className="flex items-center justify-between gap-3">
+                  <div>
+                    <p className="text-[9px] font-black uppercase tracking-[0.13em] text-cyan-300">
+                      État du système
+                    </p>
+                    <p className="mt-1 text-[11px] font-bold leading-5 text-white">
+                      {status}
+                    </p>
+                  </div>
+                  <span className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border ${
+                    scanning
+                      ? "border-cyan-400/25 bg-cyan-400/[0.07] text-cyan-300"
+                      : detectedCard
+                        ? "border-emerald-400/25 bg-emerald-400/[0.07] text-emerald-300"
+                        : "border-white/[0.08] bg-white/[0.025] text-zinc-400"
+                  }`}>
+                    {scanning ? (
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                    ) : detectedCard ? (
+                      <CheckCircle2 className="h-4 w-4" />
+                    ) : (
+                      <ShieldCheck className="h-4 w-4" />
+                    )}
                   </span>
                 </div>
-                <span className="text-[10px] font-black text-cyan-400">
-                  {Math.round(scanConfidence * 100)}%
-                </span>
-              </div>
 
-              <div className="h-1.5 bg-black rounded-full overflow-hidden">
-                <div
-                  className="h-full bg-cyan-500 transition-all"
-                  style={{
-                    width: `${Math.round(scanConfidence * 100)}%`,
-                  }}
-                />
-              </div>
+                {scanning && (
+                  <div className="mt-3 grid grid-cols-4 gap-1.5">
+                    {["Photo", "Carte", "Match", "Prix"].map((step, index) => (
+                      <div
+                        key={step}
+                        className="rounded-lg border border-cyan-400/15 bg-cyan-400/[0.05] px-1 py-2 text-center text-[8px] font-black uppercase tracking-[0.08em] text-cyan-300 animate-pulse"
+                        style={{ animationDelay: `${index * 120}ms` }}
+                      >
+                        {step}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </section>
 
-              {needsRetry && (
+              <section className="rounded-[18px] border border-white/[0.09] bg-[#0a1118] p-4">
+                <div className="flex items-center gap-2">
+                  <Camera className="h-4 w-4 text-cyan-300" />
+                  <div>
+                    <p className="text-[10px] font-black text-white">
+                      {scanMode === "single"
+                        ? "Mono · une carte"
+                        : batchCaptureMode === "grouped"
+                          ? "Quadra · quatre zones"
+                          : "Batch · session multiple"}
+                    </p>
+                    <p className="mt-0.5 text-[9px] leading-4 text-zinc-400">
+                      {scanMode === "single"
+                        ? "Cadrez entièrement la carte avant de lancer l’analyse."
+                        : batchCaptureMode === "grouped"
+                          ? "Gardez les quatre cartes visibles, nettes et non superposées."
+                          : "Ajoutez jusqu’à quatre cartes successivement dans la même session."}
+                    </p>
+                  </div>
+                </div>
+              </section>
+
+              <section className="rounded-[18px] border border-white/[0.09] bg-[#0a1118] p-4">
+                <div className="flex items-center justify-between gap-3">
+                  <div>
+                    <p className="text-[9px] font-black uppercase tracking-[0.12em] text-zinc-400">
+                      Renouvellement quota
+                    </p>
+                    <p className="mt-1 text-[11px] font-black text-white">
+                      {quotaEnd ? new Date(quotaEnd).toLocaleDateString("fr-FR") : "5 du mois"}
+                    </p>
+                  </div>
+                  <Crown className="h-5 w-5 text-amber-300" />
+                </div>
+              </section>
+
+              {detectedCard && (
+                <section className="rounded-[18px] border border-emerald-400/18 bg-emerald-400/[0.035] p-4 animate-fadeIn">
+                  <div className="flex items-center justify-between gap-3">
+                    <div className="min-w-0">
+                      <p className="text-[9px] font-black uppercase tracking-[0.12em] text-emerald-300">
+                        Carte détectée
+                      </p>
+                      <p className="mt-1 truncate text-[13px] font-black text-white">
+                        {detectedCard.name}
+                      </p>
+                      <p className="mt-1 truncate text-[9px] text-zinc-300">
+                        {detectedCard.number ? `N° ${detectedCard.number}` : "Numéro non lu"}
+                        {detectedCard.set ? ` · ${detectedCard.set}` : ""}
+                      </p>
+                    </div>
+
+                    {detectedCard.confidence && (
+                      <span className="rounded-full border border-emerald-400/25 bg-emerald-400/[0.07] px-2.5 py-1 text-[10px] font-black text-emerald-300">
+                        {Math.round(detectedCard.confidence * 100)}%
+                      </span>
+                    )}
+                  </div>
+                </section>
+              )}
+
+              {scanData && (
+                <section className="rounded-[18px] border border-cyan-400/15 bg-[#0a1118] p-4">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <ShieldCheck className="h-4 w-4 text-cyan-300" />
+                      <span className="text-[10px] font-black uppercase tracking-[0.11em] text-white">
+                        Confiance IA
+                      </span>
+                    </div>
+                    <span className="text-[11px] font-black text-cyan-300">
+                      {Math.round(scanConfidence * 100)}%
+                    </span>
+                  </div>
+
+                  <div className="mt-3 h-2 overflow-hidden rounded-full bg-black/50">
+                    <div
+                      className="h-full rounded-full bg-cyan-400 transition-all"
+                      style={{ width: `${Math.round(scanConfidence * 100)}%` }}
+                    />
+                  </div>
+
+                  {needsRetry && (
+                    <button
+                      onClick={scan}
+                      className="mt-3 flex w-full items-center justify-center gap-2 rounded-xl border border-cyan-400/20 bg-cyan-400/[0.06] py-2.5 text-[9px] font-black uppercase tracking-[0.10em] text-cyan-300"
+                    >
+                      <RefreshCw className="h-3.5 w-3.5" />
+                      Relancer l’analyse IA
+                    </button>
+                  )}
+                </section>
+              )}
+
+              {scanMode === "batch" && (
                 <button
-                  onClick={scan}
-                  className="w-full rounded-lg bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 py-2 text-[10px] font-black uppercase flex items-center justify-center gap-2"
+                  type="button"
+                  onClick={() => setIsDrawerOpen(true)}
+                  className="flex w-full items-center justify-between rounded-[18px] border border-amber-400/18 bg-amber-400/[0.04] px-4 py-3 text-left transition hover:border-amber-300/35"
                 >
-                  <RefreshCw className="w-3 h-3" />
-                  Relancer analyse IA
+                  <span className="flex items-center gap-3">
+                    <span className="flex h-9 w-9 items-center justify-center rounded-xl border border-amber-400/20 bg-amber-400/[0.07] text-amber-300">
+                      <Layers className="h-4 w-4" />
+                    </span>
+                    <span>
+                      <span className="block text-[10px] font-black text-white">
+                        Session Batch
+                      </span>
+                      <span className="mt-0.5 block text-[9px] text-zinc-400">
+                        {batchList.length}/{SCANNER_BATCH_LIMIT} cartes
+                      </span>
+                    </span>
+                  </span>
+                  <ChevronUp className="h-4 w-4 text-amber-300" />
                 </button>
               )}
-            </div>
-          )}
+            </aside>
+          </div>
         </div>
 
-        {/* =====================================================
-            DRAWER BATCH V5
-        ===================================================== */}
+        {/* DRAWER BATCH */}
         {scanMode === "batch" && (
           <div
-            className={`fixed bottom-0 left-0 right-0 z-50 bg-neutral-950 border-t border-zinc-800 transition-all duration-300 shadow-2xl ${
+            className={`fixed bottom-0 left-0 right-0 z-50 border-t border-cyan-400/14 bg-[#080d13]/98 shadow-[0_-18px_48px_rgba(0,0,0,.48)] backdrop-blur-2xl transition-all duration-300 ${
               isDrawerOpen ? "h-[65vh]" : "h-14"
             }`}
           >
             <button
               onClick={() => setIsDrawerOpen(!isDrawerOpen)}
-              className="w-full h-14 bg-neutral-900/90 border-b border-zinc-800 px-4 flex items-center justify-between text-xs font-black uppercase tracking-wider text-white"
+              className="flex h-14 w-full items-center justify-between border-b border-white/[0.07] bg-[#0a1118]/95 px-4 text-[10px] font-black uppercase tracking-[0.10em] text-white"
             >
               <div className="flex items-center gap-2">
-                <Layers className="w-4 h-4 text-cyan-400" />
-                <span>Session de Scan ({batchList.length}/{SCANNER_BATCH_LIMIT})</span>
+                <Layers className="h-4 w-4 text-cyan-300" />
+                <span>Session de scan ({batchList.length}/{SCANNER_BATCH_LIMIT})</span>
               </div>
 
               {isDrawerOpen ? (
-                <ChevronDown className="w-4 h-4 text-cyan-400" />
+                <ChevronDown className="h-4 w-4 text-cyan-300" />
               ) : (
-                <ChevronUp className="w-4 h-4" />
+                <ChevronUp className="h-4 w-4 text-cyan-300" />
               )}
             </button>
 
             {isDrawerOpen && (
-              <div className="p-4 h-[calc(65vh-3.5rem)] flex flex-col justify-between overflow-hidden">
+              <div className="flex h-[calc(65vh-3.5rem)] flex-col justify-between overflow-hidden p-4">
                 {batchList.length > 0 && (
-                  <div className="flex items-center justify-between mb-3 pb-2.5 border-b border-white/[0.08]">
+                  <div className="mb-3 flex items-center justify-between border-b border-white/[0.07] pb-3">
                     <button
                       onClick={exportBatch}
-                      className="text-[10px] font-bold uppercase tracking-[0.11em] text-cyan-400 bg-cyan-500/10 px-3 py-1.5 rounded-lg border border-cyan-500/20 flex items-center gap-1.5"
+                      className="flex items-center gap-1.5 rounded-lg border border-cyan-400/20 bg-cyan-400/[0.06] px-3 py-1.5 text-[9px] font-black uppercase tracking-[0.09em] text-cyan-300"
                     >
-                      <Download className="w-3.5 h-3.5" />
+                      <Download className="h-3.5 w-3.5" />
                       Exporter JSON
                     </button>
 
                     <button
                       onClick={clearBatch}
-                      className="text-[10px] font-bold uppercase tracking-[0.11em] text-red-400 bg-red-500/10 px-3 py-1.5 rounded-lg border border-red-500/20 flex items-center gap-1.5"
+                      className="flex items-center gap-1.5 rounded-lg border border-rose-400/20 bg-rose-400/[0.06] px-3 py-1.5 text-[9px] font-black uppercase tracking-[0.09em] text-rose-300"
                     >
-                      <Trash2 className="w-3.5 h-3.5" />
+                      <Trash2 className="h-3.5 w-3.5" />
                       Vider
                     </button>
                   </div>
                 )}
 
-                <div className="flex-1 overflow-y-auto space-y-2 pr-1">
+                <div className="flex-1 space-y-2 overflow-y-auto pr-1">
                   {batchList.length === 0 ? (
-                    <div className="h-full flex flex-col items-center justify-center text-center text-zinc-200 space-y-2">
-                      <Layers className="w-8 h-8 opacity-40" />
-                      <p className="text-xs uppercase font-bold">
+                    <div className="flex h-full flex-col items-center justify-center space-y-2 text-center text-zinc-500">
+                      <Layers className="h-8 w-8 opacity-50" />
+                      <p className="text-[10px] font-black uppercase tracking-[0.10em]">
                         Aucune carte scannée
                       </p>
                     </div>
@@ -1121,11 +1155,11 @@ export default function ScannerPage() {
                     batchList.map((item) => (
                       <div
                         key={item.id}
-                        className="flex items-center justify-between bg-neutral-900/60 border border-white/[0.08] rounded-xl p-2.5"
+                        className="flex items-center justify-between rounded-[14px] border border-white/[0.08] bg-[#0a1118] p-2.5"
                       >
-                        <div className="flex items-center gap-3">
+                        <div className="flex min-w-0 items-center gap-3">
                           {item.card.images?.small && (
-                            <div className="relative w-10 h-14 rounded-lg overflow-hidden bg-neutral-800 flex-shrink-0">
+                            <div className="relative h-14 w-10 shrink-0 overflow-hidden rounded-lg border border-white/[0.08] bg-black">
                               <Image
                                 src={item.card.images.small}
                                 alt={item.card.name}
@@ -1134,12 +1168,12 @@ export default function ScannerPage() {
                               />
                             </div>
                           )}
-                          <div>
-                            <h4 className="text-xs font-black uppercase text-white">
+                          <div className="min-w-0">
+                            <h4 className="truncate text-[11px] font-black text-white">
                               {item.card.name}
                             </h4>
-                            <p className="text-[10px] text-zinc-100">
-                              N° {item.card.number} • {item.card.set?.name}
+                            <p className="mt-0.5 truncate text-[9px] text-zinc-400">
+                              N° {item.card.number} · {item.card.set?.name}
                             </p>
                           </div>
                         </div>
@@ -1148,18 +1182,18 @@ export default function ScannerPage() {
                           <button
                             type="button"
                             onClick={() => router.push(`/card/${item.card.id}`)}
-                            className="p-2 text-cyan-400 hover:text-cyan-300 transition-colors"
+                            className="p-2 text-cyan-300 transition hover:text-cyan-200"
                             aria-label="Ouvrir la fiche"
                           >
-                            <ExternalLink className="w-4 h-4" />
+                            <ExternalLink className="h-4 w-4" />
                           </button>
                           <button
                             type="button"
                             onClick={() => removeBatchItem(item.id)}
-                            className="p-2 text-zinc-200 hover:text-red-400 transition-colors"
+                            className="p-2 text-zinc-400 transition hover:text-rose-300"
                             aria-label="Supprimer de la session"
                           >
-                            <Trash2 className="w-4 h-4" />
+                            <Trash2 className="h-4 w-4" />
                           </button>
                         </div>
                       </div>
