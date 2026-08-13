@@ -23,12 +23,10 @@ export default function ScannerOverlay({
   statusText,
   mode = "single",
 }: Props) {
-  const stateColor = hasResult
+  const stateColor = mode === "batch" || mode === "quad"
+    ? "border-amber-300 text-amber-200"
+    : hasResult
     ? "border-emerald-400 text-emerald-300"
-    : mode === "quad"
-    ? "border-violet-400 text-violet-300"
-    : mode === "batch"
-    ? "border-cyan-400 text-cyan-300"
     : scanning
     ? "border-cyan-400 text-cyan-300"
     : "border-cyan-300 text-cyan-200";
