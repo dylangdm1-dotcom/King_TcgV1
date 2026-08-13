@@ -45,7 +45,7 @@ const partners = [
 ];
 
 const metrics = [
-  { label: "Visiteurs", value: "44", detail: "Visiteurs", icon: Users },
+  { label: "Testeurs", value: "44", detail: "Testeurs", icon: Users },
   { label: "Pages vues", value: "4 085", detail: "Pages consultées", icon: Eye },
   { label: "Taux de rebond", value: "55 %", detail: "+55 %", icon: ShieldCheck },
 ];
@@ -64,28 +64,26 @@ export default function TesteursPage() {
             Retour aux paramètres
           </Link>
 
-          <header className="relative mt-4 overflow-hidden rounded-[18px] border border-white/[0.12] bg-[#0a1118] px-5 py-5 shadow-[0_16px_40px_rgba(0,0,0,.22)] sm:px-7 sm:py-6">
+          <header className="relative mt-4 overflow-hidden rounded-[18px] border border-white/[0.12] bg-[#0a1118] px-5 py-4 shadow-[0_16px_40px_rgba(0,0,0,.22)] sm:px-7 sm:py-5">
             <div className="pointer-events-none absolute bottom-0 left-1/2 h-px w-24 -translate-x-1/2 bg-cyan-300 shadow-[0_0_12px_rgba(34,211,238,.9)]" />
-            <div className="relative flex items-center gap-5">
-              <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-[12px] border border-cyan-400/45 bg-cyan-400/[0.05] text-cyan-300 sm:h-[70px] sm:w-[70px]">
-                <Users className="h-8 w-8" />
-              </span>
-              <div>
-                <h1 className="text-2xl font-black tracking-tight sm:text-[28px]">Partenaires & Testeurs</h1>
-                <p className="mt-1.5 text-[12px] leading-5 text-zinc-300 sm:text-[13px]">
-                  Découvrez les partenaires et testeurs qui accompagnent l’évolution de King_TCG.
-                </p>
+            <div className="relative">
+              <div className="flex items-center gap-2 text-cyan-300">
+                <Users className="h-5 w-5 shrink-0" />
+                <h1 className="text-lg font-black tracking-tight sm:text-xl">Partenaires & Testeurs</h1>
               </div>
+              <p className="mt-1.5 text-[12px] leading-5 text-zinc-300 sm:text-[13px]">
+                Découvrez les partenaires et testeurs qui accompagnent l’évolution de King_TCG.
+              </p>
             </div>
           </header>
 
           <section className="mt-5">
-            <h2 className="mb-3 text-lg font-black tracking-tight text-white sm:text-xl">Nos partenaires</h2>
+            <h2 className="mb-3 flex items-center gap-2 text-base font-black tracking-tight text-cyan-300 sm:text-lg"><BadgeCheck className="h-4 w-4" />Nos partenaires</h2>
             <div className="grid gap-3 lg:grid-cols-2">
               {partners.map((partner) => {
                 const green = partner.accent === "green";
                 return (
-                  <article key={partner.name} className="rounded-[15px] border border-white/[0.12] bg-[#0a1118] p-4 shadow-[0_16px_38px_rgba(0,0,0,.20)] sm:p-5">
+                  <article key={partner.name} className={`rounded-[15px] border bg-[#0a1118] p-4 shadow-[0_16px_38px_rgba(0,0,0,.20)] sm:p-5 ${green ? "border-emerald-400/55 shadow-[0_0_24px_rgba(52,211,153,.07)]" : "border-cyan-400/55 shadow-[0_0_24px_rgba(34,211,238,.07)]"}`}> 
                     <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
                       <div className={`mx-auto flex h-36 w-36 shrink-0 items-center justify-center overflow-hidden rounded-full border-2 bg-black p-1 sm:mx-0 ${green ? "border-emerald-400/70 shadow-[0_0_22px_rgba(52,211,153,.12)]" : "border-cyan-400/70 shadow-[0_0_22px_rgba(34,211,238,.12)]"}`}>
                         <img src={partner.logo} alt={`Logo ${partner.name}`} className="h-full w-full rounded-full object-cover" />
@@ -126,14 +124,14 @@ export default function TesteursPage() {
           </section>
 
           <section className="mt-4">
-            <h2 className="mb-2 text-lg font-black tracking-tight text-white">Indicateurs réels des tests effectués</h2>
+            <h2 className="mb-2 text-center text-lg font-black tracking-tight text-cyan-300">Indicateurs réels des tests effectués</h2>
             <div className="grid grid-cols-3 gap-3">
               {metrics.map(({ label, value, detail, icon: Icon }) => (
-                <div key={label} className="flex min-w-0 items-center gap-3 rounded-[14px] border border-white/[0.12] bg-[#0a1118] px-3 py-4 sm:px-4">
+                <div key={label} className="flex min-w-0 flex-col items-center justify-center gap-2 rounded-[14px] border border-white/[0.12] bg-[#0a1118] px-3 py-4 text-center sm:px-4">
                   <span className="hidden h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-cyan-400/25 bg-cyan-400/[0.05] text-cyan-300 sm:flex">
                     <Icon className="h-5 w-5" />
                   </span>
-                  <div className="min-w-0">
+                  <div className="min-w-0 text-center">
                     <p className="truncate text-[10px] font-semibold text-zinc-200 sm:text-[11px]">{label}</p>
                     <p className="mt-1 text-xl font-black leading-none text-cyan-300 sm:text-2xl">{value}</p>
                     <p className="mt-1 truncate text-[9px] text-zinc-400 sm:text-[10px]">{detail}</p>
