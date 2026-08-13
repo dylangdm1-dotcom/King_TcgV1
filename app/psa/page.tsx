@@ -316,36 +316,19 @@ export default function PSAPage() {
             </div>
           </section>
 
-          <section className="kt-premium-panel overflow-hidden rounded-[18px] p-2 sm:p-3">
-            <div className="grid gap-2 sm:grid-cols-3">
-              <div className="rounded-[14px] border border-white/[0.06] bg-black/15 p-3.5">
-                <div className="flex items-center gap-2.5">
-                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl border border-cyan-300/15 bg-cyan-400/[0.06] text-cyan-200">
-                    <Award className="h-4 w-4" />
-                  </div>
-                  <p className="text-[10px] font-black uppercase tracking-[0.12em] text-cyan-300">Collection gradée</p>
-                </div>
-                <p className="mt-2 text-[10px] leading-5 text-zinc-500">Centralisez certificats, grades et valeurs estimées.</p>
-              </div>
-
-              <div className="rounded-[14px] border border-white/[0.06] bg-black/15 p-3.5">
-                <div className="flex items-center gap-2.5">
-                  <div className="flex h-8 w-16 shrink-0 items-center justify-center rounded-xl border border-white/[0.08] bg-white px-1.5 py-1">
+          <section className="kt-premium-panel overflow-hidden rounded-[18px] p-3 sm:p-4">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <div className="min-w-0">
+                <div className="flex flex-wrap items-center gap-2.5">
+                  <div className="flex h-9 w-16 shrink-0 items-center justify-center rounded-xl border border-white/[0.08] bg-white px-1.5 py-1">
                     <img src="/marketplaces/pricecharting.png" alt="PriceCharting" className="h-full w-full object-contain" />
                   </div>
-                  <p className="text-[10px] font-black uppercase tracking-[0.12em] text-cyan-300">Prix PriceCharting</p>
-                </div>
-                <p className="mt-2 text-[10px] leading-5 text-zinc-500">Comparez les repères PSA disponibles avant un ajout.</p>
-              </div>
-
-              <div className="rounded-[14px] border border-white/[0.06] bg-black/15 p-3.5">
-                <div className="flex items-center gap-2.5">
-                  <div className="flex h-8 w-14 shrink-0 items-center justify-center rounded-xl border border-white/[0.08] bg-white px-1.5 py-1">
+                  <div className="flex h-9 w-14 shrink-0 items-center justify-center rounded-xl border border-white/[0.08] bg-white px-1.5 py-1">
                     <img src="/brands/psa.png" alt="PSA" className="h-full w-full object-contain" />
                   </div>
-                  <p className="text-[10px] font-black uppercase tracking-[0.12em] text-cyan-300">Estimation IA Grade</p>
                 </div>
-                <p className="mt-2 text-[10px] leading-5 text-zinc-500">Estimation visuelle assistée par IA, sans présenter une note non officielle comme garantie.</p>
+                <p className="mt-3 text-[10px] font-black uppercase tracking-[0.12em] text-cyan-300">Collection gradée · Prix PriceCharting · Estimation IA Grade</p>
+                <p className="mt-1.5 text-[10px] leading-5 text-zinc-500">Centralisez vos cartes gradées, comparez les repères de prix PriceCharting et obtenez une estimation visuelle assistée par IA.</p>
               </div>
             </div>
           </section>
@@ -383,9 +366,6 @@ export default function PSAPage() {
                 }`}
               >
                 <span className="flex items-center justify-center gap-1.5">
-                  {tab.id === "search" ? (
-                    <img src="/marketplaces/pricecharting.png" alt="" aria-hidden="true" className="h-4 w-8 rounded-sm bg-white object-contain px-0.5" />
-                  ) : null}
                   {tab.id === "estimation" ? (
                     <img src="/brands/psa.png" alt="" aria-hidden="true" className="h-4 w-8 rounded-sm bg-white object-contain px-0.5" />
                   ) : null}
