@@ -40,6 +40,12 @@ export interface PSASaleHistoryItem {
  */
 export interface PSAPrices {
   ungraded: number;
+  psa1: number;
+  psa2: number;
+  psa3: number;
+  psa4: number;
+  psa5: number;
+  psa6: number;
   psa7: number;
   psa8: number;
   psa9: number;
