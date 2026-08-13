@@ -2,6 +2,7 @@
 
 import { useMemo, useState, useEffect, useCallback, useRef } from "react";
 import { AnimatePresence, motion } from "motion/react";
+import Link from "next/link";
 import {
   Search,
   Package,
@@ -14,9 +15,11 @@ import {
   Sparkles,
   CalendarDays,
   ChevronDown,
+  ArrowRight,
+  Hash,
+  ImageOff,
 } from "lucide-react";
 import Navbar from "../../components/Navbar";
-import CardResult from "@/components/cards/CardResult";
 import SearchFilters from "../../components/SearchFilters";
 import {
   searchCards,
@@ -69,6 +72,136 @@ function getGeneration(set: SetItem): string {
 
 function yearLabel(date?: string) {
   return date?.slice(0, 4) || "—";
+}
+
+
+function SearchResultCard({ card }: { card: PokemonCard }) {
+  const imageCandidates = useMemo(
+    () =>
+      Array.from(
+        new Set(
+          [
+            card.images?.large,
+            card.images?.small,
+            ...(card.imageCandidates ?? []),
+          ].filter(Boolean)
+        )
+      ) as string[],
+    [card.images?.large, card.images?.small, card.imageCandidates]
+  );
+  const [imageIndex, setImageIndex] = useState(0);
+  const imageSrc = imageCandidates[imageIndex] || "";
+  const imageFailed = imageIndex >= imageCandidates.length || !imageSrc;
+
+  const variantCount = card.availablePrintVariants?.length || 0;
+  const setCode = card.set?.id?.toUpperCase() || "";
+  const releaseYear = yearLabel(card.set?.releaseDate);
+  const typeLabel =
+    card.types?.[0] ||
+    card.cardType ||
+    card.supertype ||
+    "Carte Pokémon";
+
+  return (
+    <article className="group relative flex h-full flex-col overflow-hidden rounded-[20px] border border-cyan-400/18 bg-[#0a1118] p-2.5 shadow-[0_18px_44px_rgba(0,0,0,.24)] transition duration-200 hover:-translate-y-1 hover:border-cyan-300/38 hover:shadow-[0_20px_48px_rgba(0,0,0,.30),0_0_24px_rgba(34,211,238,.055)]">
+      <div className="pointer-events-none absolute inset-x-8 top-2 h-20 rounded-full bg-cyan-400/[0.04] blur-2xl" />
+
+      <Link href={`/card/${card.id}`} className="relative block">
+        <div className="relative aspect-[0.72] overflow-hidden rounded-[16px] border border-white/[0.10] bg-[#0c151e]">
+          <div className="absolute left-2 top-2 z-20 flex max-w-[calc(100%-1rem)] flex-wrap gap-1.5">
+            {card.dataLanguage ? (
+              <span className="rounded-full border border-cyan-400/28 bg-[#061016]/90 px-2 py-1 text-[7px] font-black uppercase tracking-[0.10em] text-cyan-200 backdrop-blur">
+                {card.dataLanguage === "zh-tw" ? "CN" : card.dataLanguage.toUpperCase()}
+              </span>
+            ) : null}
+            {variantCount > 1 ? (
+              <span className="rounded-full border border-violet-400/25 bg-[#100c19]/90 px-2 py-1 text-[7px] font-black uppercase tracking-[0.10em] text-violet-200 backdrop-blur">
+                {variantCount} versions
+              </span>
+            ) : null}
+          </div>
+
+          {!imageFailed && imageSrc ? (
+            <img
+              src={imageSrc}
+              alt={card.name}
+              loading="lazy"
+              onError={() => setImageIndex((current) => current + 1)}
+              className="relative z-10 h-full w-full object-contain p-2.5 drop-shadow-[0_18px_20px_rgba(0,0,0,.46)] transition duration-300 group-hover:scale-[1.035]"
+            />
+          ) : (
+            <div className="flex h-full w-full flex-col items-center justify-center gap-2 px-4 text-center text-zinc-500">
+              <ImageOff className="h-7 w-7" />
+              <span className="text-[10px] font-bold leading-4">
+                Visuel indisponible
+              </span>
+            </div>
+          )}
+
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-16 bg-gradient-to-t from-[#061016]/75 to-transparent" />
+        </div>
+      </Link>
+
+      <div className="relative flex flex-1 flex-col px-1 pb-1 pt-3">
+        <div className="min-h-[48px]">
+          <div className="flex items-start justify-between gap-2">
+            <h2 className="line-clamp-2 text-[13px] font-black leading-[1.25] tracking-[-0.015em] text-white transition group-hover:text-cyan-100">
+              {card.name}
+            </h2>
+            <span className="shrink-0 rounded-md border border-white/[0.08] bg-white/[0.03] px-1.5 py-1 text-[7px] font-black uppercase tracking-[0.08em] text-zinc-400">
+              {setCode || "SET"}
+            </span>
+          </div>
+          <p className="mt-1 line-clamp-1 text-[9px] font-semibold text-zinc-400">
+            {card.set?.name}
+          </p>
+        </div>
+
+        <div className="mt-3 grid grid-cols-2 gap-1.5">
+          <div className="rounded-[11px] border border-cyan-400/12 bg-cyan-400/[0.035] px-2.5 py-2">
+            <p className="text-[7px] font-black uppercase tracking-[0.12em] text-zinc-500">
+              Numéro
+            </p>
+            <p className="mt-1 flex items-center gap-1 text-[9px] font-black text-cyan-200">
+              <Hash className="h-2.5 w-2.5" />
+              {card.number}
+            </p>
+          </div>
+
+          <div className="rounded-[11px] border border-white/[0.08] bg-white/[0.025] px-2.5 py-2">
+            <p className="text-[7px] font-black uppercase tracking-[0.12em] text-zinc-500">
+              Rareté
+            </p>
+            <p className="mt-1 truncate text-[9px] font-black text-white">
+              {card.rarity || "Standard"}
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-1.5 flex items-center justify-between gap-2 rounded-[11px] border border-white/[0.07] bg-[#0c151e] px-2.5 py-2">
+          <span className="min-w-0 truncate text-[8px] font-bold text-zinc-400">
+            {typeLabel}
+          </span>
+          <span className="shrink-0 text-[8px] font-black text-zinc-500">
+            {releaseYear}
+          </span>
+        </div>
+
+        <div className="mt-2.5 flex items-center justify-between gap-2 border-t border-white/[0.06] pt-2.5">
+          <span className="text-[8px] font-semibold text-zinc-500">
+            Prix dans la fiche
+          </span>
+          <Link
+            href={`/card/${card.id}`}
+            className="inline-flex items-center gap-1.5 rounded-[10px] border border-cyan-400/22 bg-cyan-400/[0.055] px-2.5 py-2 text-[8px] font-black uppercase tracking-[0.09em] text-cyan-200 transition hover:border-cyan-300/45 hover:bg-cyan-400/[0.09]"
+          >
+            Voir la carte
+            <ArrowRight className="h-3 w-3" />
+          </Link>
+        </div>
+      </div>
+    </article>
+  );
 }
 
 export default function Recherche() {
@@ -534,9 +667,9 @@ export default function Recherche() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.24, delay: Math.min(index, 10) * 0.018 }}
-                  className={viewMode === "large" ? "w-full max-w-md rounded-[20px] border border-cyan-400/10 bg-cyan-400/[0.018] p-1 shadow-[0_14px_34px_rgba(0,0,0,.16)]" : "w-full rounded-[20px] border border-cyan-400/10 bg-cyan-400/[0.018] p-1 shadow-[0_14px_34px_rgba(0,0,0,.16)]"}
+                  className={viewMode === "large" ? "w-full max-w-md" : "w-full"}
                 >
-                  <CardResult card={card} />
+                  <SearchResultCard card={card} />
                 </motion.div>
               ))}
             </motion.div>
