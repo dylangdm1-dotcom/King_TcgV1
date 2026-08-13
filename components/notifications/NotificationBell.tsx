@@ -3,8 +3,16 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "motion/react";
-import { Bell, BellRing, ChevronRight, Sparkles, TrendingUp, X } from "lucide-react";
-import { getFavorites, getCollection } from "@/lib/storage";
+import {
+  Bell,
+  BellRing,
+  ChevronRight,
+  Sparkles,
+  TrendingDown,
+  TrendingUp,
+  X,
+} from "lucide-react";
+import { getSignalSnapshot, refreshSignalSnapshotIfNeeded } from "@/lib/signalSnapshot";
 
 const READ_KEY = "king_tcg_notifications_last_read";
 
@@ -13,67 +21,84 @@ type NotificationItem = {
   title: string;
   description: string;
   href: string;
-  tone: "market" | "collection" | "system";
+  tone: "rise" | "drop" | "opportunity" | "system";
 };
 
 export default function NotificationBell() {
   const [open, setOpen] = useState(false);
   const [lastRead, setLastRead] = useState(0);
+  const [snapshotVersion, setSnapshotVersion] = useState(0);
   const panelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const stored = Number(localStorage.getItem(READ_KEY) || 0);
     setLastRead(Number.isFinite(stored) ? stored : 0);
+
+    const refresh = () => setSnapshotVersion((value) => value + 1);
+    window.addEventListener("king_tcg_signals_update", refresh);
+    window.addEventListener("king_tcg_update", refresh);
+    window.addEventListener("storage_favorites_update", refresh);
+
+    return () => {
+      window.removeEventListener("king_tcg_signals_update", refresh);
+      window.removeEventListener("king_tcg_update", refresh);
+      window.removeEventListener("storage_favorites_update", refresh);
+    };
   }, []);
 
+  const snapshot = useMemo(() => getSignalSnapshot(), [open, snapshotVersion]);
+
   const notifications = useMemo<NotificationItem[]>(() => {
-    if (typeof window === "undefined") return [];
-    const favorites = getFavorites();
-    const collection = getCollection();
-    const collectionCount = Object.keys(collection).length;
+    const items: NotificationItem[] = [];
 
-    const items: NotificationItem[] = [
-      {
-        id: "market-sync",
-        title: "Marché synchronisé",
-        description: "Les cotations visibles sont prêtes à être consultées.",
-        href: "/recherche",
-        tone: "market",
-      },
-    ];
-
-    if (favorites.length > 0) {
+    snapshot.alerts.slice(0, 4).forEach((alert) => {
+      const isRise = alert.type === "RISE";
+      const isDrop = alert.type === "DROP";
       items.push({
-        id: "favorites-watch",
-        title: `${favorites.length} favori${favorites.length > 1 ? "s" : ""} surveillé${favorites.length > 1 ? "s" : ""}`,
-        description: "Ouvrez votre watchlist pour vérifier les dernières opportunités.",
-        href: "/favoris",
-        tone: "market",
+        id: `alert-${alert.cardId}-${alert.type}`,
+        title: isRise
+          ? `Hausse · ${alert.cardName}`
+          : isDrop
+            ? `Baisse · ${alert.cardName}`
+            : `Opportunité · ${alert.cardName}`,
+        description: alert.message,
+        href: `/card/${encodeURIComponent(alert.cardId)}`,
+        tone: isRise ? "rise" : isDrop ? "drop" : "opportunity",
       });
-    }
-
-    if (collectionCount > 0) {
-      items.push({
-        id: "collection-review",
-        title: "Portefeuille à jour",
-        description: `${collectionCount} carte${collectionCount > 1 ? "s" : ""} unique${collectionCount > 1 ? "s" : ""} suivie${collectionCount > 1 ? "s" : ""} dans votre collection.`,
-        href: "/collection",
-        tone: "collection",
-      });
-    }
-
-    items.push({
-      id: "opportunities",
-      title: "Opportunités King_TCG",
-      description: "Consultez les cartes à fort potentiel détectées localement.",
-      href: "/opportunity",
-      tone: "system",
     });
 
-    return items;
-  }, [open]);
+    snapshot.opportunities
+      .filter((item) => item.recommendation === "BUY" || item.recommendation === "SELL")
+      .slice(0, 3)
+      .forEach((item) => {
+        items.push({
+          id: `op-${item.id}-${item.recommendation}`,
+          title: `${item.recommendation === "BUY" ? "Signal d'achat" : "Signal de vente"} · ${item.name}`,
+          description: `${item.currentPrice.toFixed(2)} € · tendance ${item.trend >= 0 ? "+" : ""}${item.trend.toFixed(2)} %`,
+          href: "/opportunity",
+          tone: item.recommendation === "BUY" ? "opportunity" : "drop",
+        });
+      });
 
-  const unread = lastRead === 0 ? notifications.length : 0;
+    if (items.length === 0) {
+      items.push({
+        id: "no-signal",
+        title: "Aucun signal majeur",
+        description:
+          snapshot.updatedAt > 0
+            ? "Les dernières analyses n'ont détecté aucune alerte exploitable."
+            : "Ouvre Alertes ou Opportunités pour lancer la première analyse du portefeuille.",
+        href: "/alerts",
+        tone: "system",
+      });
+    }
+
+    return items;
+  }, [snapshot]);
+
+  const unread = snapshot.updatedAt > lastRead && snapshot.updatedAt > 0
+    ? Math.min(notifications.length, 9)
+    : 0;
 
   function markRead() {
     const now = Date.now();
@@ -84,7 +109,12 @@ export default function NotificationBell() {
   function toggle() {
     setOpen((current) => {
       const next = !current;
-      if (next) markRead();
+      if (next) {
+        void refreshSignalSnapshotIfNeeded().finally(() => {
+          setSnapshotVersion((value) => value + 1);
+        });
+        markRead();
+      }
       return next;
     });
   }
@@ -99,7 +129,9 @@ export default function NotificationBell() {
       >
         {open ? <BellRing className="h-4 w-4 text-amber-300" /> : <Bell className="h-4 w-4" />}
         {unread > 0 ? (
-          <span className="absolute right-1.5 top-1.5 h-2 w-2 rounded-full bg-amber-400 shadow-[0_0_12px_rgba(251,191,36,.7)]" />
+          <span className="absolute right-1 top-0.5 flex min-h-4 min-w-4 items-center justify-center rounded-full bg-amber-400 px-1 text-[8px] font-black text-black shadow-[0_0_12px_rgba(251,191,36,.7)]">
+            {unread}
+          </span>
         ) : null}
       </button>
 
@@ -117,12 +149,12 @@ export default function NotificationBell() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -8, scale: 0.98 }}
               transition={{ duration: 0.2 }}
-              className="fixed inset-x-3 top-[72px] z-[80] overflow-hidden rounded-[22px] border border-cyan-100/25 bg-[#121821] shadow-[0_30px_90px_rgba(0,0,0,.82),0_0_0_1px_rgba(125,211,252,.08)] md:absolute md:inset-auto md:right-0 md:top-12 md:w-[360px]"
+              className="fixed inset-x-3 top-[72px] z-[80] overflow-hidden rounded-[22px] border border-cyan-100/25 bg-[#121821] shadow-[0_30px_90px_rgba(0,0,0,.82),0_0_0_1px_rgba(125,211,252,.08)] md:absolute md:inset-auto md:right-0 md:top-12 md:w-[380px]"
             >
               <div className="flex items-center justify-between border-b border-white/[0.07] px-4 py-3.5">
                 <div>
                   <p className="text-xs font-black uppercase tracking-[0.16em] text-white">Notifications</p>
-                  <p className="mt-0.5 text-[9px] font-medium text-zinc-500">Alertes, opportunités et activité locale</p>
+                  <p className="mt-0.5 text-[9px] font-medium text-zinc-500">Vrais signaux Alertes + Opportunités</p>
                 </div>
                 <button type="button" onClick={() => setOpen(false)} className="rounded-xl p-2 text-zinc-500 transition hover:bg-white/[0.05] hover:text-white">
                   <X className="h-4 w-4" />
@@ -131,12 +163,18 @@ export default function NotificationBell() {
 
               <div className="max-h-[65vh] space-y-2 overflow-y-auto p-3">
                 {notifications.map((item) => {
-                  const Icon = item.tone === "market" ? TrendingUp : Sparkles;
-                  const tone = item.tone === "market"
+                  const Icon = item.tone === "rise"
+                    ? TrendingUp
+                    : item.tone === "drop"
+                      ? TrendingDown
+                      : Sparkles;
+                  const tone = item.tone === "rise"
                     ? "border-emerald-400/15 bg-emerald-400/[0.05] text-emerald-300"
-                    : item.tone === "collection"
-                      ? "border-violet-400/15 bg-violet-400/[0.05] text-violet-300"
-                      : "border-amber-400/15 bg-amber-400/[0.05] text-amber-300";
+                    : item.tone === "drop"
+                      ? "border-rose-400/15 bg-rose-400/[0.05] text-rose-300"
+                      : item.tone === "opportunity"
+                        ? "border-amber-400/15 bg-amber-400/[0.05] text-amber-300"
+                        : "border-cyan-400/15 bg-cyan-400/[0.05] text-cyan-300";
 
                   return (
                     <Link
@@ -156,6 +194,11 @@ export default function NotificationBell() {
                     </Link>
                   );
                 })}
+              </div>
+
+              <div className="grid grid-cols-2 gap-2 border-t border-white/[0.07] p-3">
+                <Link href="/alerts" onClick={() => setOpen(false)} className="rounded-xl border border-white/[0.08] bg-white/[0.03] px-3 py-2 text-center text-[10px] font-bold text-zinc-300 hover:text-white">Toutes les alertes</Link>
+                <Link href="/opportunity" onClick={() => setOpen(false)} className="rounded-xl border border-white/[0.08] bg-white/[0.03] px-3 py-2 text-center text-[10px] font-bold text-zinc-300 hover:text-white">Opportunités</Link>
               </div>
             </motion.div>
           </>
