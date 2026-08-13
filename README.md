@@ -478,3 +478,39 @@ principal conservé à la racine.
 - PokéWallet 429/502 can therefore no longer break the JP catalogue path.
 - TCGdex remains JP primary; curated recent JP entries remain display-only until TCGdex exposes matching cards.
 - FR/EN and pricing engine unchanged.
+
+## Feuille de route finale King_TCG
+
+### 1. Quad Scanner
+- Terminer les ~25 % restants du Quad Scanner.
+- Améliorer la quatrième détection lorsque 3 cartes sur 4 sont correctement reconnues.
+- Améliorer le cadrage et la robustesse de la détection.
+- Conserver les résultats progressifs.
+- Ne pas casser les modes Mono et Batch.
+
+### 2. Finition finale
+- Vérifier le tri des catalogues JP / CN.
+- Faire une vérification globale des prix et historiques.
+- Valider le cache partagé des prix entre les différentes pages.
+- Effectuer les tests de non-régression.
+- Vérifier les performances et l'expérience mobile.
+- Préparer la version production.
+
+### 3. Activation des comptes
+- Activer les comptes Normal et Premium.
+- Prévoir un compte Administrateur.
+- Prévoir des comptes Testeurs avec Premium gratuit.
+- Mettre en place le stockage lié aux comptes / groupes.
+- Ajouter la connexion Google.
+- Ajouter la gestion de l'abonnement et du paiement Premium.
+
+### 4. Points complémentaires avant production
+- Vérifier les erreurs et états vides sur les parcours principaux.
+- Vérifier les quotas et protections Premium sur tous les modules concernés.
+- Vérifier la persistance des données après reconnexion / changement d'appareil une fois les comptes activés.
+- Prévoir les sauvegardes / migrations des données locales vers le stockage compte.
+- Faire une passe finale accessibilité, responsive et sécurité des routes sensibles.
+
+### Règle stricte pour les dernières versions
+Une seule zone fonctionnelle par version. Aucun refactoring transversal inutile.
+Les fondations déjà validées — FR / JP / CN, fiches cartes et prix — ne doivent plus être modifiées sauf nécessité directe liée à la zone travaillée.
