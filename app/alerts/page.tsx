@@ -11,6 +11,8 @@ Activity,
 ArrowUpRight,
 ArrowDownRight,
 Sparkles,
+ChevronDown,
+Crown,
 } from "lucide-react";
 
 import Navbar from "../../components/Navbar";
@@ -28,6 +30,9 @@ import { updateSignalSnapshot } from "../../lib/signalSnapshot";
 export default function AlertCenter() {
 const [alerts, setAlerts] = useState<PriceAlert[]>([]);
 const [loading, setLoading] = useState(true);
+const [premiumOpen, setPremiumOpen] = useState<Record<string, boolean>>({});
+// Mode test V96 : accès Premium forcé jusqu’au branchement des vrais comptes.
+const hasPremiumAccess = true;
 
 useEffect(() => {
 let cancelled = false;
@@ -361,26 +366,33 @@ return (
                       </p>
                     </div>
 
-                    <div className="mt-5 flex items-end justify-between border-t border-white/[0.06] pt-4">
-                      <div>
-                        <p className="text-[11px] uppercase tracking-wider text-zinc-500">
-                          Variation détectée
-                        </p>
-
-                        <p className="mt-1 text-xs text-zinc-500">
-                          Analyse Market V5
-                        </p>
+                    <div className="mt-4 flex items-center justify-end border-t border-white/[0.06] pt-3">
+                      <div className="text-lg font-bold" style={{ color: config.accent }}>
+                        {alert.changePercent > 0 ? "+" : ""}{alert.changePercent.toFixed(2)}%
                       </div>
+                    </div>
 
-                      <div
-                        className="text-xl font-bold"
-                        style={{
-                          color: config.accent,
-                        }}
+                    <div className="mt-3">
+                      <button
+                        type="button"
+                        onClick={() => hasPremiumAccess && setPremiumOpen((current) => ({ ...current, [alert.cardId]: !current[alert.cardId] }))}
+                        aria-expanded={hasPremiumAccess ? Boolean(premiumOpen[alert.cardId]) : false}
+                        className={`flex w-full items-center justify-between rounded-xl border px-3 py-2 text-[10px] font-black uppercase tracking-wider transition ${
+                          hasPremiumAccess
+                            ? "border-amber-400/20 bg-amber-400/[0.05] text-amber-300 hover:bg-amber-400/[0.09]"
+                            : "cursor-not-allowed border-white/[0.06] bg-white/[0.02] text-zinc-500"
+                        }`}
                       >
-                        {alert.changePercent > 0 ? "+" : ""}
-                        {alert.changePercent.toFixed(2)}%
-                      </div>
+                        <span className="flex items-center gap-2"><Crown className="h-3.5 w-3.5" /> Analyse Premium</span>
+                        <ChevronDown className={`h-3.5 w-3.5 transition-transform ${premiumOpen[alert.cardId] ? "rotate-180" : ""}`} />
+                      </button>
+
+                      {hasPremiumAccess && premiumOpen[alert.cardId] && (
+                        <div className="mt-2 space-y-1.5 rounded-xl border border-amber-400/10 bg-black/20 px-3 py-2.5 text-[11px]">
+                          <p className="text-zinc-300">🔎 Cause : <span className="font-bold text-white">{alert.type === "RISE" ? "demande + ventes en hausse" : alert.type === "DROP" ? "pression vendeuse + prix en baisse" : "repli du prix + zone d’achat"}</span></p>
+                          <p className="text-zinc-300">🧠 Lecture : <span className="font-bold text-white">{alert.type === "RISE" ? "hausse probablement durable" : alert.type === "DROP" ? "baisse à surveiller" : "opportunité à confirmer"}</span></p>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </article>
