@@ -278,16 +278,18 @@ export default function PSAPage() {
         <div className="mx-auto max-w-6xl px-4 py-6 space-y-6">
 
           {/* HEADER */}
-          <section className="rounded-[18px] border border-cyan-200/35 bg-[linear-gradient(145deg,rgba(22,27,35,.98),rgba(12,16,22,.98))] p-4 shadow-[0_18px_48px_rgba(0,0,0,.34),0_0_0_1px_rgba(255,255,255,.025)] sm:p-5">
+          <section className="relative overflow-hidden rounded-[22px] border border-cyan-400/25 bg-[#0a1118] p-5 shadow-[0_20px_52px_rgba(0,0,0,.27),0_0_34px_rgba(34,211,238,.045)] sm:p-6">
+            <div className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-cyan-400/[0.055] blur-3xl" />
+            <div className="pointer-events-none absolute bottom-0 left-1/3 h-px w-36 bg-cyan-300/55 shadow-[0_0_12px_rgba(34,211,238,.7)]" />
             <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
               <div className="flex min-w-0 items-center gap-3">
-                <div className="flex h-11 w-16 shrink-0 items-center justify-center rounded-2xl border border-cyan-200/40 bg-white p-1.5 shadow-[0_0_26px_rgba(34,211,238,.12)]">
+                <div className="flex h-14 w-20 shrink-0 items-center justify-center rounded-[17px] border border-cyan-400/28 bg-white p-2 shadow-[0_0_28px_rgba(34,211,238,.09)]">
                   <img src="/brands/psa.png" alt="PSA" className="h-full w-full object-contain" />
                 </div>
                 <div className="min-w-0">
                   <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
-                    <h1 className="text-base font-black uppercase text-white sm:text-lg">Collection PSA</h1>
-                    <span className="self-center whitespace-nowrap rounded-full border border-violet-300/20 bg-violet-400/[0.08] px-2 py-1 text-[10px] font-bold uppercase tracking-[0.11em] text-violet-200">Pokémon TCG</span>
+                    <h1 className="text-2xl font-black tracking-tight text-white sm:text-[28px]">Espace PSA</h1>
+                    <span className="self-center whitespace-nowrap rounded-full border border-cyan-400/20 bg-cyan-400/[0.06] px-2 py-1 text-[9px] font-black uppercase tracking-[0.11em] text-cyan-300">Pokémon TCG</span>
                   </div>
                   <p className="mt-1 max-w-2xl text-[10px] leading-4 text-zinc-100 sm:text-[11px]">
                     Suivez certificats, prix d'achat, valeur estimée et plus-value de vos cartes gradées.
@@ -316,9 +318,9 @@ export default function PSAPage() {
             </div>
           </section>
 
-          <section className="kt-premium-panel overflow-hidden rounded-[18px] p-3 sm:p-4">
+          <section className="overflow-hidden rounded-[18px] border border-white/[0.09] bg-[#0a1118] p-3 shadow-[0_14px_34px_rgba(0,0,0,.18)] sm:p-4">
             <div className="grid gap-2.5 md:grid-cols-3">
-              <div className="rounded-2xl border border-white/[0.08] bg-white/[0.035] p-3">
+              <div className="rounded-[15px] border border-cyan-400/13 bg-cyan-400/[0.03] p-3">
                 <div className="flex items-center gap-2">
                   <Award className="h-4 w-4 text-cyan-300" />
                   <p className="text-[11px] font-black uppercase tracking-[0.12em] text-cyan-300">
@@ -330,7 +332,7 @@ export default function PSAPage() {
                 </p>
               </div>
 
-              <div className="rounded-2xl border border-white/[0.08] bg-white/[0.035] p-3">
+              <div className="rounded-[15px] border border-cyan-400/13 bg-cyan-400/[0.03] p-3">
                 <div className="flex items-center gap-2">
                   <div className="flex h-7 w-12 shrink-0 items-center justify-center rounded-lg border border-white/[0.08] bg-white px-1 py-0.5">
                     <img
@@ -348,7 +350,7 @@ export default function PSAPage() {
                 </p>
               </div>
 
-              <div className="rounded-2xl border border-white/[0.08] bg-white/[0.035] p-3">
+              <div className="rounded-[15px] border border-cyan-400/13 bg-cyan-400/[0.03] p-3">
                 <div className="flex items-center gap-2">
                   <div className="flex h-7 w-11 shrink-0 items-center justify-center rounded-lg border border-white/[0.08] bg-white px-1 py-0.5">
                     <img
@@ -369,7 +371,7 @@ export default function PSAPage() {
           </section>
 
           {/* NAVIGATION */}
-          <div className="kt-premium-panel grid grid-cols-3 gap-1.5 rounded-[18px] p-1.5">
+          <div className="grid grid-cols-3 gap-1.5 rounded-[18px] border border-cyan-400/12 bg-[#0a1118] p-1.5 shadow-[0_14px_34px_rgba(0,0,0,.18)]">
             {[
               {
                 id: "collection",
@@ -396,8 +398,8 @@ export default function PSAPage() {
                 }
                 className={`flex-1 py-2.5 rounded-xl text-xs font-black uppercase transition ${
                   activeTab === tab.id
-                    ? "bg-cyan-400 text-black shadow-[0_8px_24px_rgba(34,211,238,0.18)]"
-                    : "text-zinc-200 hover:bg-white/[0.04] hover:text-white"
+                    ? "border border-cyan-300/40 bg-cyan-400/[0.11] text-cyan-200 shadow-[0_0_20px_rgba(34,211,238,.06)]"
+                    : "border border-transparent text-zinc-300 hover:bg-white/[0.03] hover:text-white"
                 }`}
               >
                 <span className="flex items-center justify-center gap-1.5">
@@ -430,7 +432,7 @@ export default function PSAPage() {
                     onChange={(e) =>
                       setCollectionSearch(e.target.value)
                     }
-                    className="w-full rounded-2xl border border-white/[0.08] bg-white/[0.04] px-4 py-3 text-xs text-white outline-none transition focus:border-cyan-400/50 focus:bg-black/40"
+                    className="w-full rounded-[15px] border border-cyan-400/15 bg-[#0a1118] px-4 py-3 text-xs text-white outline-none transition placeholder:text-zinc-500 focus:border-cyan-300/45"
                   />
                 </div>
 
@@ -445,7 +447,7 @@ export default function PSAPage() {
                           ) as PSAGrade)
                     )
                   }
-                  className="rounded-2xl border border-white/[0.08] bg-white/[0.04] px-4 py-3 text-xs text-white outline-none transition focus:border-cyan-400/50"
+                  className="rounded-[15px] border border-cyan-400/15 bg-[#0a1118] px-4 py-3 text-xs text-white outline-none transition focus:border-cyan-300/45"
                 >
                   <option value="all">
                     Tous les grades
@@ -482,7 +484,7 @@ export default function PSAPage() {
                   {filteredCollection.map((card) => (
                     <article
                       key={card.id}
-                      className="group relative min-w-0 overflow-hidden rounded-[18px] border border-white/[0.09] bg-[linear-gradient(145deg,rgba(27,32,41,.96),rgba(17,21,28,.96))] p-3 shadow-[0_14px_36px_rgba(0,0,0,.24)] transition hover:border-cyan-200/20"
+                      className="group relative min-w-0 overflow-hidden rounded-[18px] border border-cyan-400/14 bg-[#0a1118] p-3 shadow-[0_16px_38px_rgba(0,0,0,.22)] transition duration-200 hover:-translate-y-0.5 hover:border-cyan-300/30 hover:shadow-[0_20px_44px_rgba(0,0,0,.28)]"
                     >
                       <div className="flex min-w-0 items-start gap-3 sm:gap-4">
                         <div className="shrink-0">
@@ -553,7 +555,7 @@ export default function PSAPage() {
           {activeTab === "search" && (
             <section className="space-y-6">
 
-              <div className="kt-premium-panel rounded-[18px] p-4 sm:p-5 space-y-4">
+              <div className="space-y-4 rounded-[18px] border border-cyan-400/13 bg-[#0a1118] p-4 shadow-[0_16px_38px_rgba(0,0,0,.20)] sm:p-5">
                 <div>
                   <h2 className="text-sm font-black uppercase">
                     Recherche Prix Pokémon TCG
@@ -1112,4 +1114,3 @@ function StatCard({ title, value, icon, tone }: { title: string; value: string |
     </div>
   );
 }
-
