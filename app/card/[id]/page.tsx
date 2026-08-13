@@ -331,10 +331,13 @@ export default function CardPage() {
       <Navbar />
 
       <main className="kt-app-shell pb-32 text-white selection:bg-cyan-500/20">
-        <div className="kt-grid-glow pointer-events-none fixed inset-0 opacity-40" />
-        <div className="relative mx-auto max-w-7xl space-y-5 px-4 py-5 sm:space-y-6 sm:px-6 sm:py-6 lg:px-8">
-          <div className="flex items-center justify-between">
+        <div className="kt-grid-glow pointer-events-none fixed inset-0 opacity-30" />
+        <div className="relative mx-auto max-w-7xl space-y-4 px-4 py-5 sm:px-6 sm:py-6 lg:px-8">
+          <div className="flex items-center justify-between gap-4">
             <BackButton />
+            <span className="hidden rounded-full border border-cyan-400/15 bg-cyan-400/[0.045] px-3 py-1.5 text-[9px] font-black uppercase tracking-[0.12em] text-cyan-300 sm:inline-flex">
+              Détails de la carte
+            </span>
           </div>
 
           {isLoadingMarket ? (
@@ -344,140 +347,130 @@ export default function CardPage() {
             </div>
           ) : null}
 
-          {/* Section Vitrine de la Carte */}
-          <section className="kt-premium-card kt-rise-in overflow-hidden p-4 sm:p-5 lg:p-6">
-            <div className="relative z-10 space-y-6">
-              <CardHero
-                image={
-                  card.images?.large || card.images?.small || "/placeholder.png"
-                }
-                name={card.name}
-                set={card.set?.name || "Extension inconnue"}
-                number={card.number}
-                rarity={card.rarity || "N/A"}
-              />
-              <div className="grid grid-cols-1 gap-4 border-t border-white/[0.06] pt-6 sm:grid-cols-2">
-                <CardActions cardId={card.id} />
-                <CardPortfolio
-                  card={card}
-                  currentValue={market?.average || 0}
-                  onPrintingVariantChange={changePrintingVariant}
+          <section className="relative overflow-hidden rounded-[24px] border border-cyan-400/20 bg-[#091018] p-4 shadow-[0_22px_65px_rgba(0,0,0,.30),0_0_38px_rgba(34,211,238,.04)] sm:p-5 lg:p-6">
+            <div className="pointer-events-none absolute -right-24 -top-28 h-72 w-72 rounded-full bg-cyan-400/[0.045] blur-3xl" />
+            <div className="relative grid gap-5 xl:grid-cols-[.92fr_1.08fr]">
+              <div className="space-y-4">
+                <CardHero
+                  image={card.images?.large || card.images?.small || "/placeholder.png"}
+                  imageCandidates={card.imageCandidates || []}
+                  name={card.name}
+                  set={card.set?.name || "Extension inconnue"}
+                  number={card.number}
+                  rarity={card.rarity || "N/A"}
+                  price={market?.average || 0}
+                  score={score}
+                  trend={trend}
+                  recommendation={recommendation}
                 />
+
+                <div className="rounded-[18px] border border-white/[0.08] bg-[#0b131b] p-4">
+                  <CardActions cardId={card.id} />
+                </div>
+
+                <div className="rounded-[18px] border border-cyan-400/12 bg-[#0b131b] p-4">
+                  <CardPortfolio
+                    card={card}
+                    currentValue={market?.average || 0}
+                    onPrintingVariantChange={changePrintingVariant}
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <section className="rounded-[20px] border border-cyan-400/16 bg-[#0b131b] p-4 sm:p-5">
+                  <MarketPanel
+                    cardmarket={market?.cardmarket}
+                    cardmarketEurope={market?.cardmarketEurope}
+                    ebay={market?.ebay}
+                    tcgplayer={market?.tcgplayer}
+                    justtcg={market?.justtcg}
+                    average={market?.average || 0}
+                    spread={spread}
+                    quotes={card.marketQuotes || []}
+                    language={card.dataLanguage || "en"}
+                    onRefresh={refreshPrice}
+                  />
+                </section>
+
+                <section className="rounded-[20px] border border-cyan-400/14 bg-[#0b131b] p-4 sm:p-5">
+                  <PriceStats
+                    current={priceInfo.current}
+                    lowest={priceInfo.lowest}
+                    highest={priceInfo.highest}
+                    variation={priceInfo.variation}
+                    opportunity={priceInfo.opportunity}
+                    kingTcgPrice={market?.average || 0}
+                    frenchMode={card.dataLanguage === "fr"}
+                  />
+                </section>
               </div>
             </div>
           </section>
 
-          <section className="rounded-2xl border border-white/[0.08] bg-[#18202a] px-4 py-3.5 sm:px-5">
-            <p className="text-[11px] font-medium leading-5 text-zinc-100">
-              <span className="font-black text-white">Comprendre cette fiche :</span>{" "}
-              les prix ci-dessous correspondent aux sources actuellement disponibles en état de référence Near Mint. La moyenne utilise uniquement les sources réellement trouvées ; une source absente n’est jamais remplacée par un prix inventé.
+          <section className="rounded-[16px] border border-white/[0.08] bg-[#0a1118] px-4 py-3.5 sm:px-5">
+            <p className="text-[10px] font-medium leading-5 text-zinc-300">
+              <span className="font-black text-cyan-300">Lecture des cotations :</span>{" "}
+              les prix utilisent uniquement les sources réellement disponibles pour cette impression. Une source absente n’est jamais remplacée par une valeur inventée.
             </p>
           </section>
 
-          {/* Grille de Données Marché & Statistiques */}
-          <div className="grid grid-cols-1 gap-5 lg:grid-cols-[1.18fr_.82fr]">
-            <div className="kt-premium-card p-4 sm:p-5">
-              <MarketPanel
-                cardmarket={market?.cardmarket}
-                cardmarketEurope={market?.cardmarketEurope}
-                ebay={market?.ebay}
-                tcgplayer={market?.tcgplayer}
-                justtcg={market?.justtcg}
-                average={market?.average || 0}
-                spread={spread}
-                quotes={card.marketQuotes || []}
-                language={card.dataLanguage || "en"}
-                onRefresh={refreshPrice}
-              />
-            </div>
+          <div className="grid gap-4 xl:grid-cols-[.8fr_1.2fr]">
+            <section className="rounded-[20px] border border-cyan-400/14 bg-[#0a1118] p-4 sm:p-5">
+              <div className="flex items-start gap-3">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-cyan-400/20 bg-cyan-400/[0.06]">
+                  <Zap className="h-4 w-4 text-cyan-300" />
+                </div>
+                <div className="min-w-0">
+                  <h2 className="text-[12px] font-black uppercase tracking-[0.10em] text-white">Analyse & opportunité</h2>
+                  <p className="mt-1 text-[10px] leading-4 text-zinc-400">Tendance, score et recommandation King_TCG.</p>
+                </div>
+              </div>
 
-            <div className="kt-premium-card p-4 sm:p-5">
-              <PriceStats
-                current={priceInfo.current}
-                lowest={priceInfo.lowest}
-                highest={priceInfo.highest}
-                variation={priceInfo.variation}
-                opportunity={priceInfo.opportunity}
-                kingTcgPrice={market?.average || 0}
-                frenchMode={card.dataLanguage === "fr"}
+              <div className="mt-4 grid grid-cols-2 gap-2">
+                <div className="rounded-[14px] border border-white/[0.08] bg-[#0c151e] p-3">
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="text-[9px] font-black uppercase tracking-[0.10em] text-zinc-400">Tendance</span>
+                    <TrendingUp className="h-4 w-4 text-cyan-300" />
+                  </div>
+                  <p className={`mt-2 text-lg font-black ${trend === "up" ? "text-emerald-300" : trend === "down" ? "text-rose-300" : "text-white"}`}>
+                    {trend === "up" ? "Hausse" : trend === "down" ? "Baisse" : "Stable"}
+                  </p>
+                </div>
+
+                <div className="rounded-[14px] border border-white/[0.08] bg-[#0c151e] p-3">
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="text-[9px] font-black uppercase tracking-[0.10em] text-zinc-400">Score IA</span>
+                    <Zap className="h-4 w-4 text-cyan-300" />
+                  </div>
+                  <p className="mt-2 text-lg font-black text-white tabular-nums">{score}<span className="text-[11px] text-zinc-400"> / 10</span></p>
+                </div>
+
+                <div className="col-span-2 rounded-[14px] border border-cyan-400/12 bg-cyan-400/[0.035] px-3 py-3">
+                  <div className="flex items-center justify-between gap-3">
+                    <span className="text-[9px] font-black uppercase tracking-[0.10em] text-cyan-300">Conseil d’arbitrage</span>
+                    <HelpCircle className="h-4 w-4 text-cyan-300" />
+                  </div>
+                  <p className="mt-1.5 text-[10px] font-semibold leading-4 text-zinc-200">{recommendation}</p>
+                </div>
+              </div>
+            </section>
+
+            <section className="rounded-[20px] border border-cyan-400/14 bg-[#0a1118] p-4 sm:p-5">
+              <PredictionPanel
+                predictedPrice30d={prediction.predictedPrice30d}
+                roi30d={prediction.roi30d}
+                confidence={prediction.confidence}
               />
-            </div>
+            </section>
           </div>
 
-          {/* Section Analyse Investissement */}
-          <section className="kt-premium-card space-y-3 overflow-hidden p-3.5 sm:p-4">
-            <div className="flex items-start gap-3">
-              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-violet-300/15 bg-violet-300/[0.07]">
-                <Zap className="h-4 w-4 text-violet-200" />
-              </div>
-              <div className="min-w-0">
-                <h2 className="text-sm font-black uppercase tracking-widest text-white">
-                  Analyse Investissement
-                </h2>
-                <p className="mt-1 text-[11px] font-medium leading-5 text-zinc-200">
-                  Indicateurs de volatilité et aides à la décision calculés en temps réel.
-                </p>
-              </div>
-            </div>
+          <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
+            <section className="rounded-[20px] border border-cyan-400/14 bg-[#0a1118] p-4 sm:p-5">
+              <PriceChart history={chartHistory} />
+            </section>
 
-            <div className="grid grid-cols-2 gap-2">
-              <div className="rounded-xl border border-white/[0.08] bg-[#1a222c] p-2 flex flex-col justify-between min-h-[58px]">
-                <div className="flex items-start justify-between">
-                  <span className="text-[10px] font-bold uppercase tracking-[0.11em] text-zinc-200">
-                    Tendance
-                  </span>
-                  <TrendingUp className="h-4 w-4 text-cyan-400" />
-                </div>
-                <span className="mt-1 text-sm font-black text-white">
-                  {trend === "up"
-                    ? "Hausse"
-                    : trend === "down"
-                    ? "Baisse"
-                    : "Stable"}
-                </span>
-              </div>
-
-              <div className="rounded-xl border border-white/[0.08] bg-[#1a222c] p-2 flex flex-col justify-between min-h-[58px]">
-                <div className="flex items-start justify-between">
-                  <span className="text-[10px] font-bold uppercase tracking-[0.11em] text-zinc-200">
-                    Score IA
-                  </span>
-                  <Zap className="h-4 w-4 text-cyan-400" />
-                </div>
-                <div className="mt-1 flex items-baseline gap-1">
-                  <span className="text-lg font-black text-white tabular-nums">
-                    {score}
-                  </span>
-                  <span className="text-xs font-bold text-zinc-200">/ 10</span>
-                </div>
-              </div>
-
-              <div className="col-span-2 rounded-xl border border-white/[0.08] bg-[#1a222c] px-3 py-2.5">
-                <div className="flex items-center justify-between gap-3">
-                  <span className="text-[10px] font-bold uppercase tracking-[0.11em] text-zinc-200">
-                    Conseil d'Arbitrage
-                  </span>
-                  <HelpCircle className="h-4 w-4 text-cyan-400" />
-                </div>
-                <p className="mt-1.5 text-[10px] font-bold leading-snug text-white">{recommendation}</p>
-              </div>
-            </div>
-          </section>
-
-          {/* Section Prédictions */}
-          <section className="kt-premium-card p-4 sm:p-5">
-            <PredictionPanel
-              predictedPrice30d={prediction.predictedPrice30d}
-              roi30d={prediction.roi30d}
-              confidence={prediction.confidence}
-            />
-          </section>
-
-          {/* Graphiques */}
-          <div className="grid grid-cols-1 gap-5 xl:grid-cols-2">
-            <PriceChart history={chartHistory} />
-
-            <section className="kt-premium-card p-4 sm:p-5">
+            <section className="rounded-[20px] border border-cyan-400/14 bg-[#0a1118] p-4 sm:p-5">
               <PriceGraph card={card} />
             </section>
           </div>
