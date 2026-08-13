@@ -708,10 +708,13 @@ export default function PSAGradeCapture() {
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl border border-violet-300/20 bg-violet-400/[0.08] text-violet-200">
                   <ClipboardCheck className="h-5 w-5" />
                 </div>
-                <div>
-                  <h4 className="text-xs font-black text-white">Contrôle manuel rapide</h4>
+                <div className="min-w-0 flex-1">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <h4 className="text-xs font-black text-white">Contrôle manuel rapide</h4>
+                    <span className="inline-flex items-center rounded-full border border-violet-300/25 bg-violet-400/[0.10] px-2.5 py-1 text-[8px] font-black uppercase tracking-[0.12em] text-violet-200">👑 Premium</span>
+                  </div>
                   <p className="mt-1 text-[10px] leading-4 text-zinc-400">
-                    Confirmez les défauts que la caméra peut manquer. Ces réponses peuvent renforcer la confiance ou réduire le grade, mais ne garantissent jamais une note officielle.
+                    Analyse Premium après les 4 photos : confirmez les défauts que la caméra peut manquer pour affiner l’estimation du grade.
                   </p>
                 </div>
               </div>
