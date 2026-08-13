@@ -317,18 +317,53 @@ export default function PSAPage() {
           </section>
 
           <section className="kt-premium-panel overflow-hidden rounded-[18px] p-3 sm:p-4">
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-              <div className="min-w-0">
-                <div className="flex flex-wrap items-center gap-2.5">
-                  <div className="flex h-9 w-16 shrink-0 items-center justify-center rounded-xl border border-white/[0.08] bg-white px-1.5 py-1">
-                    <img src="/marketplaces/pricecharting.png" alt="PriceCharting" className="h-full w-full object-contain" />
-                  </div>
-                  <div className="flex h-9 w-14 shrink-0 items-center justify-center rounded-xl border border-white/[0.08] bg-white px-1.5 py-1">
-                    <img src="/brands/psa.png" alt="PSA" className="h-full w-full object-contain" />
-                  </div>
+            <div className="grid gap-2.5 md:grid-cols-3">
+              <div className="rounded-2xl border border-white/[0.08] bg-black/20 p-3">
+                <div className="flex items-center gap-2">
+                  <Award className="h-4 w-4 text-cyan-300" />
+                  <p className="text-[10px] font-black uppercase tracking-[0.12em] text-white">
+                    Collection gradée
+                  </p>
                 </div>
-                <p className="mt-3 text-[10px] font-black uppercase tracking-[0.12em] text-cyan-300">Collection gradée · Prix PriceCharting · Estimation IA Grade</p>
-                <p className="mt-1.5 text-[10px] leading-5 text-zinc-500">Centralisez vos cartes gradées, comparez les repères de prix PriceCharting et obtenez une estimation visuelle assistée par IA.</p>
+                <p className="mt-1.5 text-[10px] leading-5 text-zinc-500">
+                  Gérez vos cartes PSA, leur grade, leur valeur estimée et leur prix d’achat.
+                </p>
+              </div>
+
+              <div className="rounded-2xl border border-white/[0.08] bg-black/20 p-3">
+                <div className="flex items-center gap-2">
+                  <div className="flex h-7 w-12 shrink-0 items-center justify-center rounded-lg border border-white/[0.08] bg-white px-1 py-0.5">
+                    <img
+                      src="/marketplaces/pricecharting.png"
+                      alt="PriceCharting"
+                      className="h-full w-full object-contain"
+                    />
+                  </div>
+                  <p className="text-[10px] font-black uppercase tracking-[0.12em] text-white">
+                    Prix PriceCharting
+                  </p>
+                </div>
+                <p className="mt-1.5 text-[10px] leading-5 text-zinc-500">
+                  Consultez les prix par grade PSA et les ventes récentes disponibles.
+                </p>
+              </div>
+
+              <div className="rounded-2xl border border-white/[0.08] bg-black/20 p-3">
+                <div className="flex items-center gap-2">
+                  <div className="flex h-7 w-11 shrink-0 items-center justify-center rounded-lg border border-white/[0.08] bg-white px-1 py-0.5">
+                    <img
+                      src="/brands/psa.png"
+                      alt="PSA"
+                      className="h-full w-full object-contain"
+                    />
+                  </div>
+                  <p className="text-[10px] font-black uppercase tracking-[0.12em] text-white">
+                    Estimation IA Grade
+                  </p>
+                </div>
+                <p className="mt-1.5 text-[10px] leading-5 text-zinc-500">
+                  Analysez 4 photos de la carte pour obtenir une estimation de grade assistée par IA.
+                </p>
               </div>
             </div>
           </section>
