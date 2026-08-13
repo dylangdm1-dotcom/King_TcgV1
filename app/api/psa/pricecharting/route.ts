@@ -5,6 +5,12 @@ export const dynamic = "force-dynamic";
 
 interface PriceChartingPrices {
   ungraded: number;
+  psa1: number;
+  psa2: number;
+  psa3: number;
+  psa4: number;
+  psa5: number;
+  psa6: number;
   psa7: number;
   psa8: number;
   psa9: number;
@@ -193,11 +199,17 @@ function extractPrices(
 
   return {
     ungraded: usdToEur(readGuidePrice(["Ungraded", "Non Classé", "Non classe"]), rate),
-    psa7: usdToEur(readGuidePrice(["Grade 7"]), rate),
-    psa8: usdToEur(readGuidePrice(["Grade 8"]), rate),
-    psa9: usdToEur(readGuidePrice(["Grade 9"]), rate),
-    psa9_5: usdToEur(readGuidePrice(["Grade 9.5", "Grade 9,5"]), rate),
-    psa10: usdToEur(readGuidePrice(["PSA 10"]), rate),
+    psa1: usdToEur(readGuidePrice(["Grade 1", "PSA 1"]), rate),
+    psa2: usdToEur(readGuidePrice(["Grade 2", "PSA 2"]), rate),
+    psa3: usdToEur(readGuidePrice(["Grade 3", "PSA 3"]), rate),
+    psa4: usdToEur(readGuidePrice(["Grade 4", "PSA 4"]), rate),
+    psa5: usdToEur(readGuidePrice(["Grade 5", "PSA 5"]), rate),
+    psa6: usdToEur(readGuidePrice(["Grade 6", "PSA 6"]), rate),
+    psa7: usdToEur(readGuidePrice(["Grade 7", "PSA 7"]), rate),
+    psa8: usdToEur(readGuidePrice(["Grade 8", "PSA 8"]), rate),
+    psa9: usdToEur(readGuidePrice(["Grade 9", "PSA 9"]), rate),
+    psa9_5: usdToEur(readGuidePrice(["Grade 9.5", "Grade 9,5", "PSA 9.5"]), rate),
+    psa10: usdToEur(readGuidePrice(["PSA 10", "Grade 10"]), rate),
   };
 }
 
