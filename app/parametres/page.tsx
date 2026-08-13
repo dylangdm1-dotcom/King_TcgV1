@@ -312,21 +312,21 @@ export default function SettingsPage() {
             >
               <div className="grid gap-2 sm:grid-cols-2">
                 {[
-                  "Recherche manuelle et par extension — Actif",
-                  "Prix Cardmarket, TCGPlayer, JustTCG, eBay et PokéWallet — Actifs",
-                  "Fiches cartes et graphiques de marché — Actif",
-                  "Collection, favoris et tableau de bord — Actif",
-                  "Scanner Mono, Batch et Quad — Actifs (50 sessions gratuites / période)",
-                  "Catalogues JP / CN dédiés — Actifs",
-                  "Collection PSA — Active",
-                  "Estimation PSA Gemini — Active",
-                  "Alertes, opportunités, analyses de marché et notifications — Actifs",
-                  "Export / import — Actif",
+                  "Recherche manuelle et par extension",
+                  "Prix Cardmarket, TCGPlayer, JustTCG, eBay et PokéWallet",
+                  "Fiches cartes et graphiques de marché",
+                  "Collection, favoris et tableau de bord",
+                  "Scanner Mono, Batch et Quad\n(50 sessions gratuites / période)",
+                  "Catalogues JP / CN dédiés",
+                  "Collection PSA",
+                  "Estimation PSA Gemini",
+                  "Alertes, opportunités, analyses de marché et notifications",
+                  "Export / import",
                   "Comptes Cloud / Premium — Non actifs pour le moment",
                 ].map((item) => (
                   <div key={item} className="flex items-start gap-2 rounded-xl border border-white/[0.06] bg-black/15 px-3 py-2.5">
                     <ShieldCheck className="mt-0.5 h-3.5 w-3.5 shrink-0 text-cyan-300" />
-                    <span className="text-[10px] text-zinc-400">{item}</span>
+                    <span className="whitespace-pre-line text-[10px] text-zinc-400">{item}</span>
                   </div>
                 ))}
               </div>
