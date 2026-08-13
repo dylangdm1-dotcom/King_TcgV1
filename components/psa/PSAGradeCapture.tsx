@@ -15,6 +15,7 @@ import {
   CheckCircle2,
   ClipboardCheck,
   ChevronRight,
+  ChevronDown,
   ImagePlus,
   Info,
   Loader2,
@@ -154,13 +155,14 @@ export default function PSAGradeCapture() {
   const [isRefining, setIsRefining] = useState(false);
   const [isRefined, setIsRefined] = useState(false);
   const [manualReview, setManualReview] = useState<PSAManualReview>({
-    whiteSpots: "0",
-    scratches: "none",
-    cornerDamage: "none",
+    surfaceMarks: "none",
+    cornerWear: "none",
     edgeWhitening: "none",
-    majorDefect: false,
-    hiddenDefect: false,
+    printLine: "none",
+    indentation: "none",
+    creaseOrMajorDefect: false,
   });
+  const [premiumControlsOpen, setPremiumControlsOpen] = useState(false);
 
   const videoRef = useRef<HTMLVideoElement>(null);
   const streamRef = useRef<MediaStream | null>(null);
@@ -368,13 +370,14 @@ export default function PSAGradeCapture() {
     setAnalysis(null);
     setIsRefined(false);
     setManualReview({
-      whiteSpots: "0",
-      scratches: "none",
-      cornerDamage: "none",
+      surfaceMarks: "none",
+      cornerWear: "none",
       edgeWhitening: "none",
-      majorDefect: false,
-      hiddenDefect: false,
+      printLine: "none",
+      indentation: "none",
+      creaseOrMajorDefect: false,
     });
+    setPremiumControlsOpen(false);
     setAnalysisError("");
     setActiveStepIndex(0);
   };
@@ -597,18 +600,18 @@ export default function PSAGradeCapture() {
                   {isRefined ? (
                     <span className="mt-3 inline-flex items-center gap-1.5 rounded-full border border-violet-300/20 bg-violet-400/[0.08] px-2.5 py-1 text-[9px] font-black uppercase tracking-wider text-violet-200">
                       <ClipboardCheck className="h-3 w-3" />
-                      Estimation affinée avec votre contrôle
+                      Estimation affinée avec les contrôles supplémentaires
                     </span>
                   ) : null}
                 </div>
 
                 <div className="min-w-[150px] rounded-[20px] border border-white/[0.08] bg-black/25 p-4 text-center">
                   <p className="text-[9px] font-black uppercase tracking-widest text-zinc-500">Confiance</p>
-                  <p className="mt-1 text-2xl font-black text-blue-300">{analysis.confidence}%</p>
+                  <p className="mt-1 text-2xl font-black text-blue-300">{Math.min(99.9, analysis.confidence).toLocaleString("fr-FR", { maximumFractionDigits: 1 })}%</p>
                   <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-black/40">
                     <div
                       className="h-full rounded-full bg-blue-400"
-                      style={{ width: `${analysis.confidence}%` }}
+                      style={{ width: `${Math.min(99.9, analysis.confidence)}%` }}
                     />
                   </div>
                 </div>
@@ -703,44 +706,50 @@ export default function PSAGradeCapture() {
           </div>
 
           {analysis.photoQuality.acceptable ? (
-            <article className="kt-premium-panel rounded-[22px] p-4 sm:p-5">
-              <div className="flex items-start gap-3">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl border border-violet-300/20 bg-violet-400/[0.08] text-violet-200">
-                  <ClipboardCheck className="h-5 w-5" />
-                </div>
-                <div className="min-w-0 flex-1">
+            <article className="kt-premium-panel overflow-hidden rounded-[22px]">
+              <button
+                type="button"
+                onClick={() => setPremiumControlsOpen((open) => !open)}
+                className="flex w-full items-center justify-between gap-3 p-5 text-left transition hover:bg-white/[0.025]"
+                aria-expanded={premiumControlsOpen}
+              >
+                <div className="min-w-0">
                   <div className="flex flex-wrap items-center gap-2">
-                    <h4 className="text-xs font-black text-white">Contrôle manuel rapide</h4>
+                    <h4 className="text-xs font-black text-white">Contrôles supplémentaires</h4>
                     <span className="inline-flex items-center rounded-full border border-violet-300/25 bg-violet-400/[0.10] px-2.5 py-1 text-[8px] font-black uppercase tracking-[0.12em] text-violet-200">👑 Premium</span>
                   </div>
                   <p className="mt-1 text-[10px] leading-4 text-zinc-400">
-                    Analyse Premium après les 4 photos : confirmez les défauts que la caméra peut manquer pour affiner l’estimation du grade.
+                    Confirmez les micro-défauts difficiles à juger sur photo pour affiner l'estimation IA.
                   </p>
                 </div>
-              </div>
-
-              <div className="mt-4 grid gap-3 sm:grid-cols-2">
-                <ManualSelect label="Points blancs" value={manualReview.whiteSpots} onChange={(value) => setManualReview((current) => ({ ...current, whiteSpots: value as PSAManualReview["whiteSpots"] }))} options={[["0", "Aucun"], ["1-2", "1 à 2"], ["3-5", "3 à 5"], ["6+", "6 ou plus"]]} />
-                <ManualSelect label="Rayures de surface" value={manualReview.scratches} onChange={(value) => setManualReview((current) => ({ ...current, scratches: value as PSAManualReview["scratches"] }))} options={[["none", "Aucune"], ["light", "Légères"], ["visible", "Visibles"], ["deep", "Profondes"]]} />
-                <ManualSelect label="Coins abîmés" value={manualReview.cornerDamage} onChange={(value) => setManualReview((current) => ({ ...current, cornerDamage: value as PSAManualReview["cornerDamage"] }))} options={[["none", "Aucun"], ["one", "Un coin"], ["multiple", "Plusieurs"]]} />
-                <ManualSelect label="Blanchiment des bords" value={manualReview.edgeWhitening} onChange={(value) => setManualReview((current) => ({ ...current, edgeWhitening: value as PSAManualReview["edgeWhitening"] }))} options={[["none", "Aucun"], ["light", "Léger"], ["marked", "Marqué"]]} />
-              </div>
-
-              <div className="mt-3 grid gap-2 sm:grid-cols-2">
-                <ManualToggle label="Pli, enfoncement ou défaut majeur" checked={manualReview.majorDefect} onChange={(checked) => setManualReview((current) => ({ ...current, majorDefect: checked }))} />
-                <ManualToggle label="Défaut difficile à voir sur les photos" checked={manualReview.hiddenDefect} onChange={(checked) => setManualReview((current) => ({ ...current, hiddenDefect: checked }))} />
-              </div>
-
-
-              <button
-                type="button"
-                onClick={refineAnalysis}
-                disabled={isRefining}
-                className="mt-3 flex w-full items-center justify-center gap-2 rounded-2xl border border-violet-300/25 bg-violet-400/[0.11] px-4 py-3 text-xs font-black text-violet-100 transition hover:bg-violet-400/[0.16] disabled:opacity-50"
-              >
-                {isRefining ? <Loader2 className="h-4 w-4 animate-spin" /> : <ClipboardCheck className="h-4 w-4" />}
-                {isRefining ? "Affinage Gemini…" : "Affiner l'estimation"}
+                <ChevronDown className={`h-4 w-4 shrink-0 text-violet-200 transition ${premiumControlsOpen ? "rotate-180" : ""}`} />
               </button>
+
+              {premiumControlsOpen ? (
+                <div className="border-t border-white/[0.06] px-5 pb-5 pt-4">
+                  <div className="grid gap-3 sm:grid-cols-2">
+                    <ManualSelect label="Surface sous lumière rasante" value={manualReview.surfaceMarks} onChange={(value) => setManualReview((current) => ({ ...current, surfaceMarks: value as PSAManualReview["surfaceMarks"] }))} options={[["none", "Aucune marque"], ["micro", "Micro-marques"], ["visible", "Rayures visibles"], ["deep", "Rayure profonde"]]} />
+                    <ManualSelect label="Usure des coins" value={manualReview.cornerWear} onChange={(value) => setManualReview((current) => ({ ...current, cornerWear: value as PSAManualReview["cornerWear"] }))} options={[["none", "Aucune"], ["light", "Très légère"], ["one_marked", "Un coin marqué"], ["multiple", "Plusieurs coins"]]} />
+                    <ManualSelect label="Blanchiment des bords" value={manualReview.edgeWhitening} onChange={(value) => setManualReview((current) => ({ ...current, edgeWhitening: value as PSAManualReview["edgeWhitening"] }))} options={[["none", "Aucun"], ["few_points", "Quelques points blancs"], ["light", "Léger"], ["marked", "Marqué"]]} />
+                    <ManualSelect label="Ligne d'impression / holo" value={manualReview.printLine} onChange={(value) => setManualReview((current) => ({ ...current, printLine: value as PSAManualReview["printLine"] }))} options={[["none", "Aucune"], ["fine", "Fine / discrète"], ["visible", "Clairement visible"]]} />
+                    <ManualSelect label="Enfoncement / marque de pression" value={manualReview.indentation} onChange={(value) => setManualReview((current) => ({ ...current, indentation: value as PSAManualReview["indentation"] }))} options={[["none", "Aucun"], ["light", "Très léger"], ["visible", "Visible"]]} />
+                  </div>
+
+                  <div className="mt-3">
+                    <ManualToggle label="Pli, déchirure ou défaut structurel majeur" checked={manualReview.creaseOrMajorDefect} onChange={(checked) => setManualReview((current) => ({ ...current, creaseOrMajorDefect: checked }))} />
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={refineAnalysis}
+                    disabled={isRefining}
+                    className="mt-3 flex w-full items-center justify-center gap-2 rounded-2xl border border-violet-300/25 bg-violet-400/[0.11] px-4 py-3 text-xs font-black text-violet-100 transition hover:bg-violet-400/[0.16] disabled:opacity-50"
+                  >
+                    {isRefining ? <Loader2 className="h-4 w-4 animate-spin" /> : <ClipboardCheck className="h-4 w-4" />}
+                    {isRefining ? "Affinage Gemini…" : "Affiner l'estimation"}
+                  </button>
+                </div>
+              ) : null}
             </article>
           ) : null}
 
