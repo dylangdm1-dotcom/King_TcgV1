@@ -357,7 +357,6 @@ return (
           <div className="grid gap-4 md:grid-cols-2">
             {alerts.map((alert, index) => {
               const config = getAlertConfig(alert.type);
-              const Icon = config.icon;
               const SmallIcon = config.smallIcon;
 
               return (
@@ -376,23 +375,13 @@ return (
                   />
 
                   <div className="relative">
-                    <div className="grid grid-cols-[44px_minmax(0,1fr)_auto] items-center gap-3">
-                      <div
-                        className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl"
-                        style={{
-                          background: config.accentSoft,
-                          color: config.accent,
-                        }}
-                      >
-                        <Icon className="h-5 w-5" />
-                      </div>
-
-                      <h2 className="min-w-0 truncate text-center text-lg font-bold tracking-tight text-white">
+                    <div className="flex items-center justify-between gap-3">
+                      <h2 className="min-w-0 truncate text-left text-lg font-bold tracking-tight text-white">
                         {alert.cardName}
                       </h2>
 
                       <div
-                        className="inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[11px] font-bold"
+                        className="inline-flex shrink-0 items-center gap-1.5 rounded-full border px-2.5 py-1 text-[11px] font-bold"
                         style={{
                           color: config.accent,
                           background: config.accentSoft,
@@ -404,15 +393,14 @@ return (
                       </div>
                     </div>
 
-                    <div className="mt-3 flex justify-center">
-                      <div className="text-lg font-bold" style={{ color: config.accent }}>
+                    <div className="mt-2 flex items-end gap-3">
+                      <p className="min-w-0 flex-1 text-left text-sm leading-5 text-zinc-400">
+                        {alert.message}
+                      </p>
+                      <div className="shrink-0 pb-0.5 text-base font-bold" style={{ color: config.accent }}>
                         {alert.changePercent > 0 ? "+" : ""}{alert.changePercent.toFixed(2)}%
                       </div>
                     </div>
-
-                    <p className="mt-1.5 text-center text-sm leading-6 text-zinc-400">
-                      {alert.message}
-                    </p>
 
                     <div className="mt-3">
                       <button
