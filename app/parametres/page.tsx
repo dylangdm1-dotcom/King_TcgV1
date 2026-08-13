@@ -155,7 +155,7 @@ export default function SettingsPage() {
 
           <section className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             <StatusPill label="Recherche & prix" status="Actif" tone="green" />
-            <StatusPill label="Scanner Mono / Batch" status="Actif" tone="green" />
+            <StatusPill label="Scanner Mono / Batch / Quad" status="Actif" tone="green" />
             <StatusPill label="Collection PSA" status="Actif" tone="green" />
             <StatusPill label="Estimation PSA Gemini" status="Actif" tone="green" />
           </section>
@@ -173,7 +173,7 @@ export default function SettingsPage() {
                   Gestion du compte
                 </span>
                 <span className="mt-1 block text-[10px] leading-4 text-zinc-500">
-                  Accédez à votre session, vos préférences et aux futures fonctions Premium.
+                  Accédez à votre session, vos préférences et aux informations liées à votre compte.
                 </span>
               </span>
               <ExternalLink className="h-4 w-4 shrink-0 text-zinc-500 transition group-hover:text-cyan-300" />
@@ -247,7 +247,7 @@ export default function SettingsPage() {
 
             <AccordionItem
               title="Scanner de cartes"
-              description="Modes disponibles, langues et limites actuelles."
+              description="Modes disponibles, langues, sessions et quota gratuit."
               icon={<ScanLine className="h-4 w-4" />}
             >
               <div className="space-y-3">
@@ -258,18 +258,25 @@ export default function SettingsPage() {
                   </div>
                   <div className="rounded-2xl border border-white/[0.07] bg-black/20 p-3">
                     <p className="font-black text-white">Batch</p>
-                    <p className="mt-1 text-[10px] text-zinc-500">Analyse jusqu’à quatre cartes dans une même capture.</p>
+                    <p className="mt-1 text-[10px] text-zinc-500">Conserve jusqu’à quatre résultats dans une même session et permet de les consulter un par un.</p>
+                  </div>
+                  <div className="rounded-2xl border border-white/[0.07] bg-black/20 p-3 sm:col-span-2">
+                    <p className="font-black text-white">Quad Scan</p>
+                    <p className="mt-1 text-[10px] text-zinc-500">Analyse quatre zones d’une même capture. Le module est fonctionnel et continue d’être affiné sur le cadrage et le raccord final.</p>
                   </div>
                 </div>
                 <p>
                   La recherche utilise des catalogues séparés FR / EN / JP / CN. Les extensions japonaises et chinoises disposent de chemins régionaux dédiés afin de préserver la bonne impression, le bon visuel et la bonne langue.
+                </p>
+                <p className="rounded-2xl border border-amber-400/12 bg-amber-400/[0.04] p-3 text-[10px] text-zinc-400">
+                  Le compte gratuit dispose actuellement de <strong className="text-white">50 sessions de scan par période</strong>, avec renouvellement le 5 du mois. Un Batch ou un Quad consomme une session, pas une session par carte. Le compteur est encore stocké localement tant que les comptes Cloud ne sont pas activés.
                 </p>
               </div>
             </AccordionItem>
 
             <AccordionItem
               title="PSA et grading"
-              description="Recherche de prix, collection gradée et future estimation IA."
+              description="Recherche de prix, collection gradée et estimation IA."
               icon={<Award className="h-4 w-4" />}
             >
               <div className="space-y-3">
@@ -309,12 +316,13 @@ export default function SettingsPage() {
                   "Prix Cardmarket, TCGPlayer, JustTCG, eBay et PokéWallet — Actifs",
                   "Fiches cartes et graphiques de marché — Actif",
                   "Collection, favoris et tableau de bord — Actif",
-                  "Scanner Mono et Batch — Actif",
+                  "Scanner Mono, Batch et Quad — Actifs (50 sessions gratuites / période)",
                   "Catalogues JP / CN dédiés — Actifs",
                   "Collection PSA — Active",
                   "Estimation PSA Gemini — Active",
-                  "Alertes et opportunités — Actif",
+                  "Alertes, opportunités, analyses de marché et notifications — Actifs",
                   "Export / import — Actif",
+                  "Comptes Cloud / Premium — Non actifs pour le moment",
                 ].map((item) => (
                   <div key={item} className="flex items-start gap-2 rounded-xl border border-white/[0.06] bg-black/15 px-3 py-2.5">
                     <ShieldCheck className="mt-0.5 h-3.5 w-3.5 shrink-0 text-cyan-300" />
