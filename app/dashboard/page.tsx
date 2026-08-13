@@ -68,6 +68,14 @@ type MarketTrendSample = {
   trend7d: number;
 };
 
+function cardLanguage(card: PokemonCard): "fr" | "en" | "ja" | "zh-tw" {
+  if (card.dataLanguage) return card.dataLanguage;
+  if (card.id.startsWith("tcgdex-ja-")) return "ja";
+  if (card.id.startsWith("tcgdex-zh-")) return "zh-tw";
+  if (card.id.startsWith("tcgdex-fr-")) return "fr";
+  return "en";
+}
+
 
 function trend7dForCard(card: PokemonCard): number {
   const market = getMarketData(card);
