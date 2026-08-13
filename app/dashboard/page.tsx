@@ -905,12 +905,11 @@ export default function DashboardPage() {
     <>
       <Navbar />
 
-      <main className="kt-app-shell pb-32 selection:bg-cyan-500/20">
-        <div className="kt-page max-w-6xl space-y-5">
+      <main className="kt-premium-shell min-h-screen pb-32 text-white selection:bg-cyan-500/20">
+        <div className="mx-auto max-w-6xl space-y-5 px-4 py-6 sm:px-6">
 
           {/* HEADER */}
-          <div className="flex items-center justify-between">
-            <div />
+          <div className="flex items-center justify-end">
 
             <div className="flex items-center gap-2">
               <button
@@ -965,9 +964,12 @@ export default function DashboardPage() {
           )}
 
           {/* MAIN HEADER */}
-          <section className="kt-premium-card kt-rise-in flex flex-col gap-3 p-4 sm:p-5">
+          <section className="kt-rise-in relative overflow-hidden rounded-[22px] border border-cyan-400/25 bg-[#0a1118] p-5 shadow-[0_20px_52px_rgba(0,0,0,.27),0_0_34px_rgba(34,211,238,.045)] sm:p-6">
+            <div className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-cyan-400/[0.055] blur-3xl" />
+            <div className="pointer-events-none absolute bottom-0 left-1/3 h-px w-40 bg-cyan-300/55 shadow-[0_0_12px_rgba(34,211,238,.7)]" />
+            <div className="relative flex flex-col gap-4">
             <div className="flex items-center justify-between">
-              <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-[10px] font-bold uppercase tracking-[0.11em]">
+              <div className="inline-flex items-center gap-1.5 rounded-full border border-cyan-400/20 bg-cyan-400/[0.06] px-2.5 py-1 text-[9px] font-black uppercase tracking-[0.13em] text-cyan-300">
                 <Sparkles className="w-3 h-3" />
                 Suivi portefeuille
               </div>
@@ -982,17 +984,17 @@ export default function DashboardPage() {
             </div>
 
             <div>
-              <h1 className="text-lg font-black uppercase tracking-tight text-white">
-                Tableau de bord
+              <h1 className="text-2xl font-black tracking-tight text-white sm:text-[30px]">
+                Dashboard <span className="text-cyan-300">King_TCG</span>
               </h1>
 
-              <p className="text-[11px] text-zinc-100 mt-0.5">
+              <p className="mt-1 max-w-2xl text-[11px] leading-5 text-zinc-300">
                 Visualisez la valeur de votre collection, votre investissement et les principales tendances du marché en un coup d’œil.
               </p>
             </div>
 
-            <div className="grid grid-cols-2 gap-3 pt-3 border-t border-white/[0.09]">
-              <div className="kt-premium-card-soft rounded-xl p-3">
+            <div className="grid grid-cols-2 gap-3 border-t border-cyan-400/10 pt-4">
+              <div className="rounded-[14px] border border-cyan-400/13 bg-cyan-400/[0.035] p-3">
                 <span className="text-zinc-200 text-[10px] block font-black uppercase tracking-wider">
                   Investissement
                 </span>
@@ -1005,7 +1007,7 @@ export default function DashboardPage() {
                 </span>
               </div>
 
-              <div className="kt-premium-card-soft rounded-xl p-3">
+              <div className="rounded-[14px] border border-cyan-400/13 bg-cyan-400/[0.035] p-3">
                 <span className="text-zinc-200 text-[10px] block font-black uppercase tracking-wider">
                   Profit Net
                 </span>
@@ -1029,11 +1031,12 @@ export default function DashboardPage() {
                 </span>
               </div>
             </div>
+            </div>
           </section>
 
           {/* KPI */}
-          <section className="grid grid-cols-2 gap-2 lg:grid-cols-4">
-            <div className="kt-premium-card kt-interactive-card flex min-h-[72px] flex-col justify-between rounded-[14px] p-3">
+          <section className="grid grid-cols-2 gap-2.5 lg:grid-cols-4">
+            <div className="relative flex min-h-[88px] flex-col justify-between overflow-hidden rounded-[16px] border border-cyan-400/14 bg-[#0a1118] p-3.5 shadow-[0_14px_34px_rgba(0,0,0,.20)] transition hover:border-cyan-300/28">
               <div className="flex justify-between items-start">
                 <span className="text-zinc-200 text-[10px] font-bold uppercase tracking-[0.11em]">
                   Valeur Actuelle
@@ -1050,7 +1053,7 @@ export default function DashboardPage() {
               </div>
             </div>
 
-            <div className="kt-premium-card kt-interactive-card flex min-h-[72px] flex-col justify-between rounded-[14px] p-3">
+            <div className="relative flex min-h-[88px] flex-col justify-between overflow-hidden rounded-[16px] border border-cyan-400/14 bg-[#0a1118] p-3.5 shadow-[0_14px_34px_rgba(0,0,0,.20)] transition hover:border-cyan-300/28">
               <div className="flex justify-between items-start">
                 <span className="text-zinc-200 text-[10px] font-bold uppercase tracking-[0.11em]">
                   Rendement Global
@@ -1078,7 +1081,7 @@ export default function DashboardPage() {
               </div>
             </div>
 
-            <div className="kt-premium-card kt-interactive-card flex min-h-[72px] flex-col justify-between rounded-[14px] p-3">
+            <div className="relative flex min-h-[88px] flex-col justify-between overflow-hidden rounded-[16px] border border-cyan-400/14 bg-[#0a1118] p-3.5 shadow-[0_14px_34px_rgba(0,0,0,.20)] transition hover:border-cyan-300/28">
               <div className="flex justify-between items-start">
                 <span className="text-zinc-200 text-[10px] font-bold uppercase tracking-[0.11em]">
                   Score Stratégique
@@ -1098,7 +1101,7 @@ export default function DashboardPage() {
               </div>
             </div>
 
-            <div className="kt-premium-card kt-interactive-card flex min-h-[72px] flex-col justify-between rounded-[14px] p-3">
+            <div className="relative flex min-h-[88px] flex-col justify-between overflow-hidden rounded-[16px] border border-cyan-400/14 bg-[#0a1118] p-3.5 shadow-[0_14px_34px_rgba(0,0,0,.20)] transition hover:border-cyan-300/28">
               <div className="flex justify-between items-start">
                 <span className="text-zinc-200 text-[10px] font-bold uppercase tracking-[0.11em]">
                   Actif Phare
@@ -1119,13 +1122,13 @@ export default function DashboardPage() {
 
           {/* ANALYSES */}
           <div className="space-y-4 pt-2">
-            <h2 className="text-[10px] font-bold uppercase tracking-[0.11em] text-zinc-200 px-1 flex items-center gap-1.5">
+            <h2 className="flex items-center gap-1.5 px-1 text-[10px] font-black uppercase tracking-[0.13em] text-cyan-300">
               <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
               Fluctuations & analyses de marché
             </h2>
 
             {/* COURBE 7 JOURS */}
-            <section className="kt-premium-card overflow-hidden rounded-[18px] p-4 sm:p-5 lg:p-6">
+            <section className="overflow-hidden rounded-[20px] border border-cyan-400/14 bg-[#0a1118] p-4 shadow-[0_18px_44px_rgba(0,0,0,.22)] sm:p-5 lg:p-6">
               <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
                 <div>
                   <p className="text-[10px] font-bold uppercase tracking-[0.11em] text-zinc-200">
@@ -1164,12 +1167,12 @@ export default function DashboardPage() {
                   </p>
                 </div>
 
-                <div className="self-start rounded-xl border border-sky-300/20 bg-sky-400/[0.08] px-3 py-2 text-right shadow-[0_8px_24px_rgba(14,165,233,.08)] sm:self-auto">
-                  <p className="text-[10px] font-bold uppercase tracking-[0.11em] text-sky-300/70">
+                <div className="self-start rounded-xl border border-cyan-400/18 bg-cyan-400/[0.055] px-3 py-2 text-right shadow-[0_8px_24px_rgba(34,211,238,.06)] sm:self-auto">
+                  <p className="text-[9px] font-black uppercase tracking-[0.11em] text-cyan-300/75">
                     Modèle
                   </p>
 
-                  <p className="text-[10px] font-black uppercase text-sky-200">
+                  <p className="text-[10px] font-black uppercase text-cyan-200">
                     Projection V5
                   </p>
                 </div>
@@ -1202,7 +1205,7 @@ export default function DashboardPage() {
             </section>
 
             {/* TOP PERFORMANCES */}
-            <section className="kt-premium-card rounded-[18px] p-3.5 sm:p-4">
+            <section className="rounded-[18px] border border-white/[0.09] bg-[#0a1118] p-4 shadow-[0_16px_38px_rgba(0,0,0,.20)]">
               <div className="flex items-center gap-2 mb-4">
                 <Trophy className="w-4 h-4 text-cyan-400" />
 
@@ -1232,7 +1235,7 @@ export default function DashboardPage() {
                           key={
                             card.id
                           }
-                          className="flex items-center justify-between rounded-2xl border border-white/[0.07] bg-[#1a222c] p-3.5 transition hover:border-white/[0.12]"
+                          className="flex items-center justify-between rounded-[14px] border border-cyan-400/10 bg-[#0c151e] p-3.5 transition hover:border-cyan-300/24"
                         >
                           <div className="min-w-0 flex-1 pr-3">
                             <div className="font-bold text-white text-xs truncate">
@@ -1286,7 +1289,7 @@ export default function DashboardPage() {
             </section>
 
             {/* HISTORIQUE */}
-            <section className="kt-premium-card rounded-[18px] p-3.5 sm:p-4">
+            <section className="rounded-[18px] border border-white/[0.09] bg-[#0a1118] p-4 shadow-[0_16px_38px_rgba(0,0,0,.20)]">
               <div className="flex items-center gap-2 mb-4">
                 <History className="w-4 h-4 text-violet-300" />
 
@@ -1313,7 +1316,7 @@ export default function DashboardPage() {
             </section>
           </div>
 
-          <section className="kt-premium-card rounded-[18px] p-4 sm:p-5">
+          <section className="rounded-[18px] border border-white/[0.09] bg-[#0a1118] p-4 shadow-[0_16px_38px_rgba(0,0,0,.20)] sm:p-5">
             <div className="mb-4 flex items-start justify-between gap-3">
               <div>
                 <div className="flex items-center gap-2">
@@ -1329,7 +1332,7 @@ export default function DashboardPage() {
 
           {/* INVENTAIRE */}
           <div className="space-y-4 pt-2">
-            <h2 className="text-[10px] font-bold uppercase tracking-[0.11em] text-zinc-200 px-1 flex items-center gap-1.5">
+            <h2 className="flex items-center gap-1.5 px-1 text-[10px] font-black uppercase tracking-[0.13em] text-cyan-300">
               <Package className="w-3.5 h-3.5 text-violet-300" />
               Inventaire des actifs
               ({cards.length})
@@ -1361,10 +1364,10 @@ export default function DashboardPage() {
                       key={
                         card.id
                       }
-                      className={`kt-premium-card transition-all ${
+                      className={`rounded-[16px] border bg-[#0a1118] shadow-[0_14px_34px_rgba(0,0,0,.18)] transition-all ${
                         isExpanded
-                          ? "border-cyan-500/30 bg-neutral-900/80 p-4"
-                          : "p-3.5 hover:border-zinc-800"
+                          ? "border-cyan-300/30 bg-cyan-400/[0.025] p-4"
+                          : "border-white/[0.08] p-3.5 hover:border-cyan-300/18"
                       }`}
                     >
                       <button
@@ -1605,17 +1608,17 @@ export default function DashboardPage() {
           </div>
 
           {/* ANALYSE PREMIUM — toujours en dernier dans le Dashboard */}
-          <section className="kt-premium-card overflow-hidden rounded-[18px] border-amber-300/15">
+          <section className="overflow-hidden rounded-[20px] border border-amber-300/22 bg-[#0a1118] shadow-[0_18px_44px_rgba(0,0,0,.22),0_0_30px_rgba(245,196,81,.035)]">
             <button
               type="button"
               onClick={() => setPremiumExpanded((value) => !value)}
-              className="flex w-full items-center justify-between gap-3 p-4 text-left sm:p-5"
+              className="flex w-full items-center justify-between gap-3 bg-[linear-gradient(90deg,rgba(245,196,81,.035),transparent)] p-4 text-left sm:p-5"
               aria-expanded={premiumExpanded}
             >
               <div className="flex items-center gap-2.5">
                 <Crown className="h-4 w-4 text-amber-300" />
                 <div>
-                  <h2 className="text-xs font-black uppercase tracking-[0.14em] text-white">Analyse Premium</h2>
+                  <h2 className="text-[12px] font-black uppercase tracking-[0.14em] text-[#f5c451]">Analyse Premium</h2>
                   <p className="mt-0.5 text-[10px] text-zinc-200">Tendances du marché et répartition de votre collection.</p>
                 </div>
               </div>
@@ -1625,7 +1628,7 @@ export default function DashboardPage() {
             {premiumExpanded && (
               <div className="space-y-3 border-t border-white/[0.07] p-4 sm:p-5">
                 <div className="grid gap-3 lg:grid-cols-2">
-                  <div className="kt-premium-card-soft rounded-2xl p-3.5">
+                  <div className="rounded-[15px] border border-amber-300/10 bg-amber-300/[0.025] p-3.5">
                     <div className="mb-3 flex items-center gap-2">
                       <TrendingUp className="h-4 w-4 text-cyan-300" />
                       <h3 className="text-[10px] font-bold uppercase tracking-[0.11em] text-zinc-300">Tendances Pokémon · 7j</h3>
@@ -1645,7 +1648,7 @@ export default function DashboardPage() {
                     </div>
                   </div>
 
-                  <div className="kt-premium-card-soft rounded-2xl p-3.5">
+                  <div className="rounded-[15px] border border-amber-300/10 bg-amber-300/[0.025] p-3.5">
                     <div className="mb-3 flex items-center gap-2">
                       <TrendingUp className="h-4 w-4 text-violet-300" />
                       <h3 className="text-[10px] font-bold uppercase tracking-[0.11em] text-zinc-300">Tendances extensions · 7j</h3>
@@ -1666,7 +1669,7 @@ export default function DashboardPage() {
                   </div>
                 </div>
 
-                <div className="kt-premium-card-soft rounded-2xl p-3.5">
+                <div className="rounded-[15px] border border-amber-300/10 bg-amber-300/[0.025] p-3.5">
                   <div className="mb-3 flex items-center gap-2">
                     <Globe2 className="h-4 w-4 text-amber-300" />
                     <h3 className="text-[10px] font-bold uppercase tracking-[0.11em] text-zinc-300">Répartition du stock par langue</h3>
