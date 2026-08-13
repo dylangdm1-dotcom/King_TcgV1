@@ -233,7 +233,7 @@ export default function FavorisPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-neutral-950 text-white pb-32 selection:bg-cyan-500/20">
+      <main className="kt-premium-shell min-h-screen pb-32 text-white selection:bg-cyan-500/20">
         <div className="mx-auto max-w-7xl space-y-6 px-4 py-6 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
             <BackButton />
@@ -242,30 +242,30 @@ export default function FavorisPage() {
           {/* ======================================================
               HEADER V5.0
           ====================================================== */}
-          <section className="rounded-2xl border border-white/[0.08] bg-[#171e28]/80 p-5 sm:p-6 shadow-xl relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-yellow-500/5 rounded-full blur-3xl pointer-events-none" />
+          <section className="relative overflow-hidden rounded-[22px] border border-cyan-400/24 bg-[#0a1118] p-5 shadow-[0_20px_52px_rgba(0,0,0,.26),0_0_34px_rgba(34,211,238,.04)] sm:p-6">
+            <div className="pointer-events-none absolute -right-16 -top-20 h-52 w-52 rounded-full bg-rose-400/[0.045] blur-3xl" />
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 relative z-10">
               <div>
-                <span className="text-[10px] font-bold uppercase tracking-[0.11em] text-yellow-400 bg-yellow-500/10 border border-yellow-500/20 px-2.5 py-1 rounded-full flex items-center gap-1.5 w-fit mb-2">
+                <span className="text-[10px] font-bold uppercase tracking-[0.11em] text-cyan-300 bg-cyan-400/[0.06] border border-cyan-400/20 px-2.5 py-1 rounded-full flex items-center gap-1.5 w-fit mb-2">
                   <ShieldCheck className="w-3.5 h-3.5" />
-                  Flux de Surveillance V5.0
+                  Watchlist King_TCG
                 </span>
-                <h1 className="text-lg font-black uppercase tracking-tight text-white flex items-center gap-2">
-                  <Bookmark className="w-5 h-5 text-yellow-400 fill-yellow-400/20" />
-                  Watchlist d'Actifs
+                <h1 className="flex items-center gap-2 text-2xl font-black tracking-tight text-white">
+                  <Bookmark className="h-5 w-5 fill-rose-400/15 text-rose-400" />
+                  Favoris
                 </h1>
-                <p className="mt-0.5 text-[11px] text-zinc-100">
-                  Suivez vos cartes prioritaires, valeurs marché et opportunités.
+                <p className="mt-1 text-[11px] text-zinc-300">
+                  Retrouvez rapidement toutes les cartes que vous avez ajoutées à vos favoris.
                 </p>
               </div>
 
               {!loading && cards.length > 0 && (
-                <div className="px-4 py-2.5 rounded-xl bg-neutral-900 border border-zinc-800 flex items-center gap-2.5 shadow-lg">
-                  <TrendingUp className="w-4 h-4 text-yellow-400" />
+                <div className="flex items-center gap-2.5 rounded-[13px] border border-cyan-400/16 bg-cyan-400/[0.04] px-4 py-2.5">
+                  <TrendingUp className="w-4 h-4 text-cyan-300" />
                   <span className="text-[10px] font-bold text-zinc-100 uppercase tracking-wider">
                     Valeur suivie :
                   </span>
-                  <span className="text-sm font-black text-yellow-400 tabular-nums">
+                  <span className="text-sm font-black text-cyan-300 tabular-nums">
                     {totalWatchlistValue.toFixed(2)} €
                   </span>
                 </div>
@@ -279,7 +279,7 @@ export default function FavorisPage() {
           {!loading && cards.length > 0 && (
             <section className="grid gap-2">
               <div className="flex items-center justify-between rounded-xl border border-white/[0.08] bg-[#171e28]/80 px-3 py-2">
-                <span className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.11em] text-zinc-100"><Bookmark className="h-3.5 w-3.5 text-yellow-400" /> Cartes favorites</span>
+                <span className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.11em] text-zinc-100"><Bookmark className="h-3.5 w-3.5 text-cyan-300" /> Cartes favorites</span>
                 <span className="text-sm font-black text-white">{cards.length}</span>
               </div>
               <div className="flex items-center justify-between rounded-xl border border-white/[0.08] bg-[#171e28]/80 px-3 py-2">
@@ -301,7 +301,7 @@ export default function FavorisPage() {
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                   placeholder="Filtrer par nom, numéro, extension..."
-                  className="w-full rounded-2xl border border-white/[0.08] bg-[#171e28]/80 pl-11 pr-10 py-3 text-xs font-medium text-white outline-none focus:border-yellow-500/50 focus:bg-neutral-900/80 transition-all placeholder:text-zinc-200 shadow-xl"
+                  className="w-full rounded-[15px] border border-cyan-400/16 bg-[#0a1118] py-3 pl-11 pr-10 text-xs font-medium text-white outline-none transition placeholder:text-zinc-500 focus:border-cyan-300/45"
                 />
                 {search && (
                   <button
@@ -314,23 +314,23 @@ export default function FavorisPage() {
               </div>
 
               <div className="flex items-center gap-2">
-                <button type="button" onClick={() => setViewMode("compact")} title="Vue compacte 3×3" className={`rounded-xl border p-3 transition ${viewMode === "compact" ? "border-yellow-400/40 bg-yellow-400/10 text-yellow-300" : "border-white/[0.08] bg-[#171e28]/80 text-zinc-200"}`}>
+                <button type="button" onClick={() => setViewMode("compact")} title="Vue compacte 3×3" className={`rounded-xl border p-3 transition ${viewMode === "compact" ? "border-cyan-400/40 bg-cyan-400/10 text-cyan-300" : "border-cyan-400/12 bg-[#0a1118] text-zinc-300"}`}>
                   <LayoutGrid className="h-4 w-4" />
                 </button>
-                <button type="button" onClick={() => setViewMode("large")} title="Vue détaillée" className={`rounded-xl border p-3 transition ${viewMode === "large" ? "border-yellow-400/40 bg-yellow-400/10 text-yellow-300" : "border-white/[0.08] bg-[#171e28]/80 text-zinc-200"}`}>
+                <button type="button" onClick={() => setViewMode("large")} title="Vue détaillée" className={`rounded-xl border p-3 transition ${viewMode === "large" ? "border-cyan-400/40 bg-cyan-400/10 text-cyan-300" : "border-cyan-400/12 bg-[#0a1118] text-zinc-300"}`}>
                   <Maximize2 className="h-4 w-4" />
                 </button>
               </div>
 
               <div className="flex items-center gap-2.5">
                 <div className="relative flex-1 sm:w-52">
-                  <ArrowUpDown className="absolute left-3.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-yellow-400 pointer-events-none" />
+                  <ArrowUpDown className="absolute left-3.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-cyan-300 pointer-events-none" />
                   <select
                     value={sortBy}
                     onChange={(e) =>
                       setSortBy(e.target.value as SortOption)
                     }
-                    className="w-full appearance-none rounded-2xl border border-white/[0.08] bg-[#171e28]/80 pl-10 pr-9 py-3 text-xs font-bold uppercase tracking-wider text-white outline-none focus:border-yellow-500/50 cursor-pointer shadow-xl"
+                    className="w-full appearance-none rounded-[15px] border border-cyan-400/14 bg-[#0a1118] py-3 pl-10 pr-9 text-xs font-bold uppercase tracking-wider text-white outline-none focus:border-cyan-300/40"
                   >
                     <option value="value_desc">Valeur (Fort → Faible)</option>
                     <option value="value_asc">Valeur (Faible → Fort)</option>
@@ -348,7 +348,7 @@ export default function FavorisPage() {
                       onChange={(e) =>
                         setFilterRarity(e.target.value)
                       }
-                      className="w-full appearance-none rounded-2xl border border-white/[0.08] bg-[#171e28]/80 pl-10 pr-9 py-3 text-xs font-bold uppercase tracking-wider text-white outline-none focus:border-yellow-500/50 cursor-pointer shadow-xl"
+                      className="w-full appearance-none rounded-[15px] border border-cyan-400/14 bg-[#0a1118] py-3 pl-10 pr-9 text-xs font-bold uppercase tracking-wider text-white outline-none focus:border-cyan-300/40"
                     >
                       <option value="all">Toutes raretés</option>
                       {availableRarities.map((rarity) => (
@@ -377,7 +377,7 @@ export default function FavorisPage() {
                     setSearch("");
                     setFilterRarity("all");
                   }}
-                  className="text-yellow-400 underline hover:text-yellow-300 ml-2 font-medium"
+                  className="text-cyan-300 underline hover:text-yellow-300 ml-2 font-medium"
                 >
                   Réinitialiser
                 </button>
@@ -398,7 +398,7 @@ export default function FavorisPage() {
               ))}
             </div>
           ) : processedCards.length === 0 ? (
-            <div className="rounded-2xl border border-white/[0.08] bg-[#171e28]/80 p-12 text-center shadow-xl">
+            <div className="rounded-[18px] border border-cyan-400/12 bg-[#0a1118] p-12 text-center">
               <p className="text-zinc-200 text-xs font-medium italic">
                 {search || filterRarity !== "all"
                   ? "Aucun actif de la Watchlist ne correspond aux critères."
