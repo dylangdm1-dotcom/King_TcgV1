@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 190 48" role="img" aria-label="JustTCG">
+  <rect width="190" height="48" rx="10" fill="#F8FAFC"/>
+  <g transform="translate(10 9)">
+    <rect x="2" y="2" width="22" height="28" rx="5" fill="#0F172A" opacity=".14"/>
+    <rect x="7" width="22" height="28" rx="5" fill="url(#j)"/>
+    <path d="M12 8h12M12 13h9M12 18h7" stroke="#ECFEFF" stroke-width="2.2" stroke-linecap="round"/>
+  </g>
+  <text x="48" y="31" font-family="Inter,Arial,Helvetica,sans-serif" font-size="24" font-weight="850" letter-spacing="-1.1" fill="#0F172A">Just<tspan fill="#0891B2">TCG</tspan></text>
+  <defs><linearGradient id="j" x1="7" y1="0" x2="29" y2="28" gradientUnits="userSpaceOnUse"><stop stop-color="#22D3EE"/><stop offset="1" stop-color="#2563EB"/></linearGradient></defs>
+</svg>
