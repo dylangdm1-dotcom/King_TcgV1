@@ -146,7 +146,7 @@ export default function AccountManagementPage() {
 
                 <button type="button" className="kt-premium-button mt-6 inline-flex w-full items-center justify-center gap-2 px-4 py-3 text-[10px] font-black uppercase tracking-[0.1em]">
                   <Crown className="h-4 w-4" />
-                  Passer au Premium — 6,99 € / mois
+                  Passer au Premium — 5,99 € / mois
                 </button>
               </div>
             </div>
