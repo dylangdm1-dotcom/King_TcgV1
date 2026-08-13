@@ -65,7 +65,7 @@ export default function ScannerOverlay({
         </>
       ) : (
         <div
-          className={`absolute left-1/2 top-1/2 aspect-[63/88] w-[74%] max-w-[340px] -translate-x-1/2 -translate-y-1/2 rounded-[18px] border bg-black/10 transition-all duration-500 ${stateColor}`}
+          className={`absolute left-1/2 top-1/2 aspect-[63/88] w-[74%] max-w-[340px] -translate-x-1/2 -translate-y-1/2 rounded-[20px] border bg-black/[0.06] shadow-[0_0_30px_rgba(0,0,0,.18)] transition-all duration-500 ${stateColor}`}
         >
           {corners.map((corner) => (
             <span key={corner} className={`absolute h-8 w-8 ${corner} ${stateColor}`} />
@@ -90,7 +90,7 @@ export default function ScannerOverlay({
         </div>
       )}
 
-      <div className="absolute bottom-[1.5%] inset-x-0 flex justify-center px-4">
+      <div className="absolute inset-x-0 bottom-[1.5%] flex justify-center px-4">
         <div
           className={`flex max-w-[92%] items-center gap-2.5 rounded-xl border px-3 py-2 text-center text-[10px] font-bold uppercase tracking-[0.11em] shadow-2xl backdrop-blur-xl transition-all duration-300 ${
             hasResult
