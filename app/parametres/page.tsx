@@ -17,6 +17,8 @@ import {
   Sparkles,
   User,
   Users,
+  ChevronRight,
+  Palette,
 } from "lucide-react";
 
 import Navbar from "../../components/Navbar";
@@ -39,47 +41,39 @@ function AccordionItem({
   const [isOpen, setIsOpen] = useState(defaultOpen);
 
   return (
-    <div className="kt-premium-panel overflow-hidden rounded-[18px]">
+    <div className="overflow-hidden rounded-[16px] border border-white/[0.09] bg-[#0b1219]">
       <button
         type="button"
         onClick={() => setIsOpen((value) => !value)}
-        className={`flex w-full items-center justify-between gap-4 p-4 text-left transition sm:p-5 ${
-          isOpen ? "bg-white/[0.025]" : "hover:bg-white/[0.018]"
+        className={`flex w-full items-center justify-between gap-4 p-4 text-left transition ${
+          isOpen ? "bg-cyan-400/[0.025]" : "hover:bg-white/[0.02]"
         }`}
         aria-expanded={isOpen}
       >
-        <div className="flex min-w-0 items-center gap-3">
-          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl border border-cyan-400/15 bg-cyan-400/[0.06] text-cyan-300">
+        <span className="flex min-w-0 items-center gap-3">
+          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[13px] border border-cyan-400/20 bg-cyan-400/[0.06] text-cyan-300">
             {icon}
           </span>
           <span className="min-w-0">
-            <span className="block text-[11px] font-black uppercase tracking-[0.12em] text-white">
-              {title}
-            </span>
-            <span className="mt-1 block text-[10px] leading-4 text-zinc-200">
-              {description}
-            </span>
+            <span className="block text-[12px] font-black text-white">{title}</span>
+            <span className="mt-1 block text-[10px] leading-4 text-zinc-300">{description}</span>
           </span>
-        </div>
-
-        <span
-          className={`shrink-0 text-[10px] font-black text-zinc-200 transition-transform duration-200 ${
-            isOpen ? "rotate-180" : ""
-          }`}
-        >
-          ▼
         </span>
+
+        <ChevronRight
+          className={`h-4 w-4 shrink-0 text-zinc-400 transition-transform ${
+            isOpen ? "rotate-90 text-cyan-300" : ""
+          }`}
+        />
       </button>
 
       <div
         className={`grid transition-all duration-200 ease-out ${
-          isOpen
-            ? "grid-rows-[1fr] opacity-100"
-            : "grid-rows-[0fr] opacity-0"
+          isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
         }`}
       >
         <div className="overflow-hidden">
-          <div className="border-t border-white/[0.06] px-4 pb-5 pt-4 text-[11px] font-medium leading-5 text-zinc-100 sm:px-5">
+          <div className="border-t border-white/[0.06] px-4 pb-5 pt-4 text-[11px] font-medium leading-5 text-zinc-200">
             {children}
           </div>
         </div>
@@ -88,26 +82,12 @@ function AccordionItem({
   );
 }
 
-function StatusPill({
-  label,
-  status,
-  tone = "cyan",
-}: {
-  label: string;
-  status: string;
-  tone?: "cyan" | "green" | "amber";
-}) {
-  const toneClass = {
-    cyan: "border-cyan-400/15 bg-cyan-400/[0.06] text-cyan-300",
-    green: "border-emerald-400/15 bg-emerald-400/[0.06] text-emerald-300",
-    amber: "border-amber-400/15 bg-amber-400/[0.06] text-amber-300",
-  }[tone];
-
+function StatusPill({ label }: { label: string }) {
   return (
-    <div className="flex items-center justify-between gap-3 rounded-2xl border border-white/[0.07] bg-white/[0.035] px-3 py-2.5">
-      <span className="text-[10px] font-black text-zinc-300">{label}</span>
-      <span className={`rounded-full border px-2 py-1 text-[10px] font-bold uppercase tracking-[0.11em] ${toneClass}`}>
-        {status}
+    <div className="flex min-w-0 items-center justify-between gap-2 rounded-[13px] border border-white/[0.08] bg-[#0b1219] px-3 py-2.5">
+      <span className="truncate text-[9px] font-bold text-zinc-300">{label}</span>
+      <span className="rounded-full border border-emerald-400/20 bg-emerald-400/[0.06] px-2 py-1 text-[8px] font-black uppercase tracking-[0.09em] text-emerald-300">
+        Actif
       </span>
     </div>
   );
@@ -119,131 +99,136 @@ export default function SettingsPage() {
       <Navbar />
 
       <main className="kt-premium-shell min-h-screen pb-32 text-white">
-        <div className="mx-auto max-w-4xl space-y-6 px-4 py-6 sm:px-6">
-          <div className="flex items-center justify-between">
-            <Link
-              href="/"
-              className="inline-flex items-center gap-2 rounded-xl border border-sky-300/25 bg-sky-400/[0.08] px-3.5 py-2 text-[10px] font-bold uppercase tracking-[0.11em] text-sky-200 transition hover:border-sky-300/45 hover:text-white"
-            >
-              ← Retour à l’accueil
-            </Link>
-          </div>
+        <div className="mx-auto max-w-5xl space-y-5 px-4 py-6 sm:px-6">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 rounded-xl border border-cyan-400/20 bg-cyan-400/[0.055] px-3.5 py-2 text-[10px] font-bold uppercase tracking-[0.10em] text-cyan-200 transition hover:border-cyan-300/45 hover:text-white"
+          >
+            ← Retour à l’accueil
+          </Link>
 
-          <section className="kt-premium-panel relative overflow-hidden rounded-[24px] p-5 sm:p-7">
-            <div className="pointer-events-none absolute -right-16 -top-20 h-52 w-52 rounded-full bg-cyan-400/[0.06] blur-3xl" />
-            <div className="relative flex items-start gap-4">
-              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-[18px] border border-cyan-300/20 bg-cyan-400/[0.08] text-cyan-300 shadow-[0_0_32px_rgba(34,211,238,0.08)]">
+          <header className="relative overflow-hidden rounded-[22px] border border-cyan-400/28 bg-[#0a1118] p-5 shadow-[0_18px_48px_rgba(0,0,0,.24),0_0_34px_rgba(34,211,238,.045)] sm:p-6">
+            <div className="pointer-events-none absolute -right-16 -top-20 h-52 w-52 rounded-full bg-cyan-400/[0.055] blur-3xl" />
+            <div className="relative flex items-center gap-4">
+              <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-[18px] border border-cyan-300/25 bg-cyan-400/[0.08] text-cyan-300">
                 <Settings className="h-7 w-7" />
-              </div>
-              <div>
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-cyan-400/15 bg-cyan-400/[0.06] px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.16em] text-cyan-300">
-                  <Settings className="h-3 w-3" />
-                  Paramètres King_TCG
-                </span>
-                <h1 className="mt-3 text-xl font-black tracking-tight text-white sm:text-2xl">
+              </span>
+              <div className="min-w-0">
+                <h1 className="text-2xl font-black tracking-tight text-white sm:text-[28px]">
                   Paramètres
                 </h1>
-                <p className="mt-1 text-xs font-bold text-zinc-100">
-                  Personnalisez et consultez les réglages de King_TCG.
-                </p>
-                <p className="mt-3 max-w-2xl text-[11px] leading-5 text-zinc-200">
-                  Compte, préférences d’affichage, données, fonctionnalités et informations de l’application sont regroupés par section.
+                <p className="mt-1 text-[12px] leading-5 text-zinc-300">
+                  Gérez votre compte, vos préférences et les informations de King_TCG.
                 </p>
               </div>
             </div>
+          </header>
+
+          <section className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+            <StatusPill label="Recherche & prix" />
+            <StatusPill label="Scanner" />
+            <StatusPill label="Collection PSA" />
+            <StatusPill label="Estimation PSA" />
           </section>
 
-          <section className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            <StatusPill label="Recherche & prix" status="Actif" tone="green" />
-            <StatusPill label="Scanner Mono / Batch / Quad" status="Actif" tone="green" />
-            <StatusPill label="Collection PSA" status="Actif" tone="green" />
-            <StatusPill label="Estimation PSA Gemini" status="Actif" tone="green" />
-          </section>
-
-          <div className="flex items-center gap-3 pt-1">
-            <User className="h-4 w-4 text-cyan-300" />
-            <h2 className="whitespace-nowrap text-[12px] font-black uppercase tracking-[0.09em] text-cyan-300">Compte</h2>
-            <span className="h-px flex-1 bg-gradient-to-r from-cyan-400/35 to-transparent" />
-          </div>
-
-          <section className="grid gap-3 sm:grid-cols-2">
+          <section className="overflow-hidden rounded-[18px] border border-white/[0.10] bg-[#0a1118]">
             <Link
               href="/parametres/compte"
-              className="kt-premium-panel group flex items-center gap-4 rounded-[18px] p-4 transition hover:-translate-y-0.5 hover:border-cyan-300/20 sm:p-5"
+              className="group flex items-center gap-4 border-b border-white/[0.08] p-4 transition hover:bg-cyan-400/[0.025] sm:p-5"
             >
-              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-cyan-400/15 bg-cyan-400/[0.06] text-cyan-300">
+              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-[15px] border border-cyan-400/28 bg-cyan-400/[0.07] text-cyan-300">
                 <User className="h-5 w-5" />
               </span>
               <span className="min-w-0 flex-1">
-                <span className="block text-[11px] font-black uppercase tracking-[0.12em] text-white">
-                  Gestion du compte
+                <span className="flex flex-wrap items-center gap-2">
+                  <span className="text-[13px] font-black text-cyan-300">Compte & offres</span>
+                  <span className="rounded-full border border-cyan-400/20 bg-cyan-400/[0.05] px-2 py-1 text-[8px] font-black uppercase tracking-[0.08em] text-cyan-300">
+                    Normal / Premium
+                  </span>
                 </span>
-                <span className="mt-1 block text-[10px] leading-4 text-zinc-200">
-                  Accédez à votre session, vos préférences et aux informations liées à votre compte.
+                <span className="mt-1 block text-[10px] leading-4 text-zinc-300">
+                  Accédez à votre compte, à la connexion Google et aux formules King_TCG.
                 </span>
               </span>
-              <ExternalLink className="h-4 w-4 shrink-0 text-zinc-200 transition group-hover:text-cyan-300" />
+              <ChevronRight className="h-4 w-4 shrink-0 text-zinc-400 transition group-hover:text-cyan-300" />
             </Link>
 
             <Link
               href="/parametres/testeurs"
-              className="kt-premium-panel group flex items-center gap-4 rounded-[18px] p-4 transition hover:-translate-y-0.5 hover:border-cyan-300/20 sm:p-5"
+              className="group flex items-center gap-4 border-b border-white/[0.08] p-4 transition hover:bg-cyan-400/[0.025] sm:p-5"
             >
-              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-cyan-400/15 bg-cyan-400/[0.06] text-cyan-300">
+              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-[15px] border border-cyan-400/28 bg-cyan-400/[0.07] text-cyan-300">
                 <Users className="h-5 w-5" />
               </span>
               <span className="min-w-0 flex-1">
-                <span className="block text-[11px] font-black uppercase tracking-[0.12em] text-white">
-                  Testeurs professionnels
-                </span>
-                <span className="mt-1 block text-[10px] leading-4 text-zinc-200">
-                  Découvrez les partenaires qui participent aux tests et à l’amélioration de King_TCG.
+                <span className="text-[13px] font-black text-cyan-300">Partenaires & testeurs</span>
+                <span className="mt-1 block text-[10px] leading-4 text-zinc-300">
+                  Retrouvez les partenaires qui participent aux tests et à l’amélioration de King_TCG.
                 </span>
               </span>
-              <ExternalLink className="h-4 w-4 shrink-0 text-zinc-200 transition group-hover:text-cyan-300" />
+              <ChevronRight className="h-4 w-4 shrink-0 text-zinc-400 transition group-hover:text-cyan-300" />
             </Link>
+
+            <div className="flex flex-col gap-4 p-4 sm:flex-row sm:items-center sm:justify-between sm:p-5">
+              <div className="flex items-center gap-4">
+                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-[15px] border border-cyan-400/28 bg-cyan-400/[0.07] text-cyan-300">
+                  <Palette className="h-5 w-5" />
+                </span>
+                <div>
+                  <p className="text-[13px] font-black text-cyan-300">Thème de l’application</p>
+                  <p className="mt-1 text-[10px] leading-4 text-zinc-300">
+                    Le thème sombre actuel reste actif. Le thème clair sera préparé plus tard.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex shrink-0 items-center gap-1 rounded-[12px] border border-white/[0.08] bg-black/20 p-1">
+                <span className="rounded-[9px] border border-cyan-400/30 bg-cyan-400/[0.09] px-3 py-2 text-[9px] font-black text-cyan-300">
+                  Sombre · actif
+                </span>
+                <span className="rounded-[9px] px-3 py-2 text-[9px] font-black text-zinc-500">
+                  Clair · bientôt
+                </span>
+              </div>
+            </div>
           </section>
 
-          <div className="flex items-center gap-3 pt-1">
-            <Settings className="h-4 w-4 text-cyan-300" />
-            <h2 className="whitespace-nowrap text-[12px] font-black uppercase tracking-[0.09em] text-cyan-300">Préférences</h2>
-            <span className="h-px flex-1 bg-gradient-to-r from-cyan-400/35 to-transparent" />
-          </div>
+          <section className="relative overflow-hidden rounded-[18px] border border-[#f5c451]/32 bg-[#0a1118] p-5">
+            <div className="pointer-events-none absolute -left-16 -top-20 h-48 w-48 rounded-full bg-[#f5c451]/[0.05] blur-3xl" />
+            <div className="relative flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex items-center gap-4">
+                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-[16px] border border-[#f5c451]/30 bg-[#f5c451]/[0.07] text-[#f5c451]">
+                  <Crown className="h-6 w-6" />
+                </span>
+                <div>
+                  <p className="text-[13px] font-black text-white">
+                    Découvrez <span className="text-[#f5c451]">Premium King_TCG</span>
+                  </p>
+                  <p className="mt-1 max-w-xl text-[10px] leading-4 text-zinc-300">
+                    Tous les modes de scan, quota étendu, PSA détaillée, alertes et opportunités Premium.
+                  </p>
+                </div>
+              </div>
 
-          <section className="kt-premium-panel rounded-[18px] p-4 sm:p-5">
-            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-              <div>
-                <p className="text-[11px] font-black text-white">Thème de l’application</p>
-                <p className="mt-1 text-[10px] leading-4 text-zinc-200">
-                  Le thème sombre actuel reste actif. Un thème plus clair avec davantage de blanc sera préparé ensuite.
-                </p>
-              </div>
-              <div className="flex shrink-0 items-center gap-1 rounded-[13px] border border-white/[0.08] bg-black/20 p-1">
-                <button
-                  type="button"
-                  aria-pressed="true"
-                  className="rounded-[10px] border border-cyan-400/30 bg-cyan-400/[0.09] px-3 py-2 text-[10px] font-black text-cyan-300"
-                >
-                  Sombre · actif
-                </button>
-                <button
-                  type="button"
-                  aria-disabled="true"
-                  className="rounded-[10px] px-3 py-2 text-[10px] font-black text-zinc-300 opacity-60"
-                >
-                  Clair · bientôt
-                </button>
-              </div>
+              <Link
+                href="/parametres/compte"
+                className="inline-flex items-center justify-center gap-2 rounded-[12px] border border-[#f5c451]/40 bg-[#f5c451]/[0.08] px-4 py-2.5 text-[10px] font-black text-[#f5c451] transition hover:bg-[#f5c451]/[0.12]"
+              >
+                Voir les offres
+                <ChevronRight className="h-3.5 w-3.5" />
+              </Link>
             </div>
           </section>
 
           <div className="flex items-center gap-3 pt-1">
             <Database className="h-4 w-4 text-cyan-300" />
-            <h2 className="whitespace-nowrap text-[12px] font-black uppercase tracking-[0.09em] text-cyan-300">Informations & fonctionnement</h2>
+            <h2 className="whitespace-nowrap text-[11px] font-black uppercase tracking-[0.09em] text-cyan-300">
+              Informations & fonctionnement
+            </h2>
             <span className="h-px flex-1 bg-gradient-to-r from-cyan-400/35 to-transparent" />
           </div>
 
-          <div className="space-y-3">
+          <div className="space-y-2.5">
             <AccordionItem
               title="À propos de King_TCG"
               description="Positionnement, fonctions principales et identité de l’application."
@@ -256,7 +241,7 @@ export default function SettingsPage() {
                 <p>
                   L’interface privilégie une lecture rapide sur mobile : cartes identifiées, sources de prix séparées, historique local et outils de portefeuille accessibles depuis un même espace.
                 </p>
-                <p className="rounded-2xl border border-white/[0.07] bg-white/[0.035] p-3 text-[10px] text-zinc-200">
+                <p className="rounded-xl border border-white/[0.07] bg-white/[0.025] p-3 text-[10px] text-zinc-300">
                   King_TCG est un outil indépendant et n’est pas une application officielle de The Pokémon Company, Nintendo, Creatures ou GAME FREAK.
                 </p>
               </div>
@@ -267,86 +252,70 @@ export default function SettingsPage() {
               description="Origine des cotations et méthode d’affichage des valeurs."
               icon={<BarChart3 className="h-4 w-4" />}
             >
-              <div className="grid gap-3 sm:grid-cols-2">
-                <div className="rounded-2xl border border-white/[0.07] bg-white/[0.035] p-3">
-                  <p className="font-black text-white">Cardmarket</p>
-                  <p className="mt-1 text-[10px] text-zinc-200">Référence principalement utilisée pour le marché européen.</p>
-                </div>
-                <div className="rounded-2xl border border-white/[0.07] bg-white/[0.035] p-3">
-                  <p className="font-black text-white">TCGPlayer</p>
-                  <p className="mt-1 text-[10px] text-zinc-200">Référence complémentaire pour le marché nord-américain.</p>
-                </div>
-                <div className="rounded-2xl border border-white/[0.07] bg-white/[0.035] p-3">
-                  <p className="font-black text-white">eBay / ventes</p>
-                  <p className="mt-1 text-[10px] text-zinc-200">Utilisé lorsqu’une donnée de vente ou une moyenne exploitable est disponible.</p>
-                </div>
-                <div className="rounded-2xl border border-white/[0.07] bg-white/[0.035] p-3">
-                  <p className="font-black text-white">Moyenne King_TCG</p>
-                  <p className="mt-1 text-[10px] text-zinc-200">Calculée uniquement à partir des sources réellement trouvées, sans inventer une valeur absente.</p>
-                </div>
+              <div className="grid gap-2 sm:grid-cols-2">
+                {[
+                  ["Cardmarket", "Référence principalement utilisée pour le marché européen."],
+                  ["TCGPlayer", "Référence complémentaire pour le marché nord-américain."],
+                  ["eBay / ventes", "Utilisé lorsqu’une donnée de vente ou une moyenne exploitable est disponible."],
+                  ["Moyenne King_TCG", "Calculée uniquement à partir des sources réellement trouvées, sans inventer une valeur absente."],
+                ].map(([title, description]) => (
+                  <div key={title} className="rounded-xl border border-white/[0.07] bg-white/[0.025] p-3">
+                    <p className="font-black text-white">{title}</p>
+                    <p className="mt-1 text-[10px] text-zinc-300">{description}</p>
+                  </div>
+                ))}
               </div>
-              <p className="mt-3 text-[10px] text-zinc-200">
+              <p className="mt-3 text-[10px] text-zinc-300">
                 Les prix sont des repères de marché. L’état, la langue, la variante et la disponibilité réelle peuvent modifier le prix final d’une carte.
               </p>
             </AccordionItem>
 
             <AccordionItem
               title="Scanner de cartes"
-              description="Modes disponibles, langues, sessions et quota gratuit."
+              description="Modes disponibles, langues, sessions et fonctionnement."
               icon={<ScanLine className="h-4 w-4" />}
             >
-              <div className="space-y-3">
-                <div className="grid gap-3 sm:grid-cols-2">
-                  <div className="rounded-2xl border border-cyan-400/12 bg-cyan-400/[0.045] p-3">
-                    <p className="font-black text-cyan-200">Mono</p>
-                    <p className="mt-1 text-[10px] text-zinc-200">Analyse une seule carte pour fournir une identification détaillée.</p>
-                  </div>
-                  <div className="rounded-2xl border border-white/[0.07] bg-white/[0.035] p-3">
-                    <p className="font-black text-white">Batch</p>
-                    <p className="mt-1 text-[10px] text-zinc-200">Conserve jusqu’à quatre résultats dans une même session et permet de les consulter un par un.</p>
-                  </div>
-                  <div className="rounded-2xl border border-white/[0.07] bg-white/[0.035] p-3 sm:col-span-2">
-                    <p className="font-black text-white">Quad Scan</p>
-                    <p className="mt-1 text-[10px] text-zinc-200">Analyse quatre zones d’une même capture. Le module est fonctionnel et continue d’être affiné sur le cadrage et le raccord final.</p>
-                  </div>
+              <div className="grid gap-2 sm:grid-cols-3">
+                <div className="rounded-xl border border-cyan-400/15 bg-cyan-400/[0.04] p-3">
+                  <p className="font-black text-cyan-300">Mono</p>
+                  <p className="mt-1 text-[10px] text-zinc-300">Analyse une seule carte pour fournir une identification détaillée.</p>
                 </div>
-                <p>
-                  La recherche utilise des catalogues séparés FR / EN / JP / CN. Les extensions japonaises et chinoises disposent de chemins régionaux dédiés afin de préserver la bonne impression, le bon visuel et la bonne langue.
-                </p>
-                <p className="rounded-2xl border border-amber-400/12 bg-amber-400/[0.04] p-3 text-[10px] text-zinc-100">
-                  Le compte gratuit dispose actuellement de <strong className="text-white">50 sessions de scan par période</strong>, avec renouvellement le 5 du mois. Un Batch ou un Quad consomme une session, pas une session par carte. Le compteur est encore stocké localement tant que les comptes Cloud ne sont pas activés.
-                </p>
+                <div className="rounded-xl border border-white/[0.07] bg-white/[0.025] p-3">
+                  <p className="font-black text-white">Batch</p>
+                  <p className="mt-1 text-[10px] text-zinc-300">Conserve plusieurs résultats dans une même session.</p>
+                </div>
+                <div className="rounded-xl border border-white/[0.07] bg-white/[0.025] p-3">
+                  <p className="font-black text-white">Quad Scan</p>
+                  <p className="mt-1 text-[10px] text-zinc-300">Analyse quatre zones d’une même capture.</p>
+                </div>
               </div>
+              <p className="mt-3">
+                La recherche utilise des catalogues séparés FR / EN / JP / CN avec des chemins régionaux dédiés lorsque nécessaire.
+              </p>
             </AccordionItem>
 
             <AccordionItem
               title="PSA et grading"
-              description="Recherche de prix, collection gradée et estimation IA."
+              description="Collection gradée et estimation PSA par image."
               icon={<Award className="h-4 w-4" />}
             >
-              <div className="space-y-3">
+              <div className="space-y-2">
                 <p>
                   La page PSA permet de rechercher des repères PriceCharting, d’ajouter une carte gradée à la collection et de suivre sa valeur estimée ainsi que son certificat.
                 </p>
                 <p>
-                  L’estimation PSA par quatre photos et Gemini est active. Le résultat reste une <strong className="text-white">estimation non officielle</strong>, distincte d’une note attribuée par PSA.
+                  L’estimation PSA par photos reste une <strong className="text-white">estimation non officielle</strong>, distincte d’une note réellement attribuée par PSA.
                 </p>
               </div>
             </AccordionItem>
-
-            <div className="flex items-center gap-3 pt-3">
-              <Database className="h-4 w-4 text-cyan-300" />
-              <p className="whitespace-nowrap text-[11px] font-black uppercase tracking-[0.08em] text-cyan-300">Données & stockage</p>
-              <span className="h-px flex-1 bg-gradient-to-r from-cyan-400/30 to-transparent" />
-            </div>
 
             <AccordionItem
               title="Stockage et confidentialité"
               description="Où sont conservées vos cartes et préférences."
               icon={<ShieldCheck className="h-4 w-4" />}
             >
-              <div className="flex items-start gap-3 rounded-2xl border border-white/[0.07] bg-white/[0.035] p-3">
-                <CloudOff className="mt-0.5 h-4 w-4 shrink-0 text-zinc-200" />
+              <div className="flex items-start gap-3 rounded-xl border border-white/[0.07] bg-white/[0.025] p-3">
+                <CloudOff className="mt-0.5 h-4 w-4 shrink-0 text-cyan-300" />
                 <p>
                   La collection, les favoris et les préférences sont actuellement enregistrés localement dans le navigateur. Une suppression des données du navigateur peut donc effacer ces informations.
                 </p>
@@ -358,46 +327,39 @@ export default function SettingsPage() {
 
             <AccordionItem
               title="Fonctionnalités disponibles"
-              description="Résumé clair des modules réellement accessibles aujourd’hui."
+              description="Résumé des modules réellement accessibles aujourd’hui."
               icon={<Sparkles className="h-4 w-4" />}
             >
               <div className="grid gap-2 sm:grid-cols-2">
                 {[
                   "Recherche manuelle et par extension",
-                  "Prix Cardmarket, TCGPlayer, JustTCG, eBay et PokéWallet",
+                  "Prix multi-sources et cote King_TCG",
                   "Fiches cartes et graphiques de marché",
                   "Collection, favoris et tableau de bord",
-                  "Scanner Mono, Batch et Quad\n(50 sessions gratuites / période)",
+                  "Scanner Mono, Batch et Quad",
                   "Catalogues JP / CN dédiés",
-                  "Collection PSA",
-                  "Estimation PSA Gemini",
-                  "Alertes, opportunités, analyses de marché et notifications",
+                  "Collection PSA et estimation PSA",
+                  "Alertes, opportunités et analyses de marché",
                   "Export / import",
-                  "Comptes Cloud / Premium — Non actifs pour le moment",
+                  "Comptes Cloud / Premium — en cours de préparation",
                 ].map((item) => (
                   <div key={item} className="flex items-start gap-2 rounded-xl border border-white/[0.06] bg-black/15 px-3 py-2.5">
                     <ShieldCheck className="mt-0.5 h-3.5 w-3.5 shrink-0 text-cyan-300" />
-                    <span className="whitespace-pre-line text-[10px] text-zinc-100">{item}</span>
+                    <span className="text-[10px] text-zinc-200">{item}</span>
                   </div>
                 ))}
               </div>
             </AccordionItem>
 
-            <div className="flex items-center gap-3 pt-3">
-              <Info className="h-4 w-4 text-cyan-300" />
-              <p className="whitespace-nowrap text-[11px] font-black uppercase tracking-[0.08em] text-cyan-300">À propos & aide</p>
-              <span className="h-px flex-1 bg-gradient-to-r from-cyan-400/30 to-transparent" />
-            </div>
-
             <AccordionItem
               title="Questions fréquentes"
-              description="Réponses courtes sur les prix, les données et les résultats."
+              description="Prix, données, synchronisation et analyses."
               icon={<HelpCircle className="h-4 w-4" />}
             >
               <div className="space-y-4">
                 <div>
                   <p className="font-black text-white">Pourquoi une synchronisation peut-elle prendre du temps ?</p>
-                  <p className="mt-1">Les résultats de cartes peuvent apparaître avant que toutes les sources de prix aient répondu. L’interface indique alors la synchronisation en cours.</p>
+                  <p className="mt-1">Les résultats de cartes peuvent apparaître avant que toutes les sources de prix aient répondu.</p>
                 </div>
                 <div>
                   <p className="font-black text-white">Pourquoi une carte peut-elle rester non indexée ?</p>
@@ -420,21 +382,17 @@ export default function SettingsPage() {
               </p>
               <Link
                 href="/parametres/testeurs"
-                className="kt-premium-button-secondary mt-4 inline-flex items-center gap-2 px-3.5 py-2 text-[10px] uppercase tracking-wider"
+                className="mt-4 inline-flex items-center gap-2 rounded-xl border border-cyan-400/25 bg-cyan-400/[0.055] px-3.5 py-2 text-[10px] font-black text-cyan-300"
               >
-                Découvrir les testeurs partenaires
+                Découvrir les partenaires
                 <ExternalLink className="h-3 w-3" />
               </Link>
             </AccordionItem>
           </div>
 
-          <footer className="border-t border-white/[0.06] pt-6 text-center">
-            <p className="text-[10px] font-black tracking-[0.18em] text-white">
-              King_TCG
-            </p>
-            <p className="mt-1 text-[10px] font-bold text-zinc-200">
-              Pokémon Trading Card Companion
-            </p>
+          <footer className="border-t border-white/[0.06] pt-5 text-center">
+            <p className="text-[10px] font-black tracking-[0.18em] text-white">King_TCG</p>
+            <p className="mt-1 text-[10px] font-bold text-zinc-300">Pokémon Trading Card Companion</p>
           </footer>
         </div>
       </main>
