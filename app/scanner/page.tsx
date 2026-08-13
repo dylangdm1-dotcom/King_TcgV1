@@ -242,43 +242,51 @@ export default function ScannerPage() {
   // CAMERA INTERNAL IDENTIFICATION
   // =====================================================
 
+  const handleQuadCardIdentified = useCallback((card: PokemonCard, slot: number) => {
+    setBatchList((prev) => {
+      if (prev.length >= SCANNER_BATCH_LIMIT) return prev;
+      if (prev.some((item) => item.card.id === card.id)) return prev;
+
+      const item: ScannedBatchItem = {
+        id: `${card.id}_${Date.now()}_${slot}`,
+        card,
+        scannedAt: new Date(),
+        confidence: 0.95,
+      };
+      return [item, ...prev].slice(0, SCANNER_BATCH_LIMIT);
+    });
+    setIsDrawerOpen(true);
+    setStatus(`Quad : carte ${slot + 1} identifiée — ${card.name}`);
+  }, []);
+
   const handleCardsIdentified = useCallback(
     (cards: PokemonCard[]) => {
       if (!cards || cards.length === 0) {
+        setStatus("Quad terminé : aucune carte suffisamment sûre n'a été reliée.");
         return;
       }
 
-      if (scanMode === "single") {
-        if (!consumeSuccessfulSession("single")) {
-          setStatus("Quota gratuit atteint. Renouvellement le 5 du mois.");
-          return;
-        }
-        router.push(`/card/${cards[0].id}`);
-      } else {
-        const remaining = Math.max(0, SCANNER_BATCH_LIMIT - batchList.length);
-        const acceptedCards = cards.slice(0, remaining);
-        if (!acceptedCards.length) {
-          setStatus("Session batch pleine (4/4). Videz la session pour recommencer.");
-          setIsDrawerOpen(true);
-          return;
-        }
+      // ScannerCamera n'utilise ce callback final que pour le Quad.
+      // Les cartes sont déjà ajoutées une par une via handleQuadCardIdentified.
+      if (scanMode === "batch") {
         if (!consumeSuccessfulSession("batch")) {
           setStatus("Quota gratuit atteint. Renouvellement le 5 du mois.");
           return;
         }
-        const newBatchItems = acceptedCards.map((card) => ({
-          id: `${card.id}_${Date.now()}_${Math.random()}`,
-          card,
-          scannedAt: new Date(),
-          confidence: 0.95,
-        }));
-
-        setBatchList((prev) => [...newBatchItems, ...prev].slice(0, SCANNER_BATCH_LIMIT));
         setIsDrawerOpen(true);
-        setStatus(`${acceptedCards.length} carte(s) ajoutée(s) à la session batch.`);
+        setStatus(`Quad terminé : ${cards.length} carte(s) reconnue(s).`);
+        triggerHaptic(60);
+        return;
       }
+
+      // Sécurité si le composant est un jour réutilisé en Mono.
+      if (!consumeSuccessfulSession("single")) {
+        setStatus("Quota gratuit atteint. Renouvellement le 5 du mois.");
+        return;
+      }
+      router.push(`/card/${cards[0].id}`);
     },
-    [scanMode, router, batchList.length, consumeSuccessfulSession]
+    [scanMode, router, consumeSuccessfulSession, triggerHaptic]
   );
 
   // =====================================================
@@ -692,7 +700,7 @@ export default function ScannerPage() {
     return null;
   };
 
-  const handlePrimaryScan = () => {
+  const handlePrimaryScan = async () => {
     const currentQuota = readQuota();
     if (currentQuota.used >= SCANNER_MONTHLY_LIMIT) {
       setQuotaUsed(currentQuota.used);
@@ -706,9 +714,19 @@ export default function ScannerPage() {
       return;
     }
     if (scanMode === "batch" && batchCaptureMode === "grouped") {
+      if (!cameraRef.current || scanning) return;
       const label = groupedLanguage === "fr" ? "FR" : groupedLanguage === "en" ? "EN" : groupedLanguage === "ja" ? "JP" : "CN";
-      setStatus(`Capture groupée ${label} : analyse des quatre zones…`);
-      void cameraRef.current?.openGroupedScanner();
+      setScanning(true);
+      resetScanState();
+      setStatus(`Quad ${label} : analyse progressive des quatre cartes…`);
+      try {
+        await cameraRef.current.openGroupedScanner();
+      } catch (error: any) {
+        logger.error("SCAN", "Erreur Quad", error);
+        setStatus(error?.message || "Erreur pendant le Quad Scan.");
+      } finally {
+        setScanning(false);
+      }
       return;
     }
 
@@ -908,6 +926,7 @@ export default function ScannerPage() {
               ref={cameraRef}
               onReady={handleCameraReady}
               onCardsIdentified={handleCardsIdentified}
+              onCardIdentified={handleQuadCardIdentified}
               identifyCardByImage={handleIdentifyCardByImage}
             />
 
