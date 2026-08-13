@@ -13,6 +13,9 @@ import {
   History,
   ChevronDown,
   ChevronUp,
+  Crown,
+  Globe2,
+  TrendingUp,
 } from "lucide-react";
 
 import Navbar from "@/components/Navbar";
@@ -22,7 +25,7 @@ import {
   getCondition,
   getCardQuantity,
 } from "@/lib/storage";
-import { enrichAndCacheCards, getCardById } from "@/lib/pokemon";
+import { enrichAndCacheCards, getCardById, getCachedCardsForAnalytics } from "@/lib/pokemon";
 import { getLastPrice, getMarketHistory } from "@/lib/priceHistory";
 import {
   getMarketData,
@@ -51,7 +54,65 @@ type DashboardCard = {
   priceTrend7d: number;
   priceTrend30d: number;
   score: number;
+  setId: string;
+  setName: string;
+  dataLanguage: "fr" | "en" | "ja" | "zh-tw";
 };
+
+type MarketTrendSample = {
+  id: string;
+  name: string;
+  setId: string;
+  setName: string;
+  language: "fr" | "en" | "ja" | "zh-tw";
+  trend7d: number;
+};
+
+const DASHBOARD_MARKET_REFRESH_KEY = "king_tcg_dashboard_market_refresh_v1";
+const DASHBOARD_MARKET_REFRESH_MS = 2 * 60 * 60 * 1000;
+
+function cardLanguage(card: PokemonCard): "fr" | "en" | "ja" | "zh-tw" {
+  if (card.dataLanguage) return card.dataLanguage;
+  if (card.id.startsWith("tcgdex-ja-")) return "ja";
+  if (card.id.startsWith("tcgdex-zh-")) return "zh-tw";
+  if (card.id.startsWith("tcgdex-fr-")) return "fr";
+  return "en";
+}
+
+function readDashboardMarketRefresh(): number {
+  if (typeof window === "undefined") return 0;
+  const value = Number(localStorage.getItem(DASHBOARD_MARKET_REFRESH_KEY) || 0);
+  return Number.isFinite(value) ? value : 0;
+}
+
+function markDashboardMarketRefresh() {
+  if (typeof window === "undefined") return;
+  try { localStorage.setItem(DASHBOARD_MARKET_REFRESH_KEY, String(Date.now())); } catch {}
+}
+
+function trend7dForCard(card: PokemonCard): number {
+  const market = getMarketData(card);
+  if (Number.isFinite(market.priceTrend7d) && Math.abs(market.priceTrend7d) > 0.001) {
+    return Number(market.priceTrend7d.toFixed(2));
+  }
+
+  const history = getMarketHistory(card.id)
+    .filter((point) => point?.average > 0)
+    .sort((a, b) => a.date - b.date);
+  const sevenDaysAgo = Date.now() - 7 * 24 * 60 * 60 * 1000;
+  const recent = history.filter((point) => point.date >= sevenDaysAgo);
+  if (recent.length >= 2 && recent[0].average > 0) {
+    return Number((((recent[recent.length - 1].average - recent[0].average) / recent[0].average) * 100).toFixed(2));
+  }
+
+  if (Number.isFinite(market.priceTrend30d) && Math.abs(market.priceTrend30d) > 0.001) {
+    const monthlyMultiplier = Math.max(0.05, 1 + market.priceTrend30d / 100);
+    return Number(((Math.pow(monthlyMultiplier, 7 / 30) - 1) * 100).toFixed(2));
+  }
+
+  return 0;
+}
+
 
 function formatEuro(value: number): string {
   return value.toLocaleString("fr-FR", {
@@ -266,6 +327,12 @@ export default function DashboardPage() {
   const [loading, setLoading] =
     useState(true);
 
+  const [premiumExpanded, setPremiumExpanded] =
+    useState(false);
+
+  const [marketTrendSamples, setMarketTrendSamples] =
+    useState<MarketTrendSample[]>([]);
+
   const fileRef =
     useRef<HTMLInputElement>(null);
 
@@ -284,12 +351,32 @@ export default function DashboardPage() {
         return;
       }
 
-      // V44: synchronize the collection market once, exactly like Collection,
-      // so Dashboard and Collection always use the same King_TCG quotes.
+      // Le Dashboard ne force une synchronisation marché qu'une fois toutes les 2 h.
+      // Entre deux rafraîchissements, il réutilise les cotations déjà mises en cache.
       const baseCards = (await Promise.all(ids.map((id) => getCardById(id))))
         .filter((card): card is PokemonCard => Boolean(card));
-      const synchronizedCards = await enrichAndCacheCards(baseCards);
+      const marketRefreshIsDue = Date.now() - readDashboardMarketRefresh() >= DASHBOARD_MARKET_REFRESH_MS;
+      const synchronizedCards = marketRefreshIsDue
+        ? await enrichAndCacheCards(baseCards)
+        : baseCards;
+      if (marketRefreshIsDue) markDashboardMarketRefresh();
       const synchronizedById = new Map(synchronizedCards.map((card) => [card.id, card]));
+
+      // Les tendances Premium lisent uniquement le cache navigateur existant.
+      // Aucun appel API n'est déclenché par l'ouverture du bloc Premium.
+      const analyticsCards = getCachedCardsForAnalytics();
+      setMarketTrendSamples(
+        analyticsCards
+          .map((card) => ({
+            id: card.id,
+            name: card.name,
+            setId: card.set?.id || "",
+            setName: card.set?.name || "Extension inconnue",
+            language: cardLanguage(card),
+            trend7d: trend7dForCard(card),
+          }))
+          .filter((item) => Number.isFinite(item.trend7d) && Math.abs(item.trend7d) > 0.001)
+      );
 
       const loadedCards =
         await Promise.all(
@@ -384,27 +471,7 @@ export default function DashboardPage() {
                   qty,
                   buyPrice,
                   currentPrice,
-                  priceTrend7d: (() => {
-                    if (Number.isFinite(market.priceTrend7d) && Math.abs(market.priceTrend7d) > 0.001) {
-                      return market.priceTrend7d;
-                    }
-
-                    const history = getMarketHistory(card.id)
-                      .filter((point) => point?.average > 0)
-                      .sort((a, b) => a.date - b.date);
-                    const sevenDaysAgo = Date.now() - 7 * 24 * 60 * 60 * 1000;
-                    const recent = history.filter((point) => point.date >= sevenDaysAgo);
-                    if (recent.length >= 2 && recent[0].average > 0) {
-                      return Number((((recent[recent.length - 1].average - recent[0].average) / recent[0].average) * 100).toFixed(2));
-                    }
-
-                    if (Number.isFinite(market.priceTrend30d) && Math.abs(market.priceTrend30d) > 0.001) {
-                      const monthlyMultiplier = Math.max(0.05, 1 + market.priceTrend30d / 100);
-                      return Number(((Math.pow(monthlyMultiplier, 7 / 30) - 1) * 100).toFixed(2));
-                    }
-
-                    return 0;
-                  })(),
+                  priceTrend7d: trend7dForCard(card),
                   priceTrend30d:
                     Number.isFinite(
                       market.priceTrend30d
@@ -412,6 +479,9 @@ export default function DashboardPage() {
                       ? market.priceTrend30d
                       : 0,
                   score,
+                  setId: card.set?.id || "",
+                  setName: card.set?.name || "Extension inconnue",
+                  dataLanguage: cardLanguage(card),
                 };
               } catch (error) {
                 console.error(
@@ -621,6 +691,64 @@ export default function DashboardPage() {
         };
       });
     }, [cards]);
+
+
+  const pokemonMarketTrends = useMemo(() => {
+    const groups = new Map<string, MarketTrendSample[]>();
+    marketTrendSamples.forEach((item) => {
+      const key = item.name.trim().toLocaleLowerCase("fr-FR");
+      if (!key) return;
+      const list = groups.get(key) || [];
+      list.push(item);
+      groups.set(key, list);
+    });
+
+    return Array.from(groups.values())
+      .filter((items) => items.length >= 5)
+      .map((items) => {
+        const average = items.reduce((sum, item) => sum + item.trend7d, 0) / items.length;
+        const rising = items.filter((item) => item.trend7d > 0).length;
+        return { name: items[0].name, average: Number(average.toFixed(2)), rising, total: items.length };
+      })
+      .filter((item) => Math.abs(item.average) >= 1)
+      .sort((a, b) => Math.abs(b.average) - Math.abs(a.average))
+      .slice(0, 3);
+  }, [marketTrendSamples]);
+
+  const extensionMarketTrends = useMemo(() => {
+    const groups = new Map<string, MarketTrendSample[]>();
+    marketTrendSamples.forEach((item) => {
+      const key = item.setId || item.setName;
+      if (!key) return;
+      const list = groups.get(key) || [];
+      list.push(item);
+      groups.set(key, list);
+    });
+
+    return Array.from(groups.values())
+      .filter((items) => items.length >= 10)
+      .map((items) => {
+        const average = items.reduce((sum, item) => sum + item.trend7d, 0) / items.length;
+        const rising = items.filter((item) => item.trend7d > 0).length;
+        return { name: items[0].setName, average: Number(average.toFixed(2)), rising, total: items.length };
+      })
+      .filter((item) => Math.abs(item.average) >= 1)
+      .sort((a, b) => Math.abs(b.average) - Math.abs(a.average))
+      .slice(0, 3);
+  }, [marketTrendSamples]);
+
+  const languageDistribution = useMemo(() => {
+    const totals: Record<DashboardCard["dataLanguage"], number> = { fr: 0, en: 0, ja: 0, "zh-tw": 0 };
+    cards.forEach((card) => { totals[card.dataLanguage] += Math.max(0, card.qty); });
+    const total = Object.values(totals).reduce((sum, value) => sum + value, 0);
+    const labels: Array<{ key: DashboardCard["dataLanguage"]; label: string; flag: string }> = [
+      { key: "fr", label: "Français", flag: "🇫🇷" },
+      { key: "ja", label: "Japonais", flag: "🇯🇵" },
+      { key: "zh-tw", label: "Chinois", flag: "🇨🇳" },
+      { key: "en", label: "Anglais", flag: "🇬🇧" },
+    ];
+    return labels.map((item) => ({ ...item, count: totals[item.key], percent: total > 0 ? Number(((totals[item.key] / total) * 100).toFixed(1)) : 0 }));
+  }, [cards]);
 
 
   const exportData =
@@ -1484,6 +1612,91 @@ export default function DashboardPage() {
               </Link>
             )}
           </div>
+
+          {/* ANALYSE PREMIUM — toujours en dernier dans le Dashboard */}
+          <section className="kt-premium-card overflow-hidden rounded-[20px] border-amber-300/15">
+            <button
+              type="button"
+              onClick={() => setPremiumExpanded((value) => !value)}
+              className="flex w-full items-center justify-between gap-3 p-4 text-left sm:p-5"
+              aria-expanded={premiumExpanded}
+            >
+              <div className="flex items-center gap-2.5">
+                <Crown className="h-4 w-4 text-amber-300" />
+                <div>
+                  <h2 className="text-xs font-black uppercase tracking-[0.14em] text-white">Analyse Premium</h2>
+                  <p className="mt-0.5 text-[10px] text-zinc-500">Tendances marché agrégées et répartition de ton stock.</p>
+                </div>
+              </div>
+              {premiumExpanded ? <ChevronUp className="h-4 w-4 text-amber-300" /> : <ChevronDown className="h-4 w-4 text-amber-300" />}
+            </button>
+
+            {premiumExpanded && (
+              <div className="space-y-3 border-t border-white/[0.07] p-4 sm:p-5">
+                <div className="grid gap-3 lg:grid-cols-2">
+                  <div className="kt-premium-card-soft rounded-2xl p-3.5">
+                    <div className="mb-3 flex items-center gap-2">
+                      <TrendingUp className="h-4 w-4 text-cyan-300" />
+                      <h3 className="text-[10px] font-black uppercase tracking-wider text-zinc-300">Tendances Pokémon · 7j</h3>
+                    </div>
+                    <div className="space-y-2">
+                      {pokemonMarketTrends.length ? pokemonMarketTrends.map((item) => (
+                        <div key={item.name} className="rounded-xl border border-white/[0.06] bg-black/20 p-2.5">
+                          <div className="flex items-center justify-between gap-3">
+                            <span className="truncate text-[11px] font-black text-white">{item.name}</span>
+                            <span className={`shrink-0 text-[11px] font-black tabular-nums ${item.average >= 0 ? "text-emerald-300" : "text-rose-300"}`}>
+                              {item.average >= 0 ? "+" : ""}{item.average.toFixed(1)} %
+                            </span>
+                          </div>
+                          <p className="mt-1 text-[9px] text-zinc-500">{item.rising}/{item.total} cartes en hausse · {Math.abs(item.average) >= 3 ? "tendance forte à surveiller" : "mouvement collectif détecté"}</p>
+                        </div>
+                      )) : <p className="text-[10px] font-bold text-zinc-600">Données insuffisantes · minimum 5 cartes par Pokémon.</p>}
+                    </div>
+                  </div>
+
+                  <div className="kt-premium-card-soft rounded-2xl p-3.5">
+                    <div className="mb-3 flex items-center gap-2">
+                      <TrendingUp className="h-4 w-4 text-violet-300" />
+                      <h3 className="text-[10px] font-black uppercase tracking-wider text-zinc-300">Tendances extensions · 7j</h3>
+                    </div>
+                    <div className="space-y-2">
+                      {extensionMarketTrends.length ? extensionMarketTrends.map((item) => (
+                        <div key={item.name} className="rounded-xl border border-white/[0.06] bg-black/20 p-2.5">
+                          <div className="flex items-center justify-between gap-3">
+                            <span className="truncate text-[11px] font-black text-white">{item.name}</span>
+                            <span className={`shrink-0 text-[11px] font-black tabular-nums ${item.average >= 0 ? "text-emerald-300" : "text-rose-300"}`}>
+                              {item.average >= 0 ? "+" : ""}{item.average.toFixed(1)} %
+                            </span>
+                          </div>
+                          <p className="mt-1 text-[9px] text-zinc-500">{Math.round((item.rising / item.total) * 100)} % des cartes en hausse · {item.total} analysées</p>
+                        </div>
+                      )) : <p className="text-[10px] font-bold text-zinc-600">Données insuffisantes · minimum 10 cartes par extension.</p>}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="kt-premium-card-soft rounded-2xl p-3.5">
+                  <div className="mb-3 flex items-center gap-2">
+                    <Globe2 className="h-4 w-4 text-amber-300" />
+                    <h3 className="text-[10px] font-black uppercase tracking-wider text-zinc-300">Répartition du stock par langue</h3>
+                  </div>
+                  <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+                    {languageDistribution.map((item) => (
+                      <div key={item.key} className="rounded-xl border border-white/[0.06] bg-black/20 p-2.5">
+                        <p className="text-[10px] font-bold text-zinc-400">{item.flag} {item.label}</p>
+                        <p className="mt-1 text-sm font-black tabular-nums text-white">{item.percent.toFixed(1)} %</p>
+                        <p className="text-[9px] text-zinc-600">{item.count} carte{item.count > 1 ? "s" : ""}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <p className="text-center text-[8px] font-bold uppercase tracking-wider text-zinc-700">
+                  Analyse depuis les données déjà en cache · rafraîchissement marché Dashboard max. toutes les 2 h
+                </p>
+              </div>
+            )}
+          </section>
         </div>
       </main>
     </>
