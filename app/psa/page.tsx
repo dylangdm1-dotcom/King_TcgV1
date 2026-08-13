@@ -34,7 +34,7 @@ import {
 
 function formatEUR(value: number): string {
   if (!Number.isFinite(value) || value <= 0) {
-    return "—";
+    return "Pas de données";
   }
 
   return `${value.toLocaleString("fr-FR", {
@@ -169,12 +169,12 @@ export default function PSAPage() {
     setNewGrade(grade);
 
     const prices: Record<PSAGrade, number> = {
-      1: card.prices.ungraded,
-      2: card.prices.ungraded,
-      3: card.prices.ungraded,
-      4: card.prices.ungraded,
-      5: card.prices.ungraded,
-      6: card.prices.ungraded,
+      1: card.prices.psa1,
+      2: card.prices.psa2,
+      3: card.prices.psa3,
+      4: card.prices.psa4,
+      5: card.prices.psa5,
+      6: card.prices.psa6,
       7: card.prices.psa7,
       8: card.prices.psa8,
       9: card.prices.psa9,
@@ -693,46 +693,112 @@ export default function PSAPage() {
                         />
 
                         <PriceBox
+                          label="PSA 1"
+                          price={card.prices.psa1}
+                          onClick={card.prices.psa1 > 0 ? () =>
+                            handleSelectPriceChartingCard(
+                              card,
+                              1
+                            ) : undefined
+                          }
+                        />
+
+                        <PriceBox
+                          label="PSA 2"
+                          price={card.prices.psa2}
+                          onClick={card.prices.psa2 > 0 ? () =>
+                            handleSelectPriceChartingCard(
+                              card,
+                              2
+                            ) : undefined
+                          }
+                        />
+
+                        <PriceBox
+                          label="PSA 3"
+                          price={card.prices.psa3}
+                          onClick={card.prices.psa3 > 0 ? () =>
+                            handleSelectPriceChartingCard(
+                              card,
+                              3
+                            ) : undefined
+                          }
+                        />
+
+                        <PriceBox
+                          label="PSA 4"
+                          price={card.prices.psa4}
+                          onClick={card.prices.psa4 > 0 ? () =>
+                            handleSelectPriceChartingCard(
+                              card,
+                              4
+                            ) : undefined
+                          }
+                        />
+
+                        <PriceBox
+                          label="PSA 5"
+                          price={card.prices.psa5}
+                          onClick={card.prices.psa5 > 0 ? () =>
+                            handleSelectPriceChartingCard(
+                              card,
+                              5
+                            ) : undefined
+                          }
+                        />
+
+                        <PriceBox
+                          label="PSA 6"
+                          price={card.prices.psa6}
+                          onClick={card.prices.psa6 > 0 ? () =>
+                            handleSelectPriceChartingCard(
+                              card,
+                              6
+                            ) : undefined
+                          }
+                        />
+
+                        <PriceBox
                           label="PSA 7"
                           price={card.prices.psa7}
-                          onClick={() =>
+                          onClick={card.prices.psa7 > 0 ? () =>
                             handleSelectPriceChartingCard(
                               card,
                               7
-                            )
+                            ) : undefined
                           }
                         />
 
                         <PriceBox
                           label="PSA 8"
                           price={card.prices.psa8}
-                          onClick={() =>
+                          onClick={card.prices.psa8 > 0 ? () =>
                             handleSelectPriceChartingCard(
                               card,
                               8
-                            )
+                            ) : undefined
                           }
                         />
 
                         <PriceBox
                           label="PSA 9"
                           price={card.prices.psa9}
-                          onClick={() =>
+                          onClick={card.prices.psa9 > 0 ? () =>
                             handleSelectPriceChartingCard(
                               card,
                               9
-                            )
+                            ) : undefined
                           }
                         />
 
                         <PriceBox
                           label="PSA 10"
                           price={card.prices.psa10}
-                          onClick={() =>
+                          onClick={card.prices.psa10 > 0 ? () =>
                             handleSelectPriceChartingCard(
                               card,
                               10
-                            )
+                            ) : undefined
                           }
                         />
                       </div>
