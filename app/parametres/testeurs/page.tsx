@@ -3,9 +3,13 @@
 import Link from "next/link";
 import {
   ArrowLeft,
+  BadgeCheck,
   ExternalLink,
+  FlaskConical,
+  Info,
   Instagram,
   MessageCircle,
+  MessagesSquare,
   ShieldCheck,
   Sparkles,
   Star,
@@ -69,153 +73,213 @@ const partners = [
   },
 ];
 
+const testerModules = [
+  {
+    label: "Tests terrain",
+    value: "Scanner & mobile",
+    icon: FlaskConical,
+    tone: "cyan",
+  },
+  {
+    label: "Retours suivis",
+    value: "UX & données",
+    icon: MessagesSquare,
+    tone: "violet",
+  },
+  {
+    label: "Statut",
+    value: "Programme actif",
+    icon: ShieldCheck,
+    tone: "emerald",
+  },
+] as const;
+
+const testerTones = {
+  cyan: {
+    icon: "border-cyan-400/25 bg-cyan-400/[0.08] text-cyan-300",
+    title: "text-cyan-300",
+  },
+  violet: {
+    icon: "border-violet-400/25 bg-violet-400/[0.08] text-violet-300",
+    title: "text-violet-200",
+  },
+  emerald: {
+    icon: "border-emerald-400/25 bg-emerald-400/[0.08] text-emerald-300",
+    title: "text-emerald-300",
+  },
+};
+
 export default function TesteursPage() {
+  const activePartners = partners.filter((partner) => partner.active);
+  const upcomingPartners = partners.filter((partner) => !partner.active);
+
   return (
     <>
       <Navbar />
 
       <main className="kt-premium-shell min-h-screen pb-32 text-white">
-        <div className="mx-auto max-w-5xl space-y-6 px-4 py-6 sm:px-6">
+        <div className="mx-auto max-w-5xl space-y-7 px-4 py-6 sm:px-6">
           <Link
             href="/parametres"
-            className="kt-premium-button-secondary inline-flex items-center gap-2 px-3.5 py-2 text-[11px] uppercase tracking-wider"
+            className="kt-premium-button-secondary inline-flex items-center gap-2 px-3.5 py-2 text-[11px] font-bold uppercase tracking-wide"
           >
             <ArrowLeft className="h-3.5 w-3.5" />
             Retour aux paramètres
           </Link>
 
-          <section className="kt-premium-panel relative overflow-hidden rounded-[26px] p-5 sm:p-7">
-            <div className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-cyan-400/[0.07] blur-3xl" />
-            <div className="relative flex items-start gap-4">
-              <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-[18px] border border-cyan-300/20 bg-cyan-400/[0.08] text-cyan-300 shadow-[0_0_34px_rgba(34,211,238,0.09)]">
-                <Users className="h-7 w-7" />
-              </span>
-              <div>
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-cyan-400/15 bg-cyan-400/[0.06] px-2.5 py-1 text-[11px] font-black uppercase tracking-[0.16em] text-cyan-300">
-                  <Star className="h-3 w-3" />
-                  Programme partenaires
-                </span>
-                <h1 className="mt-3 text-xl font-black tracking-tight sm:text-2xl">
-                  Testeurs professionnels
-                </h1>
-                <p className="mt-1 text-xs font-bold text-zinc-100">
-                  Des retours terrain pour améliorer King_TCG
-                </p>
-                <p className="mt-3 max-w-2xl text-[12px] leading-5 text-zinc-200">
-                  Ces profils contribuent à tester les parcours réels, la compréhension des prix, le scanner et l’expérience mobile avant les prochaines versions.
-                </p>
-              </div>
+          <header className="flex items-start gap-4 border-b border-white/[0.08] pb-6">
+            <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-[15px] border border-cyan-300/20 bg-cyan-400/[0.08] text-cyan-300 shadow-[0_0_28px_rgba(34,211,238,.08)]">
+              <Users className="h-6 w-6" />
+            </span>
+            <div>
+              <h1 className="text-xl font-black tracking-tight sm:text-2xl">
+                Partenaires & Testeurs
+              </h1>
+              <p className="mt-1 text-[13px] font-medium leading-5 text-zinc-200">
+                Découvrez les partenaires et testeurs qui accompagnent l’évolution de King_TCG.
+              </p>
             </div>
-          </section>
+          </header>
 
-          <section className="grid grid-cols-3 gap-2">
-            {[
-              { label: "Tests terrain", value: "Scanner & mobile" },
-              { label: "Retours suivis", value: "UX & données" },
-              { label: "Statut", value: "Programme actif" },
-            ].map((item) => (
-              <div key={item.label} className="kt-premium-panel rounded-[16px] p-2.5 sm:p-3">
-                <ShieldCheck className="h-3.5 w-3.5 text-cyan-300" />
-                <p className="mt-2 text-[10px] font-black uppercase tracking-[0.08em] text-zinc-200">
-                  {item.label}
-                </p>
-                <p className="mt-1 text-[10px] font-bold leading-4 text-white sm:text-[11px]">{item.value}</p>
-              </div>
-            ))}
-          </section>
+          <section>
+            <div className="mb-4 flex items-center gap-3">
+              <Star className="h-4 w-4 text-cyan-300" />
+              <h2 className="whitespace-nowrap text-[13px] font-black uppercase tracking-[0.08em] text-cyan-300">
+                Nos partenaires
+              </h2>
+              <span className="h-px flex-1 bg-gradient-to-r from-cyan-400/45 to-transparent" />
+            </div>
 
-          <section className="grid gap-4 lg:grid-cols-3">
-            {partners.map((partner, index) => (
-              <article
-                key={`${partner.name}-${index}`}
-                className={`kt-premium-panel relative overflow-hidden rounded-[24px] p-5 transition duration-200 ${
-                  partner.active
-                    ? "hover:-translate-y-1 hover:border-cyan-300/20"
-                    : "opacity-70"
-                }`}
-              >
-                {partner.active && (
-                  <div className="pointer-events-none absolute -right-12 -top-14 h-36 w-36 rounded-full bg-cyan-400/[0.07] blur-3xl" />
-                )}
+            <div className="grid gap-4 md:grid-cols-2">
+              {activePartners.map((partner, index) => (
+                <article
+                  key={`${partner.name}-${index}`}
+                  className={`relative overflow-hidden rounded-[18px] border bg-[#111821] p-5 shadow-[0_18px_48px_rgba(0,0,0,.26)] transition duration-200 hover:-translate-y-1 ${
+                    index === 1
+                      ? "border-emerald-400/35 hover:border-emerald-300/55"
+                      : "border-cyan-400/18 hover:border-cyan-300/35"
+                  }`}
+                >
+                  <div
+                    className={`pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full blur-3xl ${
+                      index === 1 ? "bg-emerald-400/[0.07]" : "bg-cyan-400/[0.06]"
+                    }`}
+                  />
 
-                <div className="relative">
-                  <div className="flex items-center justify-between gap-3">
-                    <span className={`rounded-full border px-2.5 py-1 text-[11px] font-black uppercase tracking-[0.13em] ${
-                      partner.active
-                        ? "border-emerald-400/15 bg-emerald-400/[0.06] text-emerald-300"
-                        : "border-white/[0.07] bg-white/[0.025] text-zinc-200"
-                    }`}>
-                      {partner.active ? "Partenaire validé" : "À venir"}
-                    </span>
-                    {partner.active ? (
-                      <Sparkles className="h-4 w-4 text-cyan-300" />
-                    ) : (
-                      <Users className="h-4 w-4 text-zinc-700" />
-                    )}
-                  </div>
-
-                  <div className="mt-5 flex items-center gap-3">
+                  <div className="relative flex flex-col items-center text-center">
                     {partner.logo && (
-                      <img
-                        src={partner.logo}
-                        alt={`Logo ${partner.name}`}
-                        className="h-14 w-14 shrink-0 rounded-2xl border border-amber-300/20 object-cover shadow-[0_0_24px_rgba(251,191,36,0.10)]"
-                        loading="lazy"
-                      />
+                      <div className="flex h-28 w-28 items-center justify-center overflow-hidden rounded-full border border-white/[0.1] bg-black/35 p-1 shadow-[0_14px_34px_rgba(0,0,0,.35)] sm:h-32 sm:w-32">
+                        <img
+                          src={partner.logo}
+                          alt={`Logo ${partner.name}`}
+                          className="h-full w-full rounded-full object-cover"
+                          loading="lazy"
+                        />
+                      </div>
                     )}
-                    <div className="min-w-0">
-                      <h2 className="text-base font-black text-white">{partner.name}</h2>
-                      <p className="mt-1 text-[11px] font-black uppercase tracking-[0.13em] text-cyan-300">
-                        {partner.role}
-                      </p>
-                      <p className="mt-1 text-[11px] font-bold text-zinc-200">{partner.platform}</p>
-                    </div>
-                  </div>
 
-                  <p className="mt-4 min-h-[64px] text-[11px] leading-5 text-zinc-200">
-                    {partner.description}
-                  </p>
+                    <h3 className="mt-4 text-lg font-black tracking-tight text-white">
+                      {partner.name}
+                    </h3>
 
-                  {partner.links.length > 0 ? (
-                    <div className="mt-5 space-y-2 border-t border-white/[0.06] pt-4">
+                    <span
+                      className={`mt-2 inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-[10px] font-black uppercase tracking-[0.08em] ${
+                        index === 1
+                          ? "border-emerald-400/20 bg-emerald-400/[0.08] text-emerald-300"
+                          : "border-cyan-400/20 bg-cyan-400/[0.08] text-cyan-300"
+                      }`}
+                    >
+                      <BadgeCheck className="h-3 w-3" />
+                      Partenaire validé
+                    </span>
+
+                    <p className="mt-3 text-[12px] font-bold text-zinc-100">
+                      {partner.role} · {partner.platform}
+                    </p>
+                    <p className="mt-3 max-w-md text-[12px] leading-5 text-zinc-200">
+                      {partner.description}
+                    </p>
+
+                    <div className="mt-5 flex w-full flex-wrap justify-center gap-2 border-t border-white/[0.07] pt-4">
                       {partner.links.map(({ label, href, icon: Icon }) => (
                         <a
                           key={href}
                           href={href}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="group flex items-center justify-between gap-3 rounded-2xl border border-white/[0.07] bg-white/[0.035] px-3 py-2.5 text-[11px] font-black text-zinc-300 transition hover:border-cyan-300/20 hover:text-cyan-200"
+                          className="group inline-flex items-center gap-2 rounded-xl border border-white/[0.08] bg-white/[0.04] px-3 py-2 text-[11px] font-bold text-zinc-100 transition hover:border-cyan-300/30 hover:text-cyan-200"
                         >
-                          <span className="flex min-w-0 items-center gap-2">
-                            <Icon className="h-3.5 w-3.5 shrink-0 text-cyan-300" />
-                            <span className="truncate">{label}</span>
-                          </span>
-                          <ExternalLink className="h-3.5 w-3.5 shrink-0 text-zinc-200 transition group-hover:text-cyan-300" />
+                          <Icon className="h-3.5 w-3.5 text-cyan-300" />
+                          <span>{label}</span>
+                          <ExternalLink className="h-3 w-3 text-zinc-400 transition group-hover:text-cyan-300" />
                         </a>
                       ))}
                     </div>
-                  ) : (
-                    <div className="mt-5 rounded-2xl border border-dashed border-white/[0.08] bg-black/15 px-3 py-3 text-center text-[11px] font-bold text-zinc-700">
-                      Profil partenaire disponible prochainement
-                    </div>
-                  )}
-                </div>
-              </article>
-            ))}
+                  </div>
+                </article>
+              ))}
+            </div>
+
+            {upcomingPartners.length > 0 && (
+              <div className="mt-3 rounded-[14px] border border-dashed border-white/[0.09] bg-white/[0.025] px-4 py-3 text-center text-[11px] font-medium text-zinc-300">
+                <Sparkles className="mr-1.5 inline h-3.5 w-3.5 text-cyan-300" />
+                D’autres partenaires pourront rejoindre le programme après validation.
+              </div>
+            )}
           </section>
 
-          <section className="kt-premium-panel rounded-[18px] p-5 text-center sm:p-6">
-            <p className="text-[11px] font-black uppercase tracking-[0.15em] text-cyan-300">
-              Contribution encadrée
-            </p>
-            <p className="mx-auto mt-3 max-w-2xl text-[11px] leading-5 text-zinc-200">
-              Être présenté comme testeur ne signifie pas un partenariat officiel avec The Pokémon Company. Les retours concernent uniquement l’amélioration indépendante de King_TCG.
-            </p>
+          <section>
+            <div className="mb-4 flex items-center gap-3">
+              <Users className="h-4 w-4 text-cyan-300" />
+              <h2 className="whitespace-nowrap text-[13px] font-black uppercase tracking-[0.08em] text-cyan-300">
+                Notre équipe de testeurs
+              </h2>
+              <span className="h-px flex-1 bg-gradient-to-r from-cyan-400/45 to-transparent" />
+            </div>
+
+            <div className="grid grid-cols-3 overflow-hidden rounded-[18px] border border-white/[0.1] bg-[#111821] shadow-[0_18px_48px_rgba(0,0,0,.24)]">
+              {testerModules.map((item, index) => {
+                const Icon = item.icon;
+                const tone = testerTones[item.tone];
+                return (
+                  <div
+                    key={item.label}
+                    className={`flex min-w-0 flex-col items-center justify-center px-2 py-4 text-center sm:px-4 sm:py-5 ${
+                      index > 0 ? "border-l border-white/[0.09]" : ""
+                    }`}
+                  >
+                    <span className={`flex h-10 w-10 items-center justify-center rounded-full border sm:h-11 sm:w-11 ${tone.icon}`}>
+                      <Icon className="h-4.5 w-4.5" />
+                    </span>
+                    <p className={`mt-2 whitespace-nowrap text-[9px] font-black uppercase tracking-[0.045em] sm:text-[10px] ${tone.title}`}>
+                      {item.label}
+                    </p>
+                    <p className="mt-1 text-[10px] font-semibold leading-4 text-white sm:text-[11px]">
+                      {item.value}
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
+          </section>
+
+          <section className="rounded-[18px] border border-cyan-400/25 bg-cyan-400/[0.045] p-4 sm:p-5">
+            <div className="flex items-start gap-3">
+              <Info className="mt-0.5 h-4 w-4 shrink-0 text-cyan-300" />
+              <div>
+                <h2 className="text-[12px] font-black uppercase tracking-[0.08em] text-cyan-300">
+                  Notre démarche
+                </h2>
+                <p className="mt-2 text-[12px] leading-5 text-zinc-100">
+                  Les retours terrain servent à améliorer le scanner, les données marché et l’expérience d’utilisation de King_TCG. Cette contribution reste indépendante de The Pokémon Company.
+                </p>
+              </div>
+            </div>
           </section>
 
           <footer className="border-t border-white/[0.06] pt-6 text-center">
             <p className="text-[11px] font-black tracking-[0.18em] text-white">King_TCG</p>
-            <p className="mt-1 text-[11px] font-bold text-zinc-200">Pokémon Trading Card Companion</p>
+            <p className="mt-1 text-[11px] font-bold text-zinc-300">Pokémon Trading Card Companion</p>
           </footer>
         </div>
       </main>
