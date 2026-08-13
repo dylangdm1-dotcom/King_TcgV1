@@ -1,7 +1,6 @@
 "use client";
 
 import { useMemo, useState } from "react";
-
 import {
   Award,
   Layers,
@@ -45,88 +44,72 @@ export default function CardHero({
   const activeImage = candidates[Math.min(imageIndex, candidates.length - 1)] || "/placeholder.png";
 
   return (
-    <div className="relative grid items-center gap-7 lg:grid-cols-[minmax(280px,390px)_1fr] lg:gap-12">
-      <div className="relative mx-auto w-full max-w-[390px]">
-        <div className="pointer-events-none absolute -inset-10 rounded-full bg-cyan-400/[0.07] blur-3xl" />
-        <div className="kt-card-stage group relative mx-auto w-fit">
-          <div className="kt-card-stage-grid" />
-          <div className="relative rounded-[18px] border border-white/[0.08] bg-[#111821]/95 p-3 shadow-[0_30px_80px_rgba(0,0,0,.58)] transition duration-300 group-hover:-translate-y-1 group-hover:border-cyan-400/20">
-            <img
-              src={activeImage}
-              alt={name}
-              onError={() => setImageIndex((current) => Math.min(current + 1, candidates.length - 1))}
-              className="block w-[230px] rounded-[15px] object-cover shadow-[0_24px_55px_rgba(0,0,0,.52)] transition-transform duration-500 group-hover:scale-[1.018] sm:w-[280px] lg:w-[310px]"
-            />
-            <div className="pointer-events-none absolute inset-3 rounded-[15px] bg-gradient-to-tr from-transparent via-white/[0.035] to-cyan-300/[0.06]" />
-          </div>
-          <div className="mx-auto mt-4 h-px w-2/3 bg-gradient-to-r from-transparent via-cyan-400/35 to-transparent" />
+    <div className="grid gap-5 lg:grid-cols-[minmax(245px,330px)_1fr] lg:items-start lg:gap-7">
+      <div className="relative mx-auto w-full max-w-[330px]">
+        <div className="pointer-events-none absolute -inset-8 rounded-full bg-cyan-400/[0.07] blur-3xl" />
+        <div className="relative overflow-hidden rounded-[22px] border border-cyan-400/22 bg-[#0a1118] p-3 shadow-[0_28px_70px_rgba(0,0,0,.50),0_0_30px_rgba(34,211,238,.04)]">
+          <div className="pointer-events-none absolute inset-x-10 top-0 h-px bg-cyan-300/70 shadow-[0_0_12px_rgba(34,211,238,.8)]" />
+          <img
+            src={activeImage}
+            alt={name}
+            onError={() => setImageIndex((current) => Math.min(current + 1, candidates.length - 1))}
+            className="relative z-10 block w-full rounded-[17px] object-cover shadow-[0_22px_52px_rgba(0,0,0,.48)] transition duration-300 hover:scale-[1.015]"
+          />
+          <div className="pointer-events-none absolute inset-3 rounded-[17px] bg-gradient-to-tr from-transparent via-white/[0.025] to-cyan-300/[0.06]" />
         </div>
       </div>
 
-      <div className="min-w-0 space-y-6 text-center lg:text-left">
+      <div className="min-w-0 space-y-4">
         <div>
-          <span className="kt-eyebrow">
-            <Sparkles className="h-3.5 w-3.5" />
-            Fiche marché premium
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-cyan-400/20 bg-cyan-400/[0.06] px-2.5 py-1 text-[9px] font-black uppercase tracking-[0.14em] text-cyan-300">
+            <Sparkles className="h-3 w-3" />
+            Fiche marché King_TCG
           </span>
-          <h1 className="mt-4 text-3xl font-black tracking-[-0.045em] text-white sm:text-4xl lg:text-5xl">
+          <h1 className="mt-3 text-3xl font-black tracking-[-0.04em] text-white sm:text-4xl">
             {name}
           </h1>
-          <p className="mx-auto mt-3 max-w-xl text-sm font-medium leading-6 text-zinc-500 lg:mx-0">
-            Retrouvez l’identité de la carte, ses cotations disponibles et les indicateurs King_TCG dans une vue unique.
-          </p>
+          <p className="mt-1.5 text-[12px] font-semibold text-zinc-300">{set}</p>
         </div>
 
-        <div className="flex flex-wrap justify-center gap-2 lg:justify-start">
-          <span className="kt-identity-chip">
-            <Layers className="h-3.5 w-3.5" />
-            {set}
+        <div className="flex flex-wrap gap-2">
+          <span className="inline-flex items-center gap-1.5 rounded-lg border border-cyan-400/18 bg-cyan-400/[0.05] px-2.5 py-1.5 text-[9px] font-black text-cyan-200">
+            <Layers className="h-3.5 w-3.5" /> {set}
           </span>
           {number ? (
-            <span className="kt-identity-chip">
-              <Hash className="h-3.5 w-3.5" />
-              {number}
+            <span className="inline-flex items-center gap-1.5 rounded-lg border border-white/[0.09] bg-white/[0.03] px-2.5 py-1.5 text-[9px] font-black text-zinc-200">
+              <Hash className="h-3.5 w-3.5 text-cyan-300" /> {number}
             </span>
           ) : null}
-          <span className="kt-identity-chip">
-            <Award className="h-3.5 w-3.5" />
-            {rarity || "Série standard"}
+          <span className="inline-flex items-center gap-1.5 rounded-lg border border-amber-400/16 bg-amber-400/[0.05] px-2.5 py-1.5 text-[9px] font-black text-amber-200">
+            <Award className="h-3.5 w-3.5" /> {rarity || "Standard"}
           </span>
         </div>
 
-        {price > 0 || score > 0 ? (
-          <div className="grid grid-cols-3 gap-3 border-t border-white/[0.06] pt-5">
-            <HeroMetric label="Valeur" value={price > 0 ? `${price.toFixed(2)} €` : "—"} />
-            <HeroMetric label="Score IA" value={score > 0 ? `${score}/10` : "—"} />
-            <div className="kt-hero-metric">
-              <span className="text-[10px] font-black uppercase tracking-[0.16em] text-zinc-500">
-                Tendance
+        <div className="grid grid-cols-3 gap-2 rounded-[16px] border border-white/[0.08] bg-[#0c141c] p-2.5">
+          <HeroMetric label="Cote King_TCG" value={price > 0 ? `${price.toFixed(2)} €` : "—"} />
+          <HeroMetric label="Score" value={score > 0 ? `${score}/10` : "—"} />
+          <div className="rounded-[12px] border border-white/[0.06] bg-white/[0.025] px-2.5 py-2.5">
+            <span className="block text-[8px] font-black uppercase tracking-[0.11em] text-zinc-500">Tendance</span>
+            {trend === "up" ? (
+              <span className="mt-1.5 flex items-center gap-1 text-[11px] font-black text-emerald-300">
+                <TrendingUp className="h-3.5 w-3.5" /> Hausse
               </span>
-              {trend === "up" ? (
-                <span className="mt-3 flex items-center justify-center gap-1 text-sm font-black text-emerald-400 lg:justify-start">
-                  <TrendingUp className="h-4 w-4" /> Hausse
-                </span>
-              ) : trend === "down" ? (
-                <span className="mt-3 flex items-center justify-center gap-1 text-sm font-black text-rose-400 lg:justify-start">
-                  <TrendingDown className="h-4 w-4" /> Baisse
-                </span>
-              ) : (
-                <span className="mt-3 flex items-center justify-center gap-1 text-sm font-black text-zinc-300 lg:justify-start">
-                  <Minus className="h-4 w-4" /> Stable
-                </span>
-              )}
-            </div>
+            ) : trend === "down" ? (
+              <span className="mt-1.5 flex items-center gap-1 text-[11px] font-black text-rose-300">
+                <TrendingDown className="h-3.5 w-3.5" /> Baisse
+              </span>
+            ) : (
+              <span className="mt-1.5 flex items-center gap-1 text-[11px] font-black text-zinc-300">
+                <Minus className="h-3.5 w-3.5" /> Stable
+              </span>
+            )}
           </div>
-        ) : null}
+        </div>
 
         {recommendation ? (
-          <div className="rounded-2xl border border-cyan-400/12 bg-cyan-400/[0.035] p-4 text-left">
-            <span className="text-[10px] font-black uppercase tracking-[0.16em] text-cyan-300">
-              Lecture King_TCG
-            </span>
-            <p className="mt-2 text-xs font-medium leading-5 text-zinc-300">
-              {recommendation}
-            </p>
+          <div className="rounded-[15px] border border-cyan-400/14 bg-cyan-400/[0.035] px-3.5 py-3">
+            <p className="text-[8px] font-black uppercase tracking-[0.14em] text-cyan-300">Lecture King_TCG</p>
+            <p className="mt-1.5 line-clamp-2 text-[10px] font-semibold leading-4 text-zinc-300">{recommendation}</p>
           </div>
         ) : null}
       </div>
@@ -136,13 +119,9 @@ export default function CardHero({
 
 function HeroMetric({ label, value }: { label: string; value: string }) {
   return (
-    <div className="kt-hero-metric">
-      <span className="text-[10px] font-black uppercase tracking-[0.16em] text-zinc-500">
-        {label}
-      </span>
-      <span className="mt-3 text-sm font-black text-white tabular-nums sm:text-base">
-        {value}
-      </span>
+    <div className="rounded-[12px] border border-white/[0.06] bg-white/[0.025] px-2.5 py-2.5">
+      <span className="block text-[8px] font-black uppercase tracking-[0.11em] text-zinc-500">{label}</span>
+      <span className="mt-1.5 block truncate text-[11px] font-black text-white tabular-nums">{value}</span>
     </div>
   );
 }
