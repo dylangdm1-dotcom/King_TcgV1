@@ -50,10 +50,10 @@ export type PSAGradeAnalysis = {
 };
 
 export type PSAManualReview = {
-  whiteSpots: "0" | "1-2" | "3-5" | "6+";
-  scratches: "none" | "light" | "visible" | "deep";
-  cornerDamage: "none" | "one" | "multiple";
-  edgeWhitening: "none" | "light" | "marked";
-  majorDefect: boolean;
-  hiddenDefect: boolean;
+  surfaceMarks: "none" | "micro" | "visible" | "deep";
+  cornerWear: "none" | "light" | "one_marked" | "multiple";
+  edgeWhitening: "none" | "few_points" | "light" | "marked";
+  printLine: "none" | "fine" | "visible";
+  indentation: "none" | "light" | "visible";
+  creaseOrMajorDefect: boolean;
 };
