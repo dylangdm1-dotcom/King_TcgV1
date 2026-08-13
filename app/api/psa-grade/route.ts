@@ -10,12 +10,12 @@ export const maxDuration = 60;
 const PhotoIdSchema = z.enum(PSA_PHOTO_IDS);
 
 const ManualReviewSchema = z.object({
-  whiteSpots: z.enum(["0", "1-2", "3-5", "6+"]),
-  scratches: z.enum(["none", "light", "visible", "deep"]),
-  cornerDamage: z.enum(["none", "one", "multiple"]),
-  edgeWhitening: z.enum(["none", "light", "marked"]),
-  majorDefect: z.boolean(),
-  hiddenDefect: z.boolean(),
+  surfaceMarks: z.enum(["none", "micro", "visible", "deep"]),
+  cornerWear: z.enum(["none", "light", "one_marked", "multiple"]),
+  edgeWhitening: z.enum(["none", "few_points", "light", "marked"]),
+  printLine: z.enum(["none", "fine", "visible"]),
+  indentation: z.enum(["none", "light", "visible"]),
+  creaseOrMajorDefect: z.boolean(),
 });
 
 const CriterionSchema = z.object({
@@ -35,7 +35,7 @@ const AnalysisSchema = z.object({
     maximum: z.coerce.number().min(1).max(10),
     recommended: z.coerce.number().min(1).max(10).nullable(),
   }),
-  confidence: z.coerce.number().min(0).max(100),
+  confidence: z.coerce.number().min(0).max(99.9),
   criteria: z.object({
     centering: CriterionSchema,
     corners: CriterionSchema,
@@ -223,7 +223,7 @@ function normalizeAnalysis(value: unknown): unknown {
               firstDefined(estimate, ["recommended", "recommanded", "recommendedGrade", "gradeRecommande"])
             ) ?? null,
     },
-    confidence: asNumber(firstDefined(value, ["confidence", "confiance", "confidenceScore"])),
+    confidence: Math.min(99.9, Math.max(0, asNumber(firstDefined(value, ["confidence", "confiance", "confidenceScore"])) || 0)),
     criteria: {
       centering: normalizeCriterion(firstDefined(criteria, ["centering", "centrage"])),
       corners: normalizeCriterion(firstDefined(criteria, ["corners", "coins"])),
@@ -274,7 +274,7 @@ RÈGLES ABSOLUES :
 - Évalue séparément : centrage, coins, bords, surface. Chaque score est sur 10.
 - estimate.minimum et estimate.maximum sont des entiers de 1 à 10, minimum <= maximum.
 - recommended est un entier de 1 à 10 uniquement si la confiance est suffisante ; sinon null.
-- La confiance est de 0 à 100.
+- La confiance est de 0 à 99,9 et ne doit jamais dépasser 99,9 %.
 - Un grade élevé exige des photos suffisamment nettes pour vérifier les micro-défauts.
 - Ne juge pas l'authenticité de la carte.
 - Retourne UNIQUEMENT un JSON valide, sans markdown ni texte autour.
@@ -282,7 +282,7 @@ RÈGLES ABSOLUES :
 - Tous les champs du format ci-dessous sont obligatoires, même lorsqu'une liste est vide.
 - Utilise les repères suivants pour stabiliser les analyses : PSA 10 = quasi parfait sans défaut visible; PSA 9 = défaut mineur isolé; PSA 8 = plusieurs défauts légers; PSA 7 ou moins = usure visible, blanchiment marqué, rayure nette, pli ou enfoncement.
 - À photos équivalentes, évite les variations de plus d'un grade. Si le doute dépasse un grade, retourne une plage et réduis la confiance.
-- La confiance ne doit jamais dépasser 90 %. Elle ne peut dépasser 85 % que si les quatre photos sont nettes ET qu'un contrôle manuel cohérent confirme l'absence de défaut caché.
+- Sans contrôles supplémentaires, reste prudent sur la confiance. Avec quatre photos excellentes ET des contrôles supplémentaires cohérents, la confiance peut augmenter, mais ne doit jamais dépasser 99,9 %.
 
 FORMAT STRICT :
 {
@@ -357,7 +357,7 @@ export async function POST(req: NextRequest) {
     }));
 
     const manualContext = manualReview
-      ? `\n\nCONTRÔLE MANUEL CONFIRMÉ PAR L'UTILISATEUR :\n${JSON.stringify(manualReview, null, 2)}\n\nRÈGLES POUR L'AFFINAGE :\n- Ces déclarations complètent les photos et ne doivent jamais être ignorées.\n- Tout pli, enfoncement, rayure profonde ou défaut majeur doit fortement pénaliser le grade.\n- Des points blancs, coins abîmés ou bords blanchis doivent réduire les critères correspondants de façon proportionnée.\n- Si l'utilisateur confirme zéro défaut supplémentaire et que les photos sont excellentes, la confiance peut augmenter modérément, sans dépasser 90 %.\n- Ne monte jamais automatiquement le grade uniquement parce que l'utilisateur déclare zéro défaut.\n- Explique dans summary comment le contrôle manuel a modifié ou confirmé l'estimation.`
+      ? `\n\nCONTRÔLES SUPPLÉMENTAIRES CONFIRMÉS PAR L'UTILISATEUR :\n${JSON.stringify(manualReview, null, 2)}\n\nRÈGLES POUR L'AFFINAGE :\n- Ces réponses complètent les quatre photos et servent surtout à révéler les micro-défauts difficiles à confirmer à l'image.\n- surfaceMarks concerne rayures, frottements ou marques visibles sous lumière rasante : pénalise surface selon l'intensité.\n- cornerWear concerne l'usure réelle des coins : pénalise corners proportionnellement.\n- edgeWhitening concerne les points blancs et le blanchiment des tranches : pénalise edges proportionnellement.\n- printLine concerne une ligne d'impression ou une ligne visible dans l'holo : pénalise surtout surface si elle est visible.\n- indentation concerne enfoncement, marque de pression ou indentation : un défaut visible doit peser fortement sur le grade.\n- creaseOrMajorDefect=true signifie pli, déchirure, enfoncement majeur ou autre défaut structurel : le grade doit être fortement plafonné.\n- Si aucun défaut supplémentaire n'est confirmé et que les quatre photos sont excellentes, la confiance peut augmenter, mais jamais au-delà de 99,9 %.\n- Ne monte jamais automatiquement le grade uniquement parce que l'utilisateur ne signale aucun défaut.\n- Explique dans summary comment les contrôles supplémentaires ont modifié ou confirmé l'estimation.`
       : "";
 
     const previousContext = manualReview && previousAnalysis
