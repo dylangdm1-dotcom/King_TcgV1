@@ -7,6 +7,7 @@ import {
   Bell,
   BellRing,
   ChevronRight,
+  CheckCircle2,
   Sparkles,
   TrendingDown,
   TrendingUp,
@@ -50,6 +51,18 @@ export default function NotificationBell() {
 
   const notifications = useMemo<NotificationItem[]>(() => {
     const items: NotificationItem[] = [];
+
+    if (snapshot.updatedAt > 0) {
+      const updated = new Date(snapshot.updatedAt);
+      const timeLabel = updated.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" });
+      items.push({
+        id: `system-market-${snapshot.updatedAt}`,
+        title: "Marché à jour",
+        description: `Dernière synchronisation des signaux à ${timeLabel}.`,
+        href: "/dashboard",
+        tone: "system",
+      });
+    }
 
     snapshot.alerts.slice(0, 4).forEach((alert) => {
       const isRise = alert.type === "RISE";
@@ -167,7 +180,9 @@ export default function NotificationBell() {
                     ? TrendingUp
                     : item.tone === "drop"
                       ? TrendingDown
-                      : Sparkles;
+                      : item.tone === "system"
+                        ? CheckCircle2
+                        : Sparkles;
                   const tone = item.tone === "rise"
                     ? "border-emerald-400/15 bg-emerald-400/[0.05] text-emerald-300"
                     : item.tone === "drop"
