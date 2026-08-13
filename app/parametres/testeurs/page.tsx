@@ -83,7 +83,19 @@ export default function TesteursPage() {
               {partners.map((partner) => {
                 const green = partner.accent === "green";
                 return (
-                  <article key={partner.name} className={`rounded-[15px] border-2 bg-[#0a1118] p-4 shadow-[0_16px_38px_rgba(0,0,0,.20)] sm:p-5 ${green ? "border-emerald-400/85 shadow-[0_0_24px_rgba(52,211,153,.10)]" : "border-cyan-400/85 shadow-[0_0_24px_rgba(34,211,238,.10)]"}`}> 
+                  <article
+                    key={partner.name}
+                    className={`rounded-[15px] border-2 bg-[#0a1118] p-4 shadow-[0_16px_38px_rgba(0,0,0,.20)] sm:p-5 ${
+                      green
+                        ? "shadow-[0_0_24px_rgba(52,211,153,.10)]"
+                        : "shadow-[0_0_24px_rgba(34,211,238,.10)]"
+                    }`}
+                    style={{
+                      borderColor: green
+                        ? "rgba(52, 211, 153, 0.88)"
+                        : "rgba(34, 211, 238, 0.88)",
+                    }}
+                  > 
                     <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
                       <div className={`mx-auto flex h-36 w-36 shrink-0 items-center justify-center overflow-hidden rounded-full border-2 bg-black p-1 sm:mx-0 ${green ? "border-emerald-400/70 shadow-[0_0_22px_rgba(52,211,153,.12)]" : "border-cyan-400/70 shadow-[0_0_22px_rgba(34,211,238,.12)]"}`}>
                         <img src={partner.logo} alt={`Logo ${partner.name}`} className="h-full w-full rounded-full object-cover" />
