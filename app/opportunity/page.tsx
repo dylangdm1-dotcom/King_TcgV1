@@ -22,6 +22,8 @@ import {
   Sparkles,
   TrendingDown,
   TrendingUp,
+  ChevronDown,
+  Crown,
 } from "lucide-react";
 
 type PortfolioCard = {
@@ -508,6 +510,15 @@ function OpportunityCard({
 }) {
   const trendPositive = op.trend > 0;
   const trendNegative = op.trend < 0;
+  const [premiumOpen, setPremiumOpen] = useState(false);
+
+  // Mode test V96 : accès Premium forcé pour valider l’UI avant les vrais comptes.
+  // Plus tard, remplacer par le statut réel du compte (ex: user.plan === "premium").
+  const hasPremiumAccess = true;
+  const potentialBase = Math.max(0, op.potential - 100);
+  const potentialLow = Math.max(2, Math.round(potentialBase * 0.45));
+  const potentialHigh = Math.max(potentialLow + 3, Math.round(potentialBase * 0.7));
+  const confidence = Math.max(55, Math.min(96, Math.round(50 + op.score * 4 + Math.min(12, Math.abs(op.trend)) / 2)));
 
   return (
     <article
@@ -566,6 +577,29 @@ function OpportunityCard({
             {op.trend.toFixed(2)}%
           </p>
         </div>
+      </div>
+
+      <div className="mt-3 border-t border-white/[0.06] pt-3">
+        <button
+          type="button"
+          onClick={() => hasPremiumAccess && setPremiumOpen((value) => !value)}
+          aria-expanded={hasPremiumAccess ? premiumOpen : false}
+          className={`flex w-full items-center justify-between rounded-xl border px-3 py-2 text-[10px] font-black uppercase tracking-wider transition ${
+            hasPremiumAccess
+              ? "border-amber-400/20 bg-amber-400/[0.05] text-amber-300 hover:bg-amber-400/[0.09]"
+              : "cursor-not-allowed border-white/[0.06] bg-white/[0.02] text-zinc-500"
+          }`}
+        >
+          <span className="flex items-center gap-2"><Crown className="h-3.5 w-3.5" /> Analyse Premium</span>
+          <ChevronDown className={`h-3.5 w-3.5 transition-transform ${premiumOpen ? "rotate-180" : ""}`} />
+        </button>
+
+        {hasPremiumAccess && premiumOpen && (
+          <div className="mt-2 space-y-1.5 rounded-xl border border-amber-400/10 bg-black/20 px-3 py-2.5 text-[11px]">
+            <p className="text-zinc-300">📈 Potentiel : <span className="font-bold text-white">+{potentialLow} à +{potentialHigh} %</span></p>
+            <p className="text-zinc-300">🎯 Confiance King_TCG : <span className="font-bold text-white">{confidence} %</span></p>
+          </div>
+        )}
       </div>
     </article>
   );
