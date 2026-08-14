@@ -341,6 +341,8 @@ async function fetchText(url: string, init?: RequestInit): Promise<{ data: strin
       headers: {
         Accept: "text/html,application/xhtml+xml",
         "Accept-Language": "fr-FR,fr;q=0.9,en;q=0.7",
+        "Cache-Control": "no-cache, no-store, max-age=0",
+        Pragma: "no-cache",
         "User-Agent":
           "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/126 Safari/537.36",
         ...(init?.headers ?? {}),
@@ -574,8 +576,8 @@ async function fromCardmarketFrance(
   const result = await fetchText(filteredUrl);
   if (!result.data) return emptyPayload(sourceStatus(result.status));
 
-  const prices = extractFilteredCardmarketPrices(result.data);
-  if (!prices.length) {
+  const frenchNmSellerPrices = extractFilteredCardmarketPrices(result.data);
+  if (!frenchNmSellerPrices.length) {
     console.info("[prices][cardmarket-fr]", {
       cardId: card.id,
       productUrl: filteredUrl,
@@ -584,8 +586,8 @@ async function fromCardmarketFrance(
     return emptyPayload();
   }
 
-  const firstSellerListing = prices[0];
-  const sample = prices.slice(0, 25);
+  const firstSellerListing = frenchNmSellerPrices[0];
+  const sample = frenchNmSellerPrices.slice(0, 25);
   const medianPrice = Number(median(sample).toFixed(2));
   const payload = emptyPayload("available");
   payload.cardmarket = {
@@ -2641,7 +2643,7 @@ export async function POST(request: Request) {
     const results = await mapWithConcurrency(cards, 3, async (card) => {
       const language = card.language ?? "en";
       const cacheKey = [
-        language === "zh-tw" ? "price-v87-cn-variant" : "price-v87-variant",
+        language === "zh-tw" ? "price-v90-cn-variant" : "price-v90-variant",
         card.id,
         language,
         normalizedSet(card.setId),
@@ -2744,6 +2746,17 @@ export async function POST(request: Request) {
       // any product URL they may expose. This is deliberately isolated from JP/CN.
       if (language === "fr" && !isSpecialPrinting(card.printingVariant)) {
         const france = await fromCardmarketFrance(card, value.cardmarket?.url);
+
+        // The FR source of truth is exclusively the filtered Cardmarket seller
+        // page (?language=2). Provider-derived Europe stats remain visible, but
+        // no previous Cardmarket quote may pretend to be an exact French offer.
+        value.quotes = value.quotes.filter(
+          (quote) =>
+            quote.source !== "cardmarket" ||
+            quote.language === "multi" ||
+            !quote.compatible
+        );
+
         if (france.cardmarket) {
           value.cardmarket = {
             ...value.cardmarket,
@@ -2755,7 +2768,29 @@ export async function POST(request: Request) {
           };
         }
         for (const quote of france.quotes) addQuote(value, quote);
-        value.sources.cardmarket = Boolean(value.cardmarket || value.quotes.some((quote) => quote.source === "cardmarket"));
+
+        const exactFrenchSellerQuote = france.quotes.find(
+          (quote) =>
+            quote.source === "cardmarket" &&
+            quote.language === "fr" &&
+            quote.condition === "Near Mint" &&
+            quote.metric === "lowest_listing" &&
+            quote.classification === "exact" &&
+            quote.compatible &&
+            quote.price > 0
+        );
+
+        if (value.cardmarket?.prices) {
+          if (exactFrenchSellerQuote) {
+            value.cardmarket.prices.frenchNmLow = exactFrenchSellerQuote.price;
+          } else {
+            delete value.cardmarket.prices.frenchNmLow;
+          }
+        }
+
+        value.sources.cardmarket = Boolean(
+          value.cardmarket || value.quotes.some((quote) => quote.source === "cardmarket")
+        );
         if (france.status === "available") value.status = "available";
 
         const exactFrenchNm = value.quotes.find(
@@ -2820,7 +2855,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({
       success: true,
-      version: "price-engine-v89-cardmarket-fr-article-row",
+      version: "price-engine-v90-cardmarket-fr-source-of-truth",
       prices: Object.fromEntries(results),
     });
   } catch (error) {
