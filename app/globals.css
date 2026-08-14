@@ -2013,16 +2013,17 @@ body {
 }
 
 .kt-market-badge-justtcg {
-  min-width: 112px;
-  min-height: 38px;
-  padding-inline: 8px;
+  min-width: 96px;
+  min-height: 32px;
+  padding-inline: 10px;
 }
 
 .kt-market-badge-justtcg img {
   display: block;
-  max-height: 24px;
+  max-width: 76px;
+  max-height: 16px;
   margin: 0 auto;
-  object-position: center;
+  object-position: 50% 50%;
 }
 
 /* =========================================================
