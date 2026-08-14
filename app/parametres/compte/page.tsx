@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import {
   ArrowLeft,
@@ -7,14 +8,37 @@ import {
   BellRing,
   Check,
   Crown,
+  Database,
   LockKeyhole,
+  Mail,
+  RefreshCw,
   ScanLine,
   ShieldCheck,
   Sparkles,
   Star,
+  Trash2,
   UserRound,
 } from "lucide-react";
 import Navbar from "../../../components/Navbar";
+import { clearAllData } from "../../../lib/storage";
+
+const PROFILE_STORAGE_KEY = "king_tcg_account_profile_v1";
+const ACCOUNT_DATA_KEYS = [
+  "king_tcg_psa_collection_v1",
+  "king_tcg_price_history",
+  "king_tcg_signal_snapshot_v1",
+] as const;
+
+const CACHE_KEYS: ReadonlySet<string> = new Set([
+  "king_tcg_market_price_cache_v1",
+  "king_tcg_signal_snapshot_v1",
+]);
+
+const CACHE_PREFIXES = [
+  "king_tcg_cards_cache",
+  "king_tcg_pokemon_cache",
+  "king_tcg_set_details_",
+] as const;
 
 const normalFeatures = [
   {
@@ -84,6 +108,52 @@ const premiumHighlights = [
 ] as const;
 
 export default function AccountManagementPage() {
+  const [profile, setProfile] = useState({ nickname: "", email: "" });
+  const [actionMessage, setActionMessage] = useState("");
+
+  useEffect(() => {
+    try {
+      const raw = window.localStorage.getItem(PROFILE_STORAGE_KEY);
+      const parsed = raw ? JSON.parse(raw) : null;
+      setProfile({
+        nickname: typeof parsed?.nickname === "string" ? parsed.nickname : "",
+        email: typeof parsed?.email === "string" ? parsed.email : "",
+      });
+    } catch {
+      setProfile({ nickname: "", email: "" });
+    }
+  }, []);
+
+  const removeCacheKeys = () => {
+    const keysToRemove: string[] = [];
+    for (let index = 0; index < window.localStorage.length; index += 1) {
+      const key = window.localStorage.key(index);
+      if (key && (CACHE_KEYS.has(key) || CACHE_PREFIXES.some((prefix) => key.startsWith(prefix)))) {
+        keysToRemove.push(key);
+      }
+    }
+    keysToRemove.forEach((key) => window.localStorage.removeItem(key));
+  };
+
+  const handleClearCache = () => {
+    if (!window.confirm("Vider le cache King_TCG ? Votre stock, vos favoris, votre thème et votre quota seront conservés.")) return;
+    removeCacheKeys();
+    setActionMessage("Cache King_TCG vidé. Actualisation en cours…");
+    window.setTimeout(() => window.location.reload(), 700);
+  };
+
+  const handleResetAccountData = () => {
+    const confirmed = window.confirm(
+      "Réinitialiser complètement le stock local ? Cette action supprimera la collection, les favoris, les cartes PSA et l’historique. Elle est irréversible."
+    );
+    if (!confirmed) return;
+
+    clearAllData();
+    ACCOUNT_DATA_KEYS.forEach((key) => window.localStorage.removeItem(key));
+    setActionMessage("Données du stock supprimées. Actualisation en cours…");
+    window.setTimeout(() => window.location.reload(), 900);
+  };
+
   return (
     <>
       <Navbar />
@@ -121,6 +191,66 @@ export default function AccountManagementPage() {
               </div>
             </div>
           </header>
+
+          <section className="kt-section-surface rounded-[20px] border p-5 sm:p-6">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex items-start gap-4">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-cyan-400/25 bg-cyan-400/[0.07] text-cyan-300">
+                  <LockKeyhole className="h-5 w-5" />
+                </span>
+                <div>
+                  <p className="text-[10px] font-black uppercase tracking-[0.11em] text-cyan-300">
+                    Connexion du compte
+                  </p>
+                  <h2 className="mt-1 text-[15px] font-black text-white">
+                    Accès et synchronisation Google
+                  </h2>
+                  <p className="mt-1 max-w-xl text-[11px] leading-5 text-zinc-300">
+                    La connexion Google associera votre profil et permettra de retrouver les données synchronisées de votre compte King_TCG.
+                  </p>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                className="inline-flex w-full items-center justify-center gap-3 rounded-[10px] border border-zinc-300 bg-white px-4 py-3 text-[12px] font-bold text-[#202124] shadow-[0_2px_8px_rgba(0,0,0,.22)] transition hover:bg-[#f8f9fa] sm:w-auto"
+              >
+                <svg aria-hidden="true" viewBox="0 0 24 24" className="h-5 w-5 shrink-0">
+                  <path fill="#4285F4" d="M21.6 12.23c0-.71-.06-1.4-.18-2.07H12v3.92h5.38a4.6 4.6 0 0 1-2 3.02v2.54h3.24c1.9-1.75 2.98-4.33 2.98-7.41Z"/>
+                  <path fill="#34A853" d="M12 22c2.7 0 4.97-.9 6.62-2.36l-3.24-2.54c-.9.6-2.05.96-3.38.96-2.61 0-4.82-1.76-5.61-4.13H3.04v2.62A10 10 0 0 0 12 22Z"/>
+                  <path fill="#FBBC05" d="M6.39 13.93A6 6 0 0 1 6.08 12c0-.67.12-1.32.31-1.93V7.45H3.04A10 10 0 0 0 2 12c0 1.61.39 3.14 1.04 4.55l3.35-2.62Z"/>
+                  <path fill="#EA4335" d="M12 5.94c1.47 0 2.79.5 3.83 1.5l2.87-2.87A9.63 9.63 0 0 0 12 2a10 10 0 0 0-8.96 5.45l3.35 2.62C7.18 7.7 9.39 5.94 12 5.94Z"/>
+                </svg>
+                Continuer avec Google
+              </button>
+            </div>
+
+            <div className="mt-5 grid gap-2 border-t border-cyan-400/[0.12] pt-4 sm:grid-cols-2">
+              <div className="kt-subpanel flex items-center gap-3 px-3.5 py-3">
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-cyan-400/[0.08] text-cyan-300">
+                  <UserRound className="h-4 w-4" />
+                </span>
+                <div className="min-w-0">
+                  <p className="text-[9px] font-black uppercase tracking-[0.10em] text-zinc-400">Pseudo</p>
+                  <p className="mt-0.5 truncate text-[11px] font-black text-white">
+                    {profile.nickname || "Non renseigné"}
+                  </p>
+                </div>
+              </div>
+
+              <div className="kt-subpanel flex items-center gap-3 px-3.5 py-3">
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-cyan-400/[0.08] text-cyan-300">
+                  <Mail className="h-4 w-4" />
+                </span>
+                <div className="min-w-0">
+                  <p className="text-[9px] font-black uppercase tracking-[0.10em] text-zinc-400">Adresse mail</p>
+                  <p className="mt-0.5 truncate text-[11px] font-black text-white">
+                    {profile.email || "Connexion Google requise"}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
 
           <section>
             <div className="mb-3 flex items-center gap-3">
@@ -347,37 +477,62 @@ export default function AccountManagementPage() {
           </section>
 
           <section className="kt-section-surface rounded-[20px] border p-5 sm:p-6">
-            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-              <div className="flex items-start gap-4">
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-cyan-400/25 bg-cyan-400/[0.07] text-cyan-300">
-                  <LockKeyhole className="h-5 w-5" />
-                </span>
-                <div>
-                  <p className="text-[10px] font-black uppercase tracking-[0.11em] text-cyan-300">
-                    Informations du compte
-                  </p>
-                  <h2 className="mt-1 text-[15px] font-black text-white">
-                    Accès et synchronisation
-                  </h2>
-                  <p className="mt-1 max-w-xl text-[11px] leading-5 text-zinc-300">
-                    Connectez votre compte Google pour accéder à votre espace King_TCG et retrouver vos informations associées.
-                  </p>
-                </div>
+            <div className="flex items-start gap-4">
+              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-cyan-400/25 bg-cyan-400/[0.07] text-cyan-300">
+                <Database className="h-5 w-5" />
+              </span>
+              <div>
+                <p className="text-[10px] font-black uppercase tracking-[0.11em] text-cyan-300">
+                  Données locales
+                </p>
+                <h2 className="mt-1 text-[15px] font-black text-white">
+                  Cache et réinitialisation
+                </h2>
+                <p className="mt-1 max-w-xl text-[11px] leading-5 text-zinc-300">
+                  Videz seulement les données temporaires ou réinitialisez complètement votre stock local King_TCG.
+                </p>
               </div>
+            </div>
+
+            <div className="mt-5 grid gap-3 sm:grid-cols-2">
+              <button
+                type="button"
+                onClick={handleClearCache}
+                className="flex items-center gap-3 rounded-[14px] border border-cyan-300/[0.34] bg-cyan-400/[0.065] px-4 py-3 text-left transition hover:border-cyan-200/[0.58] hover:bg-cyan-400/[0.11]"
+              >
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-cyan-400/[0.10] text-cyan-300">
+                  <RefreshCw className="h-4 w-4" />
+                </span>
+                <span>
+                  <span className="block text-[11px] font-black text-cyan-200">Vider le cache</span>
+                  <span className="mt-0.5 block text-[9px] leading-4 text-zinc-300">Conserve le stock, les favoris, le thème et le quota.</span>
+                </span>
+              </button>
 
               <button
                 type="button"
-                className="inline-flex w-full items-center justify-center gap-3 rounded-[10px] border border-zinc-300 bg-white px-4 py-3 text-[12px] font-bold text-[#202124] shadow-[0_2px_8px_rgba(0,0,0,.22)] transition hover:bg-[#f8f9fa] sm:w-auto"
+                onClick={handleResetAccountData}
+                className="flex items-center gap-3 rounded-[14px] border border-rose-300/[0.38] bg-rose-400/[0.065] px-4 py-3 text-left transition hover:border-rose-200/[0.62] hover:bg-rose-400/[0.11]"
               >
-                <svg aria-hidden="true" viewBox="0 0 24 24" className="h-5 w-5 shrink-0">
-                  <path fill="#4285F4" d="M21.6 12.23c0-.71-.06-1.4-.18-2.07H12v3.92h5.38a4.6 4.6 0 0 1-2 3.02v2.54h3.24c1.9-1.75 2.98-4.33 2.98-7.41Z"/>
-                  <path fill="#34A853" d="M12 22c2.7 0 4.97-.9 6.62-2.36l-3.24-2.54c-.9.6-2.05.96-3.38.96-2.61 0-4.82-1.76-5.61-4.13H3.04v2.62A10 10 0 0 0 12 22Z"/>
-                  <path fill="#FBBC05" d="M6.39 13.93A6 6 0 0 1 6.08 12c0-.67.12-1.32.31-1.93V7.45H3.04A10 10 0 0 0 2 12c0 1.61.39 3.14 1.04 4.55l3.35-2.62Z"/>
-                  <path fill="#EA4335" d="M12 5.94c1.47 0 2.79.5 3.83 1.5l2.87-2.87A9.63 9.63 0 0 0 12 2a10 10 0 0 0-8.96 5.45l3.35 2.62C7.18 7.7 9.39 5.94 12 5.94Z"/>
-                </svg>
-                Continuer avec Google
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-rose-400/[0.10] text-rose-300">
+                  <Trash2 className="h-4 w-4" />
+                </span>
+                <span>
+                  <span className="block text-[11px] font-black text-rose-200">Réinitialiser le stock</span>
+                  <span className="mt-0.5 block text-[9px] leading-4 text-zinc-300">Supprime collection, favoris, PSA et historique.</span>
+                </span>
               </button>
             </div>
+
+            {actionMessage ? (
+              <p className="mt-3 rounded-xl border border-cyan-300/[0.28] bg-cyan-400/[0.06] px-3 py-2 text-center text-[10px] font-bold text-cyan-200">
+                {actionMessage}
+              </p>
+            ) : null}
+
+            <p className="mt-3 text-[9px] leading-4 text-zinc-400">
+              La réinitialisation ne modifie ni le thème choisi ni le quota de scanner. Une confirmation est toujours demandée avant suppression.
+            </p>
           </section>
 
           <footer className="border-t border-white/[0.06] pt-5 text-center">
