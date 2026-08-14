@@ -524,4 +524,3 @@ Les fondations déjà validées — FR / JP / CN, fiches cartes et prix — ne d
 - Vert / rouge / orange : états marché positifs, négatifs et vigilance.
 - Titres, descriptions, micro-labels, rayons de cartes et navigation doivent rester cohérents entre les pages.
 - Aucun changement visuel ne doit modifier les routes, les données, le moteur de prix, le scanner ou la logique métier.
-
