@@ -22,6 +22,14 @@ type Props = {
   average?: number | null;
   spread?: number | null;
   quotes?: MarketQuote[];
+  debugCardmarketFr?: {
+    url?: string;
+    fetchStatus?: string;
+    articleRows: number;
+    frNmPrices: number[];
+    htmlHas210: boolean;
+    htmlHas27899: boolean;
+  };
   language?: "fr" | "en" | "ja" | "zh-tw";
   onRefresh?: () => void;
 };
@@ -35,6 +43,7 @@ export default function MarketPanel({
   average = 0,
   spread = 0,
   quotes = [],
+  debugCardmarketFr,
   language = "fr",
   onRefresh,
 }: Props) {
@@ -45,12 +54,12 @@ export default function MarketPanel({
   const sources = [
     {
       title: language === "fr"
-        ? "Estimation marché FR"
+        ? "1re offre Cardmarket FR · NM"
         : language === "ja" || language === "zh-tw"
           ? "Tendance Cardmarket"
           : "Cardmarket",
       subtitle: language === "fr"
-        ? "Référence Cardmarket française"
+        ? "Première annonce vendeur réellement listée"
         : language === "ja" || language === "zh-tw"
           ? "Marché occidental · impression exacte"
           : "Référence européenne indicative",
@@ -60,10 +69,14 @@ export default function MarketPanel({
     {
       title: language === "ja" || language === "zh-tw"
         ? "Moyenne occidentale 7j"
-        : "Cardmarket Europe",
+        : language === "fr"
+          ? "Moyenne Cardmarket Europe"
+          : "Cardmarket Europe",
       subtitle: language === "ja" || language === "zh-tw"
         ? "Moyenne Cardmarket sur 7 jours"
-        : "Deuxième statistique la plus élevée disponible",
+        : language === "fr"
+          ? "Moyenne/tendance Europe séparée des offres FR"
+          : "Référence européenne indicative",
       source: "cardmarket" as MarketSource,
       value: cardmarketEurope ?? 0,
     },
@@ -140,6 +153,16 @@ export default function MarketPanel({
           </div>
         ))}
       </div>
+
+      {language === "fr" && debugCardmarketFr ? (
+        <div className="rounded-[12px] border border-amber-400/25 bg-amber-400/[0.05] px-3 py-2 text-[10px] leading-4 text-amber-100">
+          <span className="font-black">Diagnostic temporaire Cardmarket FR :</span>{" "}
+          statut {debugCardmarketFr.fetchStatus || "?"} · {debugCardmarketFr.articleRows} articleRow ·
+          FR/NM [{debugCardmarketFr.frNmPrices.join(", ") || "aucun"}] ·
+          HTML 210€ {debugCardmarketFr.htmlHas210 ? "oui" : "non"} ·
+          HTML 278,99€ {debugCardmarketFr.htmlHas27899 ? "oui" : "non"}
+        </div>
+      ) : null}
 
       {quotes.length ? (
         <details className="rounded-[14px] bg-[#111923] px-3 py-2.5">
