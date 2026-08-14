@@ -163,16 +163,16 @@ export default function TesteursPage() {
             </div>
           </section>
 
-          {OTHER_TESTERS.length > 0 && (
-            <section className="mt-4 text-center">
-              <h2 className="text-[12px] font-black text-cyan-300">
-                Merci également à nos autres testeurs
-              </h2>
-              <p className="mx-auto mt-2 max-w-2xl text-[11px] leading-5 text-zinc-300">
-                ({OTHER_TESTERS.join(" · ")})
-              </p>
-            </section>
-          )}
+          <section className="mt-4 border-t border-cyan-300/[0.12] pt-4 text-center">
+            <h2 className="text-[12px] font-black text-cyan-300">
+              Merci également à nos autres testeurs
+            </h2>
+            <p className="mx-auto mt-2 max-w-2xl text-[11px] leading-5 text-zinc-300">
+              {OTHER_TESTERS.length > 0
+                ? `(${OTHER_TESTERS.join(" · ")})`
+                : "(Liste des testeurs à compléter)"}
+            </p>
+          </section>
 
           <footer className="mt-5 border-t border-white/[0.06] pt-4 text-center">
             <p className="text-[13px] font-black text-white">King_TCG</p>
