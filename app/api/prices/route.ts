@@ -368,7 +368,71 @@ function parseEuroPrice(raw: string): number | undefined {
   return numberValue(cleaned);
 }
 
+function extractCardmarketSellerOfferPrices(html: string): number[] {
+  const decoded = html
+    .replace(/&euro;|&#8364;/gi, "€")
+    .replace(/&nbsp;|&#160;/gi, " ");
+
+  // Cardmarket FR product pages expose each seller offer as an articleRow.
+  // Read only those rows so summary values ("De", trend, averages) are never
+  // confused with a real French Near Mint seller offer.
+  const rowRegex =
+    /<div[^>]+id=["']articleRow[^"']*["'][^>]+class=["'][^"']*\barticle-row\b[^"']*["'][^>]*>[\s\S]*?(?=<div[^>]+id=["']articleRow|$)/gi;
+
+  const rows = decoded.match(rowRegex) ?? [];
+  const prices: number[] = [];
+
+  for (const row of rows) {
+    const isNearMint =
+      /class=["'][^"']*\bcondition-nm\b[^"']*["']/i.test(row) ||
+      /data-bs-original-title=["']Near Mint["']/i.test(row);
+    if (!isNearMint) continue;
+
+    const isFrench =
+      /aria-label=["']Français["']/i.test(row) ||
+      /data-original-title=["']Français["']/i.test(row) ||
+      /onmouseover=["'][^"']*Français[^"']*["']/i.test(row);
+    if (!isFrench) continue;
+
+    const desktopPriceContainer =
+      row.match(
+        /<div[^>]+class=["'][^"']*\bprice-container\b[^"']*\bd-none\b[^"']*\bd-md-flex\b[^"']*["'][^>]*>([\s\S]*?)<\/div>\s*<\/div>/i
+      )?.[1] ??
+      row.match(
+        /<div[^>]+class=["'][^"']*\bprice-container\b[^"']*["'][^>]*>([\s\S]*?)<\/div>/i
+      )?.[1];
+
+    if (!desktopPriceContainer) continue;
+
+    const priceMatch =
+      desktopPriceContainer.match(
+        /<span[^>]+class=["'][^"']*\bcolor-primary\b[^"']*["'][^>]*>\s*([0-9]{1,6}(?:[.\s][0-9]{3})*,[0-9]{2})\s*€\s*<\/span>/i
+      ) ??
+      desktopPriceContainer.match(
+        /([0-9]{1,6}(?:[.\s][0-9]{3})*,[0-9]{2})\s*€/i
+      );
+
+    const price = priceMatch ? parseEuroPrice(priceMatch[1]) : undefined;
+    if (price && price >= 0.02 && price <= 100000) {
+      prices.push(Number(price.toFixed(2)));
+    }
+  }
+
+  // Preserve Cardmarket's seller order. The first value is the first real
+  // French + Near Mint seller row shown on the filtered product page.
+  return prices;
+}
+
 function extractFilteredCardmarketPrices(html: string): number[] {
+  const sellerPrices = extractCardmarketSellerOfferPrices(html);
+  if (sellerPrices.length) return sellerPrices;
+
+  // If Cardmarket article rows exist but none pass the exact FR + NM parser,
+  // fail closed instead of falling back to a page summary.
+  if (/id=["']articleRow/i.test(html) && /article-row/i.test(html)) return [];
+
+  // Compatibility fallback for alternate Cardmarket row markup. It still only
+  // scans explicit offer/table rows and never the whole page summary.
   const decoded = html
     .replace(/&euro;|&#8364;/gi, "€")
     .replace(/&nbsp;|&#160;/gi, " ");
@@ -394,29 +458,26 @@ function extractFilteredCardmarketPrices(html: string): number[] {
     /€\s*([0-9]{1,6}(?:[.\s][0-9]{3})*[.,][0-9]{2})/gi,
   ];
 
-  const candidates = rows.length ? rows : [];
-  for (const row of candidates) {
-    // The page URL is already filtered to French cards and French sellers.
-    // Prefer rows explicitly marked NM/Mint when the markup exposes condition.
-    const normalizedRow = normalizedText(row);
-    const hasKnownCondition = /\b(nm|near\s*mint|mint|ex|gd|lp|pl|po)\b/i.test(row);
-    if (hasKnownCondition && !/\b(nm|near\s*mint|mint)\b/i.test(row)) continue;
+  for (const row of rows) {
+    const plain = stripHtmlText(row);
+    const hasKnownCondition = /\b(?:NM|Near\s*Mint|Mint|EX|GD|LP|PL|PO)\b/i.test(plain);
+    if (hasKnownCondition && !/\b(?:NM|Near\s*Mint)\b/i.test(plain)) continue;
 
     for (const pattern of pricePatterns) {
       pattern.lastIndex = 0;
       let match: RegExpExecArray | null;
       while ((match = pattern.exec(row))) {
         const price = parseEuroPrice(match[1]);
-        if (price && price >= 0.02 && price <= 100000) prices.push(price);
+        if (price && price >= 0.02 && price <= 100000) {
+          prices.push(Number(price.toFixed(2)));
+          break;
+        }
       }
       if (prices.length) break;
     }
-    void normalizedRow;
   }
 
-  return Array.from(new Set(prices.map((price) => Number(price.toFixed(2))))).sort(
-    (a, b) => a - b
-  );
+  return prices;
 }
 
 function buildCardmarketFranceUrl(productUrl: string): string | null {
@@ -424,11 +485,10 @@ function buildCardmarketFranceUrl(productUrl: string): string | null {
     const url = new URL(productUrl);
     if (!/cardmarket\.com$/i.test(url.hostname)) return null;
     url.pathname = url.pathname.replace(/^\/(?:en|de|es|it|fr)\//i, "/fr/");
-    // Cardmarket language id 2 = French. We want the cheapest French copy,
-    // regardless of seller country, then Near Mint or better.
+    // Cardmarket language id 2 = French. Keep the product URL otherwise
+    // untouched: condition is verified from each real article-row.
+    url.search = "";
     url.searchParams.set("language", "2");
-    url.searchParams.delete("sellerCountry");
-    url.searchParams.set("minCondition", "2");
     return url.toString();
   } catch {
     return null;
@@ -515,22 +575,29 @@ async function fromCardmarketFrance(
   if (!result.data) return emptyPayload(sourceStatus(result.status));
 
   const prices = extractFilteredCardmarketPrices(result.data);
-  if (!prices.length) return emptyPayload();
+  if (!prices.length) {
+    console.info("[prices][cardmarket-fr]", {
+      cardId: card.id,
+      productUrl: filteredUrl,
+      stage: "no-fr-nm-article-row",
+    });
+    return emptyPayload();
+  }
 
-  const lowest = prices[0];
+  const firstSellerListing = prices[0];
   const sample = prices.slice(0, 25);
   const medianPrice = Number(median(sample).toFixed(2));
   const payload = emptyPayload("available");
   payload.cardmarket = {
-    prices: { lowPrice: lowest },
+    prices: { frenchNmLow: firstSellerListing },
     url: filteredUrl,
     updatedAt: new Date().toISOString(),
   };
 
   addQuote(payload, {
     source: "cardmarket",
-    label: "Cardmarket · première offre française NM",
-    price: lowest,
+    label: "Cardmarket · 1re offre vendeurs FR · NM",
+    price: firstSellerListing,
     currency: "EUR",
     language: "fr",
     condition: "Near Mint",
@@ -543,7 +610,7 @@ async function fromCardmarketFrance(
     sampleSize: sample.length,
   });
 
-  if (sample.length >= 3 && medianPrice !== lowest) {
+  if (sample.length >= 3 && medianPrice !== firstSellerListing) {
     addQuote(payload, {
       source: "cardmarket",
       label: "Cardmarket · médiane offres françaises NM",
@@ -2753,7 +2820,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({
       success: true,
-      version: "price-engine-v87-fr-nm-ebay-robust",
+      version: "price-engine-v89-cardmarket-fr-article-row",
       prices: Object.fromEntries(results),
     });
   } catch (error) {
