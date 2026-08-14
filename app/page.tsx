@@ -7,8 +7,9 @@ import { useRouter } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import { 
   Layers, Library, Bookmark, Wallet, 
-  LayoutDashboard, Camera, Star, Zap, Sparkles, Award, Search,
-  Bell, TrendingUp, Crown
+  LayoutDashboard, Camera, Star, Zap, Sparkles, Search,
+  Bell, TrendingUp, Crown, BadgeCheck, Users, ChevronDown,
+  ExternalLink, Video
 } from "lucide-react";
 import { getCollection, getFavorites } from "@/lib/storage";
 import { getCardById } from "@/lib/pokemon";
@@ -21,6 +22,7 @@ export default function Home() {
   const [uniqueCards, setUniqueCards] = useState(0);
   const [favorites, setFavorites] = useState(0);
   const [portfolioValue, setPortfolioValue] = useState(0);
+  const [creatorOpen, setCreatorOpen] = useState(false);
 
   useEffect(() => {
     async function loadStats() {
@@ -189,7 +191,7 @@ export default function Home() {
             Modules King_TCG
           </span>
 
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             <QuickCard
               href="/parametres/compte"
               title="Espace utilisateur"
@@ -234,50 +236,115 @@ export default function Home() {
 
             <QuickCard
               href="/psa"
-              title="PSA Gradation"
+              title="Gradation PSA"
               subtitle="Prix, collection gradée et estimation IA"
-              icon={<img src="/brands/psa.png" alt="PSA" className="h-9 w-14 rounded-lg object-contain" />}
-              isSpecial={true}
+              icon={<BadgeCheck className="w-5 h-5 text-cyan-400" />}
+            />
+
+            <QuickCard
+              href="/parametres/testeurs"
+              title="Partenaires & Testeurs"
+              subtitle="Équipe terrain, retours et communautés King_TCG"
+              icon={<Users className="w-5 h-5 text-cyan-400" />}
             />
           </div>
+        </section>
 
-          {/* WHATNOT */}
-          <div className="pt-2">
-            <div className="kt-section-surface relative overflow-hidden rounded-[20px] border p-5">
-              <div className="flex items-center gap-2.5 mb-2">
-                <div className="kt-logo-tile flex h-8 w-8 items-center justify-center overflow-hidden rounded-xl bg-[#f4f6f8] p-1">
-                  <img src="/brands/whatnot.png" alt="Whatnot" className="h-full w-full object-contain" />
+        {/* Créateur — barre indépendante et dépliable */}
+        <section className="mx-auto mt-5 max-w-[1180px] px-4 sm:px-5">
+          <div className="kt-panel overflow-hidden rounded-[18px]">
+            <button
+              type="button"
+              onClick={() => setCreatorOpen((value) => !value)}
+              aria-expanded={creatorOpen}
+              aria-controls="creator-details"
+              className={`flex w-full items-center justify-between gap-3 px-4 py-3.5 text-left transition sm:px-5 ${
+                creatorOpen ? "bg-cyan-400/[0.035]" : "hover:bg-white/[0.025]"
+              }`}
+            >
+              <span className="flex min-w-0 items-center gap-3">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[14px] border border-cyan-400/25 bg-gradient-to-br from-cyan-400/[0.13] to-blue-500/[0.07] text-cyan-300">
+                  <Crown className="h-5 w-5" />
+                </span>
+                <span className="min-w-0">
+                  <span className="block text-[11px] font-black uppercase tracking-[0.09em] text-white">
+                    Qui est le créateur ?
+                  </span>
+                  <span className="mt-1 block truncate text-[10px] text-zinc-400">
+                    Dylang_TCG · Le projet et les lives Pokémon
+                  </span>
+                </span>
+              </span>
+
+              <ChevronDown
+                className={`h-4 w-4 shrink-0 text-zinc-400 transition-transform duration-200 ${
+                  creatorOpen ? "rotate-180 text-cyan-300" : ""
+                }`}
+              />
+            </button>
+
+            <div
+              id="creator-details"
+              className={`grid transition-all duration-200 ease-out ${
+                creatorOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+              }`}
+            >
+              <div className="overflow-hidden">
+                <div className="border-t border-white/[0.06] p-4 sm:p-5">
+                  <div className="flex flex-col items-center gap-4 text-center sm:flex-row sm:text-left">
+                    <div className="relative flex h-20 w-20 shrink-0 items-center justify-center rounded-full border border-cyan-300/35 bg-gradient-to-br from-[#123142] via-[#0d2230] to-[#07131c] shadow-[0_0_28px_rgba(34,211,238,.12)]">
+                      <Crown className="absolute top-2 h-4 w-4 text-cyan-300" />
+                      <span className="mt-4 text-xl font-black tracking-[-0.04em] text-white">DG</span>
+                    </div>
+
+                    <div className="min-w-0 flex-1">
+                      <p className="text-[13px] font-black text-white">Dylang_TCG</p>
+                      <p className="mt-1 text-[10px] font-black uppercase tracking-[0.10em] text-cyan-300">
+                        Créateur de King_TCG
+                      </p>
+                      <p className="mt-2 text-[11px] leading-5 text-zinc-300">
+                        King_TCG réunit le scan, la recherche, la collection et le suivi du marché Pokémon dans une expérience pensée pour les collectionneurs.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="kt-subpanel mt-4 rounded-[14px] p-3.5 sm:p-4">
+                    <div className="flex items-center gap-3">
+                      <div className="kt-logo-tile flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-[#f4f6f8] p-1.5">
+                        <img src="/brands/whatnot.png" alt="Whatnot" className="h-full w-full object-contain" />
+                      </div>
+                      <div className="min-w-0">
+                        <p className="text-[11px] font-black text-white">Lives Pokémon Whatnot</p>
+                        <p className="mt-0.5 text-[10px] leading-4 text-zinc-400">
+                          Ouvertures Pokémon en direct et communauté Dylang_TCG.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="mt-3 grid gap-2 sm:grid-cols-2">
+                      <a
+                        href="https://whatnot.com/invite/dylang_tcg"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-center gap-2 rounded-xl border border-cyan-400/25 bg-cyan-400/[0.055] px-3 py-2.5 text-[10px] font-black text-cyan-200 transition hover:border-cyan-300/45 hover:bg-cyan-400/[0.09]"
+                      >
+                        Code partenaire · Dylang_TCG
+                        <ExternalLink className="h-3.5 w-3.5" />
+                      </a>
+
+                      <a
+                        href="https://whatnot.com/s/J0IWStNW"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-center gap-2 rounded-xl border border-violet-400/25 bg-violet-400/[0.055] px-3 py-2.5 text-[10px] font-black text-violet-200 transition hover:border-violet-300/45 hover:bg-violet-400/[0.09]"
+                      >
+                        <Video className="h-3.5 w-3.5" />
+                        Voir les lives Pokémon
+                      </a>
+                    </div>
+                  </div>
                 </div>
-                <h3 className="text-[13px] font-black uppercase tracking-[0.09em] text-white">
-                  Lives Pokémon Whatnot
-                </h3>
               </div>
-
-              <p className="mb-1 text-[12px] font-black text-white">
-                Découvre les ouvertures Pokémon en direct
-              </p>
-
-              <p className="mb-4 text-[11px] leading-5 text-zinc-300">
-                Soutiens la communauté King_TCG avec le code partenaire :
-              </p>
-
-              <a
-                href="https://whatnot.com/invite/dylang_tcg"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mb-3 block rounded-xl border border-cyan-400/18 bg-cyan-400/[0.035] py-2.5 text-center font-mono text-xs font-black tracking-widest text-cyan-300 transition hover:border-cyan-300/35"
-              >
-                Dylang_TCG
-              </a>
-
-              <a
-                href="https://whatnot.com/s/J0IWStNW"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex w-full items-center justify-center rounded-[13px] border border-violet-400/20 bg-violet-400/[0.05] py-2.5 text-[10px] font-black uppercase tracking-[0.10em] text-violet-200 transition hover:border-violet-300/35 hover:bg-violet-400/[0.08]"
-              >
-                Voir les lives Pokémon
-              </a>
             </div>
           </div>
         </section>
@@ -313,8 +380,7 @@ function QuickCard({
   href,
   icon,
   title,
-  subtitle,
-  isSpecial = false
+  subtitle
 }: any) {
   return (
     <Link
@@ -322,14 +388,10 @@ function QuickCard({
       className="group block"
     >
       <div
-        className={`kt-section-surface relative overflow-hidden rounded-[18px] border p-4 transition-all hover:-translate-y-0.5 ${
-          isSpecial
-            ? "border-cyan-400/26 bg-cyan-400/[0.035] group-hover:border-cyan-300/45"
-            : "border-transparent group-hover:border-cyan-400/16"
-        }`}
+        className="kt-section-surface relative overflow-hidden rounded-[18px] border border-transparent p-4 transition-all hover:-translate-y-0.5 group-hover:border-cyan-400/16"
       >
         <div className="flex items-center gap-3">
-          <div className={`${isSpecial ? "kt-logo-tile flex h-11 w-16 items-center justify-center overflow-hidden rounded-xl bg-[#f4f6f8] p-0" : "flex h-11 w-11 items-center justify-center rounded-xl bg-cyan-400/[0.07] text-cyan-300"} transition-transform group-hover:scale-105`}>
+          <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-cyan-400/[0.07] text-cyan-300 transition-transform group-hover:scale-105">
             {icon}
           </div>
 
