@@ -588,6 +588,64 @@ function normalizeTCGdexCard(card: any, lang: LanguageCode, parentSet?: any): Po
 }
 
 const tcgdexDetailCache = new Map<string, any>();
+const japaneseSetAvailabilityRequests = new Map<string, Promise<any | null>>();
+
+async function verifyAdditionalJapaneseSet(set: any): Promise<any | null> {
+  const setId = String(set?.id || "").trim();
+  if (!setId) return null;
+
+  const key = normalizeSetId(setId);
+  const existing = japaneseSetAvailabilityRequests.get(key);
+  if (existing) return existing;
+
+  const request = (async () => {
+    try {
+      const response = await fetch(`${TCGDEX_URL}/ja/sets/${encodeURIComponent(setId)}`);
+      if (!response.ok) return null;
+      const detail = await response.json();
+      const cards = Array.isArray(detail?.cards) ? detail.cards : [];
+      if (!cards.length) return null;
+
+      return {
+        ...set,
+        name: detail?.name || set.name,
+        series: readSeriesName(detail) || set.series || "Pokémon TCG",
+        total: Number(detail?.cardCount?.total ?? cards.length),
+        printedTotal: Number(detail?.cardCount?.official ?? cards.length),
+        releaseDate: effectiveSetReleaseDate(setId, detail?.releaseDate || set.releaseDate || ""),
+        images: {
+          ...(set.images || {}),
+          logo: detail?.logo ? `${detail.logo}.png` : set.images?.logo,
+          symbol: detail?.symbol ? `${detail.symbol}.png` : set.images?.symbol,
+        },
+        availability: "available",
+      };
+    } catch {
+      return null;
+    }
+  })();
+
+  japaneseSetAvailabilityRequests.set(key, request);
+  return request;
+}
+
+async function includeNewJapaneseSetsWithCards(sets: any[]): Promise<any[]> {
+  const verified = sets.filter((set) => hasVerifiedJapaneseCards(set?.id));
+  const candidates = sets.filter((set) =>
+    !hasVerifiedJapaneseCards(set?.id) &&
+    Number(set?.total || set?.printedTotal || 0) > 0
+  );
+  const recovered: any[] = [];
+
+  for (let index = 0; index < candidates.length; index += 8) {
+    const results = await Promise.all(
+      candidates.slice(index, index + 8).map(verifyAdditionalJapaneseSet)
+    );
+    recovered.push(...results.filter(Boolean));
+  }
+
+  return [...verified, ...recovered];
+}
 
 async function fetchPage(query: string, page = 1): Promise<any[]> {
   const params = new URLSearchParams({
@@ -1405,10 +1463,7 @@ export async function getAllSets(lang: LanguageCode = "fr"): Promise<any[]> {
 
       for (const set of data) {
         if (!isPhysicalBrowsableSet({ id: set?.id, name: set?.name, series: readSeriesName(set) })) continue;
-        if (
-          targetLang === "ja" &&
-          (isSimplifiedChineseSetCode(set?.id) || !hasVerifiedJapaneseCards(set?.id))
-        ) continue;
+        if (targetLang === "ja" && isSimplifiedChineseSetCode(set?.id)) continue;
         const key = normalizeSetId(set.id);
         if (!key || byId.has(key)) continue;
         byId.set(key, {
@@ -1426,6 +1481,13 @@ export async function getAllSets(lang: LanguageCode = "fr"): Promise<any[]> {
       }
     }
     tcgdexSets = Array.from(byId.values());
+    if (targetLang === "ja") {
+      // Le manifeste constitue une base stable, mais il ne doit jamais bloquer
+      // une nouvelle extension que TCGdex vient réellement de publier. Les
+      // codes encore inconnus sont donc validés par leur route détaillée : ils
+      // ne deviennent visibles que si elle contient au moins une vraie carte.
+      tcgdexSets = await includeNewJapaneseSetsWithCards(tcgdexSets);
+    }
   } catch (error) {
     logger.error("API", "[TCGdex Sets API Error]", error);
   }
@@ -1531,13 +1593,31 @@ export async function getCardById(id: string): Promise<PokemonCard | null> {
         const imageReadyData = lang === "fr" && !hasTcgdexImage(data)
           ? await recoverFrenchCardImage(data, false)
           : data;
-        const rawCard = normalizeTCGdexCard(imageReadyData, lang);
+        const detailSetId = deriveTcgdexSetId(imageReadyData);
+        const parentSet = detailSetId
+          ? await loadTcgdexParentSet(lang, detailSetId)
+          : null;
+        const rawCard = normalizeTCGdexCard(imageReadyData, lang, parentSet || undefined);
         // Preserve the latest enriched market payload already stored locally.
         // TCGdex detail data is authoritative for metadata/images, not for replacing
         // a fresher King_TCG market quote cached after a price search.
         const card = saved
-          ? {
+          ? (() => {
+              const usableImages = Array.from(new Set([
+                rawCard.images?.large,
+                rawCard.images?.small,
+                ...(rawCard.imageCandidates || []),
+                saved.images?.large,
+                saved.images?.small,
+                ...(saved.imageCandidates || []),
+              ].filter((url): url is string => Boolean(url && url !== "/placeholder.png"))));
+
+              return {
               ...rawCard,
+              images: usableImages.length
+                ? { large: usableImages[0], small: usableImages[0] }
+                : rawCard.images,
+              imageCandidates: [...usableImages, "/placeholder.png"],
               cardmarket: saved.cardmarket ?? rawCard.cardmarket,
               tcgplayer: saved.tcgplayer ?? rawCard.tcgplayer,
               justtcg: saved.justtcg ?? rawCard.justtcg,
@@ -1547,7 +1627,8 @@ export async function getCardById(id: string): Promise<PokemonCard | null> {
               marketStatus: saved.marketStatus ?? rawCard.marketStatus,
               marketSources: { ...rawCard.marketSources, ...saved.marketSources },
               computedPrice: saved.computedPrice ?? rawCard.computedPrice,
-            }
+            };
+            })()
           : rawCard;
         cache.set(card.id, card);
         cache.set(targetId, card);
