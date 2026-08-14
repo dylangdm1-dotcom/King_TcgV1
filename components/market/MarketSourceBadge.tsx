@@ -26,7 +26,7 @@ const sourceMap: Record<MarketSource, SourceItem> = {
   justtcg: {
     label: "JustTCG",
     logo: "/marketplaces/justtcg.svg",
-    logoClassName: "block h-6 w-auto max-w-[98px] object-contain object-center",
+    logoClassName: "block h-4 w-auto max-w-[76px] object-contain object-center",
     className: "bg-[#f4f6f8] text-zinc-900",
   },
   pokewallet: { label: "PokéWallet", fallback: "PW", className: "border-fuchsia-300/25 bg-fuchsia-400/[0.10] text-fuchsia-100" },
