@@ -425,30 +425,6 @@ export default function AccountManagementPage() {
             </div>
           </section>
 
-          <section className="kt-section-surface rounded-[20px] border p-5 sm:p-6">
-            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-              <div className="flex items-start gap-4">
-              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-cyan-400/25 bg-cyan-400/[0.07] text-cyan-300">
-                  <LockKeyhole className="h-5 w-5" />
-              </span>
-              <div>
-                <p className="text-[10px] font-black uppercase tracking-[0.11em] text-cyan-300">
-                    Informations du compte
-                </p>
-                <h2 className="mt-1 text-[15px] font-black text-white">
-                    Accès et synchronisation
-                </h2>
-                <p className="mt-1 max-w-xl text-[11px] leading-5 text-zinc-300">
-                    Connectez votre compte Google pour accéder à votre espace King_TCG et retrouver vos informations associées.
-                </p>
-              </div>
-            </div>
-              <span className="inline-flex w-fit shrink-0 rounded-full border border-cyan-400/25 bg-cyan-400/[0.07] px-3 py-1.5 text-[9px] font-black uppercase tracking-[0.08em] text-cyan-300">
-                Synchronisation préparée
-              </span>
-            </div>
-          </section>
-
           <footer className="border-t border-white/[0.06] pt-5 text-center">
             <p className="text-[11px] font-black tracking-[0.18em] text-white">King_TCG</p>
             <p className="mt-1 text-[11px] font-bold text-zinc-300">
