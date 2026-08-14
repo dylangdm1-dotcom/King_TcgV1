@@ -2030,20 +2030,20 @@ body {
    Le mode sombre reste le défaut ; le clair illumine les fonds.
    ========================================================= */
 html[data-theme="light"] {
-  --background: #ced9df;
-  --background-soft: #dce5e9;
-  --surface: #e8edef;
-  --surface-elevated: #edf1f3;
-  --surface-premium: #dfe8ec;
+  --background: #a8bac4;
+  --background-soft: #b9c8d0;
+  --surface: #ccd7dc;
+  --surface-elevated: #d7e0e4;
+  --surface-premium: #c2d0d7;
   --border: rgba(31, 112, 139, .17);
   --border-strong: rgba(8, 145, 178, .31);
   --text: #10212c;
   --text-muted: #566876;
   --text-subtle: #748591;
   --kt-line: rgba(31, 112, 139, .13);
-  --kt-panel: rgba(232, 238, 241, .96);
-  --kt-panel-soft: rgba(218, 228, 233, .94);
-  --kt-panel-raised: rgba(239, 243, 245, .98);
+  --kt-panel: rgba(204, 215, 220, .97);
+  --kt-panel-soft: rgba(185, 201, 208, .95);
+  --kt-panel-raised: rgba(216, 225, 229, .98);
   --kt-copy-2: #304652;
   --kt-copy-3: #637682;
   color-scheme: light;
@@ -2053,7 +2053,7 @@ html[data-theme="light"] body {
   background:
     radial-gradient(circle at 50% -12%, rgba(34, 211, 238, .15), transparent 36%),
     radial-gradient(circle at 100% 14%, rgba(56, 189, 248, .09), transparent 28%),
-    linear-gradient(180deg, #dfe6ea 0%, #cdd8de 48%, #d9e2e6 100%) !important;
+    linear-gradient(180deg, #bdcad1 0%, #9fb2bd 48%, #afc0c8 100%) !important;
   color: #10212c !important;
 }
 
@@ -2061,30 +2061,51 @@ html[data-theme="light"] :is(.kt-premium-shell, .kt-app-shell) {
   color: #10212c !important;
   background:
     radial-gradient(circle at 50% -12%, rgba(34, 211, 238, .13), transparent 35%),
-    linear-gradient(180deg, #dfe6ea 0%, #cdd8de 52%, #dae3e7 100%) !important;
+    linear-gradient(180deg, #bdcad1 0%, #9fb2bd 52%, #b0c0c8 100%) !important;
 }
 
 html[data-theme="light"] nav.sticky {
   border-color: rgba(8, 145, 178, .18) !important;
-  background: rgba(226, 233, 237, .95) !important;
+  background: rgba(171, 190, 200, .96) !important;
   box-shadow: 0 12px 34px rgba(42, 88, 104, .13) !important;
 }
 
 html[data-theme="light"] .kt-mobile-nav {
   border-color: rgba(8, 145, 178, .17);
-  background: rgba(230, 236, 239, .95);
+  background: rgba(187, 201, 208, .96);
   box-shadow: 0 16px 42px rgba(42, 88, 104, .20);
 }
 
 html[data-theme="light"] .kt-mobile-nav a:not(.active):not(.scan) {
-  color: #617482;
+  color: #405763;
+}
+
+html[data-theme="light"] .kt-brand-lockup-image {
+  position: relative !important;
+  isolation: isolate;
+}
+
+html[data-theme="light"] .kt-brand-lockup-image::before {
+  content: "";
+  position: absolute;
+  inset: -4px -7px;
+  z-index: -1;
+  border: 1px solid rgba(103, 232, 249, .24);
+  border-radius: 12px;
+  background: linear-gradient(180deg, rgba(20, 36, 48, .94), rgba(10, 24, 34, .96));
+  box-shadow: 0 7px 18px rgba(31, 55, 68, .20), inset 0 1px 0 rgba(255,255,255,.06);
+}
+
+html[data-theme="light"] .kt-brand-logo-image {
+  image-rendering: auto;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, .40)) drop-shadow(0 0 5px rgba(34, 211, 238, .16));
 }
 
 html[data-theme="light"] :is(.kt-hero-surface, .kt-page-header) {
   border-color: rgba(8, 145, 178, .25) !important;
   background:
     radial-gradient(circle at 92% 8%, rgba(34, 211, 238, .14), transparent 36%),
-    linear-gradient(180deg, rgba(237, 242, 244, .98), rgba(218, 229, 234, .98)) !important;
+    linear-gradient(180deg, rgba(215, 224, 228, .98), rgba(193, 206, 212, .98)) !important;
   box-shadow: 0 16px 38px rgba(42, 88, 104, .12) !important;
 }
 
@@ -2101,18 +2122,18 @@ html[data-theme="light"] :is(
 ) {
   border-color: rgba(31, 112, 139, .17) !important;
   background:
-    linear-gradient(145deg, rgba(235, 240, 242, .98), rgba(218, 228, 233, .98)) !important;
+    linear-gradient(145deg, rgba(209, 219, 224, .98), rgba(189, 203, 210, .98)) !important;
   box-shadow: 0 13px 32px rgba(42, 88, 104, .11), inset 0 1px 0 rgba(255, 255, 255, .90) !important;
 }
 
 html[data-theme="light"] :is(.kt-subpanel, .kt-premium-card-soft, .kt-source-row, .kt-metric-cell, .kt-chart-insight, .kt-data-row, .kt-summary-tile) {
   border-color: rgba(31, 112, 139, .13) !important;
-  background: rgba(211, 224, 230, .90) !important;
+  background: rgba(180, 198, 207, .92) !important;
   box-shadow: none !important;
 }
 
 html[data-theme="light"] :is(.kt-stat-card, .kt-metric-tile) {
-  background: linear-gradient(180deg, rgba(237, 242, 244, .97), rgba(215, 226, 231, .97)) !important;
+  background: linear-gradient(180deg, rgba(210, 220, 225, .97), rgba(187, 202, 209, .97)) !important;
   box-shadow: inset 3px 0 0 rgba(8, 145, 178, .40), 0 10px 24px rgba(42, 88, 104, .09) !important;
 }
 
@@ -2121,14 +2142,14 @@ html[data-theme="light"] :is(.kt-chart-shell, .kt-chart-canvas, .kt-history-char
   background:
     linear-gradient(rgba(31, 112, 139, .085) 1px, transparent 1px),
     linear-gradient(90deg, rgba(31, 112, 139, .045) 1px, transparent 1px),
-    linear-gradient(180deg, #f8fcfd, #eaf5f8) !important;
+    linear-gradient(180deg, #d4dfe3, #b9cbd2) !important;
   background-size: 100% 25%, 14.285% 100%, auto !important;
   box-shadow: 0 12px 28px rgba(42, 88, 104, .10) !important;
 }
 
 html[data-theme="light"] .kt-card-frame {
   background:
-    linear-gradient(#f7fbfc, #e9f4f7) padding-box,
+    linear-gradient(#d5dfe3, #bdcbd1) padding-box,
     linear-gradient(145deg, rgba(8, 145, 178, .70), rgba(34, 211, 238, .35), rgba(148, 163, 184, .22)) border-box !important;
   box-shadow: 0 12px 28px rgba(42, 88, 104, .13);
 }
@@ -2137,18 +2158,18 @@ html[data-theme="light"] .kt-psa-camera-panel {
   border-color: rgba(8, 145, 178, .32) !important;
   background:
     radial-gradient(circle at 10% 0%, rgba(56, 189, 248, .20), transparent 48%),
-    linear-gradient(180deg, #f8fcfd, #e6f4f8) !important;
+    linear-gradient(180deg, #d5e0e4, #b7c8cf) !important;
 }
 
 html[data-theme="light"] .kt-notification-row {
   border-color: rgba(31, 112, 139, .12);
-  background: #f7fbfc;
+  background: #d2dde1;
 }
 
-html[data-theme="light"] .kt-notification-row[data-tone="rise"] { background: linear-gradient(90deg, rgba(16,185,129,.12), #f7fbfc 32%); }
-html[data-theme="light"] .kt-notification-row[data-tone="drop"] { background: linear-gradient(90deg, rgba(244,63,94,.11), #f7fbfc 32%); }
-html[data-theme="light"] .kt-notification-row[data-tone="opportunity"] { background: linear-gradient(90deg, rgba(245,196,81,.15), #f7fbfc 32%); }
-html[data-theme="light"] .kt-notification-row[data-tone="system"] { background: linear-gradient(90deg, rgba(34,211,238,.13), #f7fbfc 32%); }
+html[data-theme="light"] .kt-notification-row[data-tone="rise"] { background: linear-gradient(90deg, rgba(16,185,129,.14), #d2dde1 32%); }
+html[data-theme="light"] .kt-notification-row[data-tone="drop"] { background: linear-gradient(90deg, rgba(244,63,94,.13), #d2dde1 32%); }
+html[data-theme="light"] .kt-notification-row[data-tone="opportunity"] { background: linear-gradient(90deg, rgba(245,196,81,.17), #d2dde1 32%); }
+html[data-theme="light"] .kt-notification-row[data-tone="system"] { background: linear-gradient(90deg, rgba(34,211,238,.15), #d2dde1 32%); }
 
 html[data-theme="light"] :is(.kt-premium-shell, .kt-app-shell) .text-white,
 html[data-theme="light"] .kt-notification-panel .text-white {
@@ -2166,7 +2187,7 @@ html[data-theme="light"] :is(.kt-premium-shell, .kt-app-shell) [class*="border-w
 
 html[data-theme="light"] :is(.kt-premium-shell, .kt-app-shell) :is(input, select, textarea, .kt-control, .kt-portfolio-field) {
   border-color: rgba(8, 145, 178, .20) !important;
-  background: rgba(255, 255, 255, .92) !important;
+  background: rgba(220, 228, 232, .94) !important;
   color: #10212c !important;
   box-shadow: inset 0 1px 0 rgba(255,255,255,.82) !important;
 }
@@ -2176,20 +2197,20 @@ html[data-theme="light"] :is(.kt-premium-shell, .kt-app-shell) :is(input, textar
 }
 
 html[data-theme="light"] .kt-search-intro-note {
-  background: linear-gradient(90deg, rgba(34, 211, 238, .20), rgba(255, 255, 255, .55));
+  background: linear-gradient(90deg, rgba(34, 211, 238, .20), rgba(208, 221, 227, .70));
   color: #294a58;
 }
 
 html[data-theme="light"] .kt-portfolio-detail-card,
 html[data-theme="light"] .kt-card-detail-page :is(.kt-panel, .kt-subpanel, .kt-source-row, .kt-metric-cell) {
   background:
-    linear-gradient(180deg, rgba(255,255,255,.98), rgba(237,247,250,.98)) padding-box,
+    linear-gradient(180deg, rgba(213,223,227,.98), rgba(190,205,212,.98)) padding-box,
     linear-gradient(145deg, rgba(8,145,178,.66), rgba(34,211,238,.42) 48%, rgba(56,189,248,.20)) border-box !important;
 }
 
 html[data-theme="light"] .kt-card-detail-page .kt-info-note {
   background:
-    linear-gradient(180deg, rgba(246,252,253,.98), rgba(232,246,249,.98)) padding-box,
+    linear-gradient(180deg, rgba(207,220,225,.98), rgba(185,202,209,.98)) padding-box,
     linear-gradient(145deg, rgba(8,145,178,.58), rgba(34,211,238,.25)) border-box !important;
 }
 
@@ -2230,7 +2251,7 @@ html[data-theme="light"] .kt-dashboard-page :is(
   .kt-dashboard-asset-card
 ) {
   background:
-    linear-gradient(180deg, rgba(235, 240, 242, .98), rgba(215, 225, 230, .98)) padding-box,
+    linear-gradient(180deg, rgba(210, 220, 225, .98), rgba(185, 200, 207, .98)) padding-box,
     linear-gradient(145deg, rgba(8, 145, 178, .68), rgba(34, 211, 238, .43) 50%, rgba(56, 189, 248, .20)) border-box !important;
   box-shadow: 0 12px 28px rgba(42, 88, 104, .11), inset 0 1px 0 rgba(255, 255, 255, .48) !important;
 }
