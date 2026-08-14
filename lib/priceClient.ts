@@ -12,8 +12,13 @@ type Item = {
 };
 type Response = { success?: boolean; prices?: Record<string, Item> };
 const BATCH = 20;
-const PRICE_CACHE_KEY = "king_tcg_market_price_cache_v3_fr_nm_ebay_robust";
-const LEGACY_PRICE_CACHE_KEYS = ["king_tcg_market_price_cache_v1", "king_tcg_market_price_cache_v2_variant_condition"] as const;
+const PRICE_CACHE_KEY = "king_tcg_market_price_cache_v5_cardmarket_fr_article_row";
+const LEGACY_PRICE_CACHE_KEYS = [
+  "king_tcg_market_price_cache_v1",
+  "king_tcg_market_price_cache_v2_variant_condition",
+  "king_tcg_market_price_cache_v3_fr_nm_ebay_robust",
+  "king_tcg_market_price_cache_v4_cardmarket_seller_row",
+] as const;
 const PRICE_CACHE_TTL_MS = 6 * 60 * 60 * 1000;
 const PRICE_CACHE_MAX_ENTRIES = 200;
 
@@ -138,7 +143,7 @@ async function batch(cards: PokemonCard[]): Promise<Response | null> {
   try {
     const response = await fetch("/api/prices", {
       method: "POST",
-      headers: { "Content-Type": "application/json", "X-King-TCG-Price-Version": "57" },
+      headers: { "Content-Type": "application/json", "X-King-TCG-Price-Version": "59" },
       signal: controller.signal,
       body: JSON.stringify({ cards: cards.map((card) => {
         const activeVariant = activePrintVariant(card);
