@@ -78,7 +78,7 @@ export default function NotificationBell() {
           ? `Hausse de ${Math.abs(Number(alert.changePercent || 0)).toFixed(2)} % sur 7 jours.`
           : isDrop
           ? `Recul de ${Math.abs(Number(alert.changePercent || 0)).toFixed(2)} % sur 7 jours.`
-          : `Zone d’achat potentielle détectée par King_TCG.`,
+          : `Repli modéré détecté · signal à confirmer.`,
         href: `/card/${encodeURIComponent(alert.cardId)}`,
         tone: isRise ? "rise" : isDrop ? "drop" : "opportunity",
       });
@@ -90,7 +90,7 @@ export default function NotificationBell() {
       .forEach((item) => {
         items.push({
           id: `op-${item.id}-${item.recommendation}`,
-          title: `${item.recommendation === "BUY" ? "Signal d'achat" : "Signal de vente"} · ${item.name}${item.number ? ` #${item.number}` : ""}`,
+          title: `${item.recommendation === "BUY" ? "Potentiel positif" : "Risque de baisse"} · ${item.name}${item.number ? ` #${item.number}` : ""}`,
           description: `${item.currentPrice.toFixed(2)} € · tendance ${item.trend >= 0 ? "+" : ""}${item.trend.toFixed(2)} %`,
           href: "/opportunity",
           tone: item.recommendation === "BUY" ? "opportunity" : "drop",

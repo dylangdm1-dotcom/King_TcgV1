@@ -10,7 +10,8 @@ type MoverCard = {
   name: string;
   price: string;
   gain: string;
-  growthValue: number;
+  trendValue: number;
+  period: "7 j" | "30 j";
 };
 
 export default function TopMovers() {
@@ -27,22 +28,23 @@ export default function TopMovers() {
           if (!card) return null;
           
           const market = getMarketData(card);
-          const rarityLower = card.rarity?.toLowerCase() || "";
-          const rarityBoost = rarityLower.includes("ultra") || rarityLower.includes("secret") ? 12.5 : 4.2;
-          const randomVariation = Math.random() * rarityBoost;
+          const trendValue = market.priceTrend30d || market.priceTrend7d || 0;
+          if (!(trendValue > 0)) return null;
+          const period = market.priceTrend30d ? "30 j" : "7 j";
 
           return {
             name: card.name,
             price: `${market.average.toFixed(2)} €`,
-            gain: `+${randomVariation.toFixed(1)} %`,
-            growthValue: randomVariation
+            gain: `+${trendValue.toFixed(1)} %`,
+            trendValue,
+            period,
           };
         })
       );
 
       const sorted = data
         .filter((item): item is MoverCard => item !== null)
-        .sort((a, b) => b.growthValue - a.growthValue)
+        .sort((a, b) => b.trendValue - a.trendValue)
         .slice(0, 3);
 
       setTopCards(sorted);
@@ -69,7 +71,7 @@ export default function TopMovers() {
             >
               <div className="min-w-0 flex-1 pr-3">
                 <div className="font-bold text-white text-xs truncate">{card.name}</div>
-                <div className="text-[10px] text-zinc-500 font-medium mt-0.5 tabular-nums">Cours : {card.price}</div>
+                <div className="text-[10px] text-zinc-500 font-medium mt-0.5 tabular-nums">Cours : {card.price} · tendance {card.period}</div>
               </div>
               <div className="font-black text-emerald-400 text-[10px] uppercase tracking-wider bg-emerald-500/5 border border-emerald-500/10 px-2 py-0.5 rounded tabular-nums shrink-0">
                 {card.gain}

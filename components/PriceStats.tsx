@@ -35,7 +35,9 @@ export default function PriceStats({
   const amplitude = highest > 0 && lowest > 0 ? highest - lowest : 0;
 
   const frenchBase = frenchMode && kingTcgPrice > 0 ? kingTcgPrice : 0;
-  const recommendedSale = frenchBase > 0 ? Number((frenchBase * 1.01).toFixed(2)) : 0;
+  // Sans frais, délai de vente, état réel de l'annonce ni ventes conclues,
+  // appliquer un pourcentage arbitraire serait trompeur. La cote reste le repère.
+  const recommendedSale = frenchBase;
 
   return (
     <div className="space-y-5">
@@ -46,7 +48,7 @@ export default function PriceStats({
         </div>
         <p className="mt-2 text-[11px] font-medium leading-5 text-zinc-100">
           {frenchMode
-            ? "Repères de vente calculés directement depuis la cote King_TCG française."
+            ? "Repère de mise en vente fondé sur la cote King_TCG française, hors frais et négociation."
             : "Résumé des repères suivis localement pour comprendre la position actuelle de la carte."}
         </p>
       </div>
@@ -55,7 +57,7 @@ export default function PriceStats({
         <div className={`flex items-start gap-4 ${frenchMode ? "justify-center text-center" : "justify-between"}`}>
           <div className={frenchMode ? "w-full" : ""}>
             <p className="text-[10px] font-black uppercase tracking-[0.16em] text-zinc-200">
-              {frenchMode ? "Prix de vente conseillé" : "Prix actuellement suivi"}
+              {frenchMode ? "Repère de mise en vente" : "Prix actuellement suivi"}
             </p>
             <p className="mt-2 text-3xl font-black tracking-[-0.035em] text-white tabular-nums">
               {frenchMode
@@ -75,7 +77,7 @@ export default function PriceStats({
           {frenchMode ? (
             <>
               <Metric label="Cote King_TCG" value={euro(frenchBase)} tone="high" />
-              <Metric label="Vente conseillée" value={euro(recommendedSale)} tone="low" />
+              <Metric label="Repère vente" value={euro(recommendedSale)} tone="low" />
               <Metric label="Amplitude" value={amplitude > 0 ? euro(amplitude) : "—"} />
             </>
           ) : (
@@ -95,7 +97,7 @@ export default function PriceStats({
         </div>
         {frenchMode ? (
           <div className="mt-3 flex items-center justify-between gap-3 rounded-xl bg-black/20 px-3 py-2.5">
-            <span className="text-[10px] font-black uppercase tracking-[0.11em] text-zinc-300">Prix de vente conseillé</span>
+            <span className="text-[10px] font-black uppercase tracking-[0.11em] text-zinc-300">Repère de mise en vente</span>
             <strong className="text-sm font-black tabular-nums text-white">{recommendedSale > 0 ? euro(recommendedSale) : "Calcul…"}</strong>
           </div>
         ) : (

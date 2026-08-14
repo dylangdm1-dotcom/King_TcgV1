@@ -7,6 +7,7 @@ import * as Recharts from "recharts";
 type PricePoint = {
   date: string;
   price: number;
+  origin?: "observed" | "reconstructed";
 };
 
 type Props = {
@@ -37,6 +38,7 @@ export default function PriceChart({ history }: Props) {
   }
 
   const filteredHistory = history.slice(-period);
+  const isReconstructed = filteredHistory.some((point) => point.origin === "reconstructed");
 
   const currentPrice =
     filteredHistory[filteredHistory.length - 1]?.price ?? 0;
@@ -64,7 +66,9 @@ export default function PriceChart({ history }: Props) {
             Historique King_TCG
           </h2>
           <p className="max-w-lg text-[10px] font-medium leading-4 text-zinc-400">
-            Évolution de la cote King_TCG enregistrée pour cette carte. Les points complétés par une tendance marché restent des estimations et non des ventes.
+            {isReconstructed
+              ? "Courbe indicative reconstruite depuis les repères fournisseur : ce ne sont ni des ventes ni des relevés quotidiens."
+              : "Évolution des relevés King_TCG enregistrés pour cette carte. Ces points ne représentent pas nécessairement des ventes."}
           </p>
 
           <div className="flex items-baseline gap-3 pt-1">
@@ -117,6 +121,12 @@ export default function PriceChart({ history }: Props) {
           <p className="mt-1 text-[12px] font-black tabular-nums text-cyan-300">{amplitude.toFixed(2)} €</p>
         </div>
       </div>
+
+      {isReconstructed ? (
+        <div className="rounded-xl border border-amber-300/18 bg-amber-300/[0.04] px-3 py-2 text-[10px] font-semibold leading-4 text-amber-100">
+          Historique reconstruit · exclu du calcul de couverture et de confiance.
+        </div>
+      ) : null}
 
       {/* Graphique */}
       <div className="kt-chart-canvas kt-history-chart rounded-[18px] border p-3">
