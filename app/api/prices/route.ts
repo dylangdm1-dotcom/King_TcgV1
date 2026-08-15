@@ -116,6 +116,8 @@ type MarketPayload = {
     availableLanguages?: string[];
     availableConditions?: string[];
     selectedPrinting?: string;
+    totalVariantCount?: number;
+    positivePriceVariantCount?: number;
   };
   estimate?: {
     price: number;
@@ -2638,6 +2640,59 @@ function justTcgUnixToIso(value: unknown): string | undefined {
   }
 }
 
+
+function canonicalJustTcgCondition(value: unknown): string {
+  const condition = normalizedText(String(value ?? ""));
+  const aliases: Record<string, string> = {
+    s: "sealed",
+    sealed: "sealed",
+    nm: "nearmint",
+    nearmint: "nearmint",
+    lp: "lightlyplayed",
+    lightlyplayed: "lightlyplayed",
+    lightplayed: "lightlyplayed",
+    mp: "moderatelyplayed",
+    moderatelyplayed: "moderatelyplayed",
+    hp: "heavilyplayed",
+    heavilyplayed: "heavilyplayed",
+    dmg: "damaged",
+    damaged: "damaged",
+  };
+  return aliases[condition] || condition;
+}
+
+function canonicalJustTcgLanguage(value: unknown): string {
+  const language = normalizedText(String(value ?? ""));
+  const aliases: Record<string, string> = {
+    en: "english",
+    eng: "english",
+    english: "english",
+    fr: "french",
+    fra: "french",
+    french: "french",
+    ja: "japanese",
+    jp: "japanese",
+    jap: "japanese",
+    japanese: "japanese",
+    zh: "chinese",
+    zhtw: "chinese",
+    chn: "chinese",
+    chinese: "chinese",
+  };
+  return aliases[language] || language;
+}
+
+function canonicalJustTcgPrinting(value: unknown): string {
+  const printing = normalizedText(String(value ?? ""));
+  if (["holo", "holofoil", "foil"].includes(printing)) return "foil";
+  if (["normal", "standard", "regular"].includes(printing)) return "normal";
+  if (printing.includes("reverse")) return "reverseholo";
+  if (printing.includes("masterball")) return "masterball";
+  if (printing.includes("pokeball")) return "pokeball";
+  if (["1stedition", "firstedition"].includes(printing)) return "firstedition";
+  return printing;
+}
+
 async function fromJustTcg(card: InputCard): Promise<MarketPayload> {
   const apiKey = process.env.JUSTTCG_API_KEY;
   const payload = emptyPayload();
@@ -2781,26 +2836,30 @@ async function fromJustTcg(card: InputCard): Promise<MarketPayload> {
     ? selectedCard.variants
     : [];
 
-  const expectedLanguageNormalized = normalizedText(expectedLanguage);
-  const expectedConditionNormalized = normalizedText(expectedCondition);
-  const expectedPrintingNormalized = normalizedText(expectedPrinting);
+  const expectedLanguageNormalized = canonicalJustTcgLanguage(expectedLanguage);
+  const expectedConditionNormalized = canonicalJustTcgCondition(expectedCondition);
+  const expectedPrintingNormalized = canonicalJustTcgPrinting(expectedPrinting);
 
-  const pricedConditionVariants = allVariants.filter((variant: any) => {
-    const price = numberValue(variant?.price);
-    if (!price) return false;
-    return normalizedText(variant?.condition) === expectedConditionNormalized;
-  });
+  const positiveVariants = allVariants.filter(
+    (variant: any) => Boolean(numberValue(variant?.price))
+  );
+  const pricedConditionVariants = positiveVariants.filter(
+    (variant: any) =>
+      canonicalJustTcgCondition(variant?.condition) === expectedConditionNormalized
+  );
 
+  payload.debugJustTcg.totalVariantCount = allVariants.length;
+  payload.debugJustTcg.positivePriceVariantCount = positiveVariants.length;
   payload.debugJustTcg.availablePrintings = Array.from(
     new Set(
-      pricedConditionVariants
+      positiveVariants
         .map((variant: any) => String(variant?.printing || "").trim())
         .filter(Boolean)
     )
   );
   payload.debugJustTcg.availableLanguages = Array.from(
     new Set(
-      pricedConditionVariants
+      positiveVariants
         .map((variant: any) => String(variant?.language || "").trim())
         .filter(Boolean)
     )
@@ -2817,26 +2876,14 @@ async function fromJustTcg(card: InputCard): Promise<MarketPayload> {
     const price = numberValue(variant?.price);
     if (!price) return false;
 
-    const condition = normalizedText(variant?.condition);
-    const printing = normalizedText(variant?.printing);
-    const language = normalizedText(variant?.language);
+    const condition = canonicalJustTcgCondition(variant?.condition);
+    const printing = canonicalJustTcgPrinting(variant?.printing);
+    const language = canonicalJustTcgLanguage(variant?.language);
 
     if (condition !== expectedConditionNormalized) return false;
+    if (printing !== expectedPrintingNormalized) return false;
 
-    const printingMatches =
-      printing === expectedPrintingNormalized ||
-      (expectedPrintingNormalized === "foil" && ["foil", "holo", "holofoil"].includes(printing)) ||
-      (expectedPrintingNormalized === "reverseholo" && printing.includes("reverse")) ||
-      (expectedPrintingNormalized === "normal" && ["normal", "standard", "regular"].includes(printing));
-
-    if (!printingMatches) return false;
-
-    if (
-      language &&
-      language !== expectedLanguageNormalized &&
-      !language.includes(expectedLanguageNormalized) &&
-      !expectedLanguageNormalized.includes(language)
-    ) return false;
+    if (language && language !== expectedLanguageNormalized) return false;
 
     return true;
   });
@@ -2852,16 +2899,15 @@ async function fromJustTcg(card: InputCard): Promise<MarketPayload> {
     expectedPrintingNormalized === "foil"
   ) {
     const languageCompatible = pricedConditionVariants.filter((variant: any) => {
-      const language = normalizedText(variant?.language);
-      return (
-        !language ||
-        language === expectedLanguageNormalized ||
-        language.includes(expectedLanguageNormalized) ||
-        expectedLanguageNormalized.includes(language)
-      );
+      const language = canonicalJustTcgLanguage(variant?.language);
+      return !language || language === expectedLanguageNormalized;
     });
     const printingNames = Array.from(
-      new Set(languageCompatible.map((variant: any) => normalizedText(variant?.printing)).filter(Boolean))
+      new Set(
+        languageCompatible
+          .map((variant: any) => canonicalJustTcgPrinting(variant?.printing))
+          .filter(Boolean)
+      )
     );
     if (languageCompatible.length > 0 && printingNames.length === 1) {
       compatibleVariants = languageCompatible;
@@ -3616,7 +3662,7 @@ export async function POST(request: Request) {
     const results = await mapWithConcurrency(cards, 3, async (card) => {
       const language = card.language ?? "en";
       const cacheKey = [
-        language === "zh-tw" ? "price-v104-cn-variant" : "price-v104-variant",
+        language === "zh-tw" ? "price-v105-cn-variant" : "price-v105-variant",
         card.id,
         language,
         normalizedSet(card.setId),
@@ -3829,7 +3875,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({
       success: true,
-      version: "price-engine-v104-justtcg-variant-discovery-cn-truth",
+      version: "price-engine-v105-justtcg-alias-normalization",
       prices: Object.fromEntries(results),
     });
   } catch (error) {
