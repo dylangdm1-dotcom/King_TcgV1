@@ -14,7 +14,7 @@ type Item = {
 };
 type Response = { success?: boolean; prices?: Record<string, Item> };
 const BATCH = 20;
-const PRICE_CACHE_KEY = "king_tcg_market_price_cache_v23_market_identity_guards";
+const PRICE_CACHE_KEY = "king_tcg_market_price_cache_v24_internal_freshness";
 const LEGACY_PRICE_CACHE_KEYS = [
   "king_tcg_market_price_cache_v1",
   "king_tcg_market_price_cache_v2_variant_condition",
@@ -22,13 +22,34 @@ const LEGACY_PRICE_CACHE_KEYS = [
   "king_tcg_market_price_cache_v4_cardmarket_seller_row",
   "king_tcg_market_price_cache_v5_cardmarket_fr_article_row",
 ] as const;
-const PRICE_CACHE_TTL_MS = 6 * 60 * 60 * 1000;
+const PRICE_CACHE_POSITIVE_TTL_MS = 6 * 60 * 60 * 1000;
+const PRICE_CACHE_NEGATIVE_TTL_MS = 5 * 60 * 1000;
 const PRICE_CACHE_MAX_ENTRIES = 200;
 
 type CachedMarketCard = {
   updatedAt: number;
   card: PokemonCard;
 };
+
+function hasUsableMarketData(card: PokemonCard): boolean {
+  if (Number(card.marketEstimate?.price || 0) > 0) return true;
+  if ((card.marketQuotes || []).some((quote) => Number(quote?.price || 0) > 0)) return true;
+  if (Number(card.justtcg?.currentPrice || card.justtcg?.medianNearMint || 0) > 0) return true;
+  if (Number(card.ebayListings?.median || card.ebayListings?.average || 0) > 0) return true;
+  if (card.cardmarket?.prices && Object.values(card.cardmarket.prices).some((value) => Number(value || 0) > 0)) return true;
+  if (card.tcgplayer?.prices) {
+    return Object.values(card.tcgplayer.prices).some((price: any) =>
+      Number(price?.market || price?.mid || price?.low || price?.high || 0) > 0
+    );
+  }
+  return false;
+}
+
+function cacheTtlForCard(card: PokemonCard): number {
+  return hasUsableMarketData(card)
+    ? PRICE_CACHE_POSITIVE_TTL_MS
+    : PRICE_CACHE_NEGATIVE_TTL_MS;
+}
 
 function readPriceCache(): Record<string, CachedMarketCard> {
   if (typeof window === "undefined") return {};
@@ -195,7 +216,7 @@ export async function enrichCardsWithMarketPrices(cards: PokemonCard[]) {
     if (
       cached?.card &&
       Number.isFinite(cached.updatedAt) &&
-      now - cached.updatedAt < PRICE_CACHE_TTL_MS
+      now - cached.updatedAt < cacheTtlForCard(cached.card)
     ) {
       resultMap.set(requestKey, mergeCachedMarket(card, cached.card));
     } else {
