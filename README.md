@@ -1,14 +1,84 @@
-# 👑 King_TCG --- README Officiel
+# King_TCG
 
-**Version technique actuelle : V42 --- eBay officiel / Cote King_TCG /
-JP-CN / Images**\
-**Statut produit : V5.0 --- Accès anticipé**\
+Application de gestion et d'analyse de cartes Pokémon : catalogues multilingues, collection, favoris, dashboard, scanner IA, estimation PSA expérimentale et agrégation de données marché.
+
+> **État du projet : base V199 validée pour la reprise.**
+> Les audits et la feuille de route détaillée sont dans `docs/`.
+> Le développement structurel restant est volontairement réservé à la phase ChatGPT Work.
+
+## État actuel
+
+### Fonctionnel / validé
+
+- Recherche et fiches cartes en **FR / EN / JP / CN**.
+- Collection : quantités, état, variante, prix d'achat, valeur et progression par extension.
+- Favoris et Dashboard.
+- Scanner **Mono / Batch / Quad** côté structure.
+- PSA IA avec quatre vues et contrôle manuel complémentaire.
+- Marchés affichés séparément : **Cardmarket, eBay, TCGPlayer et JustTCG**.
+- Cote King_TCG avec protections anti-outliers et distinction entre données exactes, comparables et indicatives.
+- Cache prix et protections contre les appels fournisseurs répétés.
+- Audits statiques de non-régression effectués sur les principaux parcours.
+
+### Tests physiques encore nécessaires
+
+- Scanner Mono avec une vraie carte.
+- Scanner Batch.
+- Quad avec 1/4, 2/4, 3/4 puis 4/4 cartes.
+- Android et iPhone réels.
+- PSA avec quatre vraies photos.
+- Vérification finale mobile et clair/sombre.
+
+### Reprise prévue dans Work
+
+- Finalisation exhaustive des catalogues **JP et CN**.
+- Fiabilisation des **images CN**.
+- Cardmarket FR/NM exact si une voie fiable est disponible.
+- Variantes et états complets.
+- Pondérations finales du moteur King_TCG.
+- Cache serveur partagé et historique persistant.
+- Comptes Normal / Premium / Admin, Cloud et connexion Google.
+- Sécurité production, quotas, monitoring, juridique et publication stores.
+
+## Invariants à préserver
+
+1. **Catalogue, Marché et Analytics restent indépendants.**
+2. Une panne fournisseur ne doit jamais supprimer une carte, son identité ou une image déjà connue.
+3. Tous les marchés restent visibles ; une source absente affiche `—`.
+4. Une cotation d'une autre langue doit rester explicitement **comparable**, jamais devenir un prix local exact.
+5. Le catalogue CN ne doit pas déclencher un scan massif automatique des extensions.
+6. Scanner et PSA restent isolés du moteur de prix.
+7. Les secrets API restent exclusivement côté serveur.
+8. Les documents techniques `.md` restent dans `docs/`.
+
+## Documentation de reprise
+
+- `docs/PROJECT_STATUS.md` — état détaillé du projet.
+- `docs/WORK_HANDOFF.md` — ordre de reprise recommandé pour Work.
+- `docs/FINAL_ROADMAP.md` — tâches validées, tests restants et travaux Work.
+- `docs/STATIC_REGRESSION_V194.md` — audit statique global.
+- `docs/TARGETED_MARKET_REGRESSION_V195.md` — audit Recherche / fiches / prix.
+- `docs/COLLECTION_FAVORITES_DASHBOARD_REGRESSION_V196.md` — audit Collection / Favoris / Dashboard.
+- `docs/SCANNER_PSA_REGRESSION_V197.md` — audit Scanner / PSA.
+
+---
+
+# 👑 King_TCG — README officiel
+
+**Version de travail actuelle : V153 — Catalogues régionaux et analytics explicables**\
+**Statut produit : V5.0 — Accès anticipé**\
 **Stack : Next.js App Router, React, TypeScript, TailwindCSS**\
 **IA : Google Gemini**\
 **Données cartes : TCGdex + Pokémon TCG API (EN uniquement en
 fallback)**\
 **Marché : Cardmarket + TCGPlayer + JustTCG + eBay Browse API**\
 **Stockage actuel : LocalStorage + caches applicatifs et serveur**
+
+> La feuille de route officielle et l'ordre des priorités jusqu'à la
+> publication Android/iPhone sont conservés dans
+> [`docs/ROADMAP_VERSION_FINALE.md`](docs/ROADMAP_VERSION_FINALE.md).
+> Les sections techniques historiques de ce README seront consolidées après
+> l'audit complet des API et des sources de prix.
 
 ------------------------------------------------------------------------
 
@@ -29,21 +99,22 @@ indépendamment de la disponibilité des prix.
 
 -   **Recherche cartes** par nom, langue et extension.
 -   **Catalogues multilingues** FR / EN / JP / CN.
+-   **Catalogue physique uniquement** : les extensions numériques Pokémon TCG Pocket sont séparées et non proposées comme produits de marché.
 -   **Fiches cartes** chargées indépendamment des fournisseurs de prix.
 -   **Cote King_TCG** avec agrégation contrôlée des sources marché.
 -   **Cardmarket** comme référence principale du marché FR.
 -   **eBay officiel** via OAuth et Browse API.
--   **JustTCG** avec prise en charge du marché Pokémon Japan lorsqu'il
-    est disponible.
+-   **JustTCG** avec variantes, état, printing et langue, y compris les
+    cotations comparables cross-language lorsqu’elles sont compatibles.
 -   **TCGPlayer** principalement pour les données anglaises compatibles.
 -   **Historique King_TCG** sous les fiches cartes.
 -   **Projection 30 jours FR** basée sur la Cote King_TCG.
--   **Prix de vente conseillé FR** basé sur la Cote King_TCG.
+-   **Repère de mise en vente FR** basé sur la Cote King_TCG, hors frais et négociation.
 -   **Collection** : quantité, état, prix d'achat, favoris, valeur et
     plus-value.
 -   **Dashboard** : portefeuille, statistiques et projection 7 jours.
--   **Scanner Mono / Batch** avec Gemini.
--   **Collection PSA** et estimation PSA IA expérimentale.
+-   **Scanner Mono / Batch / Quad** avec Gemini et confiance bornée par les signaux réellement lus.
+-   **Collection PSA** et estimation visuelle expérimentale, avec cohérence et plafonds de confiance contrôlés côté serveur.
 -   **Notifications** et navigation mobile premium.
 
 ------------------------------------------------------------------------
@@ -80,7 +151,7 @@ fiches.
 -   **FR** : TCGdex FR uniquement pour le catalogue.
 -   **EN** : TCGdex EN avec fallback Pokémon TCG API autorisé.
 -   **JP** : TCGdex JP uniquement pour le catalogue.
--   **CN** : TCGdex CN uniquement pour le catalogue.
+-   **CN** : PokéWallet avec catalogue local de repli, alias de codes fournisseur et cache long. La couverture exhaustive et les images restent à finaliser dans Work.
 
 Les sources anglaises ne doivent jamais injecter une carte ou une
 extension anglaise dans un catalogue FR, JP ou CN.
@@ -204,12 +275,9 @@ Toutes les clés privées restent exclusivement côté serveur.
 Pour le français, la **Cote King_TCG** est la référence centrale des
 éléments analytiques de la fiche.
 
-Le prix de vente conseillé utilise actuellement une cible légère
-au-dessus de la cote, par défaut autour de **+1 %**.
-
-Exemple :
-
-`Cote King_TCG 312,27 € → prix conseillé ≈ 315,39 €`
+Le repère de mise en vente reprend la Cote King_TCG sans majoration
+arbitraire. Les frais, la négociation, l'état précis et le délai de vente
+ne sont pas connus de l'application et doivent être appréciés séparément.
 
 La projection 30 jours part également de la Cote King_TCG actuelle afin
 d'éviter qu'un ancien historique ou une moyenne provenant d'une autre
@@ -227,6 +295,28 @@ reconstruire une série indicative à partir de la cote actuelle et des
 tendances disponibles. Cette reconstruction doit rester identifiable
 comme une estimation et ne doit pas être présentée comme une succession
 de ventes historiques réelles.
+
+Les points reconstruits sont marqués `reconstructed` et sont exclus du
+calcul de couverture des données, de volatilité et de confiance.
+
+------------------------------------------------------------------------
+
+## Score stratégique et projections
+
+Le score stratégique n'est pas un conseil financier. Il combine des
+signaux bornés : tendance 7/30 jours lorsqu'elle existe, rareté, volatilité
+des seuls relevés observés, niveau de prix, état et écart entre sources.
+
+La projection 30 jours est un scénario algorithmique amorti, accompagné :
+
+-   d'une fourchette basse/haute ;
+-   d'un pourcentage de couverture des données ;
+-   du nombre de sources compatibles ;
+-   du nombre de relevés King_TCG réellement enregistrés ;
+-   d'un libellé de qualité `Insuffisante`, `Limitée`, `Correcte` ou `Solide`.
+
+Une variation forte augmente l'incertitude ; elle n'augmente pas la
+confiance à elle seule.
 
 ------------------------------------------------------------------------
 
@@ -328,7 +418,7 @@ traduction approximative du nom.
 
 ### Batch
 
-Le mode Batch permet une capture guidée de quatre cartes.
+Le mode Batch permet le traitement de plusieurs cartes. Le mode Quad gère quatre emplacements avec résultats progressifs et détections partielles.
 
 ------------------------------------------------------------------------
 
@@ -413,7 +503,7 @@ Après une modification Data ou Marché :
 
 ------------------------------------------------------------------------
 
-## État V42
+## Historique technique V42
 
 ### Validé récemment
 
@@ -441,7 +531,7 @@ Après une modification Data ou Marché :
 
 ------------------------------------------------------------------------
 
-## Priorités suivantes
+## Anciennes priorités V42 — historique
 
 1.  Valider V42 sur FR / JP / CN.
 2.  Stabiliser la couverture prix JP et CN.
@@ -469,8 +559,8 @@ principal conservé à la racine.
 
 ------------------------------------------------------------------------
 
-**King_TCG --- Pokémon Trading Card Companion**\
-**V42 technique / V5.0 Accès anticipé**
+**King_TCG — Pokémon Trading Card Companion**\
+**V153 de travail / V5.0 Accès anticipé**
 
 ## V78 — CN public dual fallback + JP TCGdex isolation
 - CN keeps V77 public PokéWallet primary + browser direct fallback when the server path fails.
@@ -481,46 +571,10 @@ principal conservé à la racine.
 
 ## Feuille de route finale King_TCG
 
-### 1. Quad Scanner
-- Terminer les ~25 % restants du Quad Scanner.
-- Améliorer la quatrième détection lorsque 3 cartes sur 4 sont correctement reconnues.
-- Améliorer le cadrage et la robustesse de la détection.
-- Conserver les résultats progressifs.
-- Ne pas casser les modes Mono et Batch.
+La feuille de route détaillée, les priorités, les exclusions et la première
+action immédiate sont centralisées dans :
 
-### 2. Finition finale
-- Vérifier le tri des catalogues JP / CN.
-- Faire une vérification globale des prix et historiques.
-- Valider le cache partagé des prix entre les différentes pages.
-- Effectuer les tests de non-régression.
-- Vérifier les performances et l'expérience mobile.
-- Préparer la version production.
+[`docs/ROADMAP_VERSION_FINALE.md`](docs/ROADMAP_VERSION_FINALE.md)
 
-### 3. Activation des comptes
-- Activer les comptes Normal et Premium.
-- Prévoir un compte Administrateur.
-- Prévoir des comptes Testeurs avec Premium gratuit.
-- Mettre en place le stockage lié aux comptes / groupes.
-- Ajouter la connexion Google.
-- Ajouter la gestion de l'abonnement et du paiement Premium.
-
-### 4. Points complémentaires avant production
-- Vérifier les erreurs et états vides sur les parcours principaux.
-- Vérifier les quotas et protections Premium sur tous les modules concernés.
-- Vérifier la persistance des données après reconnexion / changement d'appareil une fois les comptes activés.
-- Prévoir les sauvegardes / migrations des données locales vers le stockage compte.
-- Faire une passe finale accessibilité, responsive et sécurité des routes sensibles.
-
-### Règle stricte pour les dernières versions
-Une seule zone fonctionnelle par version. Aucun refactoring transversal inutile.
-Les fondations déjà validées — FR / JP / CN, fiches cartes et prix — ne doivent plus être modifiées sauf nécessité directe liée à la zone travaillée.
-
-### Charte visuelle King_TCG
-- Univers : TCG moderne, sombre, lisible et orienté collection / marché.
-- Police principale : Inter, avec une hiérarchie claire plutôt qu'une multiplication des graisses.
-- Cyan : identité King_TCG et actions principales.
-- Gold : réservé aux fonctions Premium et à la couronne Premium.
-- Violet : fonctions IA lorsqu'une distinction est utile.
-- Vert / rouge / orange : états marché positifs, négatifs et vigilance.
-- Titres, descriptions, micro-labels, rayons de cartes et navigation doivent rester cohérents entre les pages.
-- Aucun changement visuel ne doit modifier les routes, les données, le moteur de prix, le scanner ou la logique métier.
+Règle stricte : une seule zone fonctionnelle importante par version, avec une
+sauvegarde restaurable et des tests ciblés avant toute modification transversale.
