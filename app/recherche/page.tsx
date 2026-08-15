@@ -13,7 +13,6 @@ import {
   Filter,
   Loader2,
   Sparkles,
-  CalendarDays,
   ChevronDown,
   ArrowRight,
   Hash,
@@ -30,7 +29,6 @@ import {
 import { filterCards, type SearchFilters as SearchFiltersType } from "../../lib/search";
 import { type PokemonCard } from "../../lib/types";
 import {
-  UPCOMING_OFFICIAL_RELEASES,
   classifySetGeneration,
   compareCardsNewestFirst,
   compareSetsNewestFirst,
@@ -239,7 +237,6 @@ export default function Recherche() {
   const [selectedSetId, setSelectedSetId] = useState<string>("");
   const [setSearch, setSetSearch] = useState("");
   const [expandedGeneration, setExpandedGeneration] = useState<string | null>(null);
-  const [showUpcoming, setShowUpcoming] = useState(false);
   const [catalogNotice, setCatalogNotice] = useState("");
   const initialSetHandledRef = useRef(false);
   const [filters, setFilters] = useState<SearchFiltersType>({
@@ -429,13 +426,7 @@ export default function Recherche() {
     [cards]
   );
 
-  const upcomingReleases = useMemo(() => {
-    const languageReleases = UPCOMING_OFFICIAL_RELEASES.filter((release) => release.language === selectedLanguage);
-    return languageReleases.map((release) => ({
-      ...release,
-      set: allSetsList.find((set) => normalizeSetId(set.id) === normalizeSetId(release.id)),
-    }));
-  }, [allSetsList, selectedLanguage]);
+
 
   return (
     <>
@@ -507,47 +498,7 @@ export default function Recherche() {
               </button>
             </div>
 
-            {upcomingReleases.length > 0 ? (
-              <section className="overflow-hidden rounded-2xl border border-amber-300/20 bg-amber-300/[0.04]">
-                <button
-                  type="button"
-                  onClick={() => setShowUpcoming((value) => !value)}
-                  className="flex w-full items-center justify-between gap-3 px-3.5 py-3 text-left"
-                >
-                  <span className="min-w-0">
-                    <span className="block text-[10px] font-black uppercase tracking-[0.16em] text-amber-300">À venir · Extensions et cartes annoncées</span>
-                    <span className="mt-0.5 block truncate text-[11px] font-bold text-zinc-300">Extensions annoncées et cartes révélées avant leur sortie</span>
-                  </span>
-                  <ChevronDown className={`h-4 w-4 shrink-0 text-amber-300 transition ${showUpcoming ? "rotate-180" : ""}`} />
-                </button>
-                {showUpcoming ? (
-                  <div className="grid gap-2 border-t border-amber-300/10 p-2.5 sm:grid-cols-2">
-                    {upcomingReleases.map((release) => (
-                      <article key={release.id} className="kt-data-row rounded-xl border p-3">
-                        <div className="flex items-start justify-between gap-3">
-                          <div className="min-w-0">
-                            <span className="text-[10px] font-bold uppercase tracking-[0.11em] text-violet-300">{release.id.toUpperCase()}</span>
-                            <h3 className="truncate text-xs font-black text-white">{release.name}</h3>
-                            <p className="mt-1 text-[10px] leading-4 text-zinc-100">Sortie {new Date(release.releaseDate).toLocaleDateString("fr-FR")} · Prix officiel {release.officialPrice}</p>
-                            <p className="text-[10px] text-zinc-200">{release.contents}</p>
-                          </div>
-                          <div className="flex shrink-0 flex-col gap-1.5">
-                            {release.set ? (
-                              <button type="button" onClick={() => { setSearchMode("set"); void handleSetSelect(release.set!.id); }} className="rounded-lg border border-cyan-300/20 bg-cyan-300/[0.08] px-2.5 py-1.5 text-[10px] font-black uppercase text-cyan-200">
-                                Cartes révélées
-                              </button>
-                            ) : null}
-                            <a href={release.officialUrl} target="_blank" rel="noreferrer" className="rounded-lg border border-white/[0.06] px-2.5 py-1.5 text-center text-[10px] font-black uppercase text-zinc-300">
-                              Officiel
-                            </a>
-                          </div>
-                        </div>
-                      </article>
-                    ))}
-                  </div>
-                ) : null}
-              </section>
-            ) : null}
+
 
             {searchMode === "text" ? (
               <div className="flex flex-col gap-3 sm:flex-row">
