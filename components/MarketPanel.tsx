@@ -62,6 +62,8 @@ type Props = {
     availableLanguages?: string[];
     availableConditions?: string[];
     selectedPrinting?: string;
+    totalVariantCount?: number;
+    positivePriceVariantCount?: number;
   };
   language?: "fr" | "en" | "ja" | "zh-tw";
   onRefresh?: () => void;
@@ -227,8 +229,16 @@ export default function MarketPanel({
           TCGdex {debugJustTcg.tcgdexIdentityStage || "—"}
           {debugJustTcg.tcgdexCardId ? ` · ${debugJustTcg.tcgdexLocale || "?"}:${debugJustTcg.tcgdexCardId}` : ""} ·
           candidats {debugJustTcg.candidateCount ?? 0} ·
+          variants {debugJustTcg.totalVariantCount ?? 0} ·
+          prix positifs {debugJustTcg.positivePriceVariantCount ?? 0} ·
           variantes exactes {debugJustTcg.matchingVariantCount ?? 0}
-          {debugJustTcg.condition ? ` · ${debugJustTcg.condition}` : ""}
+          {debugJustTcg.availableConditions?.length
+            ? ` · conditions [${debugJustTcg.availableConditions.join(", ")}]`
+            : ""}
+          {debugJustTcg.availableLanguages?.length
+            ? ` · langues [${debugJustTcg.availableLanguages.join(", ")}]`
+            : ""}
+          {debugJustTcg.condition ? ` · demandé ${debugJustTcg.condition}` : ""}
           {debugJustTcg.printing ? ` · demandé ${debugJustTcg.printing}` : ""}
           {debugJustTcg.availablePrintings?.length
             ? ` · printings [${debugJustTcg.availablePrintings.join(", ")}]`
