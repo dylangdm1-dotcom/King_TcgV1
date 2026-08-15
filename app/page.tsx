@@ -9,7 +9,7 @@ import {
   Layers, Library, Bookmark, Wallet, 
   LayoutDashboard, Camera, Star, Zap, Sparkles, Search,
   Bell, TrendingUp, Crown, BadgeCheck, Handshake, ChevronDown,
-  ExternalLink, Video, Heart, CalendarDays, Newspaper
+  ExternalLink, Video, Heart, CalendarDays, Newspaper, CircleDollarSign
 } from "lucide-react";
 import { getCollection, getFavorites } from "@/lib/storage";
 import { getCardById } from "@/lib/pokemon";
@@ -356,6 +356,16 @@ export default function Home() {
               icon={<Handshake className="w-5 h-5 text-cyan-400" />}
             />
           </div>
+        </section>
+
+        {/* Ventes Premium — fonctionnalité à venir */}
+        <section className="mx-auto mt-5 max-w-[1180px] px-4 sm:px-5">
+          <QuickCard
+            href="/ventes"
+            title="Ventes"
+            subtitle="Historique des cartes vendues, prix de vente et bénéfices · Premium à venir"
+            icon={<CircleDollarSign className="h-5 w-5 text-amber-300" />}
+          />
         </section>
 
         {/* Créateur — barre indépendante et dépliable */}
