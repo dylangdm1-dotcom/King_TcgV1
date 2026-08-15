@@ -247,11 +247,11 @@ export default function Home() {
                   <div className="divide-y divide-cyan-200/[0.07]">
                     {upcomingKingTcgItems.map((item) => (
                       <div key={item.title} className="flex items-start gap-2 py-1.5 first:pt-0 last:pb-0">
-                        <span className="mt-[3px] h-1.5 w-1.5 shrink-0 rounded-full bg-cyan-300/70" />
+                        <span className={`mt-[3px] h-1.5 w-1.5 shrink-0 rounded-full ${item.badge === "Premium" ? "bg-amber-300/80" : "bg-cyan-300/70"}`} />
                         <p className="min-w-0 text-[9px] leading-4 text-zinc-300">
-                          <span className="font-black text-cyan-200">{item.badge}</span>
+                          <span className={`font-black ${item.badge === "Premium" ? "text-amber-300" : "text-cyan-200"}`}>{item.badge}</span>
                           <span className="text-zinc-500"> · </span>
-                          <span className="font-bold text-white">{item.title}</span>
+                          <span className={`font-bold ${item.badge === "Premium" ? "text-amber-100" : "text-white"}`}>{item.title}</span>
                           <span className="hidden sm:inline"> — {item.text}</span>
                         </p>
                       </div>
