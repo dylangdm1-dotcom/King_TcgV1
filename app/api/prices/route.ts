@@ -1571,9 +1571,10 @@ async function fromEbay(card: InputCard): Promise<MarketPayload> {
   const configuredMarketplace = process.env.EBAY_MARKETPLACE_ID || "EBAY_FR";
   // V46: FR remains strictly on EBAY_FR. Asian cards are also searched on the
   // international US marketplace, where JP/CN singles are far more numerous.
-  const marketplaces = card.language === "ja" || card.language === "zh-tw"
-    ? Array.from(new Set(["EBAY_US", configuredMarketplace]))
-    : [configuredMarketplace];
+  const marketplaces =
+    card.language === "ja" || card.language === "zh-tw" || card.language === "en"
+      ? Array.from(new Set(["EBAY_US", configuredMarketplace]))
+      : [configuredMarketplace];
 
   const fetched = await Promise.all(
     marketplaces.flatMap((marketplaceId) =>
@@ -1824,9 +1825,10 @@ async function fromEbay(card: InputCard): Promise<MarketPayload> {
 
   const price = robustSelected.average || robustSelected.median;
   const exactNm = exactLanguageNm.length > 0;
-  const searchHost = card.language === "ja" || card.language === "zh-tw"
-    ? "https://www.ebay.com/sch/i.html"
-    : "https://www.ebay.fr/sch/i.html";
+  const searchHost =
+    card.language === "ja" || card.language === "zh-tw" || card.language === "en"
+      ? "https://www.ebay.com/sch/i.html"
+      : "https://www.ebay.fr/sch/i.html";
   const searchUrl = `${searchHost}?_nkw=${encodeURIComponent(query)}`;
 
   const payload = emptyPayload("available");
@@ -1858,14 +1860,14 @@ async function fromEbay(card: InputCard): Promise<MarketPayload> {
     // the identity checks above are strict (number + Pokémon + language/set).
     classification: exactNm
       ? "exact"
-      : (card.language === "fr" || card.language === "ja" || card.language === "zh-tw")
+      : (card.language === "fr" || card.language === "en" || card.language === "ja" || card.language === "zh-tw")
         ? "comparable"
         : "indicative",
     // V54: exact card identity + non-contradictory language is sufficient for
     // an active eBay listing to contribute even when the seller did not state NM.
     // Such listings stay limited-confidence and are never labelled as sold prices.
     compatible: exactNm || (
-      (card.language === "fr" || card.language === "ja" || card.language === "zh-tw") &&
+      (card.language === "fr" || card.language === "en" || card.language === "ja" || card.language === "zh-tw") &&
       selected.length >= 1
     ),
     confidence:
@@ -3711,7 +3713,7 @@ export async function POST(request: Request) {
     const results = await mapWithConcurrency(cards, 3, async (card) => {
       const language = card.language ?? "en";
       const cacheKey = [
-        language === "zh-tw" ? "price-v107-cn-variant" : "price-v107-variant",
+        language === "zh-tw" ? "price-v108-cn-variant" : "price-v108-variant",
         card.id,
         language,
         normalizedSet(card.setId),
@@ -3760,6 +3762,43 @@ export async function POST(request: Request) {
         .filter((result): result is PromiseFulfilledResult<MarketPayload> => result.status === "fulfilled")
         .map((result) => result.value);
       const value = mergePayloads(...baseParts);
+
+      // JP guardrail: Cardmarket search can occasionally resolve a different
+      // product sharing a compact set/number identity. When the whole
+      // Cardmarket product (trend + averages) is grossly inconsistent with
+      // independent JP signals, discard that product instead of displaying a
+      // plausible-looking but wrong 1 EUR market.
+      if (language === "ja") {
+        const cardmarketSignals = value.quotes.filter(
+          (quote) =>
+            quote.source === "cardmarket" &&
+            /impression japonaise/i.test(String(quote.label || "")) &&
+            quote.price > 0
+        );
+        const independentSignals = value.quotes
+          .filter(
+            (quote) =>
+              quote.source !== "cardmarket" &&
+              quote.language === "ja" &&
+              quote.price > 0 &&
+              (quote.source === "tcgplayer" || quote.source === "ebay" || quote.source === "justtcg")
+          )
+          .map((quote) => quote.price);
+        if (cardmarketSignals.length && independentSignals.length) {
+          const cmCenter = median(cardmarketSignals.map((quote) => quote.price));
+          const localCenter = median(independentSignals);
+          const ratio = localCenter > 0 ? cmCenter / localCenter : 1;
+          if (ratio < 0.30 || ratio > 3.5) {
+            value.quotes = value.quotes.filter(
+              (quote) =>
+                quote.source !== "cardmarket" ||
+                !/impression japonaise/i.test(String(quote.label || ""))
+            );
+            value.cardmarket = undefined;
+            value.sources.cardmarket = false;
+          }
+        }
+      }
 
       // V53: a special physical printing is a different market product.
       // Never fall back to the Standard/Normal price when Master Ball, Poké Ball
@@ -3924,7 +3963,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({
       success: true,
-      version: "price-engine-v107-justtcg-comparable-weighted",
+      version: "price-engine-v108-market-identity-guards",
       prices: Object.fromEntries(results),
     });
   } catch (error) {
