@@ -570,17 +570,20 @@ export async function GET(request: NextRequest) {
         const code = normalizeCode(raw?.set_code);
         if (!code || known.has(code)) continue;
         known.add(code);
+        const providerCardCount = Number(raw?.card_count || 0);
         sets.push({
           id: code,
           providerSetId: String(raw?.set_id || "") || undefined,
           providerCode: String(raw?.set_code || "") || undefined,
           name: String(raw?.name || code),
           series: "À trier",
-          total: Number(raw?.card_count || 0),
-          printedTotal: Number(raw?.card_count || 0),
+          total: providerCardCount,
+          printedTotal: providerCardCount,
           releaseDate: String(raw?.release_date || ""),
           images: {},
-          availability: Number(raw?.card_count || 0) > 0 ? "available" : "announced",
+          providerCardCount,
+          availability: providerCardCount > 0 ? "available" : "metadata_only",
+          availabilitySource: providerCardCount > 0 ? "pokewallet-private" : "metadata-only",
         });
       }
 
