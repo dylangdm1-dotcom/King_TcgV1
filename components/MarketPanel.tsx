@@ -189,8 +189,8 @@ export default function MarketPanel({
             Marchés disponibles
           </div>
           <p className="mt-1 max-w-xl text-[10px] font-medium leading-4 text-zinc-400">
-            Chaque valeur garde sa vraie source. Une cotation d’une autre langue
-            peut être visible, mais elle n’entre pas dans la cote King_TCG.
+            Chaque valeur garde sa vraie source. Une cotation comparable peut être
+            utilisée avec un poids réduit lorsqu’elle correspond à la même carte, impression et état.
           </p>
         </div>
         {onRefresh ? (
@@ -205,7 +205,7 @@ export default function MarketPanel({
       </div>
 
       <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
-        {sources.map((item) => (
+        {sources.filter((item) => Number(item.value) > 0).map((item) => (
           <div
             key={item.title}
             className="kt-source-row rounded-[14px] border px-3 py-2.5 transition duration-200 hover:-translate-y-0.5"
@@ -234,7 +234,7 @@ export default function MarketPanel({
             Voir les détails marché
           </summary>
           <div className="mt-2 space-y-1.5">
-            {quotes.map((quote, index) => (
+            {quotes.filter((quote) => Number(quote.price) > 0).map((quote, index) => (
               <div
                 key={`${quote.source}-${quote.metric}-${quote.language}-${index}`}
                 className="flex items-center justify-between gap-3 text-[10px]"
@@ -248,7 +248,9 @@ export default function MarketPanel({
                       ? "Exacte"
                       : quote.classification === "comparable"
                         ? "Comparable"
-                        : "Indicative"}
+                        : quote.classification === "estimated"
+                          ? "Estimée"
+                          : "Indicative"}
                     {quote.compatible ? " · incluse" : " · hors cote"}
                   </p>
                 </div>
@@ -292,11 +294,9 @@ export default function MarketPanel({
             Amplitude entre les cotations compatibles.
           </p>
           <p className="mt-2 text-lg font-black text-white tabular-nums">
-            {Number(spread) > 0 ? "+" : ""}
-            {Number.isFinite(Number(spread))
-              ? Number(spread).toFixed(2)
-              : "0.00"}{" "}
-            €
+            {Number.isFinite(Number(spread)) && Number(spread) > 0
+              ? `${Number(spread).toFixed(2)} €`
+              : "—"}
           </p>
         </div>
       </div>
