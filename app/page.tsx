@@ -201,59 +201,58 @@ export default function Home() {
             </button>
 
             {newsOpen ? (
-              <div className="grid gap-2.5 border-t border-cyan-300/[0.09] p-3 sm:grid-cols-2">
-                {UPCOMING_OFFICIAL_RELEASES.map((release) => (
-                  <article key={release.id} className="rounded-[14px] border border-white/[0.06] bg-black/[0.12] p-3.5">
-                    <div className="flex items-start gap-3">
-                      <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-amber-300/15 bg-amber-300/[0.06]">
-                        <CalendarDays className="h-4 w-4 text-amber-300" />
-                      </span>
-                      <div className="min-w-0">
-                        <p className="text-[9px] font-black uppercase tracking-[0.13em] text-amber-300">
-                          Pokémon · {release.language === "ja" ? "Japon" : String(release.language).toUpperCase()}
-                        </p>
-                        <h3 className="mt-0.5 text-[12px] font-black text-white">
-                          {release.name}
-                        </h3>
-                        <p className="mt-1 text-[10px] leading-4 text-zinc-300">
-                          Sortie {new Date(release.releaseDate).toLocaleDateString("fr-FR")} · {release.contents}
-                        </p>
+              <div className="space-y-2.5 border-t border-cyan-300/[0.09] p-3">
+                <div className="rounded-[14px] border border-amber-300/[0.12] bg-amber-300/[0.035] px-3 py-2.5">
+                  <div className="mb-2 flex items-center gap-2">
+                    <CalendarDays className="h-3.5 w-3.5 shrink-0 text-amber-300" />
+                    <p className="text-[9px] font-black uppercase tracking-[0.13em] text-amber-300">
+                      Pokémon · Sorties officielles
+                    </p>
+                  </div>
+                  <div className="space-y-2">
+                    {UPCOMING_OFFICIAL_RELEASES.map((release) => (
+                      <div key={release.id} className="flex min-w-0 items-start justify-between gap-3 border-t border-amber-200/[0.08] pt-2 first:border-t-0 first:pt-0">
+                        <div className="min-w-0">
+                          <h3 className="truncate text-[11px] font-black text-white">{release.name}</h3>
+                          <p className="mt-0.5 text-[9px] leading-4 text-zinc-300">
+                            {release.language === "ja" ? "Japon" : String(release.language).toUpperCase()} · {new Date(release.releaseDate).toLocaleDateString("fr-FR")} · {release.contents}
+                          </p>
+                        </div>
                         <a
                           href={release.officialUrl}
                           target="_blank"
                           rel="noreferrer"
-                          className="mt-2 inline-flex items-center gap-1 text-[9px] font-black uppercase tracking-[0.10em] text-cyan-300 hover:text-white"
+                          aria-label={`Source officielle ${release.name}`}
+                          className="mt-0.5 shrink-0 text-amber-300 transition hover:text-white"
                         >
-                          Source officielle <ExternalLink className="h-3 w-3" />
+                          <ExternalLink className="h-3.5 w-3.5" />
                         </a>
                       </div>
-                    </div>
-                  </article>
-                ))}
+                    ))}
+                  </div>
+                </div>
 
-                {upcomingKingTcgItems.map((item) => (
-                  <article
-                    key={item.title}
-                    className="rounded-[14px] border border-white/[0.06] bg-black/[0.12] p-3.5"
-                  >
-                    <div className="flex items-start gap-3">
-                      <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-cyan-300/15 bg-cyan-300/[0.06]">
-                        <Sparkles className="h-4 w-4 text-cyan-300" />
-                      </span>
-                      <div className="min-w-0">
-                        <p className="text-[9px] font-black uppercase tracking-[0.13em] text-cyan-300">
-                          King_TCG · {item.badge}
-                        </p>
-                        <h3 className="mt-0.5 text-[12px] font-black text-white">
-                          {item.title}
-                        </h3>
-                        <p className="mt-1 text-[10px] leading-4 text-zinc-300">
-                          {item.text}
+                <div className="rounded-[14px] border border-cyan-300/[0.13] bg-cyan-300/[0.035] px-3 py-2.5">
+                  <div className="mb-1.5 flex items-center gap-2">
+                    <Sparkles className="h-3.5 w-3.5 shrink-0 text-cyan-300" />
+                    <p className="text-[9px] font-black uppercase tracking-[0.13em] text-cyan-300">
+                      King_TCG · Prochaines améliorations
+                    </p>
+                  </div>
+                  <div className="divide-y divide-cyan-200/[0.07]">
+                    {upcomingKingTcgItems.map((item) => (
+                      <div key={item.title} className="flex items-start gap-2 py-1.5 first:pt-0 last:pb-0">
+                        <span className="mt-[3px] h-1.5 w-1.5 shrink-0 rounded-full bg-cyan-300/70" />
+                        <p className="min-w-0 text-[9px] leading-4 text-zinc-300">
+                          <span className="font-black text-cyan-200">{item.badge}</span>
+                          <span className="text-zinc-500"> · </span>
+                          <span className="font-bold text-white">{item.title}</span>
+                          <span className="hidden sm:inline"> — {item.text}</span>
                         </p>
                       </div>
-                    </div>
-                  </article>
-                ))}
+                    ))}
+                  </div>
+                </div>
               </div>
             ) : null}
           </div>
