@@ -158,7 +158,10 @@ const STALE_PROVIDER_TTL = 6 * 60 * 60 * 1000;
 const cache = new Map<string, { expiresAt: number; value: MarketPayload }>();
 const providerResponseCache = new Map<string, { freshUntil: number; staleUntil: number; data: any }>();
 const justTcgResponseCache = new Map<string, { expiresAt: number; result: FetchResult }>();
-const JUSTTCG_CACHE_TTL = 6 * 60 * 60 * 1000;
+const justTcgInFlight = new Map<string, Promise<FetchResult>>();
+const JUSTTCG_POSITIVE_CACHE_TTL = 24 * 60 * 60 * 1000;
+const JUSTTCG_EMPTY_CACHE_TTL = 6 * 60 * 60 * 1000;
+const JUSTTCG_FAILURE_CACHE_TTL = 15 * 60 * 1000;
 let fxCache: { value: number; expiresAt: number } | null = null;
 let ebayTokenCache: { value: string; expiresAt: number } | null = null;
 const englishIdentityCache = new Map<string, { name?: string; setName?: string; expiresAt: number }>();
@@ -2322,26 +2325,57 @@ async function fetchJustTcgCards(
 ): Promise<FetchResult> {
   const url = `${JUSTTCG}/cards?${params.toString()}`;
   const cacheKey = url;
+  const now = Date.now();
   const cached = justTcgResponseCache.get(cacheKey);
-  if (cached && cached.expiresAt > Date.now()) {
+  if (cached && cached.expiresAt > now) {
     return cached.result;
   }
 
-  const result = await fetchJson(url, {
-    headers: {
-      "x-api-key": apiKey,
-    },
-  });
+  // Several King_TCG surfaces can request the same card at nearly the same time.
+  // Share the same pending JustTCG request instead of spending quota twice.
+  const pending = justTcgInFlight.get(cacheKey);
+  if (pending) return pending;
 
-  // Cache successful results for six hours. Temporary failures are cached only
-  // briefly by the route-level negative cache, so a bad network moment can retry.
-  if (result.status === "ok") {
+  const request = (async () => {
+    const result = await fetchJson(url, {
+      headers: {
+        "x-api-key": apiKey,
+      },
+    });
+
+    const cards = Array.isArray(result.data?.data) ? result.data.data : [];
+    const hasPositivePrice =
+      result.status === "ok" &&
+      cards.some((card: any) =>
+        Array.isArray(card?.variants) &&
+        card.variants.some((variant: any) => Number(variant?.price) > 0)
+      );
+
+    // Quota protection:
+    // - useful pricing response: 24 h
+    // - successful but empty/unpriced response: 6 h
+    // - temporary provider/network failure: 15 min
+    const ttl =
+      result.status === "ok"
+        ? hasPositivePrice
+          ? JUSTTCG_POSITIVE_CACHE_TTL
+          : JUSTTCG_EMPTY_CACHE_TTL
+        : JUSTTCG_FAILURE_CACHE_TTL;
+
     justTcgResponseCache.set(cacheKey, {
-      expiresAt: Date.now() + JUSTTCG_CACHE_TTL,
+      expiresAt: Date.now() + ttl,
       result,
     });
+
+    return result;
+  })();
+
+  justTcgInFlight.set(cacheKey, request);
+  try {
+    return await request;
+  } finally {
+    justTcgInFlight.delete(cacheKey);
   }
-  return result;
 }
 
 function expectedJustTcgLanguage(language?: CardLanguage): string {
