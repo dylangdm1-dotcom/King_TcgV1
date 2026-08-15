@@ -57,10 +57,9 @@ export default function Navbar() {
               href="/ventes"
               title="Ventes Premium"
               aria-label="Ventes Premium"
-              className="flex h-11 w-11 flex-col items-center justify-center gap-0.5 text-[8px] font-black uppercase tracking-[0.06em] text-white transition hover:text-amber-100"
+              className="flex h-9 w-9 items-center justify-center rounded-xl border border-white/[0.07] bg-white/[0.025] text-amber-300 transition hover:border-amber-300/20 hover:bg-amber-300/[0.05]"
             >
-              <CircleDollarSign className="h-4 w-4 text-amber-300" />
-              <span>Ventes</span>
+              <CircleDollarSign className="h-4 w-4" />
             </Link>
             <NotificationBell />
             <div className="hidden items-center gap-1.5 md:flex">
