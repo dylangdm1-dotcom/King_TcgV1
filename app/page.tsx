@@ -28,22 +28,22 @@ export default function Home() {
 
   const upcomingKingTcgItems = [
     {
-      title: "Compléter les extensions manquantes",
+      title: "Extensions manquantes par langue",
       text: "Ajouter les séries encore absentes ou incomplètes selon les langues FR, EN, JP et CN, sans casser les catalogues déjà validés.",
       badge: "Catalogues",
     },
     {
-      title: "Compléter les prix manquants",
+      title: "Prix manquants par marché",
       text: "Étendre la couverture Cardmarket, eBay, TCGPlayer et JustTCG lorsque certaines cartes ou langues n'ont pas encore de cotation exploitable.",
       badge: "Marché",
     },
     {
-      title: "Fiabiliser les images manquantes",
+      title: "Images CN encore manquantes",
       text: "Améliorer la couverture des visuels, notamment pour certaines cartes chinoises, tout en conservant les images déjà mises en cache.",
       badge: "Images",
     },
     {
-      title: "Finaliser variantes et états",
+      title: "Variantes et états plus précis",
       text: "Renforcer la correspondance entre langue, impression, variante et état afin d'utiliser le bon prix pour chaque version physique.",
       badge: "Données",
     },
