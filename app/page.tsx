@@ -210,7 +210,7 @@ export default function Home() {
                       </span>
                       <div className="min-w-0">
                         <p className="text-[9px] font-black uppercase tracking-[0.13em] text-amber-300">
-                          Pokémon · {release.language === "ja" ? "Japon" : release.language.toUpperCase()}
+                          Pokémon · {release.language === "ja" ? "Japon" : String(release.language).toUpperCase()}
                         </p>
                         <h3 className="mt-0.5 text-[12px] font-black text-white">
                           {release.name}
