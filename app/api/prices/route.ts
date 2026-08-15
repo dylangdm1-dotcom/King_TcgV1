@@ -118,6 +118,8 @@ type MarketPayload = {
     selectedPrinting?: string;
     totalVariantCount?: number;
     positivePriceVariantCount?: number;
+    selectedLanguage?: string;
+    languageComparable?: boolean;
   };
   estimate?: {
     price: number;
@@ -2915,6 +2917,29 @@ async function fromJustTcg(card: InputCard): Promise<MarketPayload> {
     }
   }
 
+  let languageComparable = false;
+
+  // If condition + physical printing match exactly but JustTCG only exposes
+  // another language, keep it as a comparable market reference instead of
+  // pretending it is an exact price for the requested language.
+  if (!compatibleVariants.length) {
+    const crossLanguageVariants = positiveVariants.filter((variant: any) => {
+      const condition = canonicalJustTcgCondition(variant?.condition);
+      const printing = canonicalJustTcgPrinting(variant?.printing);
+      return (
+        condition === expectedConditionNormalized &&
+        printing === expectedPrintingNormalized
+      );
+    });
+
+    if (crossLanguageVariants.length > 0) {
+      compatibleVariants = crossLanguageVariants;
+      languageComparable = true;
+      payload.debugJustTcg.stage = "cross_language_comparable";
+      payload.debugJustTcg.languageComparable = true;
+    }
+  }
+
   payload.debugJustTcg.matchingVariantCount = compatibleVariants.length;
 
   if (!compatibleVariants.length) {
@@ -2939,10 +2964,13 @@ async function fromJustTcg(card: InputCard): Promise<MarketPayload> {
   const updatedAt = justTcgUnixToIso(selectedVariant?.lastUpdated);
 
   payload.debugJustTcg.stage =
-    payload.debugJustTcg.stage === "single_provider_printing_fallback"
-      ? "compatible_variant_price_found"
-      : "exact_variant_price_found";
+    languageComparable
+      ? "comparable_variant_price_found"
+      : payload.debugJustTcg.stage === "single_provider_printing_fallback"
+        ? "compatible_variant_price_found"
+        : "exact_variant_price_found";
   payload.debugJustTcg.selectedPrinting = String(selectedVariant?.printing || expectedPrinting);
+  payload.debugJustTcg.selectedLanguage = String(selectedVariant?.language || expectedLanguage);
   payload.debugJustTcg.selectedPriceUsd = usdPrice;
   payload.debugJustTcg.selectedPriceEur = eurPrice;
   payload.debugJustTcg.variantUuid =
@@ -2961,7 +2989,7 @@ async function fromJustTcg(card: InputCard): Promise<MarketPayload> {
     currentPrice: eurPrice,
     // Kept for backward compatibility with getMarketData().
     medianNearMint: expectedCondition === "Near Mint" ? eurPrice : undefined,
-    language: expectedLanguage,
+    language: String(selectedVariant?.language || expectedLanguage),
     condition: expectedCondition,
     printing: String(selectedVariant?.printing || expectedPrinting),
     sampleSize: 1,
@@ -2999,10 +3027,10 @@ async function fromJustTcg(card: InputCard): Promise<MarketPayload> {
 
   addQuote(payload, {
     source: "justtcg",
-    label: `JustTCG · ${expectedLanguage} · ${expectedCondition} · ${String(selectedVariant?.printing || expectedPrinting)}`,
+    label: `JustTCG · ${String(selectedVariant?.language || expectedLanguage)} · ${expectedCondition} · ${String(selectedVariant?.printing || expectedPrinting)}${languageComparable ? " · comparable" : ""}`,
     price: eurPrice,
     currency: "EUR",
-    language: card.language ?? "en",
+    language: languageComparable ? "multi" : (card.language ?? "en"),
     condition:
       expectedCondition === "Near Mint"
         ? "Near Mint"
@@ -3018,9 +3046,9 @@ async function fromJustTcg(card: InputCard): Promise<MarketPayload> {
                   ? "Poor"
                   : "Unknown",
     metric: "market",
-    classification: "exact",
-    compatible: true,
-    confidence: "medium",
+    classification: languageComparable ? "comparable" : "exact",
+    compatible: !languageComparable,
+    confidence: languageComparable ? "limited" : "medium",
     url: selectedCard?.url,
     updatedAt,
     sampleSize: 1,
@@ -3662,7 +3690,7 @@ export async function POST(request: Request) {
     const results = await mapWithConcurrency(cards, 3, async (card) => {
       const language = card.language ?? "en";
       const cacheKey = [
-        language === "zh-tw" ? "price-v105-cn-variant" : "price-v105-variant",
+        language === "zh-tw" ? "price-v106-cn-variant" : "price-v106-variant",
         card.id,
         language,
         normalizedSet(card.setId),
@@ -3875,7 +3903,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({
       success: true,
-      version: "price-engine-v105-justtcg-alias-normalization",
+      version: "price-engine-v106-justtcg-language-comparable",
       prices: Object.fromEntries(results),
     });
   } catch (error) {
