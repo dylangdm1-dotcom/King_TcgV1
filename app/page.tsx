@@ -47,6 +47,11 @@ export default function Home() {
       text: "Renforcer la correspondance entre langue, impression, variante et état afin d'utiliser le bon prix pour chaque version physique.",
       badge: "Données",
     },
+    {
+      title: "Ventes de cartes pour les Premium",
+      text: "Préparer l'historique des cartes vendues avec prix de vente et bénéfice réalisé.",
+      badge: "Premium",
+    },
   ] as const;
 
   useEffect(() => {
@@ -355,18 +360,15 @@ export default function Home() {
               subtitle="Équipe terrain, retours et communautés King_TCG"
               icon={<Handshake className="w-5 h-5 text-cyan-400" />}
             />
-          </div>
-        </section>
 
-        {/* Ventes Premium — fonctionnalité à venir */}
-        <section className="mx-auto mt-5 max-w-[1180px] px-4 sm:px-5">
-          <QuickCard
-            href="/ventes"
-            title="Ventes"
-            badge="Premium"
-            subtitle="Cartes vendues · prix de vente · bénéfices réalisés"
-            icon={<CircleDollarSign className="h-5 w-5 text-cyan-400" />}
-          />
+            <QuickCard
+              href="/ventes"
+              title="Ventes"
+              badge="Premium"
+              subtitle="Cartes vendues · prix de vente · bénéfices réalisés"
+              icon={<CircleDollarSign className="h-5 w-5 text-cyan-400" />}
+            />
+          </div>
         </section>
 
         {/* Créateur — barre indépendante et dépliable */}
