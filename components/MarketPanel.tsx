@@ -64,6 +64,8 @@ type Props = {
     selectedPrinting?: string;
     totalVariantCount?: number;
     positivePriceVariantCount?: number;
+    selectedLanguage?: string;
+    languageComparable?: boolean;
   };
   language?: "fr" | "en" | "ja" | "zh-tw";
   onRefresh?: () => void;
@@ -237,6 +239,10 @@ export default function MarketPanel({
             : ""}
           {debugJustTcg.availableLanguages?.length
             ? ` · langues [${debugJustTcg.availableLanguages.join(", ")}]`
+            : ""}
+          {debugJustTcg.language ? ` · langue demandée ${debugJustTcg.language}` : ""}
+          {debugJustTcg.selectedLanguage
+            ? ` · langue sélectionnée ${debugJustTcg.selectedLanguage}${debugJustTcg.languageComparable ? " (comparable)" : ""}`
             : ""}
           {debugJustTcg.condition ? ` · demandé ${debugJustTcg.condition}` : ""}
           {debugJustTcg.printing ? ` · demandé ${debugJustTcg.printing}` : ""}
