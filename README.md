@@ -56,10 +56,10 @@ Application de gestion et d'analyse de cartes Pokémon : catalogues multilingues
 - `docs/PROJECT_STATUS.md` — état détaillé du projet.
 - `docs/WORK_HANDOFF.md` — ordre de reprise recommandé pour Work.
 - `docs/FINAL_ROADMAP.md` — tâches validées, tests restants et travaux Work.
-- `docs/STATIC_REGRESSION_V194.md` — audit statique global.
-- `docs/TARGETED_MARKET_REGRESSION_V195.md` — audit Recherche / fiches / prix.
-- `docs/COLLECTION_FAVORITES_DASHBOARD_REGRESSION_V196.md` — audit Collection / Favoris / Dashboard.
-- `docs/SCANNER_PSA_REGRESSION_V197.md` — audit Scanner / PSA.
+- `docs/archive/audits/STATIC_REGRESSION_V194.md` — audit statique global.
+- `docs/archive/audits/TARGETED_MARKET_REGRESSION_V195.md` — audit Recherche / fiches / prix.
+- `docs/archive/audits/COLLECTION_FAVORITES_DASHBOARD_REGRESSION_V196.md` — audit Collection / Favoris / Dashboard.
+- `docs/archive/audits/SCANNER_PSA_REGRESSION_V197.md` — audit Scanner / PSA.
 
 ---
 
