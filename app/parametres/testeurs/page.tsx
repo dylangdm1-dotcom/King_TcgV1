@@ -163,15 +163,30 @@ export default function TesteursPage() {
             </div>
           </section>
 
-          <section className="mt-4 border-t border-cyan-300/[0.12] pt-4 text-center">
-            <h2 className="text-[12px] font-black text-cyan-300">
+          <section className="relative mt-4 overflow-hidden rounded-[16px] border border-cyan-300/[0.16] bg-gradient-to-br from-blue-500/[0.07] via-cyan-400/[0.045] to-sky-300/[0.025] px-4 py-4 text-center shadow-[inset_0_1px_0_rgba(103,232,249,0.05)] sm:px-5">
+            <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-cyan-300/45 to-transparent shadow-[0_0_9px_rgba(34,211,238,0.22)]" />
+            <div className="pointer-events-none absolute inset-x-12 bottom-0 h-px bg-gradient-to-r from-transparent via-blue-400/20 to-transparent" />
+
+            <h2 className="text-[11px] font-black uppercase tracking-[0.16em] text-cyan-200">
               Merci également à nos autres testeurs
             </h2>
-            <p className="mx-auto mt-2 max-w-2xl text-[11px] leading-5 text-zinc-300">
-              {OTHER_TESTERS.length > 0
-                ? `(${OTHER_TESTERS.join(" · ")})`
-                : "(Liste des testeurs à compléter)"}
-            </p>
+
+            {OTHER_TESTERS.length > 0 ? (
+              <div className="mt-3 flex flex-wrap items-center justify-center gap-x-3 gap-y-2">
+                {OTHER_TESTERS.map((tester, index) => (
+                  <span
+                    key={`${tester}-${index}`}
+                    className="text-[13px] font-black tracking-[0.02em] text-white drop-shadow-[0_0_7px_rgba(103,232,249,0.16)] sm:text-[14px]"
+                  >
+                    {tester}
+                  </span>
+                ))}
+              </div>
+            ) : (
+              <p className="mt-3 text-[11px] font-semibold text-zinc-400">
+                Liste des testeurs à compléter
+              </p>
+            )}
           </section>
 
           <footer className="mt-5 border-t border-white/[0.06] pt-4 text-center">
