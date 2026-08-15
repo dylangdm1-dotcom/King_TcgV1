@@ -2,7 +2,7 @@
 
 Application de gestion et d'analyse de cartes Pokémon : catalogues multilingues, collection, favoris, dashboard, scanner IA, estimation PSA expérimentale et agrégation de données marché.
 
-> **État du projet : base V199 validée pour la reprise.**
+> **État du projet : base V218 — préparation finale avant reprise dans ChatGPT Work.**
 > Les audits et la feuille de route détaillée sont dans `docs/`.
 > Le développement structurel restant est volontairement réservé à la phase ChatGPT Work.
 
@@ -15,6 +15,8 @@ Application de gestion et d'analyse de cartes Pokémon : catalogues multilingues
 - Favoris et Dashboard.
 - Scanner **Mono / Batch / Quad** côté structure.
 - PSA IA avec quatre vues et contrôle manuel complémentaire.
+- Module **Ventes Premium** préparé mais volontairement inactif : future saisie du prix de vente et calcul du bénéfice réalisé.
+- Accueil : bloc **Actus & à venir**, annonce des chantiers catalogue/prix et de la future partie Ventes Premium.
 - Marchés affichés séparément : **Cardmarket, eBay, TCGPlayer et JustTCG**.
 - Cote King_TCG avec protections anti-outliers et distinction entre données exactes, comparables et indicatives.
 - Cache prix et protections contre les appels fournisseurs répétés.
@@ -38,6 +40,7 @@ Application de gestion et d'analyse de cartes Pokémon : catalogues multilingues
 - Pondérations finales du moteur King_TCG.
 - Cache serveur partagé et historique persistant.
 - Comptes Normal / Premium / Admin, Cloud et connexion Google.
+- Activation réelle du module Ventes après mise en place des comptes Premium et du stockage persistant.
 - Sécurité production, quotas, monitoring, juridique et publication stores.
 
 ## Invariants à préserver
@@ -65,7 +68,7 @@ Application de gestion et d'analyse de cartes Pokémon : catalogues multilingues
 
 # 👑 King_TCG — README officiel
 
-**Version de travail actuelle : V153 — Catalogues régionaux et analytics explicables**\
+**Version de travail actuelle : V218 — Préparation finale, Ventes Premium et protection quotas**\
 **Statut produit : V5.0 — Accès anticipé**\
 **Stack : Next.js App Router, React, TypeScript, TailwindCSS**\
 **IA : Google Gemini**\
@@ -350,8 +353,9 @@ Principes :
 -   les recherches ne doivent pas déclencher une synchronisation marché
     massive ;
 -   les prix sont chargés principalement à l'ouverture de la fiche ;
--   les erreurs temporaires utilisent des caches courts ;
--   les données valides peuvent utiliser des caches plus longs ;
+-   le cache marché positif côté application est conservé **24 h** ;
+-   JustTCG : réponse avec prix positif **24 h**, réponse valide vide/sans prix **6 h**, échec temporaire **15 min** ;
+-   les requêtes JustTCG identiques simultanées sont dédupliquées par une requête en vol partagée ;
 -   une indisponibilité eBay, Cardmarket, JustTCG ou TCGPlayer ne doit
     jamais casser la fiche.
 
@@ -371,6 +375,7 @@ app/
 ├── dashboard/
 ├── card/[id]/
 ├── psa/
+├── ventes/          # aperçu Premium, non activé
 ├── favoris/
 ├── reglages/
 └── api/
