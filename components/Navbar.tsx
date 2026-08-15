@@ -10,6 +10,7 @@ import {
   Settings,
   ArrowLeft,
   CircleDollarSign,
+  BadgeCheck,
 } from "lucide-react";
 import NotificationBell from "@/components/notifications/NotificationBell";
 
@@ -18,7 +19,7 @@ const links = [
   { href: "/scanner", icon: Camera, label: "Scanner", main: true },
   { href: "/recherche", icon: Search, label: "Recherche" },
   { href: "/collection", icon: Library, label: "Collection" },
-  { href: "/ventes", icon: CircleDollarSign, label: "Ventes", premium: true },
+  { href: "/psa", icon: BadgeCheck, label: "PSA", premium: true },
   { href: "/parametres", icon: Settings, label: "Paramètres" },
 ];
 
@@ -52,18 +53,35 @@ export default function Navbar() {
           </Link>
 
           <div className="kt-navbar-actions flex items-center justify-end gap-2">
-            <Link
-              href="/psa"
-              title="Accès rapide PSA"
-              aria-label="Accès rapide PSA"
-              className={`kt-psa-navbar-link flex h-10 w-[52px] items-center justify-center overflow-hidden rounded-xl border p-0 text-[10px] font-bold uppercase tracking-wide transition ${
-                pathname === "/psa" || pathname.startsWith("/psa/")
-                  ? "border-violet-300/35 bg-violet-300/[0.12] text-violet-100 shadow-[0_10px_26px_rgba(167,139,250,.14)]"
-                  : "border-transparent bg-[#151b23] text-zinc-300 hover:bg-violet-300/[0.06] hover:text-white"
-              }`}
-            >
-              <img src="/brands/psa.png" alt="PSA" className="kt-psa-navbar-logo h-full w-full object-contain" />
-            </Link>
+            <div className="flex items-center gap-1.5">
+              <Link
+                href="/psa"
+                title="Gradation PSA"
+                aria-label="Gradation PSA"
+                className={`flex h-11 w-11 flex-col items-center justify-center gap-0.5 rounded-xl border text-[8px] font-black uppercase tracking-[0.06em] transition ${
+                  pathname === "/psa" || pathname.startsWith("/psa/")
+                    ? "border-violet-300/35 bg-violet-300/[0.12] text-violet-100 shadow-[0_8px_24px_rgba(167,139,250,.12)]"
+                    : "border-violet-300/12 bg-violet-300/[0.035] text-violet-300 hover:border-violet-300/28 hover:bg-violet-300/[0.07] hover:text-white"
+                }`}
+              >
+                <BadgeCheck className="h-4 w-4" />
+                <span>PSA</span>
+              </Link>
+
+              <Link
+                href="/ventes"
+                title="Ventes Premium"
+                aria-label="Ventes Premium"
+                className={`flex h-11 w-11 flex-col items-center justify-center gap-0.5 rounded-xl border text-[8px] font-black uppercase tracking-[0.06em] transition ${
+                  pathname === "/ventes" || pathname.startsWith("/ventes/")
+                    ? "border-amber-300/35 bg-amber-300/[0.12] text-amber-100 shadow-[0_8px_24px_rgba(245,196,81,.10)]"
+                    : "border-amber-300/14 bg-amber-300/[0.035] text-amber-300 hover:border-amber-300/30 hover:bg-amber-300/[0.07] hover:text-amber-100"
+                }`}
+              >
+                <CircleDollarSign className="h-4 w-4" />
+                <span>Ventes</span>
+              </Link>
+            </div>
             <NotificationBell />
             <div className="hidden items-center gap-1.5 md:flex">
             {links.map(({ href, icon: Icon, label, main, premium }) => {
