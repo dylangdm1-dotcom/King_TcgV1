@@ -22,7 +22,7 @@ const LEGACY_PRICE_CACHE_KEYS = [
   "king_tcg_market_price_cache_v4_cardmarket_seller_row",
   "king_tcg_market_price_cache_v5_cardmarket_fr_article_row",
 ] as const;
-const PRICE_CACHE_POSITIVE_TTL_MS = 6 * 60 * 60 * 1000;
+const PRICE_CACHE_POSITIVE_TTL_MS = 24 * 60 * 60 * 1000;
 const PRICE_CACHE_NEGATIVE_TTL_MS = 5 * 60 * 1000;
 const PRICE_CACHE_MAX_ENTRIES = 200;
 
