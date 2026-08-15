@@ -14,7 +14,7 @@ type Item = {
 };
 type Response = { success?: boolean; prices?: Record<string, Item> };
 const BATCH = 20;
-const PRICE_CACHE_KEY = "king_tcg_market_price_cache_v19_justtcg_variant_discovery_cn_truth";
+const PRICE_CACHE_KEY = "king_tcg_market_price_cache_v20_justtcg_alias_normalization";
 const LEGACY_PRICE_CACHE_KEYS = [
   "king_tcg_market_price_cache_v1",
   "king_tcg_market_price_cache_v2_variant_condition",
@@ -95,7 +95,7 @@ function cacheToken(value: unknown): string {
 function priceRequestKey(card: PokemonCard): string {
   const printing = activePrintVariant(card).key;
   return [
-    "price-v12-justtcg-variant-discovery-cn-truth",
+    "price-v13-justtcg-alias-normalization",
     card.id,
     language(card),
     card.set?.id,
@@ -150,7 +150,7 @@ async function batch(cards: PokemonCard[]): Promise<Response | null> {
   try {
     const response = await fetch("/api/prices", {
       method: "POST",
-      headers: { "Content-Type": "application/json", "X-King-TCG-Price-Version": "74" },
+      headers: { "Content-Type": "application/json", "X-King-TCG-Price-Version": "75" },
       signal: controller.signal,
       body: JSON.stringify({ cards: cards.map((card) => {
         const activeVariant = activePrintVariant(card);
