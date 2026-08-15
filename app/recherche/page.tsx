@@ -63,7 +63,7 @@ type SetItem = {
   printedTotal?: number;
   releaseDate?: string;
   images?: { symbol?: string; logo?: string };
-  availability?: "available" | "announced" | "unknown";
+  availability?: "available" | "announced" | "unknown" | "metadata_only";
 };
 
 
