@@ -49,7 +49,11 @@ export default function MarketSourceBadge({ source, compact = false }: { source:
 
   return (
     <span
-      className={`kt-logo-tile kt-market-badge-${source} inline-flex min-h-8 items-center justify-center gap-2 rounded-lg px-2.5 py-1.5 ${item.className}`}
+      className={`kt-logo-tile kt-market-badge-${source} inline-flex items-center justify-center gap-2 rounded-lg ${
+        compact
+          ? "h-8 w-[92px] shrink-0 px-2 py-1.5"
+          : "min-h-8 px-2.5 py-1.5"
+      } ${item.className}`}
       aria-label={item.label}
       title={`${item.label} — marque appartenant à son propriétaire`}
     >
