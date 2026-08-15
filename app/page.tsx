@@ -9,11 +9,12 @@ import {
   Layers, Library, Bookmark, Wallet, 
   LayoutDashboard, Camera, Star, Zap, Sparkles, Search,
   Bell, TrendingUp, Crown, BadgeCheck, Handshake, ChevronDown,
-  ExternalLink, Video, Heart
+  ExternalLink, Video, Heart, CalendarDays, Newspaper
 } from "lucide-react";
 import { getCollection, getFavorites } from "@/lib/storage";
 import { getCardById } from "@/lib/pokemon";
 import { getMarketData } from "@/lib/marketEngine";
+import { UPCOMING_OFFICIAL_RELEASES } from "@/lib/setCatalog";
 
 export default function Home() {
   const router = useRouter();
@@ -23,6 +24,30 @@ export default function Home() {
   const [favorites, setFavorites] = useState(0);
   const [portfolioValue, setPortfolioValue] = useState(0);
   const [creatorOpen, setCreatorOpen] = useState(false);
+  const [newsOpen, setNewsOpen] = useState(false);
+
+  const upcomingKingTcgItems = [
+    {
+      title: "Compléter les extensions manquantes",
+      text: "Ajouter les séries encore absentes ou incomplètes selon les langues FR, EN, JP et CN, sans casser les catalogues déjà validés.",
+      badge: "Catalogues",
+    },
+    {
+      title: "Compléter les prix manquants",
+      text: "Étendre la couverture Cardmarket, eBay, TCGPlayer et JustTCG lorsque certaines cartes ou langues n'ont pas encore de cotation exploitable.",
+      badge: "Marché",
+    },
+    {
+      title: "Fiabiliser les images manquantes",
+      text: "Améliorer la couverture des visuels, notamment pour certaines cartes chinoises, tout en conservant les images déjà mises en cache.",
+      badge: "Images",
+    },
+    {
+      title: "Finaliser variantes et états",
+      text: "Renforcer la correspondance entre langue, impression, variante et état afin d'utiliser le bon prix pour chaque version physique.",
+      badge: "Données",
+    },
+  ] as const;
 
   useEffect(() => {
     async function loadStats() {
@@ -147,6 +172,90 @@ export default function Home() {
                 </span>
               </Link>
             </div>
+          </div>
+        </section>
+
+        {/* Actus & à venir */}
+        <section className="mx-auto mt-5 max-w-[1180px] px-4 sm:px-5">
+          <div className="overflow-hidden rounded-[18px] border border-cyan-300/[0.14] bg-gradient-to-br from-cyan-400/[0.055] via-sky-400/[0.025] to-transparent">
+            <button
+              type="button"
+              onClick={() => setNewsOpen((value) => !value)}
+              aria-expanded={newsOpen}
+              className="flex w-full items-center justify-between gap-3 px-4 py-3.5 text-left sm:px-5"
+            >
+              <div className="flex min-w-0 items-center gap-3">
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-cyan-300/20 bg-cyan-300/[0.07]">
+                  <Newspaper className="h-4 w-4 text-cyan-300" />
+                </span>
+                <span className="min-w-0">
+                  <span className="block text-[10px] font-black uppercase tracking-[0.15em] text-cyan-300">
+                    Actus & à venir
+                  </span>
+                  <span className="mt-0.5 block truncate text-[11px] font-bold text-zinc-300">
+                    Sorties Pokémon, nouveautés et travaux à venir sur King_TCG
+                  </span>
+                </span>
+              </div>
+              <ChevronDown className={`h-4 w-4 shrink-0 text-cyan-300 transition ${newsOpen ? "rotate-180" : ""}`} />
+            </button>
+
+            {newsOpen ? (
+              <div className="grid gap-2.5 border-t border-cyan-300/[0.09] p-3 sm:grid-cols-2">
+                {UPCOMING_OFFICIAL_RELEASES.map((release) => (
+                  <article key={release.id} className="rounded-[14px] border border-white/[0.06] bg-black/[0.12] p-3.5">
+                    <div className="flex items-start gap-3">
+                      <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-amber-300/15 bg-amber-300/[0.06]">
+                        <CalendarDays className="h-4 w-4 text-amber-300" />
+                      </span>
+                      <div className="min-w-0">
+                        <p className="text-[9px] font-black uppercase tracking-[0.13em] text-amber-300">
+                          Pokémon · {release.language === "ja" ? "Japon" : release.language.toUpperCase()}
+                        </p>
+                        <h3 className="mt-0.5 text-[12px] font-black text-white">
+                          {release.name}
+                        </h3>
+                        <p className="mt-1 text-[10px] leading-4 text-zinc-300">
+                          Sortie {new Date(release.releaseDate).toLocaleDateString("fr-FR")} · {release.contents}
+                        </p>
+                        <a
+                          href={release.officialUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="mt-2 inline-flex items-center gap-1 text-[9px] font-black uppercase tracking-[0.10em] text-cyan-300 hover:text-white"
+                        >
+                          Source officielle <ExternalLink className="h-3 w-3" />
+                        </a>
+                      </div>
+                    </div>
+                  </article>
+                ))}
+
+                {upcomingKingTcgItems.map((item) => (
+                  <article
+                    key={item.title}
+                    className="rounded-[14px] border border-white/[0.06] bg-black/[0.12] p-3.5"
+                  >
+                    <div className="flex items-start gap-3">
+                      <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-cyan-300/15 bg-cyan-300/[0.06]">
+                        <Sparkles className="h-4 w-4 text-cyan-300" />
+                      </span>
+                      <div className="min-w-0">
+                        <p className="text-[9px] font-black uppercase tracking-[0.13em] text-cyan-300">
+                          King_TCG · {item.badge}
+                        </p>
+                        <h3 className="mt-0.5 text-[12px] font-black text-white">
+                          {item.title}
+                        </h3>
+                        <p className="mt-1 text-[10px] leading-4 text-zinc-300">
+                          {item.text}
+                        </p>
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            ) : null}
           </div>
         </section>
 
