@@ -119,14 +119,14 @@ export default function MarketPanel({
           : "Moyenne Cardmarket FR · NM"
         : language === "ja" || language === "zh-tw"
           ? "Tendance Cardmarket"
-          : "Cardmarket",
+          : "Cardmarket Europe · tendance",
       subtitle: language === "fr"
         ? cardmarketFrExactQuote
           ? "Première annonce vendeur réellement listée"
           : "Moyenne annonce vendeur réellement listée · repère provisoire 1 jour"
         : language === "ja" || language === "zh-tw"
           ? "Marché occidental · impression exacte"
-          : "Référence européenne indicative",
+          : "Tendance actuelle du marché européen",
       source: "cardmarket" as MarketSource,
       value: language === "fr" && !cardmarketFrExactQuote
         ? cardmarketOneDayQuote?.price ?? cardmarket ?? 0
