@@ -9,6 +9,7 @@ import {
   Library,
   Settings,
   ArrowLeft,
+  CircleDollarSign,
 } from "lucide-react";
 import NotificationBell from "@/components/notifications/NotificationBell";
 
@@ -17,6 +18,7 @@ const links = [
   { href: "/scanner", icon: Camera, label: "Scanner", main: true },
   { href: "/recherche", icon: Search, label: "Recherche" },
   { href: "/collection", icon: Library, label: "Collection" },
+  { href: "/ventes", icon: CircleDollarSign, label: "Ventes", premium: true },
   { href: "/parametres", icon: Settings, label: "Paramètres" },
 ];
 
@@ -64,7 +66,7 @@ export default function Navbar() {
             </Link>
             <NotificationBell />
             <div className="hidden items-center gap-1.5 md:flex">
-            {links.map(({ href, icon: Icon, label, main }) => {
+            {links.map(({ href, icon: Icon, label, main, premium }) => {
               const active = pathname === href || pathname.startsWith(`${href}/`);
               return (
                 <Link
@@ -74,9 +76,13 @@ export default function Navbar() {
                   className={`flex h-9 items-center gap-2 rounded-xl px-3 text-[11px] font-bold transition ${
                     main
                       ? "border border-cyan-300/35 bg-cyan-300 text-[#061016] shadow-[0_8px_24px_rgba(34,211,238,.16)] hover:bg-cyan-200"
-                      : active
-                        ? "border border-cyan-400/15 bg-cyan-400/[0.08] text-cyan-300"
-                        : "text-zinc-400 hover:bg-white/[0.04] hover:text-white"
+                      : premium
+                        ? active
+                          ? "border border-amber-300/35 bg-amber-300/[0.12] text-amber-200 shadow-[0_8px_24px_rgba(245,196,81,.10)]"
+                          : "border border-amber-300/15 bg-amber-300/[0.035] text-amber-300 hover:border-amber-300/30 hover:bg-amber-300/[0.07] hover:text-amber-100"
+                        : active
+                          ? "border border-cyan-400/15 bg-cyan-400/[0.08] text-cyan-300"
+                          : "text-zinc-400 hover:bg-white/[0.04] hover:text-white"
                   }`}
                 >
                   <Icon className="h-4 w-4" />
@@ -90,13 +96,13 @@ export default function Navbar() {
       </nav>
 
       <div className="kt-mobile-nav" aria-label="Navigation mobile">
-        {links.map(({ href, icon: Icon, label, main }) => {
+        {links.map(({ href, icon: Icon, label, main, premium }) => {
           const active = pathname === href || pathname.startsWith(`${href}/`);
           return (
             <Link
               key={href}
               href={href}
-              className={`${active ? "active" : ""} ${main ? "scan" : ""}`}
+              className={`${active ? "active" : ""} ${main ? "scan" : ""} ${premium ? "premium" : ""}`}
               aria-current={active ? "page" : undefined}
             >
               <Icon />
