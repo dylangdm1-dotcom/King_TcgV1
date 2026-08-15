@@ -173,6 +173,28 @@ export function getCardMarketPrice(card?: PokemonCard | null): number {
     );
   }
 
+  // EN: Cardmarket data exposed by TCGdex is a European aggregate (language
+  // "multi"), not an exact English seller listing. Use the current European
+  // trend for the primary Cardmarket tile instead of returning an empty slot.
+  if (card?.dataLanguage === "en") {
+    const currentEurope =
+      card?.marketQuotes?.find(
+        (item) =>
+          item.source === "cardmarket" &&
+          item.language === "multi" &&
+          item.metric === "trend_europe" &&
+          n(item.price) > 0
+      ) ??
+      card?.marketQuotes?.find(
+        (item) =>
+          item.source === "cardmarket" &&
+          item.language === "multi" &&
+          item.metric === "average_1d_europe" &&
+          n(item.price) > 0
+      );
+    return Number(n(currentEurope?.price).toFixed(2));
+  }
+
   const value = compatibleQuote(
     card,
     (source, label) =>
@@ -250,15 +272,24 @@ export function getCardMarketLowPrice(card?: PokemonCard | null): number {
 }
 
 export function getTCGPlayerPrice(card?: PokemonCard | null): number {
-  const value =
-    compatibleQuote(
-      card,
-      (source, label) =>
-        source === "tcgplayer" ||
-        (source === "pokewallet" && /tcgplayer/i.test(label))
-    ) || legacyTcgplayer(card);
+  // Never display an English TCGPlayer quote as if it were a local FR price.
+  // This was the source of absurd values such as 1.67 EUR beside a 90-120 EUR
+  // French market. JP keeps its dedicated Japan mappings.
+  const exactLanguageQuote = card?.marketQuotes?.find(
+    (item) =>
+      item.compatible &&
+      item.language === card?.dataLanguage &&
+      (
+        item.source === "tcgplayer" ||
+        (item.source === "pokewallet" && /tcgplayer/i.test(String(item.label || "")))
+      ) &&
+      n(item.price) > 0
+  );
+  const value = n(exactLanguageQuote?.price);
 
-  return Number(value.toFixed(2));
+  // Legacy TCGPlayer payloads are safe only for English cards.
+  const fallback = card?.dataLanguage === "en" ? legacyTcgplayer(card) : 0;
+  return Number((value || fallback).toFixed(2));
 }
 
 export function getJustTcgPrice(card?: PokemonCard | null): number {
