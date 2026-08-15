@@ -272,9 +272,6 @@ export function getCardMarketLowPrice(card?: PokemonCard | null): number {
 }
 
 export function getTCGPlayerPrice(card?: PokemonCard | null): number {
-  // Never display an English TCGPlayer quote as if it were a local FR price.
-  // This was the source of absurd values such as 1.67 EUR beside a 90-120 EUR
-  // French market. JP keeps its dedicated Japan mappings.
   const exactLanguageQuote = card?.marketQuotes?.find(
     (item) =>
       item.compatible &&
@@ -285,11 +282,29 @@ export function getTCGPlayerPrice(card?: PokemonCard | null): number {
       ) &&
       n(item.price) > 0
   );
-  const value = n(exactLanguageQuote?.price);
+  if (exactLanguageQuote) {
+    return Number(n(exactLanguageQuote.price).toFixed(2));
+  }
 
-  // Legacy TCGPlayer payloads are safe only for English cards.
+  // FR: TCGPlayer is an English-market comparison only. The upstream provider
+  // prices are already converted from USD to EUR before reaching this helper.
+  // Display this reference, but frenchKingTcgPrice() deliberately does not use it.
+  if (card?.dataLanguage === "fr") {
+    const englishComparable = card?.marketQuotes?.find(
+      (item) =>
+        item.source === "tcgplayer" &&
+        item.language === "en" &&
+        n(item.price) > 0
+    );
+    const comparableValue =
+      n(englishComparable?.price) ||
+      legacyTcgplayer(card);
+    return Number(comparableValue.toFixed(2));
+  }
+
+  // Legacy TCGPlayer payloads are safe as a fallback only for English cards.
   const fallback = card?.dataLanguage === "en" ? legacyTcgplayer(card) : 0;
-  return Number((value || fallback).toFixed(2));
+  return Number(fallback.toFixed(2));
 }
 
 export function getJustTcgPrice(card?: PokemonCard | null): number {
