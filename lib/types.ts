@@ -252,6 +252,8 @@ export interface PokemonCard {
     availableLanguages?: string[];
     availableConditions?: string[];
     selectedPrinting?: string;
+    totalVariantCount?: number;
+    positivePriceVariantCount?: number;
   };
 
   favorite?: boolean;
