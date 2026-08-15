@@ -149,16 +149,22 @@ export default function MarketPanel({
         : cardmarketEurope ?? 0,
     },
     {
-      title: language === "ja" ? "TCGPlayer Japan" : "TCGPlayer",
+      title: language === "ja"
+        ? "TCGPlayer Japan"
+        : language === "fr"
+          ? "TCGPlayer · marché anglais"
+          : "TCGPlayer",
       subtitle: language === "ja"
         ? "Pokemon Japan · USD converti EUR"
-        : "Market anglais comparable",
+        : language === "fr"
+          ? "Prix anglais comparable · converti en EUR · hors cote FR"
+          : "Market anglais comparable",
       source: "tcgplayer" as MarketSource,
       value: tcgplayer ?? 0,
     },
     {
       title: "JustTCG",
-      subtitle: "Médiane Near Mint · langue exacte",
+      subtitle: "Near Mint · langue exacte ou comparable",
       source: "justtcg" as MarketSource,
       value: justtcg ?? 0,
     },
