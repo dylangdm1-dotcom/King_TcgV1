@@ -8,6 +8,7 @@ type EbayPsaListing = {
   currency: "EUR";
   imageUrl?: string;
   url: string;
+  listedAt?: string;
   languageSignal: "explicit_fr" | "structured_fr" | "unknown";
   languageLabel: string;
 };
@@ -66,6 +67,26 @@ function languageSignal(item: any): EbayPsaListing["languageSignal"] {
   }
 
   return "unknown";
+}
+
+
+function isExplicitForeignLanguage(item: any): boolean {
+  const title = String(item?.title ?? "");
+  const aspectText = aspectEntries(item)
+    .map((aspect) => `${aspect.name} ${aspect.value}`)
+    .join(" ");
+  const haystack = `${title} ${aspectText}`;
+  const hasFrench = /\b(?:fr|french|fran[cç]ais|fran[cç]aise)\b/i.test(haystack);
+
+  if (/[\u3040-\u30ff\u3400-\u9fff]/u.test(haystack)) return true;
+  if (/\b(?:jp|jpn|japanese|japonais|japonaise)\b/i.test(haystack)) return true;
+  if (/\b(?:cn|chinese|chinois|chinoise)\b/i.test(haystack)) return true;
+  if (/\b(?:german|allemand|allemande|deutsch)\b/i.test(haystack)) return true;
+  if (/\b(?:spanish|espagnol|espagnole|espanol|español)\b/i.test(haystack)) return true;
+  if (/\b(?:italian|italien|italienne)\b/i.test(haystack)) return true;
+  if (!hasFrench && /\b(?:english|anglais|anglaise)\b/i.test(haystack)) return true;
+
+  return false;
 }
 
 function looksLikeNonSingleCard(title: string): boolean {
@@ -209,6 +230,7 @@ export async function GET(request: Request) {
     .map((item: any) => {
       const title = String(item?.title ?? "").trim();
       const grade = parseGrade(title);
+      if (isExplicitForeignLanguage(item)) return null;
       const signal = languageSignal(item);
       const price = Number(item?.price?.value ?? 0);
       const currency = String(item?.price?.currency ?? "").toUpperCase();
@@ -233,6 +255,7 @@ export async function GET(request: Request) {
         currency: "EUR" as const,
         imageUrl,
         url: String(item?.itemWebUrl || ""),
+        listedAt: String(item?.itemCreationDate || item?.itemOriginDate || "").trim() || undefined,
         languageSignal: signal,
         languageLabel:
           signal === "explicit_fr"
