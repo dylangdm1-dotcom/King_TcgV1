@@ -31,6 +31,7 @@ export interface EbayPsaListing {
     | "explicit_fr" | "structured_fr"
     | "explicit_ja" | "structured_ja"
     | "unknown";
+  language?: "en" | "fr" | "ja";
   languageLabel: string;
 }
 
