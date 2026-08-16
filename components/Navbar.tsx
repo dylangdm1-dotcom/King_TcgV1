@@ -57,7 +57,7 @@ export default function Navbar() {
               href="/ventes"
               title="Ventes Premium"
               aria-label="Ventes Premium"
-              className="flex h-9 w-9 items-center justify-center rounded-xl border border-white/[0.07] bg-white/[0.025] text-amber-300 transition hover:border-amber-300/20 hover:bg-amber-300/[0.05]"
+              className="relative flex h-10 w-10 items-center justify-center rounded-2xl border border-white/[0.08] bg-[#151b23] text-amber-300 shadow-inner transition hover:border-amber-300/25 hover:text-amber-200"
             >
               <CircleDollarSign className="h-4 w-4" />
             </Link>
@@ -99,7 +99,7 @@ export default function Navbar() {
             <Link
               key={href}
               href={href}
-              className={`${active ? "active" : ""} ${main ? "scan" : ""} ${premium ? "premium" : ""} ${href === "/psa" ? "psa" : ""}`}
+              className={`${active ? "active" : ""} ${main ? "scan" : ""} ${premium ? "premium" : ""}`}
               aria-current={active ? "page" : undefined}
             >
               <Icon />
