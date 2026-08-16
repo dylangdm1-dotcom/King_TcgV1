@@ -1,6 +1,6 @@
 "use client";
 
-import { CheckCircle2, Loader2, ScanLine, Camera } from "lucide-react";
+import { CheckCircle2, Loader2, ScanLine } from "lucide-react";
 import { QUAD_FRAMES } from "@/lib/scanner/quadLayout";
 import type { QuadSlotProgress } from "@/components/scanner/ScannerCamera";
 
@@ -88,7 +88,7 @@ export default function ScannerOverlay({
               </div>
             );
           })}
-          <div className="absolute left-1/2 top-[5.5%] w-[88%] -translate-x-1/2 rounded-xl border border-violet-300/20 bg-black/58 px-3 py-2 text-center text-[9px] font-black uppercase leading-4 tracking-[0.12em] text-violet-100 backdrop-blur-md">
+          <div className="absolute left-1/2 top-[5.5%] w-[88%] -translate-x-1/2 rounded-xl border border-violet-200/35 bg-black/62 px-3 py-2 text-center text-[9px] font-black uppercase leading-4 tracking-[0.12em] text-violet-100 shadow-[0_0_18px_rgba(167,139,250,.08)] backdrop-blur-md">
             <span className="block">Placez les 4 cartes entièrement</span>
             <span className="block">dans les cadres, sans les superposer</span>
           </div>
@@ -141,25 +141,27 @@ export default function ScannerOverlay({
             type="button"
             onClick={onScan}
             disabled={!ready || !onScan}
-            className={`pointer-events-auto inline-flex min-w-[58%] items-center justify-center gap-2 rounded-xl border-2 px-5 py-3 text-[11px] font-black uppercase tracking-[0.12em] text-white shadow-[0_12px_30px_rgba(0,0,0,.38)] backdrop-blur-md transition-all active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-45 ${
+            className={`pointer-events-auto inline-flex min-w-[62%] items-center justify-center gap-2 rounded-xl border-2 px-5 py-3 text-[11px] font-black uppercase tracking-[0.12em] shadow-[0_12px_30px_rgba(0,0,0,.38)] backdrop-blur-md transition-all hover:brightness-110 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-45 ${
               mode === "quad"
-                ? "border-violet-300 bg-violet-500/20 shadow-[0_0_24px_rgba(167,139,250,.12)]"
+                ? "border-amber-300 bg-violet-500/24 text-violet-100 shadow-[0_0_24px_rgba(245,196,81,.10)]"
                 : mode === "batch"
-                ? "border-amber-300 bg-sky-500/20 shadow-[0_0_24px_rgba(245,196,81,.10)]"
-                : "border-cyan-300 bg-cyan-500/18 shadow-[0_0_24px_rgba(34,211,238,.12)]"
+                ? "border-amber-300 bg-sky-500/24 text-sky-100 shadow-[0_0_24px_rgba(245,196,81,.10)]"
+                : "border-cyan-300 bg-cyan-500/22 text-cyan-50 shadow-[0_0_24px_rgba(34,211,238,.13)]"
             }`}
           >
-            {mode === "quad" ? (
-              <ScanLine className="h-4 w-4" />
-            ) : (
-              <Camera className="h-4 w-4" />
-            )}
-            <span>
-              {mode === "quad"
-                ? "Capturer les 4 cartes"
+            <ScanLine className={`h-4 w-4 ${
+              mode === "quad"
+                ? "text-violet-200"
                 : mode === "batch"
-                ? "Scanner cette carte"
-                : "Scanner la carte"}
+                  ? "text-sky-200"
+                  : "text-cyan-200"
+            }`} />
+            <span className="[text-shadow:0_0_10px_rgba(255,255,255,.12)]">
+              {mode === "quad"
+                ? "Scanner les 4 cartes"
+                : mode === "batch"
+                  ? "Ajouter au Batch"
+                  : "Scanner la carte"}
             </span>
           </button>
         )}
