@@ -131,7 +131,7 @@ export default function PSAPage() {
 
     try {
       const results =
-        await psaService.searchPriceCharting(query);
+        await psaService.searchPriceCharting(query, priceSearchLanguage);
 
       setPriceChartingResults(results);
 
@@ -581,19 +581,6 @@ export default function PSAPage() {
                 </div>
               </div>
 
-              {priceSearchLanguage === "fr" ? (
-                <div className="rounded-[16px] border border-amber-300/16 bg-amber-300/[0.045] px-4 py-3 text-center">
-                  <p className="text-[10px] font-black uppercase tracking-[0.10em] text-amber-300">
-                    Recherche française en préparation
-                  </p>
-                  <p className="mt-1 text-[10px] leading-4 text-zinc-300">
-                    Le chemin de recherche FR sera relié après validation du matching exact des cartes françaises.
-                  </p>
-                </div>
-              ) : null}
-
-              {priceSearchLanguage === "en" ? (
-              <>
               <div className="space-y-4 rounded-[18px] border border-cyan-400/13 bg-[#0a1118] p-4 shadow-[0_16px_38px_rgba(0,0,0,.20)] sm:p-5">
                 <div>
                   <h2 className="text-sm font-black uppercase">
@@ -605,11 +592,28 @@ export default function PSAPage() {
                     et dernières ventes PriceCharting.
                   </p>
 
-                  <div className="mt-3 flex items-start gap-2 rounded-xl border border-amber-400/15 bg-amber-400/[0.05] px-3 py-2.5">
-                    <span className="mt-0.5 text-base leading-none" aria-hidden="true">🇬🇧</span>
-                    <p className="text-[11px] leading-relaxed text-amber-200/80">
-                      <span className="font-black text-amber-200">Recherche en anglais pour le moment :</span>{" "}
-                      utilisez le nom anglais du Pokémon (ex. <span className="font-bold text-white">Charizard</span>, <span className="font-bold text-white">Pikachu</span> ou <span className="font-bold text-white">Umbreon</span>).
+                  <div className={`mt-3 flex items-start gap-2 rounded-xl border px-3 py-2.5 ${
+                    priceSearchLanguage === "fr"
+                      ? "border-blue-400/18 bg-blue-400/[0.05]"
+                      : "border-amber-400/15 bg-amber-400/[0.05]"
+                  }`}>
+                    <span className="mt-0.5 text-base leading-none" aria-hidden="true">
+                      {priceSearchLanguage === "fr" ? "🇫🇷" : "🇬🇧"}
+                    </span>
+                    <p className={`text-[11px] leading-relaxed ${
+                      priceSearchLanguage === "fr" ? "text-blue-200/85" : "text-amber-200/80"
+                    }`}>
+                      {priceSearchLanguage === "fr" ? (
+                        <>
+                          <span className="font-black text-blue-200">Recherche FR expérimentale :</span>{" "}
+                          seuls les résultats explicitement identifiés comme impression française par PriceCharting sont conservés.
+                        </>
+                      ) : (
+                        <>
+                          <span className="font-black text-amber-200">Recherche anglaise :</span>{" "}
+                          utilisez le nom anglais du Pokémon (ex. <span className="font-bold text-white">Charizard</span>, <span className="font-bold text-white">Pikachu</span> ou <span className="font-bold text-white">Umbreon</span>).
+                        </>
+                      )}
                     </p>
                   </div>
                 </div>
@@ -620,7 +624,9 @@ export default function PSAPage() {
                 >
                   <input
                     type="text"
-                    placeholder="Exemple : Dracaufeu, Pikachu, Umbreon..."
+                    placeholder={priceSearchLanguage === "fr"
+                      ? "Exemple : Pikachu, Dracaufeu, 60..."
+                      : "Exemple : Charizard, Pikachu, Umbreon..."}
                     value={priceChartingQuery}
                     onChange={(e) =>
                       setPriceChartingQuery(
@@ -726,7 +732,7 @@ export default function PSAPage() {
 
                         {card.language && (
                           <p className="text-[10px] text-zinc-200 mt-1">
-                            Langue : {card.language}
+                            Langue : {card.language === "fr" ? "Français" : card.language === "en" ? "Anglais" : card.language}
                           </p>
                         )}
 
@@ -928,8 +934,6 @@ export default function PSAPage() {
                   </div>
                 ))}
               </div>
-              </>
-              ) : null}
             </section>
           )}
 
