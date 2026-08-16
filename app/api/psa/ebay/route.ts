@@ -252,7 +252,7 @@ export async function GET(request: Request) {
     return rank(a.languageSignal) - rank(b.languageSignal) || a.grade - b.grade;
   });
 
-  const results = candidates.slice(0, 24);
+  const results = candidates.slice(0, 60);
 
   cache.set(cacheKey, {
     expiresAt: Date.now() + CACHE_TTL,
@@ -265,6 +265,9 @@ export async function GET(request: Request) {
     marketplace: "EBAY_FR",
     listingType: "active",
     cached: false,
+    candidateCount: candidates.length,
+    returnedCount: results.length,
+    queryCount: searchQueries.length,
     results,
   });
 }
