@@ -1013,7 +1013,15 @@ export default function ScannerPage() {
           {modeSelected ? (
             <>
           <section>
-            <PremiumCard className="p-4">
+            <PremiumCard
+              className={`p-4 ${
+                scanMode === "single"
+                  ? "border-cyan-300/45 bg-cyan-400/[0.055] shadow-[0_0_26px_rgba(34,211,238,.06)]"
+                  : batchCaptureMode === "grouped"
+                    ? "border-amber-300/45 bg-violet-400/[0.065] shadow-[0_0_26px_rgba(245,196,81,.07)]"
+                    : "border-amber-300/45 bg-sky-400/[0.065] shadow-[0_0_26px_rgba(245,196,81,.07)]"
+              }`}
+            >
               <div className="flex items-start justify-between gap-3">
                 <div className="min-w-0">
                   <div className="flex items-center gap-1.5">
@@ -1028,7 +1036,13 @@ export default function ScannerPage() {
                       {scanMode === "single" ? "Mode Normal" : "Mode Premium"}
                     </p>
                   </div>
-                  <h2 className="mt-1 truncate text-sm font-black text-white">
+                  <h2 className={`mt-1 truncate text-sm font-black ${
+                    scanMode === "single"
+                      ? "text-cyan-200"
+                      : batchCaptureMode === "grouped"
+                        ? "text-violet-200"
+                        : "text-sky-200"
+                  }`}>
                     {scanMode === "single"
                       ? "Mono · Scan"
                       : batchCaptureMode === "grouped"
@@ -1060,14 +1074,22 @@ export default function ScannerPage() {
                 exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.22 }}
               >
-                <PremiumCard className="p-4">
+                <PremiumCard
+                  className={`p-4 border-amber-300/45 shadow-[0_0_26px_rgba(245,196,81,.07)] ${
+                    batchCaptureMode === "grouped"
+                      ? "bg-violet-400/[0.065]"
+                      : "bg-sky-400/[0.065]"
+                  }`}
+                >
                   <div className="flex items-start justify-between gap-3">
                     <div className="min-w-0">
                       <div className="flex items-center gap-1.5">
                         <Crown className="h-3.5 w-3.5 text-amber-300" />
                         <p className="text-[10px] font-black uppercase tracking-[0.16em] text-amber-300">Mode Premium</p>
                       </div>
-                      <h2 className="mt-1 truncate text-sm font-black text-white">
+                      <h2 className={`mt-1 truncate text-sm font-black ${
+                        batchCaptureMode === "grouped" ? "text-violet-200" : "text-sky-200"
+                      }`}>
                         {batchCaptureMode === "grouped" ? "Quadra Scan" : "Batch · Scan multiples"}
                       </h2>
                       <p className="mt-1 text-[10px] leading-4 text-zinc-100">
