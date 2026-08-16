@@ -918,7 +918,7 @@ export default function ScannerPage() {
           <section className="kt-page-header kt-hero-surface flex flex-col items-center gap-4 border text-center">
             <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-[10px] font-bold uppercase tracking-[0.11em]">
               <Sparkles className="w-3 h-3" />
-              Vision IA
+              Vision IA avancée
             </div>
 
             <div>
@@ -940,56 +940,69 @@ export default function ScannerPage() {
                 <button
                   type="button"
                   onClick={() => selectScannerMode("single")}
-                  className={`rounded-2xl border px-2 py-3 text-center transition-all ${
+                  className={`relative rounded-2xl border px-2 py-3 text-center transition-all ${
                     modeSelected && scanMode === "single"
-                      ? "border-cyan-300/55 bg-cyan-400/[0.13] shadow-[0_0_24px_rgba(34,211,238,.08)]"
-                      : "border-cyan-300/16 bg-cyan-400/[0.035] hover:border-cyan-300/35 hover:bg-cyan-400/[0.07]"
+                      ? "border-cyan-300/65 bg-cyan-400/[0.12] shadow-[0_0_24px_rgba(34,211,238,.09)]"
+                      : "border-cyan-300/35 bg-cyan-400/[0.035] hover:border-cyan-300/55 hover:bg-cyan-400/[0.07]"
                   }`}
                 >
                   <Zap className="mx-auto h-5 w-5 text-cyan-300" />
                   <span className="mt-1.5 block text-[10px] font-black uppercase tracking-[0.09em] text-white">
                     Mono
                   </span>
-                  <span className="mt-1 block text-[8px] leading-3 text-zinc-400">
+                  <span className="mt-1 block text-[8px] font-bold leading-3 text-cyan-200">
                     1 carte
+                  </span>
+                  <span className="mt-1 block text-[7px] leading-3 text-zinc-400">
+                    Identification directe
                   </span>
                 </button>
 
                 <button
                   type="button"
                   onClick={() => selectScannerMode("batch", "individual")}
-                  className={`rounded-2xl border px-2 py-3 text-center transition-all ${
+                  className={`relative rounded-2xl border px-2 py-3 text-center transition-all ${
                     modeSelected && scanMode === "batch" && batchCaptureMode === "individual"
-                      ? "border-sky-300/55 bg-sky-400/[0.13] shadow-[0_0_24px_rgba(56,189,248,.08)]"
-                      : "border-sky-300/18 bg-sky-400/[0.04] hover:border-sky-300/38 hover:bg-sky-400/[0.08]"
+                      ? "border-amber-300/60 bg-sky-400/[0.12] shadow-[0_0_24px_rgba(245,196,81,.10)]"
+                      : "border-amber-300/38 bg-sky-400/[0.055] hover:border-amber-300/58 hover:bg-sky-400/[0.09]"
                   }`}
                 >
-                  <Layers className="mx-auto h-5 w-5 text-sky-300" />
-                  <span className="mt-1.5 flex items-center justify-center gap-1 text-[10px] font-black uppercase tracking-[0.09em] text-white">
-                    Batch
-                    <Crown className="h-3 w-3 text-amber-300" />
+                  <span className="absolute right-1.5 top-1.5 inline-flex items-center gap-0.5 rounded-full border border-amber-300/25 bg-amber-300/[0.08] px-1.5 py-0.5 text-[6px] font-black uppercase tracking-[0.07em] text-amber-300">
+                    <Crown className="h-2.5 w-2.5" /> Premium
                   </span>
-                  <span className="mt-1 block text-[8px] leading-3 text-amber-300/80">
-                    Premium · 4 cartes
+                  <Layers className="mx-auto h-5 w-5 text-sky-300" />
+                  <span className="mt-1.5 block text-[10px] font-black uppercase tracking-[0.09em] text-white">
+                    Batch
+                  </span>
+                  <span className="mt-1 block text-[8px] font-bold leading-3 text-sky-200">
+                    Jusqu’à 4 cartes
+                  </span>
+                  <span className="mt-1 block text-[7px] leading-3 text-zinc-400">
+                    Une carte après l’autre
                   </span>
                 </button>
 
                 <button
                   type="button"
                   onClick={() => selectScannerMode("batch", "grouped")}
-                  className={`rounded-2xl border px-2 py-3 text-center transition-all ${
+                  className={`relative rounded-2xl border px-2 py-3 text-center transition-all ${
                     modeSelected && scanMode === "batch" && batchCaptureMode === "grouped"
-                      ? "border-violet-300/55 bg-violet-400/[0.13] shadow-[0_0_24px_rgba(167,139,250,.08)]"
-                      : "border-violet-300/18 bg-violet-400/[0.04] hover:border-violet-300/38 hover:bg-violet-400/[0.08]"
+                      ? "border-amber-300/60 bg-violet-400/[0.13] shadow-[0_0_24px_rgba(245,196,81,.10)]"
+                      : "border-amber-300/38 bg-violet-400/[0.06] hover:border-amber-300/58 hover:bg-violet-400/[0.10]"
                   }`}
                 >
-                  <Grid2X2 className="mx-auto h-5 w-5 text-violet-300" />
-                  <span className="mt-1.5 flex items-center justify-center gap-1 text-[10px] font-black uppercase tracking-[0.09em] text-white">
-                    Quad
-                    <Crown className="h-3 w-3 text-amber-300" />
+                  <span className="absolute right-1.5 top-1.5 inline-flex items-center gap-0.5 rounded-full border border-amber-300/25 bg-amber-300/[0.08] px-1.5 py-0.5 text-[6px] font-black uppercase tracking-[0.07em] text-amber-300">
+                    <Crown className="h-2.5 w-2.5" /> Premium
                   </span>
-                  <span className="mt-1 block text-[8px] leading-3 text-amber-300/80">
-                    Premium · 4 en 1
+                  <Grid2X2 className="mx-auto h-5 w-5 text-violet-300" />
+                  <span className="mt-1.5 block text-[10px] font-black uppercase tracking-[0.09em] text-white">
+                    Quad
+                  </span>
+                  <span className="mt-1 block text-[8px] font-bold leading-3 text-violet-200">
+                    4 cartes en 1 photo
+                  </span>
+                  <span className="mt-1 block text-[7px] leading-3 text-zinc-400">
+                    Analyse simultanée
                   </span>
                 </button>
               </div>
@@ -1013,7 +1026,7 @@ export default function ScannerPage() {
 
           {modeSelected ? (
             <>
-          <section className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+          <section>
             <PremiumCard className="p-4 text-left">
               <div className="flex items-start gap-3">
                 <div className="rounded-xl bg-cyan-400/[0.08] p-2 text-cyan-300">
@@ -1021,22 +1034,20 @@ export default function ScannerPage() {
                 </div>
                 <PremiumSectionHeading
                   eyebrow="Prise en main"
-                  title={scanMode === "single" ? "Une carte, une fiche complète" : "Plusieurs cartes, une seule session"}
-                  description={scanMode === "single"
-                    ? "Cadrez une carte entière pour obtenir l’identification et ouvrir sa fiche marché."
-                    : "Choisissez une capture individuelle ou une photo groupée de quatre cartes."}
-                />
-              </div>
-            </PremiumCard>
-            <PremiumCard className="p-4 text-left">
-              <div className="flex items-start gap-3">
-                <div className="rounded-xl bg-violet-400/[0.08] p-2 text-violet-300">
-                  <Languages className="h-4 w-4" />
-                </div>
-                <PremiumSectionHeading
-                  eyebrow="Reconnaissance"
-                  title="FR / EN optimisées"
-                  description="Les cartes japonaises et chinoises sont détectées ; leur correspondance base continue de progresser."
+                  title={
+                    scanMode === "single"
+                      ? "Mono · une carte, une fiche complète"
+                      : batchCaptureMode === "grouped"
+                        ? "Quad · quatre cartes sur une seule photo"
+                        : "Batch · jusqu’à quatre cartes à la suite"
+                  }
+                  description={
+                    scanMode === "single"
+                      ? "Cadrez une carte entière pour l’identifier puis ouvrir sa fiche marché."
+                      : batchCaptureMode === "grouped"
+                        ? "Placez quatre cartes dans les zones prévues pour lancer une analyse simultanée."
+                        : "Scannez les cartes une par une dans la même session, jusqu’à quatre cartes."
+                  }
                 />
               </div>
             </PremiumCard>
