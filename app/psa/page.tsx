@@ -77,7 +77,7 @@ type EbayPsaCardGroup = {
   cardNumber: string;
   imageUrl?: string;
   listingCount: number;
-  verifiedFrenchCount: number;
+  verifiedLanguageCount: number;
   referencePrice: number;
   latestListedAt?: string;
   grades: EbayPsaGradeSummary[];
@@ -133,27 +133,35 @@ function normalizeSearchIdentity(value: string): string {
   return value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]/g, "");
 }
 
-function ebayPsaCardIdentity(title: string, query: string): string {
+function ebayPsaCardIdentity(
+  title: string,
+  query: string,
+  language?: "en" | "fr" | "ja"
+): string {
   const number = ebayPsaCardNumber(title);
   const edition = ebayPsaFirstEdition(title) ? "1ed" : "std";
   const variant = ebayPsaVariantKey(title);
   const setKey = ebayPsaSetKey(title);
+  const languageKey = language || "unknown";
+
+  // Same language + same card number + same real edition/variant = same card.
+  // Seller wording and PSA grade must not create separate card groups.
+  if (number) {
+    return `${languageKey}|${number}|${edition}|${variant}`;
+  }
+
   const queryKey = normalizeSearchIdentity(query);
-
-  if (number.includes("/")) return `${queryKey}|${number}|${edition}|${variant}`;
-  if (number) return `${queryKey}|${number}|${setKey}|${edition}|${variant}`;
-
   const cleaned = title
     .toLowerCase()
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
     .replace(/\b(?:psa\s*(?:gem\s*mint\s*)?(?:10|9|8|7|6|5|4|3|2|1)|grade\s*(?:10|9|8|7|6|5|4|3|2|1)|note\s*(?:10|9|8|7|6|5|4|3|2|1))\b/gi, " ")
     .replace(/\b(?:ex[-\s]?mt|mt[-\s]?(?:nm|ny)|nm[-\s]?mt|near\s*mint|gem\s*mint|mint|excellent(?:[-\s]?mint)?)\b/gi, " ")
-    .replace(/\b(?:fr|french|francais|francaise|pokemon|pokémon|carte|card|graded|gradee|slab)\b/gi, " ")
+    .replace(/\b(?:fr|french|francais|francaise|en|eng|english|anglais|jp|jpn|japanese|japonais|japonaise|pokemon|pokémon|carte|card|graded|gradee|slab)\b/gi, " ")
     .replace(/\s+/g, " ")
     .trim();
 
-  return `${queryKey}|${cleaned}|${edition}|${variant}`;
+  return `${languageKey}|${queryKey}|${setKey}|${cleaned}|${edition}|${variant}`;
 }
 
 function compactEbayTitle(title: string): string {
@@ -170,7 +178,9 @@ function groupEbayPsaListings(listings: EbayPsaListing[], query: string): EbayPs
   const groups = new Map<string, EbayPsaListing[]>();
 
   for (const listing of listings) {
-    const identity = ebayPsaCardIdentity(listing.title, query) || listing.title.toLowerCase();
+    const identity =
+      ebayPsaCardIdentity(listing.title, query, listing.language) ||
+      listing.title.toLowerCase();
     const current = groups.get(identity) || [];
     current.push(listing);
     groups.set(identity, current);
@@ -209,13 +219,13 @@ function groupEbayPsaListings(listings: EbayPsaListing[], query: string): EbayPs
         cardNumber: ebayPsaCardNumber(representative?.title || ""),
         imageUrl: items.find((item) => item.imageUrl)?.imageUrl,
         listingCount: items.length,
-        verifiedFrenchCount: items.filter((item) => item.languageSignal !== "unknown").length,
+        verifiedLanguageCount: items.filter((item) => item.languageSignal !== "unknown").length,
         referencePrice: medianPrice(items.map((item) => item.price)),
         latestListedAt: items.map((item) => item.listedAt || "").filter(Boolean).sort((a, b) => b.localeCompare(a))[0],
         grades,
       };
     })
-    .sort((a, b) => b.listingCount - a.listingCount || b.verifiedFrenchCount - a.verifiedFrenchCount);
+    .sort((a, b) => b.listingCount - a.listingCount || b.verifiedLanguageCount - a.verifiedLanguageCount);
 }
 
 export default function PSAPage() {
@@ -761,9 +771,9 @@ export default function PSAPage() {
 
           {/* PRICECHARTING SEARCH */}
           {activeTab === "search" && (
-            <section className="space-y-6">
+            <section className="flex flex-col gap-6">
 
-              <div className="rounded-[16px] border border-cyan-300/20 bg-[#0a1118] p-2 shadow-[0_10px_28px_rgba(0,0,0,.16)]">
+              <div className="order-[-2] rounded-[16px] border border-cyan-300/20 bg-[#0a1118] p-2 shadow-[0_10px_28px_rgba(0,0,0,.16)]">
                 <div className="mb-2 px-1">
                   <p className="text-[9px] font-black uppercase tracking-[0.12em] text-cyan-300">
                     Langue de recherche
@@ -836,7 +846,7 @@ export default function PSAPage() {
                 </div>
               </div>
 
-              <div className="space-y-4 rounded-[18px] border border-cyan-400/13 bg-[#0a1118] p-4 shadow-[0_16px_38px_rgba(0,0,0,.20)] sm:p-5">
+              <div className="order-[-1] space-y-4 rounded-[18px] border border-cyan-400/13 bg-[#0a1118] p-4 shadow-[0_16px_38px_rgba(0,0,0,.20)] sm:p-5">
                 <div>
                   <h2 className="text-sm font-black uppercase">
                     Recherche Prix Pokémon TCG
@@ -897,7 +907,7 @@ export default function PSAPage() {
               </div>
 
               {priceChartingLoading && (
-                <div className="rounded-2xl border border-cyan-500/20 bg-cyan-500/5 p-4 text-xs text-cyan-300">
+                <div className="order-0 rounded-2xl border border-cyan-500/20 bg-cyan-500/5 p-4 text-xs text-cyan-300">
                   Recherche des données publiques
                   PriceCharting...
                 </div>
@@ -905,16 +915,16 @@ export default function PSAPage() {
 
               {priceChartingError &&
                 !priceChartingLoading && (
-                  <div className="rounded-2xl border border-amber-500/20 bg-amber-500/5 p-4 text-xs text-amber-300">
+                  <div className="order-0 rounded-2xl border border-amber-500/20 bg-amber-500/5 p-4 text-xs text-amber-300">
                     {priceChartingError}
                   </div>
                 )}
 
               {true ? (
-                <div className="space-y-5">
+                <div className="order-2 space-y-5">
                   <div className="rounded-[16px] border border-amber-300/15 bg-amber-300/[0.025] px-3 py-2.5">
                     <p className="text-[10px] font-black uppercase tracking-[0.11em] text-amber-300">
-                      eBay · annonces actives
+                      eBay · complément annonces actives
                     </p>
                     <p className="mt-1 text-[9px] leading-4 text-zinc-400">
                       {ebayPsaResults.length} annonces analysées · {ebayPsaGroups.length} cartes regroupées. Les prix affichés sont des annonces en cours, pas des ventes réalisées.
@@ -983,7 +993,7 @@ export default function PSAPage() {
                               eBay · {group.listingCount} annonce{group.listingCount > 1 ? "s" : ""}
                             </p>
                             <p className="mt-1 text-[10px] text-zinc-200">
-                              Langue : {priceSearchLanguage === "fr" ? "Français" : priceSearchLanguage === "ja" ? "Japonais" : "Anglais"} · {group.verifiedFrenchCount} résultat{group.verifiedFrenchCount > 1 ? "s" : ""} vérifié{group.verifiedFrenchCount > 1 ? "s" : ""}
+                              Langue : {priceSearchLanguage === "fr" ? "Français" : priceSearchLanguage === "ja" ? "Japonais" : "Anglais"} · {group.verifiedLanguageCount} résultat{group.verifiedLanguageCount > 1 ? "s" : ""} vérifié{group.verifiedLanguageCount > 1 ? "s" : ""}
                             </p>
 
                             {group.grades[0]?.listings[0]?.url ? (
@@ -1077,7 +1087,7 @@ export default function PSAPage() {
               ) : null}
 
               {true ? (
-              <div className="space-y-5">
+              <div className="order-1 space-y-5">
                 {priceChartingResults.map((card) => (
                   <div
                     key={card.id}
