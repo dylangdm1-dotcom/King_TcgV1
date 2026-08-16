@@ -17,6 +17,18 @@ export interface PriceChartingSale {
   source: string;
 }
 
+export interface EbayPsaListing {
+  id: string;
+  title: string;
+  grade: number;
+  price: number;
+  currency: "EUR";
+  imageUrl?: string;
+  url: string;
+  languageSignal: "explicit_fr" | "structured_fr" | "unknown";
+  languageLabel: string;
+}
+
 /**
  * Résultat public PriceCharting.
  */
@@ -181,6 +193,28 @@ export const psaService = {
     return Array.isArray(data.results)
       ? data.results
       : [];
+  },
+
+  async searchEbayPsaFr(
+    query: string
+  ): Promise<EbayPsaListing[]> {
+    const search = query.trim();
+    if (!search) return [];
+
+    const response = await fetch(
+      `/api/psa/ebay?q=${encodeURIComponent(search)}`,
+      { cache: "no-store" }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok || !data.success) {
+      throw new Error(
+        data.error || "Recherche eBay PSA FR impossible."
+      );
+    }
+
+    return Array.isArray(data.results) ? data.results : [];
   },
 
   calculateStats(cards: PSACard[]) {
