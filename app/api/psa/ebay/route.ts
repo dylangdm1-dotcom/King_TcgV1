@@ -93,9 +93,9 @@ function languageSignal(
     }
   }
 
-  // English listings are commonly unlabelled on eBay. For FR/JP, unknown
-  // language is not strong enough evidence and is excluded to prevent leakage.
-  return requested === "en" ? "unknown" : null;
+  // PSA search must remain language-pure. If the selected language cannot
+  // be verified from title/aspects, reject the listing instead of guessing.
+  return null;
 }
 
 function languageLabel(
@@ -297,6 +297,7 @@ export async function GET(request: Request) {
         url: String(item?.itemWebUrl || ""),
         listedAt: String(item?.itemCreationDate || item?.itemOriginDate || "").trim() || undefined,
         languageSignal: signal,
+        language: language,
         languageLabel: languageLabel(signal, language),
       } satisfies EbayPsaListing;
     })
