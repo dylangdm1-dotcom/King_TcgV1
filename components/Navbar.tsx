@@ -99,7 +99,7 @@ export default function Navbar() {
             <Link
               key={href}
               href={href}
-              className={`${active ? "active" : ""} ${main ? "scan" : ""} ${premium ? "premium" : ""}`}
+              className={`${active ? "active" : ""} ${main ? "scan" : ""} ${premium ? "premium" : ""} ${href === "/psa" ? "psa" : ""}`}
               aria-current={active ? "page" : undefined}
             >
               <Icon />
