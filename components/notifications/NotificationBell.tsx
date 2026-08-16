@@ -126,7 +126,7 @@ export default function NotificationBell() {
       });
     }
 
-    const groups: NotificationGroup[] = [
+    const groups = ([
       {
         key: "important",
         title: "Alertes importantes",
@@ -151,7 +151,7 @@ export default function NotificationBell() {
         href: "/alerts",
         items: systemItems,
       },
-    ].filter((group) => group.items.length > 0);
+    ] satisfies NotificationGroup[]).filter((group) => group.items.length > 0);
 
     if (groups.length === 0) {
       return [
