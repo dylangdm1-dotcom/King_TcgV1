@@ -58,14 +58,14 @@ const partners = [
 ];
 
 const metrics = [
-  { label: "Testeurs actifs", value: "44", detail: "participants", icon: Users, green: false },
-  { label: "Pages vues", value: "4 085", detail: "Pages consultées", icon: Eye, green: false },
-  { label: "Taux de rebond", value: "55 %", detail: "mesure actuelle", icon: ShieldCheck, green: true },
+  { label: "Testeurs actifs", value: "66", detail: "participants", icon: Users, green: false },
+  { label: "Pages vues", value: "5 784", detail: "Pages consultées", icon: Eye, green: false },
+  { label: "Taux de rebond", value: "56,2 %", detail: "mesure actuelle", icon: ShieldCheck, green: true },
 ];
 
 // Ajouter ici les pseudos transmis par DYLANG_TCG. La section reste masquée
 // tant que la liste est vide afin de ne jamais inventer de remerciements.
-const OTHER_TESTERS: string[] = ["Jfaule", "Zapires", "Vicky92240", "…"];
+const OTHER_TESTERS: string[] = ["Jfaule", "Zapires", "Vicky92240", "Celinemienheer"];
 
 export default function TesteursPage() {
   return (
@@ -211,11 +211,18 @@ export default function TesteursPage() {
             {OTHER_TESTERS.length > 0 ? (
               <div className="mt-3 flex flex-wrap items-center justify-center gap-x-3 gap-y-2">
                 {OTHER_TESTERS.map((tester, index) => (
-                  <span
-                    key={`${tester}-${index}`}
-                    className="text-[13px] font-black tracking-[0.02em] text-white drop-shadow-[0_0_7px_rgba(103,232,249,0.16)] sm:text-[14px]"
-                  >
-                    {tester}
+                  <span key={`${tester}-${index}`} className="inline-flex items-center gap-3">
+                    {index > 0 ? (
+                      <span
+                        aria-hidden="true"
+                        className="text-[13px] font-black text-cyan-300 drop-shadow-[0_0_7px_rgba(34,211,238,0.72)]"
+                      >
+                        /
+                      </span>
+                    ) : null}
+                    <span className="text-[13px] font-black tracking-[0.02em] text-white drop-shadow-[0_0_7px_rgba(103,232,249,0.16)] sm:text-[14px]">
+                      {tester}
+                    </span>
                   </span>
                 ))}
               </div>
