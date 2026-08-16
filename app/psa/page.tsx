@@ -78,6 +78,8 @@ type EbayPsaCardGroup = {
   imageUrl?: string;
   listingCount: number;
   verifiedFrenchCount: number;
+  referencePrice: number;
+  latestListedAt?: string;
   grades: EbayPsaGradeSummary[];
 };
 
@@ -92,8 +94,7 @@ function medianPrice(values: number[]): number {
 
 function ebayPsaCardNumber(title: string): string {
   return (
-    title.match(/\b(\d{1,4}\s*\/\s*\d{1,4})\b/)?.[1]
-      ?.replace(/\s+/g, "") ||
+    title.match(/\b(\d{1,4}\s*\/\s*\d{1,4})\b/)?.[1]?.replace(/\s+/g, "") ||
     title.match(/#\s*(\d{1,4})\b/)?.[1] ||
     ""
   );
@@ -103,47 +104,56 @@ function ebayPsaFirstEdition(title: string): boolean {
   return /\b(?:1st\s*edition|first\s*edition|edition\s*1|1(?:e|ere|ère)\s*edition|premiere\s*edition|première\s*édition)\b/i.test(title);
 }
 
-function ebayPsaCoreName(title: string): string {
-  return title
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/\b(?:psa\s*(?:gem\s*mint\s*)?(?:10|9|8|7|6|5|4|3|2|1)|grade\s*(?:10|9|8|7|6|5|4|3|2|1)|note\s*(?:10|9|8|7|6|5|4|3|2|1))\b/gi, " ")
-    .replace(/\b\d{1,4}\s*\/\s*\d{1,4}\b/g, " ")
-    .replace(/#\s*\d{1,4}\b/g, " ")
-    .replace(/\b(?:19|20)\d{2}\b/g, " ")
-    .replace(/\b(?:1st\s*edition|first\s*edition|edition\s*1|1(?:e|ere|ère)\s*edition|premiere\s*edition)\b/gi, " ")
-    .replace(/\b(?:set\s*de\s*base|base\s*set|set\s*base|base)\b/gi, " ")
-    .replace(/\b(?:set|serie|series|extension)\b/gi, " ")
-    .replace(/\b(?:ex[-\s]?mt|mt[-\s]?(?:nm|ny)|nm[-\s]?mt|near\s*mint|gem\s*mint|mint|excellent(?:[-\s]?mint)?|played|good|poor)\b/gi, " ")
-    .replace(/\b(?:fr|french|francais|francaise|pokemon|pokémon|carte|card|graded|gradee|slab)\b/gi, " ")
-    .replace(/[|()[\]{}_,;:+*!?]/g, " ")
-    .replace(/[-–—]/g, " ")
-    .replace(/\s+/g, " ")
-    .trim();
+function ebayPsaVariantKey(title: string): string {
+  const normalized = title.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  const variants: string[] = [];
+  if (/\bshadowless\b/.test(normalized)) variants.push("shadowless");
+  if (/\breverse\b/.test(normalized)) variants.push("reverse");
+  if (/\b(?:holo|holographic|holofoil)\b/.test(normalized) && !/\breverse\b/.test(normalized)) variants.push("holo");
+  if (/\bpromo\b/.test(normalized)) variants.push("promo");
+  return variants.join("-") || "standard";
 }
 
-function ebayPsaCardIdentity(title: string): string {
+function ebayPsaSetKey(title: string): string {
+  const normalized = title.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  const mappings: Array<[RegExp, string]> = [
+    [/\b(?:base\s*set|set\s*de\s*base|set\s*base)\b/, "base"],
+    [/\bjungle\b/, "jungle"],
+    [/\bfossil\b/, "fossil"],
+    [/\bteam\s*rocket\b/, "team-rocket"],
+    [/\bneo\s*genesis\b/, "neo-genesis"],
+    [/\bneo\s*discovery\b/, "neo-discovery"],
+    [/\bneo\s*revelation\b/, "neo-revelation"],
+    [/\bneo\s*destiny\b/, "neo-destiny"],
+  ];
+  return mappings.find(([pattern]) => pattern.test(normalized))?.[1] || "";
+}
+
+function normalizeSearchIdentity(value: string): string {
+  return value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]/g, "");
+}
+
+function ebayPsaCardIdentity(title: string, query: string): string {
   const number = ebayPsaCardNumber(title);
-  const core = ebayPsaCoreName(title);
   const edition = ebayPsaFirstEdition(title) ? "1ed" : "std";
+  const variant = ebayPsaVariantKey(title);
+  const setKey = ebayPsaSetKey(title);
+  const queryKey = normalizeSearchIdentity(query);
 
-  if (number && core) {
-    return `${core}|${number}|${edition}`;
-  }
+  if (number.includes("/")) return `${queryKey}|${number}|${edition}|${variant}`;
+  if (number) return `${queryKey}|${number}|${setKey}|${edition}|${variant}`;
 
-  if (number) {
-    return `${number}|${edition}`;
-  }
-
-  return title
+  const cleaned = title
     .toLowerCase()
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
     .replace(/\b(?:psa\s*(?:gem\s*mint\s*)?(?:10|9|8|7|6|5|4|3|2|1)|grade\s*(?:10|9|8|7|6|5|4|3|2|1)|note\s*(?:10|9|8|7|6|5|4|3|2|1))\b/gi, " ")
     .replace(/\b(?:ex[-\s]?mt|mt[-\s]?(?:nm|ny)|nm[-\s]?mt|near\s*mint|gem\s*mint|mint|excellent(?:[-\s]?mint)?)\b/gi, " ")
+    .replace(/\b(?:fr|french|francais|francaise|pokemon|pokémon|carte|card|graded|gradee|slab)\b/gi, " ")
     .replace(/\s+/g, " ")
     .trim();
+
+  return `${queryKey}|${cleaned}|${edition}|${variant}`;
 }
 
 function compactEbayTitle(title: string): string {
@@ -156,11 +166,11 @@ function compactEbayTitle(title: string): string {
     .trim();
 }
 
-function groupEbayPsaListings(listings: EbayPsaListing[]): EbayPsaCardGroup[] {
+function groupEbayPsaListings(listings: EbayPsaListing[], query: string): EbayPsaCardGroup[] {
   const groups = new Map<string, EbayPsaListing[]>();
 
   for (const listing of listings) {
-    const identity = ebayPsaCardIdentity(listing.title) || listing.title.toLowerCase();
+    const identity = ebayPsaCardIdentity(listing.title, query) || listing.title.toLowerCase();
     const current = groups.get(identity) || [];
     current.push(listing);
     groups.set(identity, current);
@@ -200,6 +210,8 @@ function groupEbayPsaListings(listings: EbayPsaListing[]): EbayPsaCardGroup[] {
         imageUrl: items.find((item) => item.imageUrl)?.imageUrl,
         listingCount: items.length,
         verifiedFrenchCount: items.filter((item) => item.languageSignal !== "unknown").length,
+        referencePrice: medianPrice(items.map((item) => item.price)),
+        latestListedAt: items.map((item) => item.listedAt || "").filter(Boolean).sort((a, b) => b.localeCompare(a))[0],
         grades,
       };
     })
@@ -238,6 +250,8 @@ export default function PSAPage() {
     useState(false);
   const [ebayPsaError, setEbayPsaError] =
     useState("");
+  const [ebayPsaSort, setEbayPsaSort] =
+    useState<"recent" | "price-asc" | "price-desc">("recent");
 
   const [isAddModalOpen, setIsAddModalOpen] =
     useState(false);
@@ -269,10 +283,16 @@ export default function PSAPage() {
     [collection]
   );
 
-  const ebayPsaGroups = useMemo(
-    () => groupEbayPsaListings(ebayPsaResults),
-    [ebayPsaResults]
-  );
+  const ebayPsaGroups = useMemo(() => {
+    const groups = groupEbayPsaListings(ebayPsaResults, priceChartingQuery);
+    return [...groups].sort((a, b) => {
+      if (ebayPsaSort === "price-asc") return a.referencePrice - b.referencePrice;
+      if (ebayPsaSort === "price-desc") return b.referencePrice - a.referencePrice;
+      const aDate = a.latestListedAt ? Date.parse(a.latestListedAt) : 0;
+      const bDate = b.latestListedAt ? Date.parse(b.latestListedAt) : 0;
+      return bDate - aDate || b.listingCount - a.listingCount;
+    });
+  }, [ebayPsaResults, priceChartingQuery, ebayPsaSort]);
 
   const handlePriceChartingSearch = async (
     event: FormEvent
@@ -365,6 +385,36 @@ export default function PSAPage() {
     setNewPrice(prices[grade]);
     setNewPurchasePrice(0);
 
+    setIsAddModalOpen(true);
+  };
+
+  const handleSelectEbayPsaCard = (
+    group: EbayPsaCardGroup,
+    gradeSummary: EbayPsaGradeSummary
+  ) => {
+    const marketPrices: PSAPrices = {
+      ungraded: 0,
+      psa1: group.grades.find((item) => item.grade === 1)?.median || 0,
+      psa2: group.grades.find((item) => item.grade === 2)?.median || 0,
+      psa3: group.grades.find((item) => item.grade === 3)?.median || 0,
+      psa4: group.grades.find((item) => item.grade === 4)?.median || 0,
+      psa5: group.grades.find((item) => item.grade === 5)?.median || 0,
+      psa6: group.grades.find((item) => item.grade === 6)?.median || 0,
+      psa7: group.grades.find((item) => item.grade === 7)?.median || 0,
+      psa8: group.grades.find((item) => item.grade === 8)?.median || 0,
+      psa9: group.grades.find((item) => item.grade === 9)?.median || 0,
+      psa10: group.grades.find((item) => item.grade === 10)?.median || 0,
+    };
+
+    setNewCert("");
+    setNewName(group.title);
+    setNewSet("");
+    setNewNumber(group.cardNumber);
+    setNewImage(group.imageUrl || "");
+    setNewGrade(gradeSummary.grade as PSAGrade);
+    setNewPrice(gradeSummary.median);
+    setNewPurchasePrice(0);
+    setSelectedMarketPrices(marketPrices);
     setIsAddModalOpen(true);
   };
 
@@ -868,6 +918,17 @@ export default function PSAPage() {
                     <p className="mt-1 text-[9px] leading-4 text-zinc-400">
                       {ebayPsaResults.length} annonces analysées · {ebayPsaGroups.length} cartes regroupées. Les prix affichés sont des annonces en cours, pas des ventes réalisées.
                     </p>
+                    <div className="mt-2">
+                      <select
+                        value={ebayPsaSort}
+                        onChange={(event) => setEbayPsaSort(event.target.value as "recent" | "price-asc" | "price-desc")}
+                        className="rounded-lg border border-cyan-300/15 bg-[#0b141d] px-2 py-1.5 text-[8px] font-black text-white outline-none"
+                      >
+                        <option value="recent">Plus récents</option>
+                        <option value="price-asc">Prix - → +</option>
+                        <option value="price-desc">Prix + → -</option>
+                      </select>
+                    </div>
                   </div>
 
                   {ebayPsaLoading ? (
@@ -885,16 +946,16 @@ export default function PSAPage() {
                         className="psa-result-card rounded-[18px] border border-cyan-300/16 bg-[linear-gradient(145deg,rgba(18,29,40,.98),rgba(9,15,22,.98))] p-4 space-y-4"
                       >
                         {/* CARD HEADER — même structure que la recherche EN */}
-                        <div className="flex flex-col gap-5 md:flex-row">
+                        <div className="flex items-start gap-3">
                           <div className="shrink-0">
                             {group.imageUrl ? (
                               <img
                                 src={group.imageUrl}
                                 alt={group.title}
-                                className="psa-card-image kt-card-frame h-40 w-28 rounded-xl bg-neutral-950 object-contain"
+                                className="psa-card-image kt-card-frame h-28 w-20 shrink-0 rounded-xl bg-neutral-950 object-contain"
                               />
                             ) : (
-                              <div className="kt-card-frame flex h-40 w-28 items-center justify-center rounded-xl bg-neutral-950">
+                              <div className="kt-card-frame flex h-28 w-20 shrink-0 items-center justify-center rounded-xl bg-neutral-950">
                                 <div className="text-center px-2">
                                   <BadgeCheck className="mx-auto h-7 w-7 text-zinc-700" />
                                   <span className="mt-2 block text-[10px] font-black uppercase text-zinc-200">
@@ -950,23 +1011,30 @@ export default function PSAPage() {
                             </span>
                           </div>
 
-                          <div className="psa-price-grid grid grid-cols-2 gap-2 md:grid-cols-5">
+                          <div className="psa-price-grid grid grid-cols-2 gap-1.5 sm:grid-cols-3 md:grid-cols-5">
                             {group.grades.map((grade) => (
                               <div
                                 key={grade.grade}
-                                className="rounded-xl border border-cyan-300/13 bg-cyan-400/[0.025] p-3"
+                                className="rounded-xl border border-cyan-300/13 bg-cyan-400/[0.025] p-2"
                               >
-                                <span className="block text-[10px] font-black uppercase text-zinc-200">
+                                <span className="block text-[9px] font-black uppercase text-zinc-200">
                                   PSA {grade.grade}
                                 </span>
-                                <span className="mt-1 block text-sm font-black">
-                                  {formatEUR(grade.median)}
-                                </span>
-                                <span className="mt-1 block text-[9px] font-bold text-cyan-400">
-                                  {grade.count} annonce{grade.count > 1 ? "s" : ""}
-                                </span>
-                                <span className="mt-1 block text-[8px] text-zinc-500">
-                                  {formatEUR(grade.min)} → {formatEUR(grade.max)}
+                                <div className="mt-1 flex items-center justify-between gap-1.5">
+                                  <span className="min-w-0 truncate text-[11px] font-black">
+                                    {formatEUR(grade.median)}
+                                  </span>
+                                  <button
+                                    type="button"
+                                    onClick={() => handleSelectEbayPsaCard(group, grade)}
+                                    className="flex h-5 w-5 shrink-0 items-center justify-center rounded-md border border-cyan-300/25 bg-cyan-300/[0.07] text-cyan-300"
+                                    aria-label={`Ajouter ${group.title} PSA ${grade.grade}`}
+                                  >
+                                    <Plus className="h-3 w-3" />
+                                  </button>
+                                </div>
+                                <span className="mt-1 block text-[8px] font-bold text-cyan-400">
+                                  {grade.count} annonce{grade.count > 1 ? "s" : ""} · {formatEUR(grade.min)} → {formatEUR(grade.max)}
                                 </span>
                               </div>
                             ))}
@@ -993,7 +1061,7 @@ export default function PSAPage() {
                                   target="_blank"
                                   rel="noreferrer"
                                   title={listing.title}
-                                  className="shrink-0 rounded-xl border border-cyan-300/12 bg-cyan-400/[0.025] px-3 py-2 text-[9px] font-black text-cyan-200 transition hover:border-cyan-300/35"
+                                  className="shrink-0 rounded-lg border border-cyan-300/10 bg-cyan-400/[0.02] px-2 py-1.5 text-[8px] font-black text-cyan-200 transition hover:border-cyan-300/30"
                                 >
                                   PSA {listing.grade} · {formatEUR(listing.price)}
                                 </a>
@@ -1016,7 +1084,7 @@ export default function PSAPage() {
                   >
 
                     {/* CARD HEADER */}
-                    <div className="flex flex-col md:flex-row gap-5">
+                    <div className="flex items-start gap-3">
 
                       {/* IMAGE */}
                       <div className="shrink-0">
@@ -1024,7 +1092,7 @@ export default function PSAPage() {
                           <img
                             src={card.imageUrl}
                             alt={card.cardName}
-                            className="psa-card-image kt-card-frame w-28 h-40 object-contain rounded-xl bg-neutral-950"
+                            className="psa-card-image kt-card-frame h-28 w-20 shrink-0 rounded-xl bg-neutral-950 object-contain"
                             onError={(event) => {
                               event.currentTarget.style.display =
                                 "none";
@@ -1047,7 +1115,7 @@ export default function PSAPage() {
                               ? "none"
                               : "flex",
                           }}
-                          className="kt-card-frame w-28 h-40 rounded-xl bg-neutral-950 items-center justify-center"
+                          className="kt-card-frame h-28 w-20 shrink-0 rounded-xl bg-neutral-950 items-center justify-center"
                         >
                           <div className="text-center px-2">
                             <Award className="w-7 h-7 mx-auto text-zinc-700" />
@@ -1115,7 +1183,7 @@ export default function PSAPage() {
                         </span>
                       </div>
 
-                      <div className="psa-price-grid grid grid-cols-2 md:grid-cols-5 gap-2">
+                      <div className="psa-price-grid grid grid-cols-2 gap-1.5 sm:grid-cols-3 md:grid-cols-5">
                         <PriceBox
                           label="Non gradée"
                           price={card.prices.ungraded}
@@ -1235,7 +1303,7 @@ export default function PSAPage() {
 
                     {/* RECENT SALES */}
                     {card.recentSales?.length > 0 && (
-                      <div className="border-t border-cyan-300/12 pt-5">
+                      <div className="border-t border-cyan-300/12 pt-3">
                         <div className="flex items-center gap-2 mb-3">
                           <ShoppingBag className="w-4 h-4 text-cyan-400" />
 
@@ -1248,13 +1316,13 @@ export default function PSAPage() {
                           </span>
                         </div>
 
-                        <div className="space-y-2">
+                        <div className="space-y-1.5">
                           {card.recentSales
                             .slice(0, 3)
                             .map((sale, index) => (
                               <div
                                 key={`${sale.date}-${index}`}
-                                className="flex flex-col md:flex-row md:items-center gap-2 md:gap-4 rounded-xl bg-cyan-400/[0.025] border border-cyan-300/12 p-3"
+                                className="flex items-center gap-2 rounded-lg border border-cyan-300/10 bg-cyan-400/[0.02] px-2 py-1.5"
                               >
                                 <span className="text-[10px] text-zinc-200 shrink-0">
                                   {formatSaleDate(
@@ -1466,25 +1534,25 @@ function PriceBox({
       type="button"
       onClick={onClick}
       disabled={!clickable}
-      className={`text-left rounded-xl p-3 border transition ${
+      className={`rounded-xl border p-2 text-left transition ${
         clickable
-          ? "border-cyan-300/25 bg-cyan-400/[0.045] hover:border-cyan-300/55 cursor-pointer"
-          : "border-cyan-300/13 bg-cyan-400/[0.025] cursor-default"
+          ? "cursor-pointer border-cyan-300/25 bg-cyan-400/[0.045] hover:border-cyan-300/55"
+          : "cursor-default border-cyan-300/13 bg-cyan-400/[0.025]"
       }`}
     >
-      <span className="block text-[10px] text-zinc-200 uppercase font-black">
+      <span className="block text-[9px] font-black uppercase text-zinc-200">
         {label}
       </span>
-
-      <span className="block text-sm font-black mt-1">
-        {formatEUR(price)}
-      </span>
-
-      {clickable && (
-        <span className="block text-[10px] text-cyan-400 mt-1 uppercase font-black">
-          Ajouter
+      <span className="mt-1 flex items-center justify-between gap-1.5">
+        <span className="min-w-0 truncate text-[11px] font-black">
+          {formatEUR(price)}
         </span>
-      )}
+        {clickable ? (
+          <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-md border border-cyan-300/25 bg-cyan-300/[0.07] text-cyan-300">
+            <Plus className="h-3 w-3" />
+          </span>
+        ) : null}
+      </span>
     </button>
   );
 }
