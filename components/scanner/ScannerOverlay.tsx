@@ -1,6 +1,6 @@
 "use client";
 
-import { CheckCircle2, Loader2, ScanLine } from "lucide-react";
+import { CheckCircle2, Loader2, ScanLine, Camera } from "lucide-react";
 import { QUAD_FRAMES } from "@/lib/scanner/quadLayout";
 import type { QuadSlotProgress } from "@/components/scanner/ScannerCamera";
 
@@ -10,6 +10,8 @@ type Props = {
   statusText?: string;
   mode?: "single" | "batch" | "quad";
   quadSlots?: QuadSlotProgress[];
+  ready?: boolean;
+  onScan?: () => void;
 };
 
 const corners = [
@@ -25,6 +27,8 @@ export default function ScannerOverlay({
   statusText,
   mode = "single",
   quadSlots = [],
+  ready = false,
+  onScan,
 }: Props) {
   const stateColor = mode === "batch" || mode === "quad"
     ? "border-amber-300 text-amber-200"
@@ -84,27 +88,28 @@ export default function ScannerOverlay({
               </div>
             );
           })}
-          <div className="absolute left-1/2 top-[10.5%] -translate-x-1/2 rounded-full border border-violet-300/20 bg-black/55 px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.16em] text-violet-200 backdrop-blur-md">
-            Alignez les bords réels des cartes dans les cadres
+          <div className="absolute left-1/2 top-[5.5%] w-[88%] -translate-x-1/2 rounded-xl border border-violet-300/20 bg-black/58 px-3 py-2 text-center text-[9px] font-black uppercase leading-4 tracking-[0.12em] text-violet-100 backdrop-blur-md">
+            <span className="block">Placez les 4 cartes entièrement</span>
+            <span className="block">dans les cadres, sans les superposer</span>
           </div>
         </>
       ) : (
         <div
-          className={`kt-scanner-card-window absolute left-1/2 top-1/2 aspect-[63/88] w-[74%] max-w-[340px] -translate-x-1/2 -translate-y-1/2 rounded-[20px] border bg-black/10 transition-all duration-500 ${stateColor}`}
+          className={`kt-scanner-card-window absolute left-1/2 top-[48%] aspect-[63/88] w-[82%] max-w-[365px] -translate-x-1/2 -translate-y-1/2 rounded-[22px] border-2 bg-black/[0.06] transition-all duration-500 ${stateColor}`}
         >
           {corners.map((corner) => (
             <span key={corner} className={`absolute h-8 w-8 ${corner} ${stateColor}`} />
           ))}
 
-          <div className="absolute left-[4%] top-[3.5%] flex h-[11%] w-[92%] items-center justify-between rounded-xl border border-white/10 bg-black/25 px-2.5 backdrop-blur-sm">
-            <span className="text-[10px] font-bold uppercase tracking-[0.11em] text-zinc-300">
+          <div className="absolute left-[6%] top-[5%] flex h-[8.5%] w-[88%] items-center justify-between rounded-lg border border-cyan-300/18 bg-black/22 px-2.5 backdrop-blur-sm">
+            <span className="text-[9px] font-black uppercase tracking-[0.10em] text-cyan-100/85">
               Nom Pokémon
             </span>
             {scanning && <span className="h-1.5 w-1.5 animate-ping rounded-full bg-cyan-400" />}
           </div>
 
-          <div className="absolute bottom-[8.5%] left-[5%] flex h-[8.5%] w-[42%] items-center rounded-xl border border-dashed border-white/10 bg-black/25 px-2 backdrop-blur-sm">
-            <span className="text-[10px] font-bold uppercase tracking-[0.11em] text-zinc-300">
+          <div className="absolute bottom-[4.5%] left-[6%] flex h-[6.5%] w-[38%] items-center rounded-lg border border-dashed border-cyan-300/18 bg-black/22 px-2 backdrop-blur-sm">
+            <span className="text-[9px] font-black uppercase tracking-[0.10em] text-cyan-100/85">
               N° Carte
             </span>
           </div>
@@ -115,32 +120,49 @@ export default function ScannerOverlay({
         </div>
       )}
 
-      <div className="absolute bottom-[1.5%] inset-x-0 flex justify-center px-4">
-        <div
-          className={`flex max-w-[92%] items-center gap-2.5 rounded-xl border px-3 py-2 text-center text-[10px] font-bold uppercase tracking-[0.11em] shadow-2xl backdrop-blur-xl transition-all duration-300 ${
-            hasResult
-              ? "border-emerald-500/40 bg-emerald-950/85 text-emerald-300"
-              : scanning
-              ? "border-cyan-500/35 bg-[#0b0f14]/92 text-cyan-300"
-              : "border-white/10 bg-[#11161d]/88 text-zinc-300"
-          }`}
-        >
-          {hasResult ? (
-            <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-400" />
-          ) : scanning ? (
-            <Loader2 className="h-4 w-4 shrink-0 animate-spin text-cyan-400" />
-          ) : (
-            <ScanLine className="h-4 w-4 shrink-0 text-zinc-400" />
-          )}
-          <span>
-            {statusText ||
-              (mode === "quad"
-                ? "Placez une carte dans chaque zone"
+      <div className="absolute bottom-[1.8%] inset-x-0 flex justify-center px-4">
+        {scanning || hasResult ? (
+          <div
+            className={`flex max-w-[92%] items-center gap-2.5 rounded-xl border px-3 py-2 text-center text-[10px] font-bold uppercase tracking-[0.11em] shadow-2xl backdrop-blur-xl transition-all duration-300 ${
+              hasResult
+                ? "border-emerald-500/40 bg-emerald-950/85 text-emerald-300"
+                : "border-cyan-500/35 bg-[#0b0f14]/92 text-cyan-300"
+            }`}
+          >
+            {hasResult ? (
+              <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-400" />
+            ) : (
+              <Loader2 className="h-4 w-4 shrink-0 animate-spin text-cyan-400" />
+            )}
+            <span>{statusText || (hasResult ? "Carte identifiée" : "Analyse en cours...")}</span>
+          </div>
+        ) : (
+          <button
+            type="button"
+            onClick={onScan}
+            disabled={!ready || !onScan}
+            className={`pointer-events-auto inline-flex min-w-[58%] items-center justify-center gap-2 rounded-xl border-2 px-5 py-3 text-[11px] font-black uppercase tracking-[0.12em] text-white shadow-[0_12px_30px_rgba(0,0,0,.38)] backdrop-blur-md transition-all active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-45 ${
+              mode === "quad"
+                ? "border-violet-300 bg-violet-500/20 shadow-[0_0_24px_rgba(167,139,250,.12)]"
                 : mode === "batch"
-                ? "Batch Premium · Cadrez la carte suivante"
-                : "Alignez la carte dans le cadre")}
-          </span>
-        </div>
+                ? "border-amber-300 bg-sky-500/20 shadow-[0_0_24px_rgba(245,196,81,.10)]"
+                : "border-cyan-300 bg-cyan-500/18 shadow-[0_0_24px_rgba(34,211,238,.12)]"
+            }`}
+          >
+            {mode === "quad" ? (
+              <ScanLine className="h-4 w-4" />
+            ) : (
+              <Camera className="h-4 w-4" />
+            )}
+            <span>
+              {mode === "quad"
+                ? "Capturer les 4 cartes"
+                : mode === "batch"
+                ? "Scanner cette carte"
+                : "Scanner la carte"}
+            </span>
+          </button>
+        )}
       </div>
 
       <style jsx>{`
