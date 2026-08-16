@@ -25,6 +25,7 @@ export interface EbayPsaListing {
   currency: "EUR";
   imageUrl?: string;
   url: string;
+  listedAt?: string;
   languageSignal: "explicit_fr" | "structured_fr" | "unknown";
   languageLabel: string;
 }
