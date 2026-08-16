@@ -143,14 +143,14 @@ const alertGroups = useMemo(() => {
     {
       key: "important",
       title: "Alertes importantes",
-      subtitle: "Mouvements les plus forts détectés",
+      subtitle: "Mouvements importants détectés",
       tone: "rose",
       items: sorted.filter((alert) => Math.abs(alert.changePercent) >= 25),
     },
     {
       key: "watch",
-      title: "À surveiller",
-      subtitle: "Variations significatives à suivre",
+      title: "Cartes à surveiller",
+      subtitle: "Signaux mesurables mais encore modérés",
       tone: "amber",
       items: sorted.filter(
         (alert) => Math.abs(alert.changePercent) >= 10 && Math.abs(alert.changePercent) < 25
@@ -159,7 +159,7 @@ const alertGroups = useMemo(() => {
     {
       key: "info",
       title: "Informations marché",
-      subtitle: "Signaux plus modérés",
+      subtitle: "Informations et signaux marché modérés",
       tone: "cyan",
       items: sorted.filter((alert) => Math.abs(alert.changePercent) < 10),
     },
@@ -408,18 +408,21 @@ return (
               const groupClasses =
                 group.tone === "rose"
                   ? {
-                      border: "border-rose-300/16",
+                      border: "border-rose-300/40",
+                      divider: "bg-rose-300/70 shadow-[0_0_8px_rgba(253,164,175,.45)]",
                       bg: "bg-rose-400/[0.025]",
                       text: "text-rose-300",
                     }
                   : group.tone === "amber"
                     ? {
-                        border: "border-amber-300/16",
+                        border: "border-amber-300/40",
+                        divider: "bg-amber-300/70 shadow-[0_0_8px_rgba(252,211,77,.45)]",
                         bg: "bg-amber-400/[0.025]",
                         text: "text-amber-300",
                       }
                     : {
-                        border: "border-cyan-300/16",
+                        border: "border-cyan-300/40",
+                        divider: "bg-cyan-300/70 shadow-[0_0_8px_rgba(103,232,249,.45)]",
                         bg: "bg-cyan-400/[0.025]",
                         text: "text-cyan-300",
                       };
@@ -441,7 +444,10 @@ return (
                     </span>
                   </div>
 
-                  <div className="border-t border-white/[0.05] p-2">
+                  <div className="flex justify-center">
+                    <span className={`h-px w-20 rounded-full ${groupClasses.divider}`} />
+                  </div>
+                  <div className="p-2">
                     {visible.map((alert, index) => {
                       const config = getAlertConfig(alert.type);
                       const premiumKey = `${alert.cardId}-${group.key}-${index}`;
