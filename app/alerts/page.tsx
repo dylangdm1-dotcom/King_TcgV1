@@ -34,6 +34,7 @@ export default function AlertCenter() {
 const [alerts, setAlerts] = useState<PriceAlert[]>([]);
 const [loading, setLoading] = useState(true);
 const [premiumOpen, setPremiumOpen] = useState<Record<string, boolean>>({});
+const [expandedGroups, setExpandedGroups] = useState<Record<string, boolean>>({});
 // Mode test V96 : accès Premium forcé jusqu’au branchement des vrais comptes.
 const hasPremiumAccess = true;
 
@@ -129,6 +130,38 @@ return {
   drops,
 };
 
+}, [alerts]);
+
+const alertGroups = useMemo(() => {
+  const sorted = [...alerts].sort(
+    (left, right) => Math.abs(right.changePercent) - Math.abs(left.changePercent)
+  );
+
+  return [
+    {
+      key: "important",
+      title: "Alertes importantes",
+      subtitle: "Mouvements les plus forts détectés",
+      tone: "rose",
+      items: sorted.filter((alert) => Math.abs(alert.changePercent) >= 25),
+    },
+    {
+      key: "watch",
+      title: "À surveiller",
+      subtitle: "Variations significatives à suivre",
+      tone: "amber",
+      items: sorted.filter(
+        (alert) => Math.abs(alert.changePercent) >= 10 && Math.abs(alert.changePercent) < 25
+      ),
+    },
+    {
+      key: "info",
+      title: "Informations marché",
+      subtitle: "Signaux plus modérés",
+      tone: "cyan",
+      items: sorted.filter((alert) => Math.abs(alert.changePercent) < 10),
+    },
+  ].filter((group) => group.items.length > 0);
 }, [alerts]);
 
 const getPremiumAlertInsight = (alert: PriceAlert) => {
@@ -366,88 +399,131 @@ return (
             </div>
           </div>
         ) : (
-          <div className="grid gap-3 lg:grid-cols-2">
-            {alerts.map((alert, index) => {
-              const config = getAlertConfig(alert.type);
-              const SmallIcon = config.smallIcon;
+          <div className="space-y-3">
+            {alertGroups.map((group) => {
+              const showAll = Boolean(expandedGroups[group.key]);
+              const visible = showAll ? group.items : group.items.slice(0, 5);
+              const groupClasses =
+                group.tone === "rose"
+                  ? {
+                      border: "border-rose-300/16",
+                      bg: "bg-rose-400/[0.025]",
+                      text: "text-rose-300",
+                    }
+                  : group.tone === "amber"
+                    ? {
+                        border: "border-amber-300/16",
+                        bg: "bg-amber-400/[0.025]",
+                        text: "text-amber-300",
+                      }
+                    : {
+                        border: "border-cyan-300/16",
+                        bg: "bg-cyan-400/[0.025]",
+                        text: "text-cyan-300",
+                      };
 
               return (
-                <article
-                  key={`${alert.cardName}-${index}`}
-                  className="kt-panel group relative overflow-hidden p-4 transition duration-200 hover:-translate-y-0.5 sm:p-5"
-                  style={{
-                    borderColor: config.border,
-                  }}
+                <div
+                  key={group.key}
+                  className={`overflow-hidden rounded-[18px] border ${groupClasses.border} ${groupClasses.bg}`}
                 >
-                  <div
-                    className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full blur-3xl"
-                    style={{
-                      background: config.accentSoft,
-                    }}
-                  />
-
-                  <div className="relative">
-                    <div className="flex items-center justify-between gap-3">
-                      <h2 className="min-w-0 truncate text-left text-[15px] font-black tracking-tight text-white">
-                        {alert.cardName} {alert.cardNumber ? <span className="text-[10px] text-cyan-300">#{alert.cardNumber}</span> : null}
+                  <div className="flex items-center justify-between gap-3 px-3.5 py-3">
+                    <div className="min-w-0">
+                      <h2 className={`text-[10px] font-black uppercase tracking-[0.11em] ${groupClasses.text}`}>
+                        {group.title}
                       </h2>
-
-                      <div
-                        className="inline-flex shrink-0 items-center gap-1.5 rounded-full border px-2.5 py-1 text-[9px] font-black uppercase tracking-[0.08em]"
-                        style={{
-                          color: config.accent,
-                          background: config.accentSoft,
-                          borderColor: config.border,
-                        }}
-                      >
-                        <SmallIcon className="h-3 w-3" />
-                        {alert.type}
-                      </div>
+                      <p className="mt-0.5 truncate text-[9px] text-zinc-400">{group.subtitle}</p>
                     </div>
+                    <span className={`shrink-0 rounded-full border px-2 py-1 text-[9px] font-black ${groupClasses.border} ${groupClasses.text}`}>
+                      {group.items.length}
+                    </span>
+                  </div>
 
-                    <div className="mt-2 flex items-end gap-3">
-                      <p className="min-w-0 flex-1 text-left text-[11px] leading-[17px] text-zinc-300">
-                        {alert.type === "RISE"
-                          ? `Hausse de ${Math.abs(alert.changePercent).toFixed(2)} % sur les 7 derniers jours.`
-                          : alert.type === "DROP"
-                          ? `Recul de ${Math.abs(alert.changePercent).toFixed(2)} % sur les 7 derniers jours.`
-                          : `Recul de ${Math.abs(alert.changePercent).toFixed(2)} % · signal à surveiller.`}
-                      </p>
-                      <div className="shrink-0 rounded-lg border border-white/[0.06] bg-black/20 px-2 py-1 text-sm font-black" style={{ color: config.accent }}>
-                        {alert.changePercent > 0 ? "+" : ""}{alert.changePercent.toFixed(2)}%
-                      </div>
-                    </div>
+                  <div className="border-t border-white/[0.05] p-2">
+                    {visible.map((alert, index) => {
+                      const config = getAlertConfig(alert.type);
+                      const premiumKey = `${alert.cardId}-${group.key}-${index}`;
+                      const isOpen = Boolean(premiumOpen[premiumKey]);
+                      const premiumInsight = getPremiumAlertInsight(alert);
 
-                    <div className="mt-3">
+                      return (
+                        <div key={premiumKey} className="border-b border-white/[0.05] last:border-b-0">
+                          <button
+                            type="button"
+                            onClick={() =>
+                              setPremiumOpen((current) => ({
+                                ...current,
+                                [premiumKey]: !current[premiumKey],
+                              }))
+                            }
+                            className="flex w-full items-center gap-2 px-2 py-2 text-left"
+                          >
+                            <span
+                              className="h-1.5 w-1.5 shrink-0 rounded-full"
+                              style={{ background: config.accent }}
+                            />
+                            <span className="min-w-0 flex-1 truncate text-[10px] font-black text-white">
+                              {alert.cardName}
+                              {alert.cardNumber ? (
+                                <span className="ml-1 text-[9px] font-bold text-cyan-300">#{alert.cardNumber}</span>
+                              ) : null}
+                            </span>
+                            <span
+                              className="shrink-0 text-[10px] font-black tabular-nums"
+                              style={{ color: config.accent }}
+                            >
+                              {alert.changePercent > 0 ? "+" : ""}{alert.changePercent.toFixed(1)} %
+                            </span>
+                            <ChevronDown className={`h-3 w-3 shrink-0 text-zinc-500 transition ${isOpen ? "rotate-180" : ""}`} />
+                          </button>
+
+                          {isOpen ? (
+                            <div className="mx-2 mb-2 rounded-xl border border-amber-400/10 bg-black/10 px-3 py-2.5 text-[10px] leading-4">
+                              <p className="text-zinc-300">
+                                {alert.type === "RISE"
+                                  ? `Hausse de ${Math.abs(alert.changePercent).toFixed(2)} % sur 7 jours.`
+                                  : alert.type === "DROP"
+                                    ? `Baisse de ${Math.abs(alert.changePercent).toFixed(2)} % sur 7 jours.`
+                                    : `Signal de ${Math.abs(alert.changePercent).toFixed(2)} % à surveiller.`}
+                              </p>
+                              {hasPremiumAccess ? (
+                                <div className="mt-2 space-y-1.5 border-t border-amber-300/10 pt-2">
+                                  <p className="flex items-start gap-2 text-zinc-300">
+                                    <SearchCheck className="mt-0.5 h-3 w-3 shrink-0 text-amber-300" />
+                                    <span>Cause : <strong className="text-white">{premiumInsight.cause}</strong></span>
+                                  </p>
+                                  <p className="flex items-start gap-2 text-zinc-300">
+                                    <BrainCircuit className="mt-0.5 h-3 w-3 shrink-0 text-amber-300" />
+                                    <span>Lecture : <strong className="text-white">{premiumInsight.reading}</strong></span>
+                                  </p>
+                                  <p className="text-zinc-400">
+                                    Couverture : <strong className="text-white">{alert.dataCoverage} % · {alert.dataQualityLabel}</strong>
+                                  </p>
+                                </div>
+                              ) : null}
+                            </div>
+                          ) : null}
+                        </div>
+                      );
+                    })}
+
+                    {group.items.length > 5 ? (
                       <button
                         type="button"
-                        onClick={() => hasPremiumAccess && setPremiumOpen((current) => ({ ...current, [alert.cardId]: !current[alert.cardId] }))}
-                        aria-expanded={hasPremiumAccess ? Boolean(premiumOpen[alert.cardId]) : false}
-                        className={`flex w-full items-center justify-between rounded-xl border px-3 py-2 text-[10px] font-bold uppercase tracking-[0.11em] transition ${
-                          hasPremiumAccess
-                            ? "border-amber-400/20 bg-amber-400/[0.05] text-amber-300 hover:bg-amber-400/[0.09]"
-                            : "cursor-not-allowed border-white/[0.06] bg-white/[0.02] text-zinc-200"
-                        }`}
+                        onClick={() =>
+                          setExpandedGroups((current) => ({
+                            ...current,
+                            [group.key]: !current[group.key],
+                          }))
+                        }
+                        className="mt-1 flex w-full items-center justify-center gap-1 rounded-lg border border-white/[0.05] bg-white/[0.02] py-1.5 text-[9px] font-black text-zinc-300"
                       >
-                        <span className="flex items-center gap-2"><Crown className="h-3.5 w-3.5" /> Analyse Premium</span>
-                        <ChevronDown className={`h-3.5 w-3.5 transition-transform ${premiumOpen[alert.cardId] ? "rotate-180" : ""}`} />
+                        {showAll ? "Réduire la liste" : `Voir les ${group.items.length - 5} autres`}
+                        <ChevronDown className={`h-3 w-3 transition ${showAll ? "rotate-180" : ""}`} />
                       </button>
-
-                      {hasPremiumAccess && premiumOpen[alert.cardId] && (() => {
-                        const premiumInsight = getPremiumAlertInsight(alert);
-
-                        return (
-                          <div className="mt-2 space-y-2 rounded-xl border border-amber-400/10 bg-white/[0.035] px-3 py-2.5 text-[11px] leading-5">
-                            <p className="flex items-start gap-2 text-zinc-300"><SearchCheck className="mt-0.5 h-3.5 w-3.5 shrink-0 text-amber-300" /><span>Cause : <strong className="text-white">{premiumInsight.cause}</strong></span></p>
-                            <p className="flex items-start gap-2 text-zinc-300"><BrainCircuit className="mt-0.5 h-3.5 w-3.5 shrink-0 text-amber-300" /><span>Lecture : <strong className="text-white">{premiumInsight.reading}</strong></span></p>
-                            <p className="text-zinc-400">Couverture : <strong className="text-white">{alert.dataCoverage} % · {alert.dataQualityLabel}</strong></p>
-                            <p className="text-[10px] text-zinc-500">Base : {alert.evidence.join(" · ")}.</p>
-                          </div>
-                        );
-                      })()}
-                    </div>
+                    ) : null}
                   </div>
-                </article>
+                </div>
               );
             })}
           </div>
