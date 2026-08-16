@@ -21,7 +21,6 @@ import {
   CheckCircle2,
   Loader2,
   Grid2X2,
-  Images,
   Crown,
 } from "lucide-react";
 
@@ -1141,26 +1140,11 @@ export default function ScannerPage() {
               hasResult={Boolean(detectedCard)}
               statusText={status}
               quadSlots={quadProgress}
+              ready={ready}
+              onScan={handlePrimaryScan}
               mode={scanMode === "batch" && batchCaptureMode === "grouped" ? "quad" : scanMode === "batch" ? "batch" : "single"}
             />
           </div>
-
-          {/* BUTTON SCAN */}
-          <button
-            onClick={handlePrimaryScan}
-            disabled={!ready || scanning}
-            className="w-full rounded-2xl bg-gradient-to-r from-cyan-400 to-cyan-500 py-4 text-sm font-black uppercase tracking-widest text-[#031014] disabled:opacity-40 transition-all hover:brightness-110 active:scale-[0.985] shadow-[0_14px_35px_rgba(34,211,238,.18)] flex items-center justify-center gap-2"
-          >
-            {scanning ? (
-              <><Loader2 className="h-4 w-4 animate-spin" /> Analyse en cours...</>
-            ) : scanMode === "single" ? (
-              <>Scanner & Consulter</>
-            ) : batchCaptureMode === "grouped" ? (
-              <><Grid2X2 className="h-4 w-4" /> Capturer les 4 cartes</>
-            ) : (
-              <><Images className="h-4 w-4" /> Ajouter cette carte</>
-            )}
-          </button>
 
           {scanMode === "batch" && batchCaptureMode === "grouped" && (
             <section className="kt-premium-panel rounded-[18px] p-3.5">
