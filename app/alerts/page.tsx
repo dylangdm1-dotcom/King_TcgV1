@@ -16,6 +16,7 @@ BrainCircuit,
 ChartNoAxesCombined,
 SearchCheck,
 ShieldAlert,
+ShieldCheck,
 } from "lucide-react";
 
 import Navbar from "../../components/Navbar";
@@ -33,6 +34,7 @@ import { updateSignalSnapshot } from "../../lib/signalSnapshot";
 export default function AlertCenter() {
 const [alerts, setAlerts] = useState<PriceAlert[]>([]);
 const [loading, setLoading] = useState(true);
+const [rowOpen, setRowOpen] = useState<Record<string, boolean>>({});
 const [premiumOpen, setPremiumOpen] = useState<Record<string, boolean>>({});
 const [expandedGroups, setExpandedGroups] = useState<Record<string, boolean>>({});
 // Mode test V96 : accès Premium forcé jusqu’au branchement des vrais comptes.
@@ -443,7 +445,8 @@ return (
                     {visible.map((alert, index) => {
                       const config = getAlertConfig(alert.type);
                       const premiumKey = `${alert.cardId}-${group.key}-${index}`;
-                      const isOpen = Boolean(premiumOpen[premiumKey]);
+                      const isOpen = Boolean(rowOpen[premiumKey]);
+                      const premiumExpanded = Boolean(premiumOpen[premiumKey]);
                       const premiumInsight = getPremiumAlertInsight(alert);
 
                       return (
@@ -451,7 +454,7 @@ return (
                           <button
                             type="button"
                             onClick={() =>
-                              setPremiumOpen((current) => ({
+                              setRowOpen((current) => ({
                                 ...current,
                                 [premiumKey]: !current[premiumKey],
                               }))
@@ -478,52 +481,66 @@ return (
                           </button>
 
                           {isOpen ? (
-                            <div className="mx-2 mb-2 space-y-2 rounded-xl border border-white/[0.06] bg-black/10 px-3 py-2.5 text-[10px] leading-4">
-                              <div>
-                                <p className="text-[9px] font-black uppercase tracking-[0.1em] text-cyan-300">
-                                  Lecture Standard
-                                </p>
-                                <p className="mt-1 text-zinc-300">
+                            <div className="mx-2 mb-2 rounded-xl border border-white/[0.06] bg-[#0d141c]/80 p-2.5">
+                              <div className="grid grid-cols-[auto_1fr] items-center gap-2 rounded-lg border border-cyan-300/10 bg-cyan-400/[0.025] px-2.5 py-2">
+                                <Activity className="h-3.5 w-3.5 text-cyan-300" />
+                                <p className="text-[9px] leading-4 text-zinc-300">
                                   {alert.type === "RISE"
-                                    ? `Hausse de ${Math.abs(alert.changePercent).toFixed(2)} % sur 7 jours · signal positif à confirmer.`
+                                    ? `Hausse ${Math.abs(alert.changePercent).toFixed(1)} % · signal positif à confirmer.`
                                     : alert.type === "DROP"
-                                      ? `Baisse de ${Math.abs(alert.changePercent).toFixed(2)} % sur 7 jours · repli à surveiller.`
-                                      : `Signal de ${Math.abs(alert.changePercent).toFixed(2)} % · observation recommandée.`}
+                                      ? `Baisse ${Math.abs(alert.changePercent).toFixed(1)} % · repli à surveiller.`
+                                      : `Variation ${Math.abs(alert.changePercent).toFixed(1)} % · observation recommandée.`}
                                 </p>
                               </div>
 
-                              <div className="border-t border-amber-300/10 pt-2">
-                                <div className="flex items-center justify-between gap-2">
-                                  <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-300/30 bg-amber-300/[0.07] px-2 py-1 text-[8px] font-black uppercase tracking-[0.09em] text-amber-300">
-                                    <Crown className="h-3 w-3" />
-                                    Analyse Premium
-                                  </span>
-                                  {!hasPremiumAccess ? (
-                                    <span className="text-[8px] font-black uppercase text-zinc-500">Verrouillée</span>
-                                  ) : null}
-                                </div>
+                              <button
+                                type="button"
+                                onClick={() =>
+                                  hasPremiumAccess &&
+                                  setPremiumOpen((current) => ({
+                                    ...current,
+                                    [premiumKey]: !current[premiumKey],
+                                  }))
+                                }
+                                className={`mt-2 flex w-full items-center justify-between rounded-lg border px-2.5 py-2 text-[9px] font-black uppercase tracking-[0.08em] ${
+                                  hasPremiumAccess
+                                    ? "border-amber-300/25 bg-amber-300/[0.055] text-amber-300"
+                                    : "cursor-not-allowed border-amber-300/10 bg-amber-300/[0.02] text-amber-300/50"
+                                }`}
+                              >
+                                <span className="flex items-center gap-1.5">
+                                  <Crown className="h-3.5 w-3.5" />
+                                  Analyse Premium
+                                </span>
+                                <ChevronDown className={`h-3 w-3 transition ${premiumExpanded ? "rotate-180" : ""}`} />
+                              </button>
 
-                                {hasPremiumAccess ? (
-                                  <div className="mt-2 space-y-1.5">
-                                    <p className="flex items-start gap-2 text-zinc-300">
-                                      <SearchCheck className="mt-0.5 h-3 w-3 shrink-0 text-amber-300" />
-                                      <span>Cause : <strong className="text-white">{premiumInsight.cause}</strong></span>
-                                    </p>
-                                    <p className="flex items-start gap-2 text-zinc-300">
-                                      <BrainCircuit className="mt-0.5 h-3 w-3 shrink-0 text-amber-300" />
-                                      <span>Lecture : <strong className="text-white">{premiumInsight.reading}</strong></span>
-                                    </p>
-                                    <p className="text-zinc-400">
-                                      Couverture : <strong className="text-white">{alert.dataCoverage} % · {alert.dataQualityLabel}</strong>
-                                    </p>
-                                    <p className="text-[9px] text-zinc-500">Base : {alert.evidence.join(" · ")}.</p>
+                              {hasPremiumAccess && premiumExpanded ? (
+                                <div className="mt-2 grid gap-1.5 sm:grid-cols-3">
+                                  <div className="rounded-lg border border-amber-300/10 bg-amber-300/[0.025] p-2">
+                                    <div className="flex items-center gap-1.5 text-amber-300">
+                                      <SearchCheck className="h-3.5 w-3.5" />
+                                      <span className="text-[8px] font-black uppercase">Cause</span>
+                                    </div>
+                                    <p className="mt-1 text-[9px] leading-4 text-zinc-300">{premiumInsight.cause}</p>
                                   </div>
-                                ) : (
-                                  <p className="mt-2 text-[9px] leading-4 text-zinc-500">
-                                    Passez en Premium pour afficher la cause détaillée, la lecture King_TCG et la couverture des données.
-                                  </p>
-                                )}
-                              </div>
+                                  <div className="rounded-lg border border-amber-300/10 bg-amber-300/[0.025] p-2">
+                                    <div className="flex items-center gap-1.5 text-amber-300">
+                                      <BrainCircuit className="h-3.5 w-3.5" />
+                                      <span className="text-[8px] font-black uppercase">Lecture</span>
+                                    </div>
+                                    <p className="mt-1 text-[9px] leading-4 text-zinc-300">{premiumInsight.reading}</p>
+                                  </div>
+                                  <div className="rounded-lg border border-amber-300/10 bg-amber-300/[0.025] p-2">
+                                    <div className="flex items-center gap-1.5 text-amber-300">
+                                      <ShieldCheck className="h-3.5 w-3.5" />
+                                      <span className="text-[8px] font-black uppercase">Confiance</span>
+                                    </div>
+                                    <p className="mt-1 text-[10px] font-black text-white">{alert.dataCoverage} %</p>
+                                    <p className="text-[8px] text-zinc-500">{alert.dataQualityLabel}</p>
+                                  </div>
+                                </div>
+                              ) : null}
                             </div>
                           ) : null}
                         </div>
