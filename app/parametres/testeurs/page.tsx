@@ -42,6 +42,19 @@ const partners = [
       { label: "Instagram · @noeunoeuf_tcg", href: "https://www.instagram.com/noeunoeuf_tcg", icon: Instagram },
     ],
   },
+  {
+    name: "Jupar59",
+    logo: "/partners/jupar59.jpg",
+    role: "Partenaire & collaborateur",
+    platform: "Whatnot & Instagram",
+    description:
+      "Toujours à l’affût des petits détails, il teste chaque nouveauté et nous partage ses retours pour améliorer l’expérience utilisateur.",
+    accent: "violet" as const,
+    links: [
+      { label: "Whatnot · Jupar59", href: "https://www.whatnot.com/s/gVcuhNuw", icon: Video },
+      { label: "Instagram · @jupar59_tcg", href: "https://www.instagram.com/jupar59_tcg", icon: Instagram },
+    ],
+  },
 ];
 
 const metrics = [
@@ -86,6 +99,18 @@ export default function TesteursPage() {
             <div className="grid gap-3 lg:grid-cols-2">
               {partners.map((partner) => {
                 const green = partner.accent === "green";
+                const violet = partner.accent === "violet";
+                const accentBadge = violet
+                  ? "border-violet-400/35 bg-violet-400/[0.08] text-violet-300"
+                  : green
+                    ? "border-emerald-400/35 bg-emerald-400/[0.08] text-emerald-300"
+                    : "border-cyan-400/35 bg-cyan-400/[0.08] text-cyan-300";
+                const accentText = violet ? "text-violet-300" : green ? "text-emerald-300" : "text-cyan-300";
+                const accentLink = violet
+                  ? "border-violet-400/22 text-violet-200 hover:border-violet-300/45"
+                  : green
+                    ? "border-emerald-400/22 text-emerald-200 hover:border-emerald-300/45"
+                    : "border-cyan-400/22 text-cyan-200 hover:border-cyan-300/45";
                 return (
                   <article
                     key={partner.name}
@@ -94,29 +119,41 @@ export default function TesteursPage() {
                   > 
                     <div className="flex flex-col items-center gap-4">
                       <div className="kt-partner-logo-ring flex h-36 w-36 shrink-0 items-center justify-center overflow-hidden rounded-full bg-black p-1.5" data-accent={partner.accent}>
-                        <img src={partner.logo} alt={`Logo ${partner.name}`} className="h-full w-full rounded-full object-cover object-center" />
+                        {partner.logo ? (
+                          <img src={partner.logo} alt={`Logo ${partner.name}`} className="h-full w-full rounded-full object-cover object-center" />
+                        ) : (
+                          <div className="flex h-full w-full flex-col items-center justify-center rounded-full bg-violet-400/[0.06] text-violet-200">
+                            <Users className="h-8 w-8" />
+                            <span className="mt-1 text-[8px] font-black uppercase tracking-[0.08em]">Photo à venir</span>
+                          </div>
+                        )}
                       </div>
 
                       <div className="min-w-0 w-full">
                         <div className="flex flex-wrap items-center justify-center gap-2">
                           <h3 className="text-[18px] font-black tracking-tight text-white">{partner.name}</h3>
-                          <span className={`rounded-md border px-2 py-1 text-[9px] font-bold ${green ? "border-emerald-400/35 bg-emerald-400/[0.08] text-emerald-300" : "border-cyan-400/35 bg-cyan-400/[0.08] text-cyan-300"}`}>
+                          <span className={`rounded-md border px-2 py-1 text-[9px] font-bold ${accentBadge}`}>
                             Partenaire officiel
                           </span>
                         </div>
-                        <p className={`mt-2 text-[11px] font-semibold ${green ? "text-emerald-300" : "text-cyan-300"}`}>
+                        <p className={`mt-2 text-[11px] font-semibold ${accentText}`}>
                           {partner.role} <span className="px-1 text-cyan-300">•</span> <span className="text-zinc-200">{partner.platform}</span>
                         </p>
-                        <p className="mx-auto mt-2 max-w-md text-[11px] leading-[1.6] text-zinc-300">{partner.description}</p>
+                        <p className="mx-auto mt-2 max-w-md text-[11px] leading-[1.6] text-zinc-300">{partner.description || "Description du partenaire à compléter."}</p>
 
                         <div className="mt-4 flex flex-wrap justify-center gap-2">
                           {partner.links.map(({ label, href, icon: Icon }) => (
-                            <a key={href} href={href} target="_blank" rel="noopener noreferrer" className={`flex max-w-full items-center gap-2 rounded-lg border bg-[#0b141d] px-3 py-2 text-[10px] font-semibold transition ${green ? "border-emerald-400/22 text-emerald-200 hover:border-emerald-300/45" : "border-cyan-400/22 text-cyan-200 hover:border-cyan-300/45"}`}>
+                            <a key={href} href={href} target="_blank" rel="noopener noreferrer" className={`flex max-w-full items-center gap-2 rounded-lg border bg-[#0b141d] px-3 py-2 text-[10px] font-semibold transition ${accentLink}`}>
                               <Icon className="h-3.5 w-3.5 shrink-0" />
                               <span className="truncate">{label}</span>
                               <ExternalLink className="h-3 w-3 shrink-0 text-zinc-400" />
                             </a>
                           ))}
+                          {partner.links.length === 0 ? (
+                            <span className="rounded-lg border border-violet-400/18 bg-violet-400/[0.035] px-3 py-2 text-[10px] font-semibold text-violet-300/75">
+                              Liens à venir
+                            </span>
+                          ) : null}
                         </div>
                       </div>
                     </div>
