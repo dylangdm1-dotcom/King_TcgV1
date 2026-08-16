@@ -14,8 +14,6 @@ import {
   Download,
   ExternalLink,
   Zap,
-  ChevronUp,
-  ChevronDown,
   ShieldCheck,
   RefreshCw,
   Camera,
@@ -163,7 +161,6 @@ export default function ScannerPage() {
   const [batchCaptureMode, setBatchCaptureMode] = useState<"individual" | "grouped">("individual");
   const [groupedLanguage, setGroupedLanguage] = useState<"fr" | "en" | "ja" | "zh-tw">("fr");
   const [batchList, setBatchList] = useState<ScannedBatchItem[]>([]);
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [quotaUsed, setQuotaUsed] = useState(0);
   const [quotaEnd, setQuotaEnd] = useState("");
   const [batchQuotaConsumed, setBatchQuotaConsumed] = useState(false);
@@ -182,20 +179,7 @@ export default function ScannerPage() {
             ...item,
             scannedAt: new Date(item.scannedAt),
           }));
-          const restoredQuad = restoredItems.some((item: ScannedBatchItem) =>
-            typeof item.quadSlot === "number"
-          );
-
           setBatchList(restoredItems);
-          setScanMode("batch");
-          setBatchCaptureMode(restoredQuad ? "grouped" : "individual");
-          setModeSelected(true);
-          setIsDrawerOpen(true);
-          setStatus(
-            restoredQuad
-              ? "Session Quad restaurée : vos résultats précédents sont toujours disponibles."
-              : "Session Batch restaurée : vos résultats précédents sont toujours disponibles."
-          );
         }
       }
       setBatchQuotaConsumed(window.localStorage.getItem(SCANNER_BATCH_QUOTA_KEY) === "1");
@@ -289,7 +273,6 @@ export default function ScannerPage() {
       return [item, ...prev.filter((existing) => existing.quadSlot !== quadSlot)]
         .slice(0, SCANNER_BATCH_LIMIT);
     });
-    setIsDrawerOpen(true);
     setStatus(`Quad : carte ${slot + 1} identifiée — ${card.name}`);
   }, []);
 
@@ -319,8 +302,7 @@ export default function ScannerPage() {
           setStatus("Quota gratuit atteint. Renouvellement le 5 du mois.");
           return;
         }
-        setIsDrawerOpen(true);
-        setStatus(`Quad terminé : ${cards.length} carte(s) reconnue(s).`);
+            setStatus(`Quad terminé : ${cards.length} carte(s) reconnue(s).`);
         triggerHaptic(60);
         return;
       }
@@ -406,8 +388,7 @@ export default function ScannerPage() {
     }
     if (scanMode === "batch" && batchList.length >= SCANNER_BATCH_LIMIT) {
       setStatus("Session batch pleine (4/4). Videz la session pour recommencer.");
-      setIsDrawerOpen(true);
-      return;
+        return;
     }
 
     const video = cameraRef.current.getVideo();
@@ -620,8 +601,7 @@ export default function ScannerPage() {
         };
 
         setBatchList((prev) => [batchItem, ...prev].slice(0, SCANNER_BATCH_LIMIT));
-        setIsDrawerOpen(true);
-        logger.scan("Carte ajoutée au batch V5.");
+            logger.scan("Carte ajoutée au batch V5.");
       }
     } catch (error: any) {
       logger.error("SCAN", "Erreur scan V5", error);
@@ -868,8 +848,7 @@ export default function ScannerPage() {
     }
     if (scanMode === "batch" && batchList.length >= SCANNER_BATCH_LIMIT) {
       setStatus("Session batch pleine (4/4). Videz la session pour recommencer.");
-      setIsDrawerOpen(true);
-      return;
+        return;
     }
     if (scanMode === "batch" && batchCaptureMode === "grouped") {
       if (!cameraRef.current || scanning) return;
@@ -964,7 +943,10 @@ export default function ScannerPage() {
                   <span className="mt-1.5 block text-[10px] font-black uppercase tracking-[0.09em] text-cyan-300">
                     Mono
                   </span>
-                  <span className="mt-2 block text-[7px] font-bold leading-3 text-zinc-300">
+                  <span className="mx-auto mt-1 inline-flex items-center justify-center rounded-full border border-cyan-300/30 bg-cyan-300/[0.08] px-1.5 py-0.5 text-[6px] font-black uppercase tracking-[0.06em] text-cyan-300">
+                    Normal
+                  </span>
+                  <span className="mt-1.5 block text-[7px] font-bold leading-3 text-zinc-300">
                     Identification directe
                   </span>
                 </button>
@@ -1032,28 +1014,41 @@ export default function ScannerPage() {
           {modeSelected ? (
             <>
           <section>
-            <PremiumCard className="p-4 text-left">
-              <div className="flex items-start gap-3">
-                <div className="rounded-xl bg-cyan-400/[0.08] p-2 text-cyan-300">
-                  <Camera className="h-4 w-4" />
+            <PremiumCard className="p-4">
+              <div className="flex items-start justify-between gap-3">
+                <div className="min-w-0">
+                  <div className="flex items-center gap-1.5">
+                    {scanMode === "single" ? (
+                      <Zap className="h-3.5 w-3.5 text-cyan-300" />
+                    ) : (
+                      <Crown className="h-3.5 w-3.5 text-amber-300" />
+                    )}
+                    <p className={`text-[10px] font-black uppercase tracking-[0.16em] ${
+                      scanMode === "single" ? "text-cyan-300" : "text-amber-300"
+                    }`}>
+                      {scanMode === "single" ? "Mode Normal" : "Mode Premium"}
+                    </p>
+                  </div>
+                  <h2 className="mt-1 truncate text-sm font-black text-white">
+                    {scanMode === "single"
+                      ? "Mono · Scan"
+                      : batchCaptureMode === "grouped"
+                        ? "Quadra Scan"
+                        : "Batch · Scan multiples"}
+                  </h2>
+                  <p className="mt-1 text-[10px] leading-4 text-zinc-100">
+                    {scanMode === "single"
+                      ? "Scannez une carte dans les langues disponibles dans l’application."
+                      : batchCaptureMode === "grouped"
+                        ? "Capturez jusqu’à 4 cartes sur une seule photo."
+                        : "Scannez jusqu’à 4 cartes à la suite dans la même session."}
+                  </p>
                 </div>
-                <PremiumSectionHeading
-                  eyebrow="Prise en main"
-                  title={
-                    scanMode === "single"
-                      ? "Mono · une carte, une fiche complète"
-                      : batchCaptureMode === "grouped"
-                        ? "Quad · quatre cartes sur une seule photo"
-                        : "Batch · jusqu’à quatre cartes à la suite"
-                  }
-                  description={
-                    scanMode === "single"
-                      ? "Cadrez une carte entière pour l’identifier puis ouvrir sa fiche marché."
-                      : batchCaptureMode === "grouped"
-                        ? "Placez quatre cartes dans les zones prévues pour lancer une analyse simultanée."
-                        : "Scannez les cartes une par une dans la même session, jusqu’à quatre cartes."
-                  }
-                />
+                <div className="shrink-0 whitespace-nowrap">
+                  <PremiumBadge tone={scanMode === "single" ? "cyan" : "violet"}>
+                    {scanMode === "single" ? "Mono" : `${batchList.length}/4`}
+                  </PremiumBadge>
+                </div>
               </div>
             </PremiumCard>
           </section>
@@ -1339,114 +1334,103 @@ export default function ScannerPage() {
           )}
         </div>
 
-        {/* =====================================================
-            DRAWER BATCH V5
-        ===================================================== */}
-        {modeSelected && scanMode === "batch" && (
-          <div
-            className={`fixed bottom-0 left-0 right-0 z-50 bg-neutral-950 border-t border-zinc-800 transition-all duration-300 shadow-2xl ${
-              isDrawerOpen ? "h-[65vh]" : "h-14"
-            }`}
-          >
-            <button
-              onClick={() => setIsDrawerOpen(!isDrawerOpen)}
-              className="w-full h-14 bg-neutral-900/90 border-b border-zinc-800 px-4 flex items-center justify-between text-xs font-black uppercase tracking-wider text-white"
-            >
-              <div className="flex items-center gap-2">
-                <Layers className="w-4 h-4 text-cyan-400" />
-                <span>Session de Scan ({batchList.length}/{SCANNER_BATCH_LIMIT})</span>
-              </div>
-
-              {isDrawerOpen ? (
-                <ChevronDown className="w-4 h-4 text-cyan-400" />
-              ) : (
-                <ChevronUp className="w-4 h-4" />
-              )}
-            </button>
-
-            {isDrawerOpen && (
-              <div className="p-4 h-[calc(65vh-3.5rem)] flex flex-col justify-between overflow-hidden">
-                {batchList.length > 0 && (
-                  <div className="flex items-center justify-between mb-3 pb-2.5 border-b border-white/[0.06]">
-                    <button
-                      onClick={exportBatch}
-                      className="text-[10px] font-bold uppercase tracking-[0.11em] text-cyan-400 bg-cyan-500/10 px-3 py-1.5 rounded-lg border border-cyan-500/20 flex items-center gap-1.5"
-                    >
-                      <Download className="w-3.5 h-3.5" />
-                      Exporter JSON
-                    </button>
-
-                    <button
-                      onClick={clearBatch}
-                      className="text-[10px] font-bold uppercase tracking-[0.11em] text-red-400 bg-red-500/10 px-3 py-1.5 rounded-lg border border-red-500/20 flex items-center gap-1.5"
-                    >
-                      <Trash2 className="w-3.5 h-3.5" />
-                      Vider
-                    </button>
+        {modeSelected && scanMode === "batch" && batchList.length > 0 ? (
+          <section className="mt-4">
+            <PremiumCard className="p-4">
+              <div className="flex items-center justify-between gap-3">
+                <div className="min-w-0">
+                  <div className="flex items-center gap-2">
+                    {batchCaptureMode === "grouped" ? (
+                      <Grid2X2 className="h-4 w-4 text-violet-300" />
+                    ) : (
+                      <Layers className="h-4 w-4 text-sky-300" />
+                    )}
+                    <p className="text-[10px] font-black uppercase tracking-[0.14em] text-white">
+                      {batchCaptureMode === "grouped" ? "Résultats Quad" : "Résultats Batch"}
+                    </p>
                   </div>
-                )}
+                  <p className="mt-1 text-[10px] text-zinc-300">
+                    {batchList.length}/{SCANNER_BATCH_LIMIT} carte{batchList.length > 1 ? "s" : ""} conservée{batchList.length > 1 ? "s" : ""} dans la session.
+                  </p>
+                </div>
 
-                <div className="flex-1 overflow-y-auto space-y-2 pr-1">
-                  {batchList.length === 0 ? (
-                    <div className="h-full flex flex-col items-center justify-center text-center text-zinc-200 space-y-2">
-                      <Layers className="w-8 h-8 opacity-40" />
-                      <p className="text-xs uppercase font-bold">
-                        Aucune carte scannée
-                      </p>
-                    </div>
-                  ) : (
-                    batchList.map((item) => (
-                      <div
-                        key={item.id}
-                        className="flex items-center justify-between bg-neutral-900/60 border border-white/[0.06] rounded-xl p-2.5"
-                      >
-                        <div className="flex items-center gap-3">
-                          {item.card.images?.small && (
-                            <div className="relative w-10 h-14 rounded-lg overflow-hidden bg-neutral-800 flex-shrink-0">
-                              <Image
-                                src={item.card.images.small}
-                                alt={item.card.name}
-                                fill
-                                className="object-cover"
-                              />
-                            </div>
-                          )}
-                          <div>
-                            <h4 className="text-xs font-black uppercase text-white">
-                              {item.card.name}
-                            </h4>
-                            <p className="text-[10px] text-zinc-100">
-                              N° {item.card.number} • {item.card.set?.name}
-                            </p>
-                          </div>
-                        </div>
-
-                        <div className="flex items-center gap-1">
-                          <button
-                            type="button"
-                            onClick={() => router.push(`/card/${item.card.id}`)}
-                            className="p-2 text-cyan-400 hover:text-cyan-300 transition-colors"
-                            aria-label="Ouvrir la fiche"
-                          >
-                            <ExternalLink className="w-4 h-4" />
-                          </button>
-                          <button
-                            type="button"
-                            onClick={() => removeBatchItem(item.id)}
-                            className="p-2 text-zinc-200 hover:text-red-400 transition-colors"
-                            aria-label="Supprimer de la session"
-                          >
-                            <Trash2 className="w-4 h-4" />
-                          </button>
-                        </div>
-                      </div>
-                    ))
-                  )}
+                <div className="flex shrink-0 items-center gap-1.5">
+                  <button
+                    type="button"
+                    onClick={exportBatch}
+                    className="inline-flex items-center gap-1 rounded-lg border border-cyan-300/18 bg-cyan-400/[0.05] px-2 py-1.5 text-[8px] font-black uppercase text-cyan-300"
+                  >
+                    <Download className="h-3 w-3" />
+                    Export
+                  </button>
+                  <button
+                    type="button"
+                    onClick={clearBatch}
+                    className="inline-flex items-center gap-1 rounded-lg border border-rose-300/18 bg-rose-400/[0.05] px-2 py-1.5 text-[8px] font-black uppercase text-rose-300"
+                  >
+                    <Trash2 className="h-3 w-3" />
+                    Vider
+                  </button>
                 </div>
               </div>
-            )}
-          </div>
-        )}
+
+              <div className="mt-3 space-y-2">
+                {batchList.map((item) => (
+                  <div
+                    key={item.id}
+                    className="flex items-center justify-between gap-3 rounded-xl border border-white/[0.06] bg-white/[0.02] p-2.5"
+                  >
+                    <div className="flex min-w-0 items-center gap-3">
+                      {item.card.images?.small ? (
+                        <div className="relative h-14 w-10 shrink-0 overflow-hidden rounded-lg bg-neutral-800">
+                          <Image
+                            src={item.card.images.small}
+                            alt={item.card.name}
+                            fill
+                            className="object-cover"
+                          />
+                        </div>
+                      ) : null}
+
+                      <div className="min-w-0">
+                        <h4 className="truncate text-xs font-black uppercase text-white">
+                          {item.card.name}
+                        </h4>
+                        <p className="truncate text-[10px] text-zinc-300">
+                          N° {item.card.number} • {item.card.set?.name}
+                        </p>
+                        {typeof item.quadSlot === "number" ? (
+                          <p className="mt-0.5 text-[9px] font-bold text-violet-300">
+                            Zone Quad {item.quadSlot + 1}
+                          </p>
+                        ) : null}
+                      </div>
+                    </div>
+
+                    <div className="flex shrink-0 items-center gap-1">
+                      <button
+                        type="button"
+                        onClick={() => router.push(`/card/${item.card.id}`)}
+                        className="rounded-lg p-2 text-cyan-400 transition-colors hover:bg-cyan-400/[0.05] hover:text-cyan-300"
+                        aria-label="Ouvrir la fiche"
+                      >
+                        <ExternalLink className="h-4 w-4" />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => removeBatchItem(item.id)}
+                        className="rounded-lg p-2 text-zinc-400 transition-colors hover:bg-rose-400/[0.05] hover:text-rose-400"
+                        aria-label="Supprimer de la session"
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </PremiumCard>
+          </section>
+        ) : null}
       </main>
     </>
   );
