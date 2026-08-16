@@ -175,6 +175,22 @@ export default function OpportunityPage() {
     (opportunity) => opportunity.recommendation === "SELL"
   );
 
+  const strongVariation = hold
+    .filter((opportunity) => Math.abs(opportunity.trend) >= 5)
+    .sort((a, b) => Math.abs(b.trend) - Math.abs(a.trend));
+
+  const watch = hold
+    .filter((opportunity) => Math.abs(opportunity.trend) < 5)
+    .sort((a, b) => b.score - a.score);
+
+  const sortedBuy = [...buy].sort(
+    (a, b) => b.score - a.score || Math.abs(b.trend) - Math.abs(a.trend)
+  );
+
+  const sortedSell = [...sell].sort(
+    (a, b) => Math.abs(b.trend) - Math.abs(a.trend) || b.score - a.score
+  );
+
   return (
     <>
       <Navbar />
@@ -206,48 +222,55 @@ export default function OpportunityPage() {
             </div>
           </section>
 
-          {/* SUMMARY */}
-          <section className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-
+          {/* SUMMARY — synthèse compacte pour les grosses collections */}
+          <section className="grid grid-cols-2 gap-2.5 lg:grid-cols-4">
             <SummaryCard
-              icon={<ShoppingCart className="h-5 w-5" />}
-              label="Signaux d'achat"
-              value={buy.length}
-              description="Opportunités détectées"
+              icon={<ShoppingCart className="h-4 w-4" />}
+              label="Opportunités"
+              value={sortedBuy.length}
+              description="signaux positifs"
               className="border-emerald-500/10 bg-emerald-500/[0.035]"
               iconClass="bg-emerald-500/10 text-emerald-400"
               valueClass="text-emerald-400"
             />
 
             <SummaryCard
-              icon={<Eye className="h-5 w-5" />}
-              label="Sous observation"
-              value={hold.length}
-              description="Signaux mesurables à surveiller"
-              className="border-amber-500/10 bg-amber-500/[0.035]"
-              iconClass="bg-amber-500/10 text-amber-400"
-              valueClass="text-amber-400"
-            />
-
-            <SummaryCard
-              icon={<TrendingDown className="h-5 w-5" />}
-              label="Signaux de vente"
-              value={sell.length}
-              description="Cartes à arbitrer"
+              icon={<TrendingDown className="h-4 w-4" />}
+              label="Signal de baisse"
+              value={sortedSell.length}
+              description="cartes concernées"
               className="border-rose-500/10 bg-rose-500/[0.035]"
               iconClass="bg-rose-500/10 text-rose-400"
               valueClass="text-rose-400"
             />
 
-          </section>
+            <SummaryCard
+              icon={<Activity className="h-4 w-4" />}
+              label="Fortes variations"
+              value={strongVariation.length}
+              description="à surveiller"
+              className="border-orange-400/10 bg-orange-400/[0.035]"
+              iconClass="bg-orange-400/10 text-orange-300"
+              valueClass="text-orange-300"
+            />
 
+            <SummaryCard
+              icon={<Eye className="h-4 w-4" />}
+              label="Observation"
+              value={watch.length}
+              description="signaux modérés"
+              className="border-amber-500/10 bg-amber-500/[0.035]"
+              iconClass="bg-amber-500/10 text-amber-400"
+              valueClass="text-amber-400"
+            />
+          </section>
 
           {/* LÉGENDE COULEURS */}
           <section className="grid grid-cols-2 gap-2 text-[9px] font-bold">
-            <span className="flex min-h-9 items-center justify-center gap-2 rounded-xl border border-emerald-300/[0.46] bg-emerald-400/[0.07] px-2.5 text-center text-emerald-300"><span className="h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400" />Achat · potentiel positif</span>
-            <span className="flex min-h-9 items-center justify-center gap-2 rounded-xl border border-amber-300/[0.46] bg-amber-400/[0.07] px-2.5 text-center text-amber-300"><span className="h-1.5 w-1.5 shrink-0 rounded-full bg-amber-400" />Sous observation</span>
-            <span className="flex min-h-9 items-center justify-center gap-2 rounded-xl border border-rose-300/[0.46] bg-rose-400/[0.07] px-2.5 text-center text-rose-300"><span className="h-1.5 w-1.5 shrink-0 rounded-full bg-rose-400" />Vente · risque</span>
-            <span className="flex min-h-9 items-center justify-center gap-2 rounded-xl border border-cyan-300/[0.46] bg-cyan-400/[0.07] px-2.5 text-center text-cyan-300"><span className="h-1.5 w-1.5 shrink-0 rounded-full bg-cyan-400" />Information marché</span>
+            <span className="flex min-h-9 items-center justify-center gap-2 rounded-xl border border-emerald-300/[0.38] bg-emerald-400/[0.06] px-2.5 text-center text-emerald-300"><span className="h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400" />Opportunité détectée</span>
+            <span className="flex min-h-9 items-center justify-center gap-2 rounded-xl border border-rose-300/[0.38] bg-rose-400/[0.06] px-2.5 text-center text-rose-300"><span className="h-1.5 w-1.5 shrink-0 rounded-full bg-rose-400" />Signal de baisse</span>
+            <span className="flex min-h-9 items-center justify-center gap-2 rounded-xl border border-orange-300/[0.38] bg-orange-400/[0.06] px-2.5 text-center text-orange-300"><span className="h-1.5 w-1.5 shrink-0 rounded-full bg-orange-400" />Forte variation</span>
+            <span className="flex min-h-9 items-center justify-center gap-2 rounded-xl border border-amber-300/[0.38] bg-amber-400/[0.06] px-2.5 text-center text-amber-300"><span className="h-1.5 w-1.5 shrink-0 rounded-full bg-amber-400" />À surveiller</span>
           </section>
 
           {/* ALERTES */}
@@ -267,120 +290,55 @@ export default function OpportunityPage() {
             </div>
 
             {alerts.length === 0 ? (
-              <div className="kt-subpanel p-5">
-                <div className="flex items-start gap-3">
-                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-zinc-800/60 text-zinc-200">
-                    <Activity className="h-4 w-4" />
-                  </div>
-
-                  <div>
-                    <p className="text-sm font-semibold text-zinc-300">
-                      Aucune alerte majeure
-                    </p>
-
-                    <p className="mt-1 text-xs leading-5 text-zinc-200">
-                      Aucune anomalie importante n&apos;a été détectée
-                      sur les actifs actuellement analysés.
-                    </p>
-                  </div>
-                </div>
+              <div className="kt-subpanel p-4">
+                <p className="text-[11px] font-bold text-zinc-300">Aucune alerte majeure détectée.</p>
               </div>
             ) : (
-              <div className="space-y-2">
-                {alerts.map((alert, index) => {
-                  const alertStyles =
-                    alert.type === "BUY"
-                      ? "border-emerald-500/20 bg-emerald-500/[0.06] text-emerald-400"
-                      : alert.type === "SELL"
-                        ? "border-rose-500/20 bg-rose-500/[0.06] text-rose-400"
-                        : "border-amber-500/20 bg-amber-500/[0.06] text-amber-400";
-
-                  return (
-                    <div
-                      key={`${alert.type}-${index}`}
-                      className={`rounded-[15px] border p-3.5 shadow-[0_12px_30px_rgba(0,0,0,.16)] sm:p-4 ${alertStyles}`}
-                    >
-                      <div className="flex items-start gap-3">
-                        <div className="mt-0.5 shrink-0">
-                          {alert.type === "BUY" ? (
-                            <ArrowUpRight className="h-4 w-4" />
-                          ) : alert.type === "SELL" ? (
-                            <ArrowDownRight className="h-4 w-4" />
-                          ) : (
-                            <Activity className="h-4 w-4" />
-                          )}
-                        </div>
-
-                        <p className="min-w-0 text-xs font-semibold leading-5 sm:text-sm">
-                          {alert.message}
-                        </p>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
+              <CompactInstantAlerts alerts={alerts} />
             )}
           </section>
 
-          {/* OPPORTUNITÉS */}
-          <div className="space-y-7">
+          {/* OPPORTUNITÉS — groupes compacts, détails à la demande */}
+          <div className="space-y-4">
+            {sortedBuy.length > 0 ? (
+              <CompactOpportunityGroup
+                title="Opportunités détectées"
+                subtitle="Meilleurs signaux positifs"
+                items={sortedBuy}
+                tone="emerald"
+                icon="up"
+              />
+            ) : null}
 
-            {/* BUY */}
-            {buy.length > 0 && (
-              <OpportunitySection
-                title="Signaux d'achat"
-                subtitle="Cartes présentant les meilleures opportunités"
-                color="emerald"
-                dotClass="bg-emerald-500"
-              >
-                {buy.map((op) => (
-                  <OpportunityCard
-                    key={op.id}
-                    op={op}
-                    borderClass="border-emerald-500/20"
-                    scoreClass="text-emerald-400 bg-emerald-500/[0.07] border-emerald-500/15"
-                  />
-                ))}
-              </OpportunitySection>
-            )}
+            {sortedSell.length > 0 ? (
+              <CompactOpportunityGroup
+                title="Cartes en signal de baisse"
+                subtitle="Les baisses les plus marquées en premier"
+                items={sortedSell}
+                tone="rose"
+                icon="down"
+              />
+            ) : null}
 
-            {/* HOLD */}
-            {hold.length > 0 && (
-              <OpportunitySection
-                title="Sous observation"
-                subtitle="Cartes avec un signal marché réel, mais sans décision forte"
-                color="amber"
-                dotClass="bg-amber-500"
-              >
-                {hold.map((op) => (
-                  <OpportunityCard
-                    key={op.id}
-                    op={op}
-                    borderClass="border-amber-500/10"
-                    scoreClass="text-amber-400 bg-amber-500/[0.07] border-amber-500/15"
-                  />
-                ))}
-              </OpportunitySection>
-            )}
+            {strongVariation.length > 0 ? (
+              <CompactOpportunityGroup
+                title="Cartes à fortes variations"
+                subtitle="Prix très mobiles, à contrôler avant décision"
+                items={strongVariation}
+                tone="orange"
+                icon="activity"
+              />
+            ) : null}
 
-            {/* SELL */}
-            {sell.length > 0 && (
-              <OpportunitySection
-                title="Signaux de vente"
-                subtitle="Cartes présentant un signal de sortie"
-                color="rose"
-                dotClass="bg-rose-500"
-              >
-                {sell.map((op) => (
-                  <OpportunityCard
-                    key={op.id}
-                    op={op}
-                    borderClass="border-rose-500/20"
-                    scoreClass="text-rose-400 bg-rose-500/[0.07] border-rose-500/15"
-                  />
-                ))}
-              </OpportunitySection>
-            )}
+            {watch.length > 0 ? (
+              <CompactOpportunityGroup
+                title="Cartes à surveiller"
+                subtitle="Signaux mesurables mais encore modérés"
+                items={watch}
+                tone="amber"
+                icon="eye"
+              />
+            ) : null}
 
             {/* EMPTY */}
             {opportunities.length === 0 && (
@@ -459,50 +417,174 @@ function SummaryCard({
   );
 }
 
-function OpportunitySection({
+function CompactInstantAlerts({
+  alerts,
+}: {
+  alerts: ReturnType<typeof getAlerts>;
+}) {
+  const [showAll, setShowAll] = useState(false);
+  const sorted = [...alerts].sort((a, b) => {
+    const rank = (type: string) => type === "SELL" ? 0 : type === "BUY" ? 1 : 2;
+    return rank(a.type) - rank(b.type);
+  });
+  const visible = showAll ? sorted : sorted.slice(0, 5);
+
+  return (
+    <div className="rounded-[16px] border border-cyan-300/10 bg-cyan-400/[0.025] p-3">
+      <div className="space-y-1.5">
+        {visible.map((alert, index) => {
+          const tone =
+            alert.type === "SELL"
+              ? "text-rose-300"
+              : alert.type === "BUY"
+                ? "text-emerald-300"
+                : "text-amber-300";
+          return (
+            <div key={`${alert.type}-${index}`} className="flex items-start gap-2 rounded-lg border border-white/[0.05] bg-black/10 px-2.5 py-2">
+              {alert.type === "SELL" ? (
+                <ArrowDownRight className="mt-0.5 h-3.5 w-3.5 shrink-0 text-rose-300" />
+              ) : alert.type === "BUY" ? (
+                <ArrowUpRight className="mt-0.5 h-3.5 w-3.5 shrink-0 text-emerald-300" />
+              ) : (
+                <Activity className="mt-0.5 h-3.5 w-3.5 shrink-0 text-amber-300" />
+              )}
+              <p className={`min-w-0 text-[10px] font-bold leading-4 ${tone}`}>{alert.message}</p>
+            </div>
+          );
+        })}
+      </div>
+      {sorted.length > 5 ? (
+        <button
+          type="button"
+          onClick={() => setShowAll((value) => !value)}
+          className="mt-2 flex w-full items-center justify-center gap-1 rounded-lg border border-white/[0.06] bg-white/[0.02] py-1.5 text-[9px] font-black text-zinc-300"
+        >
+          {showAll ? "Réduire" : `Voir les ${sorted.length - 5} autres`}
+          <ChevronDown className={`h-3 w-3 transition ${showAll ? "rotate-180" : ""}`} />
+        </button>
+      ) : null}
+    </div>
+  );
+}
+
+function CompactOpportunityGroup({
   title,
   subtitle,
-  children,
-  color,
-  dotClass,
+  items,
+  tone,
+  icon,
 }: {
   title: string;
   subtitle: string;
-  children: React.ReactNode;
-  color: "emerald" | "amber" | "rose";
-  dotClass: string;
+  items: Opportunity[];
+  tone: "emerald" | "rose" | "orange" | "amber";
+  icon: "up" | "down" | "activity" | "eye";
 }) {
-  const titleClass =
-    color === "emerald"
-      ? "text-emerald-400"
-      : color === "amber"
-        ? "text-amber-400"
-        : "text-rose-400";
+  const [showAll, setShowAll] = useState(false);
+  const [expandedId, setExpandedId] = useState<string | null>(null);
+  const visible = showAll ? items : items.slice(0, 5);
+
+  const toneClasses = {
+    emerald: {
+      border: "border-emerald-300/16",
+      bg: "bg-emerald-400/[0.025]",
+      text: "text-emerald-300",
+      row: "border-emerald-300/10",
+      score: "text-emerald-300 bg-emerald-400/[0.06] border-emerald-300/15",
+    },
+    rose: {
+      border: "border-rose-300/16",
+      bg: "bg-rose-400/[0.025]",
+      text: "text-rose-300",
+      row: "border-rose-300/10",
+      score: "text-rose-300 bg-rose-400/[0.06] border-rose-300/15",
+    },
+    orange: {
+      border: "border-orange-300/16",
+      bg: "bg-orange-400/[0.025]",
+      text: "text-orange-300",
+      row: "border-orange-300/10",
+      score: "text-orange-300 bg-orange-400/[0.06] border-orange-300/15",
+    },
+    amber: {
+      border: "border-amber-300/16",
+      bg: "bg-amber-400/[0.025]",
+      text: "text-amber-300",
+      row: "border-amber-300/10",
+      score: "text-amber-300 bg-amber-400/[0.06] border-amber-300/15",
+    },
+  }[tone];
+
+  const Icon =
+    icon === "up"
+      ? TrendingUp
+      : icon === "down"
+        ? TrendingDown
+        : icon === "eye"
+          ? Eye
+          : Activity;
 
   return (
-    <section className="space-y-3">
-      <div className="flex items-start gap-2 border-b border-white/[0.055] pb-2.5">
-        <span
-          className={`mt-1.5 h-2 w-2 shrink-0 rounded-full ${dotClass} ${
-            color !== "amber" ? "animate-pulse" : ""
-          }`}
-        />
-
-        <div className="min-w-0">
-          <h2
-            className={`text-[11px] font-black uppercase tracking-[0.12em] ${titleClass}`}
-          >
-            {title}
-          </h2>
-
-          <p className="mt-1 text-[10px] leading-4 text-zinc-200">
-            {subtitle}
-          </p>
+    <section className={`overflow-hidden rounded-[18px] border ${toneClasses.border} ${toneClasses.bg}`}>
+      <div className="flex items-center justify-between gap-3 px-3.5 py-3">
+        <div className="flex min-w-0 items-center gap-2">
+          <Icon className={`h-4 w-4 shrink-0 ${toneClasses.text}`} />
+          <div className="min-w-0">
+            <h2 className={`text-[10px] font-black uppercase tracking-[0.11em] ${toneClasses.text}`}>
+              {title}
+            </h2>
+            <p className="mt-0.5 truncate text-[9px] text-zinc-400">{subtitle}</p>
+          </div>
         </div>
+        <span className={`shrink-0 rounded-full border px-2 py-1 text-[9px] font-black ${toneClasses.score}`}>
+          {items.length}
+        </span>
       </div>
 
-      <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3">
-        {children}
+      <div className="border-t border-white/[0.05] p-2">
+        {visible.map((op) => {
+          const trendClass =
+            op.trend > 0 ? "text-emerald-300" : op.trend < 0 ? "text-rose-300" : "text-zinc-300";
+          const isOpen = expandedId === op.id;
+          return (
+            <div key={op.id} className={`border-b last:border-b-0 ${toneClasses.row}`}>
+              <button
+                type="button"
+                onClick={() => setExpandedId((current) => current === op.id ? null : op.id)}
+                className="flex w-full items-center gap-2 px-2 py-2 text-left"
+              >
+                <span className={`min-w-0 flex-1 truncate text-[10px] font-black ${toneClasses.text}`}>
+                  {op.name}
+                  {op.number ? <span className="ml-1 text-[9px] font-bold text-zinc-400">#{op.number}</span> : null}
+                </span>
+                <span className={`shrink-0 text-[10px] font-black tabular-nums ${trendClass}`}>
+                  {op.trend > 0 ? "+" : ""}{op.trend.toFixed(1)} %
+                </span>
+                <ChevronDown className={`h-3 w-3 shrink-0 text-zinc-500 transition ${isOpen ? "rotate-180" : ""}`} />
+              </button>
+              {isOpen ? (
+                <div className="px-1 pb-2">
+                  <OpportunityCard
+                    op={op}
+                    borderClass={toneClasses.border}
+                    scoreClass={toneClasses.score}
+                  />
+                </div>
+              ) : null}
+            </div>
+          );
+        })}
+
+        {items.length > 5 ? (
+          <button
+            type="button"
+            onClick={() => setShowAll((value) => !value)}
+            className="mt-1 flex w-full items-center justify-center gap-1 rounded-lg border border-white/[0.05] bg-white/[0.02] py-1.5 text-[9px] font-black text-zinc-300"
+          >
+            {showAll ? "Réduire la liste" : `Voir les ${items.length - 5} autres`}
+            <ChevronDown className={`h-3 w-3 transition ${showAll ? "rotate-180" : ""}`} />
+          </button>
+        ) : null}
       </div>
     </section>
   );
