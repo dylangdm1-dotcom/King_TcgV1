@@ -566,6 +566,7 @@ a {
   }
 
   .kt-mobile-nav svg { width: 18px; height: 18px; }
+  .kt-mobile-nav a.psa svg { width: 20px; height: 20px; }
 }
 
 /* PSA / market cards stay readable on narrow screens */
@@ -1817,6 +1818,10 @@ body {
   border-color: rgba(52,211,153,.38);
   box-shadow: 0 0 0 1px rgba(52,211,153,.055), 0 0 34px rgba(52,211,153,.13), 0 18px 42px rgba(0,0,0,.25);
 }
+.kt-partner-card[data-accent="violet"] {
+  border-color: rgba(167,139,250,.40);
+  box-shadow: 0 0 0 1px rgba(167,139,250,.055), 0 0 34px rgba(139,92,246,.14), 0 18px 42px rgba(0,0,0,.25);
+}
 .kt-partner-logo-ring {
   border: 2px solid transparent;
   outline: 1px solid rgba(255,255,255,.035);
@@ -1828,6 +1833,10 @@ body {
 .kt-partner-logo-ring[data-accent="green"] {
   border-color: rgba(110,231,183,.72);
   box-shadow: 0 0 0 5px rgba(52,211,153,.055), 0 0 30px rgba(52,211,153,.28);
+}
+.kt-partner-logo-ring[data-accent="violet"] {
+  border-color: rgba(196,181,253,.76);
+  box-shadow: 0 0 0 5px rgba(139,92,246,.06), 0 0 30px rgba(139,92,246,.30);
 }
 .kt-approach-card {
   border-color: rgba(196,181,253,.22);
