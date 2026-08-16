@@ -1699,12 +1699,18 @@ export default function DashboardPage() {
                             </span>
                           </div>
                           <p className="mt-1 text-[10px] text-zinc-200">
-                            {item.rising}/{item.total} cartes en hausse · {
-                              Math.abs(item.average) >= 3
-                                ? "tendance forte à surveiller"
-                                : Math.abs(item.average) >= 1
-                                  ? "mouvement collectif détecté"
-                                  : "tendance globalement stable"
+                            {item.average < 0
+                              ? `${Math.max(0, item.total - item.rising)}/${item.total} cartes en baisse`
+                              : `${item.rising}/${item.total} cartes en hausse`} · {
+                              item.average <= -3
+                                ? "forte baisse à surveiller"
+                                : item.average < -1
+                                  ? "baisse collective détectée"
+                                  : item.average >= 3
+                                    ? "forte hausse à surveiller"
+                                    : item.average > 1
+                                      ? "hausse collective détectée"
+                                      : "tendance globalement stable"
                             }
                           </p>
                         </div>
