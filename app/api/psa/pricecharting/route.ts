@@ -43,6 +43,18 @@ interface PriceChartingCard {
 const BASE = "https://www.pricecharting.com";
 const FALLBACK_USD_TO_EUR = 0.86;
 
+type SearchLanguage = "en" | "fr";
+
+function isStrongFrenchProduct(product: SearchProduct): boolean {
+  const haystack = `${product.title || ""} ${product.url || ""}`.toLowerCase();
+  return (
+    /\bfrench\b/.test(haystack) ||
+    /\bfrancais\b/.test(haystack) ||
+    /\bfrançais\b/.test(haystack) ||
+    /-french(?:-|$)/.test(haystack)
+  );
+}
+
 function decodeHtml(value: string): string {
   return value
     .replace(/<script[\s\S]*?<\/script>/gi, " ")
@@ -448,16 +460,25 @@ function addSearchResult(
 }
 
 async function searchPriceCharting(
-  query: string
+  query: string,
+  language: SearchLanguage
 ): Promise<SearchProduct[]> {
-  const urls = [
-    `${BASE}/fr/search-products?q=${encodeURIComponent(
-      query
-    )}&type=prices`,
-    `${BASE}/search-products?q=${encodeURIComponent(
-      query
-    )}&type=prices`,
-  ];
+  const searchTerms =
+    language === "fr"
+      ? [`${query} French`, query]
+      : [query];
+
+  const urls = searchTerms.flatMap((term) =>
+    language === "fr"
+      ? [
+          `${BASE}/fr/search-products?q=${encodeURIComponent(term)}&type=prices&exclude-variants=false&region-name=all`,
+          `${BASE}/search-products?q=${encodeURIComponent(term)}&type=prices&exclude-variants=false&region-name=all`,
+        ]
+      : [
+          `${BASE}/search-products?q=${encodeURIComponent(term)}&type=prices`,
+          `${BASE}/fr/search-products?q=${encodeURIComponent(term)}&type=prices`,
+        ]
+  );
 
   const results: SearchProduct[] = [];
 
@@ -639,12 +660,17 @@ async function searchPriceCharting(
     }
   }
 
+  if (language === "fr") {
+    return results.filter(isStrongFrenchProduct);
+  }
+
   return results;
 }
 
 async function fetchProduct(
   product: SearchProduct,
-  rate: number
+  rate: number,
+  language: SearchLanguage
 ): Promise<PriceChartingCard | null> {
   const controller =
     new AbortController();
@@ -730,7 +756,7 @@ async function fetchProduct(
       sourceUrl:
         product.url,
 
-      language: "fr",
+      language,
 
       recentSales,
     };
@@ -752,6 +778,9 @@ export async function GET(
       .get("q")
       ?.trim();
 
+  const language: SearchLanguage =
+    searchParams.get("lang") === "fr" ? "fr" : "en";
+
   if (!query) {
     return NextResponse.json(
       {
@@ -768,11 +797,12 @@ export async function GET(
 
     const searchResults =
       await searchPriceCharting(
-        query
+        query,
+        language
       );
 
     console.log(
-      `[PSA] PriceCharting query="${query}" results=${searchResults.length}`
+      `[PSA] PriceCharting lang=${language} query="${query}" results=${searchResults.length}`
     );
 
     if (
@@ -784,7 +814,7 @@ export async function GET(
         results: [],
         resultCount: 0,
         currency: "EUR",
-        language: "fr",
+        language,
         usdToEur: rate,
       });
     }
@@ -806,7 +836,8 @@ export async function GET(
           (product) =>
             fetchProduct(
               product,
-              rate
+              rate,
+              language
             )
         )
       );
@@ -845,7 +876,7 @@ export async function GET(
 
       currency: "EUR",
 
-      language: "fr",
+      language,
 
       usdToEur: rate,
     });
