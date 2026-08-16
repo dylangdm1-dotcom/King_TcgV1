@@ -49,6 +49,10 @@ import type {
   PokemonCard,
 } from "@/lib/types";
 import ConditionValueBars, { type ConditionValueDatum } from "@/components/charts/ConditionValueBars";
+import {
+  cleanTCGSuffix,
+  translatePokemonToFrench,
+} from "@/lib/pokemonTranslator";
 
 type DashboardCard = {
   id: string;
@@ -91,34 +95,56 @@ function cardLanguage(card: PokemonCard): "fr" | "en" | "ja" | "zh-tw" {
 
 
 function premiumBasePokemonName(name: string): { key: string; label: string } {
-  const normalized = name
+  if (!name?.trim()) return { key: "", label: "" };
+
+  // This normalization is ONLY for the Premium Dashboard grouping.
+  // It never changes the catalogue/card identity stored elsewhere.
+  let cleaned = name
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
     .replace(/[’']/g, "'")
-    .trim();
-
-  let base = normalized
-    // Forms / mechanics that may appear before the Pokémon name.
-    .replace(/^(?:mega|méga)\s+/i, "")
-    .replace(/^(?:dark|obscur|obscure|light|lumineux|lumineuse)\s+/i, "")
-    // Forms / mechanics that may appear after the Pokémon name.
-    .replace(/\s+(?:ex|gx|vmax|vstar|v-union|vunion|v|lv\.?\s*x|break|turbo)\b.*$/i, "")
-    .replace(/\s+(?:promo|promotional|promotionnelle?)\b.*$/i, "")
+    // Treat separators used by providers as spaces: "Mega-Charizard-EX".
+    .replace(/[-_/]+/g, " ")
     .replace(/\s+/g, " ")
     .trim();
 
-  // Keep the original value if a future/unknown naming pattern would strip too much.
-  if (!base) base = normalized;
+  // Mega cards may be written "Mega", "Méga", or simply "M".
+  cleaned = cleaned
+    .replace(/^(?:mega|m)\s+/i, "")
+    .replace(/^(?:dark|obscur|obscure|light|lumineux|lumineuse)\s+/i, "")
+    .trim();
 
-  const label = base
+  // Reuse King_TCG's existing TCG suffix cleaner for EX/GX/V/VMAX/VSTAR/etc.
+  cleaned = cleanTCGSuffix(cleaned)
+    .replace(/\s+/g, " ")
+    .trim();
+
+  // Mega Charizard X/Y should still count as Charizard.
+  cleaned = cleaned
+    .replace(/\s+(?:x|y)\s*$/i, "")
+    .trim();
+
+  // Canonicalise English names to the French Pokémon name already used
+  // elsewhere in King_TCG: Charizard -> Dracaufeu, Eevee -> Évoli, etc.
+  const french = translatePokemonToFrench(cleaned).trim() || cleaned;
+
+  const label = french
     .split(" ")
-    .map((part) => part ? part.charAt(0).toLocaleUpperCase("fr-FR") + part.slice(1).toLocaleLowerCase("fr-FR") : part)
+    .map((part) =>
+      part
+        ? part.charAt(0).toLocaleUpperCase("fr-FR") +
+          part.slice(1).toLocaleLowerCase("fr-FR")
+        : part
+    )
     .join(" ");
 
-  return {
-    key: base.toLocaleLowerCase("fr-FR"),
-    label,
-  };
+  const key = label
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLocaleLowerCase("fr-FR")
+    .replace(/[^a-z0-9]+/g, "");
+
+  return { key, label };
 }
 
 function trend7dForCard(card: PokemonCard): number {
@@ -652,7 +678,7 @@ export default function DashboardPage() {
     }, [cards]);
 
 
-  const pokemonMarketTrends = useMemo(() => {
+  const pokemonMarketAnalysis = useMemo(() => {
     // Premium Dashboard only:
     // use the REAL Dashboard collection (including quantities), not the analytics
     // cache, so 5+ owned cards of the same Pokémon are enough to form a group.
@@ -680,7 +706,10 @@ export default function DashboardPage() {
       groups.set(pokemon.key, group);
     });
 
-    return Array.from(groups.values())
+    const allGroups = Array.from(groups.values())
+      .sort((a, b) => b.totalQty - a.totalQty);
+
+    const trends = allGroups
       .filter((group) => group.totalQty >= 5)
       .map((group) => {
         const weighted = group.cards
@@ -698,7 +727,10 @@ export default function DashboardPage() {
 
         const rising = group.cards.reduce(
           (sum, card) =>
-            sum + (Number.isFinite(card.priceTrend7d) && card.priceTrend7d > 0 ? Math.max(1, card.qty || 1) : 0),
+            sum +
+            (Number.isFinite(card.priceTrend7d) && card.priceTrend7d > 0
+              ? Math.max(1, card.qty || 1)
+              : 0),
           0
         );
 
@@ -709,10 +741,18 @@ export default function DashboardPage() {
           total: group.totalQty,
         };
       })
-      // Do not hide a qualifying Pokémon just because its current trend is stable.
       .sort((a, b) => Math.abs(b.average) - Math.abs(a.average))
       .slice(0, 3);
+
+    return {
+      trends,
+      largestGroup: allGroups[0]
+        ? { name: allGroups[0].label, total: allGroups[0].totalQty }
+        : null,
+    };
   }, [cards]);
+
+  const pokemonMarketTrends = pokemonMarketAnalysis.trends;
 
   const extensionMarketTrends = useMemo(() => {
     const groups = new Map<string, MarketTrendSample[]>();
@@ -1668,7 +1708,16 @@ export default function DashboardPage() {
                             }
                           </p>
                         </div>
-                      )) : <p className="text-[10px] font-bold text-zinc-600">Données insuffisantes · minimum 5 cartes du même Pokémon, variantes incluses.</p>}
+                      )) : <div className="space-y-1">
+                        <p className="text-[10px] font-bold text-zinc-600">
+                          Données insuffisantes · minimum 5 cartes du même Pokémon, variantes incluses.
+                        </p>
+                        {pokemonMarketAnalysis.largestGroup ? (
+                          <p className="text-[9px] font-bold text-zinc-500">
+                            Plus grand groupe détecté : {pokemonMarketAnalysis.largestGroup.name} · {pokemonMarketAnalysis.largestGroup.total} carte{pokemonMarketAnalysis.largestGroup.total > 1 ? "s" : ""}.
+                          </p>
+                        ) : null}
+                      </div>}
                     </div>
                   </div>
 
