@@ -409,7 +409,7 @@ export default function PSAPage() {
 
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                 <StatCard title="Valeur totale" value={formatEUR(stats.totalValue)} icon={<BadgeEuro className="h-4 w-4" />} tone="cyan" />
-                <StatCard title="Cartes PSA" value={stats.totalCount} icon={<Award className="h-4 w-4" />} tone="cyan" />
+                <StatCard title="Cartes PSA" value={stats.totalCount} icon={<BadgeCheck className="h-4 w-4" />} tone="cyan" />
                 <StatCard title="PSA 10" value={stats.gemMintCount} icon={<Gem className="h-4 w-4" />} tone="amber" />
                 <StatCard title="Plus-value" value={formatSignedEUR(stats.netProfit)} icon={<TrendingUp className="h-4 w-4" />} tone="green" />
               </div>
@@ -475,7 +475,7 @@ export default function PSAPage() {
                   {filteredCollection.map((card) => (
                     <article
                       key={card.id}
-                      className="kt-psa-collection-card group relative min-w-0 overflow-hidden rounded-[18px] border border-cyan-400/14 bg-[#0a1118] p-3 shadow-[0_16px_38px_rgba(0,0,0,.22)] transition duration-200 hover:-translate-y-0.5 hover:border-cyan-300/30 hover:shadow-[0_20px_44px_rgba(0,0,0,.28)]"
+                      className="kt-psa-collection-card group relative min-w-0 overflow-hidden rounded-[18px] border border-cyan-300/18 bg-[linear-gradient(145deg,rgba(17,42,61,.96),rgba(9,20,31,.98)_55%,rgba(8,15,23,.99))] p-3 shadow-[0_16px_38px_rgba(0,0,0,.22),inset_0_1px_0_rgba(125,211,252,.035)] transition duration-200 hover:-translate-y-0.5 hover:border-cyan-300/35 hover:shadow-[0_20px_44px_rgba(0,0,0,.28),0_0_26px_rgba(34,211,238,.05)]"
                     >
                       <div className="flex min-w-0 items-start gap-3 sm:gap-4">
                         <div className="shrink-0">
@@ -556,7 +556,14 @@ export default function PSAPage() {
                 <div className="grid grid-cols-2 gap-2">
                 <button
                   type="button"
-                  onClick={() => setPriceSearchLanguage("en")}
+                  onClick={() => {
+                    if (priceSearchLanguage !== "en") {
+                      setPriceSearchLanguage("en");
+                      setPriceChartingQuery("");
+                      setPriceChartingResults([]);
+                      setPriceChartingError("");
+                    }
+                  }}
                   className={`flex items-center justify-center gap-2 rounded-xl px-3 py-3 text-[10px] font-black uppercase tracking-[0.08em] transition ${
                     priceSearchLanguage === "en"
                       ? "border border-cyan-300/45 bg-cyan-400/[0.14] text-white shadow-[0_0_20px_rgba(34,211,238,.06)]"
@@ -568,7 +575,14 @@ export default function PSAPage() {
                 </button>
                 <button
                   type="button"
-                  onClick={() => setPriceSearchLanguage("fr")}
+                  onClick={() => {
+                    if (priceSearchLanguage !== "fr") {
+                      setPriceSearchLanguage("fr");
+                      setPriceChartingQuery("");
+                      setPriceChartingResults([]);
+                      setPriceChartingError("");
+                    }
+                  }}
                   className={`flex items-center justify-center gap-2 rounded-xl px-3 py-3 text-[10px] font-black uppercase tracking-[0.08em] transition ${
                     priceSearchLanguage === "fr"
                       ? "border border-cyan-300/45 bg-cyan-400/[0.14] text-white shadow-[0_0_20px_rgba(34,211,238,.06)]"
