@@ -223,7 +223,7 @@ export default function PSAPage() {
     "collection" | "search" | "estimation"
   >("collection");
 
-  const [priceSearchLanguage, setPriceSearchLanguage] = useState<"en" | "fr">("en");
+  const [priceSearchLanguage, setPriceSearchLanguage] = useState<"en" | "fr" | "ja">("en");
 
   const [collection, setCollection] = useState<PSACard[]>([]);
 
@@ -306,54 +306,42 @@ export default function PSAPage() {
     setPriceChartingResults([]);
     setEbayPsaResults([]);
     setEbayPsaError("");
-
-    if (priceSearchLanguage === "fr") {
-      setPriceChartingLoading(false);
-      setEbayPsaLoading(true);
-
-      try {
-        const results = await psaService.searchEbayPsaFr(query);
-        setEbayPsaResults(results);
-
-        if (results.length === 0) {
-          setEbayPsaError("Aucune annonce eBay FR gradée PSA trouvée.");
-        }
-      } catch (error) {
-        console.error("Erreur recherche eBay PSA FR", error);
-        setEbayPsaResults([]);
-        setEbayPsaError(
-          error instanceof Error
-            ? error.message
-            : "Impossible de récupérer les annonces eBay PSA FR."
-        );
-      } finally {
-        setEbayPsaLoading(false);
-      }
-
-      return;
-    }
-
-    setEbayPsaLoading(false);
     setPriceChartingLoading(true);
+    setEbayPsaLoading(true);
 
-    try {
-      const results = await psaService.searchPriceCharting(query, "en");
-      setPriceChartingResults(results);
+    const [priceResult, ebayResult] = await Promise.allSettled([
+      psaService.searchPriceCharting(query, priceSearchLanguage),
+      psaService.searchEbayPsa(query, priceSearchLanguage),
+    ]);
 
-      if (results.length === 0) {
-        setPriceChartingError("Aucune carte PriceCharting trouvée.");
+    if (priceResult.status === "fulfilled") {
+      setPriceChartingResults(priceResult.value);
+      if (priceResult.value.length === 0) {
+        setPriceChartingError("Aucune carte PriceCharting trouvée dans cette langue.");
       }
-    } catch (error) {
-      console.error("Erreur recherche PriceCharting", error);
-      setPriceChartingResults([]);
+    } else {
       setPriceChartingError(
-        error instanceof Error
-          ? error.message
+        priceResult.reason instanceof Error
+          ? priceResult.reason.message
           : "Impossible de récupérer les données PriceCharting."
       );
-    } finally {
-      setPriceChartingLoading(false);
     }
+
+    if (ebayResult.status === "fulfilled") {
+      setEbayPsaResults(ebayResult.value);
+      if (ebayResult.value.length === 0) {
+        setEbayPsaError("Aucune annonce eBay PSA fiable trouvée dans cette langue.");
+      }
+    } else {
+      setEbayPsaError(
+        ebayResult.reason instanceof Error
+          ? ebayResult.reason.message
+          : "Impossible de récupérer les annonces eBay PSA."
+      );
+    }
+
+    setPriceChartingLoading(false);
+    setEbayPsaLoading(false);
   };
 
   const handleSelectPriceChartingCard = (
@@ -781,7 +769,7 @@ export default function PSAPage() {
                     Langue de recherche
                   </p>
                 </div>
-                <div className="grid grid-cols-2 gap-2">
+                <div className="grid grid-cols-3 gap-2">
                 <button
                   type="button"
                   onClick={() => {
@@ -824,6 +812,27 @@ export default function PSAPage() {
                   <span className="text-lg leading-none">🇫🇷</span>
                   Français
                 </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (priceSearchLanguage !== "ja") {
+                      setPriceSearchLanguage("ja");
+                      setPriceChartingQuery("");
+                      setPriceChartingResults([]);
+                      setPriceChartingError("");
+                      setEbayPsaResults([]);
+                      setEbayPsaError("");
+                    }
+                  }}
+                  className={`flex items-center justify-center gap-2 rounded-xl px-3 py-3 text-[10px] font-black uppercase tracking-[0.08em] transition ${
+                    priceSearchLanguage === "ja"
+                      ? "border border-cyan-300/45 bg-cyan-400/[0.14] text-white shadow-[0_0_20px_rgba(34,211,238,.06)]"
+                      : "border border-transparent text-zinc-400 hover:bg-white/[0.03] hover:text-white"
+                  }`}
+                >
+                  <span className="text-lg leading-none">🇯🇵</span>
+                  Japonais
+                </button>
                 </div>
               </div>
 
@@ -834,33 +843,22 @@ export default function PSAPage() {
                   </h2>
 
                   <p className="text-xs text-zinc-100 mt-1">
-                    {priceSearchLanguage === "fr"
-                      ? "Recherche des cartes gradées PSA disponibles sur eBay France."
-                      : "Recherche des cartes, valeurs marché et dernières ventes PriceCharting."}
+                    Recherche PSA par langue avec PriceCharting et eBay.
                   </p>
 
-                  <div className={`mt-3 flex items-start gap-2 rounded-xl border px-3 py-2.5 ${
-                    priceSearchLanguage === "fr"
-                      ? "border-blue-400/18 bg-blue-400/[0.05]"
-                      : "border-amber-400/15 bg-amber-400/[0.05]"
-                  }`}>
+                  <div className="mt-3 flex items-start gap-2 rounded-xl border border-cyan-400/18 bg-cyan-400/[0.04] px-3 py-2.5">
                     <span className="mt-0.5 text-base leading-none" aria-hidden="true">
-                      {priceSearchLanguage === "fr" ? "🇫🇷" : "🇬🇧"}
+                      {priceSearchLanguage === "fr" ? "🇫🇷" : priceSearchLanguage === "ja" ? "🇯🇵" : "🇬🇧"}
                     </span>
-                    <p className={`text-[11px] leading-relaxed ${
-                      priceSearchLanguage === "fr" ? "text-blue-200/85" : "text-amber-200/80"
-                    }`}>
-                      {priceSearchLanguage === "fr" ? (
-                        <>
-                          <span className="font-black text-blue-200">Recherche PSA française :</span>{" "}
-                          eBay FR est utilisé pour trouver davantage de cartes gradées françaises. Les annonces restent séparées par carte et par grade.
-                        </>
-                      ) : (
-                        <>
-                          <span className="font-black text-amber-200">Recherche anglaise :</span>{" "}
-                          utilisez le nom anglais du Pokémon (ex. <span className="font-bold text-white">Charizard</span>, <span className="font-bold text-white">Pikachu</span> ou <span className="font-bold text-white">Umbreon</span>).
-                        </>
-                      )}
+                    <p className="text-[11px] leading-relaxed text-cyan-100/80">
+                      <span className="font-black text-cyan-200">
+                        {priceSearchLanguage === "fr"
+                          ? "Recherche PSA française :"
+                          : priceSearchLanguage === "ja"
+                            ? "Recherche PSA japonaise :"
+                            : "Recherche PSA anglaise :"}
+                      </span>{" "}
+                      PriceCharting fournit les fiches et prix disponibles ; eBay complète avec les annonces gradées correspondant à la langue sélectionnée.
                     </p>
                   </div>
                 </div>
@@ -871,9 +869,13 @@ export default function PSAPage() {
                 >
                   <input
                     type="text"
-                    placeholder={priceSearchLanguage === "fr"
-                      ? "Exemple : Pikachu, Dracaufeu, 60..."
-                      : "Exemple : Charizard, Pikachu, Umbreon..."}
+                    placeholder={
+                      priceSearchLanguage === "fr"
+                        ? "Exemple : Pikachu, Dracaufeu, 60..."
+                        : priceSearchLanguage === "ja"
+                          ? "Exemple : Pikachu, Charizard, 006..."
+                          : "Exemple : Charizard, Pikachu, Umbreon..."
+                    }
                     value={priceChartingQuery}
                     onChange={(e) =>
                       setPriceChartingQuery(
@@ -894,26 +896,25 @@ export default function PSAPage() {
                 </form>
               </div>
 
-              {priceSearchLanguage === "en" && priceChartingLoading && (
+              {priceChartingLoading && (
                 <div className="rounded-2xl border border-cyan-500/20 bg-cyan-500/5 p-4 text-xs text-cyan-300">
                   Recherche des données publiques
                   PriceCharting...
                 </div>
               )}
 
-              {priceSearchLanguage === "en" &&
-                priceChartingError &&
+              {priceChartingError &&
                 !priceChartingLoading && (
                   <div className="rounded-2xl border border-amber-500/20 bg-amber-500/5 p-4 text-xs text-amber-300">
                     {priceChartingError}
                   </div>
                 )}
 
-              {priceSearchLanguage === "fr" ? (
+              {true ? (
                 <div className="space-y-5">
                   <div className="rounded-[16px] border border-amber-300/15 bg-amber-300/[0.025] px-3 py-2.5">
                     <p className="text-[10px] font-black uppercase tracking-[0.11em] text-amber-300">
-                      eBay FR · annonces actives
+                      eBay · annonces actives
                     </p>
                     <p className="mt-1 text-[9px] leading-4 text-zinc-400">
                       {ebayPsaResults.length} annonces analysées · {ebayPsaGroups.length} cartes regroupées. Les prix affichés sont des annonces en cours, pas des ventes réalisées.
@@ -933,7 +934,7 @@ export default function PSAPage() {
 
                   {ebayPsaLoading ? (
                     <div className="rounded-2xl border border-cyan-500/20 bg-cyan-500/5 p-4 text-xs text-cyan-300">
-                      Recherche des cartes gradées PSA sur eBay France...
+                      Recherche des cartes gradées PSA sur eBay...
                     </div>
                   ) : ebayPsaError && ebayPsaResults.length === 0 ? (
                     <div className="rounded-2xl border border-amber-500/20 bg-amber-500/5 p-4 text-xs text-amber-300">
@@ -979,10 +980,10 @@ export default function PSAPage() {
                             </div>
 
                             <p className="mt-2 text-xs text-zinc-100">
-                              eBay France · {group.listingCount} annonce{group.listingCount > 1 ? "s" : ""}
+                              eBay · {group.listingCount} annonce{group.listingCount > 1 ? "s" : ""}
                             </p>
                             <p className="mt-1 text-[10px] text-zinc-200">
-                              Langue : Français · {group.verifiedFrenchCount} résultat{group.verifiedFrenchCount > 1 ? "s" : ""} explicite{group.verifiedFrenchCount > 1 ? "s" : ""}
+                              Langue : {priceSearchLanguage === "fr" ? "Français" : priceSearchLanguage === "ja" ? "Japonais" : "Anglais"} · {group.verifiedFrenchCount} résultat{group.verifiedFrenchCount > 1 ? "s" : ""} vérifié{group.verifiedFrenchCount > 1 ? "s" : ""}
                             </p>
 
                             {group.grades[0]?.listings[0]?.url ? (
@@ -1075,7 +1076,7 @@ export default function PSAPage() {
                 </div>
               ) : null}
 
-              {priceSearchLanguage === "en" ? (
+              {true ? (
               <div className="space-y-5">
                 {priceChartingResults.map((card) => (
                   <div
