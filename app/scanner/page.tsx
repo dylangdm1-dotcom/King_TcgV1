@@ -145,6 +145,7 @@ const EMPTY_QUAD_PROGRESS: QuadSlotProgress[] = [
 
 export default function ScannerPage() {
   const cameraRef = useRef<ScannerCameraHandle>(null);
+  const cameraSectionRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
   const [ready, setReady] = useState(false);
@@ -158,7 +159,7 @@ export default function ScannerPage() {
   const [needsRetry, setNeedsRetry] = useState(false);
 
   const [scanMode, setScanMode] = useState<"single" | "batch">("single");
-  const [premiumModesOpen, setPremiumModesOpen] = useState(false);
+  const [modeSelected, setModeSelected] = useState(false);
   const [batchCaptureMode, setBatchCaptureMode] = useState<"individual" | "grouped">("individual");
   const [groupedLanguage, setGroupedLanguage] = useState<"fr" | "en" | "ja" | "zh-tw">("fr");
   const [batchList, setBatchList] = useState<ScannedBatchItem[]>([]);
@@ -877,6 +878,33 @@ export default function ScannerPage() {
     void scan();
   };
 
+  const selectScannerMode = (
+    mode: "single" | "batch",
+    captureMode: "individual" | "grouped" = "individual"
+  ) => {
+    setScanMode(mode);
+    setBatchCaptureMode(captureMode);
+    setModeSelected(true);
+    setReady(false);
+    resetScanState();
+    setQuadProgress(EMPTY_QUAD_PROGRESS.map((slot) => ({ ...slot })));
+
+    if (mode === "single") {
+      setStatus("Mode Mono sélectionné : cadrez une carte entière.");
+    } else if (captureMode === "grouped") {
+      setStatus("Quadra Scan Premium : placez 4 cartes dans une seule photo.");
+    } else {
+      setStatus("Batch Premium : scannez jusqu’à 4 cartes à la suite.");
+    }
+
+    window.setTimeout(() => {
+      cameraSectionRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    }, 120);
+  };
+
   const quadConfirmedCount = quadProgress.filter((slot) => slot.status === "success").length;
   const quadReviewCount = quadProgress.filter((slot) => slot.status === "review").length;
 
@@ -902,80 +930,75 @@ export default function ScannerPage() {
               </p>
             </div>
 
-            {/* MODE SWITCH */}
-            <div className="w-full max-w-xs mt-1 space-y-2">
-              <div className="flex items-center gap-1.5 bg-black/45 p-1.5 rounded-2xl border border-white/[0.055] shadow-inner">
+            {/* CHOIX DU MODE — aucune caméra ouverte avant sélection */}
+            <div className="mt-2 w-full max-w-xl">
+              <p className="mb-2 text-[9px] font-black uppercase tracking-[0.14em] text-zinc-400">
+                Choisissez votre mode de scan
+              </p>
+
+              <div className="grid grid-cols-3 gap-2">
                 <button
-                  onClick={() => setScanMode("single")}
-                  className={`flex-1 py-2 rounded-lg text-[10px] font-bold uppercase tracking-[0.11em] transition-all flex items-center justify-center gap-1.5 ${
-                    scanMode === "single"
-                      ? "bg-cyan-500 text-black shadow-md shadow-cyan-500/20"
-                      : "text-zinc-100 hover:text-white"
+                  type="button"
+                  onClick={() => selectScannerMode("single")}
+                  className={`rounded-2xl border px-2 py-3 text-center transition-all ${
+                    modeSelected && scanMode === "single"
+                      ? "border-cyan-300/55 bg-cyan-400/[0.13] shadow-[0_0_24px_rgba(34,211,238,.08)]"
+                      : "border-cyan-300/16 bg-cyan-400/[0.035] hover:border-cyan-300/35 hover:bg-cyan-400/[0.07]"
                   }`}
                 >
-                  <Zap className="w-3.5 h-3.5" />
-                  Mono
+                  <Zap className="mx-auto h-5 w-5 text-cyan-300" />
+                  <span className="mt-1.5 block text-[10px] font-black uppercase tracking-[0.09em] text-white">
+                    Mono
+                  </span>
+                  <span className="mt-1 block text-[8px] leading-3 text-zinc-400">
+                    1 carte
+                  </span>
                 </button>
 
                 <button
-                  onClick={() => setPremiumModesOpen((open) => !open)}
-                  className={`flex-1 py-2 rounded-lg text-[10px] font-bold uppercase tracking-[0.11em] transition-all flex items-center justify-center gap-1.5 ${
-                    scanMode === "batch" || premiumModesOpen
-                      ? "border border-amber-400/30 bg-amber-400/10 text-amber-200 shadow-md shadow-amber-500/10"
-                      : "text-zinc-100 hover:text-white"
+                  type="button"
+                  onClick={() => selectScannerMode("batch", "individual")}
+                  className={`rounded-2xl border px-2 py-3 text-center transition-all ${
+                    modeSelected && scanMode === "batch" && batchCaptureMode === "individual"
+                      ? "border-sky-300/55 bg-sky-400/[0.13] shadow-[0_0_24px_rgba(56,189,248,.08)]"
+                      : "border-sky-300/18 bg-sky-400/[0.04] hover:border-sky-300/38 hover:bg-sky-400/[0.08]"
                   }`}
                 >
-                  <Crown className="w-3.5 h-3.5 text-amber-300" />
-                  <span className="text-amber-300">Premium</span>
-                  {premiumModesOpen ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
+                  <Layers className="mx-auto h-5 w-5 text-sky-300" />
+                  <span className="mt-1.5 flex items-center justify-center gap-1 text-[10px] font-black uppercase tracking-[0.09em] text-white">
+                    Batch
+                    <Crown className="h-3 w-3 text-amber-300" />
+                  </span>
+                  <span className="mt-1 block text-[8px] leading-3 text-amber-300/80">
+                    Premium · 4 cartes
+                  </span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => selectScannerMode("batch", "grouped")}
+                  className={`rounded-2xl border px-2 py-3 text-center transition-all ${
+                    modeSelected && scanMode === "batch" && batchCaptureMode === "grouped"
+                      ? "border-violet-300/55 bg-violet-400/[0.13] shadow-[0_0_24px_rgba(167,139,250,.08)]"
+                      : "border-violet-300/18 bg-violet-400/[0.04] hover:border-violet-300/38 hover:bg-violet-400/[0.08]"
+                  }`}
+                >
+                  <Grid2X2 className="mx-auto h-5 w-5 text-violet-300" />
+                  <span className="mt-1.5 flex items-center justify-center gap-1 text-[10px] font-black uppercase tracking-[0.09em] text-white">
+                    Quad
+                    <Crown className="h-3 w-3 text-amber-300" />
+                  </span>
+                  <span className="mt-1 block text-[8px] leading-3 text-amber-300/80">
+                    Premium · 4 en 1
+                  </span>
                 </button>
               </div>
 
-              <AnimatePresence initial={false}>
-                {premiumModesOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -6 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -6 }}
-                    transition={{ duration: 0.18 }}
-                    className="grid grid-cols-2 gap-2 rounded-2xl border border-amber-300/[0.52] bg-amber-400/[0.07] p-2 shadow-[0_0_28px_rgba(245,196,81,.10)]"
-                  >
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setScanMode("batch");
-                        setBatchCaptureMode("individual");
-                        setPremiumModesOpen(false);
-                        setStatus("Batch Premium : scannez jusqu’à 4 cartes à la suite.");
-                      }}
-                      className="rounded-xl border border-sky-300/[0.52] bg-sky-400/[0.10] px-3 py-2.5 text-left transition-all hover:border-sky-200/[0.72] hover:bg-sky-400/[0.15]"
-                    >
-                      <div className="flex items-center gap-1.5 text-sky-300">
-                        <Layers className="h-4 w-4" />
-                        <span className="text-[10px] font-bold uppercase tracking-[0.11em]">Batch</span>
-                      </div>
-                      <p className="mt-1 text-[10px] leading-4 text-zinc-100">Jusqu’à 4 cartes scannées à la suite.</p>
-                    </button>
-
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setScanMode("batch");
-                        setBatchCaptureMode("grouped");
-                        setPremiumModesOpen(false);
-                        setStatus("Quadra Scan Premium : placez 4 cartes dans une seule photo.");
-                      }}
-                      className="rounded-xl border border-violet-300/[0.52] bg-violet-400/[0.10] px-3 py-2.5 text-left transition-all hover:border-violet-200/[0.72] hover:bg-violet-400/[0.15]"
-                    >
-                      <div className="flex items-center gap-1.5 text-violet-300">
-                        <Grid2X2 className="h-4 w-4" />
-                        <span className="text-[10px] font-bold uppercase tracking-[0.11em]">Quadra Scan</span>
-                      </div>
-                      <p className="mt-1 text-[10px] leading-4 text-zinc-100">Jusqu’à 4 cartes sur une seule photo.</p>
-                    </button>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+              {!modeSelected ? (
+                <p className="mt-3 text-[10px] leading-4 text-zinc-400">
+                  La caméra s’ouvrira uniquement après votre sélection.
+                </p>
+              ) : null}
             </div>
           </section>
 
@@ -988,6 +1011,8 @@ export default function ScannerPage() {
             <span className={`rounded-full border px-2.5 py-1 text-[10px] font-black ${quotaBlocked ? "border-amber-300/30 bg-amber-400/[0.08] text-amber-300" : "border-emerald-300/30 bg-emerald-400/[0.09] text-emerald-300"}`}>{Math.max(0, SCANNER_MONTHLY_LIMIT - quotaUsed)} restantes</span>
           </div>
 
+          {modeSelected ? (
+            <>
           <section className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             <PremiumCard className="p-4 text-left">
               <div className="flex items-start gap-3">
@@ -1018,7 +1043,7 @@ export default function ScannerPage() {
           </section>
 
           <AnimatePresence initial={false}>
-            {scanMode === "batch" && (
+            {modeSelected && scanMode === "batch" && (
               <motion.section
                 initial={{ opacity: 0, y: -8 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -1090,7 +1115,7 @@ export default function ScannerPage() {
           </AnimatePresence>
 
           {/* CAMERA */}
-          <div data-scan-mode={scanMode === "single" ? "single" : batchCaptureMode === "grouped" ? "quad" : "batch"} className="kt-scanner-stage kt-scan-grid relative aspect-[9/16] overflow-hidden rounded-[24px] border bg-black shadow-[0_24px_70px_rgba(0,0,0,.55)]">
+          <div ref={cameraSectionRef} data-scan-mode={scanMode === "single" ? "single" : batchCaptureMode === "grouped" ? "quad" : "batch"} className="kt-scanner-stage kt-scan-grid relative aspect-[9/16] overflow-hidden rounded-[24px] border bg-black shadow-[0_24px_70px_rgba(0,0,0,.55)]">
             <ScannerCamera
               ref={cameraRef}
               onReady={handleCameraReady}
@@ -1284,12 +1309,24 @@ export default function ScannerPage() {
               )}
             </div>
           )}
+            </>
+          ) : (
+            <section className="rounded-[18px] border border-white/[0.06] bg-white/[0.018] px-4 py-5 text-center">
+              <Camera className="mx-auto h-5 w-5 text-cyan-300/65" />
+              <p className="mt-2 text-[11px] font-black text-white">
+                Aucun mode sélectionné
+              </p>
+              <p className="mx-auto mt-1 max-w-md text-[10px] leading-4 text-zinc-400">
+                Choisissez Mono, Batch ou Quad ci-dessus pour ouvrir la caméra correspondante.
+              </p>
+            </section>
+          )}
         </div>
 
         {/* =====================================================
             DRAWER BATCH V5
         ===================================================== */}
-        {scanMode === "batch" && (
+        {modeSelected && scanMode === "batch" && (
           <div
             className={`fixed bottom-0 left-0 right-0 z-50 bg-neutral-950 border-t border-zinc-800 transition-all duration-300 shadow-2xl ${
               isDrawerOpen ? "h-[65vh]" : "h-14"
