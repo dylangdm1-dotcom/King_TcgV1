@@ -61,6 +61,105 @@ function formatSaleDate(date: string): string {
   return parsed.toLocaleDateString("fr-FR");
 }
 
+
+type EbayPsaGradeSummary = {
+  grade: number;
+  count: number;
+  min: number;
+  median: number;
+  max: number;
+  listings: EbayPsaListing[];
+};
+
+type EbayPsaCardGroup = {
+  key: string;
+  title: string;
+  imageUrl?: string;
+  listingCount: number;
+  verifiedFrenchCount: number;
+  grades: EbayPsaGradeSummary[];
+};
+
+function medianPrice(values: number[]): number {
+  const sorted = values.filter((value) => Number.isFinite(value) && value > 0).sort((a, b) => a - b);
+  if (!sorted.length) return 0;
+  const middle = Math.floor(sorted.length / 2);
+  return sorted.length % 2
+    ? sorted[middle]
+    : Number(((sorted[middle - 1] + sorted[middle]) / 2).toFixed(2));
+}
+
+function ebayPsaCardIdentity(title: string): string {
+  return title
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/\b(?:psa\s*(?:gem\s*mint\s*)?(?:10|9|8|7|6|5|4|3|2|1)|grade\s*(?:10|9|8|7|6|5|4|3|2|1)|note\s*(?:10|9|8|7|6|5|4|3|2|1))\b/gi, " ")
+    .replace(/\b(?:fr|french|francais|francaise|pokemon|pokémon|carte|card|graded|gradee|slab)\b/gi, " ")
+    .replace(/\b(?:neuf|new|mint|gem\s*mint)\b/gi, " ")
+    .replace(/[|()[\]{}_,;:+*!?]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function compactEbayTitle(title: string): string {
+  return title
+    .replace(/\bPSA\s*(?:GEM\s*MINT\s*)?(?:10|9|8|7|6|5|4|3|2|1)\b/gi, "")
+    .replace(/\b(?:FR|French|Français|Française)\b/gi, "")
+    .replace(/\s{2,}/g, " ")
+    .replace(/\s*[-|]\s*$/g, "")
+    .trim();
+}
+
+function groupEbayPsaListings(listings: EbayPsaListing[]): EbayPsaCardGroup[] {
+  const groups = new Map<string, EbayPsaListing[]>();
+
+  for (const listing of listings) {
+    const identity = ebayPsaCardIdentity(listing.title) || listing.title.toLowerCase();
+    const current = groups.get(identity) || [];
+    current.push(listing);
+    groups.set(identity, current);
+  }
+
+  return Array.from(groups.entries())
+    .map(([key, items]) => {
+      const byGrade = new Map<number, EbayPsaListing[]>();
+      for (const item of items) {
+        const gradeItems = byGrade.get(item.grade) || [];
+        gradeItems.push(item);
+        byGrade.set(item.grade, gradeItems);
+      }
+
+      const grades: EbayPsaGradeSummary[] = Array.from(byGrade.entries())
+        .map(([grade, gradeItems]) => {
+          const prices = gradeItems.map((item) => item.price).filter((price) => price > 0);
+          return {
+            grade,
+            count: gradeItems.length,
+            min: prices.length ? Math.min(...prices) : 0,
+            median: medianPrice(prices),
+            max: prices.length ? Math.max(...prices) : 0,
+            listings: [...gradeItems].sort((a, b) => a.price - b.price),
+          };
+        })
+        .sort((a, b) => b.grade - a.grade);
+
+      const representative =
+        items.find((item) => item.languageSignal !== "unknown") ||
+        items[0];
+
+      return {
+        key,
+        title: compactEbayTitle(representative?.title || key),
+        imageUrl: items.find((item) => item.imageUrl)?.imageUrl,
+        listingCount: items.length,
+        verifiedFrenchCount: items.filter((item) => item.languageSignal !== "unknown").length,
+        grades,
+      };
+    })
+    .sort((a, b) => b.listingCount - a.listingCount || b.verifiedFrenchCount - a.verifiedFrenchCount);
+}
+
 export default function PSAPage() {
   const [activeTab, setActiveTab] = useState<
     "collection" | "search" | "estimation"
@@ -124,60 +223,70 @@ export default function PSAPage() {
     [collection]
   );
 
+  const ebayPsaGroups = useMemo(
+    () => groupEbayPsaListings(ebayPsaResults),
+    [ebayPsaResults]
+  );
+
   const handlePriceChartingSearch = async (
     event: FormEvent
   ) => {
     event.preventDefault();
 
     const query = priceChartingQuery.trim();
-
     if (!query) return;
 
-    setPriceChartingLoading(true);
     setPriceChartingError("");
     setPriceChartingResults([]);
     setEbayPsaResults([]);
     setEbayPsaError("");
-    setEbayPsaLoading(priceSearchLanguage === "fr");
+
+    if (priceSearchLanguage === "fr") {
+      setPriceChartingLoading(false);
+      setEbayPsaLoading(true);
+
+      try {
+        const results = await psaService.searchEbayPsaFr(query);
+        setEbayPsaResults(results);
+
+        if (results.length === 0) {
+          setEbayPsaError("Aucune annonce eBay FR gradée PSA trouvée.");
+        }
+      } catch (error) {
+        console.error("Erreur recherche eBay PSA FR", error);
+        setEbayPsaResults([]);
+        setEbayPsaError(
+          error instanceof Error
+            ? error.message
+            : "Impossible de récupérer les annonces eBay PSA FR."
+        );
+      } finally {
+        setEbayPsaLoading(false);
+      }
+
+      return;
+    }
+
+    setEbayPsaLoading(false);
+    setPriceChartingLoading(true);
 
     try {
-      const [priceChartingResult, ebayResult] = await Promise.allSettled([
-        psaService.searchPriceCharting(query, priceSearchLanguage),
-        priceSearchLanguage === "fr"
-          ? psaService.searchEbayPsaFr(query)
-          : Promise.resolve([] as EbayPsaListing[]),
-      ]);
+      const results = await psaService.searchPriceCharting(query, "en");
+      setPriceChartingResults(results);
 
-      if (priceChartingResult.status === "fulfilled") {
-        setPriceChartingResults(priceChartingResult.value);
-        if (priceChartingResult.value.length === 0) {
-          setPriceChartingError("Aucune carte PriceCharting trouvée.");
-        }
-      } else {
-        setPriceChartingError(
-          priceChartingResult.reason instanceof Error
-            ? priceChartingResult.reason.message
-            : "Impossible de récupérer les données PriceCharting."
-        );
+      if (results.length === 0) {
+        setPriceChartingError("Aucune carte PriceCharting trouvée.");
       }
-
-      if (priceSearchLanguage === "fr") {
-        if (ebayResult.status === "fulfilled") {
-          setEbayPsaResults(ebayResult.value);
-          if (ebayResult.value.length === 0) {
-            setEbayPsaError("Aucune annonce eBay FR gradée PSA trouvée.");
-          }
-        } else {
-          setEbayPsaError(
-            ebayResult.reason instanceof Error
-              ? ebayResult.reason.message
-              : "Impossible de récupérer les annonces eBay PSA FR."
-          );
-        }
-      }
+    } catch (error) {
+      console.error("Erreur recherche PriceCharting", error);
+      setPriceChartingResults([]);
+      setPriceChartingError(
+        error instanceof Error
+          ? error.message
+          : "Impossible de récupérer les données PriceCharting."
+      );
     } finally {
       setPriceChartingLoading(false);
-      setEbayPsaLoading(false);
     }
   };
 
@@ -629,8 +738,9 @@ export default function PSAPage() {
                   </h2>
 
                   <p className="text-xs text-zinc-100 mt-1">
-                    Recherche des cartes, valeurs marché
-                    et dernières ventes PriceCharting.
+                    {priceSearchLanguage === "fr"
+                      ? "Recherche des cartes gradées PSA disponibles sur eBay France."
+                      : "Recherche des cartes, valeurs marché et dernières ventes PriceCharting."}
                   </p>
 
                   <div className={`mt-3 flex items-start gap-2 rounded-xl border px-3 py-2.5 ${
@@ -646,8 +756,8 @@ export default function PSAPage() {
                     }`}>
                       {priceSearchLanguage === "fr" ? (
                         <>
-                          <span className="font-black text-blue-200">Recherche FR expérimentale :</span>{" "}
-                          seuls les résultats explicitement identifiés comme impression française par PriceCharting sont conservés.
+                          <span className="font-black text-blue-200">Recherche PSA française :</span>{" "}
+                          eBay FR est utilisé pour trouver davantage de cartes gradées françaises. Les annonces restent séparées par carte et par grade.
                         </>
                       ) : (
                         <>
@@ -679,23 +789,24 @@ export default function PSAPage() {
 
                   <button
                     type="submit"
-                    disabled={priceChartingLoading}
+                    disabled={priceChartingLoading || ebayPsaLoading}
                     className="flex items-center justify-center gap-2 rounded-2xl border border-cyan-200/30 bg-cyan-400 px-5 py-3 text-xs font-black uppercase text-[#041014] shadow-[0_10px_28px_rgba(34,211,238,.18)] transition hover:bg-cyan-300 disabled:opacity-50"
                   >
-                    {priceChartingLoading ? <Sparkles className="h-4 w-4 animate-pulse" /> : <Search className="h-4 w-4" />}
-                    {priceChartingLoading ? "Analyse des prix..." : "Analyser les prix"}
+                    {(priceChartingLoading || ebayPsaLoading) ? <Sparkles className="h-4 w-4 animate-pulse" /> : <Search className="h-4 w-4" />}
+                    {(priceChartingLoading || ebayPsaLoading) ? "Recherche..." : "Analyser les prix"}
                   </button>
                 </form>
               </div>
 
-              {priceChartingLoading && (
+              {priceSearchLanguage === "en" && priceChartingLoading && (
                 <div className="rounded-2xl border border-cyan-500/20 bg-cyan-500/5 p-4 text-xs text-cyan-300">
                   Recherche des données publiques
                   PriceCharting...
                 </div>
               )}
 
-              {priceChartingError &&
+              {priceSearchLanguage === "en" &&
+                priceChartingError &&
                 !priceChartingLoading && (
                   <div className="rounded-2xl border border-amber-500/20 bg-amber-500/5 p-4 text-xs text-amber-300">
                     {priceChartingError}
@@ -703,18 +814,18 @@ export default function PSAPage() {
                 )}
 
               {priceSearchLanguage === "fr" ? (
-                <div className="space-y-3 rounded-[18px] border border-amber-300/15 bg-amber-300/[0.025] p-3 sm:p-4">
-                  <div className="flex items-center justify-between gap-3">
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between gap-3 rounded-[16px] border border-amber-300/15 bg-amber-300/[0.025] px-3 py-2.5">
                     <div>
                       <p className="text-[10px] font-black uppercase tracking-[0.11em] text-amber-300">
-                        eBay FR · annonces actives
+                        eBay FR · cartes PSA regroupées
                       </p>
-                      <p className="mt-1 text-[10px] leading-4 text-zinc-400">
-                        Cartes gradées PSA actuellement proposées. Ce ne sont pas des ventes réalisées.
+                      <p className="mt-1 text-[9px] leading-4 text-zinc-400">
+                        {ebayPsaResults.length} annonces actives analysées · {ebayPsaGroups.length} groupes de cartes probables
                       </p>
                     </div>
                     <span className="shrink-0 rounded-full border border-amber-300/18 bg-amber-300/[0.06] px-2 py-1 text-[8px] font-black text-amber-200">
-                      {ebayPsaResults.length}
+                      FR
                     </span>
                   </div>
 
@@ -727,53 +838,100 @@ export default function PSAPage() {
                       {ebayPsaError}
                     </div>
                   ) : (
-                    <div className="grid gap-2 sm:grid-cols-2">
-                      {ebayPsaResults.map((listing) => (
-                        <a
-                          key={listing.id}
-                          href={listing.url}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="flex min-w-0 gap-3 rounded-[14px] border border-white/[0.06] bg-black/[0.12] p-2.5 transition hover:border-amber-300/22"
+                    <div className="space-y-3">
+                      {ebayPsaGroups.map((group) => (
+                        <article
+                          key={group.key}
+                          className="overflow-hidden rounded-[16px] border border-cyan-300/12 bg-[linear-gradient(145deg,rgba(17,42,61,.72),rgba(8,16,24,.96))]"
                         >
-                          {listing.imageUrl ? (
-                            <img
-                              src={listing.imageUrl}
-                              alt=""
-                              className="h-20 w-14 shrink-0 rounded-lg bg-black object-contain"
-                            />
-                          ) : (
-                            <div className="flex h-20 w-14 shrink-0 items-center justify-center rounded-lg border border-white/[0.05] bg-black/20">
-                              <BadgeCheck className="h-4 w-4 text-zinc-600" />
+                          <div className="flex gap-3 p-3">
+                            {group.imageUrl ? (
+                              <img
+                                src={group.imageUrl}
+                                alt=""
+                                className="h-24 w-[68px] shrink-0 rounded-lg bg-black object-contain"
+                              />
+                            ) : (
+                              <div className="flex h-24 w-[68px] shrink-0 items-center justify-center rounded-lg border border-white/[0.05] bg-black/20">
+                                <BadgeCheck className="h-5 w-5 text-cyan-300/55" />
+                              </div>
+                            )}
+
+                            <div className="min-w-0 flex-1">
+                              <h3 className="line-clamp-2 text-[11px] font-black leading-4 text-white">
+                                {group.title}
+                              </h3>
+                              <div className="mt-2 flex flex-wrap gap-1.5">
+                                <span className="rounded-md border border-cyan-300/15 bg-cyan-300/[0.05] px-1.5 py-1 text-[8px] font-black text-cyan-200">
+                                  {group.listingCount} annonce{group.listingCount > 1 ? "s" : ""}
+                                </span>
+                                <span className="rounded-md border border-blue-300/15 bg-blue-300/[0.05] px-1.5 py-1 text-[8px] font-black text-blue-200">
+                                  {group.verifiedFrenchCount} FR vérifiée{group.verifiedFrenchCount > 1 ? "s" : ""}
+                                </span>
+                                <span className="rounded-md border border-amber-300/15 bg-amber-300/[0.05] px-1.5 py-1 text-[8px] font-black text-amber-200">
+                                  PSA {group.grades.map((grade) => grade.grade).join(" · ")}
+                                </span>
+                              </div>
                             </div>
-                          )}
-                          <div className="min-w-0 flex-1">
-                            <div className="flex items-center justify-between gap-2">
-                              <span className="rounded-md border border-cyan-300/18 bg-cyan-300/[0.06] px-1.5 py-0.5 text-[8px] font-black text-cyan-200">
-                                PSA {listing.grade}
-                              </span>
-                              <span className="text-[11px] font-black text-amber-200">
-                                {formatEUR(listing.price)}
-                              </span>
-                            </div>
-                            <p className="mt-1.5 line-clamp-2 text-[9px] font-bold leading-4 text-white">
-                              {listing.title}
-                            </p>
-                            <p className={`mt-1 text-[8px] font-bold ${
-                              listing.languageSignal === "unknown"
-                                ? "text-zinc-500"
-                                : "text-blue-300"
-                            }`}>
-                              {listing.languageLabel}
-                            </p>
                           </div>
-                        </a>
+
+                          <div className="divide-y divide-white/[0.05] border-t border-white/[0.05]">
+                            {group.grades.map((grade) => (
+                              <div key={grade.grade} className="px-3 py-2.5">
+                                <div className="flex items-center justify-between gap-3">
+                                  <div className="flex items-center gap-2">
+                                    <span className="rounded-md border border-cyan-300/18 bg-cyan-300/[0.06] px-2 py-1 text-[9px] font-black text-cyan-200">
+                                      PSA {grade.grade}
+                                    </span>
+                                    <span className="text-[8px] font-bold text-zinc-500">
+                                      {grade.count} annonce{grade.count > 1 ? "s" : ""}
+                                    </span>
+                                  </div>
+                                  <span className="text-[11px] font-black text-white">
+                                    médiane {formatEUR(grade.median)}
+                                  </span>
+                                </div>
+
+                                <div className="mt-2 grid grid-cols-3 gap-1.5 text-center">
+                                  <div className="rounded-lg border border-white/[0.05] bg-black/10 px-2 py-1.5">
+                                    <p className="text-[7px] font-black uppercase text-zinc-500">Mini</p>
+                                    <p className="mt-0.5 text-[9px] font-black text-zinc-200">{formatEUR(grade.min)}</p>
+                                  </div>
+                                  <div className="rounded-lg border border-cyan-300/10 bg-cyan-300/[0.025] px-2 py-1.5">
+                                    <p className="text-[7px] font-black uppercase text-cyan-300/70">Médian</p>
+                                    <p className="mt-0.5 text-[9px] font-black text-cyan-200">{formatEUR(grade.median)}</p>
+                                  </div>
+                                  <div className="rounded-lg border border-white/[0.05] bg-black/10 px-2 py-1.5">
+                                    <p className="text-[7px] font-black uppercase text-zinc-500">Maxi</p>
+                                    <p className="mt-0.5 text-[9px] font-black text-zinc-200">{formatEUR(grade.max)}</p>
+                                  </div>
+                                </div>
+
+                                <div className="mt-2 flex gap-1.5 overflow-x-auto pb-1">
+                                  {grade.listings.slice(0, 6).map((listing) => (
+                                    <a
+                                      key={listing.id}
+                                      href={listing.url}
+                                      target="_blank"
+                                      rel="noreferrer"
+                                      title={listing.title}
+                                      className="shrink-0 rounded-lg border border-amber-300/12 bg-amber-300/[0.035] px-2 py-1.5 text-[8px] font-black text-amber-200 transition hover:border-amber-300/30"
+                                    >
+                                      {formatEUR(listing.price)}
+                                    </a>
+                                  ))}
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </article>
                       ))}
                     </div>
                   )}
                 </div>
               ) : null}
 
+              {priceSearchLanguage === "en" ? (
               <div className="space-y-5">
                 {priceChartingResults.map((card) => (
                   <div
@@ -1047,6 +1205,7 @@ export default function PSAPage() {
                   </div>
                 ))}
               </div>
+              ) : null}
             </section>
           )}
 
