@@ -229,9 +229,9 @@ export default function OpportunityPage() {
           <section className="grid grid-cols-2 gap-2.5 lg:grid-cols-4">
             <SummaryCard
               icon={<ShoppingCart className="h-4 w-4" />}
-              label="Opportunités"
+              label="Opportunités détectées"
               value={sortedBuy.length}
-              description="signaux positifs"
+              description="meilleurs signaux positifs"
               className="border-emerald-500/10 bg-emerald-500/[0.035]"
               iconClass="bg-emerald-500/10 text-emerald-400"
               valueClass="text-emerald-400"
@@ -239,9 +239,9 @@ export default function OpportunityPage() {
 
             <SummaryCard
               icon={<TrendingDown className="h-4 w-4" />}
-              label="Signal de baisse"
+              label="Cartes en signal de baisse"
               value={sortedSell.length}
-              description="cartes concernées"
+              description="baisses détectées"
               className="border-rose-500/10 bg-rose-500/[0.035]"
               iconClass="bg-rose-500/10 text-rose-400"
               valueClass="text-rose-400"
@@ -249,9 +249,9 @@ export default function OpportunityPage() {
 
             <SummaryCard
               icon={<Activity className="h-4 w-4" />}
-              label="Fortes variations"
+              label="Cartes à fortes variations"
               value={strongVariation.length}
-              description="à surveiller"
+              description="prix très mobiles"
               className="border-orange-400/10 bg-orange-400/[0.035]"
               iconClass="bg-orange-400/10 text-orange-300"
               valueClass="text-orange-300"
@@ -259,9 +259,9 @@ export default function OpportunityPage() {
 
             <SummaryCard
               icon={<Eye className="h-4 w-4" />}
-              label="Observation"
+              label="Cartes à surveiller"
               value={watch.length}
-              description="signaux modérés"
+              description="signaux mesurables"
               className="border-amber-500/10 bg-amber-500/[0.035]"
               iconClass="bg-amber-500/10 text-amber-400"
               valueClass="text-amber-400"
@@ -270,10 +270,10 @@ export default function OpportunityPage() {
 
           {/* LÉGENDE COULEURS */}
           <section className="grid grid-cols-2 gap-2 text-[9px] font-bold">
-            <span className="flex min-h-9 items-center justify-center gap-2 rounded-xl border border-emerald-300/[0.38] bg-emerald-400/[0.06] px-2.5 text-center text-emerald-300"><span className="h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400" />Opportunité détectée</span>
-            <span className="flex min-h-9 items-center justify-center gap-2 rounded-xl border border-rose-300/[0.38] bg-rose-400/[0.06] px-2.5 text-center text-rose-300"><span className="h-1.5 w-1.5 shrink-0 rounded-full bg-rose-400" />Signal de baisse</span>
-            <span className="flex min-h-9 items-center justify-center gap-2 rounded-xl border border-orange-300/[0.38] bg-orange-400/[0.06] px-2.5 text-center text-orange-300"><span className="h-1.5 w-1.5 shrink-0 rounded-full bg-orange-400" />Forte variation</span>
-            <span className="flex min-h-9 items-center justify-center gap-2 rounded-xl border border-amber-300/[0.38] bg-amber-400/[0.06] px-2.5 text-center text-amber-300"><span className="h-1.5 w-1.5 shrink-0 rounded-full bg-amber-400" />À surveiller</span>
+            <span className="flex min-h-9 items-center justify-center gap-2 rounded-xl border border-emerald-300/[0.38] bg-emerald-400/[0.06] px-2.5 text-center text-emerald-300"><span className="h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400" />Opportunités détectées</span>
+            <span className="flex min-h-9 items-center justify-center gap-2 rounded-xl border border-rose-300/[0.38] bg-rose-400/[0.06] px-2.5 text-center text-rose-300"><span className="h-1.5 w-1.5 shrink-0 rounded-full bg-rose-400" />Cartes en signal de baisse</span>
+            <span className="flex min-h-9 items-center justify-center gap-2 rounded-xl border border-orange-300/[0.38] bg-orange-400/[0.06] px-2.5 text-center text-orange-300"><span className="h-1.5 w-1.5 shrink-0 rounded-full bg-orange-400" />Cartes à fortes variations</span>
+            <span className="flex min-h-9 items-center justify-center gap-2 rounded-xl border border-amber-300/[0.38] bg-amber-400/[0.06] px-2.5 text-center text-amber-300"><span className="h-1.5 w-1.5 shrink-0 rounded-full bg-amber-400" />Cartes à surveiller</span>
           </section>
 
           {/* ALERTES */}
@@ -489,28 +489,32 @@ function CompactOpportunityGroup({
 
   const toneClasses = {
     emerald: {
-      border: "border-emerald-300/16",
+      border: "border-emerald-300/40",
+      divider: "bg-emerald-300/70 shadow-[0_0_8px_rgba(110,231,183,.45)]",
       bg: "bg-emerald-400/[0.025]",
       text: "text-emerald-300",
       row: "border-emerald-300/10",
       score: "text-emerald-300 bg-emerald-400/[0.06] border-emerald-300/15",
     },
     rose: {
-      border: "border-rose-300/16",
+      border: "border-rose-300/40",
+      divider: "bg-rose-300/70 shadow-[0_0_8px_rgba(253,164,175,.45)]",
       bg: "bg-rose-400/[0.025]",
       text: "text-rose-300",
       row: "border-rose-300/10",
       score: "text-rose-300 bg-rose-400/[0.06] border-rose-300/15",
     },
     orange: {
-      border: "border-orange-300/16",
+      border: "border-orange-300/40",
+      divider: "bg-orange-300/70 shadow-[0_0_8px_rgba(253,186,116,.45)]",
       bg: "bg-orange-400/[0.025]",
       text: "text-orange-300",
       row: "border-orange-300/10",
       score: "text-orange-300 bg-orange-400/[0.06] border-orange-300/15",
     },
     amber: {
-      border: "border-amber-300/16",
+      border: "border-amber-300/40",
+      divider: "bg-amber-300/70 shadow-[0_0_8px_rgba(252,211,77,.45)]",
       bg: "bg-amber-400/[0.025]",
       text: "text-amber-300",
       row: "border-amber-300/10",
@@ -544,7 +548,10 @@ function CompactOpportunityGroup({
         </span>
       </div>
 
-      <div className="border-t border-white/[0.05] p-2">
+      <div className="flex justify-center">
+        <span className={`h-px w-20 rounded-full ${toneClasses.divider}`} />
+      </div>
+      <div className="p-2">
         {visible.map((op) => {
           const trendClass =
             op.trend > 0 ? "text-emerald-300" : op.trend < 0 ? "text-rose-300" : "text-zinc-300";
@@ -599,6 +606,7 @@ function CompactOpportunityDetails({
   op: Opportunity;
   toneClasses: {
     border: string;
+    divider: string;
     bg: string;
     text: string;
     row: string;
