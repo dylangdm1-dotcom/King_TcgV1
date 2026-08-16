@@ -25,6 +25,7 @@ import PSAGradeCapture from "@/components/psa/PSAGradeCapture";
 import {
   psaService,
   PriceChartingCard,
+  EbayPsaListing,
 } from "@/lib/psa/psaService";
 
 import {
@@ -86,6 +87,13 @@ export default function PSAPage() {
   const [priceChartingError, setPriceChartingError] =
     useState("");
 
+  const [ebayPsaResults, setEbayPsaResults] =
+    useState<EbayPsaListing[]>([]);
+  const [ebayPsaLoading, setEbayPsaLoading] =
+    useState(false);
+  const [ebayPsaError, setEbayPsaError] =
+    useState("");
+
   const [isAddModalOpen, setIsAddModalOpen] =
     useState(false);
 
@@ -128,33 +136,48 @@ export default function PSAPage() {
     setPriceChartingLoading(true);
     setPriceChartingError("");
     setPriceChartingResults([]);
+    setEbayPsaResults([]);
+    setEbayPsaError("");
+    setEbayPsaLoading(priceSearchLanguage === "fr");
 
     try {
-      const results =
-        await psaService.searchPriceCharting(query, priceSearchLanguage);
+      const [priceChartingResult, ebayResult] = await Promise.allSettled([
+        psaService.searchPriceCharting(query, priceSearchLanguage),
+        priceSearchLanguage === "fr"
+          ? psaService.searchEbayPsaFr(query)
+          : Promise.resolve([] as EbayPsaListing[]),
+      ]);
 
-      setPriceChartingResults(results);
-
-      if (results.length === 0) {
+      if (priceChartingResult.status === "fulfilled") {
+        setPriceChartingResults(priceChartingResult.value);
+        if (priceChartingResult.value.length === 0) {
+          setPriceChartingError("Aucune carte PriceCharting trouvée.");
+        }
+      } else {
         setPriceChartingError(
-          "Aucune carte PriceCharting trouvée."
+          priceChartingResult.reason instanceof Error
+            ? priceChartingResult.reason.message
+            : "Impossible de récupérer les données PriceCharting."
         );
       }
-    } catch (error) {
-      console.error(
-        "Erreur recherche PriceCharting",
-        error
-      );
 
-      setPriceChartingResults([]);
-
-      setPriceChartingError(
-        error instanceof Error
-          ? error.message
-          : "Impossible de récupérer les données PriceCharting."
-      );
+      if (priceSearchLanguage === "fr") {
+        if (ebayResult.status === "fulfilled") {
+          setEbayPsaResults(ebayResult.value);
+          if (ebayResult.value.length === 0) {
+            setEbayPsaError("Aucune annonce eBay FR gradée PSA trouvée.");
+          }
+        } else {
+          setEbayPsaError(
+            ebayResult.reason instanceof Error
+              ? ebayResult.reason.message
+              : "Impossible de récupérer les annonces eBay PSA FR."
+          );
+        }
+      }
     } finally {
       setPriceChartingLoading(false);
+      setEbayPsaLoading(false);
     }
   };
 
@@ -562,6 +585,8 @@ export default function PSAPage() {
                       setPriceChartingQuery("");
                       setPriceChartingResults([]);
                       setPriceChartingError("");
+                      setEbayPsaResults([]);
+                      setEbayPsaError("");
                     }
                   }}
                   className={`flex items-center justify-center gap-2 rounded-xl px-3 py-3 text-[10px] font-black uppercase tracking-[0.08em] transition ${
@@ -581,6 +606,8 @@ export default function PSAPage() {
                       setPriceChartingQuery("");
                       setPriceChartingResults([]);
                       setPriceChartingError("");
+                      setEbayPsaResults([]);
+                      setEbayPsaError("");
                     }
                   }}
                   className={`flex items-center justify-center gap-2 rounded-xl px-3 py-3 text-[10px] font-black uppercase tracking-[0.08em] transition ${
@@ -674,6 +701,78 @@ export default function PSAPage() {
                     {priceChartingError}
                   </div>
                 )}
+
+              {priceSearchLanguage === "fr" ? (
+                <div className="space-y-3 rounded-[18px] border border-amber-300/15 bg-amber-300/[0.025] p-3 sm:p-4">
+                  <div className="flex items-center justify-between gap-3">
+                    <div>
+                      <p className="text-[10px] font-black uppercase tracking-[0.11em] text-amber-300">
+                        eBay FR · annonces actives
+                      </p>
+                      <p className="mt-1 text-[10px] leading-4 text-zinc-400">
+                        Cartes gradées PSA actuellement proposées. Ce ne sont pas des ventes réalisées.
+                      </p>
+                    </div>
+                    <span className="shrink-0 rounded-full border border-amber-300/18 bg-amber-300/[0.06] px-2 py-1 text-[8px] font-black text-amber-200">
+                      {ebayPsaResults.length}
+                    </span>
+                  </div>
+
+                  {ebayPsaLoading ? (
+                    <div className="rounded-xl border border-amber-300/10 bg-black/10 px-3 py-3 text-[10px] text-amber-200">
+                      Recherche eBay FR des cartes gradées PSA...
+                    </div>
+                  ) : ebayPsaError && ebayPsaResults.length === 0 ? (
+                    <div className="rounded-xl border border-white/[0.06] bg-black/10 px-3 py-3 text-[10px] text-zinc-400">
+                      {ebayPsaError}
+                    </div>
+                  ) : (
+                    <div className="grid gap-2 sm:grid-cols-2">
+                      {ebayPsaResults.map((listing) => (
+                        <a
+                          key={listing.id}
+                          href={listing.url}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="flex min-w-0 gap-3 rounded-[14px] border border-white/[0.06] bg-black/[0.12] p-2.5 transition hover:border-amber-300/22"
+                        >
+                          {listing.imageUrl ? (
+                            <img
+                              src={listing.imageUrl}
+                              alt=""
+                              className="h-20 w-14 shrink-0 rounded-lg bg-black object-contain"
+                            />
+                          ) : (
+                            <div className="flex h-20 w-14 shrink-0 items-center justify-center rounded-lg border border-white/[0.05] bg-black/20">
+                              <BadgeCheck className="h-4 w-4 text-zinc-600" />
+                            </div>
+                          )}
+                          <div className="min-w-0 flex-1">
+                            <div className="flex items-center justify-between gap-2">
+                              <span className="rounded-md border border-cyan-300/18 bg-cyan-300/[0.06] px-1.5 py-0.5 text-[8px] font-black text-cyan-200">
+                                PSA {listing.grade}
+                              </span>
+                              <span className="text-[11px] font-black text-amber-200">
+                                {formatEUR(listing.price)}
+                              </span>
+                            </div>
+                            <p className="mt-1.5 line-clamp-2 text-[9px] font-bold leading-4 text-white">
+                              {listing.title}
+                            </p>
+                            <p className={`mt-1 text-[8px] font-bold ${
+                              listing.languageSignal === "unknown"
+                                ? "text-zinc-500"
+                                : "text-blue-300"
+                            }`}>
+                              {listing.languageLabel}
+                            </p>
+                          </div>
+                        </a>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ) : null}
 
               <div className="space-y-5">
                 {priceChartingResults.map((card) => (
