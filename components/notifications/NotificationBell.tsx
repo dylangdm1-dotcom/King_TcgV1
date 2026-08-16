@@ -7,10 +7,12 @@ import {
   Bell,
   BellRing,
   ChevronRight,
-  BadgeEuro,
-  ChartNoAxesCombined,
   CircleCheckBig,
   ShieldAlert,
+  TrendingDown,
+  TrendingUp,
+  Activity,
+  Eye,
   X,
 } from "lucide-react";
 import { getSignalSnapshot, refreshSignalSnapshotIfNeeded } from "@/lib/signalSnapshot";
@@ -22,7 +24,14 @@ type NotificationItem = {
   title: string;
   description: string;
   href: string;
-  tone: "rise" | "drop" | "opportunity" | "system";
+  tone: "important" | "watch" | "opportunity" | "system";
+};
+
+type NotificationGroup = {
+  key: "important" | "watch" | "opportunity" | "system";
+  title: string;
+  href: string;
+  items: NotificationItem[];
 };
 
 export default function NotificationBell() {
@@ -49,13 +58,66 @@ export default function NotificationBell() {
 
   const snapshot = useMemo(() => getSignalSnapshot(), [open, snapshotVersion]);
 
-  const notifications = useMemo<NotificationItem[]>(() => {
-    const items: NotificationItem[] = [];
+  const notificationGroups = useMemo<NotificationGroup[]>(() => {
+    const importantAlerts = snapshot.alerts
+      .filter((alert) => Math.abs(Number(alert.changePercent || 0)) >= 25)
+      .sort(
+        (a, b) =>
+          Math.abs(Number(b.changePercent || 0)) -
+          Math.abs(Number(a.changePercent || 0))
+      )
+      .slice(0, 3)
+      .map<NotificationItem>((alert) => ({
+        id: `important-${alert.cardId}-${alert.type}`,
+        title: `${alert.cardName}${alert.cardNumber ? ` #${alert.cardNumber}` : ""}`,
+        description: `${Number(alert.changePercent || 0) > 0 ? "+" : ""}${Number(alert.changePercent || 0).toFixed(1)} % · mouvement important`,
+        href: `/card/${encodeURIComponent(alert.cardId)}`,
+        tone: "important",
+      }));
 
+    const watchAlerts = snapshot.alerts
+      .filter((alert) => {
+        const magnitude = Math.abs(Number(alert.changePercent || 0));
+        return magnitude >= 10 && magnitude < 25;
+      })
+      .sort(
+        (a, b) =>
+          Math.abs(Number(b.changePercent || 0)) -
+          Math.abs(Number(a.changePercent || 0))
+      )
+      .slice(0, 3)
+      .map<NotificationItem>((alert) => ({
+        id: `watch-${alert.cardId}-${alert.type}`,
+        title: `${alert.cardName}${alert.cardNumber ? ` #${alert.cardNumber}` : ""}`,
+        description: `${Number(alert.changePercent || 0) > 0 ? "+" : ""}${Number(alert.changePercent || 0).toFixed(1)} % · à surveiller`,
+        href: `/card/${encodeURIComponent(alert.cardId)}`,
+        tone: "watch",
+      }));
+
+    const opportunityItems = snapshot.opportunities
+      .filter((item) => item.recommendation === "BUY")
+      .sort(
+        (a, b) =>
+          Math.abs(b.trend) - Math.abs(a.trend) ||
+          b.currentPrice - a.currentPrice
+      )
+      .slice(0, 3)
+      .map<NotificationItem>((item) => ({
+        id: `opportunity-${item.id}`,
+        title: `${item.name}${item.number ? ` #${item.number}` : ""}`,
+        description: `${item.trend >= 0 ? "+" : ""}${item.trend.toFixed(1)} % · opportunité détectée`,
+        href: "/opportunity",
+        tone: "opportunity",
+      }));
+
+    const systemItems: NotificationItem[] = [];
     if (snapshot.updatedAt > 0) {
       const updated = new Date(snapshot.updatedAt);
-      const timeLabel = updated.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" });
-      items.push({
+      const timeLabel = updated.toLocaleTimeString("fr-FR", {
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+      systemItems.push({
         id: `system-market-${snapshot.updatedAt}`,
         title: "Marché à jour",
         description: `Dernière synchronisation des signaux à ${timeLabel}.`,
@@ -64,57 +126,65 @@ export default function NotificationBell() {
       });
     }
 
-    snapshot.alerts.slice(0, 4).forEach((alert) => {
-      const isRise = alert.type === "RISE";
-      const isDrop = alert.type === "DROP";
-      items.push({
-        id: `alert-${alert.cardId}-${alert.type}`,
-        title: isRise
-            ? `Hausse · ${alert.cardName}${alert.cardNumber ? ` #${alert.cardNumber}` : ""}`
-          : isDrop
-            ? `Baisse · ${alert.cardName}${alert.cardNumber ? ` #${alert.cardNumber}` : ""}`
-            : `Opportunité · ${alert.cardName}${alert.cardNumber ? ` #${alert.cardNumber}` : ""}`,
-        description: isRise
-          ? `Hausse de ${Math.abs(Number(alert.changePercent || 0)).toFixed(2)} % sur 7 jours.`
-          : isDrop
-          ? `Recul de ${Math.abs(Number(alert.changePercent || 0)).toFixed(2)} % sur 7 jours.`
-          : `Repli modéré détecté · signal à confirmer.`,
-        href: `/card/${encodeURIComponent(alert.cardId)}`,
-        tone: isRise ? "rise" : isDrop ? "drop" : "opportunity",
-      });
-    });
-
-    snapshot.opportunities
-      .filter((item) => item.recommendation === "BUY" || item.recommendation === "SELL")
-      .slice(0, 3)
-      .forEach((item) => {
-        items.push({
-          id: `op-${item.id}-${item.recommendation}`,
-          title: `${item.recommendation === "BUY" ? "Potentiel positif" : "Risque de baisse"} · ${item.name}${item.number ? ` #${item.number}` : ""}`,
-          description: `${item.currentPrice.toFixed(2)} € · tendance ${item.trend >= 0 ? "+" : ""}${item.trend.toFixed(2)} %`,
-          href: "/opportunity",
-          tone: item.recommendation === "BUY" ? "opportunity" : "drop",
-        });
-      });
-
-    if (items.length === 0) {
-      items.push({
-        id: "no-signal",
-        title: "Aucun signal majeur",
-        description:
-          snapshot.updatedAt > 0
-            ? "Les dernières analyses n'ont détecté aucune alerte exploitable."
-            : "Ouvre Alertes ou Opportunités pour lancer la première analyse du portefeuille.",
+    const groups: NotificationGroup[] = [
+      {
+        key: "important",
+        title: "Alertes importantes",
         href: "/alerts",
-        tone: "system",
-      });
+        items: importantAlerts,
+      },
+      {
+        key: "watch",
+        title: "À surveiller",
+        href: "/alerts",
+        items: watchAlerts,
+      },
+      {
+        key: "opportunity",
+        title: "Opportunités détectées",
+        href: "/opportunity",
+        items: opportunityItems,
+      },
+      {
+        key: "system",
+        title: "Informations marché",
+        href: "/alerts",
+        items: systemItems,
+      },
+    ].filter((group) => group.items.length > 0);
+
+    if (groups.length === 0) {
+      return [
+        {
+          key: "system",
+          title: "Informations marché",
+          href: "/alerts",
+          items: [
+            {
+              id: "no-signal",
+              title: "Aucun signal majeur",
+              description:
+                snapshot.updatedAt > 0
+                  ? "Les dernières analyses n'ont détecté aucun signal prioritaire."
+                  : "Ouvre Alertes ou Opportunités pour lancer la première analyse.",
+              href: "/alerts",
+              tone: "system",
+            },
+          ],
+        },
+      ];
     }
 
-    return items;
+    return groups;
   }, [snapshot]);
 
+  const notificationCount = notificationGroups.reduce(
+    (sum, group) => sum + group.items.length,
+    0
+  );
+
   const unread = snapshot.updatedAt > lastRead && snapshot.updatedAt > 0
-    ? Math.min(notifications.length, 9)
+    ? Math.min(notificationCount, 9)
     : 0;
 
   function markRead() {
@@ -171,54 +241,121 @@ export default function NotificationBell() {
               <div className="flex items-center justify-between border-b border-white/[0.07] px-4 py-3.5">
                 <div>
                   <p className="text-xs font-black uppercase tracking-[0.16em] text-white">Notifications</p>
-                  <p className="mt-0.5 text-[9px] font-medium text-zinc-500">Vrais signaux Alertes + Opportunités</p>
+                  <p className="mt-0.5 text-[9px] font-medium text-zinc-500">Synthèse priorisée des signaux du portefeuille</p>
                 </div>
                 <button type="button" onClick={() => setOpen(false)} className="rounded-xl p-2 text-zinc-500 transition hover:bg-white/[0.05] hover:text-white">
                   <X className="h-4 w-4" />
                 </button>
               </div>
 
-              <div className="max-h-[65vh] space-y-2 overflow-y-auto p-3">
-                {notifications.map((item) => {
-                  const Icon = item.tone === "rise"
-                    ? ChartNoAxesCombined
-                    : item.tone === "drop"
-                      ? ShieldAlert
-                      : item.tone === "system"
-                        ? CircleCheckBig
-                        : BadgeEuro;
-                  const tone = item.tone === "rise"
-                    ? "border-emerald-400/15 bg-emerald-400/[0.05] text-emerald-300"
-                    : item.tone === "drop"
-                      ? "border-rose-400/15 bg-rose-400/[0.05] text-rose-300"
-                      : item.tone === "opportunity"
-                        ? "border-amber-400/15 bg-amber-400/[0.05] text-amber-300"
-                        : "border-cyan-400/15 bg-cyan-400/[0.05] text-cyan-300";
+              <div className="max-h-[65vh] space-y-3 overflow-y-auto p-3">
+                {notificationGroups.map((group) => {
+                  const groupTone =
+                    group.key === "important"
+                      ? {
+                          border: "border-rose-300/16",
+                          bg: "bg-rose-400/[0.025]",
+                          text: "text-rose-300",
+                          icon: ShieldAlert,
+                        }
+                      : group.key === "watch"
+                        ? {
+                            border: "border-amber-300/16",
+                            bg: "bg-amber-400/[0.025]",
+                            text: "text-amber-300",
+                            icon: Eye,
+                          }
+                        : group.key === "opportunity"
+                          ? {
+                              border: "border-emerald-300/16",
+                              bg: "bg-emerald-400/[0.025]",
+                              text: "text-emerald-300",
+                              icon: TrendingUp,
+                            }
+                          : {
+                              border: "border-cyan-300/16",
+                              bg: "bg-cyan-400/[0.025]",
+                              text: "text-cyan-300",
+                              icon: Activity,
+                            };
+
+                  const GroupIcon = groupTone.icon;
 
                   return (
-                    <Link
-                      href={item.href}
-                      key={item.id}
-                      onClick={() => setOpen(false)}
-                      data-tone={item.tone}
-                      className="kt-notification-row group flex items-start gap-3 rounded-2xl border p-3.5 shadow-[0_8px_22px_rgba(0,0,0,.18)] transition hover:border-cyan-100/25 hover:bg-[#202934]"
+                    <section
+                      key={group.key}
+                      className={`overflow-hidden rounded-[16px] border ${groupTone.border} ${groupTone.bg}`}
                     >
-                      <span className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border ${tone}`}>
-                        <Icon className="h-4 w-4" />
-                      </span>
-                      <span className="min-w-0 flex-1">
-                        <span className="block text-[11px] font-black text-white">{item.title}</span>
-                        <span className="mt-1 block text-[10px] leading-4 text-zinc-500">{item.description}</span>
-                      </span>
-                      <ChevronRight className="mt-2 h-4 w-4 shrink-0 text-zinc-600 transition group-hover:translate-x-0.5 group-hover:text-white" />
-                    </Link>
+                      <Link
+                        href={group.href}
+                        onClick={() => setOpen(false)}
+                        className="flex items-center justify-between gap-3 px-3 py-2.5"
+                      >
+                        <span className="flex min-w-0 items-center gap-2">
+                          <GroupIcon className={`h-3.5 w-3.5 shrink-0 ${groupTone.text}`} />
+                          <span className={`truncate text-[9px] font-black uppercase tracking-[0.1em] ${groupTone.text}`}>
+                            {group.title}
+                          </span>
+                        </span>
+                        <span className={`shrink-0 rounded-full border px-1.5 py-0.5 text-[8px] font-black ${groupTone.border} ${groupTone.text}`}>
+                          {group.items.length}
+                        </span>
+                      </Link>
+
+                      <div className="border-t border-white/[0.05]">
+                        {group.items.map((item) => {
+                          const trendNegative = item.description.trim().startsWith("-");
+                          const trendPositive = item.description.trim().startsWith("+");
+
+                          return (
+                            <Link
+                              href={item.href}
+                              key={item.id}
+                              onClick={() => setOpen(false)}
+                              className="group flex items-center gap-2 border-b border-white/[0.045] px-3 py-2 last:border-b-0 hover:bg-white/[0.025]"
+                            >
+                              {group.key === "important" ? (
+                                trendNegative ? (
+                                  <TrendingDown className="h-3.5 w-3.5 shrink-0 text-rose-300" />
+                                ) : (
+                                  <TrendingUp className="h-3.5 w-3.5 shrink-0 text-emerald-300" />
+                                )
+                              ) : group.key === "watch" ? (
+                                trendNegative ? (
+                                  <TrendingDown className="h-3.5 w-3.5 shrink-0 text-rose-300" />
+                                ) : trendPositive ? (
+                                  <TrendingUp className="h-3.5 w-3.5 shrink-0 text-emerald-300" />
+                                ) : (
+                                  <Eye className="h-3.5 w-3.5 shrink-0 text-amber-300" />
+                                )
+                              ) : group.key === "opportunity" ? (
+                                <TrendingUp className="h-3.5 w-3.5 shrink-0 text-emerald-300" />
+                              ) : (
+                                <CircleCheckBig className="h-3.5 w-3.5 shrink-0 text-cyan-300" />
+                              )}
+
+                              <span className="min-w-0 flex-1">
+                                <span className="block truncate text-[10px] font-black text-white">
+                                  {item.title}
+                                </span>
+                                <span className="mt-0.5 block truncate text-[9px] text-zinc-500">
+                                  {item.description}
+                                </span>
+                              </span>
+
+                              <ChevronRight className="h-3.5 w-3.5 shrink-0 text-zinc-600 transition group-hover:translate-x-0.5 group-hover:text-white" />
+                            </Link>
+                          );
+                        })}
+                      </div>
+                    </section>
                   );
                 })}
               </div>
 
               <div className="grid grid-cols-2 gap-2 border-t border-white/[0.07] p-3">
-                <Link href="/alerts" onClick={() => setOpen(false)} className="rounded-xl border border-rose-300/[0.48] bg-rose-400/[0.08] px-3 py-2 text-center text-[10px] font-bold text-rose-300 transition hover:border-rose-200/[0.72] hover:bg-rose-400/[0.14]">Toutes les alertes</Link>
-                <Link href="/opportunity" onClick={() => setOpen(false)} className="rounded-xl border border-amber-300/[0.48] bg-amber-400/[0.08] px-3 py-2 text-center text-[10px] font-bold text-amber-300 transition hover:border-amber-200/[0.72] hover:bg-amber-400/[0.14]">Opportunités</Link>
+                <Link href="/alerts" onClick={() => setOpen(false)} className="rounded-xl border border-rose-300/[0.48] bg-rose-400/[0.08] px-3 py-2 text-center text-[10px] font-bold text-rose-300 transition hover:border-rose-200/[0.72] hover:bg-rose-400/[0.14]">Voir toutes les alertes</Link>
+                <Link href="/opportunity" onClick={() => setOpen(false)} className="rounded-xl border border-amber-300/[0.48] bg-amber-400/[0.08] px-3 py-2 text-center text-[10px] font-bold text-amber-300 transition hover:border-amber-200/[0.72] hover:bg-amber-400/[0.14]">Voir les opportunités</Link>
               </div>
             </motion.div>
           </>
