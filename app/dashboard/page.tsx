@@ -653,33 +653,66 @@ export default function DashboardPage() {
 
 
   const pokemonMarketTrends = useMemo(() => {
-    // Premium Dashboard only: group variants/forms under the base Pokémon.
-    // Card identity, catalogue names, prices and the rest of Dashboard stay untouched.
-    const groups = new Map<string, { label: string; items: MarketTrendSample[] }>();
-    marketTrendSamples.forEach((item) => {
-      const pokemon = premiumBasePokemonName(item.name);
+    // Premium Dashboard only:
+    // use the REAL Dashboard collection (including quantities), not the analytics
+    // cache, so 5+ owned cards of the same Pokémon are enough to form a group.
+    const groups = new Map<
+      string,
+      {
+        label: string;
+        cards: DashboardCard[];
+        totalQty: number;
+      }
+    >();
+
+    cards.forEach((card) => {
+      const pokemon = premiumBasePokemonName(card.name);
       if (!pokemon.key) return;
-      const group = groups.get(pokemon.key) || { label: pokemon.label, items: [] };
-      group.items.push(item);
+
+      const group = groups.get(pokemon.key) || {
+        label: pokemon.label,
+        cards: [],
+        totalQty: 0,
+      };
+
+      group.cards.push(card);
+      group.totalQty += Math.max(0, card.qty || 0);
       groups.set(pokemon.key, group);
     });
 
     return Array.from(groups.values())
-      .filter((group) => group.items.length >= 5)
+      .filter((group) => group.totalQty >= 5)
       .map((group) => {
-        const average = group.items.reduce((sum, item) => sum + item.trend7d, 0) / group.items.length;
-        const rising = group.items.filter((item) => item.trend7d > 0).length;
+        const weighted = group.cards
+          .filter((card) => Number.isFinite(card.priceTrend7d))
+          .map((card) => ({
+            trend: card.priceTrend7d,
+            qty: Math.max(1, card.qty || 1),
+          }));
+
+        const trendWeight = weighted.reduce((sum, item) => sum + item.qty, 0);
+        const average =
+          trendWeight > 0
+            ? weighted.reduce((sum, item) => sum + item.trend * item.qty, 0) / trendWeight
+            : 0;
+
+        const rising = group.cards.reduce(
+          (sum, card) =>
+            sum + (Number.isFinite(card.priceTrend7d) && card.priceTrend7d > 0 ? Math.max(1, card.qty || 1) : 0),
+          0
+        );
+
         return {
           name: group.label,
           average: Number(average.toFixed(2)),
           rising,
-          total: group.items.length,
+          total: group.totalQty,
         };
       })
-      .filter((item) => Math.abs(item.average) >= 1)
+      // Do not hide a qualifying Pokémon just because its current trend is stable.
       .sort((a, b) => Math.abs(b.average) - Math.abs(a.average))
       .slice(0, 3);
-  }, [marketTrendSamples]);
+  }, [cards]);
 
   const extensionMarketTrends = useMemo(() => {
     const groups = new Map<string, MarketTrendSample[]>();
@@ -1625,7 +1658,15 @@ export default function DashboardPage() {
                               {item.average >= 0 ? "+" : ""}{item.average.toFixed(1)} %
                             </span>
                           </div>
-                          <p className="mt-1 text-[10px] text-zinc-200">{item.rising}/{item.total} cartes en hausse · {Math.abs(item.average) >= 3 ? "tendance forte à surveiller" : "mouvement collectif détecté"}</p>
+                          <p className="mt-1 text-[10px] text-zinc-200">
+                            {item.rising}/{item.total} cartes en hausse · {
+                              Math.abs(item.average) >= 3
+                                ? "tendance forte à surveiller"
+                                : Math.abs(item.average) >= 1
+                                  ? "mouvement collectif détecté"
+                                  : "tendance globalement stable"
+                            }
+                          </p>
                         </div>
                       )) : <p className="text-[10px] font-bold text-zinc-600">Données insuffisantes · minimum 5 cartes du même Pokémon, variantes incluses.</p>}
                     </div>
