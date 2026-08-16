@@ -177,11 +177,25 @@ export default function ScannerPage() {
       const raw = window.localStorage.getItem(SCANNER_BATCH_KEY);
       if (raw) {
         const items = JSON.parse(raw);
-        if (Array.isArray(items)) {
-          setBatchList(items.slice(0, SCANNER_BATCH_LIMIT).map((item: any) => ({
+        if (Array.isArray(items) && items.length > 0) {
+          const restoredItems = items.slice(0, SCANNER_BATCH_LIMIT).map((item: any) => ({
             ...item,
             scannedAt: new Date(item.scannedAt),
-          })));
+          }));
+          const restoredQuad = restoredItems.some((item: ScannedBatchItem) =>
+            typeof item.quadSlot === "number"
+          );
+
+          setBatchList(restoredItems);
+          setScanMode("batch");
+          setBatchCaptureMode(restoredQuad ? "grouped" : "individual");
+          setModeSelected(true);
+          setIsDrawerOpen(true);
+          setStatus(
+            restoredQuad
+              ? "Session Quad restaurée : vos résultats précédents sont toujours disponibles."
+              : "Session Batch restaurée : vos résultats précédents sont toujours disponibles."
+          );
         }
       }
       setBatchQuotaConsumed(window.localStorage.getItem(SCANNER_BATCH_QUOTA_KEY) === "1");
@@ -940,20 +954,17 @@ export default function ScannerPage() {
                 <button
                   type="button"
                   onClick={() => selectScannerMode("single")}
-                  className={`relative rounded-2xl border px-2 py-3 text-center transition-all ${
+                  className={`rounded-2xl border-2 px-2 py-3 text-center transition-all ${
                     modeSelected && scanMode === "single"
-                      ? "border-cyan-300/65 bg-cyan-400/[0.12] shadow-[0_0_24px_rgba(34,211,238,.09)]"
-                      : "border-cyan-300/35 bg-cyan-400/[0.035] hover:border-cyan-300/55 hover:bg-cyan-400/[0.07]"
+                      ? "border-cyan-300 bg-cyan-400/[0.12] shadow-[0_0_24px_rgba(34,211,238,.10)]"
+                      : "border-cyan-400/70 bg-cyan-400/[0.045] hover:border-cyan-300 hover:bg-cyan-400/[0.08]"
                   }`}
                 >
                   <Zap className="mx-auto h-5 w-5 text-cyan-300" />
-                  <span className="mt-1.5 block text-[10px] font-black uppercase tracking-[0.09em] text-white">
+                  <span className="mt-1.5 block text-[10px] font-black uppercase tracking-[0.09em] text-cyan-300">
                     Mono
                   </span>
-                  <span className="mt-1 block text-[8px] font-bold leading-3 text-cyan-200">
-                    1 carte
-                  </span>
-                  <span className="mt-1 block text-[7px] leading-3 text-zinc-400">
+                  <span className="mt-2 block text-[7px] font-bold leading-3 text-zinc-300">
                     Identification directe
                   </span>
                 </button>
@@ -961,23 +972,20 @@ export default function ScannerPage() {
                 <button
                   type="button"
                   onClick={() => selectScannerMode("batch", "individual")}
-                  className={`relative rounded-2xl border px-2 py-3 text-center transition-all ${
+                  className={`rounded-2xl border-2 px-2 py-3 text-center transition-all ${
                     modeSelected && scanMode === "batch" && batchCaptureMode === "individual"
-                      ? "border-amber-300/60 bg-sky-400/[0.12] shadow-[0_0_24px_rgba(245,196,81,.10)]"
-                      : "border-amber-300/38 bg-sky-400/[0.055] hover:border-amber-300/58 hover:bg-sky-400/[0.09]"
+                      ? "border-amber-300 bg-sky-500/[0.14] shadow-[0_0_24px_rgba(245,196,81,.10)]"
+                      : "border-amber-300/75 bg-sky-500/[0.075] hover:border-amber-200 hover:bg-sky-500/[0.11]"
                   }`}
                 >
-                  <span className="absolute right-1.5 top-1.5 inline-flex items-center gap-0.5 rounded-full border border-amber-300/25 bg-amber-300/[0.08] px-1.5 py-0.5 text-[6px] font-black uppercase tracking-[0.07em] text-amber-300">
-                    <Crown className="h-2.5 w-2.5" /> Premium
-                  </span>
                   <Layers className="mx-auto h-5 w-5 text-sky-300" />
-                  <span className="mt-1.5 block text-[10px] font-black uppercase tracking-[0.09em] text-white">
+                  <span className="mt-1.5 block text-[10px] font-black uppercase tracking-[0.09em] text-sky-300">
                     Batch
                   </span>
-                  <span className="mt-1 block text-[8px] font-bold leading-3 text-sky-200">
-                    Jusqu’à 4 cartes
+                  <span className="mx-auto mt-1 inline-flex items-center justify-center gap-0.5 rounded-full border border-amber-300/30 bg-amber-300/[0.08] px-1.5 py-0.5 text-[6px] font-black uppercase tracking-[0.06em] text-amber-300">
+                    <Crown className="h-2.5 w-2.5" /> Premium
                   </span>
-                  <span className="mt-1 block text-[7px] leading-3 text-zinc-400">
+                  <span className="mt-1.5 block text-[7px] font-bold leading-3 text-zinc-300">
                     Une carte après l’autre
                   </span>
                 </button>
@@ -985,23 +993,20 @@ export default function ScannerPage() {
                 <button
                   type="button"
                   onClick={() => selectScannerMode("batch", "grouped")}
-                  className={`relative rounded-2xl border px-2 py-3 text-center transition-all ${
+                  className={`rounded-2xl border-2 px-2 py-3 text-center transition-all ${
                     modeSelected && scanMode === "batch" && batchCaptureMode === "grouped"
-                      ? "border-amber-300/60 bg-violet-400/[0.13] shadow-[0_0_24px_rgba(245,196,81,.10)]"
-                      : "border-amber-300/38 bg-violet-400/[0.06] hover:border-amber-300/58 hover:bg-violet-400/[0.10]"
+                      ? "border-amber-300 bg-violet-500/[0.15] shadow-[0_0_24px_rgba(245,196,81,.10)]"
+                      : "border-amber-300/75 bg-violet-500/[0.08] hover:border-amber-200 hover:bg-violet-500/[0.12]"
                   }`}
                 >
-                  <span className="absolute right-1.5 top-1.5 inline-flex items-center gap-0.5 rounded-full border border-amber-300/25 bg-amber-300/[0.08] px-1.5 py-0.5 text-[6px] font-black uppercase tracking-[0.07em] text-amber-300">
-                    <Crown className="h-2.5 w-2.5" /> Premium
-                  </span>
                   <Grid2X2 className="mx-auto h-5 w-5 text-violet-300" />
-                  <span className="mt-1.5 block text-[10px] font-black uppercase tracking-[0.09em] text-white">
+                  <span className="mt-1.5 block text-[10px] font-black uppercase tracking-[0.09em] text-violet-300">
                     Quad
                   </span>
-                  <span className="mt-1 block text-[8px] font-bold leading-3 text-violet-200">
-                    4 cartes en 1 photo
+                  <span className="mx-auto mt-1 inline-flex items-center justify-center gap-0.5 rounded-full border border-amber-300/30 bg-amber-300/[0.08] px-1.5 py-0.5 text-[6px] font-black uppercase tracking-[0.06em] text-amber-300">
+                    <Crown className="h-2.5 w-2.5" /> Premium
                   </span>
-                  <span className="mt-1 block text-[7px] leading-3 text-zinc-400">
+                  <span className="mt-1.5 block text-[7px] font-bold leading-3 text-zinc-300">
                     Analyse simultanée
                   </span>
                 </button>
@@ -1009,7 +1014,7 @@ export default function ScannerPage() {
 
               {!modeSelected ? (
                 <p className="mt-3 text-[10px] leading-4 text-zinc-400">
-                  La caméra s’ouvrira uniquement après votre sélection.
+                  Les différences sont indiquées ci-dessus. Choisissez ensuite le mode à utiliser.
                 </p>
               ) : null}
             </div>
