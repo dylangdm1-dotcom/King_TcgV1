@@ -478,29 +478,52 @@ return (
                           </button>
 
                           {isOpen ? (
-                            <div className="mx-2 mb-2 rounded-xl border border-amber-400/10 bg-black/10 px-3 py-2.5 text-[10px] leading-4">
-                              <p className="text-zinc-300">
-                                {alert.type === "RISE"
-                                  ? `Hausse de ${Math.abs(alert.changePercent).toFixed(2)} % sur 7 jours.`
-                                  : alert.type === "DROP"
-                                    ? `Baisse de ${Math.abs(alert.changePercent).toFixed(2)} % sur 7 jours.`
-                                    : `Signal de ${Math.abs(alert.changePercent).toFixed(2)} % à surveiller.`}
-                              </p>
-                              {hasPremiumAccess ? (
-                                <div className="mt-2 space-y-1.5 border-t border-amber-300/10 pt-2">
-                                  <p className="flex items-start gap-2 text-zinc-300">
-                                    <SearchCheck className="mt-0.5 h-3 w-3 shrink-0 text-amber-300" />
-                                    <span>Cause : <strong className="text-white">{premiumInsight.cause}</strong></span>
-                                  </p>
-                                  <p className="flex items-start gap-2 text-zinc-300">
-                                    <BrainCircuit className="mt-0.5 h-3 w-3 shrink-0 text-amber-300" />
-                                    <span>Lecture : <strong className="text-white">{premiumInsight.reading}</strong></span>
-                                  </p>
-                                  <p className="text-zinc-400">
-                                    Couverture : <strong className="text-white">{alert.dataCoverage} % · {alert.dataQualityLabel}</strong>
-                                  </p>
+                            <div className="mx-2 mb-2 space-y-2 rounded-xl border border-white/[0.06] bg-black/10 px-3 py-2.5 text-[10px] leading-4">
+                              <div>
+                                <p className="text-[9px] font-black uppercase tracking-[0.1em] text-cyan-300">
+                                  Lecture Standard
+                                </p>
+                                <p className="mt-1 text-zinc-300">
+                                  {alert.type === "RISE"
+                                    ? `Hausse de ${Math.abs(alert.changePercent).toFixed(2)} % sur 7 jours · signal positif à confirmer.`
+                                    : alert.type === "DROP"
+                                      ? `Baisse de ${Math.abs(alert.changePercent).toFixed(2)} % sur 7 jours · repli à surveiller.`
+                                      : `Signal de ${Math.abs(alert.changePercent).toFixed(2)} % · observation recommandée.`}
+                                </p>
+                              </div>
+
+                              <div className="border-t border-amber-300/10 pt-2">
+                                <div className="flex items-center justify-between gap-2">
+                                  <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-300/30 bg-amber-300/[0.07] px-2 py-1 text-[8px] font-black uppercase tracking-[0.09em] text-amber-300">
+                                    <Crown className="h-3 w-3" />
+                                    Analyse Premium
+                                  </span>
+                                  {!hasPremiumAccess ? (
+                                    <span className="text-[8px] font-black uppercase text-zinc-500">Verrouillée</span>
+                                  ) : null}
                                 </div>
-                              ) : null}
+
+                                {hasPremiumAccess ? (
+                                  <div className="mt-2 space-y-1.5">
+                                    <p className="flex items-start gap-2 text-zinc-300">
+                                      <SearchCheck className="mt-0.5 h-3 w-3 shrink-0 text-amber-300" />
+                                      <span>Cause : <strong className="text-white">{premiumInsight.cause}</strong></span>
+                                    </p>
+                                    <p className="flex items-start gap-2 text-zinc-300">
+                                      <BrainCircuit className="mt-0.5 h-3 w-3 shrink-0 text-amber-300" />
+                                      <span>Lecture : <strong className="text-white">{premiumInsight.reading}</strong></span>
+                                    </p>
+                                    <p className="text-zinc-400">
+                                      Couverture : <strong className="text-white">{alert.dataCoverage} % · {alert.dataQualityLabel}</strong>
+                                    </p>
+                                    <p className="text-[9px] text-zinc-500">Base : {alert.evidence.join(" · ")}.</p>
+                                  </div>
+                                ) : (
+                                  <p className="mt-2 text-[9px] leading-4 text-zinc-500">
+                                    Passez en Premium pour afficher la cause détaillée, la lecture King_TCG et la couverture des données.
+                                  </p>
+                                )}
+                              </div>
                             </div>
                           ) : null}
                         </div>
