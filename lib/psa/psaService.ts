@@ -151,7 +151,8 @@ export const psaService = {
    * le module PSA.
    */
   async searchPriceCharting(
-    query: string
+    query: string,
+    language: "en" | "fr" = "en"
   ): Promise<PriceChartingCard[]> {
     const search = query.trim();
 
@@ -161,7 +162,7 @@ export const psaService = {
       await fetch(
         `/api/psa/pricecharting?q=${encodeURIComponent(
           search
-        )}`,
+        )}&lang=${language}`,
         {
           cache: "no-store",
         }
