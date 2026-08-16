@@ -26,7 +26,11 @@ export interface EbayPsaListing {
   imageUrl?: string;
   url: string;
   listedAt?: string;
-  languageSignal: "explicit_fr" | "structured_fr" | "unknown";
+  languageSignal:
+    | "explicit_en" | "structured_en"
+    | "explicit_fr" | "structured_fr"
+    | "explicit_ja" | "structured_ja"
+    | "unknown";
   languageLabel: string;
 }
 
@@ -165,7 +169,7 @@ export const psaService = {
    */
   async searchPriceCharting(
     query: string,
-    language: "en" | "fr" = "en"
+    language: "en" | "fr" | "ja" = "en"
   ): Promise<PriceChartingCard[]> {
     const search = query.trim();
 
@@ -196,14 +200,15 @@ export const psaService = {
       : [];
   },
 
-  async searchEbayPsaFr(
-    query: string
+  async searchEbayPsa(
+    query: string,
+    language: "en" | "fr" | "ja" = "en"
   ): Promise<EbayPsaListing[]> {
     const search = query.trim();
     if (!search) return [];
 
     const response = await fetch(
-      `/api/psa/ebay?q=${encodeURIComponent(search)}`,
+      `/api/psa/ebay?q=${encodeURIComponent(search)}&lang=${language}`,
       { cache: "no-store" }
     );
 
@@ -211,7 +216,7 @@ export const psaService = {
 
     if (!response.ok || !data.success) {
       throw new Error(
-        data.error || "Recherche eBay PSA FR impossible."
+        data.error || "Recherche eBay PSA impossible."
       );
     }
 
