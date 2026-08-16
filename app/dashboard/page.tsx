@@ -90,6 +90,37 @@ function cardLanguage(card: PokemonCard): "fr" | "en" | "ja" | "zh-tw" {
 }
 
 
+function premiumBasePokemonName(name: string): { key: string; label: string } {
+  const normalized = name
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[’']/g, "'")
+    .trim();
+
+  let base = normalized
+    // Forms / mechanics that may appear before the Pokémon name.
+    .replace(/^(?:mega|méga)\s+/i, "")
+    .replace(/^(?:dark|obscur|obscure|light|lumineux|lumineuse)\s+/i, "")
+    // Forms / mechanics that may appear after the Pokémon name.
+    .replace(/\s+(?:ex|gx|vmax|vstar|v-union|vunion|v|lv\.?\s*x|break|turbo)\b.*$/i, "")
+    .replace(/\s+(?:promo|promotional|promotionnelle?)\b.*$/i, "")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  // Keep the original value if a future/unknown naming pattern would strip too much.
+  if (!base) base = normalized;
+
+  const label = base
+    .split(" ")
+    .map((part) => part ? part.charAt(0).toLocaleUpperCase("fr-FR") + part.slice(1).toLocaleLowerCase("fr-FR") : part)
+    .join(" ");
+
+  return {
+    key: base.toLocaleLowerCase("fr-FR"),
+    label,
+  };
+}
+
 function trend7dForCard(card: PokemonCard): number {
   const market = getMarketData(card);
   if (Number.isFinite(market.priceTrend7d) && Math.abs(market.priceTrend7d) > 0.001) {
@@ -622,21 +653,28 @@ export default function DashboardPage() {
 
 
   const pokemonMarketTrends = useMemo(() => {
-    const groups = new Map<string, MarketTrendSample[]>();
+    // Premium Dashboard only: group variants/forms under the base Pokémon.
+    // Card identity, catalogue names, prices and the rest of Dashboard stay untouched.
+    const groups = new Map<string, { label: string; items: MarketTrendSample[] }>();
     marketTrendSamples.forEach((item) => {
-      const key = item.name.trim().toLocaleLowerCase("fr-FR");
-      if (!key) return;
-      const list = groups.get(key) || [];
-      list.push(item);
-      groups.set(key, list);
+      const pokemon = premiumBasePokemonName(item.name);
+      if (!pokemon.key) return;
+      const group = groups.get(pokemon.key) || { label: pokemon.label, items: [] };
+      group.items.push(item);
+      groups.set(pokemon.key, group);
     });
 
     return Array.from(groups.values())
-      .filter((items) => items.length >= 5)
-      .map((items) => {
-        const average = items.reduce((sum, item) => sum + item.trend7d, 0) / items.length;
-        const rising = items.filter((item) => item.trend7d > 0).length;
-        return { name: items[0].name, average: Number(average.toFixed(2)), rising, total: items.length };
+      .filter((group) => group.items.length >= 5)
+      .map((group) => {
+        const average = group.items.reduce((sum, item) => sum + item.trend7d, 0) / group.items.length;
+        const rising = group.items.filter((item) => item.trend7d > 0).length;
+        return {
+          name: group.label,
+          average: Number(average.toFixed(2)),
+          rising,
+          total: group.items.length,
+        };
       })
       .filter((item) => Math.abs(item.average) >= 1)
       .sort((a, b) => Math.abs(b.average) - Math.abs(a.average))
@@ -1561,8 +1599,10 @@ export default function DashboardPage() {
               <div className="flex items-center gap-2.5">
                 <Crown className="h-4 w-4 text-amber-300" />
                 <div>
-                  <h2 className="text-[12px] font-black uppercase tracking-[0.14em] text-[#f5c451]">Analyse Premium</h2>
-                  <p className="mt-0.5 text-[10px] text-zinc-200">Tendances du marché et répartition de votre collection.</p>
+                  <div className="inline-flex items-center rounded-full border border-amber-300/35 bg-amber-300/[0.08] px-2.5 py-1 shadow-[0_0_16px_rgba(245,196,81,.08)]">
+                    <h2 className="text-[10px] font-black uppercase tracking-[0.13em] text-[#f5c451]">Analyse Premium</h2>
+                  </div>
+                  <p className="mt-1 text-[10px] text-zinc-200">Tendances du marché et répartition de votre collection.</p>
                 </div>
               </div>
               {premiumExpanded ? <ChevronUp className="h-4 w-4 text-amber-300" /> : <ChevronDown className="h-4 w-4 text-amber-300" />}
@@ -1587,7 +1627,7 @@ export default function DashboardPage() {
                           </div>
                           <p className="mt-1 text-[10px] text-zinc-200">{item.rising}/{item.total} cartes en hausse · {Math.abs(item.average) >= 3 ? "tendance forte à surveiller" : "mouvement collectif détecté"}</p>
                         </div>
-                      )) : <p className="text-[10px] font-bold text-zinc-600">Données insuffisantes · minimum 5 cartes par Pokémon.</p>}
+                      )) : <p className="text-[10px] font-bold text-zinc-600">Données insuffisantes · minimum 5 cartes du même Pokémon, variantes incluses.</p>}
                     </div>
                   </div>
 
