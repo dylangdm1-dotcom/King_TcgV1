@@ -242,7 +242,7 @@ export async function GET(request: Request) {
               : "Langue à vérifier",
       } satisfies EbayPsaListing;
     })
-    .filter((item): item is EbayPsaListing => Boolean(item));
+    .filter((item): item is NonNullable<typeof item> => Boolean(item));
 
   // Strong French evidence first. Unknown-language listings remain visible but
   // clearly labelled so we get broader coverage without pretending certainty.
