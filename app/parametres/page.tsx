@@ -228,9 +228,9 @@ export default function SettingsPage() {
                 <Users className="h-5 w-5" />
               </span>
               <span className="min-w-0 flex-1">
-                <span className="text-[13px] font-black text-cyan-300">Partenaires & testeurs</span>
+                <span className="text-[13px] font-black text-cyan-300">Partenaires & collaborateurs</span>
                 <span className="mt-1 block text-[10px] leading-4 text-zinc-300">
-                  Retrouvez les partenaires qui participent aux tests et à l’amélioration de King_TCG.
+                  Retrouvez les partenaires et collaborateurs qui participent aux tests et à l’amélioration de King_TCG.
                 </span>
               </span>
               <ChevronRight className="h-4 w-4 shrink-0 text-zinc-400 transition group-hover:text-cyan-300" />
@@ -326,19 +326,22 @@ export default function SettingsPage() {
               icon={<ScanLine className="h-4 w-4" />}
             >
               <div className="grid gap-2 sm:grid-cols-3">
-                <div className="rounded-xl border border-cyan-300/30 bg-cyan-400/[0.06] p-3">
-                  <p className="font-black text-cyan-300">Mono</p>
-                  <p className="mt-1 text-[10px] leading-4 text-zinc-300">Cadrez une carte entière : le scanner identifie son nom, son numéro et son extension avant d’ouvrir sa fiche détaillée.</p>
+                <div className="rounded-xl border border-cyan-300/35 bg-cyan-400/[0.06] p-3">
+                  <p className="font-black text-cyan-300">Mono · Normal</p>
+                  <p className="mt-1 text-[10px] leading-4 text-zinc-300">Choisissez Mono puis cadrez une carte entière. Les repères Nom Pokémon et N° de carte facilitent la prise de vue avant l’identification.</p>
                 </div>
-                <div className="rounded-xl border border-[#f5c451]/32 bg-[#f5c451]/[0.06] p-3">
-                  <p className="font-black text-[#f5c451]">Batch</p>
-                  <p className="mt-1 text-[10px] leading-4 text-zinc-300">Enchaînez jusqu’à quatre captures individuelles et conservez progressivement chaque résultat dans la même session.</p>
+                <div className="rounded-xl border border-[#f5c451]/38 bg-sky-400/[0.06] p-3">
+                  <p className="font-black text-sky-300">Batch · Premium</p>
+                  <p className="mt-1 text-[10px] leading-4 text-zinc-300">Scannez jusqu’à quatre cartes une par une. Les résultats restent conservés dans la session pendant la consultation des fiches.</p>
                 </div>
-                <div className="rounded-xl border border-[#f5c451]/32 bg-[#f5c451]/[0.06] p-3">
-                  <p className="font-black text-[#f5c451]">Quad Scan</p>
-                  <p className="mt-1 text-[10px] leading-4 text-zinc-300">Placez quatre cartes dans une seule photo : chaque zone est analysée séparément puis ajoutée aux résultats.</p>
+                <div className="rounded-xl border border-[#f5c451]/38 bg-violet-400/[0.06] p-3">
+                  <p className="font-black text-violet-300">Quad · Premium</p>
+                  <p className="mt-1 text-[10px] leading-4 text-zinc-300">Placez jusqu’à quatre cartes dans une seule photo. Chaque cadre est analysé séparément et les résultats restent disponibles dans la session.</p>
                 </div>
               </div>
+              <p className="mt-3 text-[10px] leading-4 text-zinc-300">
+                À l’ouverture du scanner, aucun mode n’est lancé automatiquement : Mono, Batch ou Quad doit d’abord être sélectionné. Une session correspond à une utilisation du scanner selon les règles du compte.
+              </p>
             </AccordionItem>
 
             <AccordionItem
@@ -348,10 +351,10 @@ export default function SettingsPage() {
             >
               <div className="space-y-2">
                 <p>
-                  La page PSA permet de rechercher des repères PriceCharting, d’ajouter une carte gradée à la collection et de suivre sa valeur estimée ainsi que son certificat.
+                  La recherche de prix PSA distingue maintenant les parcours <strong className="text-white">EN</strong> et <strong className="text-white">FR</strong> : PriceCharting sert de référence principale pour l’anglais, tandis qu’eBay complète la recherche des cartes gradées françaises avec regroupement des annonces compatibles.
                 </p>
                 <p>
-                  L’estimation PSA par photos reste une <strong className="text-white">estimation non officielle</strong>, distincte d’une note réellement attribuée par PSA.
+                  Une carte PSA trouvée peut être ajoutée à la collection avec son grade et son prix d’achat. L’estimation PSA par photos reste une <strong className="text-white">estimation non officielle</strong>, distincte d’une note réellement attribuée par PSA.
                 </p>
               </div>
             </AccordionItem>
@@ -427,11 +430,12 @@ export default function SettingsPage() {
                   "Prix multi-sources et cote King_TCG",
                   "Fiches cartes et graphiques de marché",
                   "Collection, favoris et tableau de bord",
-                  "Scanner Mono, Batch et Quad",
-                  "Catalogues JP / CN dédiés",
-                  "Collection PSA et estimation PSA",
+                  "Scanner Mono + Batch / Quad Premium (50 sessions)",
+                  "Catalogues FR / EN / JP / CN",
+                  "Collection PSA, recherche EN / FR et estimation IA",
                   "Alertes, opportunités et analyses de marché",
                   "Export / import",
+                  "Ventes Premium — module préparé, activation à venir",
                   "Comptes Cloud / Premium — en cours de préparation",
                 ].map((item) => (
                   <div key={item} className="kt-subpanel flex items-start gap-2 px-3 py-2.5">
@@ -469,7 +473,7 @@ export default function SettingsPage() {
               icon={<Database className="h-4 w-4" />}
             >
               <p>
-                King_TCG sépare les données de catalogue et les données marché. TCGdex et Pokémon TCG API servent les catalogues compatibles ; PokéWallet complète les chemins régionaux JP/CN ; Cardmarket, TCGPlayer, JustTCG et eBay alimentent les cotations lorsqu’une correspondance fiable existe. PriceCharting reste utilisé pour les modules PSA. Une source absente ne doit jamais entraîner l’invention d’un prix.
+                King_TCG sépare les données de catalogue et les données marché. TCGdex et Pokémon TCG API servent les catalogues compatibles ; PokéWallet complète les chemins régionaux JP/CN ; Cardmarket, TCGPlayer, JustTCG et eBay alimentent les cotations lorsqu’une correspondance fiable existe. PriceCharting alimente principalement la recherche PSA EN ; eBay complète désormais la recherche PSA FR. Une source absente ne doit jamais entraîner l’invention d’un prix.
               </p>
               <Link
                 href="/parametres/testeurs"
