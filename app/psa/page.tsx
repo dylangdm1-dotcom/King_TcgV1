@@ -74,6 +74,7 @@ type EbayPsaGradeSummary = {
 type EbayPsaCardGroup = {
   key: string;
   title: string;
+  cardNumber: string;
   imageUrl?: string;
   listingCount: number;
   verifiedFrenchCount: number;
@@ -89,15 +90,58 @@ function medianPrice(values: number[]): number {
     : Number(((sorted[middle - 1] + sorted[middle]) / 2).toFixed(2));
 }
 
-function ebayPsaCardIdentity(title: string): string {
+function ebayPsaCardNumber(title: string): string {
+  return (
+    title.match(/\b(\d{1,4}\s*\/\s*\d{1,4})\b/)?.[1]
+      ?.replace(/\s+/g, "") ||
+    title.match(/#\s*(\d{1,4})\b/)?.[1] ||
+    ""
+  );
+}
+
+function ebayPsaFirstEdition(title: string): boolean {
+  return /\b(?:1st\s*edition|first\s*edition|edition\s*1|1(?:e|ere|ère)\s*edition|premiere\s*edition|première\s*édition)\b/i.test(title);
+}
+
+function ebayPsaCoreName(title: string): string {
   return title
     .toLowerCase()
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
     .replace(/\b(?:psa\s*(?:gem\s*mint\s*)?(?:10|9|8|7|6|5|4|3|2|1)|grade\s*(?:10|9|8|7|6|5|4|3|2|1)|note\s*(?:10|9|8|7|6|5|4|3|2|1))\b/gi, " ")
+    .replace(/\b\d{1,4}\s*\/\s*\d{1,4}\b/g, " ")
+    .replace(/#\s*\d{1,4}\b/g, " ")
+    .replace(/\b(?:19|20)\d{2}\b/g, " ")
+    .replace(/\b(?:1st\s*edition|first\s*edition|edition\s*1|1(?:e|ere|ère)\s*edition|premiere\s*edition)\b/gi, " ")
+    .replace(/\b(?:set\s*de\s*base|base\s*set|set\s*base|base)\b/gi, " ")
+    .replace(/\b(?:set|serie|series|extension)\b/gi, " ")
+    .replace(/\b(?:ex[-\s]?mt|mt[-\s]?(?:nm|ny)|nm[-\s]?mt|near\s*mint|gem\s*mint|mint|excellent(?:[-\s]?mint)?|played|good|poor)\b/gi, " ")
     .replace(/\b(?:fr|french|francais|francaise|pokemon|pokémon|carte|card|graded|gradee|slab)\b/gi, " ")
-    .replace(/\b(?:neuf|new|mint|gem\s*mint)\b/gi, " ")
     .replace(/[|()[\]{}_,;:+*!?]/g, " ")
+    .replace(/[-–—]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function ebayPsaCardIdentity(title: string): string {
+  const number = ebayPsaCardNumber(title);
+  const core = ebayPsaCoreName(title);
+  const edition = ebayPsaFirstEdition(title) ? "1ed" : "std";
+
+  if (number && core) {
+    return `${core}|${number}|${edition}`;
+  }
+
+  if (number) {
+    return `${number}|${edition}`;
+  }
+
+  return title
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/\b(?:psa\s*(?:gem\s*mint\s*)?(?:10|9|8|7|6|5|4|3|2|1)|grade\s*(?:10|9|8|7|6|5|4|3|2|1)|note\s*(?:10|9|8|7|6|5|4|3|2|1))\b/gi, " ")
+    .replace(/\b(?:ex[-\s]?mt|mt[-\s]?(?:nm|ny)|nm[-\s]?mt|near\s*mint|gem\s*mint|mint|excellent(?:[-\s]?mint)?)\b/gi, " ")
     .replace(/\s+/g, " ")
     .trim();
 }
@@ -106,6 +150,7 @@ function compactEbayTitle(title: string): string {
   return title
     .replace(/\bPSA\s*(?:GEM\s*MINT\s*)?(?:10|9|8|7|6|5|4|3|2|1)\b/gi, "")
     .replace(/\b(?:FR|French|Français|Française)\b/gi, "")
+    .replace(/\b(?:ex[-\s]?mt|mt[-\s]?(?:nm|ny)|nm[-\s]?mt|near\s*mint|gem\s*mint|mint|excellent(?:[-\s]?mint)?)\b/gi, "")
     .replace(/\s{2,}/g, " ")
     .replace(/\s*[-|]\s*$/g, "")
     .trim();
@@ -151,6 +196,7 @@ function groupEbayPsaListings(listings: EbayPsaListing[]): EbayPsaCardGroup[] {
       return {
         key,
         title: compactEbayTitle(representative?.title || key),
+        cardNumber: ebayPsaCardNumber(representative?.title || ""),
         imageUrl: items.find((item) => item.imageUrl)?.imageUrl,
         listingCount: items.length,
         verifiedFrenchCount: items.filter((item) => item.languageSignal !== "unknown").length,
@@ -471,11 +517,11 @@ export default function PSAPage() {
                 <div className="flex items-center justify-center gap-2">
                   <BadgeCheck className="h-4 w-4 text-cyan-300" />
                   <p className="text-[11px] font-black uppercase tracking-[0.12em] text-cyan-300">
-                    Prix PriceCharting
+                    PriceCharting & eBay
                   </p>
                 </div>
                 <p className="mt-1.5 text-[11px] leading-5 text-zinc-100">
-                  Consultez les prix PriceCharting disponibles pour chaque grade PSA.
+                  Consultez les prix PriceCharting et eBay disponibles pour chaque grade PSA EN/FR.
                 </p>
               </div>
 
@@ -814,119 +860,149 @@ export default function PSAPage() {
                 )}
 
               {priceSearchLanguage === "fr" ? (
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between gap-3 rounded-[16px] border border-amber-300/15 bg-amber-300/[0.025] px-3 py-2.5">
-                    <div>
-                      <p className="text-[10px] font-black uppercase tracking-[0.11em] text-amber-300">
-                        eBay FR · cartes PSA regroupées
-                      </p>
-                      <p className="mt-1 text-[9px] leading-4 text-zinc-400">
-                        {ebayPsaResults.length} annonces actives analysées · {ebayPsaGroups.length} groupes de cartes probables
-                      </p>
-                    </div>
-                    <span className="shrink-0 rounded-full border border-amber-300/18 bg-amber-300/[0.06] px-2 py-1 text-[8px] font-black text-amber-200">
-                      FR
-                    </span>
+                <div className="space-y-5">
+                  <div className="rounded-[16px] border border-amber-300/15 bg-amber-300/[0.025] px-3 py-2.5">
+                    <p className="text-[10px] font-black uppercase tracking-[0.11em] text-amber-300">
+                      eBay FR · annonces actives
+                    </p>
+                    <p className="mt-1 text-[9px] leading-4 text-zinc-400">
+                      {ebayPsaResults.length} annonces analysées · {ebayPsaGroups.length} cartes regroupées. Les prix affichés sont des annonces en cours, pas des ventes réalisées.
+                    </p>
                   </div>
 
                   {ebayPsaLoading ? (
-                    <div className="rounded-xl border border-amber-300/10 bg-black/10 px-3 py-3 text-[10px] text-amber-200">
-                      Recherche eBay FR des cartes gradées PSA...
+                    <div className="rounded-2xl border border-cyan-500/20 bg-cyan-500/5 p-4 text-xs text-cyan-300">
+                      Recherche des cartes gradées PSA sur eBay France...
                     </div>
                   ) : ebayPsaError && ebayPsaResults.length === 0 ? (
-                    <div className="rounded-xl border border-white/[0.06] bg-black/10 px-3 py-3 text-[10px] text-zinc-400">
+                    <div className="rounded-2xl border border-amber-500/20 bg-amber-500/5 p-4 text-xs text-amber-300">
                       {ebayPsaError}
                     </div>
                   ) : (
-                    <div className="space-y-3">
-                      {ebayPsaGroups.map((group) => (
-                        <article
-                          key={group.key}
-                          className="overflow-hidden rounded-[16px] border border-cyan-300/12 bg-[linear-gradient(145deg,rgba(17,42,61,.72),rgba(8,16,24,.96))]"
-                        >
-                          <div className="flex gap-3 p-3">
+                    ebayPsaGroups.map((group) => (
+                      <div
+                        key={group.key}
+                        className="psa-result-card rounded-[18px] border border-cyan-300/16 bg-[linear-gradient(145deg,rgba(18,29,40,.98),rgba(9,15,22,.98))] p-4 space-y-4"
+                      >
+                        {/* CARD HEADER — même structure que la recherche EN */}
+                        <div className="flex flex-col gap-5 md:flex-row">
+                          <div className="shrink-0">
                             {group.imageUrl ? (
                               <img
                                 src={group.imageUrl}
-                                alt=""
-                                className="h-24 w-[68px] shrink-0 rounded-lg bg-black object-contain"
+                                alt={group.title}
+                                className="psa-card-image kt-card-frame h-40 w-28 rounded-xl bg-neutral-950 object-contain"
                               />
                             ) : (
-                              <div className="flex h-24 w-[68px] shrink-0 items-center justify-center rounded-lg border border-white/[0.05] bg-black/20">
-                                <BadgeCheck className="h-5 w-5 text-cyan-300/55" />
-                              </div>
-                            )}
-
-                            <div className="min-w-0 flex-1">
-                              <h3 className="line-clamp-2 text-[11px] font-black leading-4 text-white">
-                                {group.title}
-                              </h3>
-                              <div className="mt-2 flex flex-wrap gap-1.5">
-                                <span className="rounded-md border border-cyan-300/15 bg-cyan-300/[0.05] px-1.5 py-1 text-[8px] font-black text-cyan-200">
-                                  {group.listingCount} annonce{group.listingCount > 1 ? "s" : ""}
-                                </span>
-                                <span className="rounded-md border border-blue-300/15 bg-blue-300/[0.05] px-1.5 py-1 text-[8px] font-black text-blue-200">
-                                  {group.verifiedFrenchCount} FR vérifiée{group.verifiedFrenchCount > 1 ? "s" : ""}
-                                </span>
-                                <span className="rounded-md border border-amber-300/15 bg-amber-300/[0.05] px-1.5 py-1 text-[8px] font-black text-amber-200">
-                                  PSA {group.grades.map((grade) => grade.grade).join(" · ")}
-                                </span>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div className="divide-y divide-white/[0.05] border-t border-white/[0.05]">
-                            {group.grades.map((grade) => (
-                              <div key={grade.grade} className="px-3 py-2.5">
-                                <div className="flex items-center justify-between gap-3">
-                                  <div className="flex items-center gap-2">
-                                    <span className="rounded-md border border-cyan-300/18 bg-cyan-300/[0.06] px-2 py-1 text-[9px] font-black text-cyan-200">
-                                      PSA {grade.grade}
-                                    </span>
-                                    <span className="text-[8px] font-bold text-zinc-500">
-                                      {grade.count} annonce{grade.count > 1 ? "s" : ""}
-                                    </span>
-                                  </div>
-                                  <span className="text-[11px] font-black text-white">
-                                    médiane {formatEUR(grade.median)}
+                              <div className="kt-card-frame flex h-40 w-28 items-center justify-center rounded-xl bg-neutral-950">
+                                <div className="text-center px-2">
+                                  <BadgeCheck className="mx-auto h-7 w-7 text-zinc-700" />
+                                  <span className="mt-2 block text-[10px] font-black uppercase text-zinc-200">
+                                    Image indisponible
                                   </span>
                                 </div>
+                              </div>
+                            )}
+                          </div>
 
-                                <div className="mt-2 grid grid-cols-3 gap-1.5 text-center">
-                                  <div className="rounded-lg border border-white/[0.05] bg-black/10 px-2 py-1.5">
-                                    <p className="text-[7px] font-black uppercase text-zinc-500">Mini</p>
-                                    <p className="mt-0.5 text-[9px] font-black text-zinc-200">{formatEUR(grade.min)}</p>
-                                  </div>
-                                  <div className="rounded-lg border border-cyan-300/10 bg-cyan-300/[0.025] px-2 py-1.5">
-                                    <p className="text-[7px] font-black uppercase text-cyan-300/70">Médian</p>
-                                    <p className="mt-0.5 text-[9px] font-black text-cyan-200">{formatEUR(grade.median)}</p>
-                                  </div>
-                                  <div className="rounded-lg border border-white/[0.05] bg-black/10 px-2 py-1.5">
-                                    <p className="text-[7px] font-black uppercase text-zinc-500">Maxi</p>
-                                    <p className="mt-0.5 text-[9px] font-black text-zinc-200">{formatEUR(grade.max)}</p>
-                                  </div>
-                                </div>
+                          <div className="min-w-0 flex-1">
+                            <div className="flex flex-wrap items-center gap-2">
+                              <h3 className="text-base font-black">
+                                {group.title}
+                              </h3>
+                              {group.cardNumber ? (
+                                <span className="rounded-lg border border-cyan-500/20 bg-cyan-500/10 px-2 py-1 text-[10px] text-cyan-400">
+                                  {group.cardNumber}
+                                </span>
+                              ) : null}
+                            </div>
 
-                                <div className="mt-2 flex gap-1.5 overflow-x-auto pb-1">
-                                  {grade.listings.slice(0, 6).map((listing) => (
-                                    <a
-                                      key={listing.id}
-                                      href={listing.url}
-                                      target="_blank"
-                                      rel="noreferrer"
-                                      title={listing.title}
-                                      className="shrink-0 rounded-lg border border-amber-300/12 bg-amber-300/[0.035] px-2 py-1.5 text-[8px] font-black text-amber-200 transition hover:border-amber-300/30"
-                                    >
-                                      {formatEUR(listing.price)}
-                                    </a>
-                                  ))}
-                                </div>
+                            <p className="mt-2 text-xs text-zinc-100">
+                              eBay France · {group.listingCount} annonce{group.listingCount > 1 ? "s" : ""}
+                            </p>
+                            <p className="mt-1 text-[10px] text-zinc-200">
+                              Langue : Français · {group.verifiedFrenchCount} résultat{group.verifiedFrenchCount > 1 ? "s" : ""} explicite{group.verifiedFrenchCount > 1 ? "s" : ""}
+                            </p>
+
+                            {group.grades[0]?.listings[0]?.url ? (
+                              <a
+                                href={group.grades[0].listings[0].url}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="mt-4 inline-flex items-center gap-1 text-[10px] text-zinc-200 underline hover:text-cyan-400"
+                              >
+                                Voir une annonce eBay
+                                <ExternalLink className="h-3 w-3" />
+                              </a>
+                            ) : null}
+                          </div>
+                        </div>
+
+                        {/* PRICES — même logique visuelle que PriceCharting EN */}
+                        <div>
+                          <div className="mb-3 flex items-center gap-2">
+                            <div className="h-4 w-1 rounded-full bg-cyan-500" />
+                            <h4 className="text-xs font-black uppercase">
+                              Prix marché
+                            </h4>
+                            <span className="text-[10px] uppercase text-zinc-200">
+                              EUR
+                            </span>
+                          </div>
+
+                          <div className="psa-price-grid grid grid-cols-2 gap-2 md:grid-cols-5">
+                            {group.grades.map((grade) => (
+                              <div
+                                key={grade.grade}
+                                className="rounded-xl border border-cyan-300/13 bg-cyan-400/[0.025] p-3"
+                              >
+                                <span className="block text-[10px] font-black uppercase text-zinc-200">
+                                  PSA {grade.grade}
+                                </span>
+                                <span className="mt-1 block text-sm font-black">
+                                  {formatEUR(grade.median)}
+                                </span>
+                                <span className="mt-1 block text-[9px] font-bold text-cyan-400">
+                                  {grade.count} annonce{grade.count > 1 ? "s" : ""}
+                                </span>
+                                <span className="mt-1 block text-[8px] text-zinc-500">
+                                  {formatEUR(grade.min)} → {formatEUR(grade.max)}
+                                </span>
                               </div>
                             ))}
                           </div>
-                        </article>
-                      ))}
-                    </div>
+                        </div>
+
+                        {/* ANNOUNCES */}
+                        <div className="border-t border-cyan-300/12 pt-4">
+                          <div className="mb-3 flex items-center gap-2">
+                            <ShoppingBag className="h-4 w-4 text-cyan-400" />
+                            <h4 className="text-xs font-black uppercase">
+                              Annonces eBay
+                            </h4>
+                            <span className="text-[10px] text-zinc-200">
+                              Actives
+                            </span>
+                          </div>
+                          <div className="flex gap-2 overflow-x-auto pb-1">
+                            {group.grades.flatMap((grade) =>
+                              grade.listings.slice(0, 3).map((listing) => (
+                                <a
+                                  key={listing.id}
+                                  href={listing.url}
+                                  target="_blank"
+                                  rel="noreferrer"
+                                  title={listing.title}
+                                  className="shrink-0 rounded-xl border border-cyan-300/12 bg-cyan-400/[0.025] px-3 py-2 text-[9px] font-black text-cyan-200 transition hover:border-cyan-300/35"
+                                >
+                                  PSA {listing.grade} · {formatEUR(listing.price)}
+                                </a>
+                              ))
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    ))
                   )}
                 </div>
               ) : null}
