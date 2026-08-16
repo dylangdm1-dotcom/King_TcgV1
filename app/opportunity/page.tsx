@@ -564,6 +564,30 @@ function CompactOpportunityGroup({
               </button>
               {isOpen ? (
                 <div className="px-1 pb-2">
+                  <div className="mb-2 rounded-xl border border-cyan-300/10 bg-cyan-400/[0.025] px-3 py-2.5">
+                    <p className="text-[9px] font-black uppercase tracking-[0.1em] text-cyan-300">
+                      Lecture Standard
+                    </p>
+                    <p className="mt-1 text-[10px] leading-4 text-zinc-300">
+                      {op.recommendation === "BUY"
+                        ? "Signal positif détecté : potentiel à surveiller selon la tendance et le score actuel."
+                        : op.recommendation === "SELL"
+                          ? "Signal de baisse détecté : vérifiez la tendance avant arbitrage."
+                          : "Signal intermédiaire : la carte reste sous observation."}
+                    </p>
+                    <div className="mt-2 flex flex-wrap gap-1.5">
+                      <span className="rounded-full border border-white/[0.06] bg-white/[0.025] px-2 py-1 text-[8px] font-bold text-zinc-300">
+                        Score {op.score}/10
+                      </span>
+                      <span className="rounded-full border border-white/[0.06] bg-white/[0.025] px-2 py-1 text-[8px] font-bold text-zinc-300">
+                        Tendance {op.trend > 0 ? "+" : ""}{op.trend.toFixed(1)} %
+                      </span>
+                      <span className="rounded-full border border-white/[0.06] bg-white/[0.025] px-2 py-1 text-[8px] font-bold text-zinc-300">
+                        {op.currentPrice.toFixed(2)} €
+                      </span>
+                    </div>
+                  </div>
+
                   <OpportunityCard
                     op={op}
                     borderClass={toneClasses.border}
@@ -674,22 +698,36 @@ function OpportunityCard({
           aria-expanded={hasPremiumAccess ? premiumOpen : false}
           className={`flex w-full items-center justify-between rounded-xl border px-3 py-2 text-[10px] font-bold uppercase tracking-[0.11em] transition ${
             hasPremiumAccess
-              ? "border-amber-400/20 bg-amber-400/[0.05] text-amber-300 hover:bg-amber-400/[0.09]"
-              : "cursor-not-allowed border-white/[0.06] bg-white/[0.02] text-zinc-200"
+              ? "border-amber-400/25 bg-amber-400/[0.055] text-amber-300 hover:bg-amber-400/[0.09]"
+              : "cursor-not-allowed border-amber-400/10 bg-amber-400/[0.025] text-amber-300/60"
           }`}
         >
-          <span className="flex items-center gap-2"><Crown className="h-3.5 w-3.5" /> Analyse Premium</span>
+          <span className="flex items-center gap-2">
+            <Crown className="h-3.5 w-3.5" />
+            Analyse Premium
+            {!hasPremiumAccess ? (
+              <span className="rounded-full border border-amber-300/20 px-1.5 py-0.5 text-[7px]">Verrouillée</span>
+            ) : null}
+          </span>
           <ChevronDown className={`h-3.5 w-3.5 transition-transform ${premiumOpen ? "rotate-180" : ""}`} />
         </button>
 
-        {hasPremiumAccess && premiumOpen && (
+        {hasPremiumAccess && premiumOpen ? (
           <div className="mt-2 space-y-1.5 rounded-xl border border-amber-400/10 bg-white/[0.035] px-3 py-2.5 text-[11px]">
-            <p className="text-zinc-300">📈 Scénario indicatif 30 j : <span className="font-bold text-white">{formatPercent(op.scenarioLow)} à {formatPercent(op.scenarioHigh)}</span></p>
-            <p className="text-zinc-300">🎯 Couverture des données : <span className="font-bold text-white">{op.dataCoverage} % · {op.dataQualityLabel}</span></p>
+            <p className="text-zinc-300">
+              👑 Potentiel indicatif 30 j : <span className="font-bold text-white">{formatPercent(op.scenarioLow)} à {formatPercent(op.scenarioHigh)}</span>
+            </p>
+            <p className="text-zinc-300">
+              🎯 Confiance King_TCG : <span className="font-bold text-white">{op.dataCoverage} % · {op.dataQualityLabel}</span>
+            </p>
             <p className="text-zinc-400">Base : {op.evidence.join(" · ")}.</p>
             <p className="text-[10px] text-zinc-500">Projection algorithmique, pas une promesse de rendement ni un conseil d’achat/vente.</p>
           </div>
-        )}
+        ) : !hasPremiumAccess ? (
+          <p className="mt-2 text-[9px] leading-4 text-zinc-500">
+            Le compte Normal conserve le signal, le score, le prix et la tendance. Le scénario 30 j et la confiance détaillée sont réservés au Premium.
+          </p>
+        ) : null}
       </div>
     </article>
   );
