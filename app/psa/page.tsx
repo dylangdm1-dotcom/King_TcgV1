@@ -16,6 +16,7 @@ import {
   TrendingUp,
   BadgeEuro,
   Gem,
+  BadgeCheck,
 } from "lucide-react";
 
 import Navbar from "@/components/Navbar";
@@ -63,6 +64,8 @@ export default function PSAPage() {
   const [activeTab, setActiveTab] = useState<
     "collection" | "search" | "estimation"
   >("collection");
+
+  const [priceSearchLanguage, setPriceSearchLanguage] = useState<"en" | "fr">("en");
 
   const [collection, setCollection] = useState<PSACard[]>([]);
 
@@ -322,7 +325,7 @@ export default function PSAPage() {
             <div className="grid md:grid-cols-3">
               <div className="kt-psa-feature-segment p-3 text-center">
                 <div className="flex items-center justify-center gap-2">
-                  <Award className="h-4 w-4 text-cyan-300" />
+                  <BadgeCheck className="h-4 w-4 text-cyan-300" />
                   <p className="text-[11px] font-black uppercase tracking-[0.12em] text-cyan-300">
                     Collection gradée
                   </p>
@@ -334,7 +337,7 @@ export default function PSAPage() {
 
               <div className="kt-psa-feature-segment p-3 text-center">
                 <div className="flex items-center justify-center gap-2">
-                  <Award className="h-4 w-4 text-cyan-300" />
+                  <BadgeCheck className="h-4 w-4 text-cyan-300" />
                   <p className="text-[11px] font-black uppercase tracking-[0.12em] text-cyan-300">
                     Prix PriceCharting
                   </p>
@@ -346,13 +349,7 @@ export default function PSAPage() {
 
               <div className="kt-psa-feature-segment p-3 text-center">
                 <div className="flex items-center justify-center gap-2">
-                  <div className="kt-logo-tile flex h-7 w-11 shrink-0 items-center justify-center rounded-lg bg-[#f4f6f8] px-1 py-0.5">
-                    <img
-                      src="/brands/psa.png"
-                      alt="PSA"
-                      className="h-full w-full object-contain"
-                    />
-                  </div>
+                  <BadgeCheck className="h-4 w-4 text-cyan-300" />
                   <p className="text-[11px] font-black uppercase tracking-[0.12em] text-cyan-300">
                     Estimation IA Grade
                   </p>
@@ -398,7 +395,7 @@ export default function PSAPage() {
               >
                 <span className="flex items-center justify-center gap-1.5">
                   {tab.id === "estimation" ? (
-                    <img src="/brands/psa.png" alt="" aria-hidden="true" className="h-4 w-8 rounded-sm bg-white object-contain px-0.5" />
+                    <BadgeCheck className="h-[18px] w-[18px] text-cyan-300" />
                   ) : null}
                   {tab.label}
                 </span>
@@ -550,6 +547,53 @@ export default function PSAPage() {
           {activeTab === "search" && (
             <section className="space-y-6">
 
+              <div className="rounded-[16px] border border-cyan-300/20 bg-[#0a1118] p-2 shadow-[0_10px_28px_rgba(0,0,0,.16)]">
+                <div className="mb-2 px-1">
+                  <p className="text-[9px] font-black uppercase tracking-[0.12em] text-cyan-300">
+                    Langue de recherche
+                  </p>
+                </div>
+                <div className="grid grid-cols-2 gap-2">
+                <button
+                  type="button"
+                  onClick={() => setPriceSearchLanguage("en")}
+                  className={`flex items-center justify-center gap-2 rounded-xl px-3 py-3 text-[10px] font-black uppercase tracking-[0.08em] transition ${
+                    priceSearchLanguage === "en"
+                      ? "border border-cyan-300/45 bg-cyan-400/[0.14] text-white shadow-[0_0_20px_rgba(34,211,238,.06)]"
+                      : "border border-transparent text-zinc-400 hover:bg-white/[0.03] hover:text-white"
+                  }`}
+                >
+                  <span className="text-lg leading-none">🇬🇧</span>
+                  Anglais
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setPriceSearchLanguage("fr")}
+                  className={`flex items-center justify-center gap-2 rounded-xl px-3 py-3 text-[10px] font-black uppercase tracking-[0.08em] transition ${
+                    priceSearchLanguage === "fr"
+                      ? "border border-cyan-300/45 bg-cyan-400/[0.14] text-white shadow-[0_0_20px_rgba(34,211,238,.06)]"
+                      : "border border-transparent text-zinc-400 hover:bg-white/[0.03] hover:text-white"
+                  }`}
+                >
+                  <span className="text-lg leading-none">🇫🇷</span>
+                  Français
+                </button>
+                </div>
+              </div>
+
+              {priceSearchLanguage === "fr" ? (
+                <div className="rounded-[16px] border border-amber-300/16 bg-amber-300/[0.045] px-4 py-3 text-center">
+                  <p className="text-[10px] font-black uppercase tracking-[0.10em] text-amber-300">
+                    Recherche française en préparation
+                  </p>
+                  <p className="mt-1 text-[10px] leading-4 text-zinc-300">
+                    Le chemin de recherche FR sera relié après validation du matching exact des cartes françaises.
+                  </p>
+                </div>
+              ) : null}
+
+              {priceSearchLanguage === "en" ? (
+              <>
               <div className="space-y-4 rounded-[18px] border border-cyan-400/13 bg-[#0a1118] p-4 shadow-[0_16px_38px_rgba(0,0,0,.20)] sm:p-5">
                 <div>
                   <h2 className="text-sm font-black uppercase">
@@ -562,7 +606,7 @@ export default function PSAPage() {
                   </p>
 
                   <div className="mt-3 flex items-start gap-2 rounded-xl border border-amber-400/15 bg-amber-400/[0.05] px-3 py-2.5">
-                    <span className="mt-0.5 text-sm" aria-hidden="true">🌐</span>
+                    <span className="mt-0.5 text-base leading-none" aria-hidden="true">🇬🇧</span>
                     <p className="text-[11px] leading-relaxed text-amber-200/80">
                       <span className="font-black text-amber-200">Recherche en anglais pour le moment :</span>{" "}
                       utilisez le nom anglais du Pokémon (ex. <span className="font-bold text-white">Charizard</span>, <span className="font-bold text-white">Pikachu</span> ou <span className="font-bold text-white">Umbreon</span>).
@@ -884,6 +928,8 @@ export default function PSAPage() {
                   </div>
                 ))}
               </div>
+              </>
+              ) : null}
             </section>
           )}
 
