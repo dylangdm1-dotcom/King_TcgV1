@@ -110,6 +110,22 @@ export default function NotificationBell() {
         tone: "opportunity",
       }));
 
+    const variationItems = snapshot.opportunities
+      .filter(
+        (item) =>
+          item.recommendation !== "BUY" &&
+          Math.abs(Number(item.trend || 0)) >= 5
+      )
+      .sort((a, b) => Math.abs(b.trend) - Math.abs(a.trend))
+      .slice(0, 3)
+      .map<NotificationItem>((item) => ({
+        id: `variation-${item.id}`,
+        title: `${item.name}${item.number ? ` #${item.number}` : ""}`,
+        description: `${item.trend >= 0 ? "+" : ""}${item.trend.toFixed(1)} % · forte variation`,
+        href: "/opportunity",
+        tone: "system",
+      }));
+
     const systemItems: NotificationItem[] = [];
     if (snapshot.updatedAt > 0) {
       const updated = new Date(snapshot.updatedAt);
@@ -129,27 +145,27 @@ export default function NotificationBell() {
     const groups = ([
       {
         key: "important",
-        title: "Alertes importantes",
+        title: "Alerte importante",
         href: "/alerts",
         items: importantAlerts,
       },
       {
         key: "watch",
-        title: "À surveiller",
+        title: "Carte à surveiller",
         href: "/alerts",
         items: watchAlerts,
       },
       {
         key: "opportunity",
-        title: "Opportunités détectées",
+        title: "Opportunité détectée",
         href: "/opportunity",
         items: opportunityItems,
       },
       {
         key: "system",
-        title: "Informations marché",
-        href: "/alerts",
-        items: systemItems,
+        title: "Forte variation",
+        href: "/opportunity",
+        items: variationItems,
       },
     ] satisfies NotificationGroup[]).filter((group) => group.items.length > 0);
 
