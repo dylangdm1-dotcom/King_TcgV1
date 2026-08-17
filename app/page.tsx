@@ -501,16 +501,16 @@ export default function Home() {
                           Votre soutien peut aider à faire évoluer l’application, améliorer ses données et préparer de nouvelles fonctions pour tous les collectionneurs. Cette démarche reste entièrement libre et facultative.
                         </p>
                       </div>
-                      <button
-                        type="button"
-                        disabled
-                        aria-disabled="true"
-                        title="Lien de soutien bientôt disponible"
-                        className="mx-auto mt-4 flex min-h-11 w-full max-w-xs cursor-not-allowed items-center justify-center gap-2 rounded-xl border border-amber-300/25 bg-amber-300/[0.055] px-4 py-2.5 text-[10px] font-black text-amber-200/70"
+                      <a
+                        href="https://paypal.me/dylangdm"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mx-auto mt-4 flex min-h-11 w-full max-w-xs items-center justify-center gap-2 rounded-xl border border-amber-300/30 bg-amber-300/[0.075] px-4 py-2.5 text-[10px] font-black text-amber-200 transition hover:border-amber-200/55 hover:bg-amber-300/[0.12]"
                       >
                         <Heart className="h-3.5 w-3.5 shrink-0" />
                         Soutenir le projet
-                      </button>
+                        <ExternalLink className="h-3.5 w-3.5 shrink-0" />
+                      </a>
                     </section>
                   </div>
                 </div>
