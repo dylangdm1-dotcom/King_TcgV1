@@ -222,22 +222,6 @@ export default function SettingsPage() {
             </Link>
 
             <Link
-              href="/parametres/legal"
-              className="group flex items-center gap-4 border-b border-white/[0.06] p-4 transition hover:bg-cyan-400/[0.025] sm:p-5"
-            >
-              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-[15px] border border-cyan-400/28 bg-cyan-400/[0.07] text-cyan-300">
-                <Scale className="h-5 w-5" />
-              </span>
-              <span className="min-w-0 flex-1">
-                <span className="text-[13px] font-black text-cyan-300">Informations légales</span>
-                <span className="mt-1 block text-[10px] leading-4 text-zinc-300">
-                  Conditions d’utilisation, confidentialité et préparation du futur cadre associatif.
-                </span>
-              </span>
-              <ChevronRight className="h-4 w-4 shrink-0 text-zinc-400 transition group-hover:text-cyan-300" />
-            </Link>
-
-            <Link
               href="/parametres/testeurs"
               className="group flex items-center gap-4 border-b border-white/[0.06] p-4 transition hover:bg-cyan-400/[0.025] sm:p-5"
             >
@@ -379,8 +363,30 @@ export default function SettingsPage() {
             </AccordionItem>
 
             <AccordionItem
-              title="Stockage et confidentialité"
-              description="Où sont conservées vos cartes et préférences."
+              title="Informations légales"
+              description="Conditions d’utilisation, confidentialité et cadre administratif de King_TCG."
+              icon={<Scale className="h-4 w-4" />}
+            >
+              <div className="space-y-3">
+                <p>
+                  Retrouvez dans un espace dédié les conditions d’utilisation, les informations relatives aux données et la préparation du futur cadre associatif de King_TCG.
+                </p>
+                <Link
+                  href="/parametres/legal"
+                  className="group flex items-center justify-between gap-3 rounded-[14px] border border-cyan-300/[0.30] bg-cyan-400/[0.06] px-4 py-3 transition hover:border-cyan-200/[0.52] hover:bg-cyan-400/[0.10]"
+                >
+                  <span>
+                    <span className="block text-[11px] font-black text-cyan-200">Consulter les informations légales</span>
+                    <span className="mt-0.5 block text-[9px] leading-4 text-zinc-300">Conditions d’utilisation · Confidentialité & données · Projet associatif</span>
+                  </span>
+                  <ChevronRight className="h-4 w-4 shrink-0 text-zinc-400 transition group-hover:text-cyan-300" />
+                </Link>
+              </div>
+            </AccordionItem>
+
+            <AccordionItem
+              title="Stockage & données locales"
+              description="Gestion technique du stockage actuellement conservé dans votre navigateur."
               icon={<ShieldCheck className="h-4 w-4" />}
             >
               <div className="kt-subpanel flex items-start gap-3 p-3">
@@ -390,7 +396,7 @@ export default function SettingsPage() {
                 </p>
               </div>
               <p className="mt-3">
-                Aucun service Cloud n’est présenté comme actif dans cette version. Une future synchronisation devra être clairement activée par l’utilisateur.
+                Cette section sert uniquement à gérer le stockage technique local. Les informations relatives à la confidentialité, aux données personnelles et aux futurs comptes Cloud sont regroupées dans <strong className="text-white">Informations légales</strong>.
               </p>
 
               <div className="mt-4 grid gap-3 sm:grid-cols-2">
