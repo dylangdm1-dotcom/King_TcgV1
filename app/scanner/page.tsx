@@ -59,7 +59,9 @@ const SCANNER_MONTHLY_LIMIT = 50;
 const SCANNER_BATCH_LIMIT = 4;
 const SCANNER_QUOTA_KEY = "king_tcg_scanner_quota_v1";
 const SCANNER_BATCH_KEY = "king_tcg_scanner_batch_v1";
+const SCANNER_QUAD_KEY = "king_tcg_scanner_quad_v1";
 const SCANNER_BATCH_QUOTA_KEY = "king_tcg_scanner_batch_quota_v1";
+const SCANNER_QUAD_QUOTA_KEY = "king_tcg_scanner_quad_quota_v1";
 
 function getScannerPeriod(now = new Date()) {
   const year = now.getFullYear();
@@ -160,9 +162,11 @@ export default function ScannerPage() {
   const [batchCaptureMode, setBatchCaptureMode] = useState<"individual" | "grouped">("individual");
   const [groupedLanguage, setGroupedLanguage] = useState<"fr" | "en" | "ja" | "zh-tw">("fr");
   const [batchList, setBatchList] = useState<ScannedBatchItem[]>([]);
+  const [quadList, setQuadList] = useState<ScannedBatchItem[]>([]);
   const [quotaUsed, setQuotaUsed] = useState(0);
   const [quotaEnd, setQuotaEnd] = useState("");
   const [batchQuotaConsumed, setBatchQuotaConsumed] = useState(false);
+  const [quadQuotaConsumed, setQuadQuotaConsumed] = useState(false);
   const [quadProgress, setQuadProgress] = useState<QuadSlotProgress[]>(EMPTY_QUAD_PROGRESS);
 
   useEffect(() => {
@@ -181,7 +185,18 @@ export default function ScannerPage() {
           setBatchList(restoredItems);
         }
       }
+      const rawQuad = window.localStorage.getItem(SCANNER_QUAD_KEY);
+      if (rawQuad) {
+        const items = JSON.parse(rawQuad);
+        if (Array.isArray(items) && items.length > 0) {
+          setQuadList(items.slice(0, SCANNER_BATCH_LIMIT).map((item: any) => ({
+            ...item,
+            scannedAt: new Date(item.scannedAt),
+          })));
+        }
+      }
       setBatchQuotaConsumed(window.localStorage.getItem(SCANNER_BATCH_QUOTA_KEY) === "1");
+      setQuadQuotaConsumed(window.localStorage.getItem(SCANNER_QUAD_QUOTA_KEY) === "1");
     } catch {}
   }, []);
 
@@ -194,10 +209,20 @@ export default function ScannerPage() {
     } catch {}
   }, [batchList]);
 
+  useEffect(() => {
+    try {
+      window.localStorage.setItem(
+        SCANNER_QUAD_KEY,
+        JSON.stringify(quadList.map((item) => ({ ...item, scannedAt: item.scannedAt.toISOString() })))
+      );
+    } catch {}
+  }, [quadList]);
+
   const quotaBlocked = quotaUsed >= SCANNER_MONTHLY_LIMIT;
 
-  const consumeSuccessfulSession = useCallback((mode: "single" | "batch") => {
+  const consumeSuccessfulSession = useCallback((mode: "single" | "batch" | "quad") => {
     if (mode === "batch" && batchQuotaConsumed) return true;
+    if (mode === "quad" && quadQuotaConsumed) return true;
     const current = readQuota();
     if (current.used >= SCANNER_MONTHLY_LIMIT) {
       setQuotaUsed(current.used);
@@ -210,9 +235,12 @@ export default function ScannerPage() {
     if (mode === "batch") {
       setBatchQuotaConsumed(true);
       try { window.localStorage.setItem(SCANNER_BATCH_QUOTA_KEY, "1"); } catch {}
+    } else if (mode === "quad") {
+      setQuadQuotaConsumed(true);
+      try { window.localStorage.setItem(SCANNER_QUAD_QUOTA_KEY, "1"); } catch {}
     }
     return true;
-  }, [batchQuotaConsumed]);
+  }, [batchQuotaConsumed, quadQuotaConsumed]);
 
   // =====================================================
   // HAPTIC FEEDBACK
@@ -258,7 +286,7 @@ export default function ScannerPage() {
 
   const handleQuadCardIdentified = useCallback((card: PokemonCard, slot: number, confidence = 0) => {
     const quadSlot = slot as QuadSlotIndex;
-    setBatchList((prev) => {
+    setQuadList((prev) => {
       const item: ScannedBatchItem = {
         id: `${card.id}_${Date.now()}_${slot}`,
         card,
@@ -297,7 +325,7 @@ export default function ScannerPage() {
       // ScannerCamera n'utilise ce callback final que pour le Quad.
       // Les cartes sont déjà ajoutées une par une via handleQuadCardIdentified.
       if (scanMode === "batch") {
-        if (!consumeSuccessfulSession("batch")) {
+        if (!consumeSuccessfulSession(batchCaptureMode === "grouped" ? "quad" : "batch")) {
           setStatus("Quota Scanner atteint. Renouvellement le 5 du mois.");
           return;
         }
@@ -313,7 +341,7 @@ export default function ScannerPage() {
       }
       router.push(`/card/${cards[0].id}`);
     },
-    [scanMode, router, consumeSuccessfulSession, triggerHaptic]
+    [scanMode, batchCaptureMode, router, consumeSuccessfulSession, triggerHaptic]
   );
 
   // =====================================================
@@ -410,7 +438,12 @@ export default function ScannerPage() {
       setStatus("Capture de la carte...");
       logger.scan("Capture image V5.");
 
-      const image64 = captureFrame(video);
+      const image64 = captureFrame(
+        video,
+        scanMode === "batch" && batchCaptureMode === "individual"
+          ? { maxWidth: 1600, jpegQuality: 0.90 }
+          : {}
+      );
 
       if (!image64) {
         setStatus("Impossible de capturer l'image.");
@@ -616,22 +649,39 @@ export default function ScannerPage() {
   // =====================================================
 
   const removeBatchItem = (id: string) => {
-    setBatchList((prev) => prev.filter((item) => item.id !== id));
+    if (batchCaptureMode === "grouped") {
+      setQuadList((prev) => prev.filter((item) => item.id !== id));
+    } else {
+      setBatchList((prev) => prev.filter((item) => item.id !== id));
+    }
   };
 
   const clearBatch = () => {
     if (confirm("Voulez-vous réinitialiser toute la session de scan ?")) {
-      setBatchList([]);
-      setBatchQuotaConsumed(false);
+      if (batchCaptureMode === "grouped") {
+        setQuadList([]);
+        setQuadQuotaConsumed(false);
+        try { window.localStorage.removeItem(SCANNER_QUAD_QUOTA_KEY); } catch {}
+      } else {
+        setBatchList([]);
+        setBatchQuotaConsumed(false);
+        try { window.localStorage.removeItem(SCANNER_BATCH_QUOTA_KEY); } catch {}
+      }
       try {
-        window.localStorage.removeItem(SCANNER_BATCH_KEY);
-        window.localStorage.removeItem(SCANNER_BATCH_QUOTA_KEY);
+        if (batchCaptureMode === "grouped") {
+          window.localStorage.removeItem(SCANNER_QUAD_KEY);
+          window.localStorage.removeItem(SCANNER_QUAD_QUOTA_KEY);
+          setQuadProgress(EMPTY_QUAD_PROGRESS.map((slot) => ({ ...slot })));
+        } else {
+          window.localStorage.removeItem(SCANNER_BATCH_KEY);
+          window.localStorage.removeItem(SCANNER_BATCH_QUOTA_KEY);
+        }
       } catch {}
     }
   };
 
   const exportBatch = () => {
-    const dataStr = JSON.stringify(batchList, null, 2);
+    const dataStr = JSON.stringify(batchCaptureMode === "grouped" ? quadList : batchList, null, 2);
     const blob = new Blob([dataStr], {
       type: "application/json",
     });
@@ -824,7 +874,7 @@ export default function ScannerPage() {
 
   const acceptQuadCandidate = useCallback((slot: QuadSlotProgress) => {
     if (!slot.card) return;
-    if (!batchQuotaConsumed && !consumeSuccessfulSession("batch")) {
+    if (!quadQuotaConsumed && !consumeSuccessfulSession("quad")) {
       setStatus("Quota Scanner atteint. Renouvellement le 5 du mois.");
       return;
     }
@@ -835,7 +885,7 @@ export default function ScannerPage() {
         : item
     ));
     setStatus(`Quad : carte ${slot.slot + 1} validée — ${slot.card.name}`);
-  }, [batchQuotaConsumed, consumeSuccessfulSession, handleQuadCardIdentified]);
+  }, [quadQuotaConsumed, consumeSuccessfulSession, handleQuadCardIdentified]);
 
   const handlePrimaryScan = async () => {
     const currentQuota = readQuota();
@@ -845,9 +895,10 @@ export default function ScannerPage() {
       setStatus(`Quota Scanner atteint (${SCANNER_MONTHLY_LIMIT}/${SCANNER_MONTHLY_LIMIT}). Renouvellement le ${new Date(currentQuota.end).toLocaleDateString("fr-FR")}.`);
       return;
     }
-    if (scanMode === "batch" && batchList.length >= SCANNER_BATCH_LIMIT) {
-      setStatus("Session batch pleine (4/4). Videz la session pour recommencer.");
-        return;
+    const activeSessionList = batchCaptureMode === "grouped" ? quadList : batchList;
+    if (scanMode === "batch" && activeSessionList.length >= SCANNER_BATCH_LIMIT) {
+      setStatus(batchCaptureMode === "grouped" ? "Session Quad pleine (4/4). Videz la session pour recommencer." : "Session Batch pleine (4/4). Videz la session pour recommencer.");
+      return;
     }
     if (scanMode === "batch" && batchCaptureMode === "grouped") {
       if (!cameraRef.current || scanning) return;
@@ -901,6 +952,7 @@ export default function ScannerPage() {
 
   const quadConfirmedCount = quadProgress.filter((slot) => slot.status === "success").length;
   const quadReviewCount = quadProgress.filter((slot) => slot.status === "review").length;
+  const visibleSessionList = batchCaptureMode === "grouped" ? quadList : batchList;
 
   return (
     <>
@@ -1146,7 +1198,7 @@ export default function ScannerPage() {
 
             <ScannerOverlay
               scanning={scanning}
-              hasResult={Boolean(detectedCard)}
+              hasResult={scanMode === "single" && Boolean(detectedCard)}
               statusText={status}
               quadSlots={quadProgress}
               ready={ready}
@@ -1327,7 +1379,7 @@ export default function ScannerPage() {
           )}
         </div>
 
-        {modeSelected && scanMode === "batch" && batchList.length > 0 ? (
+        {modeSelected && scanMode === "batch" && visibleSessionList.length > 0 ? (
           <section className="mt-4">
             <PremiumCard className="p-4">
               <div className="flex items-center justify-between gap-3">
@@ -1343,7 +1395,7 @@ export default function ScannerPage() {
                     </p>
                   </div>
                   <p className="mt-1 text-[10px] text-zinc-300">
-                    {batchList.length}/{SCANNER_BATCH_LIMIT} carte{batchList.length > 1 ? "s" : ""} conservée{batchList.length > 1 ? "s" : ""} dans la session.
+                    {visibleSessionList.length}/{SCANNER_BATCH_LIMIT} carte{visibleSessionList.length > 1 ? "s" : ""} conservée{visibleSessionList.length > 1 ? "s" : ""} dans la session.
                   </p>
                 </div>
 
@@ -1368,7 +1420,7 @@ export default function ScannerPage() {
               </div>
 
               <div className="mt-3 space-y-2">
-                {batchList.map((item) => (
+                {visibleSessionList.map((item) => (
                   <div
                     key={item.id}
                     className="flex items-center justify-between gap-3 rounded-xl border border-white/[0.06] bg-white/[0.02] p-2.5"
