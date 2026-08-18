@@ -179,7 +179,10 @@ const ScannerCamera = forwardRef<ScannerCameraHandle, ScannerCameraProps>(
                 quality: slot.quality,
               });
 
-              if ((!best.card || best.requiresReview) && slot.enhancedImageUri) {
+              // Un second appel Gemini n'est utile que lorsqu'un candidat existe mais
+              // demande confirmation. En absence totale de candidat, on laisse le slot
+              // en reprise manuelle afin d'éviter de doubler inutilement les appels.
+              if (best.card && best.requiresReview && slot.enhancedImageUri) {
                 patchProgress(slot.slot, {
                   status: "processing",
                   attempts: 2,
@@ -230,9 +233,9 @@ const ScannerCamera = forwardRef<ScannerCameraHandle, ScannerCameraProps>(
           }
         };
 
-        // Deux analyses simultanées accélèrent le Quad sans envoyer les quatre
-        // appels d'un coup, ce qui limite les erreurs de quota sur mobile.
-        await Promise.all([worker(), worker()]);
+        // Traitement séquentiel : quatre cartes peuvent déjà représenter quatre appels
+        // Gemini. Les envoyer une par une réduit fortement les pointes de rate-limit.
+        await worker();
         onCardsIdentified?.(foundCards);
       } finally {
         processingRef.current = false;
