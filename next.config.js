@@ -1,9 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-
   webpack: (config, { isServer }) => {
     // Résolution des modules optionnels côté client
     if (!isServer) {
