@@ -2,9 +2,24 @@
 
 Application de gestion et d'analyse de cartes Pokémon : catalogues multilingues, collection, favoris, dashboard, scanner IA, estimation PSA expérimentale et agrégation de données marché.
 
-> **État du projet : base V218 — préparation finale avant reprise dans ChatGPT Work.**
-> Les audits et la feuille de route détaillée sont dans `docs/`.
-> Le développement structurel restant est volontairement réservé à la phase ChatGPT Work.
+> **État du projet : V270 — socle parallèle du Catalogue King_TCG V2.**
+> **V267 est abandonnée : ne pas la reprendre.**
+> La V270 ajoute le modèle canonique, les variantes normalisées et la fusion non destructive sans basculer les pages ni les routes existantes.
+> Lire en priorité `docs/PROJECT_STATUS.md`, `docs/WORK_HANDOFF.md`, `docs/FINAL_ROADMAP.md` et `docs/LEGAL_ROADMAP.md`.
+
+## Handoff final — 18 août 2026
+
+- **Base source officielle : V266 ; version actuelle contrôlée : V270.**
+- **V267 M6/PokéCardex : abandonnée**, ne pas réintégrer ce prototype.
+- Le socle parallèle du **Catalogue King_TCG V2** est intégré : identités canoniques, séparation extensions/groupes, garde-fous JP/CN, variantes et fusion non destructive.
+- Prochaine étape Catalogue : adaptateurs d'import/synchronisation des cartes, images et variantes, toujours sans bascule brutale de l'interface.
+- Deuxième chantier : **cache serveur partagé** pour réduire fortement les appels prix et partager une même donnée entre Recherche, Fiche, Collection, Favoris, Dashboard, Alertes et Opportunités.
+- PokéCardex est à étudier comme source complémentaire FR/JP/CN pour extensions, visuels et variantes (Holo/Reverse/Poké Ball/Master Ball/etc.), avec normalisation dans le modèle King_TCG.
+- API payante à étudier en premier après premières recettes : **JustTCG** ; Gemini ensuite selon la consommation Scanner ; PriceCharting selon l'usage PSA. Revalider les offres au moment de l'achat.
+- Scanner : Batch amélioré et retesté après V266 ; **Quad post-V266 reste à tester physiquement**.
+- PSA : filtres non-cartes renforcés en V264 ; refaire Évoli/Pikachu/Dracaufeu au retour.
+- Recherche : actions rapides Collection/Favoris ajoutées en V265.
+- Juridique : préparation associative V261–V263 intégrée ; l'Association King_TCG n'est pas encore créée.
 
 ## État actuel
 
@@ -56,6 +71,9 @@ Application de gestion et d'analyse de cartes Pokémon : catalogues multilingues
 
 ## Documentation de reprise
 
+- `docs/REPRISE_AUDIT_V268.md` — audit de reprise, résultats des contrôles et plan d'attaque.
+- `docs/API_SECURITY_V269.md` — limites appliquées aux routes et contrôles de sécurité.
+- `docs/CATALOG_V2_V270.md` — modèle canonique, amorçage, garde-fous et limites du catalogue parallèle.
 - `docs/PROJECT_STATUS.md` — état détaillé du projet.
 - `docs/WORK_HANDOFF.md` — ordre de reprise recommandé pour Work.
 - `docs/FINAL_ROADMAP.md` — tâches validées, tests restants et travaux Work.
@@ -68,7 +86,7 @@ Application de gestion et d'analyse de cartes Pokémon : catalogues multilingues
 
 # 👑 King_TCG — README officiel
 
-**Version de travail actuelle : V218 — Préparation finale, Ventes Premium et protection quotas**\
+**Version de travail actuelle : V270 — Catalogue King_TCG V2 parallèle**\
 **Statut produit : V5.0 — Accès anticipé**\
 **Stack : Next.js App Router, React, TypeScript, TailwindCSS**\
 **IA : Google Gemini**\
@@ -79,7 +97,7 @@ fallback)**\
 
 > La feuille de route officielle et l'ordre des priorités jusqu'à la
 > publication Android/iPhone sont conservés dans
-> [`docs/ROADMAP_VERSION_FINALE.md`](docs/ROADMAP_VERSION_FINALE.md).
+> [`docs/FINAL_ROADMAP.md`](docs/FINAL_ROADMAP.md).
 > Les sections techniques historiques de ce README seront consolidées après
 > l'audit complet des API et des sources de prix.
 
@@ -116,9 +134,9 @@ indépendamment de la disponibilité des prix.
 -   **Collection** : quantité, état, prix d'achat, favoris, valeur et
     plus-value.
 -   **Dashboard** : portefeuille, statistiques et projection 7 jours.
--   **Scanner Mono / Batch / Quad** avec Gemini et confiance bornée par les signaux réellement lus.
--   **Collection PSA** et estimation visuelle expérimentale, avec cohérence et plafonds de confiance contrôlés côté serveur.
--   **Notifications** et navigation mobile premium.
+-   **Scanner Mono / Batch / Quad** avec sélection du mode avant ouverture caméra, overlays dédiés, sessions Batch/Quad persistantes et Gemini borné par les signaux réellement lus.
+-   **PSA** : collection gradée, recherche de prix EN via PriceCharting, parcours FR complété par eBay et estimation visuelle expérimentale avec plafonds de confiance contrôlés côté serveur.
+-   **Notifications**, navigation mobile premium et **module Ventes Premium préparé** pour une activation ultérieure.
 
 ------------------------------------------------------------------------
 
@@ -377,7 +395,7 @@ app/
 ├── psa/
 ├── ventes/          # aperçu Premium, non activé
 ├── favoris/
-├── reglages/
+├── parametres/
 └── api/
     ├── scan/
     ├── psa-grade/
@@ -406,28 +424,43 @@ fusionnés uniquement après validation qu'ils ne sont plus utilisés.
 
 ## Scanner IA
 
-### Scanner Mono
+À l’ouverture de `/scanner`, aucune caméra n’est lancée automatiquement. L’utilisateur choisit d’abord son mode ; la page descend ensuite vers la zone caméra correspondante.
+
+### Mono — Normal
 
 Pipeline :
 
-`Caméra → Capture → Gemini → résultat structuré → matching catalogue → carte → marché`
+`Choix Mono → Caméra → Capture → Gemini → résultat structuré → matching catalogue → carte → marché`
 
-Gemini identifie les informations visibles, mais la correspondance
-finale reste effectuée avec le catalogue commun.
+L’overlay reprend les proportions d’une carte Pokémon et fournit des repères visuels pour le **Nom Pokémon** et le **N° de carte**. Le déclenchement du scan est intégré directement dans l’overlay.
 
-### JP / CN
+### Batch — Premium
 
-Pour les cartes japonaises et chinoises, le numéro, l'extension et les
-identifiants fiables doivent être privilégiés par rapport à une
-traduction approximative du nom.
+Le Batch permet de scanner jusqu’à quatre cartes l’une après l’autre dans une même session. Les résultats restent conservés localement pendant la consultation d’une fiche et réapparaissent uniquement lorsque le mode Batch correspondant est sélectionné.
 
-### Batch
+### Quad — Premium
 
-Le mode Batch permet le traitement de plusieurs cartes. Le mode Quad gère quatre emplacements avec résultats progressifs et détections partielles.
+Le Quad permet d’analyser jusqu’à quatre cartes sur une seule photo. Les quatre cadres utilisent la même géométrie de référence pour la capture et le découpage. Les résultats partiels restent acceptés : 1/4, 2/4, 3/4 ou 4/4 cartes peuvent être reconnues.
+
+Les résultats Batch/Quad sont affichés **inline sous la zone Scanner** et non dans une fenêtre flottante.
+
+### Langues et matching
+
+Pour les cartes japonaises et chinoises, le numéro, l’extension et les identifiants fiables doivent être privilégiés par rapport à une traduction approximative du nom. Le Scanner reste isolé du moteur de prix : une panne marché ne doit jamais empêcher l’identification catalogue.
+
+### Quota
+
+Le quota Scanner reste géré au niveau de la session selon les règles du compte. Les évolutions visuelles du Scanner ne doivent jamais modifier sa consommation.
 
 ------------------------------------------------------------------------
 
 ## PSA / IA Grade
+
+La zone PSA regroupe désormais la collection gradée, la recherche de prix et l’estimation IA.
+
+- **EN** : PriceCharting reste la référence principale de recherche.
+- **FR** : eBay complète la recherche de cartes gradées françaises, avec filtrage et regroupement des annonces compatibles.
+- Une carte trouvée peut être ajoutée à la collection PSA avec son grade et son prix d’achat.
 
 L'estimation PSA est expérimentale et non officielle.
 
@@ -443,6 +476,18 @@ Parcours principal :
 
 L'application ne doit jamais présenter cette estimation comme un grade
 PSA officiel.
+
+------------------------------------------------------------------------
+
+## Ventes Premium — préparé, non activé
+
+La page `/ventes` et ses accès visuels sont préparés pour une future fonctionnalité Premium.
+
+Objectif prévu :
+
+`Carte de collection → marquer comme vendue → prix de vente → bénéfice réalisé → historique des ventes`
+
+Le module reste volontairement **à venir** tant que le stockage persistant, les comptes Premium et la logique de vente définitive ne sont pas finalisés.
 
 ------------------------------------------------------------------------
 
@@ -502,51 +547,48 @@ Après une modification Data ou Marché :
 -   projection FR 30 jours ;
 -   dashboard et projection portefeuille 7 jours ;
 -   collection ;
--   Scanner Mono ;
+-   Scanner : arrivée sans caméra ouverte ;
+-   Scanner Mono réel et cadrage overlay ;
+-   Scanner Batch : session, retour fiche et persistance des résultats ;
+-   Scanner Quad : 1/4, 2/4, 3/4 et 4/4 ;
+-   PSA recherche EN / FR ;
+-   ajout Collection PSA ;
 -   PSA IA Grade ;
 -   `npm run build`.
 
 ------------------------------------------------------------------------
 
-## Historique technique V42
+## État de travail actuel — V270
 
-### Validé récemment
+### Validé / intégré récemment
 
--   séparation Recherche / Marché ;
--   fiches indépendantes des erreurs de prix ;
--   catalogues FR/EN/JP/CN isolés ;
--   suppression des doublons EN injectés en FR ;
--   correction des séries spéciales FR et IDs techniques ;
--   eBay Production fonctionnel en FR ;
--   eBay intégré à la Cote King_TCG FR avec pondération ;
--   historique King_TCG ;
--   projection portefeuille 7 jours restaurée ;
--   projection FR 30 jours basée sur la Cote King_TCG ;
--   fichiers techniques `.md` rangés dans `docs/`.
+- séparation Catalogue / Marché / Analytics ;
+- catalogues FR / EN / JP / CN isolés ;
+- protections de quota JustTCG et cache différencié ;
+- module Ventes Premium préparé mais non activé ;
+- partenaire/collaborateur Jupar59 intégré ;
+- PSA : parcours EN conservé et recherche FR via eBay ajoutée ;
+- Scanner : choix Mono / Batch / Quad avant ouverture caméra ;
+- Scanner : overlays recentrés et boutons intégrés ;
+- Scanner : résultats Batch/Quad persistants et affichés inline ;
+- page Paramètres synchronisée avec l’état actuel de l’application.
+- protection minimale des 10 routes API en V269 ;
+- Catalogue V2 parallèle : 23 séries/ères, 232 extensions réelles et 11 groupes d'affichage amorcés depuis la V269 ;
+- identifiants canoniques, variantes normalisées et fusion non destructive ;
+- séparation stricte JP/CN avec M6 côté JP et CSV10C/CBB6C côté CN.
 
-### En cours de validation
+### À poursuivre dans Work
 
--   couverture complète des recherches Évoli et autres Pokémon avec de
-    nombreuses impressions ;
--   images JP en recherche par extension après correction V42 ;
--   couverture prix JP ;
--   couverture prix CN ;
--   qualité du filtrage eBay JP/CN ;
--   pondération finale des différentes sources marché.
+- compléter et fiabiliser les extensions manquantes JP / CN ;
+- poursuivre la couverture prix manquante, notamment JP / CN ;
+- finaliser variantes et états fournisseurs ;
+- tester physiquement Scanner Mono / Batch / Quad sur Android et iPhone ;
+- calibrer l’IA Grade PSA sur des cartes réelles ;
+- mettre en place comptes, Cloud, Premium, paiements et stockage persistant ;
+- activer ensuite le module Ventes Premium ;
+- finaliser juridique et préparation Stores.
 
-------------------------------------------------------------------------
-
-## Anciennes priorités V42 — historique
-
-1.  Valider V42 sur FR / JP / CN.
-2.  Stabiliser la couverture prix JP et CN.
-3.  Vérifier les images de toutes les extensions JP.
-4.  Mesurer la qualité réelle des résultats eBay avant d'augmenter leur
-    poids.
-5.  Continuer à simplifier les anciens modules marché sans modifier les
-    fonctions validées.
-6.  Reprendre le Scanner uniquement après stabilisation complète du
-    moteur Data / Marché.
+La feuille de route opérationnelle et le handoff Work restent dans `docs/`.
 
 ------------------------------------------------------------------------
 
@@ -565,7 +607,7 @@ principal conservé à la racine.
 ------------------------------------------------------------------------
 
 **King_TCG — Pokémon Trading Card Companion**\
-**V153 de travail / V5.0 Accès anticipé**
+**V270 — Catalogue V2 parallèle / V5.0 Accès anticipé**
 
 ## V78 — CN public dual fallback + JP TCGdex isolation
 - CN keeps V77 public PokéWallet primary + browser direct fallback when the server path fails.
@@ -579,7 +621,56 @@ principal conservé à la racine.
 La feuille de route détaillée, les priorités, les exclusions et la première
 action immédiate sont centralisées dans :
 
-[`docs/ROADMAP_VERSION_FINALE.md`](docs/ROADMAP_VERSION_FINALE.md)
+[`docs/FINAL_ROADMAP.md`](docs/FINAL_ROADMAP.md)
 
 Règle stricte : une seule zone fonctionnelle importante par version, avec une
 sauvegarde restaurable et des tests ciblés avant toute modification transversale.
+
+## V265 — Actions rapides Recherche
+- Ajout de deux actions compactes directement sous chaque résultat de recherche : **Collection** et **Favoris**.
+- Réutilise le moteur de stockage existant (`lib/storage.ts`) : aucun second stockage ni doublon de logique.
+- Collection affiche immédiatement la quantité présente ; Favoris reflète et permet de basculer l’état sans ouvrir la fiche.
+- Mise en page mobile : deux boutons compacts côte à côte.
+
+## V266 — Scanner Batch / Quad runtime fix
+- Batch : le bouton « Ajouter au Batch » revient après chaque carte reconnue jusqu'à 4/4.
+- Batch : capture individuelle renforcée (1600 px / JPEG 0,90) pour améliorer la lecture du numéro et de l'extension sans modifier le cadre visuel.
+- Batch et Quad : mémoires locales désormais séparées ; les 4 dernières cartes de chaque mode ne se mélangent plus.
+- Batch et Quad : état de quota de session séparé.
+- Quad : analyses Gemini séquentielles au lieu de deux appels simultanés et second passage uniquement lorsqu'un candidat existe réellement, afin de réduire les pointes de quota temporaires.
+
+## V268 — Reprise technique et audit complet
+- Vérification statique des modifications V265/V266 annoncées dans le handoff.
+- Correction des deux erreurs ESLint de la page Opportunités.
+- ESLint réactivé dans le build de production afin qu'une future erreur ne soit plus masquée.
+- Dépendance directe `zod` déclarée pour les validations Scanner et PSA.
+- Documentation, liens et checklists remis au niveau V268.
+- Aucun changement du comportement Catalogue, Prix, Scanner, PSA, Collection ou stockage utilisateur.
+
+## V269 — Protection minimale des routes API
+- Limiteur de rafales par route et par adresse client sur les 10 routes API.
+- Corps JSON bornés pour Scanner, PSA Grade et Prix, même sans `Content-Length`.
+- Scanner : taille Base64 maximale et formats d'image explicitement autorisés.
+- Recherche, identifiants, langues, tailles d'image et codes d'extension bornés/validés.
+- Réponses d'erreur JSON homogènes avec codes stables et `Retry-After` pour les limites.
+- Audit reproductible avec `npm run audit:security`.
+- Cette protection par instance prépare, mais ne remplace pas, le futur rate limiting global lié aux comptes.
+
+## V270 — Socle parallèle du Catalogue King_TCG V2
+- Modèle canonique Zod pour langues, séries, extensions, groupes, cartes, variantes, visuels et provenance.
+- Identifiants internes `ktcg:*` distincts des IDs fournisseurs.
+- Amorçage non destructif depuis les catalogues V269 : 68 FR, 122 JP, 42 CN et 11 groupes éditoriaux séparés.
+- Garde-fou strict : familles CS/CSV/CBB en chinois, M6 en japonais.
+- Variantes normalisées : Normal, Holo, Reverse, Poké Ball, Master Ball, Stamp et spécifiques.
+- Audit reproductible avec `npm run audit:catalog-v2`.
+- Aucune page, route API ou logique métier existante ne consomme encore ce snapshot.
+
+## Pause projet / reprise Work — août 2026
+
+- 18/08/2026 : arrêt volontaire sur **V266**.
+- 20/08/2026 : Work peut commencer audit + première phase Catalogue V2/cache selon `docs/WORK_HANDOFF.md`.
+- 27/08/2026 : retour utilisateur, revue, tests physiques restants et commit après validation.
+- Ne pas utiliser V267 : le test provisoire M6/PokéCardex a été abandonné.
+
+## Handoff final V266 — compléments
+Le handoff final ajoute les règles cache-first : cohérence stricte langue/marché, prix partagé 24 h avec conservation du dernier prix connu, affichage de la Cote en Recherche si déjà en cache, catalogue permanent enrichi au fil des sorties, matching fournisseur strict, absence de marketplace réelle pour l'instant, audit d'harmonisation mobile et optimisation Scanner/API. Voir `docs/FINAL_ROADMAP.md` et `docs/WORK_HANDOFF.md`.
