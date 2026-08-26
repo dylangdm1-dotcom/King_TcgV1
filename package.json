@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "audit:data": "node scripts/audit-data-coverage.mjs",
+    "audit:security": "node scripts/audit-api-security.mjs",
+    "audit:catalog-v2": "node scripts/audit-catalog-v2.mjs"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
@@ -28,6 +31,7 @@
     "react-dom": "18.2.0",
     "recharts": "2.12.7",
     "tailwindcss": "3.3.3",
-    "typescript": "5.2.2"
+    "typescript": "5.2.2",
+    "zod": "3.21.4"
   }
 }
