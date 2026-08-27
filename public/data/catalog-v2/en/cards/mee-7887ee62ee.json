@@ -1,0 +1,555 @@
+{
+  "schemaVersion": 2,
+  "formatVersion": 1,
+  "catalogVersion": "v273-local-2026-08-27",
+  "language": "en",
+  "setId": "ktcg:set:en:mee",
+  "status": "complete",
+  "sourceCardCount": 8,
+  "cards": [
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-mee:001",
+      "name": "Grass Energy",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "mee-001",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:mee",
+      "number": "001",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse",
+          "rawLabel": "reverse"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/me/mee/001/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "mee-001",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/me/mee/001/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "mee-001",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/me/mee/001/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "mee-001",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-mee:002",
+      "name": "Fire Energy",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "mee-002",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:mee",
+      "number": "002",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse",
+          "rawLabel": "reverse"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/me/mee/002/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "mee-002",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/me/mee/002/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "mee-002",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/me/mee/002/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "mee-002",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-mee:003",
+      "name": "Water Energy",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "mee-003",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:mee",
+      "number": "003",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse",
+          "rawLabel": "reverse"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/me/mee/003/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "mee-003",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/me/mee/003/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "mee-003",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/me/mee/003/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "mee-003",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-mee:004",
+      "name": "Lightning Energy",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "mee-004",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:mee",
+      "number": "004",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse",
+          "rawLabel": "reverse"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/me/mee/004/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "mee-004",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/me/mee/004/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "mee-004",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/me/mee/004/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "mee-004",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-mee:005",
+      "name": "Psychic Energy",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "mee-005",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:mee",
+      "number": "005",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse",
+          "rawLabel": "reverse"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/me/mee/005/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "mee-005",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/me/mee/005/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "mee-005",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/me/mee/005/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "mee-005",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-mee:006",
+      "name": "Fighting Energy",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "mee-006",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:mee",
+      "number": "006",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse",
+          "rawLabel": "reverse"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/me/mee/006/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "mee-006",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/me/mee/006/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "mee-006",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/me/mee/006/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "mee-006",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-mee:007",
+      "name": "Darkness Energy",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "mee-007",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:mee",
+      "number": "007",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse",
+          "rawLabel": "reverse"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/me/mee/007/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "mee-007",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/me/mee/007/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "mee-007",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/me/mee/007/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "mee-007",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-mee:008",
+      "name": "Metal Energy",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "mee-008",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:mee",
+      "number": "008",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse",
+          "rawLabel": "reverse"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/me/mee/008/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "mee-008",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/me/mee/008/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "mee-008",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/me/mee/008/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "mee-008",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    }
+  ]
+}

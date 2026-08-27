@@ -1,0 +1,5186 @@
+{
+  "schemaVersion": 2,
+  "formatVersion": 1,
+  "catalogVersion": "v273-local-2026-08-27",
+  "language": "en",
+  "setId": "ktcg:set:en:neo2",
+  "status": "complete",
+  "sourceCardCount": 75,
+  "cards": [
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:1",
+      "name": "Espeon",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-1",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "1",
+      "rarity": "Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "holo"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/1/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-1",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/1/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-1",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/1/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-1",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:10",
+      "name": "Scizor",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-10",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "10",
+      "rarity": "Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "holo"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/10/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-10",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/10/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-10",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/10/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-10",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:11",
+      "name": "Smeargle",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-11",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "11",
+      "rarity": "Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "holo"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/11/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-11",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/11/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-11",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/11/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-11",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:12",
+      "name": "Tyranitar",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-12",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "12",
+      "rarity": "Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "holo"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/12/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-12",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/12/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-12",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/12/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-12",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:13",
+      "name": "Umbreon",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-13",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "13",
+      "rarity": "Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "holo"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/13/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-13",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/13/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-13",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/13/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-13",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:14",
+      "name": "Unown [A]",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-14",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "14",
+      "rarity": "Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "holo"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/14/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-14",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/14/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-14",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/14/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-14",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:15",
+      "name": "Ursaring",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-15",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "15",
+      "rarity": "Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "holo"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/15/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-15",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/15/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-15",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/15/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-15",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:16",
+      "name": "Wobbuffet",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-16",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "16",
+      "rarity": "Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "holo"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/16/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-16",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/16/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-16",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/16/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-16",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:17",
+      "name": "Yanma",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-17",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "17",
+      "rarity": "Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "holo"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/17/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-17",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/17/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-17",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/17/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-17",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:18",
+      "name": "Beedrill",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-18",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "18",
+      "rarity": "Rare",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/18/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-18",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/18/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-18",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/18/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-18",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:19",
+      "name": "Butterfree",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-19",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "19",
+      "rarity": "Rare",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/19/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-19",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/19/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-19",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/19/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-19",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:2",
+      "name": "Forretress",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-2",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "2",
+      "rarity": "Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "holo"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/2/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-2",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/2/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-2",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/2/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-2",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:20",
+      "name": "Espeon",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-20",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "20",
+      "rarity": "Rare",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/20/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-20",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/20/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-20",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/20/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-20",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:21",
+      "name": "Forretress",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-21",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "21",
+      "rarity": "Rare",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/21/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-21",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/21/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-21",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/21/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-21",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:22",
+      "name": "Hitmontop",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-22",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "22",
+      "rarity": "Rare",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/22/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-22",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/22/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-22",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/22/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-22",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:23",
+      "name": "Houndoom",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-23",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "23",
+      "rarity": "Rare",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/23/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-23",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/23/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-23",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/23/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-23",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:24",
+      "name": "Houndour",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-24",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "24",
+      "rarity": "Rare",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/24/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-24",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/24/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-24",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/24/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-24",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:25",
+      "name": "Kabutops",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-25",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "25",
+      "rarity": "Rare",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/25/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-25",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/25/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-25",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/25/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-25",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:26",
+      "name": "Magnemite",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-26",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "26",
+      "rarity": "Rare",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/26/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-26",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/26/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-26",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/26/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-26",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:27",
+      "name": "Politoed",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-27",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "27",
+      "rarity": "Rare",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/27/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-27",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/27/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-27",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/27/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-27",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:28",
+      "name": "Poliwrath",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-28",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "28",
+      "rarity": "Rare",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/28/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-28",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/28/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-28",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/28/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-28",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:29",
+      "name": "Scizor",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-29",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "29",
+      "rarity": "Rare",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/29/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-29",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/29/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-29",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/29/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-29",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:3",
+      "name": "Hitmontop",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-3",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "3",
+      "rarity": "Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "holo"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/3/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-3",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/3/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-3",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/3/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-3",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:30",
+      "name": "Smeargle",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-30",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "30",
+      "rarity": "Rare",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/30/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-30",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/30/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-30",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/30/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-30",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:31",
+      "name": "Tyranitar",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-31",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "31",
+      "rarity": "Rare",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/31/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-31",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/31/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-31",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/31/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-31",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:32",
+      "name": "Umbreon",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-32",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "32",
+      "rarity": "Rare",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/32/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-32",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/32/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-32",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/32/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-32",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:33",
+      "name": "Unown [A]",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-33",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "33",
+      "rarity": "Rare",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/33/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-33",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/33/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-33",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/33/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-33",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:34",
+      "name": "Ursaring",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-34",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "34",
+      "rarity": "Rare",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/34/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-34",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/34/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-34",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/34/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-34",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:35",
+      "name": "Wobbuffet",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-35",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "35",
+      "rarity": "Rare",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/35/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-35",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/35/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-35",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/35/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-35",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:36",
+      "name": "Yanma",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-36",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "36",
+      "rarity": "Rare",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/36/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-36",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/36/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-36",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/36/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-36",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:37",
+      "name": "Corsola",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-37",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "37",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/37/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-37",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/37/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-37",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/37/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-37",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:38",
+      "name": "Eevee",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-38",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "38",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/38/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-38",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/38/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-38",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/38/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-38",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:39",
+      "name": "Houndour",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-39",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "39",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/39/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-39",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/39/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-39",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/39/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-39",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:4",
+      "name": "Houndoom",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-4",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "4",
+      "rarity": "Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "holo"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/4/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-4",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/4/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-4",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/4/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-4",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:40",
+      "name": "Igglybuff",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-40",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "40",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/40/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-40",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/40/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-40",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/40/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-40",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:41",
+      "name": "Kakuna",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-41",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "41",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/41/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-41",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/41/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-41",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/41/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-41",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:42",
+      "name": "Metapod",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-42",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "42",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/42/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-42",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/42/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-42",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/42/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-42",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:43",
+      "name": "Omastar",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-43",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "43",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/43/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-43",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/43/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-43",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/43/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-43",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:44",
+      "name": "Poliwhirl",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-44",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "44",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/44/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-44",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/44/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-44",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/44/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-44",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:45",
+      "name": "Pupitar",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-45",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "45",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/45/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-45",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/45/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-45",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/45/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-45",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:46",
+      "name": "Scyther",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-46",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "46",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/46/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-46",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/46/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-46",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/46/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-46",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:47",
+      "name": "Unown [D]",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-47",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "47",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/47/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-47",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/47/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-47",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/47/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-47",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:48",
+      "name": "Unown [F]",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-48",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "48",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/48/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-48",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/48/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-48",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/48/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-48",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:49",
+      "name": "Unown [M]",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-49",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "49",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/49/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-49",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/49/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-49",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/49/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-49",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:5",
+      "name": "Houndour",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-5",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "5",
+      "rarity": "Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "holo"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/5/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-5",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/5/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-5",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/5/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-5",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:50",
+      "name": "Unown [N]",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-50",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "50",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/50/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-50",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/50/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-50",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/50/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-50",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:51",
+      "name": "Unown [U]",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-51",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "51",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/51/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-51",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/51/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-51",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/51/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-51",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:52",
+      "name": "Xatu",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-52",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "52",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/52/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-52",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/52/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-52",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/52/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-52",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:53",
+      "name": "Caterpie",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-53",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "53",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/53/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-53",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/53/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-53",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/53/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-53",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:54",
+      "name": "Dunsparce",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-54",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "54",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/54/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-54",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/54/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-54",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/54/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-54",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:55",
+      "name": "Hoppip",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-55",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "55",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/55/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-55",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/55/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-55",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/55/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-55",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:56",
+      "name": "Kabuto",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-56",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "56",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/56/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-56",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/56/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-56",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/56/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-56",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:57",
+      "name": "Larvitar",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-57",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "57",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/57/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-57",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/57/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-57",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/57/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-57",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:58",
+      "name": "Mareep",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-58",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "58",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/58/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-58",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/58/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-58",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/58/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-58",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:59",
+      "name": "Natu",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-59",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "59",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/59/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-59",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/59/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-59",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/59/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-59",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:6",
+      "name": "Kabutops",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-6",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "6",
+      "rarity": "Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "holo"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/6/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-6",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/6/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-6",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/6/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-6",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:60",
+      "name": "Omanyte",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-60",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "60",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/60/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-60",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/60/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-60",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/60/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-60",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:61",
+      "name": "Pineco",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-61",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "61",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/61/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-61",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/61/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-61",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/61/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-61",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:62",
+      "name": "Poliwag",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-62",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "62",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/62/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-62",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/62/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-62",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/62/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-62",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:63",
+      "name": "Sentret",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-63",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "63",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/63/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-63",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/63/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-63",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/63/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-63",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:64",
+      "name": "Spinarak",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-64",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "64",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/64/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-64",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/64/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-64",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/64/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-64",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:65",
+      "name": "Teddiursa",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-65",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "65",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/65/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-65",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/65/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-65",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/65/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-65",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:66",
+      "name": "Tyrogue",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-66",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "66",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/66/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-66",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/66/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-66",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/66/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-66",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:67",
+      "name": "Unown [E]",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-67",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "67",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/67/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-67",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/67/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-67",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/67/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-67",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:68",
+      "name": "Unown [I]",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-68",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "68",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/68/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-68",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/68/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-68",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/68/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-68",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:69",
+      "name": "Unown [O]",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-69",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "69",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/69/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-69",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/69/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-69",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/69/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-69",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:7",
+      "name": "Magnemite",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-7",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "7",
+      "rarity": "Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "holo"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/7/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-7",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/7/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-7",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/7/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-7",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:70",
+      "name": "Weedle",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-70",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "70",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/70/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-70",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/70/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-70",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/70/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-70",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:71",
+      "name": "Wooper",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-71",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "71",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/71/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-71",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/71/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-71",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/71/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-71",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:72",
+      "name": "Fossil Egg",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-72",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "72",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/72/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-72",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/72/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-72",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/72/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-72",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:73",
+      "name": "Hyper Devolution Spray",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-73",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "73",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/73/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-73",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/73/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-73",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/73/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-73",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:74",
+      "name": "Ruin Wall",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-74",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "74",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/74/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-74",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/74/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-74",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/74/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-74",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:75",
+      "name": "Energy Ark",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-75",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "75",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/75/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-75",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/75/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-75",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/75/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-75",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:8",
+      "name": "Politoed",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-8",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "8",
+      "rarity": "Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "holo"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/8/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-8",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/8/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-8",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/8/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-8",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:en:ktcg-set-en-neo2:9",
+      "name": "Poliwrath",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2-9",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "setId": "ktcg:set:en:neo2",
+      "number": "9",
+      "rarity": "Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "holo"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/en/neo/neo2/9/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2-9",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/9/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-9",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/en/neo/neo2/9/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2-9",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    }
+  ]
+}
