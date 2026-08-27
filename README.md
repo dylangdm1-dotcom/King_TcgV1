@@ -2,17 +2,17 @@
 
 Application de gestion et d'analyse de cartes Pokémon : catalogues multilingues, collection, favoris, dashboard, scanner IA, estimation PSA expérimentale et agrégation de données marché.
 
-> **État du projet : V270 — socle parallèle du Catalogue King_TCG V2.**
+> **État du projet : V274 — pipeline régional vérifiable du Catalogue King_TCG V2.**
 > **V267 est abandonnée : ne pas la reprendre.**
-> La V270 ajoute le modèle canonique, les variantes normalisées et la fusion non destructive sans basculer les pages ni les routes existantes.
+> La V274 ajoute captures JP/CN traçables, contrôle d'intégrité et import local non destructif, sans basculer les pages ni les routes existantes.
 > Lire en priorité `docs/PROJECT_STATUS.md`, `docs/WORK_HANDOFF.md`, `docs/FINAL_ROADMAP.md` et `docs/LEGAL_ROADMAP.md`.
 
 ## Handoff final — 18 août 2026
 
-- **Base source officielle : V266 ; version actuelle contrôlée : V270.**
+- **Base source officielle : V266 ; version actuelle contrôlée : V274.**
 - **V267 M6/PokéCardex : abandonnée**, ne pas réintégrer ce prototype.
 - Le socle parallèle du **Catalogue King_TCG V2** est intégré : identités canoniques, séparation extensions/groupes, garde-fous JP/CN, variantes et fusion non destructive.
-- Prochaine étape Catalogue : adaptateurs d'import/synchronisation des cartes, images et variantes, toujours sans bascule brutale de l'interface.
+- Le stockage local contient 40 863 cartes FR/EN ; prochaine étape : snapshots régionaux vérifiés pour les cartes JP/CN avant toute bascule.
 - Deuxième chantier : **cache serveur partagé** pour réduire fortement les appels prix et partager une même donnée entre Recherche, Fiche, Collection, Favoris, Dashboard, Alertes et Opportunités.
 - PokéCardex est à étudier comme source complémentaire FR/JP/CN pour extensions, visuels et variantes (Holo/Reverse/Poké Ball/Master Ball/etc.), avec normalisation dans le modèle King_TCG.
 - API payante à étudier en premier après premières recettes : **JustTCG** ; Gemini ensuite selon la consommation Scanner ; PriceCharting selon l'usage PSA. Revalider les offres au moment de l'achat.
@@ -74,6 +74,10 @@ Application de gestion et d'analyse de cartes Pokémon : catalogues multilingues
 - `docs/REPRISE_AUDIT_V268.md` — audit de reprise, résultats des contrôles et plan d'attaque.
 - `docs/API_SECURITY_V269.md` — limites appliquées aux routes et contrôles de sécurité.
 - `docs/CATALOG_V2_V270.md` — modèle canonique, amorçage, garde-fous et limites du catalogue parallèle.
+- `docs/CATALOG_V2_IMPORTS_V271.md` — adaptateurs fournisseurs, synchronisation, couverture et conflits.
+- `docs/CATALOG_V2_ORCHESTRATOR_V272.md` — cache, pagination, checkpoints, reprise et couverture.
+- `docs/CATALOG_V2_LOCAL_V273.md` — stockage permanent, couverture réelle, loaders et limites JP/CN.
+- `docs/CATALOG_V2_REGIONAL_V274.md` — captures régionales, réconciliation, import local et garde-fous.
 - `docs/PROJECT_STATUS.md` — état détaillé du projet.
 - `docs/WORK_HANDOFF.md` — ordre de reprise recommandé pour Work.
 - `docs/FINAL_ROADMAP.md` — tâches validées, tests restants et travaux Work.
@@ -86,14 +90,14 @@ Application de gestion et d'analyse de cartes Pokémon : catalogues multilingues
 
 # 👑 King_TCG — README officiel
 
-**Version de travail actuelle : V270 — Catalogue King_TCG V2 parallèle**\
+**Version de travail actuelle : V274 — Pipeline régional JP/CN contrôlé**\
 **Statut produit : V5.0 — Accès anticipé**\
 **Stack : Next.js App Router, React, TypeScript, TailwindCSS**\
 **IA : Google Gemini**\
 **Données cartes : TCGdex + Pokémon TCG API (EN uniquement en
 fallback)**\
 **Marché : Cardmarket + TCGPlayer + JustTCG + eBay Browse API**\
-**Stockage actuel : LocalStorage + caches applicatifs et serveur**
+**Stockage actuel : Catalogue V2 JSON local + IndexedDB + LocalStorage utilisateur + caches applicatifs et serveur**
 
 > La feuille de route officielle et l'ordre des priorités jusqu'à la
 > publication Android/iPhone sont conservés dans
@@ -558,7 +562,7 @@ Après une modification Data ou Marché :
 
 ------------------------------------------------------------------------
 
-## État de travail actuel — V270
+## État de travail actuel — V274
 
 ### Validé / intégré récemment
 
@@ -576,10 +580,21 @@ Après une modification Data ou Marché :
 - Catalogue V2 parallèle : 23 séries/ères, 232 extensions réelles et 11 groupes d'affichage amorcés depuis la V269 ;
 - identifiants canoniques, variantes normalisées et fusion non destructive ;
 - séparation stricte JP/CN avec M6 côté JP et CSV10C/CBB6C côté CN.
+- adaptateurs TCGdex, Pokémon TCG API et PokéWallet vers le schéma canonique ;
+- synchronisation additive avec rapport de couverture, rejets et conflits ;
+- plusieurs visuels conservés par extension/carte sans écraser un visuel vérifié.
+- cache long avec dernier résultat connu en cas de panne ;
+- pagination bornée et synchronisation par petits lots reprenables ;
+- checkpoints persistables et comparaison de couverture avant bascule.
+- stockage local V273 : 394 fichiers de données, manifest avec empreintes et 40 863 cartes FR/EN ;
+- loaders serveur/navigateur local-first et cache IndexedDB versionné ;
+- 122 extensions JP et 42 CN conservées sans fausse injection de cartes internationales.
+- pipeline régional V274 : capture ciblée, snapshots vérifiés, réconciliation canonique et génération non destructive ;
+- aucune carte JP/CN inventée : les captures réelles restent à exécuter avec les fournisseurs disponibles.
 
 ### À poursuivre dans Work
 
-- compléter et fiabiliser les extensions manquantes JP / CN ;
+- exécuter et valider les captures régionales JP / CN réelles avant publication ;
 - poursuivre la couverture prix manquante, notamment JP / CN ;
 - finaliser variantes et états fournisseurs ;
 - tester physiquement Scanner Mono / Batch / Quad sur Android et iPhone ;
@@ -607,7 +622,7 @@ principal conservé à la racine.
 ------------------------------------------------------------------------
 
 **King_TCG — Pokémon Trading Card Companion**\
-**V270 — Catalogue V2 parallèle / V5.0 Accès anticipé**
+**V274 — Pipeline régional Catalogue V2 / V5.0 Accès anticipé**
 
 ## V78 — CN public dual fallback + JP TCGdex isolation
 - CN keeps V77 public PokéWallet primary + browser direct fallback when the server path fails.
@@ -664,6 +679,43 @@ sauvegarde restaurable et des tests ciblés avant toute modification transversal
 - Variantes normalisées : Normal, Holo, Reverse, Poké Ball, Master Ball, Stamp et spécifiques.
 - Audit reproductible avec `npm run audit:catalog-v2`.
 - Aucune page, route API ou logique métier existante ne consomme encore ce snapshot.
+
+## V271 — Adaptateurs et synchronisation Catalogue V2
+- Adaptateurs purs pour TCGdex, Pokémon TCG API et PokéWallet, sans appel réseau automatique.
+- Import canonique des séries, extensions, cartes, raretés, variantes, images et provenance.
+- Fusion des produits PokéWallet d'une même carte en variantes d'une seule identité King_TCG.
+- Synchronisation additive : conflits signalés, données invalides rejetées, existant jamais supprimé.
+- Rapport de couverture par fournisseur et langue avec audit `npm run audit:catalog-v2-imports`.
+- Aucune page ni route existante n'est basculée vers le Catalogue V2.
+
+## V272 — Orchestration serveur Catalogue V2
+- Cache index 24 h / stale 30 jours et détail 7 jours / stale 180 jours.
+- Requêtes identiques dédupliquées et retries bornés sur 429/réseau/5xx.
+- Pagination complète Pokémon TCG API et PokéWallet.
+- Traitement en lots, curseurs par source et checkpoint après chaque extension réussie.
+- Reprise exacte sur l'extension en échec sans supprimer l'existant.
+- Rapport de couverture comparé au catalogue de référence.
+- Stockage abstrait pour futur KV/Redis/base ; mémoire uniquement pour les audits.
+- Audit reproductible avec `npm run audit:catalog-v2-orchestrator`.
+- Aucune route, page, cron ou variable Vercel modifiée.
+
+## V273 — Catalogue V2 local permanent
+- Manifest versionné et index séparés FR/EN/JP/CN pour séries, extensions et groupes.
+- Un fichier de cartes par extension, avec taille et empreinte SHA-256 contrôlées.
+- 19 797 cartes FR et 21 066 cartes EN matérialisées localement.
+- 122 extensions JP et 42 CN conservées en `metadata_only` jusqu'à import de leurs cartes régionales vérifiées.
+- Loader serveur local-first avec repli fournisseur et loader navigateur avec cache IndexedDB.
+- Générateur reproductible et audit `npm run audit:catalog-v2-local`.
+- Pokémon TCG Pocket exclu ; aucune donnée de prix intégrée ; aucune page/route existante basculée.
+
+## V274 — Snapshots et import régional contrôlé
+- Capture ciblée TCGdex japonaise et PokéWallet Chine simplifiée dans un dossier séparé.
+- Index de snapshots avec taille et empreinte SHA-256 vérifiées avant import.
+- Réconciliation vers les identifiants `ktcg:*` V273 sans changer les codes canoniques.
+- Rejet des mélanges JP/CN, doublons et compteurs incohérents.
+- Génération additive dans un dossier neuf ; FR/EN et catalogue publié V273 restent intacts.
+- Audit reproductible avec `npm run audit:catalog-v2-regional`.
+- Les cartes régionales réelles ne sont pas incluses sans réponse fournisseur et autorisation disponible au moment de la capture.
 
 ## Pause projet / reprise Work — août 2026
 
