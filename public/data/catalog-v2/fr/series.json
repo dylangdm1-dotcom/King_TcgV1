@@ -1,0 +1,1590 @@
+{
+  "schemaVersion": 2,
+  "formatVersion": 1,
+  "catalogVersion": "v273-local-2026-08-27",
+  "language": "fr",
+  "series": [
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:series:fr:autre",
+      "name": "Autre",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "jumbo",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "fr"
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:series:fr:base",
+      "name": "Base",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "base1",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "base3",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "base2",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "base5",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "wp",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "basep",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "fr"
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:series:fr:collection-mcdonald-s",
+      "name": "Collection McDonald's",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "2013bw",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "2018sm-fr",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "2019sm-fr",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "2011bw",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "2012bw",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "2014xy",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "2015xy",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "2016xy",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "2017sm",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "2021swsh",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "2022swsh",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "2023sv",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "2024sv",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "fr"
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:series:fr:diamant-and-perle",
+      "name": "Diamant & Perle",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "dp1",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "dpp",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "dp4",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "dp6",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "dp5",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "dp2",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "dp3",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "dp7",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "fr"
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:series:fr:e-cards",
+      "name": "e-cards",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "ecard2",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "ecard1",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "fr"
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:series:fr:ecarlate-et-violet",
+      "name": "Écarlate et Violet",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:EV10.5"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:EV10"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:EV09"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:EV08.5"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:EV08"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:EV07"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:EV06.5"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:EV06"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:EV05"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:EV04.5"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:EV04"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:EV03.5"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:EV03"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:EV02"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:EV01"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "sv03.5",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "sv10.5b",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "sv10",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "sv09",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "sv03",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "sv02",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "sv04.5",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "sv04",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "sv08.5",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "sve",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "sv01",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "sv06.5",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "sv07",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "sv08",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "svp",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "sv05",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "sv06",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "sv10.5w",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "fr"
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:series:fr:epee-et-bouclier",
+      "name": "Épée et Bouclier",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:EB12.5"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:EB12"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:EB11"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:EB10.5"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:EB10"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:EB09"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:EB08"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:EB07.5"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:EB07"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:EB06"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:EB05"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:EB04.5"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:EB04"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:EB03.5"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:EB03"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:EB02"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:EB01"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "swsh10tg",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "swsh10",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "swsh5",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "swsh9tg",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "swsh9",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "cel25cc",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "cel25",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "swsh3.5",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "swsh6",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "swsh12.5gg",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "swsh12.5",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "swsh3",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "swsh7",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "swsh8",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "swsh11tg",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "swsh11",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "swsh10.5",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "swsh2",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "swsh4.5sv",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "swsh4.5",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "swsh12tg",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "swsh12",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "swsh1",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "swshp",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "swsh4",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "fr"
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:series:fr:ex",
+      "name": "EX",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "ex14",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "ex11",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "ex8",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "ex15",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "ex3",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "ex9",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "ex6",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "ex5",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "ex13",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "ex12",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "ex16",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "ex1",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "ex2",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "ex4",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "exu",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "ex10",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "fr"
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:series:fr:heartgold-soulsilver",
+      "name": "HeartGold SoulSilver",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "hgss1",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "hgssp",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "hgss4",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "hgss3",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "hgss2",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "fr"
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:series:fr:kits-du-dresseur",
+      "name": "Kits du dresseur",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "tk-bw-e",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "tk-bw-z",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "tk-dp-l",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "tk-dp-m",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "tk-ex-latia",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "tk-ex-latio",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "tk-ex-m",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "tk-ex-p",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "tk-hs-g",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "tk-hs-r",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "tk-sm-r",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "tk-sm-l",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "tk-xy-b",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "tk-xy-latia",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "tk-xy-latio",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "tk-xy-n",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "tk-xy-p",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "tk-xy-su",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "tk-xy-sy",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "tk-xy-w",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "fr"
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:series:fr:l-appel-des-legendes",
+      "name": "L'appel des Légendes",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "col1",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "fr"
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:series:fr:mega-evolution",
+      "name": "Méga-Évolution",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:ME06"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:ME05"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "m5"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:ME04"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "m4"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:ME03"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "m3"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:ME02.5"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "m2a"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:ME02"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "m2"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:ME01"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "me02.5",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "me04",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "mee",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "me01",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "mep",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "me03",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "me02",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "me05",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "fr"
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:series:fr:neo",
+      "name": "Neo",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo4",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo1",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo3",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "fr"
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:series:fr:noir-and-blanc",
+      "name": "Noir & Blanc",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "bw1",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "bw7",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "bwp",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "bw5",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "dv1",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "bw6",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "bw2",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "bw4",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "bw3",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "bw10",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "bw9",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "bw8",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "rc",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "fr"
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:series:fr:platine",
+      "name": "Platine",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "pl1",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "pl2",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "pl3",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "fr"
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:series:fr:pop",
+      "name": "POP",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "np",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "pop1",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "pop2",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "pop3",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "pop4",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "pop7",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "pop9",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "fr"
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:series:fr:soleil-et-lune",
+      "name": "Soleil et Lune",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:SL12"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:SL11.5"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:SL11"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:SL10"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:SL09"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:SL08"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:SL07.5"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:SL07"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:SL06"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:SL05"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:SL04.5"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:SL04"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:SL03.5"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:SL03"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:SL02"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:SL01"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "sm3",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "sm7",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "sm12",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "sm4",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "det1",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "sm7.5",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "sm6",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "sm2",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "sma",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "sm115",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "sm8",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "sm3.5",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "smp",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "sm1",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "sm9",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "sm5",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "sm10",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "sm11",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "fr"
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:series:fr:xy",
+      "name": "XY",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:XY12"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:XY11"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:XY10"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:XY09"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:XY08"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:XY07.5"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:XY07"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:XY06"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:XY05"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:XY04"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:XY03"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:XY02"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:fr:XY01"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "xy7",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "xy9",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "xy8",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "dc1",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "xy12",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "xy10",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "xy2",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "xy3",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "g1",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "xy0",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "xy4",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "xy5",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "xy6",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "xy11",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "xyp",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "xy1",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "xya",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "fr"
+    }
+  ]
+}
