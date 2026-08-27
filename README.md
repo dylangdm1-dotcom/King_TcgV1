@@ -2,18 +2,18 @@
 
 Application de gestion et d'analyse de cartes Pokémon : catalogues multilingues, collection, favoris, dashboard, scanner IA, estimation PSA expérimentale et agrégation de données marché.
 
-> **État du projet : V274 — pipeline régional vérifiable du Catalogue King_TCG V2.**
+> **État du projet : V276 — cache marché persistant multi-instance.**
 > **V267 est abandonnée : ne pas la reprendre.**
-> La V274 ajoute captures JP/CN traçables, contrôle d'intégrité et import local non destructif, sans basculer les pages ni les routes existantes.
+> La V276 ajoute une persistance Redis REST multi-instance avec repli mémoire, sans modifier la clé V275 ni déclencher d'appel prix depuis Recherche.
 > Lire en priorité `docs/PROJECT_STATUS.md`, `docs/WORK_HANDOFF.md`, `docs/FINAL_ROADMAP.md` et `docs/LEGAL_ROADMAP.md`.
 
 ## Handoff final — 18 août 2026
 
-- **Base source officielle : V266 ; version actuelle contrôlée : V274.**
+- **Base source officielle : V266 ; version actuelle contrôlée : V276.**
 - **V267 M6/PokéCardex : abandonnée**, ne pas réintégrer ce prototype.
 - Le socle parallèle du **Catalogue King_TCG V2** est intégré : identités canoniques, séparation extensions/groupes, garde-fous JP/CN, variantes et fusion non destructive.
 - Le stockage local contient 40 863 cartes FR/EN ; prochaine étape : snapshots régionaux vérifiés pour les cartes JP/CN avant toute bascule.
-- Deuxième chantier : **cache serveur partagé** pour réduire fortement les appels prix et partager une même donnée entre Recherche, Fiche, Collection, Favoris, Dashboard, Alertes et Opportunités.
+- Le cache marché applicatif est partagé entre les parcours et sa persistance Redis REST multi-instance est prête ; elle s'active avec les variables serveur V276.
 - PokéCardex est à étudier comme source complémentaire FR/JP/CN pour extensions, visuels et variantes (Holo/Reverse/Poké Ball/Master Ball/etc.), avec normalisation dans le modèle King_TCG.
 - API payante à étudier en premier après premières recettes : **JustTCG** ; Gemini ensuite selon la consommation Scanner ; PriceCharting selon l'usage PSA. Revalider les offres au moment de l'achat.
 - Scanner : Batch amélioré et retesté après V266 ; **Quad post-V266 reste à tester physiquement**.
@@ -78,6 +78,8 @@ Application de gestion et d'analyse de cartes Pokémon : catalogues multilingues
 - `docs/CATALOG_V2_ORCHESTRATOR_V272.md` — cache, pagination, checkpoints, reprise et couverture.
 - `docs/CATALOG_V2_LOCAL_V273.md` — stockage permanent, couverture réelle, loaders et limites JP/CN.
 - `docs/CATALOG_V2_REGIONAL_V274.md` — captures régionales, réconciliation, import local et garde-fous.
+- `docs/MARKET_CACHE_PERSISTENT_V276.md` — persistance Redis REST, repli mémoire, verrou distribué et activation Vercel.
+- `docs/MARKET_CACHE_V275.md` — clé canonique, fraîcheur, stale et partage entre pages.
 - `docs/PROJECT_STATUS.md` — état détaillé du projet.
 - `docs/WORK_HANDOFF.md` — ordre de reprise recommandé pour Work.
 - `docs/FINAL_ROADMAP.md` — tâches validées, tests restants et travaux Work.
@@ -90,7 +92,7 @@ Application de gestion et d'analyse de cartes Pokémon : catalogues multilingues
 
 # 👑 King_TCG — README officiel
 
-**Version de travail actuelle : V274 — Pipeline régional JP/CN contrôlé**\
+**Version de travail actuelle : V276 — Cache marché persistant**\
 **Statut produit : V5.0 — Accès anticipé**\
 **Stack : Next.js App Router, React, TypeScript, TailwindCSS**\
 **IA : Google Gemini**\
@@ -562,7 +564,7 @@ Après une modification Data ou Marché :
 
 ------------------------------------------------------------------------
 
-## État de travail actuel — V274
+## État de travail actuel — V276
 
 ### Validé / intégré récemment
 
@@ -591,6 +593,9 @@ Après une modification Data ou Marché :
 - 122 extensions JP et 42 CN conservées sans fausse injection de cartes internationales.
 - pipeline régional V274 : capture ciblée, snapshots vérifiés, réconciliation canonique et génération non destructive ;
 - aucune carte JP/CN inventée : les captures réelles restent à exécuter avec les fournisseurs disponibles.
+- cache marché V275 partagé entre les parcours via une identité langue/variante/état unique ;
+- Cote déjà connue visible dans Recherche sans appel fournisseur ;
+- dernier snapshot conservé 30 jours et signalé « À actualiser » après expiration.
 
 ### À poursuivre dans Work
 
@@ -622,7 +627,7 @@ principal conservé à la racine.
 ------------------------------------------------------------------------
 
 **King_TCG — Pokémon Trading Card Companion**\
-**V274 — Pipeline régional Catalogue V2 / V5.0 Accès anticipé**
+**V276 — Cache marché persistant / V5.0 Accès anticipé**
 
 ## V78 — CN public dual fallback + JP TCGdex isolation
 - CN keeps V77 public PokéWallet primary + browser direct fallback when the server path fails.
@@ -716,6 +721,22 @@ sauvegarde restaurable et des tests ciblés avant toute modification transversal
 - Génération additive dans un dossier neuf ; FR/EN et catalogue publié V273 restent intacts.
 - Audit reproductible avec `npm run audit:catalog-v2-regional`.
 - Les cartes régionales réelles ne sont pas incluses sans réponse fournisseur et autorisation disponible au moment de la capture.
+
+## V275 — Cache marché partagé
+- Clé canonique commune client/serveur : carte, langue, extension, numéro, impression, état et IDs de variante.
+- Prix positif frais 24 h ; absence fraîche 6 h ; dernier snapshot conservé 30 jours.
+- Recherche affiche une Cote en cache sans déclencher de requête prix.
+- Collection, Favoris, Dashboard, Alertes et Opportunités relisent le même snapshot via `getCardById`.
+- Panne fournisseur : dernier prix connu conservé et marqué à actualiser.
+- V276 connecte ce contrat à Redis REST avec repli mémoire lorsque la configuration est absente ou indisponible.
+
+## V276 — Persistance multi-instance
+
+- lecture durable groupée et restauration après cold start ;
+- snapshots conservés 30 jours avec fraîcheur 24 h/6 h ;
+- verrou Redis distribué pour les rafraîchissements stale ;
+- activation par variables serveur, sans secret embarqué ;
+- Recherche reste cache-only.
 
 ## Pause projet / reprise Work — août 2026
 
