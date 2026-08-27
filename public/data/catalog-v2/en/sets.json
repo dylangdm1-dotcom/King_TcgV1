@@ -1,0 +1,4880 @@
+{
+  "schemaVersion": 2,
+  "formatVersion": 1,
+  "catalogVersion": "v273-local-2026-08-27",
+  "language": "en",
+  "sets": [
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:2011bw",
+      "name": "McDonald's Collection 2011",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "2011bw",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "2011BW",
+      "seriesId": "ktcg:series:en:mcdonald-s-collection",
+      "year": 2011,
+      "releaseDate": "2011-06-17",
+      "officialCardCount": 12,
+      "knownCardCount": 12,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:2012bw",
+      "name": "McDonald's Collection 2012",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "2012bw",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "2012BW",
+      "seriesId": "ktcg:series:en:mcdonald-s-collection",
+      "year": 2012,
+      "releaseDate": "2012-06-15",
+      "officialCardCount": 12,
+      "knownCardCount": 12,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:2014xy",
+      "name": "McDonald's Collection 2014",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "2014xy",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "2014XY",
+      "seriesId": "ktcg:series:en:mcdonald-s-collection",
+      "year": 2014,
+      "releaseDate": "2014-05-23",
+      "officialCardCount": 12,
+      "knownCardCount": 12,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:2015xy",
+      "name": "McDonald's Collection 2015",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "2015xy",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "2015XY",
+      "seriesId": "ktcg:series:en:mcdonald-s-collection",
+      "year": 2015,
+      "releaseDate": "2015-11-27",
+      "officialCardCount": 12,
+      "knownCardCount": 12,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:2016xy",
+      "name": "McDonald's Collection 2016",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "2016xy",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "2016XY",
+      "seriesId": "ktcg:series:en:mcdonald-s-collection",
+      "year": 2016,
+      "releaseDate": "2016-08-20",
+      "officialCardCount": 12,
+      "knownCardCount": 12,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:2017sm",
+      "name": "McDonald's Collection 2017",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "2017sm",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "2017SM",
+      "seriesId": "ktcg:series:en:mcdonald-s-collection",
+      "year": 2017,
+      "releaseDate": "2017-08-03",
+      "officialCardCount": 12,
+      "knownCardCount": 12,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:2018sm",
+      "name": "McDonald's Collection 2018",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "2018sm",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "2018SM",
+      "seriesId": "ktcg:series:en:mcdonald-s-collection",
+      "year": 2018,
+      "releaseDate": "2018-10-19",
+      "officialCardCount": 12,
+      "knownCardCount": 12,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:2019sm",
+      "name": "McDonald's Collection 2019",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "2019sm",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "2019SM",
+      "seriesId": "ktcg:series:en:mcdonald-s-collection",
+      "year": 2019,
+      "releaseDate": "2019-10-15",
+      "officialCardCount": 12,
+      "knownCardCount": 12,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:2021swsh",
+      "name": "McDonald's Collection 2021",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "2021swsh",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "2021SWSH",
+      "seriesId": "ktcg:series:en:mcdonald-s-collection",
+      "year": 2021,
+      "releaseDate": "2021-02-09",
+      "officialCardCount": 25,
+      "knownCardCount": 25,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:2022swsh",
+      "name": "McDonald's Collection 2022",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "2022swsh",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "2022SWSH",
+      "seriesId": "ktcg:series:en:mcdonald-s-collection",
+      "year": 2022,
+      "releaseDate": "2022-08-03",
+      "officialCardCount": 15,
+      "knownCardCount": 15,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:2023sv",
+      "name": "McDonald's Collection 2023",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "2023sv",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "2023SV",
+      "seriesId": "ktcg:series:en:mcdonald-s-collection",
+      "year": 2023,
+      "releaseDate": "2023-08-01",
+      "officialCardCount": 15,
+      "knownCardCount": 15,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:2024sv",
+      "name": "McDonald's Collection 2024",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "2024sv",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "2024SV",
+      "seriesId": "ktcg:series:en:mcdonald-s-collection",
+      "year": 2024,
+      "releaseDate": "2024-12-04",
+      "officialCardCount": 15,
+      "knownCardCount": 15,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:base1",
+      "name": "Base Set",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "base1",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "BASE1",
+      "seriesId": "ktcg:series:en:base",
+      "year": 1999,
+      "releaseDate": "1999-01-09",
+      "officialCardCount": 102,
+      "knownCardCount": 102,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:base2",
+      "name": "Jungle",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "base2",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "BASE2",
+      "seriesId": "ktcg:series:en:base",
+      "year": 1999,
+      "releaseDate": "1999-06-16",
+      "officialCardCount": 64,
+      "knownCardCount": 64,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:base3",
+      "name": "Fossil",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "base3",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "BASE3",
+      "seriesId": "ktcg:series:en:base",
+      "year": 1999,
+      "releaseDate": "1999-10-10",
+      "officialCardCount": 62,
+      "knownCardCount": 62,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:base4",
+      "name": "Base Set 2",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "base4",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "BASE4",
+      "seriesId": "ktcg:series:en:base",
+      "year": 2000,
+      "releaseDate": "2000-02-24",
+      "officialCardCount": 130,
+      "knownCardCount": 130,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:base5",
+      "name": "Team Rocket",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "base5",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "BASE5",
+      "seriesId": "ktcg:series:en:base",
+      "year": 2000,
+      "releaseDate": "2000-04-24",
+      "officialCardCount": 82,
+      "knownCardCount": 83,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:basep",
+      "name": "Wizards Black Star Promos",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "basep",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "BASEP",
+      "seriesId": "ktcg:series:en:base",
+      "year": 1999,
+      "releaseDate": "1999-07-01",
+      "officialCardCount": 53,
+      "knownCardCount": 53,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:bog",
+      "name": "Best of game",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "bog",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "BOG",
+      "seriesId": "ktcg:series:en:e-card",
+      "year": 2002,
+      "releaseDate": "2002-12-01",
+      "officialCardCount": 9,
+      "knownCardCount": 9,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:bw1",
+      "name": "Black & White",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "bw1",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "BW1",
+      "seriesId": "ktcg:series:en:black-and-white",
+      "year": 2011,
+      "releaseDate": "2011-04-25",
+      "officialCardCount": 114,
+      "knownCardCount": 115,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:bw10",
+      "name": "Plasma Blast",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "bw10",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "BW10",
+      "seriesId": "ktcg:series:en:black-and-white",
+      "year": 2013,
+      "releaseDate": "2013-08-14",
+      "officialCardCount": 101,
+      "knownCardCount": 105,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:bw11",
+      "name": "Legendary Treasures",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "bw11",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "BW11",
+      "seriesId": "ktcg:series:en:black-and-white",
+      "year": 2013,
+      "releaseDate": "2013-11-06",
+      "officialCardCount": 113,
+      "knownCardCount": 140,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:bw2",
+      "name": "Emerging Powers",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "bw2",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "BW2",
+      "seriesId": "ktcg:series:en:black-and-white",
+      "year": 2011,
+      "releaseDate": "2011-08-31",
+      "officialCardCount": 98,
+      "knownCardCount": 98,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:bw3",
+      "name": "Noble Victories",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "bw3",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "BW3",
+      "seriesId": "ktcg:series:en:black-and-white",
+      "year": 2011,
+      "releaseDate": "2011-11-16",
+      "officialCardCount": 101,
+      "knownCardCount": 102,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:bw4",
+      "name": "Next Destinies",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "bw4",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "BW4",
+      "seriesId": "ktcg:series:en:black-and-white",
+      "year": 2012,
+      "releaseDate": "2012-02-08",
+      "officialCardCount": 99,
+      "knownCardCount": 103,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:bw5",
+      "name": "Dark Explorers",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "bw5",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "BW5",
+      "seriesId": "ktcg:series:en:black-and-white",
+      "year": 2012,
+      "releaseDate": "2012-05-09",
+      "officialCardCount": 108,
+      "knownCardCount": 111,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:bw6",
+      "name": "Dragons Exalted",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "bw6",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "BW6",
+      "seriesId": "ktcg:series:en:black-and-white",
+      "year": 2012,
+      "releaseDate": "2012-08-15",
+      "officialCardCount": 124,
+      "knownCardCount": 128,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:bw7",
+      "name": "Boundaries Crossed",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "bw7",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "BW7",
+      "seriesId": "ktcg:series:en:black-and-white",
+      "year": 2012,
+      "releaseDate": "2012-11-07",
+      "officialCardCount": 149,
+      "knownCardCount": 153,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:bw8",
+      "name": "Plasma Storm",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "bw8",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "BW8",
+      "seriesId": "ktcg:series:en:black-and-white",
+      "year": 2013,
+      "releaseDate": "2013-02-06",
+      "officialCardCount": 135,
+      "knownCardCount": 138,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:bw9",
+      "name": "Plasma Freeze",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "bw9",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "BW9",
+      "seriesId": "ktcg:series:en:black-and-white",
+      "year": 2013,
+      "releaseDate": "2013-05-08",
+      "officialCardCount": 116,
+      "knownCardCount": 122,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:bwp",
+      "name": "BW Black Star Promos",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "bwp",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "BWP",
+      "seriesId": "ktcg:series:en:black-and-white",
+      "year": 2011,
+      "releaseDate": "2011-04-26",
+      "officialCardCount": 101,
+      "knownCardCount": 101,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:cel25",
+      "name": "Celebrations",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "cel25",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "CEL25",
+      "seriesId": "ktcg:series:en:sword-and-shield",
+      "year": 2021,
+      "releaseDate": "2021-10-08",
+      "officialCardCount": 25,
+      "knownCardCount": 25,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:cel25cc",
+      "name": "Celebrations Classic Collection",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "cel25cc",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "CEL25CC",
+      "seriesId": "ktcg:series:en:sword-and-shield",
+      "year": 2021,
+      "releaseDate": "2021-10-08",
+      "officialCardCount": 25,
+      "knownCardCount": 25,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:col1",
+      "name": "Call of Legends",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "col1",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "COL1",
+      "seriesId": "ktcg:series:en:call-of-legends",
+      "year": 2011,
+      "releaseDate": "2011-02-09",
+      "officialCardCount": 95,
+      "knownCardCount": 106,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:dc1",
+      "name": "Double Crisis",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "dc1",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "DC1",
+      "seriesId": "ktcg:series:en:xy",
+      "year": 2015,
+      "releaseDate": "2015-03-25",
+      "officialCardCount": 34,
+      "knownCardCount": 34,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:det1",
+      "name": "Detective Pikachu",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "det1",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "DET1",
+      "seriesId": "ktcg:series:en:sun-and-moon",
+      "year": 2019,
+      "releaseDate": "2019-03-29",
+      "officialCardCount": 18,
+      "knownCardCount": 18,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:dp1",
+      "name": "Diamond & Pearl",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "dp1",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "DP1",
+      "seriesId": "ktcg:series:en:diamond-and-pearl",
+      "year": 2007,
+      "releaseDate": "2007-05-01",
+      "officialCardCount": 130,
+      "knownCardCount": 130,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:dp2",
+      "name": "Mysterious Treasures",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "dp2",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "DP2",
+      "seriesId": "ktcg:series:en:diamond-and-pearl",
+      "year": 2007,
+      "releaseDate": "2007-08-01",
+      "officialCardCount": 123,
+      "knownCardCount": 124,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:dp3",
+      "name": "Secret Wonders",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "dp3",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "DP3",
+      "seriesId": "ktcg:series:en:diamond-and-pearl",
+      "year": 2007,
+      "releaseDate": "2007-11-01",
+      "officialCardCount": 132,
+      "knownCardCount": 132,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:dp4",
+      "name": "Great Encounters",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "dp4",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "DP4",
+      "seriesId": "ktcg:series:en:diamond-and-pearl",
+      "year": 2008,
+      "releaseDate": "2008-02-01",
+      "officialCardCount": 106,
+      "knownCardCount": 106,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:dp5",
+      "name": "Majestic Dawn",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "dp5",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "DP5",
+      "seriesId": "ktcg:series:en:diamond-and-pearl",
+      "year": 2008,
+      "releaseDate": "2008-05-01",
+      "officialCardCount": 100,
+      "knownCardCount": 100,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:dp6",
+      "name": "Legends Awakened",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "dp6",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "DP6",
+      "seriesId": "ktcg:series:en:diamond-and-pearl",
+      "year": 2008,
+      "releaseDate": "2008-08-01",
+      "officialCardCount": 146,
+      "knownCardCount": 146,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:dp7",
+      "name": "Stormfront",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "dp7",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "DP7",
+      "seriesId": "ktcg:series:en:diamond-and-pearl",
+      "year": 2008,
+      "releaseDate": "2008-11-01",
+      "officialCardCount": 100,
+      "knownCardCount": 106,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:dpp",
+      "name": "DP Black Star Promos",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "dpp",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "DPP",
+      "seriesId": "ktcg:series:en:diamond-and-pearl",
+      "year": 2007,
+      "releaseDate": "2007-05-01",
+      "officialCardCount": 56,
+      "knownCardCount": 56,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:dv1",
+      "name": "Dragon Vault",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "dv1",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "DV1",
+      "seriesId": "ktcg:series:en:black-and-white",
+      "year": 2012,
+      "releaseDate": "2012-10-05",
+      "officialCardCount": 20,
+      "knownCardCount": 21,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:ecard1",
+      "name": "Expedition Base Set",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "ecard1",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "ECARD1",
+      "seriesId": "ktcg:series:en:e-card",
+      "year": 2002,
+      "releaseDate": "2002-09-15",
+      "officialCardCount": 165,
+      "knownCardCount": 165,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:ecard2",
+      "name": "Aquapolis",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "ecard2",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "ECARD2",
+      "seriesId": "ktcg:series:en:e-card",
+      "year": 2003,
+      "releaseDate": "2003-01-15",
+      "officialCardCount": 147,
+      "knownCardCount": 186,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:ecard3",
+      "name": "Skyridge",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "ecard3",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "ECARD3",
+      "seriesId": "ktcg:series:en:e-card",
+      "year": 2003,
+      "releaseDate": "2003-05-12",
+      "officialCardCount": 144,
+      "knownCardCount": 182,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:ex1",
+      "name": "Ruby & Sapphire",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "ex1",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "EX1",
+      "seriesId": "ktcg:series:en:ex",
+      "year": 2003,
+      "releaseDate": "2003-07-01",
+      "officialCardCount": 109,
+      "knownCardCount": 109,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:ex10",
+      "name": "Unseen Forces",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "ex10",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "EX10",
+      "seriesId": "ktcg:series:en:ex",
+      "year": 2005,
+      "releaseDate": "2005-08-22",
+      "officialCardCount": 115,
+      "knownCardCount": 117,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:ex11",
+      "name": "Delta Species",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "ex11",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "EX11",
+      "seriesId": "ktcg:series:en:ex",
+      "year": 2005,
+      "releaseDate": "2005-10-31",
+      "officialCardCount": 113,
+      "knownCardCount": 114,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:ex12",
+      "name": "Legend Maker",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "ex12",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "EX12",
+      "seriesId": "ktcg:series:en:ex",
+      "year": 2006,
+      "releaseDate": "2006-02-13",
+      "officialCardCount": 92,
+      "knownCardCount": 93,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:ex13",
+      "name": "Holon Phantoms",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "ex13",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "EX13",
+      "seriesId": "ktcg:series:en:ex",
+      "year": 2006,
+      "releaseDate": "2006-05-03",
+      "officialCardCount": 110,
+      "knownCardCount": 111,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:ex14",
+      "name": "Crystal Guardians",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "ex14",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "EX14",
+      "seriesId": "ktcg:series:en:ex",
+      "year": 2006,
+      "releaseDate": "2006-08-30",
+      "officialCardCount": 100,
+      "knownCardCount": 100,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:ex15",
+      "name": "Dragon Frontiers",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "ex15",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "EX15",
+      "seriesId": "ktcg:series:en:ex",
+      "year": 2006,
+      "releaseDate": "2006-11-08",
+      "officialCardCount": 101,
+      "knownCardCount": 101,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:ex16",
+      "name": "Power Keepers",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "ex16",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "EX16",
+      "seriesId": "ktcg:series:en:ex",
+      "year": 2007,
+      "releaseDate": "2007-02-17",
+      "officialCardCount": 108,
+      "knownCardCount": 108,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:ex2",
+      "name": "Sandstorm",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "ex2",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "EX2",
+      "seriesId": "ktcg:series:en:ex",
+      "year": 2003,
+      "releaseDate": "2003-09-18",
+      "officialCardCount": 100,
+      "knownCardCount": 100,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:ex3",
+      "name": "Dragon",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "ex3",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "EX3",
+      "seriesId": "ktcg:series:en:ex",
+      "year": 2003,
+      "releaseDate": "2003-11-24",
+      "officialCardCount": 97,
+      "knownCardCount": 100,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:ex4",
+      "name": "Team Magma vs Team Aqua",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "ex4",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "EX4",
+      "seriesId": "ktcg:series:en:ex",
+      "year": 2004,
+      "releaseDate": "2004-03-01",
+      "officialCardCount": 95,
+      "knownCardCount": 97,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:ex5",
+      "name": "Hidden Legends",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "ex5",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "EX5",
+      "seriesId": "ktcg:series:en:ex",
+      "year": 2004,
+      "releaseDate": "2004-06-01",
+      "officialCardCount": 101,
+      "knownCardCount": 102,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:ex5-5",
+      "name": "Poké Card Creator Pack",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "ex5.5",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "EX5.5",
+      "seriesId": "ktcg:series:en:ex",
+      "year": 2004,
+      "releaseDate": "2004-07-01",
+      "officialCardCount": 5,
+      "knownCardCount": 5,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:ex6",
+      "name": "FireRed & LeafGreen",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "ex6",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "EX6",
+      "seriesId": "ktcg:series:en:ex",
+      "year": 2004,
+      "releaseDate": "2004-09-01",
+      "officialCardCount": 112,
+      "knownCardCount": 116,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:ex7",
+      "name": "Team Rocket Returns",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "ex7",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "EX7",
+      "seriesId": "ktcg:series:en:ex",
+      "year": 2004,
+      "releaseDate": "2004-11-01",
+      "officialCardCount": 109,
+      "knownCardCount": 111,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:ex8",
+      "name": "Deoxys",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "ex8",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "EX8",
+      "seriesId": "ktcg:series:en:ex",
+      "year": 2005,
+      "releaseDate": "2005-02-01",
+      "officialCardCount": 107,
+      "knownCardCount": 108,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:ex9",
+      "name": "Emerald",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "ex9",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "EX9",
+      "seriesId": "ktcg:series:en:ex",
+      "year": 2005,
+      "releaseDate": "2005-05-09",
+      "officialCardCount": 106,
+      "knownCardCount": 107,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:exu",
+      "name": "Unseen Forces Unown Collection",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "exu",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "EXU",
+      "seriesId": "ktcg:series:en:ex",
+      "year": 2005,
+      "releaseDate": "2005-08-22",
+      "officialCardCount": 28,
+      "knownCardCount": 28,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:fut2020",
+      "name": "Pokémon Futsal 2020",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "fut2020",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "FUT2020",
+      "seriesId": "ktcg:series:en:sword-and-shield",
+      "year": 2020,
+      "releaseDate": "2020-09-11",
+      "officialCardCount": 5,
+      "knownCardCount": 5,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:g1",
+      "name": "Generations",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "g1",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "G1",
+      "seriesId": "ktcg:series:en:xy",
+      "year": 2016,
+      "releaseDate": "2016-02-22",
+      "officialCardCount": 83,
+      "knownCardCount": 117,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:gym1",
+      "name": "Gym Heroes",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "gym1",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "GYM1",
+      "seriesId": "ktcg:series:en:gym",
+      "year": 2000,
+      "releaseDate": "2000-08-14",
+      "officialCardCount": 132,
+      "knownCardCount": 132,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:gym2",
+      "name": "Gym Challenge",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "gym2",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "GYM2",
+      "seriesId": "ktcg:series:en:gym",
+      "year": 2000,
+      "releaseDate": "2000-10-16",
+      "officialCardCount": 132,
+      "knownCardCount": 132,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:hgss1",
+      "name": "HeartGold SoulSilver",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "hgss1",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "HGSS1",
+      "seriesId": "ktcg:series:en:heartgold-and-soulsilver",
+      "year": 2010,
+      "releaseDate": "2010-02-10",
+      "officialCardCount": 123,
+      "knownCardCount": 124,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:hgss2",
+      "name": "Unleashed",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "hgss2",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "HGSS2",
+      "seriesId": "ktcg:series:en:heartgold-and-soulsilver",
+      "year": 2010,
+      "releaseDate": "2010-05-12",
+      "officialCardCount": 95,
+      "knownCardCount": 96,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:hgss3",
+      "name": "Undaunted",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "hgss3",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "HGSS3",
+      "seriesId": "ktcg:series:en:heartgold-and-soulsilver",
+      "year": 2010,
+      "releaseDate": "2010-08-18",
+      "officialCardCount": 90,
+      "knownCardCount": 91,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:hgss4",
+      "name": "Triumphant",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "hgss4",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "HGSS4",
+      "seriesId": "ktcg:series:en:heartgold-and-soulsilver",
+      "year": 2010,
+      "releaseDate": "2010-11-03",
+      "officialCardCount": 102,
+      "knownCardCount": 103,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:hgssp",
+      "name": "HGSS Black Star Promos",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "hgssp",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "HGSSP",
+      "seriesId": "ktcg:series:en:heartgold-and-soulsilver",
+      "year": 2010,
+      "releaseDate": "2010-02-11",
+      "officialCardCount": 25,
+      "knownCardCount": 25,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:jumbo",
+      "name": "Jumbo cards",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "jumbo",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "JUMBO",
+      "seriesId": "ktcg:series:en:miscellaneous",
+      "year": 2000,
+      "releaseDate": "2000-02-01",
+      "officialCardCount": 160,
+      "knownCardCount": 0,
+      "availability": "metadata_only",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:lc",
+      "name": "Legendary Collection",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "lc",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "LC",
+      "seriesId": "ktcg:series:en:legendary-collection",
+      "year": 2002,
+      "releaseDate": "2002-05-24",
+      "officialCardCount": 110,
+      "knownCardCount": 110,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:me01",
+      "name": "Mega Evolution",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "me01",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "ME01",
+      "seriesId": "ktcg:series:en:mega-evolution",
+      "year": 2025,
+      "releaseDate": "2025-09-26",
+      "officialCardCount": 132,
+      "knownCardCount": 188,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:me02",
+      "name": "Phantasmal Flames",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "me02",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "ME02",
+      "seriesId": "ktcg:series:en:mega-evolution",
+      "year": 2025,
+      "releaseDate": "2025-11-14",
+      "officialCardCount": 94,
+      "knownCardCount": 130,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:me02-5",
+      "name": "Ascended Heroes",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "me02.5",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "ME02.5",
+      "seriesId": "ktcg:series:en:mega-evolution",
+      "year": 2026,
+      "releaseDate": "2026-01-30",
+      "officialCardCount": 217,
+      "knownCardCount": 295,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:me03",
+      "name": "Perfect Order",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "me03",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "ME03",
+      "seriesId": "ktcg:series:en:mega-evolution",
+      "year": 2026,
+      "releaseDate": "2026-03-27",
+      "officialCardCount": 88,
+      "knownCardCount": 124,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:me04",
+      "name": "Chaos Rising",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "me04",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "ME04",
+      "seriesId": "ktcg:series:en:mega-evolution",
+      "year": 2026,
+      "releaseDate": "2026-05-22",
+      "officialCardCount": 86,
+      "knownCardCount": 122,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:me05",
+      "name": "Pitch Black",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "me05",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "ME05",
+      "seriesId": "ktcg:series:en:mega-evolution",
+      "year": 2026,
+      "releaseDate": "2026-07-17",
+      "officialCardCount": 84,
+      "knownCardCount": 120,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:mee",
+      "name": "Mega Evolution Energy",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "mee",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "MEE",
+      "seriesId": "ktcg:series:en:mega-evolution",
+      "year": 2025,
+      "releaseDate": "2025-09-25",
+      "officialCardCount": 8,
+      "knownCardCount": 8,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:mep",
+      "name": "MEP Black Star Promos",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "mep",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "MEP",
+      "seriesId": "ktcg:series:en:mega-evolution",
+      "year": 2025,
+      "releaseDate": "2025-09-26",
+      "officialCardCount": 0,
+      "knownCardCount": 89,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:mfb",
+      "name": "My First Battle",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "mfb",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "MFB",
+      "seriesId": "ktcg:series:en:scarlet-and-violet",
+      "year": 2023,
+      "releaseDate": "2023-09-29",
+      "officialCardCount": 48,
+      "knownCardCount": 34,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:miscp",
+      "name": "Miscellaneous Promos",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "miscp",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "MISCP",
+      "seriesId": "ktcg:series:en:miscellaneous",
+      "year": 1996,
+      "releaseDate": "1996-01-01",
+      "officialCardCount": 1,
+      "knownCardCount": 1,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:neo1",
+      "name": "Neo Genesis",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo1",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "NEO1",
+      "seriesId": "ktcg:series:en:neo",
+      "year": 2000,
+      "releaseDate": "2000-12-16",
+      "officialCardCount": 111,
+      "knownCardCount": 111,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:neo2",
+      "name": "Neo Discovery",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "NEO2",
+      "seriesId": "ktcg:series:en:neo",
+      "year": 2001,
+      "releaseDate": "2001-06-01",
+      "officialCardCount": 75,
+      "knownCardCount": 75,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:neo3",
+      "name": "Neo Revelation",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo3",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "NEO3",
+      "seriesId": "ktcg:series:en:neo",
+      "year": 2001,
+      "releaseDate": "2001-09-21",
+      "officialCardCount": 64,
+      "knownCardCount": 66,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:neo4",
+      "name": "Neo Destiny",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo4",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "NEO4",
+      "seriesId": "ktcg:series:en:neo",
+      "year": 2002,
+      "releaseDate": "2002-02-28",
+      "officialCardCount": 105,
+      "knownCardCount": 113,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:np",
+      "name": "Nintendo Black Star Promos",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "np",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "NP",
+      "seriesId": "ktcg:series:en:pop",
+      "year": 2003,
+      "releaseDate": "2003-10-01",
+      "officialCardCount": 40,
+      "knownCardCount": 40,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:pl1",
+      "name": "Platinum",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "pl1",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "PL1",
+      "seriesId": "ktcg:series:en:platinum",
+      "year": 2009,
+      "releaseDate": "2009-02-11",
+      "officialCardCount": 127,
+      "knownCardCount": 133,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:pl2",
+      "name": "Rising Rivals",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "pl2",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "PL2",
+      "seriesId": "ktcg:series:en:platinum",
+      "year": 2009,
+      "releaseDate": "2009-05-16",
+      "officialCardCount": 111,
+      "knownCardCount": 120,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:pl3",
+      "name": "Supreme Victors",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "pl3",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "PL3",
+      "seriesId": "ktcg:series:en:platinum",
+      "year": 2009,
+      "releaseDate": "2009-08-19",
+      "officialCardCount": 147,
+      "knownCardCount": 153,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:pl4",
+      "name": "Arceus",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "pl4",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "PL4",
+      "seriesId": "ktcg:series:en:platinum",
+      "year": 2009,
+      "releaseDate": "2009-11-04",
+      "officialCardCount": 99,
+      "knownCardCount": 111,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:pop1",
+      "name": "POP Series 1",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "pop1",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "POP1",
+      "seriesId": "ktcg:series:en:pop",
+      "year": 2004,
+      "releaseDate": "2004-09-01",
+      "officialCardCount": 17,
+      "knownCardCount": 17,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:pop2",
+      "name": "POP Series 2",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "pop2",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "POP2",
+      "seriesId": "ktcg:series:en:pop",
+      "year": 2005,
+      "releaseDate": "2005-08-01",
+      "officialCardCount": 17,
+      "knownCardCount": 17,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:pop3",
+      "name": "POP Series 3",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "pop3",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "POP3",
+      "seriesId": "ktcg:series:en:pop",
+      "year": 2006,
+      "releaseDate": "2006-04-01",
+      "officialCardCount": 17,
+      "knownCardCount": 17,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:pop4",
+      "name": "POP Series 4",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "pop4",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "POP4",
+      "seriesId": "ktcg:series:en:pop",
+      "year": 2006,
+      "releaseDate": "2006-08-01",
+      "officialCardCount": 17,
+      "knownCardCount": 17,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:pop5",
+      "name": "POP Series 5",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "pop5",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "POP5",
+      "seriesId": "ktcg:series:en:pop",
+      "year": 2007,
+      "releaseDate": "2007-03-01",
+      "officialCardCount": 17,
+      "knownCardCount": 17,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:pop6",
+      "name": "POP Series 6",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "pop6",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "POP6",
+      "seriesId": "ktcg:series:en:pop",
+      "year": 2007,
+      "releaseDate": "2007-09-01",
+      "officialCardCount": 17,
+      "knownCardCount": 17,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:pop7",
+      "name": "POP Series 7",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "pop7",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "POP7",
+      "seriesId": "ktcg:series:en:pop",
+      "year": 2008,
+      "releaseDate": "2008-03-01",
+      "officialCardCount": 17,
+      "knownCardCount": 17,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:pop8",
+      "name": "POP Series 8",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "pop8",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "POP8",
+      "seriesId": "ktcg:series:en:pop",
+      "year": 2008,
+      "releaseDate": "2008-09-01",
+      "officialCardCount": 17,
+      "knownCardCount": 17,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:pop9",
+      "name": "POP Series 9",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "pop9",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "POP9",
+      "seriesId": "ktcg:series:en:pop",
+      "year": 2009,
+      "releaseDate": "2009-03-01",
+      "officialCardCount": 17,
+      "knownCardCount": 17,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:rc",
+      "name": "Radiant Collection",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "rc",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "RC",
+      "seriesId": "ktcg:series:en:black-and-white",
+      "year": 2013,
+      "releaseDate": "2013-11-06",
+      "officialCardCount": 25,
+      "knownCardCount": 0,
+      "availability": "metadata_only",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:ru1",
+      "name": "Pokémon Rumble",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "ru1",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "RU1",
+      "seriesId": "ktcg:series:en:platinum",
+      "year": 2009,
+      "releaseDate": "2009-12-02",
+      "officialCardCount": 16,
+      "knownCardCount": 16,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:si1",
+      "name": "Southern Islands",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "si1",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "SI1",
+      "seriesId": "ktcg:series:en:neo",
+      "year": 2001,
+      "releaseDate": "2001-07-31",
+      "officialCardCount": 18,
+      "knownCardCount": 18,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:sm1",
+      "name": "Sun & Moon",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "sm1",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "SM1",
+      "seriesId": "ktcg:series:en:sun-and-moon",
+      "year": 2017,
+      "releaseDate": "2017-02-03",
+      "officialCardCount": 149,
+      "knownCardCount": 172,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:sm10",
+      "name": "Unbroken Bonds",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "sm10",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "SM10",
+      "seriesId": "ktcg:series:en:sun-and-moon",
+      "year": 2019,
+      "releaseDate": "2019-05-03",
+      "officialCardCount": 214,
+      "knownCardCount": 234,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:sm11",
+      "name": "Unified Minds",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "sm11",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "SM11",
+      "seriesId": "ktcg:series:en:sun-and-moon",
+      "year": 2019,
+      "releaseDate": "2019-08-02",
+      "officialCardCount": 236,
+      "knownCardCount": 258,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:sm115",
+      "name": "Hidden Fates",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "sm115",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "SM115",
+      "seriesId": "ktcg:series:en:sun-and-moon",
+      "year": 2019,
+      "releaseDate": "2019-08-23",
+      "officialCardCount": 68,
+      "knownCardCount": 69,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:sm12",
+      "name": "Cosmic Eclipse",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "sm12",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "SM12",
+      "seriesId": "ktcg:series:en:sun-and-moon",
+      "year": 2019,
+      "releaseDate": "2019-11-01",
+      "officialCardCount": 236,
+      "knownCardCount": 271,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:sm2",
+      "name": "Guardians Rising",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "sm2",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "SM2",
+      "seriesId": "ktcg:series:en:sun-and-moon",
+      "year": 2017,
+      "releaseDate": "2017-05-05",
+      "officialCardCount": 145,
+      "knownCardCount": 169,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:sm3",
+      "name": "Burning Shadows",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "sm3",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "SM3",
+      "seriesId": "ktcg:series:en:sun-and-moon",
+      "year": 2017,
+      "releaseDate": "2017-08-04",
+      "officialCardCount": 147,
+      "knownCardCount": 169,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:sm3-5",
+      "name": "Shining Legends",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "sm3.5",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "SM3.5",
+      "seriesId": "ktcg:series:en:sun-and-moon",
+      "year": 2017,
+      "releaseDate": "2017-10-06",
+      "officialCardCount": 73,
+      "knownCardCount": 78,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:sm4",
+      "name": "Crimson Invasion",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "sm4",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "SM4",
+      "seriesId": "ktcg:series:en:sun-and-moon",
+      "year": 2017,
+      "releaseDate": "2017-11-03",
+      "officialCardCount": 111,
+      "knownCardCount": 125,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:sm5",
+      "name": "Ultra Prism",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "sm5",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "SM5",
+      "seriesId": "ktcg:series:en:sun-and-moon",
+      "year": 2018,
+      "releaseDate": "2018-02-02",
+      "officialCardCount": 156,
+      "knownCardCount": 173,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:sm6",
+      "name": "Forbidden Light",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "sm6",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "SM6",
+      "seriesId": "ktcg:series:en:sun-and-moon",
+      "year": 2018,
+      "releaseDate": "2018-05-04",
+      "officialCardCount": 131,
+      "knownCardCount": 146,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:sm7",
+      "name": "Celestial Storm",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "sm7",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "SM7",
+      "seriesId": "ktcg:series:en:sun-and-moon",
+      "year": 2018,
+      "releaseDate": "2018-08-03",
+      "officialCardCount": 168,
+      "knownCardCount": 183,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:sm7-5",
+      "name": "Dragon Majesty",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "sm7.5",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "SM7.5",
+      "seriesId": "ktcg:series:en:sun-and-moon",
+      "year": 2018,
+      "releaseDate": "2018-09-07",
+      "officialCardCount": 70,
+      "knownCardCount": 78,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:sm8",
+      "name": "Lost Thunder",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "sm8",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "SM8",
+      "seriesId": "ktcg:series:en:sun-and-moon",
+      "year": 2018,
+      "releaseDate": "2018-11-02",
+      "officialCardCount": 214,
+      "knownCardCount": 236,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:sm9",
+      "name": "Team Up",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "sm9",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "SM9",
+      "seriesId": "ktcg:series:en:sun-and-moon",
+      "year": 2019,
+      "releaseDate": "2019-01-31",
+      "officialCardCount": 181,
+      "knownCardCount": 196,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:sma",
+      "name": "Hidden Fates Shiny Vault",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "sma",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "SMA",
+      "seriesId": "ktcg:series:en:sun-and-moon",
+      "year": 2019,
+      "releaseDate": "2019-08-23",
+      "officialCardCount": 94,
+      "knownCardCount": 94,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:smp",
+      "name": "SM Black Star Promos",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "smp",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "SMP",
+      "seriesId": "ktcg:series:en:sun-and-moon",
+      "year": 2017,
+      "releaseDate": "2017-02-03",
+      "officialCardCount": 248,
+      "knownCardCount": 248,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:sp",
+      "name": "Sample",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "sp",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "SP",
+      "seriesId": "ktcg:series:en:e-card",
+      "year": 2002,
+      "releaseDate": "2002-08-01",
+      "officialCardCount": 10,
+      "knownCardCount": 0,
+      "availability": "metadata_only",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:sv01",
+      "name": "Scarlet & Violet",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "sv01",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "SV01",
+      "seriesId": "ktcg:series:en:scarlet-and-violet",
+      "year": 2023,
+      "releaseDate": "2023-03-31",
+      "officialCardCount": 198,
+      "knownCardCount": 258,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:sv02",
+      "name": "Paldea Evolved",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "sv02",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "SV02",
+      "seriesId": "ktcg:series:en:scarlet-and-violet",
+      "year": 2023,
+      "releaseDate": "2023-06-09",
+      "officialCardCount": 193,
+      "knownCardCount": 279,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:sv03",
+      "name": "Obsidian Flames",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "sv03",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "SV03",
+      "seriesId": "ktcg:series:en:scarlet-and-violet",
+      "year": 2023,
+      "releaseDate": "2023-08-11",
+      "officialCardCount": 197,
+      "knownCardCount": 230,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:sv03-5",
+      "name": "151",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "sv03.5",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "SV03.5",
+      "seriesId": "ktcg:series:en:scarlet-and-violet",
+      "year": 2023,
+      "releaseDate": "2023-09-22",
+      "officialCardCount": 165,
+      "knownCardCount": 207,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:sv04",
+      "name": "Paradox Rift",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "sv04",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "SV04",
+      "seriesId": "ktcg:series:en:scarlet-and-violet",
+      "year": 2023,
+      "releaseDate": "2023-11-03",
+      "officialCardCount": 182,
+      "knownCardCount": 266,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:sv04-5",
+      "name": "Paldean Fates",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "sv04.5",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "SV04.5",
+      "seriesId": "ktcg:series:en:scarlet-and-violet",
+      "year": 2024,
+      "releaseDate": "2024-01-26",
+      "officialCardCount": 91,
+      "knownCardCount": 245,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:sv05",
+      "name": "Temporal Forces",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "sv05",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "SV05",
+      "seriesId": "ktcg:series:en:scarlet-and-violet",
+      "year": 2024,
+      "releaseDate": "2024-03-22",
+      "officialCardCount": 162,
+      "knownCardCount": 218,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:sv06",
+      "name": "Twilight Masquerade",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "sv06",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "SV06",
+      "seriesId": "ktcg:series:en:scarlet-and-violet",
+      "year": 2024,
+      "releaseDate": "2024-05-24",
+      "officialCardCount": 167,
+      "knownCardCount": 226,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:sv06-5",
+      "name": "Shrouded Fable",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "sv06.5",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "SV06.5",
+      "seriesId": "ktcg:series:en:scarlet-and-violet",
+      "year": 2024,
+      "releaseDate": "2024-08-02",
+      "officialCardCount": 64,
+      "knownCardCount": 99,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:sv07",
+      "name": "Stellar Crown",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "sv07",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "SV07",
+      "seriesId": "ktcg:series:en:scarlet-and-violet",
+      "year": 2024,
+      "releaseDate": "2024-09-13",
+      "officialCardCount": 142,
+      "knownCardCount": 175,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:sv08",
+      "name": "Surging Sparks",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "sv08",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "SV08",
+      "seriesId": "ktcg:series:en:scarlet-and-violet",
+      "year": 2024,
+      "releaseDate": "2024-11-08",
+      "officialCardCount": 191,
+      "knownCardCount": 252,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:sv08-5",
+      "name": "Prismatic Evolutions",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "sv08.5",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "SV08.5",
+      "seriesId": "ktcg:series:en:scarlet-and-violet",
+      "year": 2025,
+      "releaseDate": "2025-01-17",
+      "officialCardCount": 131,
+      "knownCardCount": 180,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:sv09",
+      "name": "Journey Together",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "sv09",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "SV09",
+      "seriesId": "ktcg:series:en:scarlet-and-violet",
+      "year": 2025,
+      "releaseDate": "2025-03-28",
+      "officialCardCount": 159,
+      "knownCardCount": 190,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:sv10",
+      "name": "Destined Rivals",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "sv10",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "SV10",
+      "seriesId": "ktcg:series:en:scarlet-and-violet",
+      "year": 2025,
+      "releaseDate": "2025-05-30",
+      "officialCardCount": 182,
+      "knownCardCount": 244,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:sv10-5b",
+      "name": "Black Bolt",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "sv10.5b",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "SV10.5B",
+      "seriesId": "ktcg:series:en:scarlet-and-violet",
+      "year": 2025,
+      "releaseDate": "2025-07-17",
+      "officialCardCount": 86,
+      "knownCardCount": 172,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:sv10-5w",
+      "name": "White Flare",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "sv10.5w",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "SV10.5W",
+      "seriesId": "ktcg:series:en:scarlet-and-violet",
+      "year": 2025,
+      "releaseDate": "2025-07-17",
+      "officialCardCount": 86,
+      "knownCardCount": 173,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:sve",
+      "name": "Scarlet & Violet Energy",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "sve",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "SVE",
+      "seriesId": "ktcg:series:en:scarlet-and-violet",
+      "year": 2023,
+      "releaseDate": "2023-03-31",
+      "officialCardCount": 24,
+      "knownCardCount": 24,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:svp",
+      "name": "SVP Black Star Promos",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "svp",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "SVP",
+      "seriesId": "ktcg:series:en:scarlet-and-violet",
+      "year": 2023,
+      "releaseDate": "2023-03-31",
+      "officialCardCount": 225,
+      "knownCardCount": 226,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:swsh1",
+      "name": "Sword & Shield",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "swsh1",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "SWSH1",
+      "seriesId": "ktcg:series:en:sword-and-shield",
+      "year": 2020,
+      "releaseDate": "2020-02-07",
+      "officialCardCount": 202,
+      "knownCardCount": 216,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:swsh10",
+      "name": "Astral Radiance",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "swsh10",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "SWSH10",
+      "seriesId": "ktcg:series:en:sword-and-shield",
+      "year": 2022,
+      "releaseDate": "2022-05-27",
+      "officialCardCount": 189,
+      "knownCardCount": 216,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:swsh10-5",
+      "name": "Pokémon GO",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "swsh10.5",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "SWSH10.5",
+      "seriesId": "ktcg:series:en:sword-and-shield",
+      "year": 2022,
+      "releaseDate": "2022-07-01",
+      "officialCardCount": 78,
+      "knownCardCount": 88,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:swsh10tg",
+      "name": "Astral Radiance Trainer Gallery",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "swsh10tg",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "SWSH10TG",
+      "seriesId": "ktcg:series:en:sword-and-shield",
+      "year": 2022,
+      "releaseDate": "2022-05-27",
+      "officialCardCount": 30,
+      "knownCardCount": 30,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:swsh11",
+      "name": "Lost Origin",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "swsh11",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "SWSH11",
+      "seriesId": "ktcg:series:en:sword-and-shield",
+      "year": 2022,
+      "releaseDate": "2022-09-09",
+      "officialCardCount": 196,
+      "knownCardCount": 217,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:swsh11tg",
+      "name": "Lost Origin Trainer Gallery",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "swsh11tg",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "SWSH11TG",
+      "seriesId": "ktcg:series:en:sword-and-shield",
+      "year": 2022,
+      "releaseDate": "2022-09-09",
+      "officialCardCount": 30,
+      "knownCardCount": 30,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:swsh12",
+      "name": "Silver Tempest",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "swsh12",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "SWSH12",
+      "seriesId": "ktcg:series:en:sword-and-shield",
+      "year": 2022,
+      "releaseDate": "2022-11-11",
+      "officialCardCount": 195,
+      "knownCardCount": 215,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:swsh12-5",
+      "name": "Crown Zenith",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "swsh12.5",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "SWSH12.5",
+      "seriesId": "ktcg:series:en:sword-and-shield",
+      "year": 2023,
+      "releaseDate": "2023-01-20",
+      "officialCardCount": 159,
+      "knownCardCount": 160,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:swsh12-5gg",
+      "name": "Crown Zenith Galarian Gallery",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "swsh12.5gg",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "SWSH12.5GG",
+      "seriesId": "ktcg:series:en:sword-and-shield",
+      "year": 2023,
+      "releaseDate": "2023-01-20",
+      "officialCardCount": 70,
+      "knownCardCount": 70,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:swsh12tg",
+      "name": "Silver Tempest Trainer Gallery",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "swsh12tg",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "SWSH12TG",
+      "seriesId": "ktcg:series:en:sword-and-shield",
+      "year": 2022,
+      "releaseDate": "2022-11-11",
+      "officialCardCount": 30,
+      "knownCardCount": 30,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:swsh2",
+      "name": "Rebel Clash",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "swsh2",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "SWSH2",
+      "seriesId": "ktcg:series:en:sword-and-shield",
+      "year": 2020,
+      "releaseDate": "2020-05-01",
+      "officialCardCount": 192,
+      "knownCardCount": 209,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:swsh3",
+      "name": "Darkness Ablaze",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "swsh3",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "SWSH3",
+      "seriesId": "ktcg:series:en:sword-and-shield",
+      "year": 2020,
+      "releaseDate": "2020-08-14",
+      "officialCardCount": 189,
+      "knownCardCount": 201,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:swsh3-5",
+      "name": "Champion's Path",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "swsh3.5",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "SWSH3.5",
+      "seriesId": "ktcg:series:en:sword-and-shield",
+      "year": 2020,
+      "releaseDate": "2020-09-25",
+      "officialCardCount": 73,
+      "knownCardCount": 80,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:swsh4",
+      "name": "Vivid Voltage",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "swsh4",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "SWSH4",
+      "seriesId": "ktcg:series:en:sword-and-shield",
+      "year": 2020,
+      "releaseDate": "2020-11-13",
+      "officialCardCount": 185,
+      "knownCardCount": 203,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:swsh4-5",
+      "name": "Shining Fates",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "swsh4.5",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "SWSH4.5",
+      "seriesId": "ktcg:series:en:sword-and-shield",
+      "year": 2021,
+      "releaseDate": "2021-02-19",
+      "officialCardCount": 72,
+      "knownCardCount": 73,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:swsh4-5sv",
+      "name": "Shining Fates Shiny Vault",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "swsh4.5sv",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "SWSH4.5SV",
+      "seriesId": "ktcg:series:en:sword-and-shield",
+      "year": 2021,
+      "releaseDate": "2021-02-19",
+      "officialCardCount": 122,
+      "knownCardCount": 122,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:swsh5",
+      "name": "Battle Styles",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "swsh5",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "SWSH5",
+      "seriesId": "ktcg:series:en:sword-and-shield",
+      "year": 2021,
+      "releaseDate": "2021-03-19",
+      "officialCardCount": 163,
+      "knownCardCount": 183,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:swsh6",
+      "name": "Chilling Reign",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "swsh6",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "SWSH6",
+      "seriesId": "ktcg:series:en:sword-and-shield",
+      "year": 2021,
+      "releaseDate": "2021-06-18",
+      "officialCardCount": 198,
+      "knownCardCount": 233,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:swsh7",
+      "name": "Evolving Skies",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "swsh7",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "SWSH7",
+      "seriesId": "ktcg:series:en:sword-and-shield",
+      "year": 2021,
+      "releaseDate": "2021-08-27",
+      "officialCardCount": 203,
+      "knownCardCount": 237,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:swsh8",
+      "name": "Fusion Strike",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "swsh8",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "SWSH8",
+      "seriesId": "ktcg:series:en:sword-and-shield",
+      "year": 2021,
+      "releaseDate": "2021-11-12",
+      "officialCardCount": 264,
+      "knownCardCount": 284,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:swsh9",
+      "name": "Brilliant Stars",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "swsh9",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "SWSH9",
+      "seriesId": "ktcg:series:en:sword-and-shield",
+      "year": 2022,
+      "releaseDate": "2022-02-25",
+      "officialCardCount": 172,
+      "knownCardCount": 186,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:swsh9tg",
+      "name": "Brilliant Stars Trainer Gallery",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "swsh9tg",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "SWSH9TG",
+      "seriesId": "ktcg:series:en:sword-and-shield",
+      "year": 2022,
+      "releaseDate": "2022-02-25",
+      "officialCardCount": 30,
+      "knownCardCount": 30,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:swshp",
+      "name": "SWSH Black Star Promos",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "swshp",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "SWSHP",
+      "seriesId": "ktcg:series:en:sword-and-shield",
+      "year": 2019,
+      "releaseDate": "2019-11-15",
+      "officialCardCount": 307,
+      "knownCardCount": 305,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:tkbwe",
+      "name": "BW trainer Kit (Excadrill)",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "tk-bw-e",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "TKBWE",
+      "seriesId": "ktcg:series:en:trainer-kits",
+      "year": 2011,
+      "releaseDate": "2011-09-01",
+      "officialCardCount": 30,
+      "knownCardCount": 30,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:tkbwz",
+      "name": "BW trainer Kit (Zoroark)",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "tk-bw-z",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "TKBWZ",
+      "seriesId": "ktcg:series:en:trainer-kits",
+      "year": 2011,
+      "releaseDate": "2011-09-01",
+      "officialCardCount": 30,
+      "knownCardCount": 30,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:tkdpl",
+      "name": "DP trainer Kit (Lucario)",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "tk-dp-l",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "TKDPL",
+      "seriesId": "ktcg:series:en:trainer-kits",
+      "year": 2007,
+      "releaseDate": "2007-09-01",
+      "officialCardCount": 11,
+      "knownCardCount": 11,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:tkdpm",
+      "name": "DP trainer Kit (Manaphy)",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "tk-dp-m",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "TKDPM",
+      "seriesId": "ktcg:series:en:trainer-kits",
+      "year": 2007,
+      "releaseDate": "2007-09-01",
+      "officialCardCount": 12,
+      "knownCardCount": 12,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:tkexlatia",
+      "name": "EX trainer Kit (Latias)",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "tk-ex-latia",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "TKEXLATIA",
+      "seriesId": "ktcg:series:en:trainer-kits",
+      "year": 2004,
+      "releaseDate": "2004-07-01",
+      "officialCardCount": 10,
+      "knownCardCount": 10,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:tkexlatio",
+      "name": "EX trainer Kit (Latios)",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "tk-ex-latio",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "TKEXLATIO",
+      "seriesId": "ktcg:series:en:trainer-kits",
+      "year": 2004,
+      "releaseDate": "2004-07-01",
+      "officialCardCount": 10,
+      "knownCardCount": 10,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:tkexm",
+      "name": "EX trainer Kit 2 (Minun)",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "tk-ex-m",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "TKEXM",
+      "seriesId": "ktcg:series:en:trainer-kits",
+      "year": 2006,
+      "releaseDate": "2006-03-01",
+      "officialCardCount": 12,
+      "knownCardCount": 12,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:tkexp",
+      "name": "EX trainer Kit 2 (Plusle)",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "tk-ex-p",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "TKEXP",
+      "seriesId": "ktcg:series:en:trainer-kits",
+      "year": 2006,
+      "releaseDate": "2006-03-01",
+      "officialCardCount": 12,
+      "knownCardCount": 12,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:tkhsg",
+      "name": "HS trainer Kit (Gyarados)",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "tk-hs-g",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "TKHSG",
+      "seriesId": "ktcg:series:en:trainer-kits",
+      "year": 2010,
+      "releaseDate": "2010-05-01",
+      "officialCardCount": 30,
+      "knownCardCount": 30,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:tkhsr",
+      "name": "HS trainer Kit (Raichu)",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "tk-hs-r",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "TKHSR",
+      "seriesId": "ktcg:series:en:trainer-kits",
+      "year": 2010,
+      "releaseDate": "2010-05-01",
+      "officialCardCount": 30,
+      "knownCardCount": 30,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:tksml",
+      "name": "SM trainer Kit (Lycanroc)",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "tk-sm-l",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "TKSML",
+      "seriesId": "ktcg:series:en:trainer-kits",
+      "year": 2017,
+      "releaseDate": "2017-04-21",
+      "officialCardCount": 30,
+      "knownCardCount": 18,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:tksmr",
+      "name": "SM trainer Kit (Alolan Raichu)",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "tk-sm-r",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "TKSMR",
+      "seriesId": "ktcg:series:en:trainer-kits",
+      "year": 2017,
+      "releaseDate": "2017-04-21",
+      "officialCardCount": 30,
+      "knownCardCount": 30,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:tkxyb",
+      "name": "XY trainer Kit (Bisharp)",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "tk-xy-b",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "TKXYB",
+      "seriesId": "ktcg:series:en:trainer-kits",
+      "year": 2014,
+      "releaseDate": "2014-11-01",
+      "officialCardCount": 30,
+      "knownCardCount": 30,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:tkxylatia",
+      "name": "XY trainer Kit (Latias)",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "tk-xy-latia",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "TKXYLATIA",
+      "seriesId": "ktcg:series:en:trainer-kits",
+      "year": 2015,
+      "releaseDate": "2015-04-29",
+      "officialCardCount": 30,
+      "knownCardCount": 30,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:tkxylatio",
+      "name": "XY trainer Kit (Latios)",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "tk-xy-latio",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "TKXYLATIO",
+      "seriesId": "ktcg:series:en:trainer-kits",
+      "year": 2015,
+      "releaseDate": "2015-04-29",
+      "officialCardCount": 30,
+      "knownCardCount": 30,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:tkxyn",
+      "name": "XY trainer Kit (Noivern)",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "tk-xy-n",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "TKXYN",
+      "seriesId": "ktcg:series:en:trainer-kits",
+      "year": 2014,
+      "releaseDate": "2014-03-12",
+      "officialCardCount": 30,
+      "knownCardCount": 30,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:tkxyp",
+      "name": "XY trainer Kit (Pikachu Libre)",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "tk-xy-p",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "TKXYP",
+      "seriesId": "ktcg:series:en:trainer-kits",
+      "year": 2016,
+      "releaseDate": "2016-04-27",
+      "officialCardCount": 30,
+      "knownCardCount": 30,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:tkxysu",
+      "name": "XY trainer Kit (Suicune)",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "tk-xy-su",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "TKXYSU",
+      "seriesId": "ktcg:series:en:trainer-kits",
+      "year": 2016,
+      "releaseDate": "2016-04-27",
+      "officialCardCount": 30,
+      "knownCardCount": 30,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:tkxysy",
+      "name": "XY trainer Kit (Sylveon)",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "tk-xy-sy",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "TKXYSY",
+      "seriesId": "ktcg:series:en:trainer-kits",
+      "year": 2014,
+      "releaseDate": "2014-03-12",
+      "officialCardCount": 30,
+      "knownCardCount": 30,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:tkxyw",
+      "name": "XY trainer Kit (Wigglytuff)",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "tk-xy-w",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "TKXYW",
+      "seriesId": "ktcg:series:en:trainer-kits",
+      "year": 2014,
+      "releaseDate": "2014-11-01",
+      "officialCardCount": 30,
+      "knownCardCount": 30,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:wp",
+      "name": "W Promotional",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "wp",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "WP",
+      "seriesId": "ktcg:series:en:base",
+      "year": 1999,
+      "releaseDate": "1999-09-01",
+      "officialCardCount": 7,
+      "knownCardCount": 0,
+      "availability": "metadata_only",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:xy0",
+      "name": "Kalos Starter Set",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "xy0",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "XY0",
+      "seriesId": "ktcg:series:en:xy",
+      "year": 2013,
+      "releaseDate": "2013-11-08",
+      "officialCardCount": 39,
+      "knownCardCount": 39,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:xy1",
+      "name": "XY",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "xy1",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "XY1",
+      "seriesId": "ktcg:series:en:xy",
+      "year": 2014,
+      "releaseDate": "2014-02-05",
+      "officialCardCount": 146,
+      "knownCardCount": 146,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:xy10",
+      "name": "Fates Collide",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "xy10",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "XY10",
+      "seriesId": "ktcg:series:en:xy",
+      "year": 2016,
+      "releaseDate": "2016-05-02",
+      "officialCardCount": 124,
+      "knownCardCount": 129,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:xy11",
+      "name": "Steam Siege",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "xy11",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "XY11",
+      "seriesId": "ktcg:series:en:xy",
+      "year": 2016,
+      "releaseDate": "2016-08-03",
+      "officialCardCount": 114,
+      "knownCardCount": 116,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:xy12",
+      "name": "Evolutions",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "xy12",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "XY12",
+      "seriesId": "ktcg:series:en:xy",
+      "year": 2016,
+      "releaseDate": "2016-11-02",
+      "officialCardCount": 108,
+      "knownCardCount": 113,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:xy2",
+      "name": "Flashfire",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "xy2",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "XY2",
+      "seriesId": "ktcg:series:en:xy",
+      "year": 2014,
+      "releaseDate": "2014-05-07",
+      "officialCardCount": 106,
+      "knownCardCount": 110,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:xy3",
+      "name": "Furious Fists",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "xy3",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "XY3",
+      "seriesId": "ktcg:series:en:xy",
+      "year": 2014,
+      "releaseDate": "2014-08-13",
+      "officialCardCount": 111,
+      "knownCardCount": 114,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:xy4",
+      "name": "Phantom Forces",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "xy4",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "XY4",
+      "seriesId": "ktcg:series:en:xy",
+      "year": 2014,
+      "releaseDate": "2014-11-05",
+      "officialCardCount": 119,
+      "knownCardCount": 124,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:xy5",
+      "name": "Primal Clash",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "xy5",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "XY5",
+      "seriesId": "ktcg:series:en:xy",
+      "year": 2015,
+      "releaseDate": "2015-02-04",
+      "officialCardCount": 160,
+      "knownCardCount": 164,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:xy6",
+      "name": "Roaring Skies",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "xy6",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "XY6",
+      "seriesId": "ktcg:series:en:xy",
+      "year": 2015,
+      "releaseDate": "2015-05-06",
+      "officialCardCount": 108,
+      "knownCardCount": 112,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:xy7",
+      "name": "Ancient Origins",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "xy7",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "XY7",
+      "seriesId": "ktcg:series:en:xy",
+      "year": 2015,
+      "releaseDate": "2015-08-12",
+      "officialCardCount": 98,
+      "knownCardCount": 101,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:xy8",
+      "name": "BREAKthrough",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "xy8",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "XY8",
+      "seriesId": "ktcg:series:en:xy",
+      "year": 2015,
+      "releaseDate": "2015-11-04",
+      "officialCardCount": 162,
+      "knownCardCount": 165,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:xy9",
+      "name": "BREAKpoint",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "xy9",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "XY9",
+      "seriesId": "ktcg:series:en:xy",
+      "year": 2016,
+      "releaseDate": "2016-02-03",
+      "officialCardCount": 122,
+      "knownCardCount": 126,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:xya",
+      "name": "Yellow A Alternate",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "xya",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "XYA",
+      "seriesId": "ktcg:series:en:xy",
+      "year": 2014,
+      "releaseDate": "2014-02-05",
+      "officialCardCount": 6,
+      "knownCardCount": 6,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:en:xyp",
+      "name": "XY Black Star Promos",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "xyp",
+          "url": "https://github.com/tcgdex/cards-database",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "en",
+      "code": "XYP",
+      "seriesId": "ktcg:series:en:xy",
+      "year": 2013,
+      "releaseDate": "2013-10-12",
+      "officialCardCount": 211,
+      "knownCardCount": 216,
+      "availability": "available",
+      "visuals": []
+    }
+  ]
+}
