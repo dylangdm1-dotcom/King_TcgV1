@@ -1,0 +1,291 @@
+{
+  "schemaVersion": 2,
+  "formatVersion": 1,
+  "catalogVersion": "v273-local-2026-08-27",
+  "language": "zh-tw",
+  "groups": [
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:group:zh-tw:cs1-5:2023",
+      "name": "Dynamax Tactics",
+      "aliases": [
+        "Dynamax Clash Flame",
+        "Dynamax Clash Thunder"
+      ],
+      "sources": [
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:zh-tw:CS1.5"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "CS1BC"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "CS1AC"
+        }
+      ],
+      "language": "zh-tw",
+      "displayCode": "CS1.5",
+      "seriesId": "ktcg:series:zh-tw:simplified-chinese",
+      "year": 2023,
+      "availability": "available",
+      "memberSetIds": [
+        "ktcg:set:zh-tw:cs1bc",
+        "ktcg:set:zh-tw:cs1ac"
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:group:zh-tw:cs1b:2023",
+      "name": "Shining Synergy",
+      "aliases": [
+        "Shining Synergy Summon",
+        "Shining Synergy Supreme",
+        "Shining Synergy Shower"
+      ],
+      "sources": [
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:zh-tw:CS1B"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "CSM2CC"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "CSM2BC"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "CSM2AC"
+        }
+      ],
+      "language": "zh-tw",
+      "displayCode": "CS1B",
+      "seriesId": "ktcg:series:zh-tw:simplified-chinese",
+      "year": 2023,
+      "availability": "available",
+      "memberSetIds": [
+        "ktcg:set:zh-tw:csm2cc",
+        "ktcg:set:zh-tw:csm2bc",
+        "ktcg:set:zh-tw:csm2ac"
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:group:zh-tw:cs2-5:2023",
+      "name": "Brilliant Counterattack",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:zh-tw:CS2.5"
+        }
+      ],
+      "language": "zh-tw",
+      "displayCode": "CS2.5",
+      "seriesId": "ktcg:series:zh-tw:simplified-chinese",
+      "year": 2023,
+      "availability": "metadata_only",
+      "memberSetIds": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:group:zh-tw:cs2b:2023",
+      "name": "Golden Energy",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:zh-tw:CS2B"
+        }
+      ],
+      "language": "zh-tw",
+      "displayCode": "CS2B",
+      "seriesId": "ktcg:series:zh-tw:simplified-chinese",
+      "year": 2023,
+      "availability": "metadata_only",
+      "memberSetIds": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:group:zh-tw:cs3-3:2024",
+      "name": "Brave Stars",
+      "aliases": [
+        "Brave Stars - Brave",
+        "Brave Stars - Charm"
+      ],
+      "sources": [
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:zh-tw:CS3.3"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "CS5BC"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "CS5AC"
+        }
+      ],
+      "language": "zh-tw",
+      "displayCode": "CS3.3",
+      "seriesId": "ktcg:series:zh-tw:simplified-chinese",
+      "year": 2024,
+      "availability": "available",
+      "memberSetIds": [
+        "ktcg:set:zh-tw:cs5bc",
+        "ktcg:set:zh-tw:cs5ac"
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:group:zh-tw:cs3-5:2024",
+      "name": "Scorching Skies",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:zh-tw:CS3.5"
+        }
+      ],
+      "language": "zh-tw",
+      "displayCode": "CS3.5",
+      "seriesId": "ktcg:series:zh-tw:simplified-chinese",
+      "year": 2024,
+      "availability": "metadata_only",
+      "memberSetIds": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:group:zh-tw:cs4-5:2024",
+      "name": "Final Flame Dance",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:zh-tw:CS4.5"
+        }
+      ],
+      "language": "zh-tw",
+      "displayCode": "CS4.5",
+      "seriesId": "ktcg:series:zh-tw:simplified-chinese",
+      "year": 2024,
+      "availability": "metadata_only",
+      "memberSetIds": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:group:zh-tw:csm1:2022",
+      "name": "Storming Emergence",
+      "aliases": [
+        "Storming Emergence Abundant",
+        "Storming Emergence Verdant",
+        "Storming Emergence Radiant"
+      ],
+      "sources": [
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:zh-tw:CSM1"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "CSM1CC"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "CSM1BC"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "CSM1AC"
+        }
+      ],
+      "language": "zh-tw",
+      "displayCode": "CSM1",
+      "seriesId": "ktcg:series:zh-tw:simplified-chinese",
+      "year": 2022,
+      "availability": "available",
+      "memberSetIds": [
+        "ktcg:set:zh-tw:csm1cc",
+        "ktcg:set:zh-tw:csm1bc",
+        "ktcg:set:zh-tw:csm1ac"
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:group:zh-tw:csv2-5:2024",
+      "name": "Nine Colours Gathering",
+      "aliases": [
+        "Nine Colors Gathering - Origin",
+        "Nine Colors Gathering - Friends"
+      ],
+      "sources": [
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:zh-tw:CSV2.5"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "CS4BC"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "CS4AC"
+        }
+      ],
+      "language": "zh-tw",
+      "displayCode": "CSV2.5",
+      "seriesId": "ktcg:series:zh-tw:simplified-chinese",
+      "year": 2024,
+      "availability": "available",
+      "memberSetIds": [
+        "ktcg:set:zh-tw:cs4bc",
+        "ktcg:set:zh-tw:cs4ac"
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:group:zh-tw:csv9-5c:2026",
+      "name": "Grand Terastal Gathering",
+      "aliases": [
+        "Terastal Gathering",
+        "CSV95C"
+      ],
+      "sources": [
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:zh-tw:CSV9.5C"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "csv9.5c"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "csv9.5"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "csv95c"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "csv95"
+        }
+      ],
+      "language": "zh-tw",
+      "displayCode": "CSV9.5C",
+      "seriesId": "ktcg:series:zh-tw:simplified-chinese",
+      "year": 2026,
+      "availability": "available",
+      "memberSetIds": [
+        "ktcg:set:zh-tw:csv9-5c"
+      ]
+    }
+  ]
+}
