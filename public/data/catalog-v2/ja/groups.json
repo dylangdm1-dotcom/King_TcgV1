@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 2,
+  "formatVersion": 1,
+  "catalogVersion": "v273-local-2026-08-27",
+  "language": "ja",
+  "groups": [
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:group:ja:meg:2025",
+      "name": "Mega Evolution",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:MEG"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "m1s"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "m1l"
+        }
+      ],
+      "language": "ja",
+      "displayCode": "MEG",
+      "seriesId": "ktcg:series:ja:mega-evolution",
+      "year": 2025,
+      "availability": "available",
+      "memberSetIds": [
+        "ktcg:set:ja:m1s",
+        "ktcg:set:ja:m1l"
+      ]
+    }
+  ]
+}

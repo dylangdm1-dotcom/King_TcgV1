@@ -1,0 +1,1201 @@
+{
+  "schemaVersion": 2,
+  "formatVersion": 1,
+  "catalogVersion": "v273-local-2026-08-27",
+  "language": "ja",
+  "series": [
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:series:ja:adv",
+      "name": "ADV",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:CBS"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "PCG2"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:FOL"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "PCG1"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:RTH"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "ADV3"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:MVA"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "ADV4"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:MOD"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "ADV2"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:ADV"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "ADV1"
+        }
+      ],
+      "language": "ja"
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:series:ja:black-and-white",
+      "name": "Black & White",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:MLC"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "BW9"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:PLG"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "BW7"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:FRB"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "BW6B"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:CLF"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "BW6O"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:RDC"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "BW2"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:BKC"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "BW1B"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:WHC"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "BW1W"
+        }
+      ],
+      "language": "ja"
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:series:ja:diamond-and-pearl",
+      "name": "Diamond & Pearl",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:IFS"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "DP6"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:SHD"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "DP3"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:SOT"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "DP2"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:STC"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "DP1"
+        }
+      ],
+      "language": "ja"
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:series:ja:e-series",
+      "name": "e-Series",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:MSM"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "E5"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:SPE"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "E4"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:WFS"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "E3"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:TNM"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "E2"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:BEP"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "E1"
+        }
+      ],
+      "language": "ja"
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:series:ja:mega-evolution",
+      "name": "Mega Evolution",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:M6"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "m6"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:M5"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "m5"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:PBL"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "m4"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:POR"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "m3"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:ASC"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "m2a"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:PFL"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "m2"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:regional:ja:M6"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:regional:ja:M5"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:regional:ja:M4"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:regional:ja:M3"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:regional:ja:M2A"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:regional:ja:M2"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:regional:ja:M1S"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:regional:ja:M1L"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:MEG"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "m1s"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "m1l"
+        }
+      ],
+      "language": "ja"
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:series:ja:neo",
+      "name": "Neo",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:NDS"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo4"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:NRE"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo3"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:NDC"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo2"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:NGS"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "neo1"
+        }
+      ],
+      "language": "ja"
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:series:ja:original",
+      "name": "Original",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:GCH"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "PMCG6"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:GHE"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "PMCG5"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:TRK"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "PMCG4"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:FOS"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "PMCG3"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:JUN"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "PMCG2"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:EXP"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "PMCG1"
+        }
+      ],
+      "language": "ja"
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:series:ja:pcg",
+      "name": "PCG",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:ODF"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:MCC"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:HPH"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:HRT"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:MFS"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "PCG5"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:GSS"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "PCG4"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:RGB"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "PCG3"
+        }
+      ],
+      "language": "ja"
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:series:ja:platinum",
+      "name": "Platinum",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:ADA"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "PT4"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:BOF"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "PT3"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:GAC"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "PT1"
+        }
+      ],
+      "language": "ja"
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:series:ja:scarlet-and-violet",
+      "name": "Scarlet & Violet",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:WHT"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "sv11w"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:BLK"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "sv11b"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:GTR"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "sv10"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:HWA"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "sv9a"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:BTP"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "sv9"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:TFE"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "sv8a"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:SEB"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "sv8"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:PDR"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "sv7a"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:STM"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "sv7"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:NIW"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "sv6a"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:MOC"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "sv6"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:CRH"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "sv5a"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:CYJ"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "sv5m"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:WFR"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "sv5k"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:SVE"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "sv4a"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:FFL"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "sv4m"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:ANR"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "sv4k"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:RSU"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "sv3a"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:RBF"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "sv3"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:151"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "sv2a"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:CLB"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "sv2d"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:SNH"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "sv2p"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:TRB"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "sv1a"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:VEX"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "sv1v"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:SEX"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "sv1s"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:regional:ja:SV11W"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:regional:ja:SV11B"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:regional:ja:SV10"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:regional:ja:SV9A"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:regional:ja:SV9"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:regional:ja:SV8A"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:regional:ja:SV8"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:regional:ja:SV7A"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:regional:ja:SV7"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:regional:ja:SV6A"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:regional:ja:SV6"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:regional:ja:SV5A"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:regional:ja:SV5M"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:regional:ja:SV5K"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:regional:ja:SV4A"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:regional:ja:SV3A"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:regional:ja:SV3"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:regional:ja:SV2A"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:regional:ja:SV2D"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:regional:ja:SV2P"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:regional:ja:SV1A"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:regional:ja:SV1V"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:regional:ja:SV1S"
+        }
+      ],
+      "language": "ja"
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:series:ja:sun-and-moon",
+      "name": "Sun & Moon",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:GUS"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM8b"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:TGB"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM9"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:DCL"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM3N"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:SLG"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM3+"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:CLM"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM1M"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:CLS"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM1S"
+        }
+      ],
+      "language": "ja"
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:series:ja:sword-and-shield",
+      "name": "Sword & Shield",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:VSU"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "S12a"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:PTG"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "S12"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:IAC"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "S11a"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:LOR"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "S11"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:PGO"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "S10b"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:DPT"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "S10a"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:SPJ"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "S10P"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:TMZ"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "S10D"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:BRG"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "S9a"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:STB"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "S9"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:VMC"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "S8b"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:25A"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "S8a"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:FST"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "S8"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:BSS"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "S7R"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:SKP"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "S7D"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:EVH"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "S6a"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:JBS"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "S6K"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:SLL"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "S6H"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:PLF"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "S5a"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:RSM"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "S5R"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:SSM"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "S5I"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:SSV"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "S4a"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:AVT"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "S4"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:IFZ"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "S3"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:RCL"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "S2"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:SWS"
+        }
+      ],
+      "language": "ja"
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:series:ja:xy",
+      "name": "XY",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:20A"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "CP6"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:APK"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "XY10"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:RBH"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "XY9"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:BLS"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "XY8a"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:RDF"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "XY8b"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:BDR"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "XY7"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:EMB"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "XY6"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:DCR"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "CP1"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:GVO"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "XY5a"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:TST"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "XY5b"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:PTG"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "XY4"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:RSF"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "XY3"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:WBL"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "XY2"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:CLX"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "XY1a"
+        },
+        {
+          "provider": "king_tcg",
+          "sourceId": "v269:display:ja:CLY"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "XY1b"
+        }
+      ],
+      "language": "ja"
+    }
+  ]
+}
