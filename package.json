@@ -16,7 +16,9 @@
     "audit:catalog-v2-local": "node --max-old-space-size=4096 scripts/audit-catalog-v2-local.mjs",
     "catalog-v2:capture-regional": "node scripts/capture-catalog-v2-regional-v274.mjs",
     "catalog-v2:import-regional": "node --max-old-space-size=4096 scripts/import-catalog-v2-regional-v274.mjs",
-    "audit:catalog-v2-regional": "node --max-old-space-size=4096 scripts/audit-catalog-v2-regional-v274.mjs"
+    "audit:catalog-v2-regional": "node --max-old-space-size=4096 scripts/audit-catalog-v2-regional-v274.mjs",
+    "audit:market-cache": "node scripts/audit-market-cache-v275.mjs",
+    "audit:market-cache:persistent": "node scripts/audit-market-cache-v276.mjs"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
