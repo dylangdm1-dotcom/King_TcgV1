@@ -9,7 +9,14 @@
     "lint": "next lint",
     "audit:data": "node scripts/audit-data-coverage.mjs",
     "audit:security": "node scripts/audit-api-security.mjs",
-    "audit:catalog-v2": "node scripts/audit-catalog-v2.mjs"
+    "audit:catalog-v2": "node scripts/audit-catalog-v2.mjs",
+    "audit:catalog-v2-imports": "node scripts/audit-catalog-v2-imports.mjs",
+    "audit:catalog-v2-orchestrator": "node scripts/audit-catalog-v2-orchestrator.mjs",
+    "catalog-v2:generate-local": "node --max-old-space-size=4096 scripts/generate-local-catalog-v273.mjs",
+    "audit:catalog-v2-local": "node --max-old-space-size=4096 scripts/audit-catalog-v2-local.mjs",
+    "catalog-v2:capture-regional": "node scripts/capture-catalog-v2-regional-v274.mjs",
+    "catalog-v2:import-regional": "node --max-old-space-size=4096 scripts/import-catalog-v2-regional-v274.mjs",
+    "audit:catalog-v2-regional": "node --max-old-space-size=4096 scripts/audit-catalog-v2-regional-v274.mjs"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
