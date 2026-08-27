@@ -18,7 +18,10 @@
     "catalog-v2:import-regional": "node --max-old-space-size=4096 scripts/import-catalog-v2-regional-v274.mjs",
     "audit:catalog-v2-regional": "node --max-old-space-size=4096 scripts/audit-catalog-v2-regional-v274.mjs",
     "audit:market-cache": "node scripts/audit-market-cache-v275.mjs",
-    "audit:market-cache:persistent": "node scripts/audit-market-cache-v276.mjs"
+    "audit:market-cache:persistent": "node scripts/audit-market-cache-v276.mjs",
+    "audit:market-history": "node scripts/audit-market-history-v277.mjs",
+    "audit:search-catalog": "node scripts/audit-search-catalog-v278.mjs",
+    "test:market-cache:live": "node scripts/test-market-cache-live-v277.mjs"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
