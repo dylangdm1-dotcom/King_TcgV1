@@ -1,0 +1,555 @@
+{
+  "schemaVersion": 2,
+  "formatVersion": 1,
+  "catalogVersion": "v273-local-2026-08-27",
+  "language": "fr",
+  "setId": "ktcg:set:fr:mee",
+  "status": "complete",
+  "sourceCardCount": 8,
+  "cards": [
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:fr:ktcg-set-fr-mee:001",
+      "name": "Énergie Plante",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "mee-001",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "fr",
+      "setId": "ktcg:set:fr:mee",
+      "number": "001",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse",
+          "rawLabel": "reverse"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/fr/me/mee/001/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "mee-001",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/fr/me/mee/001/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "mee-001",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/fr/me/mee/001/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "mee-001",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:fr:ktcg-set-fr-mee:002",
+      "name": "Énergie Feu",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "mee-002",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "fr",
+      "setId": "ktcg:set:fr:mee",
+      "number": "002",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse",
+          "rawLabel": "reverse"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/fr/me/mee/002/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "mee-002",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/fr/me/mee/002/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "mee-002",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/fr/me/mee/002/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "mee-002",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:fr:ktcg-set-fr-mee:003",
+      "name": "Énergie Eau",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "mee-003",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "fr",
+      "setId": "ktcg:set:fr:mee",
+      "number": "003",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse",
+          "rawLabel": "reverse"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/fr/me/mee/003/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "mee-003",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/fr/me/mee/003/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "mee-003",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/fr/me/mee/003/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "mee-003",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:fr:ktcg-set-fr-mee:004",
+      "name": "Énergie Electrik",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "mee-004",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "fr",
+      "setId": "ktcg:set:fr:mee",
+      "number": "004",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse",
+          "rawLabel": "reverse"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/fr/me/mee/004/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "mee-004",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/fr/me/mee/004/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "mee-004",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/fr/me/mee/004/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "mee-004",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:fr:ktcg-set-fr-mee:005",
+      "name": "Énergie Psy",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "mee-005",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "fr",
+      "setId": "ktcg:set:fr:mee",
+      "number": "005",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse",
+          "rawLabel": "reverse"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/fr/me/mee/005/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "mee-005",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/fr/me/mee/005/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "mee-005",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/fr/me/mee/005/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "mee-005",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:fr:ktcg-set-fr-mee:006",
+      "name": "Énergie Combat",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "mee-006",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "fr",
+      "setId": "ktcg:set:fr:mee",
+      "number": "006",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse",
+          "rawLabel": "reverse"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/fr/me/mee/006/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "mee-006",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/fr/me/mee/006/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "mee-006",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/fr/me/mee/006/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "mee-006",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:fr:ktcg-set-fr-mee:007",
+      "name": "Énergie Obscurité",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "mee-007",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "fr",
+      "setId": "ktcg:set:fr:mee",
+      "number": "007",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse",
+          "rawLabel": "reverse"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/fr/me/mee/007/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "mee-007",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/fr/me/mee/007/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "mee-007",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/fr/me/mee/007/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "mee-007",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:fr:ktcg-set-fr-mee:008",
+      "name": "Énergie Métal",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "mee-008",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "fr",
+      "setId": "ktcg:set:fr:mee",
+      "number": "008",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse",
+          "rawLabel": "reverse"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/fr/me/mee/008/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "mee-008",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/fr/me/mee/008/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "mee-008",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/fr/me/mee/008/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "mee-008",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    }
+  ]
+}

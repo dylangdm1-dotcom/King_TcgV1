@@ -1,0 +1,1117 @@
+{
+  "schemaVersion": 2,
+  "formatVersion": 1,
+  "catalogVersion": "v273-local-2026-08-27",
+  "language": "fr",
+  "setId": "ktcg:set:fr:pop3",
+  "status": "complete",
+  "sourceCardCount": 17,
+  "cards": [
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:fr:ktcg-set-fr-pop3:1",
+      "name": "Tortank",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "pop3-1",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "fr",
+      "setId": "ktcg:set:fr:pop3",
+      "number": "1",
+      "rarity": "Rare",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "holo"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/fr/pop/pop3/1/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "pop3-1",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/fr/pop/pop3/1/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "pop3-1",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/fr/pop/pop3/1/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "pop3-1",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:fr:ktcg-set-fr-pop3:10",
+      "name": "Système à haute pression",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "pop3-10",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "fr",
+      "setId": "ktcg:set:fr:pop3",
+      "number": "10",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/fr/pop/pop3/10/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "pop3-10",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/fr/pop/pop3/10/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "pop3-10",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/fr/pop/pop3/10/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "pop3-10",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:fr:ktcg-set-fr-pop3:11",
+      "name": "Système à basse pression",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "pop3-11",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "fr",
+      "setId": "ktcg:set:fr:pop3",
+      "number": "11",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/fr/pop/pop3/11/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "pop3-11",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/fr/pop/pop3/11/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "pop3-11",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/fr/pop/pop3/11/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "pop3-11",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:fr:ktcg-set-fr-pop3:12",
+      "name": "Metamorph",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "pop3-12",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "fr",
+      "setId": "ktcg:set:fr:pop3",
+      "number": "12",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/fr/pop/pop3/12/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "pop3-12",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/fr/pop/pop3/12/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "pop3-12",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/fr/pop/pop3/12/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "pop3-12",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:fr:ktcg-set-fr-pop3:13",
+      "name": "Evoli",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "pop3-13",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "fr",
+      "setId": "ktcg:set:fr:pop3",
+      "number": "13",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/fr/pop/pop3/13/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "pop3-13",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/fr/pop/pop3/13/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "pop3-13",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/fr/pop/pop3/13/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "pop3-13",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:fr:ktcg-set-fr-pop3:14",
+      "name": "Herbizarre",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "pop3-14",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "fr",
+      "setId": "ktcg:set:fr:pop3",
+      "number": "14",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/fr/pop/pop3/14/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "pop3-14",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/fr/pop/pop3/14/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "pop3-14",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/fr/pop/pop3/14/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "pop3-14",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:fr:ktcg-set-fr-pop3:15",
+      "name": "Flobio",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "pop3-15",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "fr",
+      "setId": "ktcg:set:fr:pop3",
+      "number": "15",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/fr/pop/pop3/15/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "pop3-15",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/fr/pop/pop3/15/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "pop3-15",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/fr/pop/pop3/15/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "pop3-15",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:fr:ktcg-set-fr-pop3:16",
+      "name": "Pichu Bros.",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "pop3-16",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "fr",
+      "setId": "ktcg:set:fr:pop3",
+      "number": "16",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/fr/pop/pop3/16/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "pop3-16",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/fr/pop/pop3/16/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "pop3-16",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/fr/pop/pop3/16/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "pop3-16",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:fr:ktcg-set-fr-pop3:17",
+      "name": "Ho-Oh ex",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "pop3-17",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "fr",
+      "setId": "ktcg:set:fr:pop3",
+      "number": "17",
+      "rarity": "Rare",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "holo"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/fr/pop/pop3/17/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "pop3-17",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/fr/pop/pop3/17/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "pop3-17",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/fr/pop/pop3/17/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "pop3-17",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:fr:ktcg-set-fr-pop3:2",
+      "name": "Pyroli",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "pop3-2",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "fr",
+      "setId": "ktcg:set:fr:pop3",
+      "number": "2",
+      "rarity": "Rare",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "holo"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/fr/pop/pop3/2/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "pop3-2",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/fr/pop/pop3/2/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "pop3-2",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/fr/pop/pop3/2/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "pop3-2",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:fr:ktcg-set-fr-pop3:3",
+      "name": "Voltali",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "pop3-3",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "fr",
+      "setId": "ktcg:set:fr:pop3",
+      "number": "3",
+      "rarity": "Rare",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "holo"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/fr/pop/pop3/3/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "pop3-3",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/fr/pop/pop3/3/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "pop3-3",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/fr/pop/pop3/3/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "pop3-3",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:fr:ktcg-set-fr-pop3:4",
+      "name": "Negapi",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "pop3-4",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "fr",
+      "setId": "ktcg:set:fr:pop3",
+      "number": "4",
+      "rarity": "Rare",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "holo"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/fr/pop/pop3/4/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "pop3-4",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/fr/pop/pop3/4/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "pop3-4",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/fr/pop/pop3/4/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "pop3-4",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:fr:ktcg-set-fr-pop3:5",
+      "name": "Posipi",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "pop3-5",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "fr",
+      "setId": "ktcg:set:fr:pop3",
+      "number": "5",
+      "rarity": "Rare",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "holo"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/fr/pop/pop3/5/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "pop3-5",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/fr/pop/pop3/5/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "pop3-5",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/fr/pop/pop3/5/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "pop3-5",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:fr:ktcg-set-fr-pop3:6",
+      "name": "Aquali",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "pop3-6",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "fr",
+      "setId": "ktcg:set:fr:pop3",
+      "number": "6",
+      "rarity": "Rare",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "holo"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/fr/pop/pop3/6/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "pop3-6",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/fr/pop/pop3/6/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "pop3-6",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/fr/pop/pop3/6/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "pop3-6",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:fr:ktcg-set-fr-pop3:7",
+      "name": "Galifeu",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "pop3-7",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "fr",
+      "setId": "ktcg:set:fr:pop3",
+      "number": "7",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/fr/pop/pop3/7/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "pop3-7",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/fr/pop/pop3/7/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "pop3-7",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/fr/pop/pop3/7/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "pop3-7",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:fr:ktcg-set-fr-pop3:8",
+      "name": "Donphan",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "pop3-8",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "fr",
+      "setId": "ktcg:set:fr:pop3",
+      "number": "8",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/fr/pop/pop3/8/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "pop3-8",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/fr/pop/pop3/8/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "pop3-8",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/fr/pop/pop3/8/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "pop3-8",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:fr:ktcg-set-fr-pop3:9",
+      "name": "Foretress",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "pop3-9",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-27T12:00:00.000Z",
+      "language": "fr",
+      "setId": "ktcg:set:fr:pop3",
+      "number": "9",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        }
+      ],
+      "visual": {
+        "url": "https://assets.tcgdex.net/fr/pop/pop3/9/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "pop3-9",
+          "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/fr/pop/pop3/9/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "pop3-9",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/fr/pop/pop3/9/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "pop3-9",
+            "lastSyncedAt": "2026-08-27T12:00:00.000Z"
+          }
+        }
+      ]
+    }
+  ]
+}
