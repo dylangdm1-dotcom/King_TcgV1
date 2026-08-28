@@ -195,7 +195,11 @@ export default function PSAPage() {
     if (priceResult.status === "fulfilled") {
       setPriceChartingResults(priceResult.value);
       if (priceResult.value.length === 0) {
-        setPriceChartingError("Aucune carte PriceCharting trouvée dans cette langue.");
+        setPriceChartingError(
+          priceSearchLanguage === "fr"
+            ? "PriceCharting ne référence aucune fiche française fiable pour cette recherche. Les annonces eBay FR compatibles restent affichées ci-dessous."
+            : "Aucune carte PriceCharting trouvée dans cette langue."
+        );
       }
     } else {
       setPriceChartingError(
