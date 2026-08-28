@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "formatVersion": 1,
-  "catalogVersion": "v273-local-2026-08-27",
+  "catalogVersion": "v281-m6-2026-08-28",
   "language": "ja",
   "sets": [
     {
@@ -748,7 +748,9 @@
       "schemaVersion": 2,
       "id": "ktcg:set:ja:m6",
       "name": "Storm Emeralda",
-      "aliases": [],
+      "aliases": [
+        "M6"
+      ],
       "sources": [
         {
           "provider": "king_tcg",
@@ -756,18 +758,23 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "m6"
+          "sourceId": "m6",
+          "url": "https://api.tcgdex.net/v2/ja/sets/M6",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
         },
         {
           "provider": "king_tcg",
           "sourceId": "v269:regional:ja:M6"
         }
       ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
       "language": "ja",
       "code": "M6",
       "seriesId": "ktcg:series:ja:mega-evolution",
       "year": 2026,
-      "availability": "metadata_only",
+      "officialCardCount": 76,
+      "knownCardCount": 113,
+      "availability": "available",
       "visuals": []
     },
     {
