@@ -1,0 +1,2889 @@
+{
+  "schemaVersion": 2,
+  "formatVersion": 1,
+  "catalogVersion": "v281-m6-2026-08-28",
+  "language": "ja",
+  "setId": "ktcg:set:ja:m6",
+  "status": "complete",
+  "sourceCardCount": 113,
+  "cards": [
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:001",
+      "name": "ヘラクロス",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-001",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "001",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:002",
+      "name": "アメタマ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-002",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "002",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:003",
+      "name": "アメモース",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-003",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "003",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:004",
+      "name": "サボネア",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-004",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "004",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:005",
+      "name": "ノクタス",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-005",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "005",
+      "rarity": "Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "Holofoil"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:006",
+      "name": "ミツハニー",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-006",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "006",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:007",
+      "name": "ビークイン",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-007",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "007",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:008",
+      "name": "コソクムシ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-008",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "008",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:009",
+      "name": "メガグソクムシャex",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-009",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "009",
+      "rarity": "Double rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "Holofoil"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:010",
+      "name": "ガーディ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-010",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "010",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:011",
+      "name": "ウインディ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-011",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "011",
+      "rarity": "Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "Holofoil"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:012",
+      "name": "ブーバー",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-012",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "012",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:013",
+      "name": "ブーバーン",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-013",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "013",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:014",
+      "name": "コータス",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-014",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "014",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:015",
+      "name": "ヒートロトムex",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-015",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "015",
+      "rarity": "Double rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "Holofoil"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:016",
+      "name": "クイタラン",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-016",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "016",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:017",
+      "name": "マンタイン",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-017",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "017",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:018",
+      "name": "カイオーガ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-018",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "018",
+      "rarity": "Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "Holofoil"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:019",
+      "name": "プルリル",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-019",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "019",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:020",
+      "name": "ブルンゲル",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-020",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "020",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:021",
+      "name": "ヨワシex",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-021",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "021",
+      "rarity": "Double rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "Holofoil"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:022",
+      "name": "エレブー",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-022",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "022",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:023",
+      "name": "エレキブル",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-023",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "023",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:024",
+      "name": "ライコウex",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-024",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "024",
+      "rarity": "Double rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "Holofoil"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:025",
+      "name": "ボルトロス",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-025",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "025",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:026",
+      "name": "バチンウニ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-026",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "026",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:027",
+      "name": "カイデン",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-027",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "027",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:028",
+      "name": "タイカイデン",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-028",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "028",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:029",
+      "name": "スリープ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-029",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "029",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:030",
+      "name": "スリーパー",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-030",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "030",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:031",
+      "name": "ギラティナ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-031",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "031",
+      "rarity": "Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "Holofoil"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:032",
+      "name": "ゴビット",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-032",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "032",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:033",
+      "name": "メガゴルーグex",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-033",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "033",
+      "rarity": "Double rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "Holofoil"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:034",
+      "name": "ラブトロス",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-034",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "034",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:035",
+      "name": "サンド",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-035",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "035",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:036",
+      "name": "サンドパン",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-036",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "036",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:037",
+      "name": "イワーク",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-037",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "037",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:038",
+      "name": "ハガネール",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-038",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "038",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:039",
+      "name": "グラードン",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-039",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "039",
+      "rarity": "Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "Holofoil"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:040",
+      "name": "ランドロス",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-040",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "040",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:041",
+      "name": "ニドラン♀",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-041",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "041",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:042",
+      "name": "ニドリーナ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-042",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "042",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:043",
+      "name": "ニドクイン",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-043",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "043",
+      "rarity": "Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "Holofoil"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:044",
+      "name": "イトマル",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-044",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "044",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:045",
+      "name": "アリアドス",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-045",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "045",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:046",
+      "name": "ヤミラミ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-046",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "046",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:047",
+      "name": "マーイーカ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-047",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "047",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:048",
+      "name": "メガカラマネロex",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-048",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "048",
+      "rarity": "Double rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "Holofoil"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:049",
+      "name": "クリムガン",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-049",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "049",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:050",
+      "name": "ジャラコ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-050",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "050",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:051",
+      "name": "ジャランゴ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-051",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "051",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:052",
+      "name": "ジャラランガ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-052",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "052",
+      "rarity": "Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "Holofoil"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:053",
+      "name": "モトトカゲ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-053",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "053",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:054",
+      "name": "ルリリ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-054",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "054",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:055",
+      "name": "チルット",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-055",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "055",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:056",
+      "name": "チルタリス",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-056",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "056",
+      "rarity": "Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "Holofoil"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:057",
+      "name": "カクレオン",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-057",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "057",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:058",
+      "name": "メガレックウザex",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-058",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "058",
+      "rarity": "Double rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "Holofoil"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:059",
+      "name": "トルネロス",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-059",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "059",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:060",
+      "name": "ヤヤコマ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-060",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "060",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:061",
+      "name": "ヒノヤコマ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-061",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "061",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:062",
+      "name": "ファイアローex",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-062",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "062",
+      "rarity": "Double rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "Holofoil"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:063",
+      "name": "おいしいおむすび",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-063",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "063",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:064",
+      "name": "ぼうけんのランタン",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-064",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "064",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:065",
+      "name": "とくちゅうチョッキ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-065",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "065",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:066",
+      "name": "メガレックウザキャップ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-066",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "066",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:067",
+      "name": "MCの盛り上げ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-067",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "067",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:068",
+      "name": "ギリー",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-068",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "068",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:069",
+      "name": "ヒガナの信頼",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-069",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "069",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:070",
+      "name": "フウとランの修行",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-070",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "070",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:071",
+      "name": "伝説の海溝",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-071",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "071",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:072",
+      "name": "伝説の海溝",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-072",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "072",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:073",
+      "name": "伝説の山頂",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-073",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "073",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:074",
+      "name": "伝説の山頂",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-074",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "074",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:075",
+      "name": "伝説の溶岩洞",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-075",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "075",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:076",
+      "name": "伝説の溶岩洞",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-076",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "076",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:077",
+      "name": "アメモース",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-077",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "077",
+      "rarity": "Mega Hyper Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "Holofoil"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:078",
+      "name": "ガーディ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-078",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "078",
+      "rarity": "Mega Hyper Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "Holofoil"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:079",
+      "name": "ブーバーン",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-079",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "079",
+      "rarity": "Mega Hyper Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "Holofoil"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:080",
+      "name": "カイオーガ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-080",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "080",
+      "rarity": "Mega Hyper Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "Holofoil"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:081",
+      "name": "エレキブル",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-081",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "081",
+      "rarity": "Mega Hyper Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "Holofoil"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:082",
+      "name": "バチンウニ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-082",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "082",
+      "rarity": "Mega Hyper Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "Holofoil"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:083",
+      "name": "ラブトロス",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-083",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "083",
+      "rarity": "Mega Hyper Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "Holofoil"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:084",
+      "name": "グラードン",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-084",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "084",
+      "rarity": "Mega Hyper Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "Holofoil"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:085",
+      "name": "マーイーカ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-085",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "085",
+      "rarity": "Mega Hyper Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "Holofoil"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:086",
+      "name": "ルリリ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-086",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "086",
+      "rarity": "Mega Hyper Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "Holofoil"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:087",
+      "name": "チルタリス",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-087",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "087",
+      "rarity": "Mega Hyper Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "Holofoil"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:088",
+      "name": "カクレオン",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-088",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "088",
+      "rarity": "Mega Hyper Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "Holofoil"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:089",
+      "name": "メガグソクムシャex",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-089",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "089",
+      "rarity": "Mega Hyper Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "Holofoil"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:090",
+      "name": "ヒートロトムex",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-090",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "090",
+      "rarity": "Mega Hyper Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "Holofoil"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:091",
+      "name": "ヨワシex",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-091",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "091",
+      "rarity": "Mega Hyper Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "Holofoil"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:092",
+      "name": "ライコウex",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-092",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "092",
+      "rarity": "Mega Hyper Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "Holofoil"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:093",
+      "name": "メガゴルーグex",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-093",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "093",
+      "rarity": "Mega Hyper Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "Holofoil"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:094",
+      "name": "メガカラマネロex",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-094",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "094",
+      "rarity": "Mega Hyper Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "Holofoil"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:095",
+      "name": "メガレックウザex",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-095",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "095",
+      "rarity": "Mega Hyper Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "Holofoil"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:096",
+      "name": "ファイアローex",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-096",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "096",
+      "rarity": "Mega Hyper Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "Holofoil"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:097",
+      "name": "ぼうけんのランタン",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-097",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "097",
+      "rarity": "Mega Hyper Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "Holofoil"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:098",
+      "name": "とくちゅうチョッキ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-098",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "098",
+      "rarity": "Mega Hyper Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "Holofoil"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:099",
+      "name": "ポケモンキャッチャー",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-099",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "099",
+      "rarity": "Mega Hyper Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "Holofoil"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:100",
+      "name": "MCの盛り上げ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-100",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "100",
+      "rarity": "Mega Hyper Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "Holofoil"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:101",
+      "name": "ギリー",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-101",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "101",
+      "rarity": "Mega Hyper Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "Holofoil"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:102",
+      "name": "ヒガナの信頼",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-102",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "102",
+      "rarity": "Mega Hyper Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "Holofoil"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:103",
+      "name": "フウとランの修行",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-103",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "103",
+      "rarity": "Mega Hyper Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "Holofoil"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:104",
+      "name": "グロウ草エネルギー",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-104",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "104",
+      "rarity": "Mega Hyper Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "Holofoil"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:105",
+      "name": "ニトロ炎エネルギー",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-105",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "105",
+      "rarity": "Mega Hyper Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "Holofoil"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:106",
+      "name": "バブル水エネルギー",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-106",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "106",
+      "rarity": "Mega Hyper Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "Holofoil"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:107",
+      "name": "メガグソクムシャex",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-107",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "107",
+      "rarity": "Mega Hyper Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "Holofoil"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:108",
+      "name": "ライコウex",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-108",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "108",
+      "rarity": "Mega Hyper Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "Holofoil"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:109",
+      "name": "メガゴルーグex",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-109",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "109",
+      "rarity": "Mega Hyper Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "Holofoil"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:110",
+      "name": "メガレックウザex",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-110",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "110",
+      "rarity": "Mega Hyper Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "Holofoil"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:111",
+      "name": "ギリー",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-111",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "111",
+      "rarity": "Mega Hyper Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "Holofoil"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:112",
+      "name": "ヒガナの信頼",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-112",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "112",
+      "rarity": "Mega Hyper Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "Holofoil"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-m6:113",
+      "name": "メガレックウザex",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M6-113",
+          "lastSyncedAt": "2026-08-28T07:53:27.895Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-28T07:53:27.895Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:m6",
+      "number": "113",
+      "rarity": "Mega Hyper Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "Holofoil"
+        }
+      ],
+      "visuals": []
+    }
+  ]
+}
