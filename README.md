@@ -2,7 +2,7 @@
 
 King_TCG est une application Next.js de recherche, collection et analyse de cartes Pokémon TCG. Elle réunit un catalogue multilingue, la gestion de collection, les favoris, un scanner assisté par IA, une estimation PSA et une agrégation de données marché.
 
-**Version actuelle : V280 — Identité et regroupement PSA fiables.**
+**Version actuelle : V281 — M6 locale et recherche PriceCharting FR fiable.**
 
 ## Fonctions principales
 
@@ -22,10 +22,10 @@ King_TCG est une application Next.js de recherche, collection et analyse de cart
 |---|---:|---:|---:|---|
 | FR | 18 | 244 | 19 797 | 172 complètes, 10 partielles |
 | EN | 20 | 203 | 21 066 | 199 complètes |
-| JP | 13 | 122 | 0 | métadonnées prêtes, cartes à synchroniser |
+| JP | 13 | 122 | 113 | M6 complète côté données, 121 extensions à synchroniser |
 | CN | 5 | 42 | 0 | métadonnées prêtes, cartes à synchroniser |
 
-Les extensions JP/CN sont visibles avec leur nom, code et série même lorsque leurs cartes ne sont pas encore disponibles localement. King_TCG n’invente jamais une carte, un visuel ou un prix manquant.
+Les extensions JP/CN sont visibles avec leur nom, code et série même lorsque leurs cartes ne sont pas encore disponibles localement. M6 contient 113 cartes locales avec leurs données et prix disponibles, mais TCGdex ne publie pas encore leurs visuels. King_TCG n’invente jamais une carte, un visuel ou un prix manquant.
 
 ## Sources de données
 
@@ -102,6 +102,7 @@ npm run audit:catalog-v2-local
 npm run audit:search-catalog
 npm run audit:market-scanner
 npm run audit:psa-identity
+npm run audit:v281
 npm run audit:market-cache
 npm run audit:market-cache:persistent
 npm run audit:market-history
@@ -144,6 +145,7 @@ Les audits statiques, le typage, le lint et le build sont exécutés avant livra
 - [`docs/SEARCH_CATALOG_V278.md`](docs/SEARCH_CATALOG_V278.md) — intégration visible Recherche/Catalogue ;
 - [`docs/MARKET_SCANNER_V279.md`](docs/MARKET_SCANNER_V279.md) — contrat prix FR/EN/JP/CN et raccord Scanner ;
 - [`docs/PSA_IDENTITY_V280.md`](docs/PSA_IDENTITY_V280.md) — dédoublonnage et regroupement PSA ;
+- [`docs/M6_PRICECHARTING_V281.md`](docs/M6_PRICECHARTING_V281.md) — M6 locale et filtrage PriceCharting FR ;
 - [`docs/MARKET_HISTORY_METRICS_V277.md`](docs/MARKET_HISTORY_METRICS_V277.md) — Redis, métriques et historique ;
 - [`docs/FINAL_ROADMAP.md`](docs/FINAL_ROADMAP.md) — prochaines étapes ;
 - [`docs/INDEX.md`](docs/INDEX.md) — index de toute la documentation.
