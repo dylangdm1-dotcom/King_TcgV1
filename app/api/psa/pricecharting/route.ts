@@ -1,6 +1,10 @@
 import { NextResponse } from "next/server";
 import { apiError, boundedQuery, enforceRateLimit } from "@/lib/api/security";
 import { buildPSACardIdentityV280 } from "@/lib/psa/identity";
+import {
+  matchesPriceChartingQueryV281,
+  priceChartingSearchTermsV281,
+} from "@/lib/psa/pricecharting-match";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -525,14 +529,9 @@ async function searchPriceCharting(
   query: string,
   language: SearchLanguage
 ): Promise<SearchProduct[]> {
-  const suffix =
-    language === "fr" ? "French" :
-    language === "ja" ? "Japanese" :
-    "";
-
-  const searchTerms = Array.from(
-    new Set([suffix ? `${query} ${suffix}` : query, query])
-  );
+  const searchTerms = language === "ja"
+    ? Array.from(new Set([`${query} Japanese`, query]))
+    : priceChartingSearchTermsV281(query, language);
 
   const urls = searchTerms.flatMap((term) => [
     `${BASE}/search-products?q=${encodeURIComponent(term)}&type=prices&exclude-variants=false&region-name=all`,
@@ -593,7 +592,12 @@ async function searchPriceCharting(
   }
 
   const filtered = results.filter((product) =>
-    matchesSearchLanguage(product, language)
+    matchesSearchLanguage(product, language) &&
+    matchesPriceChartingQueryV281(
+      query,
+      `${product.title} ${product.url} ${product.setName} ${product.cardNumber}`,
+      language
+    )
   );
 
   return filtered.slice(0, 30);
@@ -765,6 +769,8 @@ export async function GET(
         resultCount: 0,
         currency: "EUR",
         language,
+        identityVersion: "psa-v280",
+        matchingVersion: "pricecharting-v281",
         usdToEur: rate,
       });
     }
@@ -797,7 +803,12 @@ export async function GET(
         (
           card
         ): card is PriceChartingCard =>
-          card !== null
+          card !== null &&
+          matchesPriceChartingQueryV281(
+            query,
+            `${card.cardName} ${card.setName} ${card.cardNumber} ${card.sourceUrl}`,
+            language
+          )
       );
 
     /*
@@ -863,6 +874,8 @@ export async function GET(
       language,
 
       identityVersion: "psa-v280",
+
+      matchingVersion: "pricecharting-v281",
 
       usdToEur: rate,
     });
