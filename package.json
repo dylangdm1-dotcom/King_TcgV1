@@ -21,6 +21,8 @@
     "audit:market-cache:persistent": "node scripts/audit-market-cache-v276.mjs",
     "audit:market-history": "node scripts/audit-market-history-v277.mjs",
     "audit:search-catalog": "node scripts/audit-search-catalog-v278.mjs",
+    "audit:market-scanner": "node scripts/audit-market-scanner-v279.mjs",
+    "audit:psa-identity": "node scripts/audit-psa-identity-v280.mjs",
     "test:market-cache:live": "node scripts/test-market-cache-live-v277.mjs"
   },
   "dependencies": {
