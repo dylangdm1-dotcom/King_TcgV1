@@ -2,7 +2,7 @@
 
 King_TCG est une application Next.js de recherche, collection et analyse de cartes Pokémon TCG. Elle réunit un catalogue multilingue, la gestion de collection, les favoris, un scanner assisté par IA, une estimation PSA et une agrégation de données marché.
 
-**Version actuelle : V278 — Recherche et Catalogue local visibles.**
+**Version actuelle : V280 — Identité et regroupement PSA fiables.**
 
 ## Fonctions principales
 
@@ -11,7 +11,8 @@ King_TCG est une application Next.js de recherche, collection et analyse de cart
 - vues Recherche compacte (3 cartes par ligne), standard et large ;
 - collection, favoris, dashboard, alertes et opportunités ;
 - Scanner Mono, Batch et Quad ;
-- estimation PSA expérimentale avec PriceCharting et eBay ;
+- raccord Scanner → fiche → prix d'une seule carte validée, sans appels marché sur les candidats ;
+- estimation PSA expérimentale avec PriceCharting et eBay, regroupée par langue, carte, extension, édition, variante et grade ;
 - Cote King_TCG construite à partir des sources compatibles disponibles ;
 - cache marché partagé et historique quotidien persistant via Redis REST.
 
@@ -99,6 +100,8 @@ npm run build
 npm run audit:security
 npm run audit:catalog-v2-local
 npm run audit:search-catalog
+npm run audit:market-scanner
+npm run audit:psa-identity
 npm run audit:market-cache
 npm run audit:market-cache:persistent
 npm run audit:market-history
@@ -122,14 +125,14 @@ docs/                   État du projet, procédures et rapports techniques
 2. Une panne externe ne supprime jamais une identité ou un visuel déjà connu.
 3. Une source absente affiche `—` ; aucune valeur n’est inventée.
 4. Les codes `CS*`, `CSV*` et `CBB*` restent chinois et ne sont jamais classés japonais.
-5. Scanner et PSA restent isolés du moteur de prix ; l’enrichissement marché intervient après identification validée.
+5. Scanner et PSA restent isolés du moteur de prix ; le Scanner ouvre la fiche après validation, puis cette fiche enrichit une seule carte.
 6. Les synchronisations de catalogue sont additives et contrôlées avant publication.
 
 ## État des tests réels
 
 Les audits statiques, le typage, le lint et le build sont exécutés avant livraison. Restent à vérifier sur les environnements réels :
 
-- cold start Redis sur Vercel ;
+- simulation complète de cold start via la route protégée (la connexion Redis et le cache partagé ont été validés sur le déploiement réel) ;
 - Scanner Mono/Batch/Quad avec caméra ;
 - recherches PSA témoins multilingues ;
 - rendu final sur Android et iPhone ;
@@ -139,6 +142,8 @@ Les audits statiques, le typage, le lint et le build sont exécutés avant livra
 
 - [`docs/PROJECT_STATUS.md`](docs/PROJECT_STATUS.md) — état détaillé actuel ;
 - [`docs/SEARCH_CATALOG_V278.md`](docs/SEARCH_CATALOG_V278.md) — intégration visible Recherche/Catalogue ;
+- [`docs/MARKET_SCANNER_V279.md`](docs/MARKET_SCANNER_V279.md) — contrat prix FR/EN/JP/CN et raccord Scanner ;
+- [`docs/PSA_IDENTITY_V280.md`](docs/PSA_IDENTITY_V280.md) — dédoublonnage et regroupement PSA ;
 - [`docs/MARKET_HISTORY_METRICS_V277.md`](docs/MARKET_HISTORY_METRICS_V277.md) — Redis, métriques et historique ;
 - [`docs/FINAL_ROADMAP.md`](docs/FINAL_ROADMAP.md) — prochaines étapes ;
 - [`docs/INDEX.md`](docs/INDEX.md) — index de toute la documentation.
