@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "formatVersion": 1,
-  "catalogVersion": "v281-m6-2026-08-28",
+  "catalogVersion": "v282-jp-batch1-2026-08-31",
   "language": "ja",
   "sets": [
     {
@@ -666,7 +666,8 @@
       "name": "Perfect Order",
       "aliases": [
         "POR",
-        "Nihil Zero"
+        "Nihil Zero",
+        "M3"
       ],
       "sources": [
         {
@@ -675,17 +676,22 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "m3"
+          "sourceId": "m3",
+          "url": "https://api.tcgdex.net/v2/ja/sets/M3",
+          "lastSyncedAt": "2026-08-31T13:17:22.137Z"
         },
         {
           "provider": "king_tcg",
           "sourceId": "v269:regional:ja:M3"
         }
       ],
+      "lastSyncedAt": "2026-08-31T13:17:22.137Z",
       "language": "ja",
       "code": "M3",
       "seriesId": "ktcg:series:ja:mega-evolution",
       "year": 2026,
+      "officialCardCount": 80,
+      "knownCardCount": 117,
       "availability": "available",
       "visuals": []
     },
@@ -2660,7 +2666,8 @@
       "id": "ktcg:set:ja:sv9a",
       "name": "Heat Wave Arena",
       "aliases": [
-        "HWA"
+        "HWA",
+        "SV9A"
       ],
       "sources": [
         {
@@ -2669,17 +2676,22 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "sv9a"
+          "sourceId": "sv9a",
+          "url": "https://api.tcgdex.net/v2/ja/sets/SV9a",
+          "lastSyncedAt": "2026-08-31T13:27:06.988Z"
         },
         {
           "provider": "king_tcg",
           "sourceId": "v269:regional:ja:SV9A"
         }
       ],
+      "lastSyncedAt": "2026-08-31T13:27:06.988Z",
       "language": "ja",
       "code": "SV9A",
       "seriesId": "ktcg:series:ja:scarlet-and-violet",
       "year": 2025,
+      "officialCardCount": 63,
+      "knownCardCount": 92,
       "availability": "available",
       "visuals": []
     },
