@@ -3909,6 +3909,7 @@ export async function POST(request: Request) {
         condition: card.condition,
         variantCardmarketId: card.variantCardmarketId,
         variantTcgplayerId: card.variantTcgplayerId,
+        providerId: card.providerId,
       });
 
       const resultKey = typeof card.requestKey === "string" && card.requestKey.length <= 500
