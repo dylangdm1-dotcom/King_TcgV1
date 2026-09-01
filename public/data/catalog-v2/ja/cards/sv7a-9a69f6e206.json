@@ -1,0 +1,5275 @@
+{
+  "schemaVersion": 2,
+  "formatVersion": 1,
+  "catalogVersion": "v287-jp-mass-import",
+  "language": "ja",
+  "setId": "ktcg:set:ja:sv7a",
+  "status": "complete",
+  "sourceCardCount": 94,
+  "cards": [
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:001",
+      "name": "タマタマ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-001",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "001",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/001/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-001",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/001/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-001",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/001/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-001",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:002",
+      "name": "ネマシュ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-002",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "002",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/002/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-002",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/002/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-002",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/002/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-002",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:003",
+      "name": "マシェード",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-003",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "003",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/003/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-003",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/003/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-003",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/003/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-003",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:004",
+      "name": "ダダリン",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-004",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "004",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/004/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-004",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/004/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-004",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/004/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-004",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:005",
+      "name": "ザルード",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-005",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "005",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/005/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-005",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/005/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-005",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/005/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-005",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:006",
+      "name": "ポワルン たいようのすがた",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-006",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "006",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/006/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-006",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/006/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-006",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/006/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-006",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:007",
+      "name": "バオップ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-007",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "007",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/007/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-007",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/007/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-007",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/007/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-007",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:008",
+      "name": "バオッキー",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-008",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "008",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/008/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-008",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/008/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-008",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/008/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-008",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:009",
+      "name": "ウガツホムラ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-009",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "009",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/009/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-009",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/009/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-009",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/009/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-009",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:010",
+      "name": "フリージオ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-010",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "010",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/010/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-010",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/010/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-010",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/010/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-010",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:011",
+      "name": "ブラックキュレムex",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-011",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "011",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/011/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-011",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/011/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-011",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/011/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-011",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:012",
+      "name": "ハギギシリ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-012",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "012",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/012/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-012",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/012/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-012",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/012/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-012",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:013",
+      "name": "クワッス",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-013",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "013",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/013/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-013",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/013/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-013",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/013/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-013",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:014",
+      "name": "ウェルカモ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-014",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "014",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/014/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-014",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/014/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-014",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/014/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-014",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:015",
+      "name": "ウェーニバル",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-015",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "015",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/015/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-015",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/015/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-015",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/015/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-015",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:016",
+      "name": "アルクジラ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-016",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "016",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/016/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-016",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/016/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-016",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/016/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-016",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:017",
+      "name": "ハルクジラ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-017",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "017",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/017/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-017",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/017/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-017",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/017/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-017",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:018",
+      "name": "ムチュール",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-018",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "018",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/018/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-018",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/018/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-018",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/018/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-018",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:019",
+      "name": "ラティアスex",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-019",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "019",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/019/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-019",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/019/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-019",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/019/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-019",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:020",
+      "name": "ラティオス",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-020",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "020",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/020/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-020",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/020/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-020",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/020/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-020",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:021",
+      "name": "カプ・テテフ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-021",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "021",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/021/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-021",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/021/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-021",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/021/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-021",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:022",
+      "name": "ヒラヒナ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-022",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "022",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/022/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-022",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/022/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-022",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/022/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-022",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:023",
+      "name": "クエスパトラ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-023",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "023",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/023/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-023",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/023/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-023",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/023/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-023",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:024",
+      "name": "コレクレー",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-024",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "024",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/024/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-024",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/024/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-024",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/024/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-024",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:025",
+      "name": "ナックラー",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-025",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "025",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/025/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-025",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/025/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-025",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/025/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-025",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:026",
+      "name": "ビブラーバ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-026",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "026",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/026/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-026",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/026/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-026",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/026/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-026",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:027",
+      "name": "フライゴンex",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-027",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "027",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/027/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-027",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/027/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-027",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/027/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-027",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:028",
+      "name": "モグリュー",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-028",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "028",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/028/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-028",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/028/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-028",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/028/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-028",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:029",
+      "name": "ドリュウズ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-029",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "029",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/029/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-029",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/029/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-029",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/029/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-029",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:030",
+      "name": "ランドロス",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-030",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "030",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/030/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-030",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/030/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-030",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/030/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-030",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:031",
+      "name": "ナゲツケサル",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-031",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "031",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/031/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-031",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/031/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-031",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/031/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-031",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:032",
+      "name": "タタッコ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-032",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "032",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/032/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-032",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/032/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-032",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/032/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-032",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:033",
+      "name": "オトスパス",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-033",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "033",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/033/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-033",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/033/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-033",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/033/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-033",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:034",
+      "name": "エアームド",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-034",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "034",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/034/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-034",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/034/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-034",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/034/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-034",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:035",
+      "name": "クレッフィ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-035",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "035",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/035/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-035",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/035/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-035",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/035/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-035",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:036",
+      "name": "ジュラルドン",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-036",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "036",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/036/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-036",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/036/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-036",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/036/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-036",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:037",
+      "name": "ブリジュラスex",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-037",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "037",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/037/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-037",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/037/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-037",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/037/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-037",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:038",
+      "name": "サーフゴー",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-038",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "038",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/038/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-038",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/038/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-038",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/038/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-038",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:039",
+      "name": "テツノカシラ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-039",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "039",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/039/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-039",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/039/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-039",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/039/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-039",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:040",
+      "name": "アローラ ナッシーex",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-040",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "040",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/040/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-040",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/040/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-040",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/040/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-040",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:041",
+      "name": "チルタリス",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-041",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "041",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/041/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-041",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/041/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-041",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/041/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-041",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:042",
+      "name": "ディアルガ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-042",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "042",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/042/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-042",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/042/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-042",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/042/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-042",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:043",
+      "name": "パルキア",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-043",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "043",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/043/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-043",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/043/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-043",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/043/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-043",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:044",
+      "name": "バクガメス",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-044",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "044",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/044/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-044",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/044/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-044",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/044/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-044",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:045",
+      "name": "カジッチュ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-045",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "045",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/045/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-045",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/045/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-045",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/045/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-045",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:046",
+      "name": "アップリュー",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-046",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "046",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/046/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-046",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/046/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-046",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/046/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-046",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:047",
+      "name": "タルップル",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-047",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "047",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/047/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-047",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/047/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-047",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/047/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-047",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:048",
+      "name": "チルット",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-048",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "048",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/048/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-048",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/048/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-048",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/048/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-048",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:049",
+      "name": "ワシボン",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-049",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "049",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/049/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-049",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/049/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-049",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/049/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-049",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:050",
+      "name": "ウォーグル",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-050",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "050",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/050/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-050",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/050/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-050",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/050/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-050",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:051",
+      "name": "モトトカゲex",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-051",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "051",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/051/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-051",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/051/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-051",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/051/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-051",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:052",
+      "name": "エネルギー転送PRO",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-052",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "052",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/052/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-052",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/052/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-052",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/052/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-052",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:053",
+      "name": "おたすけベル",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-053",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "053",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/053/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-053",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/053/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-053",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/053/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-053",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:054",
+      "name": "ダークボール",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-054",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "054",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/054/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-054",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/054/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-054",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/054/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-054",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:055",
+      "name": "ぼうがいレター",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-055",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "055",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/055/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-055",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/055/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-055",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/055/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-055",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:056",
+      "name": "メガトンブロアー",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-056",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "056",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/056/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-056",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/056/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-056",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/056/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-056",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:057",
+      "name": "竜の秘薬",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-057",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "057",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/057/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-057",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/057/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-057",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/057/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-057",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:058",
+      "name": "イトケのみ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-058",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "058",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/058/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-058",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/058/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-058",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/058/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-058",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:059",
+      "name": "カウンターゲイン",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-059",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "059",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/059/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-059",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/059/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-059",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/059/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-059",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:060",
+      "name": "カキツバタ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-060",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "060",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/060/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-060",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/060/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-060",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/060/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-060",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:061",
+      "name": "サーファー",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-061",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "061",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/061/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-061",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/061/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-061",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/061/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-061",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:062",
+      "name": "ドラセナ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-062",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "062",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/062/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-062",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/062/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-062",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/062/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-062",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:063",
+      "name": "ルチアのアピール",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-063",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "063",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/063/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-063",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/063/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-063",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/063/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-063",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:064",
+      "name": "リッチエネルギー",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-064",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "064",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/064/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-064",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/064/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-064",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/064/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-064",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:065",
+      "name": "タマタマ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-065",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "065",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/065/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-065",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/065/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-065",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/065/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-065",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:066",
+      "name": "マシェード",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-066",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "066",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/066/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-066",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/066/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-066",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/066/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-066",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:067",
+      "name": "ポワルン たいようのすがた",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-067",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "067",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/067/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-067",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/067/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-067",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/067/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-067",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:068",
+      "name": "ハギギシリ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-068",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "068",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/068/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-068",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/068/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-068",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/068/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-068",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:069",
+      "name": "ハルクジラ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-069",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "069",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/069/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-069",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/069/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-069",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/069/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-069",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:070",
+      "name": "ラティオス",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-070",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "070",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/070/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-070",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/070/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-070",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/070/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-070",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:071",
+      "name": "ビブラーバ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-071",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "071",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/071/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-071",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/071/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-071",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/071/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-071",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:072",
+      "name": "タタッコ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-072",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "072",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/072/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-072",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/072/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-072",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/072/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-072",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:073",
+      "name": "エアームド",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-073",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "073",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/073/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-073",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/073/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-073",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/073/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-073",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:074",
+      "name": "アップリュー",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-074",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "074",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/074/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-074",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/074/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-074",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/074/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-074",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:075",
+      "name": "タルップル",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-075",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "075",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/075/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-075",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/075/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-075",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/075/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-075",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:076",
+      "name": "ウォーグル",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-076",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "076",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/076/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-076",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/076/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-076",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/076/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-076",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:077",
+      "name": "ブラックキュレムex",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-077",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "077",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/077/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-077",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/077/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-077",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/077/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-077",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:078",
+      "name": "ラティアスex",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-078",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "078",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/078/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-078",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/078/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-078",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/078/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-078",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:079",
+      "name": "フライゴンex",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-079",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "079",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/079/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-079",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/079/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-079",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/079/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-079",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:080",
+      "name": "ブリジュラスex",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-080",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "080",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/080/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-080",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/080/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-080",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/080/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-080",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:081",
+      "name": "アローラ ナッシーex",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-081",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "081",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/081/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-081",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/081/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-081",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/081/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-081",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:082",
+      "name": "モトトカゲex",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-082",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "082",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/082/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-082",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/082/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-082",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/082/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-082",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:083",
+      "name": "カキツバタ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-083",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "083",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/083/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-083",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/083/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-083",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/083/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-083",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:084",
+      "name": "サーファー",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-084",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "084",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/084/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-084",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/084/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-084",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/084/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-084",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:085",
+      "name": "ドラセナ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-085",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "085",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/085/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-085",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/085/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-085",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/085/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-085",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:086",
+      "name": "ルチアのアピール",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-086",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "086",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/086/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-086",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/086/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-086",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/086/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-086",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:087",
+      "name": "ラティアスex",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-087",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "087",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/087/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-087",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/087/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-087",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/087/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-087",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:088",
+      "name": "ブリジュラスex",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-088",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "088",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/088/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-088",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/088/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-088",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/088/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-088",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:089",
+      "name": "アローラ ナッシーex",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-089",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "089",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/089/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-089",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/089/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-089",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/089/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-089",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:090",
+      "name": "カキツバタ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-090",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "090",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/090/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-090",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/090/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-090",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/090/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-090",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:091",
+      "name": "ルチアのアピール",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-091",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "091",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/091/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-091",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/091/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-091",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/091/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-091",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:092",
+      "name": "アローラ ナッシーex",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-092",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "092",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/092/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-092",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/092/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-092",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/092/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-092",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:093",
+      "name": "カウンターゲイン",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-093",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "093",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/093/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-093",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/093/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-093",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/093/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-093",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sv7a:094",
+      "name": "ジェットエネルギー",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-094",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sv7a",
+      "number": "094",
+      "variants": [],
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SV7a/094/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SV7a-094",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/094/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-094",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SV7a/094/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SV7a-094",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
+    }
+  ]
+}
