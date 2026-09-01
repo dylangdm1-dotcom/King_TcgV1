@@ -41,6 +41,10 @@ export interface SearchLocalSetCardsV278 {
   cards: PokemonCard[];
 }
 
+function japaneseSetName(name: string, aliases: readonly string[]): string {
+  return aliases.find((alias) => /[\u3040-\u30ff\u3400-\u9fff]/.test(alias)) || name;
+}
+
 function normalizedCode(value: string): string {
   return String(value || "").toLowerCase().replace(/[^a-z0-9]/g, "");
 }
@@ -169,11 +173,18 @@ export async function loadSearchCatalogSetsV278(
   return bundle.sets.sets.map((set) => {
     const entry = entries.get(set.id);
     const coverage = entry?.status || (set.availability === "announced" ? "announced" : "metadata_only");
+    const localizedName = language === "ja"
+      ? japaneseSetName(set.name, set.aliases)
+      : language === "zh-tw"
+        ? canonicalChineseSetName(set.code, set.name)
+        : set.name;
     return {
       id: set.code,
       canonicalId: set.id,
-      name: language === "zh-tw" ? canonicalChineseSetName(set.code, set.name) : set.name,
-      aliases: set.aliases,
+      name: localizedName,
+      aliases: localizedName === set.name
+        ? set.aliases
+        : Array.from(new Set([...set.aliases, set.name])),
       series: seriesNames.get(set.seriesId) || "Pokémon TCG",
       total: entry?.sourceCardCount || set.knownCardCount || entry?.cardCount || set.officialCardCount || 0,
       printedTotal: entry?.officialCardCount || set.officialCardCount || 0,
@@ -207,7 +218,9 @@ export async function loadSearchCatalogSetCardsV278(
   const seriesName = bundle.series.series.find((series) => series.id === set.seriesId)?.name || "Pokémon TCG";
   const runtimeSet = language === "zh-tw"
     ? { ...set, name: canonicalChineseSetName(set.code, set.name) }
-    : set;
+    : language === "ja"
+      ? { ...set, name: japaneseSetName(set.name, set.aliases) }
+      : set;
   return {
     status: file.status,
     cards: file.cards.map((card) => toPokemonCard(card, runtimeSet, seriesName, file.cards.length)),
