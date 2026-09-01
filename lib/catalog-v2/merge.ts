@@ -35,7 +35,11 @@ function uniqueText(values: readonly string[]): string[] {
   const seen = new Set<string>();
   return values.filter((value) => {
     if (!usableText(value)) return false;
-    const key = normalizeCatalogToken(value);
+    const trimmed = value.trim();
+    // `normalizeCatalogToken` intentionally produces ASCII identifiers. Names
+    // written entirely in Japanese or Chinese therefore need a Unicode-safe
+    // fallback when they are used as searchable aliases.
+    const key = normalizeCatalogToken(trimmed) || trimmed.normalize("NFKC").toLocaleLowerCase();
     if (!key || seen.has(key)) return false;
     seen.add(key);
     return true;
