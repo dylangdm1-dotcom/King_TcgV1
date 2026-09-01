@@ -1,9 +1,67 @@
 {
   "schemaVersion": 2,
   "formatVersion": 1,
-  "catalogVersion": "v273-local-2026-08-27",
+  "catalogVersion": "v283-cn-pokewallet-2026-08-31",
   "language": "zh-tw",
   "series": [
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:series:zh-tw:chinese-collections",
+      "name": "Chinese Collections",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "pokewallet",
+          "sourceId": "-48",
+          "url": "https://api.pokewallet.io/sets/-48",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-49",
+          "url": "https://api.pokewallet.io/sets/-49",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-50",
+          "url": "https://api.pokewallet.io/sets/-50",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-51",
+          "url": "https://api.pokewallet.io/sets/-51",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-65",
+          "url": "https://api.pokewallet.io/sets/-65",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-73",
+          "url": "https://api.pokewallet.io/sets/-73",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-74",
+          "url": "https://api.pokewallet.io/sets/-74",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-75",
+          "url": "https://api.pokewallet.io/sets/-75",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
+      "language": "zh-tw"
+    },
     {
       "schemaVersion": 2,
       "id": "ktcg:series:zh-tw:promos",
@@ -17,8 +75,21 @@
         {
           "provider": "king_tcg",
           "sourceId": "v269:regional:zh-tw:NRGY"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-241",
+          "url": "https://api.pokewallet.io/sets/-241",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-47",
+          "url": "https://api.pokewallet.io/sets/-47",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
         }
       ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
       "language": "zh-tw"
     },
     {
@@ -98,8 +169,99 @@
         {
           "provider": "king_tcg",
           "sourceId": "v269:regional:zh-tw:CSV1C"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-1",
+          "url": "https://api.pokewallet.io/sets/-1",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-13",
+          "url": "https://api.pokewallet.io/sets/-13",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-14",
+          "url": "https://api.pokewallet.io/sets/-14",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-15",
+          "url": "https://api.pokewallet.io/sets/-15",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-240",
+          "url": "https://api.pokewallet.io/sets/-240",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-242",
+          "url": "https://api.pokewallet.io/sets/-242",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-244",
+          "url": "https://api.pokewallet.io/sets/-244",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-66",
+          "url": "https://api.pokewallet.io/sets/-66",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-67",
+          "url": "https://api.pokewallet.io/sets/-67",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-68",
+          "url": "https://api.pokewallet.io/sets/-68",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-69",
+          "url": "https://api.pokewallet.io/sets/-69",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-70",
+          "url": "https://api.pokewallet.io/sets/-70",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-243",
+          "url": "https://api.pokewallet.io/sets/-243",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-71",
+          "url": "https://api.pokewallet.io/sets/-71",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-72",
+          "url": "https://api.pokewallet.io/sets/-72",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
         }
       ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
       "language": "zh-tw"
     },
     {
@@ -252,8 +414,87 @@
         {
           "provider": "king_tcg",
           "sourceId": "v269:regional:zh-tw:CSM1AC"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-52",
+          "url": "https://api.pokewallet.io/sets/-52",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-53",
+          "url": "https://api.pokewallet.io/sets/-53",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-54",
+          "url": "https://api.pokewallet.io/sets/-54",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-55",
+          "url": "https://api.pokewallet.io/sets/-55",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-56",
+          "url": "https://api.pokewallet.io/sets/-56",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-57",
+          "url": "https://api.pokewallet.io/sets/-57",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-58",
+          "url": "https://api.pokewallet.io/sets/-58",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-59",
+          "url": "https://api.pokewallet.io/sets/-59",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-60",
+          "url": "https://api.pokewallet.io/sets/-60",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-61",
+          "url": "https://api.pokewallet.io/sets/-61",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-62",
+          "url": "https://api.pokewallet.io/sets/-62",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-63",
+          "url": "https://api.pokewallet.io/sets/-63",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-64",
+          "url": "https://api.pokewallet.io/sets/-64",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
         }
       ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
       "language": "zh-tw"
     },
     {
@@ -317,8 +558,141 @@
         {
           "provider": "king_tcg",
           "sourceId": "v269:regional:zh-tw:CS1AC"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-25",
+          "url": "https://api.pokewallet.io/sets/-25",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-26",
+          "url": "https://api.pokewallet.io/sets/-26",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-27",
+          "url": "https://api.pokewallet.io/sets/-27",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-28",
+          "url": "https://api.pokewallet.io/sets/-28",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-29",
+          "url": "https://api.pokewallet.io/sets/-29",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-30",
+          "url": "https://api.pokewallet.io/sets/-30",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-31",
+          "url": "https://api.pokewallet.io/sets/-31",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-32",
+          "url": "https://api.pokewallet.io/sets/-32",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-33",
+          "url": "https://api.pokewallet.io/sets/-33",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-34",
+          "url": "https://api.pokewallet.io/sets/-34",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-35",
+          "url": "https://api.pokewallet.io/sets/-35",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-36",
+          "url": "https://api.pokewallet.io/sets/-36",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-37",
+          "url": "https://api.pokewallet.io/sets/-37",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-38",
+          "url": "https://api.pokewallet.io/sets/-38",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-39",
+          "url": "https://api.pokewallet.io/sets/-39",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-40",
+          "url": "https://api.pokewallet.io/sets/-40",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-41",
+          "url": "https://api.pokewallet.io/sets/-41",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-42",
+          "url": "https://api.pokewallet.io/sets/-42",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-43",
+          "url": "https://api.pokewallet.io/sets/-43",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-44",
+          "url": "https://api.pokewallet.io/sets/-44",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-45",
+          "url": "https://api.pokewallet.io/sets/-45",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-46",
+          "url": "https://api.pokewallet.io/sets/-46",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
         }
       ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
       "language": "zh-tw"
     }
   ]
