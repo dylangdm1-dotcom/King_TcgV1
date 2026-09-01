@@ -1264,13 +1264,16 @@ export async function searchCardsBySetId(
   let resolvedSetId = cleanId;
   let localSet: SearchLocalSetCardsV278 | undefined;
 
-  // V278 : les extensions FR/EN complètes sont servies depuis les fichiers
-  // versionnés du projet. Les fournisseurs restent le repli des extensions
-  // partielles ou absentes, sans modifier les parcours JP/CN existants.
-  if (lang === "fr" || lang === "en") {
+  // V283 : les extensions CN capturées sont également servies depuis les
+  // fichiers versionnés. PokéWallet reste le repli des six extensions encore
+  // sans cartes locales et la source marché appelée depuis la fiche.
+  if (lang === "fr" || lang === "en" || lang === "zh-tw") {
     try {
       localSet = await loadSearchCatalogSetCardsV278(lang, setId);
-      if (localSet?.status === "complete" && localSet.cards.length > 0) {
+      if (
+        localSet?.cards.length &&
+        (localSet.status === "complete" || lang === "zh-tw")
+      ) {
         const localCards = [...localSet.cards].sort((a, b) => {
           const numA = parseInt((a.number || "0").replace(/\D/g, "")) || 0;
           const numB = parseInt((b.number || "0").replace(/\D/g, "")) || 0;
