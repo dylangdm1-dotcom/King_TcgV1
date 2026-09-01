@@ -127,6 +127,8 @@ export interface MarketQuote {
 
 export interface PokemonCard {
   id: string;
+  /** Identifiant serveur du fournisseur, utilisé sans exposer sa clé API. */
+  providerId?: string;
   name: string;
   number: string;
 
