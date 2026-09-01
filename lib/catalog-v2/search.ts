@@ -16,6 +16,7 @@ import {
   loadLocalCatalogSetCardsV2,
 } from "./local/client";
 import type { CatalogLocalCoverageStatusV2 } from "./local/schema";
+import { CHINESE_SET_CATALOG } from "../regionalSetCatalog";
 
 export interface SearchCatalogSetV278 {
   id: string;
@@ -25,6 +26,8 @@ export interface SearchCatalogSetV278 {
   series: string;
   total: number;
   printedTotal: number;
+  identityCount: number;
+  sourceCardCount: number;
   releaseDate?: string;
   images: { symbol?: string; logo?: string };
   availability: "available" | "announced" | "metadata_only" | "unknown";
@@ -39,6 +42,16 @@ export interface SearchLocalSetCardsV278 {
 
 function normalizedCode(value: string): string {
   return String(value || "").toLowerCase().replace(/[^a-z0-9]/g, "");
+}
+
+function canonicalChineseSetName(code: string, fallback: string): string {
+  const wanted = normalizedCode(code);
+  const entry = CHINESE_SET_CATALOG.find((candidate) =>
+    [candidate.code, ...(candidate.providerCodes ?? [])].some(
+      (value) => normalizedCode(value) === wanted
+    )
+  );
+  return entry?.name || fallback;
 }
 
 function visualUrls(visual: CatalogVisualV2 | undefined, visuals: CatalogVisualV2[]): string[] {
@@ -82,6 +95,8 @@ function cardVariants(card: CatalogCardV2): CardPrintVariant[] {
 function runtimeCardId(card: CatalogCardV2): string {
   const tcgdex = card.sources.find((source) => source.provider === "tcgdex" && source.sourceId);
   if (tcgdex) return `tcgdex-${card.language}-${tcgdex.sourceId}`;
+  const pokewallet = card.sources.find((source) => source.provider === "pokewallet" && source.sourceId);
+  if (pokewallet) return `pokewallet-${card.language}-${pokewallet.sourceId}`;
   return card.id;
 }
 
@@ -104,12 +119,14 @@ function toPokemonCard(
   cardCount: number
 ): PokemonCard {
   const candidates = visualUrls(card.visual, card.visuals);
+  const pokewallet = card.sources.find((source) => source.provider === "pokewallet" && source.sourceId);
   const large = card.visuals.find((visual) => visual.kind === "card")?.url || card.visual?.url || candidates[0] || "/placeholder.png";
   const small = card.visuals.find((visual) => visual.kind === "thumbnail")?.url || candidates[0] || large;
   const images = setImages(set);
 
   return {
     id: runtimeCardId(card),
+    ...(pokewallet ? { providerId: pokewallet.sourceId } : {}),
     name: card.name,
     number: card.number,
     rarity: card.rarity === "None" ? undefined : card.rarity,
@@ -144,11 +161,13 @@ export async function loadSearchCatalogSetsV278(
     return {
       id: set.code,
       canonicalId: set.id,
-      name: set.name,
+      name: language === "zh-tw" ? canonicalChineseSetName(set.code, set.name) : set.name,
       aliases: set.aliases,
       series: seriesNames.get(set.seriesId) || "Pokémon TCG",
-      total: entry?.cardCount || set.knownCardCount || set.officialCardCount || 0,
+      total: entry?.sourceCardCount || set.knownCardCount || entry?.cardCount || set.officialCardCount || 0,
       printedTotal: entry?.officialCardCount || set.officialCardCount || 0,
+      identityCount: entry?.cardCount || 0,
+      sourceCardCount: entry?.sourceCardCount || entry?.cardCount || 0,
       releaseDate: set.releaseDate,
       images: setImages(set),
       availability: availabilityFromCoverage(coverage),
@@ -175,9 +194,12 @@ export async function loadSearchCatalogSetCardsV278(
   const file = await loadLocalCatalogSetCardsV2(language, set.id);
   if (!file) return { status: entry.status, cards: [] };
   const seriesName = bundle.series.series.find((series) => series.id === set.seriesId)?.name || "Pokémon TCG";
+  const runtimeSet = language === "zh-tw"
+    ? { ...set, name: canonicalChineseSetName(set.code, set.name) }
+    : set;
   return {
     status: file.status,
-    cards: file.cards.map((card) => toPokemonCard(card, set, seriesName, file.cards.length)),
+    cards: file.cards.map((card) => toPokemonCard(card, runtimeSet, seriesName, file.cards.length)),
   };
 }
 
