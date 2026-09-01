@@ -1,0 +1,761 @@
+{
+  "schemaVersion": 2,
+  "formatVersion": 1,
+  "catalogVersion": "v283-cn-pokewallet-2026-08-31",
+  "language": "zh-tw",
+  "setId": "ktcg:set:zh-tw:csmjc",
+  "status": "complete",
+  "sourceCardCount": 15,
+  "cards": [
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:zh-tw:ktcg-set-zh-tw-csmjc:1",
+      "name": "Shining Celebi",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "pokewallet",
+          "sourceId": "pokewallet-public-zh-tw-CSMJC-1-0",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
+      "language": "zh-tw",
+      "setId": "ktcg:set:zh-tw:csmjc",
+      "number": "1",
+      "variants": [],
+      "visual": {
+        "url": "/api/catalog/image?id=pokewallet-public-zh-tw-CSMJC-1-0&lang=zh-tw&size=large",
+        "kind": "card",
+        "status": "candidate",
+        "source": {
+          "provider": "pokewallet",
+          "sourceId": "pokewallet-public-zh-tw-CSMJC-1-0",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "/api/catalog/image?id=pokewallet-public-zh-tw-CSMJC-1-0&lang=zh-tw&size=large",
+          "kind": "card",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "pokewallet-public-zh-tw-CSMJC-1-0",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=pokewallet-public-zh-tw-CSMJC-1-0&lang=zh-tw&size=small",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "pokewallet-public-zh-tw-CSMJC-1-0",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:zh-tw:ktcg-set-zh-tw-csmjc:10",
+      "name": "Poké Ball",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "pokewallet",
+          "sourceId": "pokewallet-public-zh-tw-CSMJC-10-9",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
+      "language": "zh-tw",
+      "setId": "ktcg:set:zh-tw:csmjc",
+      "number": "10",
+      "variants": [],
+      "visual": {
+        "url": "/api/catalog/image?id=pokewallet-public-zh-tw-CSMJC-10-9&lang=zh-tw&size=large",
+        "kind": "card",
+        "status": "candidate",
+        "source": {
+          "provider": "pokewallet",
+          "sourceId": "pokewallet-public-zh-tw-CSMJC-10-9",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "/api/catalog/image?id=pokewallet-public-zh-tw-CSMJC-10-9&lang=zh-tw&size=large",
+          "kind": "card",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "pokewallet-public-zh-tw-CSMJC-10-9",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=pokewallet-public-zh-tw-CSMJC-10-9&lang=zh-tw&size=small",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "pokewallet-public-zh-tw-CSMJC-10-9",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:zh-tw:ktcg-set-zh-tw-csmjc:11",
+      "name": "Palkia GX",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "pokewallet",
+          "sourceId": "pokewallet-public-zh-tw-CSMJC-11-10",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
+      "language": "zh-tw",
+      "setId": "ktcg:set:zh-tw:csmjc",
+      "number": "11",
+      "variants": [],
+      "visual": {
+        "url": "/api/catalog/image?id=pokewallet-public-zh-tw-CSMJC-11-10&lang=zh-tw&size=large",
+        "kind": "card",
+        "status": "candidate",
+        "source": {
+          "provider": "pokewallet",
+          "sourceId": "pokewallet-public-zh-tw-CSMJC-11-10",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "/api/catalog/image?id=pokewallet-public-zh-tw-CSMJC-11-10&lang=zh-tw&size=large",
+          "kind": "card",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "pokewallet-public-zh-tw-CSMJC-11-10",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=pokewallet-public-zh-tw-CSMJC-11-10&lang=zh-tw&size=small",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "pokewallet-public-zh-tw-CSMJC-11-10",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:zh-tw:ktcg-set-zh-tw-csmjc:12",
+      "name": "Mewtwo GX",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "pokewallet",
+          "sourceId": "pokewallet-public-zh-tw-CSMJC-12-11",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
+      "language": "zh-tw",
+      "setId": "ktcg:set:zh-tw:csmjc",
+      "number": "12",
+      "variants": [],
+      "visual": {
+        "url": "/api/catalog/image?id=pokewallet-public-zh-tw-CSMJC-12-11&lang=zh-tw&size=large",
+        "kind": "card",
+        "status": "candidate",
+        "source": {
+          "provider": "pokewallet",
+          "sourceId": "pokewallet-public-zh-tw-CSMJC-12-11",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "/api/catalog/image?id=pokewallet-public-zh-tw-CSMJC-12-11&lang=zh-tw&size=large",
+          "kind": "card",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "pokewallet-public-zh-tw-CSMJC-12-11",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=pokewallet-public-zh-tw-CSMJC-12-11&lang=zh-tw&size=small",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "pokewallet-public-zh-tw-CSMJC-12-11",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:zh-tw:ktcg-set-zh-tw-csmjc:13",
+      "name": "Yveltal GX",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "pokewallet",
+          "sourceId": "pokewallet-public-zh-tw-CSMJC-13-12",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
+      "language": "zh-tw",
+      "setId": "ktcg:set:zh-tw:csmjc",
+      "number": "13",
+      "variants": [],
+      "visual": {
+        "url": "/api/catalog/image?id=pokewallet-public-zh-tw-CSMJC-13-12&lang=zh-tw&size=large",
+        "kind": "card",
+        "status": "candidate",
+        "source": {
+          "provider": "pokewallet",
+          "sourceId": "pokewallet-public-zh-tw-CSMJC-13-12",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "/api/catalog/image?id=pokewallet-public-zh-tw-CSMJC-13-12&lang=zh-tw&size=large",
+          "kind": "card",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "pokewallet-public-zh-tw-CSMJC-13-12",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=pokewallet-public-zh-tw-CSMJC-13-12&lang=zh-tw&size=small",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "pokewallet-public-zh-tw-CSMJC-13-12",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:zh-tw:ktcg-set-zh-tw-csmjc:14",
+      "name": "Dialga GX",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "pokewallet",
+          "sourceId": "pokewallet-public-zh-tw-CSMJC-14-13",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
+      "language": "zh-tw",
+      "setId": "ktcg:set:zh-tw:csmjc",
+      "number": "14",
+      "variants": [],
+      "visual": {
+        "url": "/api/catalog/image?id=pokewallet-public-zh-tw-CSMJC-14-13&lang=zh-tw&size=large",
+        "kind": "card",
+        "status": "candidate",
+        "source": {
+          "provider": "pokewallet",
+          "sourceId": "pokewallet-public-zh-tw-CSMJC-14-13",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "/api/catalog/image?id=pokewallet-public-zh-tw-CSMJC-14-13&lang=zh-tw&size=large",
+          "kind": "card",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "pokewallet-public-zh-tw-CSMJC-14-13",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=pokewallet-public-zh-tw-CSMJC-14-13&lang=zh-tw&size=small",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "pokewallet-public-zh-tw-CSMJC-14-13",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:zh-tw:ktcg-set-zh-tw-csmjc:15",
+      "name": "Xerneas GX",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "pokewallet",
+          "sourceId": "pokewallet-public-zh-tw-CSMJC-15-14",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
+      "language": "zh-tw",
+      "setId": "ktcg:set:zh-tw:csmjc",
+      "number": "15",
+      "variants": [],
+      "visual": {
+        "url": "/api/catalog/image?id=pokewallet-public-zh-tw-CSMJC-15-14&lang=zh-tw&size=large",
+        "kind": "card",
+        "status": "candidate",
+        "source": {
+          "provider": "pokewallet",
+          "sourceId": "pokewallet-public-zh-tw-CSMJC-15-14",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "/api/catalog/image?id=pokewallet-public-zh-tw-CSMJC-15-14&lang=zh-tw&size=large",
+          "kind": "card",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "pokewallet-public-zh-tw-CSMJC-15-14",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=pokewallet-public-zh-tw-CSMJC-15-14&lang=zh-tw&size=small",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "pokewallet-public-zh-tw-CSMJC-15-14",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:zh-tw:ktcg-set-zh-tw-csmjc:2",
+      "name": "Shining Genesect",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "pokewallet",
+          "sourceId": "pokewallet-public-zh-tw-CSMJC-2-1",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
+      "language": "zh-tw",
+      "setId": "ktcg:set:zh-tw:csmjc",
+      "number": "2",
+      "variants": [],
+      "visual": {
+        "url": "/api/catalog/image?id=pokewallet-public-zh-tw-CSMJC-2-1&lang=zh-tw&size=large",
+        "kind": "card",
+        "status": "candidate",
+        "source": {
+          "provider": "pokewallet",
+          "sourceId": "pokewallet-public-zh-tw-CSMJC-2-1",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "/api/catalog/image?id=pokewallet-public-zh-tw-CSMJC-2-1&lang=zh-tw&size=large",
+          "kind": "card",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "pokewallet-public-zh-tw-CSMJC-2-1",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=pokewallet-public-zh-tw-CSMJC-2-1&lang=zh-tw&size=small",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "pokewallet-public-zh-tw-CSMJC-2-1",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:zh-tw:ktcg-set-zh-tw-csmjc:3",
+      "name": "Shining Ho-Oh",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "pokewallet",
+          "sourceId": "pokewallet-public-zh-tw-CSMJC-3-2",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
+      "language": "zh-tw",
+      "setId": "ktcg:set:zh-tw:csmjc",
+      "number": "3",
+      "variants": [],
+      "visual": {
+        "url": "/api/catalog/image?id=pokewallet-public-zh-tw-CSMJC-3-2&lang=zh-tw&size=large",
+        "kind": "card",
+        "status": "candidate",
+        "source": {
+          "provider": "pokewallet",
+          "sourceId": "pokewallet-public-zh-tw-CSMJC-3-2",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "/api/catalog/image?id=pokewallet-public-zh-tw-CSMJC-3-2&lang=zh-tw&size=large",
+          "kind": "card",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "pokewallet-public-zh-tw-CSMJC-3-2",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=pokewallet-public-zh-tw-CSMJC-3-2&lang=zh-tw&size=small",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "pokewallet-public-zh-tw-CSMJC-3-2",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:zh-tw:ktcg-set-zh-tw-csmjc:4",
+      "name": "Shining Volcanion",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "pokewallet",
+          "sourceId": "pokewallet-public-zh-tw-CSMJC-4-3",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
+      "language": "zh-tw",
+      "setId": "ktcg:set:zh-tw:csmjc",
+      "number": "4",
+      "variants": [],
+      "visual": {
+        "url": "/api/catalog/image?id=pokewallet-public-zh-tw-CSMJC-4-3&lang=zh-tw&size=large",
+        "kind": "card",
+        "status": "candidate",
+        "source": {
+          "provider": "pokewallet",
+          "sourceId": "pokewallet-public-zh-tw-CSMJC-4-3",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "/api/catalog/image?id=pokewallet-public-zh-tw-CSMJC-4-3&lang=zh-tw&size=large",
+          "kind": "card",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "pokewallet-public-zh-tw-CSMJC-4-3",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=pokewallet-public-zh-tw-CSMJC-4-3&lang=zh-tw&size=small",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "pokewallet-public-zh-tw-CSMJC-4-3",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:zh-tw:ktcg-set-zh-tw-csmjc:5",
+      "name": "Shining Mew",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "pokewallet",
+          "sourceId": "pokewallet-public-zh-tw-CSMJC-5-4",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
+      "language": "zh-tw",
+      "setId": "ktcg:set:zh-tw:csmjc",
+      "number": "5",
+      "variants": [],
+      "visual": {
+        "url": "/api/catalog/image?id=pokewallet-public-zh-tw-CSMJC-5-4&lang=zh-tw&size=large",
+        "kind": "card",
+        "status": "candidate",
+        "source": {
+          "provider": "pokewallet",
+          "sourceId": "pokewallet-public-zh-tw-CSMJC-5-4",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "/api/catalog/image?id=pokewallet-public-zh-tw-CSMJC-5-4&lang=zh-tw&size=large",
+          "kind": "card",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "pokewallet-public-zh-tw-CSMJC-5-4",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=pokewallet-public-zh-tw-CSMJC-5-4&lang=zh-tw&size=small",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "pokewallet-public-zh-tw-CSMJC-5-4",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:zh-tw:ktcg-set-zh-tw-csmjc:6",
+      "name": "Shining Jirachi",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "pokewallet",
+          "sourceId": "pokewallet-public-zh-tw-CSMJC-6-5",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
+      "language": "zh-tw",
+      "setId": "ktcg:set:zh-tw:csmjc",
+      "number": "6",
+      "variants": [],
+      "visual": {
+        "url": "/api/catalog/image?id=pokewallet-public-zh-tw-CSMJC-6-5&lang=zh-tw&size=large",
+        "kind": "card",
+        "status": "candidate",
+        "source": {
+          "provider": "pokewallet",
+          "sourceId": "pokewallet-public-zh-tw-CSMJC-6-5",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "/api/catalog/image?id=pokewallet-public-zh-tw-CSMJC-6-5&lang=zh-tw&size=large",
+          "kind": "card",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "pokewallet-public-zh-tw-CSMJC-6-5",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=pokewallet-public-zh-tw-CSMJC-6-5&lang=zh-tw&size=small",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "pokewallet-public-zh-tw-CSMJC-6-5",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:zh-tw:ktcg-set-zh-tw-csmjc:7",
+      "name": "Shining Rayquaza",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "pokewallet",
+          "sourceId": "pokewallet-public-zh-tw-CSMJC-7-6",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
+      "language": "zh-tw",
+      "setId": "ktcg:set:zh-tw:csmjc",
+      "number": "7",
+      "variants": [],
+      "visual": {
+        "url": "/api/catalog/image?id=pokewallet-public-zh-tw-CSMJC-7-6&lang=zh-tw&size=large",
+        "kind": "card",
+        "status": "candidate",
+        "source": {
+          "provider": "pokewallet",
+          "sourceId": "pokewallet-public-zh-tw-CSMJC-7-6",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "/api/catalog/image?id=pokewallet-public-zh-tw-CSMJC-7-6&lang=zh-tw&size=large",
+          "kind": "card",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "pokewallet-public-zh-tw-CSMJC-7-6",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=pokewallet-public-zh-tw-CSMJC-7-6&lang=zh-tw&size=small",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "pokewallet-public-zh-tw-CSMJC-7-6",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:zh-tw:ktcg-set-zh-tw-csmjc:8",
+      "name": "Shining Lugia",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "pokewallet",
+          "sourceId": "pokewallet-public-zh-tw-CSMJC-8-7",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
+      "language": "zh-tw",
+      "setId": "ktcg:set:zh-tw:csmjc",
+      "number": "8",
+      "variants": [],
+      "visual": {
+        "url": "/api/catalog/image?id=pokewallet-public-zh-tw-CSMJC-8-7&lang=zh-tw&size=large",
+        "kind": "card",
+        "status": "candidate",
+        "source": {
+          "provider": "pokewallet",
+          "sourceId": "pokewallet-public-zh-tw-CSMJC-8-7",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "/api/catalog/image?id=pokewallet-public-zh-tw-CSMJC-8-7&lang=zh-tw&size=large",
+          "kind": "card",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "pokewallet-public-zh-tw-CSMJC-8-7",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=pokewallet-public-zh-tw-CSMJC-8-7&lang=zh-tw&size=small",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "pokewallet-public-zh-tw-CSMJC-8-7",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:zh-tw:ktcg-set-zh-tw-csmjc:9",
+      "name": "Shining Arceus",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "pokewallet",
+          "sourceId": "pokewallet-public-zh-tw-CSMJC-9-8",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
+      "language": "zh-tw",
+      "setId": "ktcg:set:zh-tw:csmjc",
+      "number": "9",
+      "variants": [],
+      "visual": {
+        "url": "/api/catalog/image?id=pokewallet-public-zh-tw-CSMJC-9-8&lang=zh-tw&size=large",
+        "kind": "card",
+        "status": "candidate",
+        "source": {
+          "provider": "pokewallet",
+          "sourceId": "pokewallet-public-zh-tw-CSMJC-9-8",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "/api/catalog/image?id=pokewallet-public-zh-tw-CSMJC-9-8&lang=zh-tw&size=large",
+          "kind": "card",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "pokewallet-public-zh-tw-CSMJC-9-8",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=pokewallet-public-zh-tw-CSMJC-9-8&lang=zh-tw&size=small",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "pokewallet-public-zh-tw-CSMJC-9-8",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        }
+      ]
+    }
+  ]
+}

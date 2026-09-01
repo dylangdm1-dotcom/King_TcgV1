@@ -1,0 +1,1761 @@
+{
+  "schemaVersion": 2,
+  "formatVersion": 1,
+  "catalogVersion": "v283-cn-pokewallet-2026-08-31",
+  "language": "zh-tw",
+  "setId": "ktcg:set:zh-tw:csdc",
+  "status": "complete",
+  "sourceCardCount": 25,
+  "cards": [
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:zh-tw:ktcg-set-zh-tw-csdc:1",
+      "name": "Pikachu",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "pokewallet",
+          "sourceId": "7b4a9eed5bb727103ab8bd76cceda2f2a4c67765748d820bc74f516681c83e2a",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
+      "language": "zh-tw",
+      "setId": "ktcg:set:zh-tw:csdc",
+      "number": "1",
+      "variants": [],
+      "visual": {
+        "url": "/api/catalog/image?id=7b4a9eed5bb727103ab8bd76cceda2f2a4c67765748d820bc74f516681c83e2a&lang=zh-tw&size=high",
+        "kind": "card",
+        "status": "candidate",
+        "source": {
+          "provider": "pokewallet",
+          "sourceId": "7b4a9eed5bb727103ab8bd76cceda2f2a4c67765748d820bc74f516681c83e2a",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "/api/catalog/image?id=7b4a9eed5bb727103ab8bd76cceda2f2a4c67765748d820bc74f516681c83e2a&lang=zh-tw&size=high",
+          "kind": "card",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "7b4a9eed5bb727103ab8bd76cceda2f2a4c67765748d820bc74f516681c83e2a",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=7b4a9eed5bb727103ab8bd76cceda2f2a4c67765748d820bc74f516681c83e2a&lang=zh-tw&size=low",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "7b4a9eed5bb727103ab8bd76cceda2f2a4c67765748d820bc74f516681c83e2a",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=7b4a9eed5bb727103ab8bd76cceda2f2a4c67765748d820bc74f516681c83e2a&lang=zh-tw&size=large",
+          "kind": "card",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "7b4a9eed5bb727103ab8bd76cceda2f2a4c67765748d820bc74f516681c83e2a",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=7b4a9eed5bb727103ab8bd76cceda2f2a4c67765748d820bc74f516681c83e2a&lang=zh-tw&size=small",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "7b4a9eed5bb727103ab8bd76cceda2f2a4c67765748d820bc74f516681c83e2a",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:zh-tw:ktcg-set-zh-tw-csdc:10",
+      "name": "Zekrom",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "pokewallet",
+          "sourceId": "ec2d51bad6e2c00efed0cd0bb44d79c816cc06c3e0c2d725e71790cce4a7f299",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
+      "language": "zh-tw",
+      "setId": "ktcg:set:zh-tw:csdc",
+      "number": "10",
+      "variants": [],
+      "visual": {
+        "url": "/api/catalog/image?id=ec2d51bad6e2c00efed0cd0bb44d79c816cc06c3e0c2d725e71790cce4a7f299&lang=zh-tw&size=high",
+        "kind": "card",
+        "status": "candidate",
+        "source": {
+          "provider": "pokewallet",
+          "sourceId": "ec2d51bad6e2c00efed0cd0bb44d79c816cc06c3e0c2d725e71790cce4a7f299",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "/api/catalog/image?id=ec2d51bad6e2c00efed0cd0bb44d79c816cc06c3e0c2d725e71790cce4a7f299&lang=zh-tw&size=high",
+          "kind": "card",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "ec2d51bad6e2c00efed0cd0bb44d79c816cc06c3e0c2d725e71790cce4a7f299",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=ec2d51bad6e2c00efed0cd0bb44d79c816cc06c3e0c2d725e71790cce4a7f299&lang=zh-tw&size=low",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "ec2d51bad6e2c00efed0cd0bb44d79c816cc06c3e0c2d725e71790cce4a7f299",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=ec2d51bad6e2c00efed0cd0bb44d79c816cc06c3e0c2d725e71790cce4a7f299&lang=zh-tw&size=large",
+          "kind": "card",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "ec2d51bad6e2c00efed0cd0bb44d79c816cc06c3e0c2d725e71790cce4a7f299",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=ec2d51bad6e2c00efed0cd0bb44d79c816cc06c3e0c2d725e71790cce4a7f299&lang=zh-tw&size=small",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "ec2d51bad6e2c00efed0cd0bb44d79c816cc06c3e0c2d725e71790cce4a7f299",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:zh-tw:ktcg-set-zh-tw-csdc:11",
+      "name": "Xerneas",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "pokewallet",
+          "sourceId": "1ded4c2b0f2def47443ce159ab5a776f3ca4e786a348cd2f6ed3384abcb67727",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
+      "language": "zh-tw",
+      "setId": "ktcg:set:zh-tw:csdc",
+      "number": "11",
+      "variants": [],
+      "visual": {
+        "url": "/api/catalog/image?id=1ded4c2b0f2def47443ce159ab5a776f3ca4e786a348cd2f6ed3384abcb67727&lang=zh-tw&size=high",
+        "kind": "card",
+        "status": "candidate",
+        "source": {
+          "provider": "pokewallet",
+          "sourceId": "1ded4c2b0f2def47443ce159ab5a776f3ca4e786a348cd2f6ed3384abcb67727",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "/api/catalog/image?id=1ded4c2b0f2def47443ce159ab5a776f3ca4e786a348cd2f6ed3384abcb67727&lang=zh-tw&size=high",
+          "kind": "card",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "1ded4c2b0f2def47443ce159ab5a776f3ca4e786a348cd2f6ed3384abcb67727",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=1ded4c2b0f2def47443ce159ab5a776f3ca4e786a348cd2f6ed3384abcb67727&lang=zh-tw&size=low",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "1ded4c2b0f2def47443ce159ab5a776f3ca4e786a348cd2f6ed3384abcb67727",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=1ded4c2b0f2def47443ce159ab5a776f3ca4e786a348cd2f6ed3384abcb67727&lang=zh-tw&size=large",
+          "kind": "card",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "1ded4c2b0f2def47443ce159ab5a776f3ca4e786a348cd2f6ed3384abcb67727",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=1ded4c2b0f2def47443ce159ab5a776f3ca4e786a348cd2f6ed3384abcb67727&lang=zh-tw&size=small",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "1ded4c2b0f2def47443ce159ab5a776f3ca4e786a348cd2f6ed3384abcb67727",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:zh-tw:ktcg-set-zh-tw-csdc:12",
+      "name": "Yveltal",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "pokewallet",
+          "sourceId": "f59837f40f2c1e0f97cc26d087dab851a339163b061230ef12fd6355d299001a",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
+      "language": "zh-tw",
+      "setId": "ktcg:set:zh-tw:csdc",
+      "number": "12",
+      "variants": [],
+      "visual": {
+        "url": "/api/catalog/image?id=f59837f40f2c1e0f97cc26d087dab851a339163b061230ef12fd6355d299001a&lang=zh-tw&size=high",
+        "kind": "card",
+        "status": "candidate",
+        "source": {
+          "provider": "pokewallet",
+          "sourceId": "f59837f40f2c1e0f97cc26d087dab851a339163b061230ef12fd6355d299001a",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "/api/catalog/image?id=f59837f40f2c1e0f97cc26d087dab851a339163b061230ef12fd6355d299001a&lang=zh-tw&size=high",
+          "kind": "card",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "f59837f40f2c1e0f97cc26d087dab851a339163b061230ef12fd6355d299001a",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=f59837f40f2c1e0f97cc26d087dab851a339163b061230ef12fd6355d299001a&lang=zh-tw&size=low",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "f59837f40f2c1e0f97cc26d087dab851a339163b061230ef12fd6355d299001a",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=f59837f40f2c1e0f97cc26d087dab851a339163b061230ef12fd6355d299001a&lang=zh-tw&size=large",
+          "kind": "card",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "f59837f40f2c1e0f97cc26d087dab851a339163b061230ef12fd6355d299001a",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=f59837f40f2c1e0f97cc26d087dab851a339163b061230ef12fd6355d299001a&lang=zh-tw&size=small",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "f59837f40f2c1e0f97cc26d087dab851a339163b061230ef12fd6355d299001a",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:zh-tw:ktcg-set-zh-tw-csdc:13",
+      "name": "Cosmog",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "pokewallet",
+          "sourceId": "737c653b723aa8833b5034507c400bfa8eac5faca47b38869f26d70cfbb2960f",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
+      "language": "zh-tw",
+      "setId": "ktcg:set:zh-tw:csdc",
+      "number": "13",
+      "variants": [],
+      "visual": {
+        "url": "/api/catalog/image?id=737c653b723aa8833b5034507c400bfa8eac5faca47b38869f26d70cfbb2960f&lang=zh-tw&size=high",
+        "kind": "card",
+        "status": "candidate",
+        "source": {
+          "provider": "pokewallet",
+          "sourceId": "737c653b723aa8833b5034507c400bfa8eac5faca47b38869f26d70cfbb2960f",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "/api/catalog/image?id=737c653b723aa8833b5034507c400bfa8eac5faca47b38869f26d70cfbb2960f&lang=zh-tw&size=high",
+          "kind": "card",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "737c653b723aa8833b5034507c400bfa8eac5faca47b38869f26d70cfbb2960f",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=737c653b723aa8833b5034507c400bfa8eac5faca47b38869f26d70cfbb2960f&lang=zh-tw&size=low",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "737c653b723aa8833b5034507c400bfa8eac5faca47b38869f26d70cfbb2960f",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=737c653b723aa8833b5034507c400bfa8eac5faca47b38869f26d70cfbb2960f&lang=zh-tw&size=large",
+          "kind": "card",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "737c653b723aa8833b5034507c400bfa8eac5faca47b38869f26d70cfbb2960f",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=737c653b723aa8833b5034507c400bfa8eac5faca47b38869f26d70cfbb2960f&lang=zh-tw&size=small",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "737c653b723aa8833b5034507c400bfa8eac5faca47b38869f26d70cfbb2960f",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:zh-tw:ktcg-set-zh-tw-csdc:14",
+      "name": "Cosmoem",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "pokewallet",
+          "sourceId": "91f3d04de7791858e92e2101c217d0c338cddbe237a16bf36dd49856cbe27994",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
+      "language": "zh-tw",
+      "setId": "ktcg:set:zh-tw:csdc",
+      "number": "14",
+      "variants": [],
+      "visual": {
+        "url": "/api/catalog/image?id=91f3d04de7791858e92e2101c217d0c338cddbe237a16bf36dd49856cbe27994&lang=zh-tw&size=high",
+        "kind": "card",
+        "status": "candidate",
+        "source": {
+          "provider": "pokewallet",
+          "sourceId": "91f3d04de7791858e92e2101c217d0c338cddbe237a16bf36dd49856cbe27994",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "/api/catalog/image?id=91f3d04de7791858e92e2101c217d0c338cddbe237a16bf36dd49856cbe27994&lang=zh-tw&size=high",
+          "kind": "card",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "91f3d04de7791858e92e2101c217d0c338cddbe237a16bf36dd49856cbe27994",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=91f3d04de7791858e92e2101c217d0c338cddbe237a16bf36dd49856cbe27994&lang=zh-tw&size=low",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "91f3d04de7791858e92e2101c217d0c338cddbe237a16bf36dd49856cbe27994",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=91f3d04de7791858e92e2101c217d0c338cddbe237a16bf36dd49856cbe27994&lang=zh-tw&size=large",
+          "kind": "card",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "91f3d04de7791858e92e2101c217d0c338cddbe237a16bf36dd49856cbe27994",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=91f3d04de7791858e92e2101c217d0c338cddbe237a16bf36dd49856cbe27994&lang=zh-tw&size=small",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "91f3d04de7791858e92e2101c217d0c338cddbe237a16bf36dd49856cbe27994",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:zh-tw:ktcg-set-zh-tw-csdc:15",
+      "name": "Solgaleo",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "pokewallet",
+          "sourceId": "03483890cc7e5492a1559bd75020fced22c87bc9897f8b123d67c86e51bab35c",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
+      "language": "zh-tw",
+      "setId": "ktcg:set:zh-tw:csdc",
+      "number": "15",
+      "variants": [],
+      "visual": {
+        "url": "/api/catalog/image?id=03483890cc7e5492a1559bd75020fced22c87bc9897f8b123d67c86e51bab35c&lang=zh-tw&size=high",
+        "kind": "card",
+        "status": "candidate",
+        "source": {
+          "provider": "pokewallet",
+          "sourceId": "03483890cc7e5492a1559bd75020fced22c87bc9897f8b123d67c86e51bab35c",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "/api/catalog/image?id=03483890cc7e5492a1559bd75020fced22c87bc9897f8b123d67c86e51bab35c&lang=zh-tw&size=high",
+          "kind": "card",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "03483890cc7e5492a1559bd75020fced22c87bc9897f8b123d67c86e51bab35c",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=03483890cc7e5492a1559bd75020fced22c87bc9897f8b123d67c86e51bab35c&lang=zh-tw&size=low",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "03483890cc7e5492a1559bd75020fced22c87bc9897f8b123d67c86e51bab35c",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=03483890cc7e5492a1559bd75020fced22c87bc9897f8b123d67c86e51bab35c&lang=zh-tw&size=large",
+          "kind": "card",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "03483890cc7e5492a1559bd75020fced22c87bc9897f8b123d67c86e51bab35c",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=03483890cc7e5492a1559bd75020fced22c87bc9897f8b123d67c86e51bab35c&lang=zh-tw&size=small",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "03483890cc7e5492a1559bd75020fced22c87bc9897f8b123d67c86e51bab35c",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:zh-tw:ktcg-set-zh-tw-csdc:16",
+      "name": "Lunala",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "pokewallet",
+          "sourceId": "a5898d155b9f6bddd5937912d867db0f3ac3202fb6e1d221bef1d3d16fbda1c8",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
+      "language": "zh-tw",
+      "setId": "ktcg:set:zh-tw:csdc",
+      "number": "16",
+      "variants": [],
+      "visual": {
+        "url": "/api/catalog/image?id=a5898d155b9f6bddd5937912d867db0f3ac3202fb6e1d221bef1d3d16fbda1c8&lang=zh-tw&size=high",
+        "kind": "card",
+        "status": "candidate",
+        "source": {
+          "provider": "pokewallet",
+          "sourceId": "a5898d155b9f6bddd5937912d867db0f3ac3202fb6e1d221bef1d3d16fbda1c8",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "/api/catalog/image?id=a5898d155b9f6bddd5937912d867db0f3ac3202fb6e1d221bef1d3d16fbda1c8&lang=zh-tw&size=high",
+          "kind": "card",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "a5898d155b9f6bddd5937912d867db0f3ac3202fb6e1d221bef1d3d16fbda1c8",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=a5898d155b9f6bddd5937912d867db0f3ac3202fb6e1d221bef1d3d16fbda1c8&lang=zh-tw&size=low",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "a5898d155b9f6bddd5937912d867db0f3ac3202fb6e1d221bef1d3d16fbda1c8",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=a5898d155b9f6bddd5937912d867db0f3ac3202fb6e1d221bef1d3d16fbda1c8&lang=zh-tw&size=large",
+          "kind": "card",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "a5898d155b9f6bddd5937912d867db0f3ac3202fb6e1d221bef1d3d16fbda1c8",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=a5898d155b9f6bddd5937912d867db0f3ac3202fb6e1d221bef1d3d16fbda1c8&lang=zh-tw&size=small",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "a5898d155b9f6bddd5937912d867db0f3ac3202fb6e1d221bef1d3d16fbda1c8",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:zh-tw:ktcg-set-zh-tw-csdc:17",
+      "name": "Zacian V",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "pokewallet",
+          "sourceId": "97483e4f3c0ed211cb3e75c6f18828efa50f14803d922ad041105fa09203b6b0",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
+      "language": "zh-tw",
+      "setId": "ktcg:set:zh-tw:csdc",
+      "number": "17",
+      "variants": [],
+      "visual": {
+        "url": "/api/catalog/image?id=97483e4f3c0ed211cb3e75c6f18828efa50f14803d922ad041105fa09203b6b0&lang=zh-tw&size=high",
+        "kind": "card",
+        "status": "candidate",
+        "source": {
+          "provider": "pokewallet",
+          "sourceId": "97483e4f3c0ed211cb3e75c6f18828efa50f14803d922ad041105fa09203b6b0",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "/api/catalog/image?id=97483e4f3c0ed211cb3e75c6f18828efa50f14803d922ad041105fa09203b6b0&lang=zh-tw&size=high",
+          "kind": "card",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "97483e4f3c0ed211cb3e75c6f18828efa50f14803d922ad041105fa09203b6b0",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=97483e4f3c0ed211cb3e75c6f18828efa50f14803d922ad041105fa09203b6b0&lang=zh-tw&size=low",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "97483e4f3c0ed211cb3e75c6f18828efa50f14803d922ad041105fa09203b6b0",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=97483e4f3c0ed211cb3e75c6f18828efa50f14803d922ad041105fa09203b6b0&lang=zh-tw&size=large",
+          "kind": "card",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "97483e4f3c0ed211cb3e75c6f18828efa50f14803d922ad041105fa09203b6b0",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=97483e4f3c0ed211cb3e75c6f18828efa50f14803d922ad041105fa09203b6b0&lang=zh-tw&size=small",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "97483e4f3c0ed211cb3e75c6f18828efa50f14803d922ad041105fa09203b6b0",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:zh-tw:ktcg-set-zh-tw-csdc:18",
+      "name": "Zamazenta V",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "pokewallet",
+          "sourceId": "65ac7c88ff2e8882184c3c5858994d0e681356031c71c12abc5e73c7f8250317",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
+      "language": "zh-tw",
+      "setId": "ktcg:set:zh-tw:csdc",
+      "number": "18",
+      "variants": [],
+      "visual": {
+        "url": "/api/catalog/image?id=65ac7c88ff2e8882184c3c5858994d0e681356031c71c12abc5e73c7f8250317&lang=zh-tw&size=high",
+        "kind": "card",
+        "status": "candidate",
+        "source": {
+          "provider": "pokewallet",
+          "sourceId": "65ac7c88ff2e8882184c3c5858994d0e681356031c71c12abc5e73c7f8250317",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "/api/catalog/image?id=65ac7c88ff2e8882184c3c5858994d0e681356031c71c12abc5e73c7f8250317&lang=zh-tw&size=high",
+          "kind": "card",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "65ac7c88ff2e8882184c3c5858994d0e681356031c71c12abc5e73c7f8250317",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=65ac7c88ff2e8882184c3c5858994d0e681356031c71c12abc5e73c7f8250317&lang=zh-tw&size=low",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "65ac7c88ff2e8882184c3c5858994d0e681356031c71c12abc5e73c7f8250317",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=65ac7c88ff2e8882184c3c5858994d0e681356031c71c12abc5e73c7f8250317&lang=zh-tw&size=large",
+          "kind": "card",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "65ac7c88ff2e8882184c3c5858994d0e681356031c71c12abc5e73c7f8250317",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=65ac7c88ff2e8882184c3c5858994d0e681356031c71c12abc5e73c7f8250317&lang=zh-tw&size=small",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "65ac7c88ff2e8882184c3c5858994d0e681356031c71c12abc5e73c7f8250317",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:zh-tw:ktcg-set-zh-tw-csdc:19",
+      "name": "Pikachu V",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "pokewallet",
+          "sourceId": "5777b47050bdd67bcfb936195c0b4d5dbaf60e800301d8b5cc7e43b22e3d6b6e",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
+      "language": "zh-tw",
+      "setId": "ktcg:set:zh-tw:csdc",
+      "number": "19",
+      "variants": [],
+      "visual": {
+        "url": "/api/catalog/image?id=5777b47050bdd67bcfb936195c0b4d5dbaf60e800301d8b5cc7e43b22e3d6b6e&lang=zh-tw&size=high",
+        "kind": "card",
+        "status": "candidate",
+        "source": {
+          "provider": "pokewallet",
+          "sourceId": "5777b47050bdd67bcfb936195c0b4d5dbaf60e800301d8b5cc7e43b22e3d6b6e",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "/api/catalog/image?id=5777b47050bdd67bcfb936195c0b4d5dbaf60e800301d8b5cc7e43b22e3d6b6e&lang=zh-tw&size=high",
+          "kind": "card",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "5777b47050bdd67bcfb936195c0b4d5dbaf60e800301d8b5cc7e43b22e3d6b6e",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=5777b47050bdd67bcfb936195c0b4d5dbaf60e800301d8b5cc7e43b22e3d6b6e&lang=zh-tw&size=low",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "5777b47050bdd67bcfb936195c0b4d5dbaf60e800301d8b5cc7e43b22e3d6b6e",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=5777b47050bdd67bcfb936195c0b4d5dbaf60e800301d8b5cc7e43b22e3d6b6e&lang=zh-tw&size=large",
+          "kind": "card",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "5777b47050bdd67bcfb936195c0b4d5dbaf60e800301d8b5cc7e43b22e3d6b6e",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=5777b47050bdd67bcfb936195c0b4d5dbaf60e800301d8b5cc7e43b22e3d6b6e&lang=zh-tw&size=small",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "5777b47050bdd67bcfb936195c0b4d5dbaf60e800301d8b5cc7e43b22e3d6b6e",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:zh-tw:ktcg-set-zh-tw-csdc:2",
+      "name": "Mew",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "pokewallet",
+          "sourceId": "75f32a74a4aa1ffc41ce60d847d65fc379bea9b780d999c31053734be472a239",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
+      "language": "zh-tw",
+      "setId": "ktcg:set:zh-tw:csdc",
+      "number": "2",
+      "variants": [],
+      "visual": {
+        "url": "/api/catalog/image?id=75f32a74a4aa1ffc41ce60d847d65fc379bea9b780d999c31053734be472a239&lang=zh-tw&size=high",
+        "kind": "card",
+        "status": "candidate",
+        "source": {
+          "provider": "pokewallet",
+          "sourceId": "75f32a74a4aa1ffc41ce60d847d65fc379bea9b780d999c31053734be472a239",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "/api/catalog/image?id=75f32a74a4aa1ffc41ce60d847d65fc379bea9b780d999c31053734be472a239&lang=zh-tw&size=high",
+          "kind": "card",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "75f32a74a4aa1ffc41ce60d847d65fc379bea9b780d999c31053734be472a239",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=75f32a74a4aa1ffc41ce60d847d65fc379bea9b780d999c31053734be472a239&lang=zh-tw&size=low",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "75f32a74a4aa1ffc41ce60d847d65fc379bea9b780d999c31053734be472a239",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=75f32a74a4aa1ffc41ce60d847d65fc379bea9b780d999c31053734be472a239&lang=zh-tw&size=large",
+          "kind": "card",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "75f32a74a4aa1ffc41ce60d847d65fc379bea9b780d999c31053734be472a239",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=75f32a74a4aa1ffc41ce60d847d65fc379bea9b780d999c31053734be472a239&lang=zh-tw&size=small",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "75f32a74a4aa1ffc41ce60d847d65fc379bea9b780d999c31053734be472a239",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:zh-tw:ktcg-set-zh-tw-csdc:20",
+      "name": "Pikachu VMAX",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "pokewallet",
+          "sourceId": "1e93628fec84c87cc57b70413dddb04964052a7b4c4e354ec8b06d845e661541",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
+      "language": "zh-tw",
+      "setId": "ktcg:set:zh-tw:csdc",
+      "number": "20",
+      "variants": [],
+      "visual": {
+        "url": "/api/catalog/image?id=1e93628fec84c87cc57b70413dddb04964052a7b4c4e354ec8b06d845e661541&lang=zh-tw&size=high",
+        "kind": "card",
+        "status": "candidate",
+        "source": {
+          "provider": "pokewallet",
+          "sourceId": "1e93628fec84c87cc57b70413dddb04964052a7b4c4e354ec8b06d845e661541",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "/api/catalog/image?id=1e93628fec84c87cc57b70413dddb04964052a7b4c4e354ec8b06d845e661541&lang=zh-tw&size=high",
+          "kind": "card",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "1e93628fec84c87cc57b70413dddb04964052a7b4c4e354ec8b06d845e661541",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=1e93628fec84c87cc57b70413dddb04964052a7b4c4e354ec8b06d845e661541&lang=zh-tw&size=low",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "1e93628fec84c87cc57b70413dddb04964052a7b4c4e354ec8b06d845e661541",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=1e93628fec84c87cc57b70413dddb04964052a7b4c4e354ec8b06d845e661541&lang=zh-tw&size=large",
+          "kind": "card",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "1e93628fec84c87cc57b70413dddb04964052a7b4c4e354ec8b06d845e661541",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=1e93628fec84c87cc57b70413dddb04964052a7b4c4e354ec8b06d845e661541&lang=zh-tw&size=small",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "1e93628fec84c87cc57b70413dddb04964052a7b4c4e354ec8b06d845e661541",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:zh-tw:ktcg-set-zh-tw-csdc:21",
+      "name": "Surfing Pikachu V",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "pokewallet",
+          "sourceId": "62c806b9bb6c923f77ebd5d8696feb5cc90a0dce334974739004a65707963a9d",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
+      "language": "zh-tw",
+      "setId": "ktcg:set:zh-tw:csdc",
+      "number": "21",
+      "variants": [],
+      "visual": {
+        "url": "/api/catalog/image?id=62c806b9bb6c923f77ebd5d8696feb5cc90a0dce334974739004a65707963a9d&lang=zh-tw&size=high",
+        "kind": "card",
+        "status": "candidate",
+        "source": {
+          "provider": "pokewallet",
+          "sourceId": "62c806b9bb6c923f77ebd5d8696feb5cc90a0dce334974739004a65707963a9d",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "/api/catalog/image?id=62c806b9bb6c923f77ebd5d8696feb5cc90a0dce334974739004a65707963a9d&lang=zh-tw&size=high",
+          "kind": "card",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "62c806b9bb6c923f77ebd5d8696feb5cc90a0dce334974739004a65707963a9d",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=62c806b9bb6c923f77ebd5d8696feb5cc90a0dce334974739004a65707963a9d&lang=zh-tw&size=low",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "62c806b9bb6c923f77ebd5d8696feb5cc90a0dce334974739004a65707963a9d",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=62c806b9bb6c923f77ebd5d8696feb5cc90a0dce334974739004a65707963a9d&lang=zh-tw&size=large",
+          "kind": "card",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "62c806b9bb6c923f77ebd5d8696feb5cc90a0dce334974739004a65707963a9d",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=62c806b9bb6c923f77ebd5d8696feb5cc90a0dce334974739004a65707963a9d&lang=zh-tw&size=small",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "62c806b9bb6c923f77ebd5d8696feb5cc90a0dce334974739004a65707963a9d",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:zh-tw:ktcg-set-zh-tw-csdc:22",
+      "name": "Surfing Pikachu VMAX",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "pokewallet",
+          "sourceId": "6e3affd8a084fece87ae870b5229bdc0cefd0df7cc26671b415f93a21f878ef1",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
+      "language": "zh-tw",
+      "setId": "ktcg:set:zh-tw:csdc",
+      "number": "22",
+      "variants": [],
+      "visual": {
+        "url": "/api/catalog/image?id=6e3affd8a084fece87ae870b5229bdc0cefd0df7cc26671b415f93a21f878ef1&lang=zh-tw&size=high",
+        "kind": "card",
+        "status": "candidate",
+        "source": {
+          "provider": "pokewallet",
+          "sourceId": "6e3affd8a084fece87ae870b5229bdc0cefd0df7cc26671b415f93a21f878ef1",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "/api/catalog/image?id=6e3affd8a084fece87ae870b5229bdc0cefd0df7cc26671b415f93a21f878ef1&lang=zh-tw&size=high",
+          "kind": "card",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "6e3affd8a084fece87ae870b5229bdc0cefd0df7cc26671b415f93a21f878ef1",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=6e3affd8a084fece87ae870b5229bdc0cefd0df7cc26671b415f93a21f878ef1&lang=zh-tw&size=low",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "6e3affd8a084fece87ae870b5229bdc0cefd0df7cc26671b415f93a21f878ef1",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=6e3affd8a084fece87ae870b5229bdc0cefd0df7cc26671b415f93a21f878ef1&lang=zh-tw&size=large",
+          "kind": "card",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "6e3affd8a084fece87ae870b5229bdc0cefd0df7cc26671b415f93a21f878ef1",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=6e3affd8a084fece87ae870b5229bdc0cefd0df7cc26671b415f93a21f878ef1&lang=zh-tw&size=small",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "6e3affd8a084fece87ae870b5229bdc0cefd0df7cc26671b415f93a21f878ef1",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:zh-tw:ktcg-set-zh-tw-csdc:23",
+      "name": "Flying Pikachu V",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "pokewallet",
+          "sourceId": "3bd301c2b9797193de63c699aee44ad2887d45baff795ab567ebcf2e59a3eb02",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
+      "language": "zh-tw",
+      "setId": "ktcg:set:zh-tw:csdc",
+      "number": "23",
+      "variants": [],
+      "visual": {
+        "url": "/api/catalog/image?id=3bd301c2b9797193de63c699aee44ad2887d45baff795ab567ebcf2e59a3eb02&lang=zh-tw&size=high",
+        "kind": "card",
+        "status": "candidate",
+        "source": {
+          "provider": "pokewallet",
+          "sourceId": "3bd301c2b9797193de63c699aee44ad2887d45baff795ab567ebcf2e59a3eb02",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "/api/catalog/image?id=3bd301c2b9797193de63c699aee44ad2887d45baff795ab567ebcf2e59a3eb02&lang=zh-tw&size=high",
+          "kind": "card",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "3bd301c2b9797193de63c699aee44ad2887d45baff795ab567ebcf2e59a3eb02",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=3bd301c2b9797193de63c699aee44ad2887d45baff795ab567ebcf2e59a3eb02&lang=zh-tw&size=low",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "3bd301c2b9797193de63c699aee44ad2887d45baff795ab567ebcf2e59a3eb02",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=3bd301c2b9797193de63c699aee44ad2887d45baff795ab567ebcf2e59a3eb02&lang=zh-tw&size=large",
+          "kind": "card",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "3bd301c2b9797193de63c699aee44ad2887d45baff795ab567ebcf2e59a3eb02",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=3bd301c2b9797193de63c699aee44ad2887d45baff795ab567ebcf2e59a3eb02&lang=zh-tw&size=small",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "3bd301c2b9797193de63c699aee44ad2887d45baff795ab567ebcf2e59a3eb02",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:zh-tw:ktcg-set-zh-tw-csdc:24",
+      "name": "Flying Pikachu VMAX",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "pokewallet",
+          "sourceId": "cb215d6531d8899495c432ce12955a44e8a65667962df5f1318cc766aef6c822",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
+      "language": "zh-tw",
+      "setId": "ktcg:set:zh-tw:csdc",
+      "number": "24",
+      "variants": [],
+      "visual": {
+        "url": "/api/catalog/image?id=cb215d6531d8899495c432ce12955a44e8a65667962df5f1318cc766aef6c822&lang=zh-tw&size=high",
+        "kind": "card",
+        "status": "candidate",
+        "source": {
+          "provider": "pokewallet",
+          "sourceId": "cb215d6531d8899495c432ce12955a44e8a65667962df5f1318cc766aef6c822",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "/api/catalog/image?id=cb215d6531d8899495c432ce12955a44e8a65667962df5f1318cc766aef6c822&lang=zh-tw&size=high",
+          "kind": "card",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "cb215d6531d8899495c432ce12955a44e8a65667962df5f1318cc766aef6c822",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=cb215d6531d8899495c432ce12955a44e8a65667962df5f1318cc766aef6c822&lang=zh-tw&size=low",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "cb215d6531d8899495c432ce12955a44e8a65667962df5f1318cc766aef6c822",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=cb215d6531d8899495c432ce12955a44e8a65667962df5f1318cc766aef6c822&lang=zh-tw&size=large",
+          "kind": "card",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "cb215d6531d8899495c432ce12955a44e8a65667962df5f1318cc766aef6c822",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=cb215d6531d8899495c432ce12955a44e8a65667962df5f1318cc766aef6c822&lang=zh-tw&size=small",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "cb215d6531d8899495c432ce12955a44e8a65667962df5f1318cc766aef6c822",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:zh-tw:ktcg-set-zh-tw-csdc:25",
+      "name": "Mew",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "pokewallet",
+          "sourceId": "1040cc6d5c3e2eb5a34a2369ce56e858fdb5cc09e3535eb43e5ca0bd90bd35c2",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
+      "language": "zh-tw",
+      "setId": "ktcg:set:zh-tw:csdc",
+      "number": "25",
+      "variants": [],
+      "visual": {
+        "url": "/api/catalog/image?id=1040cc6d5c3e2eb5a34a2369ce56e858fdb5cc09e3535eb43e5ca0bd90bd35c2&lang=zh-tw&size=high",
+        "kind": "card",
+        "status": "candidate",
+        "source": {
+          "provider": "pokewallet",
+          "sourceId": "1040cc6d5c3e2eb5a34a2369ce56e858fdb5cc09e3535eb43e5ca0bd90bd35c2",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "/api/catalog/image?id=1040cc6d5c3e2eb5a34a2369ce56e858fdb5cc09e3535eb43e5ca0bd90bd35c2&lang=zh-tw&size=high",
+          "kind": "card",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "1040cc6d5c3e2eb5a34a2369ce56e858fdb5cc09e3535eb43e5ca0bd90bd35c2",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=1040cc6d5c3e2eb5a34a2369ce56e858fdb5cc09e3535eb43e5ca0bd90bd35c2&lang=zh-tw&size=low",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "1040cc6d5c3e2eb5a34a2369ce56e858fdb5cc09e3535eb43e5ca0bd90bd35c2",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=1040cc6d5c3e2eb5a34a2369ce56e858fdb5cc09e3535eb43e5ca0bd90bd35c2&lang=zh-tw&size=large",
+          "kind": "card",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "1040cc6d5c3e2eb5a34a2369ce56e858fdb5cc09e3535eb43e5ca0bd90bd35c2",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=1040cc6d5c3e2eb5a34a2369ce56e858fdb5cc09e3535eb43e5ca0bd90bd35c2&lang=zh-tw&size=small",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "1040cc6d5c3e2eb5a34a2369ce56e858fdb5cc09e3535eb43e5ca0bd90bd35c2",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:zh-tw:ktcg-set-zh-tw-csdc:3",
+      "name": "Ho-Oh",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "pokewallet",
+          "sourceId": "f2dff09c3325b9a87a0cf28de05f1d00d83dff1f9015dfce8e1017c3a00b2193",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
+      "language": "zh-tw",
+      "setId": "ktcg:set:zh-tw:csdc",
+      "number": "3",
+      "variants": [],
+      "visual": {
+        "url": "/api/catalog/image?id=f2dff09c3325b9a87a0cf28de05f1d00d83dff1f9015dfce8e1017c3a00b2193&lang=zh-tw&size=high",
+        "kind": "card",
+        "status": "candidate",
+        "source": {
+          "provider": "pokewallet",
+          "sourceId": "f2dff09c3325b9a87a0cf28de05f1d00d83dff1f9015dfce8e1017c3a00b2193",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "/api/catalog/image?id=f2dff09c3325b9a87a0cf28de05f1d00d83dff1f9015dfce8e1017c3a00b2193&lang=zh-tw&size=high",
+          "kind": "card",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "f2dff09c3325b9a87a0cf28de05f1d00d83dff1f9015dfce8e1017c3a00b2193",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=f2dff09c3325b9a87a0cf28de05f1d00d83dff1f9015dfce8e1017c3a00b2193&lang=zh-tw&size=low",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "f2dff09c3325b9a87a0cf28de05f1d00d83dff1f9015dfce8e1017c3a00b2193",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=f2dff09c3325b9a87a0cf28de05f1d00d83dff1f9015dfce8e1017c3a00b2193&lang=zh-tw&size=large",
+          "kind": "card",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "f2dff09c3325b9a87a0cf28de05f1d00d83dff1f9015dfce8e1017c3a00b2193",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=f2dff09c3325b9a87a0cf28de05f1d00d83dff1f9015dfce8e1017c3a00b2193&lang=zh-tw&size=small",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "f2dff09c3325b9a87a0cf28de05f1d00d83dff1f9015dfce8e1017c3a00b2193",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:zh-tw:ktcg-set-zh-tw-csdc:4",
+      "name": "Lugia",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "pokewallet",
+          "sourceId": "49e159d373c0b8deb6f012d96db3a65fac7f07b6405db9d86759e9509d309c3c",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
+      "language": "zh-tw",
+      "setId": "ktcg:set:zh-tw:csdc",
+      "number": "4",
+      "variants": [],
+      "visual": {
+        "url": "/api/catalog/image?id=49e159d373c0b8deb6f012d96db3a65fac7f07b6405db9d86759e9509d309c3c&lang=zh-tw&size=high",
+        "kind": "card",
+        "status": "candidate",
+        "source": {
+          "provider": "pokewallet",
+          "sourceId": "49e159d373c0b8deb6f012d96db3a65fac7f07b6405db9d86759e9509d309c3c",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "/api/catalog/image?id=49e159d373c0b8deb6f012d96db3a65fac7f07b6405db9d86759e9509d309c3c&lang=zh-tw&size=high",
+          "kind": "card",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "49e159d373c0b8deb6f012d96db3a65fac7f07b6405db9d86759e9509d309c3c",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=49e159d373c0b8deb6f012d96db3a65fac7f07b6405db9d86759e9509d309c3c&lang=zh-tw&size=low",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "49e159d373c0b8deb6f012d96db3a65fac7f07b6405db9d86759e9509d309c3c",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=49e159d373c0b8deb6f012d96db3a65fac7f07b6405db9d86759e9509d309c3c&lang=zh-tw&size=large",
+          "kind": "card",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "49e159d373c0b8deb6f012d96db3a65fac7f07b6405db9d86759e9509d309c3c",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=49e159d373c0b8deb6f012d96db3a65fac7f07b6405db9d86759e9509d309c3c&lang=zh-tw&size=small",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "49e159d373c0b8deb6f012d96db3a65fac7f07b6405db9d86759e9509d309c3c",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:zh-tw:ktcg-set-zh-tw-csdc:5",
+      "name": "Groudon",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "pokewallet",
+          "sourceId": "f09d6fdb5d3540e515709ca47cb87a0cf288c29ba618db98b888c7d4d6d70abe",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
+      "language": "zh-tw",
+      "setId": "ktcg:set:zh-tw:csdc",
+      "number": "5",
+      "variants": [],
+      "visual": {
+        "url": "/api/catalog/image?id=f09d6fdb5d3540e515709ca47cb87a0cf288c29ba618db98b888c7d4d6d70abe&lang=zh-tw&size=high",
+        "kind": "card",
+        "status": "candidate",
+        "source": {
+          "provider": "pokewallet",
+          "sourceId": "f09d6fdb5d3540e515709ca47cb87a0cf288c29ba618db98b888c7d4d6d70abe",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "/api/catalog/image?id=f09d6fdb5d3540e515709ca47cb87a0cf288c29ba618db98b888c7d4d6d70abe&lang=zh-tw&size=high",
+          "kind": "card",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "f09d6fdb5d3540e515709ca47cb87a0cf288c29ba618db98b888c7d4d6d70abe",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=f09d6fdb5d3540e515709ca47cb87a0cf288c29ba618db98b888c7d4d6d70abe&lang=zh-tw&size=low",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "f09d6fdb5d3540e515709ca47cb87a0cf288c29ba618db98b888c7d4d6d70abe",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=f09d6fdb5d3540e515709ca47cb87a0cf288c29ba618db98b888c7d4d6d70abe&lang=zh-tw&size=large",
+          "kind": "card",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "f09d6fdb5d3540e515709ca47cb87a0cf288c29ba618db98b888c7d4d6d70abe",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=f09d6fdb5d3540e515709ca47cb87a0cf288c29ba618db98b888c7d4d6d70abe&lang=zh-tw&size=small",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "f09d6fdb5d3540e515709ca47cb87a0cf288c29ba618db98b888c7d4d6d70abe",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:zh-tw:ktcg-set-zh-tw-csdc:6",
+      "name": "Kyogre",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "pokewallet",
+          "sourceId": "a34c728e43d853fb5e5921ff4096aeea41a27627a058ee7afa8e349961886446",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
+      "language": "zh-tw",
+      "setId": "ktcg:set:zh-tw:csdc",
+      "number": "6",
+      "variants": [],
+      "visual": {
+        "url": "/api/catalog/image?id=a34c728e43d853fb5e5921ff4096aeea41a27627a058ee7afa8e349961886446&lang=zh-tw&size=high",
+        "kind": "card",
+        "status": "candidate",
+        "source": {
+          "provider": "pokewallet",
+          "sourceId": "a34c728e43d853fb5e5921ff4096aeea41a27627a058ee7afa8e349961886446",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "/api/catalog/image?id=a34c728e43d853fb5e5921ff4096aeea41a27627a058ee7afa8e349961886446&lang=zh-tw&size=high",
+          "kind": "card",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "a34c728e43d853fb5e5921ff4096aeea41a27627a058ee7afa8e349961886446",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=a34c728e43d853fb5e5921ff4096aeea41a27627a058ee7afa8e349961886446&lang=zh-tw&size=low",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "a34c728e43d853fb5e5921ff4096aeea41a27627a058ee7afa8e349961886446",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=a34c728e43d853fb5e5921ff4096aeea41a27627a058ee7afa8e349961886446&lang=zh-tw&size=large",
+          "kind": "card",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "a34c728e43d853fb5e5921ff4096aeea41a27627a058ee7afa8e349961886446",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=a34c728e43d853fb5e5921ff4096aeea41a27627a058ee7afa8e349961886446&lang=zh-tw&size=small",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "a34c728e43d853fb5e5921ff4096aeea41a27627a058ee7afa8e349961886446",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:zh-tw:ktcg-set-zh-tw-csdc:7",
+      "name": "Dialga",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "pokewallet",
+          "sourceId": "0309967826c1ffe6860a6c9e186005364171a5261eb82455ea35fef02eceba2f",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
+      "language": "zh-tw",
+      "setId": "ktcg:set:zh-tw:csdc",
+      "number": "7",
+      "variants": [],
+      "visual": {
+        "url": "/api/catalog/image?id=0309967826c1ffe6860a6c9e186005364171a5261eb82455ea35fef02eceba2f&lang=zh-tw&size=high",
+        "kind": "card",
+        "status": "candidate",
+        "source": {
+          "provider": "pokewallet",
+          "sourceId": "0309967826c1ffe6860a6c9e186005364171a5261eb82455ea35fef02eceba2f",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "/api/catalog/image?id=0309967826c1ffe6860a6c9e186005364171a5261eb82455ea35fef02eceba2f&lang=zh-tw&size=high",
+          "kind": "card",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "0309967826c1ffe6860a6c9e186005364171a5261eb82455ea35fef02eceba2f",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=0309967826c1ffe6860a6c9e186005364171a5261eb82455ea35fef02eceba2f&lang=zh-tw&size=low",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "0309967826c1ffe6860a6c9e186005364171a5261eb82455ea35fef02eceba2f",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=0309967826c1ffe6860a6c9e186005364171a5261eb82455ea35fef02eceba2f&lang=zh-tw&size=large",
+          "kind": "card",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "0309967826c1ffe6860a6c9e186005364171a5261eb82455ea35fef02eceba2f",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=0309967826c1ffe6860a6c9e186005364171a5261eb82455ea35fef02eceba2f&lang=zh-tw&size=small",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "0309967826c1ffe6860a6c9e186005364171a5261eb82455ea35fef02eceba2f",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:zh-tw:ktcg-set-zh-tw-csdc:8",
+      "name": "Palkia",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "pokewallet",
+          "sourceId": "454ede3777522d6fa458200ab145beccf9390ce4be8ad7937c83d8ea8cfdcc6b",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
+      "language": "zh-tw",
+      "setId": "ktcg:set:zh-tw:csdc",
+      "number": "8",
+      "variants": [],
+      "visual": {
+        "url": "/api/catalog/image?id=454ede3777522d6fa458200ab145beccf9390ce4be8ad7937c83d8ea8cfdcc6b&lang=zh-tw&size=high",
+        "kind": "card",
+        "status": "candidate",
+        "source": {
+          "provider": "pokewallet",
+          "sourceId": "454ede3777522d6fa458200ab145beccf9390ce4be8ad7937c83d8ea8cfdcc6b",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "/api/catalog/image?id=454ede3777522d6fa458200ab145beccf9390ce4be8ad7937c83d8ea8cfdcc6b&lang=zh-tw&size=high",
+          "kind": "card",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "454ede3777522d6fa458200ab145beccf9390ce4be8ad7937c83d8ea8cfdcc6b",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=454ede3777522d6fa458200ab145beccf9390ce4be8ad7937c83d8ea8cfdcc6b&lang=zh-tw&size=low",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "454ede3777522d6fa458200ab145beccf9390ce4be8ad7937c83d8ea8cfdcc6b",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=454ede3777522d6fa458200ab145beccf9390ce4be8ad7937c83d8ea8cfdcc6b&lang=zh-tw&size=large",
+          "kind": "card",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "454ede3777522d6fa458200ab145beccf9390ce4be8ad7937c83d8ea8cfdcc6b",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=454ede3777522d6fa458200ab145beccf9390ce4be8ad7937c83d8ea8cfdcc6b&lang=zh-tw&size=small",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "454ede3777522d6fa458200ab145beccf9390ce4be8ad7937c83d8ea8cfdcc6b",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:zh-tw:ktcg-set-zh-tw-csdc:9",
+      "name": "Reshiram",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "pokewallet",
+          "sourceId": "83a461bccb8cbcef35d4ec84e14716846adfe8810efaa8a00eb0029baaa19103",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
+      "language": "zh-tw",
+      "setId": "ktcg:set:zh-tw:csdc",
+      "number": "9",
+      "variants": [],
+      "visual": {
+        "url": "/api/catalog/image?id=83a461bccb8cbcef35d4ec84e14716846adfe8810efaa8a00eb0029baaa19103&lang=zh-tw&size=high",
+        "kind": "card",
+        "status": "candidate",
+        "source": {
+          "provider": "pokewallet",
+          "sourceId": "83a461bccb8cbcef35d4ec84e14716846adfe8810efaa8a00eb0029baaa19103",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "/api/catalog/image?id=83a461bccb8cbcef35d4ec84e14716846adfe8810efaa8a00eb0029baaa19103&lang=zh-tw&size=high",
+          "kind": "card",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "83a461bccb8cbcef35d4ec84e14716846adfe8810efaa8a00eb0029baaa19103",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=83a461bccb8cbcef35d4ec84e14716846adfe8810efaa8a00eb0029baaa19103&lang=zh-tw&size=low",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "83a461bccb8cbcef35d4ec84e14716846adfe8810efaa8a00eb0029baaa19103",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=83a461bccb8cbcef35d4ec84e14716846adfe8810efaa8a00eb0029baaa19103&lang=zh-tw&size=large",
+          "kind": "card",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "83a461bccb8cbcef35d4ec84e14716846adfe8810efaa8a00eb0029baaa19103",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?id=83a461bccb8cbcef35d4ec84e14716846adfe8810efaa8a00eb0029baaa19103&lang=zh-tw&size=small",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "source": {
+            "provider": "pokewallet",
+            "sourceId": "83a461bccb8cbcef35d4ec84e14716846adfe8810efaa8a00eb0029baaa19103",
+            "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+          }
+        }
+      ]
+    }
+  ]
+}
