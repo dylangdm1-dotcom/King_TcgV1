@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "formatVersion": 1,
-  "catalogVersion": "v282-jp-batch1-2026-08-31",
+  "catalogVersion": "v286-jp-mega-batch-2",
   "language": "ja",
   "sets": [
     {
@@ -572,16 +572,28 @@
       "schemaVersion": 2,
       "id": "ktcg:set:ja:m1l",
       "name": "Mega Brave",
-      "aliases": [],
+      "aliases": [
+        "M1L",
+        "メガブレイブ"
+      ],
       "sources": [
         {
           "provider": "king_tcg",
           "sourceId": "v269:regional:ja:M1L"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "M1L",
+          "url": "https://api.tcgdex.net/v2/ja/sets/M1L",
+          "lastSyncedAt": "2026-09-01T00:00:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T00:00:00.000Z",
       "language": "ja",
       "code": "M1L",
       "seriesId": "ktcg:series:ja:mega-evolution",
+      "officialCardCount": 63,
+      "knownCardCount": 92,
       "availability": "available",
       "visuals": []
     },
@@ -589,16 +601,28 @@
       "schemaVersion": 2,
       "id": "ktcg:set:ja:m1s",
       "name": "Mega Symphonia",
-      "aliases": [],
+      "aliases": [
+        "M1S",
+        "メガシンフォニア"
+      ],
       "sources": [
         {
           "provider": "king_tcg",
           "sourceId": "v269:regional:ja:M1S"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "M1S",
+          "url": "https://api.tcgdex.net/v2/ja/sets/M1S",
+          "lastSyncedAt": "2026-09-01T00:00:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T00:00:00.000Z",
       "language": "ja",
       "code": "M1S",
       "seriesId": "ktcg:series:ja:mega-evolution",
+      "officialCardCount": 63,
+      "knownCardCount": 92,
       "availability": "available",
       "visuals": []
     },
@@ -608,7 +632,9 @@
       "name": "Phantasmal Flames",
       "aliases": [
         "PFL",
-        "Inferno X"
+        "Inferno X",
+        "インフェルノX",
+        "M2"
       ],
       "sources": [
         {
@@ -617,17 +643,22 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "m2"
+          "sourceId": "m2",
+          "url": "https://api.tcgdex.net/v2/ja/sets/M2",
+          "lastSyncedAt": "2026-09-01T00:00:00.000Z"
         },
         {
           "provider": "king_tcg",
           "sourceId": "v269:regional:ja:M2"
         }
       ],
+      "lastSyncedAt": "2026-09-01T00:00:00.000Z",
       "language": "ja",
       "code": "M2",
       "seriesId": "ktcg:series:ja:mega-evolution",
       "year": 2026,
+      "officialCardCount": 80,
+      "knownCardCount": 116,
       "availability": "available",
       "visuals": []
     },
@@ -637,7 +668,9 @@
       "name": "Ascended Heroes",
       "aliases": [
         "ASC",
-        "MEGA Dream ex"
+        "MEGA Dream ex",
+        "MEGAドリームex",
+        "M2A"
       ],
       "sources": [
         {
@@ -646,17 +679,22 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "m2a"
+          "sourceId": "m2a",
+          "url": "https://api.tcgdex.net/v2/ja/sets/M2a",
+          "lastSyncedAt": "2026-09-01T00:00:00.000Z"
         },
         {
           "provider": "king_tcg",
           "sourceId": "v269:regional:ja:M2A"
         }
       ],
+      "lastSyncedAt": "2026-09-01T00:00:00.000Z",
       "language": "ja",
       "code": "M2A",
       "seriesId": "ktcg:series:ja:mega-evolution",
       "year": 2026,
+      "officialCardCount": 193,
+      "knownCardCount": 250,
       "availability": "available",
       "visuals": []
     },
@@ -701,7 +739,9 @@
       "name": "Pitch Black",
       "aliases": [
         "PBL",
-        "Ninja Spinner"
+        "Ninja Spinner",
+        "M4",
+        "ニンジャスピナー"
       ],
       "sources": [
         {
@@ -710,17 +750,22 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "m4"
+          "sourceId": "m4",
+          "url": "https://api.tcgdex.net/v2/ja/sets/M4",
+          "lastSyncedAt": "2026-09-01T00:00:00.000Z"
         },
         {
           "provider": "king_tcg",
           "sourceId": "v269:regional:ja:M4"
         }
       ],
+      "lastSyncedAt": "2026-09-01T00:00:00.000Z",
       "language": "ja",
       "code": "M4",
       "seriesId": "ktcg:series:ja:mega-evolution",
       "year": 2026,
+      "officialCardCount": 83,
+      "knownCardCount": 120,
       "availability": "available",
       "visuals": []
     },
@@ -728,7 +773,10 @@
       "schemaVersion": 2,
       "id": "ktcg:set:ja:m5",
       "name": "Abyss Eye",
-      "aliases": [],
+      "aliases": [
+        "M5",
+        "アビスアイ"
+      ],
       "sources": [
         {
           "provider": "king_tcg",
@@ -736,17 +784,22 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "m5"
+          "sourceId": "m5",
+          "url": "https://api.tcgdex.net/v2/ja/sets/M5",
+          "lastSyncedAt": "2026-09-01T00:00:00.000Z"
         },
         {
           "provider": "king_tcg",
           "sourceId": "v269:regional:ja:M5"
         }
       ],
+      "lastSyncedAt": "2026-09-01T00:00:00.000Z",
       "language": "ja",
       "code": "M5",
       "seriesId": "ktcg:series:ja:mega-evolution",
       "year": 2026,
+      "officialCardCount": 81,
+      "knownCardCount": 118,
       "availability": "available",
       "visuals": []
     },
