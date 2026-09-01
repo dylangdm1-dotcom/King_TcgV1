@@ -65,6 +65,7 @@ const GENERATION_ORDER = [
   "HeartGold & SoulSilver",
   "Diamant & Perle",
   "Promos",
+  "Collections chinoises",
   "Séries classiques",
 ];
 
@@ -76,6 +77,8 @@ type SetItem = {
   series?: string;
   total?: number;
   printedTotal?: number;
+  identityCount?: number;
+  sourceCardCount?: number;
   releaseDate?: string;
   images?: { symbol?: string; logo?: string };
   availability?: "available" | "announced" | "unknown" | "metadata_only";
@@ -480,6 +483,11 @@ export default function Recherche() {
     [allSetsList]
   );
 
+  const selectedSetSummary = useMemo(
+    () => allSetsList.find((set) => normalizeSetId(set.id) === normalizeSetId(selectedSetId)),
+    [allSetsList, selectedSetId]
+  );
+
   const visibleSetGroups = useMemo(() => {
     const normalized = setSearch.trim().toLowerCase();
     const entries = availableGenerations
@@ -615,7 +623,7 @@ export default function Recherche() {
                   Rechercher une carte
                 </h1>
                 <p className="kt-search-intro-note mt-2">
-                  Recherchez par nom ou parcourez le catalogue local par série et extension. Les cartes FR/EN disponibles sont chargées localement ; JP/CN indiquent clairement ce qui reste à synchroniser.
+                  Recherchez par nom ou parcourez le catalogue local par série et extension. Les cartes FR, EN et CN disponibles sont chargées localement ; le catalogue JP progresse extension par extension.
                 </p>
               </div>
 
@@ -755,7 +763,7 @@ export default function Recherche() {
                                 </span>
 
                                 <span className="shrink-0 pl-1 text-right">
-                                  <span className="block text-[11px] font-black text-zinc-200">{set.total || set.printedTotal || "—"}</span>
+                                  <span className="block text-[11px] font-black text-zinc-200">{set.sourceCardCount || set.total || set.printedTotal || "—"}</span>
                                   <span className={`block text-[9px] font-bold uppercase tracking-wide ${
                                     set.availability === "announced"
                                       ? "text-amber-300"
@@ -767,7 +775,9 @@ export default function Recherche() {
                                       ? "à venir"
                                       : set.availability === "metadata_only"
                                         ? "référencée"
-                                        : "cartes"}
+                                        : set.sourceCardCount && set.identityCount && set.sourceCardCount > set.identityCount
+                                          ? "impressions"
+                                          : "cartes"}
                                   </span>
                                   <span className="mt-0.5 block max-w-[54px] truncate text-[10px] font-black uppercase text-violet-300">{localizedSetCode(set.id, selectedLanguage)}</span>
                                 </span>
@@ -790,7 +800,10 @@ export default function Recherche() {
           <section className="kt-section-surface flex items-center justify-between gap-4 rounded-[16px] border p-3">
             <div className="flex min-w-0 items-center gap-2 rounded-xl border border-cyan-400/14 bg-cyan-400/[0.035] px-3.5 py-2 text-[10px] font-bold uppercase tracking-[0.11em] text-zinc-300">
               <Filter className="h-3.5 w-3.5 shrink-0 text-cyan-300" />
-              <span>{filteredCards.length} résultat{filteredCards.length > 1 ? "s" : ""}</span>
+              <span>{filteredCards.length} carte{filteredCards.length > 1 ? "s" : ""} unique{filteredCards.length > 1 ? "s" : ""}</span>
+              {selectedSetSummary?.sourceCardCount && selectedSetSummary.sourceCardCount > filteredCards.length
+                ? <span className="whitespace-nowrap font-normal text-cyan-100/75">· {selectedSetSummary.sourceCardCount} impressions regroupées</span>
+                : null}
               {query ? <span className="truncate font-normal text-zinc-200">· {query}</span> : null}
             </div>
 
