@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "formatVersion": 1,
-  "catalogVersion": "v286-jp-mega-batch-2",
+  "catalogVersion": "v287-jp-mass-import",
   "language": "ja",
   "sets": [
     {
@@ -9,7 +9,9 @@
       "id": "ktcg:set:ja:adv1",
       "name": "ADV Expansion Pack",
       "aliases": [
-        "ADV"
+        "ADV",
+        "拡張パック",
+        "ADV1"
       ],
       "sources": [
         {
@@ -18,13 +20,17 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "ADV1"
+          "sourceId": "ADV1",
+          "url": "https://api.tcgdex.net/v2/ja/sets/ADV1",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "ADV1",
       "seriesId": "ktcg:series:ja:adv",
       "year": 2003,
+      "officialCardCount": 55,
       "availability": "metadata_only",
       "visuals": []
     },
@@ -33,7 +39,9 @@
       "id": "ktcg:set:ja:adv2",
       "name": "Miracle of the Desert",
       "aliases": [
-        "MOD"
+        "MOD",
+        "砂漠のきせき",
+        "ADV2"
       ],
       "sources": [
         {
@@ -42,13 +50,17 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "ADV2"
+          "sourceId": "ADV2",
+          "url": "https://api.tcgdex.net/v2/ja/sets/ADV2",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "ADV2",
       "seriesId": "ktcg:series:ja:adv",
       "year": 2003,
+      "officialCardCount": 53,
       "availability": "metadata_only",
       "visuals": []
     },
@@ -57,7 +69,9 @@
       "id": "ktcg:set:ja:adv3",
       "name": "Rulers of the Heavens",
       "aliases": [
-        "RTH"
+        "RTH",
+        "天空の覇者",
+        "ADV3"
       ],
       "sources": [
         {
@@ -66,13 +80,17 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "ADV3"
+          "sourceId": "ADV3",
+          "url": "https://api.tcgdex.net/v2/ja/sets/ADV3",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "ADV3",
       "seriesId": "ktcg:series:ja:adv",
       "year": 2004,
+      "officialCardCount": 54,
       "availability": "metadata_only",
       "visuals": []
     },
@@ -81,7 +99,9 @@
       "id": "ktcg:set:ja:adv4",
       "name": "Magma VS Aqua: Two Ambitions",
       "aliases": [
-        "MVA"
+        "MVA",
+        "強化拡張パックex1マグマVSアクア ふたつの野望",
+        "ADV4"
       ],
       "sources": [
         {
@@ -90,13 +110,17 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "ADV4"
+          "sourceId": "ADV4",
+          "url": "https://api.tcgdex.net/v2/ja/sets/ADV4",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "ADV4",
       "seriesId": "ktcg:series:ja:adv",
       "year": 2003,
+      "officialCardCount": 80,
       "availability": "metadata_only",
       "visuals": []
     },
@@ -273,7 +297,9 @@
       "id": "ktcg:set:ja:cp1",
       "name": "Double Crisis",
       "aliases": [
-        "DCR"
+        "DCR",
+        "マグマ団VSアクア団 ダブルクライシス",
+        "CP1"
       ],
       "sources": [
         {
@@ -282,13 +308,18 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "CP1"
+          "sourceId": "CP1",
+          "url": "https://api.tcgdex.net/v2/ja/sets/CP1",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "CP1",
       "seriesId": "ktcg:series:ja:xy",
       "year": 2015,
+      "officialCardCount": 34,
+      "knownCardCount": 34,
       "availability": "available",
       "visuals": []
     },
@@ -297,7 +328,9 @@
       "id": "ktcg:set:ja:cp6",
       "name": "Expansion Pack 20th Anniversary",
       "aliases": [
-        "20A"
+        "20A",
+        "ポケットモンスターカードゲーム 拡張パック 20th Anniversary",
+        "CP6"
       ],
       "sources": [
         {
@@ -306,13 +339,17 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "CP6"
+          "sourceId": "CP6",
+          "url": "https://api.tcgdex.net/v2/ja/sets/CP6",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "CP6",
       "seriesId": "ktcg:series:ja:xy",
       "year": 2016,
+      "officialCardCount": 87,
       "availability": "metadata_only",
       "visuals": []
     },
@@ -417,7 +454,9 @@
       "id": "ktcg:set:ja:e1",
       "name": "Base Expansion Pack",
       "aliases": [
-        "BEP"
+        "BEP",
+        "基本拡張パック",
+        "E1"
       ],
       "sources": [
         {
@@ -426,13 +465,18 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "E1"
+          "sourceId": "E1",
+          "url": "https://api.tcgdex.net/v2/ja/sets/E1",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "E1",
       "seriesId": "ktcg:series:ja:e-series",
       "year": 2001,
+      "officialCardCount": 128,
+      "knownCardCount": 128,
       "availability": "available",
       "visuals": []
     },
@@ -441,7 +485,9 @@
       "id": "ktcg:set:ja:e2",
       "name": "The Town on No Map",
       "aliases": [
-        "TNM"
+        "TNM",
+        "地図にない町",
+        "E2"
       ],
       "sources": [
         {
@@ -450,13 +496,18 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "E2"
+          "sourceId": "E2",
+          "url": "https://api.tcgdex.net/v2/ja/sets/E2",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "E2",
       "seriesId": "ktcg:series:ja:e-series",
       "year": 2002,
+      "officialCardCount": 92,
+      "knownCardCount": 92,
       "availability": "available",
       "visuals": []
     },
@@ -465,7 +516,9 @@
       "id": "ktcg:set:ja:e3",
       "name": "Wind from the Sea",
       "aliases": [
-        "WFS"
+        "WFS",
+        "海からの風",
+        "E3"
       ],
       "sources": [
         {
@@ -474,13 +527,18 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "E3"
+          "sourceId": "E3",
+          "url": "https://api.tcgdex.net/v2/ja/sets/E3",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "E3",
       "seriesId": "ktcg:series:ja:e-series",
       "year": 2002,
+      "officialCardCount": 87,
+      "knownCardCount": 90,
       "availability": "available",
       "visuals": []
     },
@@ -489,7 +547,9 @@
       "id": "ktcg:set:ja:e4",
       "name": "Split Earth",
       "aliases": [
-        "SPE"
+        "SPE",
+        "裂けた大地",
+        "E4"
       ],
       "sources": [
         {
@@ -498,13 +558,18 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "E4"
+          "sourceId": "E4",
+          "url": "https://api.tcgdex.net/v2/ja/sets/E4",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "E4",
       "seriesId": "ktcg:series:ja:e-series",
       "year": 2002,
+      "officialCardCount": 88,
+      "knownCardCount": 91,
       "availability": "available",
       "visuals": []
     },
@@ -513,7 +578,9 @@
       "id": "ktcg:set:ja:e5",
       "name": "Mysterious Mountains",
       "aliases": [
-        "MSM"
+        "MSM",
+        "神秘なる山",
+        "E5"
       ],
       "sources": [
         {
@@ -522,13 +589,18 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "E5"
+          "sourceId": "E5",
+          "url": "https://api.tcgdex.net/v2/ja/sets/E5",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "E5",
       "seriesId": "ktcg:series:ja:e-series",
       "year": 2002,
+      "officialCardCount": 88,
+      "knownCardCount": 91,
       "availability": "available",
       "visuals": []
     },
@@ -859,7 +931,9 @@
       "id": "ktcg:set:ja:neo1",
       "name": "Neo Genesis",
       "aliases": [
-        "NGS"
+        "NGS",
+        "金、銀、新世界へ...",
+        "NEO1"
       ],
       "sources": [
         {
@@ -868,22 +942,52 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "neo1"
+          "sourceId": "neo1",
+          "url": "https://api.tcgdex.net/v2/ja/sets/neo1",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "NEO1",
       "seriesId": "ktcg:series:ja:neo",
       "year": 1999,
+      "officialCardCount": 96,
+      "knownCardCount": 96,
       "availability": "available",
-      "visuals": []
+      "visual": {
+        "url": "https://assets.tcgdex.net/univ/neo/neo1/symbol/high.webp",
+        "kind": "symbol",
+        "status": "candidate",
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo1",
+          "url": "https://api.tcgdex.net/v2/ja/sets/neo1",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/univ/neo/neo1/symbol/high.webp",
+          "kind": "symbol",
+          "status": "candidate",
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo1",
+            "url": "https://api.tcgdex.net/v2/ja/sets/neo1",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
     },
     {
       "schemaVersion": 2,
       "id": "ktcg:set:ja:neo2",
       "name": "Neo Discovery",
       "aliases": [
-        "NDC"
+        "NDC",
+        "遺跡をこえて...",
+        "NEO2"
       ],
       "sources": [
         {
@@ -892,22 +996,52 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "neo2"
+          "sourceId": "neo2",
+          "url": "https://api.tcgdex.net/v2/ja/sets/neo2",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "NEO2",
       "seriesId": "ktcg:series:ja:neo",
       "year": 2000,
+      "officialCardCount": 56,
+      "knownCardCount": 57,
       "availability": "available",
-      "visuals": []
+      "visual": {
+        "url": "https://assets.tcgdex.net/univ/neo/neo2/symbol/high.webp",
+        "kind": "symbol",
+        "status": "candidate",
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo2",
+          "url": "https://api.tcgdex.net/v2/ja/sets/neo2",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/univ/neo/neo2/symbol/high.webp",
+          "kind": "symbol",
+          "status": "candidate",
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo2",
+            "url": "https://api.tcgdex.net/v2/ja/sets/neo2",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
     },
     {
       "schemaVersion": 2,
       "id": "ktcg:set:ja:neo3",
       "name": "Neo Revelation",
       "aliases": [
-        "NRE"
+        "NRE",
+        "めざめる伝説",
+        "NEO3"
       ],
       "sources": [
         {
@@ -916,22 +1050,52 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "neo3"
+          "sourceId": "neo3",
+          "url": "https://api.tcgdex.net/v2/ja/sets/neo3",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "NEO3",
       "seriesId": "ktcg:series:ja:neo",
       "year": 2000,
+      "officialCardCount": 57,
+      "knownCardCount": 57,
       "availability": "available",
-      "visuals": []
+      "visual": {
+        "url": "https://assets.tcgdex.net/univ/neo/neo3/symbol/high.webp",
+        "kind": "symbol",
+        "status": "candidate",
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo3",
+          "url": "https://api.tcgdex.net/v2/ja/sets/neo3",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/univ/neo/neo3/symbol/high.webp",
+          "kind": "symbol",
+          "status": "candidate",
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo3",
+            "url": "https://api.tcgdex.net/v2/ja/sets/neo3",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
     },
     {
       "schemaVersion": 2,
       "id": "ktcg:set:ja:neo4",
       "name": "Neo Destiny",
       "aliases": [
-        "NDS"
+        "NDS",
+        "闇、そして光へ...",
+        "NEO4"
       ],
       "sources": [
         {
@@ -940,15 +1104,43 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "neo4"
+          "sourceId": "neo4",
+          "url": "https://api.tcgdex.net/v2/ja/sets/neo4",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "NEO4",
       "seriesId": "ktcg:series:ja:neo",
       "year": 2000,
+      "officialCardCount": 113,
+      "knownCardCount": 113,
       "availability": "available",
-      "visuals": []
+      "visual": {
+        "url": "https://assets.tcgdex.net/univ/neo/neo4/symbol/high.webp",
+        "kind": "symbol",
+        "status": "candidate",
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "neo4",
+          "url": "https://api.tcgdex.net/v2/ja/sets/neo4",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/univ/neo/neo4/symbol/high.webp",
+          "kind": "symbol",
+          "status": "candidate",
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "neo4",
+            "url": "https://api.tcgdex.net/v2/ja/sets/neo4",
+            "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          }
+        }
+      ]
     },
     {
       "schemaVersion": 2,
@@ -973,7 +1165,9 @@
       "id": "ktcg:set:ja:pcg1",
       "name": "Flight of Legends",
       "aliases": [
-        "FOL"
+        "FOL",
+        "伝説の飛翔",
+        "PCG1"
       ],
       "sources": [
         {
@@ -982,13 +1176,18 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "PCG1"
+          "sourceId": "PCG1",
+          "url": "https://api.tcgdex.net/v2/ja/sets/PCG1",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "PCG1",
       "seriesId": "ktcg:series:ja:adv",
       "year": 2004,
+      "officialCardCount": 82,
+      "knownCardCount": 82,
       "availability": "available",
       "visuals": []
     },
@@ -997,7 +1196,9 @@
       "id": "ktcg:set:ja:pcg2",
       "name": "Clash of the Blue Sky",
       "aliases": [
-        "CBS"
+        "CBS",
+        "蒼空の激突",
+        "PCG2"
       ],
       "sources": [
         {
@@ -1006,13 +1207,18 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "PCG2"
+          "sourceId": "PCG2",
+          "url": "https://api.tcgdex.net/v2/ja/sets/PCG2",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "PCG2",
       "seriesId": "ktcg:series:ja:adv",
       "year": 2004,
+      "officialCardCount": 82,
+      "knownCardCount": 82,
       "availability": "available",
       "visuals": []
     },
@@ -1021,7 +1227,9 @@
       "id": "ktcg:set:ja:pcg3",
       "name": "Rocket Gang Strikes Back",
       "aliases": [
-        "RGB"
+        "RGB",
+        "ロケット団の逆襲",
+        "PCG3"
       ],
       "sources": [
         {
@@ -1030,13 +1238,18 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "PCG3"
+          "sourceId": "PCG3",
+          "url": "https://api.tcgdex.net/v2/ja/sets/PCG3",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "PCG3",
       "seriesId": "ktcg:series:ja:pcg",
       "year": 2004,
+      "officialCardCount": 84,
+      "knownCardCount": 85,
       "availability": "available",
       "visuals": []
     },
@@ -1045,7 +1258,9 @@
       "id": "ktcg:set:ja:pcg4",
       "name": "Golden Sky, Silvery Ocean",
       "aliases": [
-        "GSS"
+        "GSS",
+        "金の空、銀の海",
+        "PCG4"
       ],
       "sources": [
         {
@@ -1054,13 +1269,18 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "PCG4"
+          "sourceId": "PCG4",
+          "url": "https://api.tcgdex.net/v2/ja/sets/PCG4",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "PCG4",
       "seriesId": "ktcg:series:ja:pcg",
       "year": 2004,
+      "officialCardCount": 106,
+      "knownCardCount": 106,
       "availability": "available",
       "visuals": []
     },
@@ -1069,7 +1289,9 @@
       "id": "ktcg:set:ja:pcg5",
       "name": "Mirage Forest",
       "aliases": [
-        "MFS"
+        "MFS",
+        "まぼろしの森",
+        "PCG5"
       ],
       "sources": [
         {
@@ -1078,13 +1300,18 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "PCG5"
+          "sourceId": "PCG5",
+          "url": "https://api.tcgdex.net/v2/ja/sets/PCG5",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "PCG5",
       "seriesId": "ktcg:series:ja:pcg",
       "year": 2005,
+      "officialCardCount": 86,
+      "knownCardCount": 86,
       "availability": "available",
       "visuals": []
     },
@@ -1093,7 +1320,9 @@
       "id": "ktcg:set:ja:pmcg1",
       "name": "Expansion Pack",
       "aliases": [
-        "EXP"
+        "EXP",
+        "拡張パック",
+        "PMCG1"
       ],
       "sources": [
         {
@@ -1102,13 +1331,18 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "PMCG1"
+          "sourceId": "PMCG1",
+          "url": "https://api.tcgdex.net/v2/ja/sets/PMCG1",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "PMCG1",
       "seriesId": "ktcg:series:ja:original",
       "year": 1996,
+      "officialCardCount": 102,
+      "knownCardCount": 102,
       "availability": "available",
       "visuals": []
     },
@@ -1118,7 +1352,9 @@
       "name": "Pokémon Jungle",
       "aliases": [
         "Jungle",
-        "JUN"
+        "JUN",
+        "ポケモンジャングル",
+        "PMCG2"
       ],
       "sources": [
         {
@@ -1127,13 +1363,18 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "PMCG2"
+          "sourceId": "PMCG2",
+          "url": "https://api.tcgdex.net/v2/ja/sets/PMCG2",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "PMCG2",
       "seriesId": "ktcg:series:ja:original",
       "year": 1997,
+      "officialCardCount": 48,
+      "knownCardCount": 48,
       "availability": "available",
       "visuals": []
     },
@@ -1143,7 +1384,9 @@
       "name": "Fossile",
       "aliases": [
         "Fossil",
-        "FOS"
+        "FOS",
+        "化石の秘密",
+        "PMCG3"
       ],
       "sources": [
         {
@@ -1152,13 +1395,18 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "PMCG3"
+          "sourceId": "PMCG3",
+          "url": "https://api.tcgdex.net/v2/ja/sets/PMCG3",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "PMCG3",
       "seriesId": "ktcg:series:ja:original",
       "year": 1997,
+      "officialCardCount": 48,
+      "knownCardCount": 48,
       "availability": "available",
       "visuals": []
     },
@@ -1167,7 +1415,9 @@
       "id": "ktcg:set:ja:pmcg4",
       "name": "Team Rocket",
       "aliases": [
-        "TRK"
+        "TRK",
+        "ロケット団",
+        "PMCG4"
       ],
       "sources": [
         {
@@ -1176,13 +1426,18 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "PMCG4"
+          "sourceId": "PMCG4",
+          "url": "https://api.tcgdex.net/v2/ja/sets/PMCG4",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "PMCG4",
       "seriesId": "ktcg:series:ja:original",
       "year": 1997,
+      "officialCardCount": 65,
+      "knownCardCount": 65,
       "availability": "available",
       "visuals": []
     },
@@ -1191,7 +1446,9 @@
       "id": "ktcg:set:ja:pmcg5",
       "name": "Gym Heroes",
       "aliases": [
-        "GHE"
+        "GHE",
+        "リーダーズスタジアム",
+        "PMCG5"
       ],
       "sources": [
         {
@@ -1200,13 +1457,18 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "PMCG5"
+          "sourceId": "PMCG5",
+          "url": "https://api.tcgdex.net/v2/ja/sets/PMCG5",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "PMCG5",
       "seriesId": "ktcg:series:ja:original",
       "year": 1998,
+      "officialCardCount": 96,
+      "knownCardCount": 96,
       "availability": "available",
       "visuals": []
     },
@@ -1215,7 +1477,9 @@
       "id": "ktcg:set:ja:pmcg6",
       "name": "Gym Challenge",
       "aliases": [
-        "GCH"
+        "GCH",
+        "闇からの挑戦",
+        "PMCG6"
       ],
       "sources": [
         {
@@ -1224,13 +1488,18 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "PMCG6"
+          "sourceId": "PMCG6",
+          "url": "https://api.tcgdex.net/v2/ja/sets/PMCG6",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "PMCG6",
       "seriesId": "ktcg:series:ja:original",
       "year": 1998,
+      "officialCardCount": 98,
+      "knownCardCount": 98,
       "availability": "available",
       "visuals": []
     },
@@ -1311,7 +1580,9 @@
       "id": "ktcg:set:ja:s10a",
       "name": "Dark Phantasma",
       "aliases": [
-        "DPT"
+        "DPT",
+        "ダークファンタズマ",
+        "S10A"
       ],
       "sources": [
         {
@@ -1320,14 +1591,19 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "S10a"
+          "sourceId": "S10a",
+          "url": "https://api.tcgdex.net/v2/ja/sets/S10a",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "S10A",
       "seriesId": "ktcg:series:ja:sword-and-shield",
       "year": 2022,
-      "availability": "metadata_only",
+      "officialCardCount": 71,
+      "knownCardCount": 99,
+      "availability": "available",
       "visuals": []
     },
     {
@@ -1335,7 +1611,9 @@
       "id": "ktcg:set:ja:s10b",
       "name": "Pokémon GO",
       "aliases": [
-        "PGO"
+        "PGO",
+        "Pokémon GO",
+        "S10B"
       ],
       "sources": [
         {
@@ -1344,13 +1622,17 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "S10b"
+          "sourceId": "S10b",
+          "url": "https://api.tcgdex.net/v2/ja/sets/S10b",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "S10B",
       "seriesId": "ktcg:series:ja:sword-and-shield",
       "year": 2022,
+      "officialCardCount": 71,
       "availability": "metadata_only",
       "visuals": []
     },
@@ -1359,7 +1641,9 @@
       "id": "ktcg:set:ja:s10d",
       "name": "Time Gazer",
       "aliases": [
-        "TMZ"
+        "TMZ",
+        "タイムゲイザー",
+        "S10D"
       ],
       "sources": [
         {
@@ -1368,13 +1652,17 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "S10D"
+          "sourceId": "S10D",
+          "url": "https://api.tcgdex.net/v2/ja/sets/S10D",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "S10D",
       "seriesId": "ktcg:series:ja:sword-and-shield",
       "year": 2022,
+      "officialCardCount": 67,
       "availability": "metadata_only",
       "visuals": []
     },
@@ -1383,7 +1671,9 @@
       "id": "ktcg:set:ja:s10p",
       "name": "Space Juggler",
       "aliases": [
-        "SPJ"
+        "SPJ",
+        "スペースジャグラー",
+        "S10P"
       ],
       "sources": [
         {
@@ -1392,14 +1682,19 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "S10P"
+          "sourceId": "S10P",
+          "url": "https://api.tcgdex.net/v2/ja/sets/S10P",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "S10P",
       "seriesId": "ktcg:series:ja:sword-and-shield",
       "year": 2022,
-      "availability": "metadata_only",
+      "officialCardCount": 67,
+      "knownCardCount": 88,
+      "availability": "available",
       "visuals": []
     },
     {
@@ -1407,7 +1702,9 @@
       "id": "ktcg:set:ja:s11",
       "name": "Lost Abyss",
       "aliases": [
-        "LOR"
+        "LOR",
+        "ロストアビス",
+        "S11"
       ],
       "sources": [
         {
@@ -1416,14 +1713,19 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "S11"
+          "sourceId": "S11",
+          "url": "https://api.tcgdex.net/v2/ja/sets/S11",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "S11",
       "seriesId": "ktcg:series:ja:sword-and-shield",
       "year": 2022,
-      "availability": "metadata_only",
+      "officialCardCount": 100,
+      "knownCardCount": 127,
+      "availability": "available",
       "visuals": []
     },
     {
@@ -1431,7 +1733,9 @@
       "id": "ktcg:set:ja:s11a",
       "name": "Incandescent Arcana",
       "aliases": [
-        "IAC"
+        "IAC",
+        "白熱のアルカナ",
+        "S11A"
       ],
       "sources": [
         {
@@ -1440,14 +1744,19 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "S11a"
+          "sourceId": "S11a",
+          "url": "https://api.tcgdex.net/v2/ja/sets/S11a",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "S11A",
       "seriesId": "ktcg:series:ja:sword-and-shield",
       "year": 2022,
-      "availability": "metadata_only",
+      "officialCardCount": 68,
+      "knownCardCount": 94,
+      "availability": "available",
       "visuals": []
     },
     {
@@ -1455,7 +1764,9 @@
       "id": "ktcg:set:ja:s12",
       "name": "Paradigm Trigger",
       "aliases": [
-        "PTG"
+        "PTG",
+        "パラダイムトリガー",
+        "S12"
       ],
       "sources": [
         {
@@ -1464,13 +1775,18 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "S12"
+          "sourceId": "S12",
+          "url": "https://api.tcgdex.net/v2/ja/sets/S12",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "S12",
       "seriesId": "ktcg:series:ja:sword-and-shield",
       "year": 2022,
+      "officialCardCount": 98,
+      "knownCardCount": 125,
       "availability": "available",
       "visuals": []
     },
@@ -1479,7 +1795,9 @@
       "id": "ktcg:set:ja:s12a",
       "name": "VSTAR Universe",
       "aliases": [
-        "VSU"
+        "VSU",
+        "VSTARユニバース",
+        "S12A"
       ],
       "sources": [
         {
@@ -1488,13 +1806,18 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "S12a"
+          "sourceId": "S12a",
+          "url": "https://api.tcgdex.net/v2/ja/sets/S12a",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "S12A",
       "seriesId": "ktcg:series:ja:sword-and-shield",
       "year": 2022,
+      "officialCardCount": 172,
+      "knownCardCount": 258,
       "availability": "available",
       "visuals": []
     },
@@ -1503,7 +1826,9 @@
       "id": "ktcg:set:ja:s2",
       "name": "Rebellion Clash",
       "aliases": [
-        "RCL"
+        "RCL",
+        "反逆クラッシュ",
+        "S2"
       ],
       "sources": [
         {
@@ -1512,13 +1837,17 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "S2"
+          "sourceId": "S2",
+          "url": "https://api.tcgdex.net/v2/ja/sets/S2",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "S2",
       "seriesId": "ktcg:series:ja:sword-and-shield",
       "year": 2020,
+      "officialCardCount": 96,
       "availability": "metadata_only",
       "visuals": []
     },
@@ -1527,7 +1856,9 @@
       "id": "ktcg:set:ja:s3",
       "name": "Infinity Zone",
       "aliases": [
-        "IFZ"
+        "IFZ",
+        "ムゲンゾーン",
+        "S3"
       ],
       "sources": [
         {
@@ -1536,13 +1867,17 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "S3"
+          "sourceId": "S3",
+          "url": "https://api.tcgdex.net/v2/ja/sets/S3",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "S3",
       "seriesId": "ktcg:series:ja:sword-and-shield",
       "year": 2020,
+      "officialCardCount": 100,
       "availability": "metadata_only",
       "visuals": []
     },
@@ -1551,7 +1886,9 @@
       "id": "ktcg:set:ja:s4",
       "name": "Amazing Volt Tackle",
       "aliases": [
-        "AVT"
+        "AVT",
+        "仰天のボルテッカー",
+        "S4"
       ],
       "sources": [
         {
@@ -1560,13 +1897,17 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "S4"
+          "sourceId": "S4",
+          "url": "https://api.tcgdex.net/v2/ja/sets/S4",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "S4",
       "seriesId": "ktcg:series:ja:sword-and-shield",
       "year": 2020,
+      "officialCardCount": 100,
       "availability": "metadata_only",
       "visuals": []
     },
@@ -1575,7 +1916,9 @@
       "id": "ktcg:set:ja:s4a",
       "name": "Shiny Star V",
       "aliases": [
-        "SSV"
+        "SSV",
+        "シャイニースターV",
+        "S4A"
       ],
       "sources": [
         {
@@ -1584,13 +1927,17 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "S4a"
+          "sourceId": "S4a",
+          "url": "https://api.tcgdex.net/v2/ja/sets/S4a",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "S4A",
       "seriesId": "ktcg:series:ja:sword-and-shield",
       "year": 2020,
+      "officialCardCount": 190,
       "availability": "metadata_only",
       "visuals": []
     },
@@ -1599,7 +1946,9 @@
       "id": "ktcg:set:ja:s5a",
       "name": "Peerless Fighters",
       "aliases": [
-        "PLF"
+        "PLF",
+        "双璧のファイター",
+        "S5A"
       ],
       "sources": [
         {
@@ -1608,13 +1957,17 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "S5a"
+          "sourceId": "S5a",
+          "url": "https://api.tcgdex.net/v2/ja/sets/S5a",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "S5A",
       "seriesId": "ktcg:series:ja:sword-and-shield",
       "year": 2021,
+      "officialCardCount": 70,
       "availability": "metadata_only",
       "visuals": []
     },
@@ -1623,7 +1976,9 @@
       "id": "ktcg:set:ja:s5i",
       "name": "Single Strike Master",
       "aliases": [
-        "SSM"
+        "SSM",
+        "一撃マスター",
+        "S5I"
       ],
       "sources": [
         {
@@ -1632,14 +1987,19 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "S5I"
+          "sourceId": "S5I",
+          "url": "https://api.tcgdex.net/v2/ja/sets/S5I",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "S5I",
       "seriesId": "ktcg:series:ja:sword-and-shield",
       "year": 2021,
-      "availability": "metadata_only",
+      "officialCardCount": 70,
+      "knownCardCount": 91,
+      "availability": "available",
       "visuals": []
     },
     {
@@ -1647,7 +2007,9 @@
       "id": "ktcg:set:ja:s5r",
       "name": "Rapid Strike Master",
       "aliases": [
-        "RSM"
+        "RSM",
+        "連撃マスター",
+        "S5R"
       ],
       "sources": [
         {
@@ -1656,13 +2018,17 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "S5R"
+          "sourceId": "S5R",
+          "url": "https://api.tcgdex.net/v2/ja/sets/S5R",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "S5R",
       "seriesId": "ktcg:series:ja:sword-and-shield",
       "year": 2021,
+      "officialCardCount": 70,
       "availability": "metadata_only",
       "visuals": []
     },
@@ -1671,7 +2037,9 @@
       "id": "ktcg:set:ja:s6a",
       "name": "Eevee Heroes",
       "aliases": [
-        "EVH"
+        "EVH",
+        "イーブイヒーローズ",
+        "S6A"
       ],
       "sources": [
         {
@@ -1680,13 +2048,17 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "S6a"
+          "sourceId": "S6a",
+          "url": "https://api.tcgdex.net/v2/ja/sets/S6a",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "S6A",
       "seriesId": "ktcg:series:ja:sword-and-shield",
       "year": 2021,
+      "officialCardCount": 69,
       "availability": "metadata_only",
       "visuals": []
     },
@@ -1695,7 +2067,9 @@
       "id": "ktcg:set:ja:s6h",
       "name": "Silver Lance",
       "aliases": [
-        "SLL"
+        "SLL",
+        "白銀のランス",
+        "S6H"
       ],
       "sources": [
         {
@@ -1704,14 +2078,19 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "S6H"
+          "sourceId": "S6H",
+          "url": "https://api.tcgdex.net/v2/ja/sets/S6H",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "S6H",
       "seriesId": "ktcg:series:ja:sword-and-shield",
       "year": 2021,
-      "availability": "metadata_only",
+      "officialCardCount": 70,
+      "knownCardCount": 95,
+      "availability": "available",
       "visuals": []
     },
     {
@@ -1719,7 +2098,9 @@
       "id": "ktcg:set:ja:s6k",
       "name": "Jet-Black Spirit",
       "aliases": [
-        "JBS"
+        "JBS",
+        "漆黒のガイスト",
+        "S6K"
       ],
       "sources": [
         {
@@ -1728,14 +2109,19 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "S6K"
+          "sourceId": "S6K",
+          "url": "https://api.tcgdex.net/v2/ja/sets/S6K",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "S6K",
       "seriesId": "ktcg:series:ja:sword-and-shield",
       "year": 2021,
-      "availability": "metadata_only",
+      "officialCardCount": 70,
+      "knownCardCount": 95,
+      "availability": "available",
       "visuals": []
     },
     {
@@ -1743,7 +2129,9 @@
       "id": "ktcg:set:ja:s7d",
       "name": "Skyscraping Perfection",
       "aliases": [
-        "SKP"
+        "SKP",
+        "摩天パーフェクト",
+        "S7D"
       ],
       "sources": [
         {
@@ -1752,14 +2140,19 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "S7D"
+          "sourceId": "S7D",
+          "url": "https://api.tcgdex.net/v2/ja/sets/S7D",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "S7D",
       "seriesId": "ktcg:series:ja:sword-and-shield",
       "year": 2021,
-      "availability": "metadata_only",
+      "officialCardCount": 67,
+      "knownCardCount": 90,
+      "availability": "available",
       "visuals": []
     },
     {
@@ -1767,7 +2160,9 @@
       "id": "ktcg:set:ja:s7r",
       "name": "Blue Sky Stream",
       "aliases": [
-        "BSS"
+        "BSS",
+        "蒼空ストリーム",
+        "S7R"
       ],
       "sources": [
         {
@@ -1776,13 +2171,17 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "S7R"
+          "sourceId": "S7R",
+          "url": "https://api.tcgdex.net/v2/ja/sets/S7R",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "S7R",
       "seriesId": "ktcg:series:ja:sword-and-shield",
       "year": 2021,
+      "officialCardCount": 67,
       "availability": "metadata_only",
       "visuals": []
     },
@@ -1791,7 +2190,9 @@
       "id": "ktcg:set:ja:s8",
       "name": "Fusion Strike",
       "aliases": [
-        "FST"
+        "FST",
+        "フュージョンアーツ",
+        "S8"
       ],
       "sources": [
         {
@@ -1800,14 +2201,19 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "S8"
+          "sourceId": "S8",
+          "url": "https://api.tcgdex.net/v2/ja/sets/S8",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "S8",
       "seriesId": "ktcg:series:ja:sword-and-shield",
       "year": 2021,
-      "availability": "metadata_only",
+      "officialCardCount": 100,
+      "knownCardCount": 129,
+      "availability": "available",
       "visuals": []
     },
     {
@@ -1815,7 +2221,9 @@
       "id": "ktcg:set:ja:s8a",
       "name": "25th Anniversary Collection",
       "aliases": [
-        "25A"
+        "25A",
+        "25th アニバーサリーコレクション",
+        "S8A"
       ],
       "sources": [
         {
@@ -1824,13 +2232,17 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "S8a"
+          "sourceId": "S8a",
+          "url": "https://api.tcgdex.net/v2/ja/sets/S8a",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "S8A",
       "seriesId": "ktcg:series:ja:sword-and-shield",
       "year": 2021,
+      "officialCardCount": 28,
       "availability": "metadata_only",
       "visuals": []
     },
@@ -1839,7 +2251,9 @@
       "id": "ktcg:set:ja:s8b",
       "name": "VMAX Climax",
       "aliases": [
-        "VMC"
+        "VMC",
+        "VMAXクライマックス",
+        "S8B"
       ],
       "sources": [
         {
@@ -1848,14 +2262,19 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "S8b"
+          "sourceId": "S8b",
+          "url": "https://api.tcgdex.net/v2/ja/sets/S8b",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "S8B",
       "seriesId": "ktcg:series:ja:sword-and-shield",
       "year": 2021,
-      "availability": "metadata_only",
+      "officialCardCount": 184,
+      "knownCardCount": 285,
+      "availability": "available",
       "visuals": []
     },
     {
@@ -1863,7 +2282,9 @@
       "id": "ktcg:set:ja:s9",
       "name": "Star Birth",
       "aliases": [
-        "STB"
+        "STB",
+        "スターバース",
+        "S9"
       ],
       "sources": [
         {
@@ -1872,13 +2293,18 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "S9"
+          "sourceId": "S9",
+          "url": "https://api.tcgdex.net/v2/ja/sets/S9",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "S9",
       "seriesId": "ktcg:series:ja:sword-and-shield",
       "year": 2021,
+      "officialCardCount": 100,
+      "knownCardCount": 127,
       "availability": "available",
       "visuals": []
     },
@@ -1887,7 +2313,9 @@
       "id": "ktcg:set:ja:s9a",
       "name": "Battle Region",
       "aliases": [
-        "BRG"
+        "BRG",
+        "バトルリージョン",
+        "S9A"
       ],
       "sources": [
         {
@@ -1896,13 +2324,18 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "S9a"
+          "sourceId": "S9a",
+          "url": "https://api.tcgdex.net/v2/ja/sets/S9a",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "S9A",
       "seriesId": "ktcg:series:ja:sword-and-shield",
       "year": 2022,
+      "officialCardCount": 67,
+      "knownCardCount": 93,
       "availability": "available",
       "visuals": []
     },
@@ -1911,7 +2344,9 @@
       "id": "ktcg:set:ja:sm1m",
       "name": "Collection Moon",
       "aliases": [
-        "CLM"
+        "CLM",
+        "コレクションムーン",
+        "SM1M"
       ],
       "sources": [
         {
@@ -1920,14 +2355,19 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "SM1M"
+          "sourceId": "SM1M",
+          "url": "https://api.tcgdex.net/v2/ja/sets/SM1M",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "SM1M",
       "seriesId": "ktcg:series:ja:sun-and-moon",
       "year": 2016,
-      "availability": "metadata_only",
+      "officialCardCount": 60,
+      "knownCardCount": 73,
+      "availability": "available",
       "visuals": []
     },
     {
@@ -1935,7 +2375,9 @@
       "id": "ktcg:set:ja:sm1s",
       "name": "Collection Sun",
       "aliases": [
-        "CLS"
+        "CLS",
+        "コレクションサン",
+        "SM1S"
       ],
       "sources": [
         {
@@ -1944,14 +2386,19 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "SM1S"
+          "sourceId": "SM1S",
+          "url": "https://api.tcgdex.net/v2/ja/sets/SM1S",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "SM1S",
       "seriesId": "ktcg:series:ja:sun-and-moon",
       "year": 2016,
-      "availability": "metadata_only",
+      "officialCardCount": 60,
+      "knownCardCount": 73,
+      "availability": "available",
       "visuals": []
     },
     {
@@ -1959,7 +2406,9 @@
       "id": "ktcg:set:ja:sm3",
       "name": "Shining Legends",
       "aliases": [
-        "SLG"
+        "SLG",
+        "ひかる伝説",
+        "SM3"
       ],
       "sources": [
         {
@@ -1968,13 +2417,17 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "SM3+"
+          "sourceId": "SM3+",
+          "url": "https://api.tcgdex.net/v2/ja/sets/SM3%2B",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "SM3",
       "seriesId": "ktcg:series:ja:sun-and-moon",
       "year": 2017,
+      "officialCardCount": 72,
       "availability": "metadata_only",
       "visuals": []
     },
@@ -1983,7 +2436,9 @@
       "id": "ktcg:set:ja:sm3n",
       "name": "Darkness that Consumes Light",
       "aliases": [
-        "DCL"
+        "DCL",
+        "光を喰らう闇",
+        "SM3N"
       ],
       "sources": [
         {
@@ -1992,14 +2447,19 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "SM3N"
+          "sourceId": "SM3N",
+          "url": "https://api.tcgdex.net/v2/ja/sets/SM3N",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "SM3N",
       "seriesId": "ktcg:series:ja:sun-and-moon",
       "year": 2017,
-      "availability": "metadata_only",
+      "officialCardCount": 51,
+      "knownCardCount": 64,
+      "availability": "available",
       "visuals": []
     },
     {
@@ -2007,7 +2467,9 @@
       "id": "ktcg:set:ja:sm8b",
       "name": "GX Ultra Shiny",
       "aliases": [
-        "GUS"
+        "GUS",
+        "GXウルトラシャイニー",
+        "SM8B"
       ],
       "sources": [
         {
@@ -2016,14 +2478,19 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "SM8b"
+          "sourceId": "SM8b",
+          "url": "https://api.tcgdex.net/v2/ja/sets/SM8b",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "SM8B",
       "seriesId": "ktcg:series:ja:sun-and-moon",
       "year": 2018,
-      "availability": "metadata_only",
+      "officialCardCount": 150,
+      "knownCardCount": 250,
+      "availability": "available",
       "visuals": []
     },
     {
@@ -2031,7 +2498,9 @@
       "id": "ktcg:set:ja:sm9",
       "name": "Tag Bolt",
       "aliases": [
-        "TGB"
+        "TGB",
+        "タッグボルト",
+        "SM9"
       ],
       "sources": [
         {
@@ -2040,14 +2509,19 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "SM9"
+          "sourceId": "SM9",
+          "url": "https://api.tcgdex.net/v2/ja/sets/SM9",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "SM9",
       "seriesId": "ktcg:series:ja:sun-and-moon",
       "year": 2018,
-      "availability": "metadata_only",
+      "officialCardCount": 95,
+      "knownCardCount": 118,
+      "availability": "available",
       "visuals": []
     },
     {
@@ -2055,7 +2529,9 @@
       "id": "ktcg:set:ja:sv10",
       "name": "Glory of the Team Rocket",
       "aliases": [
-        "GTR"
+        "GTR",
+        "ロケット団の栄光",
+        "SV10"
       ],
       "sources": [
         {
@@ -2064,17 +2540,22 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "sv10"
+          "sourceId": "sv10",
+          "url": "https://api.tcgdex.net/v2/ja/sets/SV10",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         },
         {
           "provider": "king_tcg",
           "sourceId": "v269:regional:ja:SV10"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "SV10",
       "seriesId": "ktcg:series:ja:scarlet-and-violet",
       "year": 2025,
+      "officialCardCount": 98,
+      "knownCardCount": 132,
       "availability": "available",
       "visuals": []
     },
@@ -2083,7 +2564,9 @@
       "id": "ktcg:set:ja:sv11b",
       "name": "Black Bolt",
       "aliases": [
-        "BLK"
+        "BLK",
+        "ブラックボルト",
+        "SV11B"
       ],
       "sources": [
         {
@@ -2092,17 +2575,22 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "sv11b"
+          "sourceId": "sv11b",
+          "url": "https://api.tcgdex.net/v2/ja/sets/SV11B",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         },
         {
           "provider": "king_tcg",
           "sourceId": "v269:regional:ja:SV11B"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "SV11B",
       "seriesId": "ktcg:series:ja:scarlet-and-violet",
       "year": 2025,
+      "officialCardCount": 174,
+      "knownCardCount": 174,
       "availability": "available",
       "visuals": []
     },
@@ -2111,7 +2599,9 @@
       "id": "ktcg:set:ja:sv11w",
       "name": "White Flare",
       "aliases": [
-        "WHT"
+        "WHT",
+        "ホワイトフレア",
+        "SV11W"
       ],
       "sources": [
         {
@@ -2120,17 +2610,22 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "sv11w"
+          "sourceId": "sv11w",
+          "url": "https://api.tcgdex.net/v2/ja/sets/SV11W",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         },
         {
           "provider": "king_tcg",
           "sourceId": "v269:regional:ja:SV11W"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "SV11W",
       "seriesId": "ktcg:series:ja:scarlet-and-violet",
       "year": 2025,
+      "officialCardCount": 86,
+      "knownCardCount": 174,
       "availability": "available",
       "visuals": []
     },
@@ -2139,7 +2634,9 @@
       "id": "ktcg:set:ja:sv1a",
       "name": "Triplet Beat",
       "aliases": [
-        "TRB"
+        "TRB",
+        "トリプレットビート",
+        "SV1A"
       ],
       "sources": [
         {
@@ -2148,17 +2645,22 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "sv1a"
+          "sourceId": "sv1a",
+          "url": "https://api.tcgdex.net/v2/ja/sets/SV1a",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         },
         {
           "provider": "king_tcg",
           "sourceId": "v269:regional:ja:SV1A"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "SV1A",
       "seriesId": "ktcg:series:ja:scarlet-and-violet",
       "year": 2023,
+      "officialCardCount": 73,
+      "knownCardCount": 103,
       "availability": "available",
       "visuals": []
     },
@@ -2167,7 +2669,9 @@
       "id": "ktcg:set:ja:sv1s",
       "name": "Scarlet ex",
       "aliases": [
-        "SEX"
+        "SEX",
+        "スカーレットex",
+        "SV1S"
       ],
       "sources": [
         {
@@ -2176,17 +2680,22 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "sv1s"
+          "sourceId": "sv1s",
+          "url": "https://api.tcgdex.net/v2/ja/sets/SV1S",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         },
         {
           "provider": "king_tcg",
           "sourceId": "v269:regional:ja:SV1S"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "SV1S",
       "seriesId": "ktcg:series:ja:scarlet-and-violet",
       "year": 2023,
+      "officialCardCount": 78,
+      "knownCardCount": 108,
       "availability": "available",
       "visuals": []
     },
@@ -2195,7 +2704,9 @@
       "id": "ktcg:set:ja:sv1v",
       "name": "Violet ex",
       "aliases": [
-        "VEX"
+        "VEX",
+        "バイオレットex",
+        "SV1V"
       ],
       "sources": [
         {
@@ -2204,17 +2715,22 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "sv1v"
+          "sourceId": "sv1v",
+          "url": "https://api.tcgdex.net/v2/ja/sets/SV1V",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         },
         {
           "provider": "king_tcg",
           "sourceId": "v269:regional:ja:SV1V"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "SV1V",
       "seriesId": "ktcg:series:ja:scarlet-and-violet",
       "year": 2023,
+      "officialCardCount": 78,
+      "knownCardCount": 108,
       "availability": "available",
       "visuals": []
     },
@@ -2223,7 +2739,8 @@
       "id": "ktcg:set:ja:sv2a",
       "name": "Pokémon Card 151",
       "aliases": [
-        "151"
+        "151",
+        "SV2A"
       ],
       "sources": [
         {
@@ -2232,17 +2749,22 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "sv2a"
+          "sourceId": "sv2a",
+          "url": "https://api.tcgdex.net/v2/ja/sets/SV2a",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         },
         {
           "provider": "king_tcg",
           "sourceId": "v269:regional:ja:SV2A"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "SV2A",
       "seriesId": "ktcg:series:ja:scarlet-and-violet",
       "year": 2023,
+      "officialCardCount": 165,
+      "knownCardCount": 210,
       "availability": "available",
       "visuals": []
     },
@@ -2251,7 +2773,9 @@
       "id": "ktcg:set:ja:sv2d",
       "name": "Clay Burst",
       "aliases": [
-        "CLB"
+        "CLB",
+        "クレイバースト",
+        "SV2D"
       ],
       "sources": [
         {
@@ -2260,17 +2784,22 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "sv2d"
+          "sourceId": "sv2d",
+          "url": "https://api.tcgdex.net/v2/ja/sets/SV2D",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         },
         {
           "provider": "king_tcg",
           "sourceId": "v269:regional:ja:SV2D"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "SV2D",
       "seriesId": "ktcg:series:ja:scarlet-and-violet",
       "year": 2023,
+      "officialCardCount": 71,
+      "knownCardCount": 99,
       "availability": "available",
       "visuals": []
     },
@@ -2279,7 +2808,9 @@
       "id": "ktcg:set:ja:sv2p",
       "name": "Snow Hazard",
       "aliases": [
-        "SNH"
+        "SNH",
+        "スノーハザード",
+        "SV2P"
       ],
       "sources": [
         {
@@ -2288,17 +2819,22 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "sv2p"
+          "sourceId": "sv2p",
+          "url": "https://api.tcgdex.net/v2/ja/sets/SV2P",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         },
         {
           "provider": "king_tcg",
           "sourceId": "v269:regional:ja:SV2P"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "SV2P",
       "seriesId": "ktcg:series:ja:scarlet-and-violet",
       "year": 2023,
+      "officialCardCount": 71,
+      "knownCardCount": 99,
       "availability": "available",
       "visuals": []
     },
@@ -2307,7 +2843,9 @@
       "id": "ktcg:set:ja:sv3",
       "name": "Ruler of the Black Flame",
       "aliases": [
-        "RBF"
+        "RBF",
+        "黒炎の支配者",
+        "SV3"
       ],
       "sources": [
         {
@@ -2316,17 +2854,22 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "sv3"
+          "sourceId": "sv3",
+          "url": "https://api.tcgdex.net/v2/ja/sets/SV3",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         },
         {
           "provider": "king_tcg",
           "sourceId": "v269:regional:ja:SV3"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "SV3",
       "seriesId": "ktcg:series:ja:scarlet-and-violet",
       "year": 2023,
+      "officialCardCount": 108,
+      "knownCardCount": 141,
       "availability": "available",
       "visuals": []
     },
@@ -2335,7 +2878,9 @@
       "id": "ktcg:set:ja:sv3a",
       "name": "Raging Surf",
       "aliases": [
-        "RSU"
+        "RSU",
+        "レイジングサーフ",
+        "SV3A"
       ],
       "sources": [
         {
@@ -2344,17 +2889,22 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "sv3a"
+          "sourceId": "sv3a",
+          "url": "https://api.tcgdex.net/v2/ja/sets/SV3a",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         },
         {
           "provider": "king_tcg",
           "sourceId": "v269:regional:ja:SV3A"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "SV3A",
       "seriesId": "ktcg:series:ja:scarlet-and-violet",
       "year": 2023,
+      "officialCardCount": 62,
+      "knownCardCount": 92,
       "availability": "available",
       "visuals": []
     },
@@ -2363,7 +2913,9 @@
       "id": "ktcg:set:ja:sv4a",
       "name": "Shiny Treasure ex",
       "aliases": [
-        "SVE"
+        "SVE",
+        "レイジングサーフ",
+        "SV4A"
       ],
       "sources": [
         {
@@ -2372,17 +2924,22 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "sv4a"
+          "sourceId": "sv4a",
+          "url": "https://api.tcgdex.net/v2/ja/sets/SV4a",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         },
         {
           "provider": "king_tcg",
           "sourceId": "v269:regional:ja:SV4A"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "SV4A",
       "seriesId": "ktcg:series:ja:scarlet-and-violet",
       "year": 2023,
+      "officialCardCount": 190,
+      "knownCardCount": 320,
       "availability": "available",
       "visuals": []
     },
@@ -2391,7 +2948,9 @@
       "id": "ktcg:set:ja:sv4k",
       "name": "Ancient Roar",
       "aliases": [
-        "ANR"
+        "ANR",
+        "古代の咆哮",
+        "SV4K"
       ],
       "sources": [
         {
@@ -2400,13 +2959,18 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "sv4k"
+          "sourceId": "sv4k",
+          "url": "https://api.tcgdex.net/v2/ja/sets/SV4K",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "SV4K",
       "seriesId": "ktcg:series:ja:scarlet-and-violet",
       "year": 2023,
+      "officialCardCount": 66,
+      "knownCardCount": 95,
       "availability": "available",
       "visuals": []
     },
@@ -2415,7 +2979,9 @@
       "id": "ktcg:set:ja:sv4m",
       "name": "Future Flash",
       "aliases": [
-        "FFL"
+        "FFL",
+        "未来の一閃",
+        "SV4M"
       ],
       "sources": [
         {
@@ -2424,13 +2990,18 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "sv4m"
+          "sourceId": "sv4m",
+          "url": "https://api.tcgdex.net/v2/ja/sets/SV4M",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "SV4M",
       "seriesId": "ktcg:series:ja:scarlet-and-violet",
       "year": 2023,
+      "officialCardCount": 66,
+      "knownCardCount": 95,
       "availability": "available",
       "visuals": []
     },
@@ -2439,7 +3010,9 @@
       "id": "ktcg:set:ja:sv5a",
       "name": "Crimson Haze",
       "aliases": [
-        "CRH"
+        "CRH",
+        "クリムゾンヘイズ",
+        "SV5A"
       ],
       "sources": [
         {
@@ -2448,17 +3021,22 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "sv5a"
+          "sourceId": "sv5a",
+          "url": "https://api.tcgdex.net/v2/ja/sets/SV5a",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         },
         {
           "provider": "king_tcg",
           "sourceId": "v269:regional:ja:SV5A"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "SV5A",
       "seriesId": "ktcg:series:ja:scarlet-and-violet",
       "year": 2024,
+      "officialCardCount": 66,
+      "knownCardCount": 96,
       "availability": "available",
       "visuals": []
     },
@@ -2467,7 +3045,9 @@
       "id": "ktcg:set:ja:sv5k",
       "name": "Wild Force",
       "aliases": [
-        "WFR"
+        "WFR",
+        "ワイルドフォース",
+        "SV5K"
       ],
       "sources": [
         {
@@ -2476,17 +3056,22 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "sv5k"
+          "sourceId": "sv5k",
+          "url": "https://api.tcgdex.net/v2/ja/sets/SV5K",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         },
         {
           "provider": "king_tcg",
           "sourceId": "v269:regional:ja:SV5K"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "SV5K",
       "seriesId": "ktcg:series:ja:scarlet-and-violet",
       "year": 2024,
+      "officialCardCount": 71,
+      "knownCardCount": 100,
       "availability": "available",
       "visuals": []
     },
@@ -2495,7 +3080,9 @@
       "id": "ktcg:set:ja:sv5m",
       "name": "Cyber Judge",
       "aliases": [
-        "CYJ"
+        "CYJ",
+        "サイバージャッジ",
+        "SV5M"
       ],
       "sources": [
         {
@@ -2504,18 +3091,23 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "sv5m"
+          "sourceId": "sv5m",
+          "url": "https://api.tcgdex.net/v2/ja/sets/SV5M",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         },
         {
           "provider": "king_tcg",
           "sourceId": "v269:regional:ja:SV5M"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "SV5M",
       "seriesId": "ktcg:series:ja:scarlet-and-violet",
       "year": 2024,
-      "availability": "metadata_only",
+      "officialCardCount": 71,
+      "knownCardCount": 100,
+      "availability": "available",
       "visuals": []
     },
     {
@@ -2523,7 +3115,9 @@
       "id": "ktcg:set:ja:sv6",
       "name": "Mask of Change",
       "aliases": [
-        "MOC"
+        "MOC",
+        "変幻の仮面",
+        "SV6"
       ],
       "sources": [
         {
@@ -2532,17 +3126,22 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "sv6"
+          "sourceId": "sv6",
+          "url": "https://api.tcgdex.net/v2/ja/sets/SV6",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         },
         {
           "provider": "king_tcg",
           "sourceId": "v269:regional:ja:SV6"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "SV6",
       "seriesId": "ktcg:series:ja:scarlet-and-violet",
       "year": 2024,
+      "officialCardCount": 101,
+      "knownCardCount": 133,
       "availability": "available",
       "visuals": []
     },
@@ -2551,7 +3150,9 @@
       "id": "ktcg:set:ja:sv6a",
       "name": "Night Wanderer",
       "aliases": [
-        "NIW"
+        "NIW",
+        "ナイトワンダラー",
+        "SV6A"
       ],
       "sources": [
         {
@@ -2560,18 +3161,23 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "sv6a"
+          "sourceId": "sv6a",
+          "url": "https://api.tcgdex.net/v2/ja/sets/SV6a",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         },
         {
           "provider": "king_tcg",
           "sourceId": "v269:regional:ja:SV6A"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "SV6A",
       "seriesId": "ktcg:series:ja:scarlet-and-violet",
       "year": 2024,
-      "availability": "metadata_only",
+      "officialCardCount": 64,
+      "knownCardCount": 94,
+      "availability": "available",
       "visuals": []
     },
     {
@@ -2579,7 +3185,9 @@
       "id": "ktcg:set:ja:sv7",
       "name": "Stellar Miracle",
       "aliases": [
-        "STM"
+        "STM",
+        "ステラミラクル",
+        "SV7"
       ],
       "sources": [
         {
@@ -2588,17 +3196,22 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "sv7"
+          "sourceId": "sv7",
+          "url": "https://api.tcgdex.net/v2/ja/sets/SV7",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         },
         {
           "provider": "king_tcg",
           "sourceId": "v269:regional:ja:SV7"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "SV7",
       "seriesId": "ktcg:series:ja:scarlet-and-violet",
       "year": 2024,
+      "officialCardCount": 102,
+      "knownCardCount": 135,
       "availability": "available",
       "visuals": []
     },
@@ -2607,7 +3220,9 @@
       "id": "ktcg:set:ja:sv7a",
       "name": "Paradise Dragona",
       "aliases": [
-        "PDR"
+        "PDR",
+        "楽園ドラゴーナ",
+        "SV7A"
       ],
       "sources": [
         {
@@ -2616,17 +3231,22 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "sv7a"
+          "sourceId": "sv7a",
+          "url": "https://api.tcgdex.net/v2/ja/sets/SV7a",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         },
         {
           "provider": "king_tcg",
           "sourceId": "v269:regional:ja:SV7A"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "SV7A",
       "seriesId": "ktcg:series:ja:scarlet-and-violet",
       "year": 2024,
+      "officialCardCount": 64,
+      "knownCardCount": 94,
       "availability": "available",
       "visuals": []
     },
@@ -2635,7 +3255,9 @@
       "id": "ktcg:set:ja:sv8",
       "name": "Super Electric Breaker",
       "aliases": [
-        "SEB"
+        "SEB",
+        "超電ブレイカー",
+        "SV8"
       ],
       "sources": [
         {
@@ -2644,17 +3266,22 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "sv8"
+          "sourceId": "sv8",
+          "url": "https://api.tcgdex.net/v2/ja/sets/SV8",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         },
         {
           "provider": "king_tcg",
           "sourceId": "v269:regional:ja:SV8"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "SV8",
       "seriesId": "ktcg:series:ja:scarlet-and-violet",
       "year": 2024,
+      "officialCardCount": 106,
+      "knownCardCount": 138,
       "availability": "available",
       "visuals": []
     },
@@ -2663,7 +3290,9 @@
       "id": "ktcg:set:ja:sv8a",
       "name": "Terastal Fest ex",
       "aliases": [
-        "TFE"
+        "TFE",
+        "テラスタルフェスex",
+        "SV8A"
       ],
       "sources": [
         {
@@ -2672,17 +3301,22 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "sv8a"
+          "sourceId": "sv8a",
+          "url": "https://api.tcgdex.net/v2/ja/sets/SV8a",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         },
         {
           "provider": "king_tcg",
           "sourceId": "v269:regional:ja:SV8A"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "SV8A",
       "seriesId": "ktcg:series:ja:scarlet-and-violet",
       "year": 2024,
+      "officialCardCount": 187,
+      "knownCardCount": 237,
       "availability": "available",
       "visuals": []
     },
@@ -2691,7 +3325,9 @@
       "id": "ktcg:set:ja:sv9",
       "name": "Battle Partners",
       "aliases": [
-        "BTP"
+        "BTP",
+        "バトルパートナーズ",
+        "SV9"
       ],
       "sources": [
         {
@@ -2700,17 +3336,22 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "sv9"
+          "sourceId": "sv9",
+          "url": "https://api.tcgdex.net/v2/ja/sets/SV9",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         },
         {
           "provider": "king_tcg",
           "sourceId": "v269:regional:ja:SV9"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "SV9",
       "seriesId": "ktcg:series:ja:scarlet-and-violet",
       "year": 2025,
+      "officialCardCount": 100,
+      "knownCardCount": 132,
       "availability": "available",
       "visuals": []
     },
@@ -2771,7 +3412,9 @@
       "id": "ktcg:set:ja:xy10",
       "name": "Awakening Psychic King",
       "aliases": [
-        "APK"
+        "APK",
+        "めざめる超王",
+        "XY10"
       ],
       "sources": [
         {
@@ -2780,13 +3423,17 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "XY10"
+          "sourceId": "XY10",
+          "url": "https://api.tcgdex.net/v2/ja/sets/XY10",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "XY10",
       "seriesId": "ktcg:series:ja:xy",
       "year": 2016,
+      "officialCardCount": 78,
       "availability": "metadata_only",
       "visuals": []
     },
@@ -2795,7 +3442,9 @@
       "id": "ktcg:set:ja:xy1a",
       "name": "Collection X",
       "aliases": [
-        "CLX"
+        "CLX",
+        "コレクションX",
+        "XY1A"
       ],
       "sources": [
         {
@@ -2804,13 +3453,17 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "XY1a"
+          "sourceId": "XY1a",
+          "url": "https://api.tcgdex.net/v2/ja/sets/XY1a",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "XY1A",
       "seriesId": "ktcg:series:ja:xy",
       "year": 2013,
+      "officialCardCount": 60,
       "availability": "metadata_only",
       "visuals": []
     },
@@ -2819,7 +3472,9 @@
       "id": "ktcg:set:ja:xy1b",
       "name": "Collection Y",
       "aliases": [
-        "CLY"
+        "CLY",
+        "コレクションY",
+        "XY1B"
       ],
       "sources": [
         {
@@ -2828,13 +3483,17 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "XY1b"
+          "sourceId": "XY1b",
+          "url": "https://api.tcgdex.net/v2/ja/sets/XY1b",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "XY1B",
       "seriesId": "ktcg:series:ja:xy",
       "year": 2013,
+      "officialCardCount": 60,
       "availability": "metadata_only",
       "visuals": []
     },
@@ -2843,7 +3502,9 @@
       "id": "ktcg:set:ja:xy2",
       "name": "Wild Blaze",
       "aliases": [
-        "WBL"
+        "WBL",
+        "ワイルドブレイズ",
+        "XY2"
       ],
       "sources": [
         {
@@ -2852,13 +3513,17 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "XY2"
+          "sourceId": "XY2",
+          "url": "https://api.tcgdex.net/v2/ja/sets/XY2",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "XY2",
       "seriesId": "ktcg:series:ja:xy",
       "year": 2014,
+      "officialCardCount": 80,
       "availability": "metadata_only",
       "visuals": []
     },
@@ -2867,7 +3532,9 @@
       "id": "ktcg:set:ja:xy3",
       "name": "Rising Fist",
       "aliases": [
-        "RSF"
+        "RSF",
+        "ライジングフィスト",
+        "XY3"
       ],
       "sources": [
         {
@@ -2876,13 +3543,17 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "XY3"
+          "sourceId": "XY3",
+          "url": "https://api.tcgdex.net/v2/ja/sets/XY3",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "XY3",
       "seriesId": "ktcg:series:ja:xy",
       "year": 2014,
+      "officialCardCount": 96,
       "availability": "metadata_only",
       "visuals": []
     },
@@ -2891,22 +3562,23 @@
       "id": "ktcg:set:ja:xy4",
       "name": "Phantom Gate",
       "aliases": [
-        "PTG"
+        "ファントムゲート",
+        "XY4"
       ],
       "sources": [
         {
-          "provider": "king_tcg",
-          "sourceId": "v269:display:ja:PTG"
-        },
-        {
           "provider": "tcgdex",
-          "sourceId": "XY4"
+          "sourceId": "XY4",
+          "url": "https://api.tcgdex.net/v2/ja/sets/XY4",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "XY4",
       "seriesId": "ktcg:series:ja:xy",
       "year": 2014,
+      "officialCardCount": 88,
       "availability": "metadata_only",
       "visuals": []
     },
@@ -2915,7 +3587,9 @@
       "id": "ktcg:set:ja:xy5a",
       "name": "Gaia Volcano",
       "aliases": [
-        "GVO"
+        "GVO",
+        "ガイアボルケーノ",
+        "XY5A"
       ],
       "sources": [
         {
@@ -2924,13 +3598,17 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "XY5a"
+          "sourceId": "XY5a",
+          "url": "https://api.tcgdex.net/v2/ja/sets/XY5a",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "XY5A",
       "seriesId": "ktcg:series:ja:xy",
       "year": 2014,
+      "officialCardCount": 70,
       "availability": "metadata_only",
       "visuals": []
     },
@@ -2939,7 +3617,9 @@
       "id": "ktcg:set:ja:xy5b",
       "name": "Tidal Storm",
       "aliases": [
-        "TST"
+        "TST",
+        "タイダルストーム",
+        "XY5B"
       ],
       "sources": [
         {
@@ -2948,13 +3628,17 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "XY5b"
+          "sourceId": "XY5b",
+          "url": "https://api.tcgdex.net/v2/ja/sets/XY5b",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "XY5B",
       "seriesId": "ktcg:series:ja:xy",
       "year": 2014,
+      "officialCardCount": 70,
       "availability": "metadata_only",
       "visuals": []
     },
@@ -2963,7 +3647,9 @@
       "id": "ktcg:set:ja:xy6",
       "name": "Emerald Break",
       "aliases": [
-        "EMB"
+        "EMB",
+        "エメラルドブレイク",
+        "XY6"
       ],
       "sources": [
         {
@@ -2972,13 +3658,17 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "XY6"
+          "sourceId": "XY6",
+          "url": "https://api.tcgdex.net/v2/ja/sets/XY6",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "XY6",
       "seriesId": "ktcg:series:ja:xy",
       "year": 2015,
+      "officialCardCount": 78,
       "availability": "metadata_only",
       "visuals": []
     },
@@ -2987,7 +3677,9 @@
       "id": "ktcg:set:ja:xy7",
       "name": "Bandit Ring",
       "aliases": [
-        "BDR"
+        "BDR",
+        "バンデットリング",
+        "XY7"
       ],
       "sources": [
         {
@@ -2996,13 +3688,17 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "XY7"
+          "sourceId": "XY7",
+          "url": "https://api.tcgdex.net/v2/ja/sets/XY7",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "XY7",
       "seriesId": "ktcg:series:ja:xy",
       "year": 2015,
+      "officialCardCount": 81,
       "availability": "metadata_only",
       "visuals": []
     },
@@ -3011,7 +3707,9 @@
       "id": "ktcg:set:ja:xy8a",
       "name": "Blue Shock",
       "aliases": [
-        "BLS"
+        "BLS",
+        "青い衝撃",
+        "XY8A"
       ],
       "sources": [
         {
@@ -3020,13 +3718,17 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "XY8a"
+          "sourceId": "XY8a",
+          "url": "https://api.tcgdex.net/v2/ja/sets/XY8a",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "XY8A",
       "seriesId": "ktcg:series:ja:xy",
       "year": 2015,
+      "officialCardCount": 59,
       "availability": "metadata_only",
       "visuals": []
     },
@@ -3035,7 +3737,9 @@
       "id": "ktcg:set:ja:xy8b",
       "name": "Red Flash",
       "aliases": [
-        "RDF"
+        "RDF",
+        "赤い閃光",
+        "XY8B"
       ],
       "sources": [
         {
@@ -3044,13 +3748,17 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "XY8b"
+          "sourceId": "XY8b",
+          "url": "https://api.tcgdex.net/v2/ja/sets/XY8b",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "XY8B",
       "seriesId": "ktcg:series:ja:xy",
       "year": 2015,
+      "officialCardCount": 59,
       "availability": "metadata_only",
       "visuals": []
     },
@@ -3059,7 +3767,9 @@
       "id": "ktcg:set:ja:xy9",
       "name": "Rage of the Broken Heavens",
       "aliases": [
-        "RBH"
+        "RBH",
+        "破天の怒り",
+        "XY9"
       ],
       "sources": [
         {
@@ -3068,13 +3778,17 @@
         },
         {
           "provider": "tcgdex",
-          "sourceId": "XY9"
+          "sourceId": "XY9",
+          "url": "https://api.tcgdex.net/v2/ja/sets/XY9",
+          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
         }
       ],
+      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
       "language": "ja",
       "code": "XY9",
       "seriesId": "ktcg:series:ja:xy",
       "year": 2015,
+      "officialCardCount": 80,
       "availability": "metadata_only",
       "visuals": []
     }
