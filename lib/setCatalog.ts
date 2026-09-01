@@ -140,6 +140,7 @@ export function classifySetGeneration(set: SetLike): string {
   const text = `${series} ${set.name || ""}`.toLowerCase();
   const year = Number(effectiveSetReleaseDate(set.id, set.releaseDate).slice(0, 4) || 0);
 
+  if (text.includes("chinese collections")) return "Collections chinoises";
   if (text.includes("promo") || /(?:^|[^a-z])promo(?:[^a-z]|$)/i.test(id)) return "Promos";
   if (/^(?:m|me)\d+/i.test(id) || text.includes("mega") || text.includes("méga")) return "MEGA";
   if (/^(?:sv|ev|csv)\d+/i.test(id) || text.includes("scarlet") || text.includes("violet") || text.includes("écarlate")) return "Écarlate & Violet";
