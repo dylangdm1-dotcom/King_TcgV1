@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "formatVersion": 1,
-  "catalogVersion": "v273-local-2026-08-27",
+  "catalogVersion": "v283-cn-pokewallet-2026-08-31",
   "language": "zh-tw",
   "sets": [
     {
@@ -12,7 +12,8 @@
         "Collect 151 Gathering",
         "Collect 151 Surprise",
         "Collect 151 Hope",
-        "Collect 151 Journey"
+        "Collect 151 Journey",
+        "Pokemon 151 (Chinese)"
       ],
       "sources": [
         {
@@ -22,12 +23,20 @@
         {
           "provider": "king_tcg",
           "sourceId": "v269:display:zh-tw:151C"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-1",
+          "url": "https://api.pokewallet.io/sets/-1",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
         }
       ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
       "language": "zh-tw",
       "code": "151C",
       "seriesId": "ktcg:series:zh-tw:scarlet-and-violet",
       "year": 2025,
+      "officialCardCount": 192,
       "knownCardCount": 192,
       "availability": "available",
       "visuals": []
@@ -37,17 +46,26 @@
       "id": "ktcg:set:zh-tw:30thp",
       "name": "30th Anniversary Celebration",
       "aliases": [
-        "30TH-P"
+        "30TH-P",
+        "30th Anniversary Celebration Simplified Chinese Singles"
       ],
       "sources": [
         {
           "provider": "king_tcg",
           "sourceId": "v269:regional:zh-tw:30THP"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-241",
+          "url": "https://api.pokewallet.io/sets/-241",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
         }
       ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
       "language": "zh-tw",
       "code": "30THP",
       "seriesId": "ktcg:series:zh-tw:promos",
+      "officialCardCount": 9,
       "knownCardCount": 9,
       "availability": "available",
       "visuals": []
@@ -58,7 +76,8 @@
       "name": "Gem Pack Volume 1",
       "aliases": [
         "Gem Pack Volume 1",
-        "Gem Pack Vol. 1"
+        "Gem Pack Vol. 1",
+        "Chinese Booster Box 1"
       ],
       "sources": [
         {
@@ -68,12 +87,20 @@
         {
           "provider": "king_tcg",
           "sourceId": "v269:display:zh-tw:CBB1C"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-13",
+          "url": "https://api.pokewallet.io/sets/-13",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
         }
       ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
       "language": "zh-tw",
       "code": "CBB1C",
       "seriesId": "ktcg:series:zh-tw:scarlet-and-violet",
       "year": 2025,
+      "officialCardCount": 115,
       "knownCardCount": 115,
       "availability": "available",
       "visuals": []
@@ -84,7 +111,8 @@
       "name": "Gem Pack Volume 2",
       "aliases": [
         "Gem Pack Volume 2",
-        "Gem Pack Vol. 2"
+        "Gem Pack Vol. 2",
+        "Chinese Booster Box 2"
       ],
       "sources": [
         {
@@ -94,12 +122,20 @@
         {
           "provider": "king_tcg",
           "sourceId": "v269:display:zh-tw:CBB2C"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-14",
+          "url": "https://api.pokewallet.io/sets/-14",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
         }
       ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
       "language": "zh-tw",
       "code": "CBB2C",
       "seriesId": "ktcg:series:zh-tw:scarlet-and-violet",
       "year": 2025,
+      "officialCardCount": 140,
       "knownCardCount": 140,
       "availability": "available",
       "visuals": []
@@ -110,7 +146,8 @@
       "name": "Gem Pack Volume 3",
       "aliases": [
         "Gem Pack Volume 3",
-        "Gem Pack Vol. 3"
+        "Gem Pack Vol. 3",
+        "Chinese Booster Box 3"
       ],
       "sources": [
         {
@@ -120,12 +157,20 @@
         {
           "provider": "king_tcg",
           "sourceId": "v269:display:zh-tw:CBB3C"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-15",
+          "url": "https://api.pokewallet.io/sets/-15",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
         }
       ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
       "language": "zh-tw",
       "code": "CBB3C",
       "seriesId": "ktcg:series:zh-tw:scarlet-and-violet",
       "year": 2025,
+      "officialCardCount": 136,
       "knownCardCount": 136,
       "availability": "available",
       "visuals": []
@@ -146,12 +191,20 @@
         {
           "provider": "king_tcg",
           "sourceId": "v269:display:zh-tw:CBB4C"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-240",
+          "url": "https://api.pokewallet.io/sets/-240",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
         }
       ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
       "language": "zh-tw",
       "code": "CBB4C",
       "seriesId": "ktcg:series:zh-tw:scarlet-and-violet",
       "year": 2026,
+      "officialCardCount": 192,
       "knownCardCount": 192,
       "availability": "available",
       "visuals": []
@@ -172,12 +225,20 @@
         {
           "provider": "king_tcg",
           "sourceId": "v269:display:zh-tw:CBB5C"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-242",
+          "url": "https://api.pokewallet.io/sets/-242",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
         }
       ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
       "language": "zh-tw",
       "code": "CBB5C",
       "seriesId": "ktcg:series:zh-tw:scarlet-and-violet",
       "year": 2026,
+      "officialCardCount": 194,
       "knownCardCount": 194,
       "availability": "available",
       "visuals": []
@@ -197,31 +258,71 @@
         {
           "provider": "king_tcg",
           "sourceId": "v269:display:zh-tw:CBB6C"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-244",
+          "url": "https://api.pokewallet.io/sets/-244",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
         }
       ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
       "language": "zh-tw",
       "code": "CBB6C",
       "seriesId": "ktcg:series:zh-tw:simplified-chinese",
       "year": 2026,
       "releaseDate": "2026-08-07",
-      "officialCardCount": 196,
-      "availability": "metadata_only",
+      "officialCardCount": 192,
+      "knownCardCount": 192,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:zh-tw:cs1-5c",
+      "name": "Dynamax Tactics",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "pokewallet",
+          "sourceId": "-25",
+          "url": "https://api.pokewallet.io/sets/-25",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
+      "language": "zh-tw",
+      "code": "CS1.5C",
+      "seriesId": "ktcg:series:zh-tw:sword-and-shield",
+      "officialCardCount": 96,
+      "knownCardCount": 96,
+      "availability": "available",
       "visuals": []
     },
     {
       "schemaVersion": 2,
       "id": "ktcg:set:zh-tw:cs1ac",
       "name": "Dynamax Clash Thunder",
-      "aliases": [],
+      "aliases": [
+        "Dynamax Clash: Thunder"
+      ],
       "sources": [
         {
           "provider": "king_tcg",
           "sourceId": "v269:regional:zh-tw:CS1AC"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-26",
+          "url": "https://api.pokewallet.io/sets/-26",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
         }
       ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
       "language": "zh-tw",
       "code": "CS1AC",
       "seriesId": "ktcg:series:zh-tw:sword-and-shield",
+      "officialCardCount": 217,
       "knownCardCount": 217,
       "availability": "available",
       "visuals": []
@@ -230,17 +331,49 @@
       "schemaVersion": 2,
       "id": "ktcg:set:zh-tw:cs1bc",
       "name": "Dynamax Clash Flame",
-      "aliases": [],
+      "aliases": [
+        "Dynamax Clash: Flame"
+      ],
       "sources": [
         {
           "provider": "king_tcg",
           "sourceId": "v269:regional:zh-tw:CS1BC"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-27",
+          "url": "https://api.pokewallet.io/sets/-27",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
         }
       ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
       "language": "zh-tw",
       "code": "CS1BC",
       "seriesId": "ktcg:series:zh-tw:sword-and-shield",
+      "officialCardCount": 199,
       "knownCardCount": 199,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:zh-tw:cs2-5c",
+      "name": "Brilliant Counterattack",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "pokewallet",
+          "sourceId": "-28",
+          "url": "https://api.pokewallet.io/sets/-28",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
+      "language": "zh-tw",
+      "code": "CS2.5C",
+      "seriesId": "ktcg:series:zh-tw:sword-and-shield",
+      "officialCardCount": 79,
+      "knownCardCount": 79,
       "availability": "available",
       "visuals": []
     },
@@ -248,16 +381,26 @@
       "schemaVersion": 2,
       "id": "ktcg:set:zh-tw:cs2ac",
       "name": "Vivid Portrayals Obsidian",
-      "aliases": [],
+      "aliases": [
+        "Vivid Portrayals: Obsidian"
+      ],
       "sources": [
         {
           "provider": "king_tcg",
           "sourceId": "v269:regional:zh-tw:CS2AC"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-29",
+          "url": "https://api.pokewallet.io/sets/-29",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
         }
       ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
       "language": "zh-tw",
       "code": "CS2AC",
       "seriesId": "ktcg:series:zh-tw:sword-and-shield",
+      "officialCardCount": 143,
       "knownCardCount": 143,
       "availability": "available",
       "visuals": []
@@ -266,17 +409,49 @@
       "schemaVersion": 2,
       "id": "ktcg:set:zh-tw:cs2bc",
       "name": "Vivid Portrayals Indigo",
-      "aliases": [],
+      "aliases": [
+        "Vivid Portrayals: Indigo"
+      ],
       "sources": [
         {
           "provider": "king_tcg",
           "sourceId": "v269:regional:zh-tw:CS2BC"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-30",
+          "url": "https://api.pokewallet.io/sets/-30",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
         }
       ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
       "language": "zh-tw",
       "code": "CS2BC",
       "seriesId": "ktcg:series:zh-tw:sword-and-shield",
+      "officialCardCount": 143,
       "knownCardCount": 143,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:zh-tw:cs3-5c",
+      "name": "Scorching Skies",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "pokewallet",
+          "sourceId": "-31",
+          "url": "https://api.pokewallet.io/sets/-31",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
+      "language": "zh-tw",
+      "code": "CS3.5C",
+      "seriesId": "ktcg:series:zh-tw:sword-and-shield",
+      "officialCardCount": 90,
+      "knownCardCount": 90,
       "availability": "available",
       "visuals": []
     },
@@ -284,16 +459,26 @@
       "schemaVersion": 2,
       "id": "ktcg:set:zh-tw:cs3ac",
       "name": "Primordial Arts Overgrow",
-      "aliases": [],
+      "aliases": [
+        "Primordial Arts: Pink"
+      ],
       "sources": [
         {
           "provider": "king_tcg",
           "sourceId": "v269:regional:zh-tw:CS3AC"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-32",
+          "url": "https://api.pokewallet.io/sets/-32",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
         }
       ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
       "language": "zh-tw",
       "code": "CS3AC",
       "seriesId": "ktcg:series:zh-tw:sword-and-shield",
+      "officialCardCount": 184,
       "knownCardCount": 184,
       "availability": "available",
       "visuals": []
@@ -302,17 +487,71 @@
       "schemaVersion": 2,
       "id": "ktcg:set:zh-tw:cs3bc",
       "name": "Primordial Arts Torrent",
-      "aliases": [],
+      "aliases": [
+        "Primordial Arts: Blue"
+      ],
       "sources": [
         {
           "provider": "king_tcg",
           "sourceId": "v269:regional:zh-tw:CS3BC"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-33",
+          "url": "https://api.pokewallet.io/sets/-33",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
         }
       ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
       "language": "zh-tw",
       "code": "CS3BC",
       "seriesId": "ktcg:series:zh-tw:sword-and-shield",
+      "officialCardCount": 179,
       "knownCardCount": 179,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:zh-tw:cs4-1c",
+      "name": "Paradise Dragona",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "pokewallet",
+          "sourceId": "-34",
+          "url": "https://api.pokewallet.io/sets/-34",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
+      "language": "zh-tw",
+      "code": "CS4.1C",
+      "seriesId": "ktcg:series:zh-tw:sword-and-shield",
+      "officialCardCount": 23,
+      "knownCardCount": 23,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:zh-tw:cs4-5c",
+      "name": "Final Flame Dance",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "pokewallet",
+          "sourceId": "-35",
+          "url": "https://api.pokewallet.io/sets/-35",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
+      "language": "zh-tw",
+      "code": "CS4.5C",
+      "seriesId": "ktcg:series:zh-tw:sword-and-shield",
+      "officialCardCount": 83,
+      "knownCardCount": 83,
       "availability": "available",
       "visuals": []
     },
@@ -320,16 +559,26 @@
       "schemaVersion": 2,
       "id": "ktcg:set:zh-tw:cs4ac",
       "name": "Nine Colors Gathering - Friends",
-      "aliases": [],
+      "aliases": [
+        "Super Electric Breaker: A"
+      ],
       "sources": [
         {
           "provider": "king_tcg",
           "sourceId": "v269:regional:zh-tw:CS4AC"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-36",
+          "url": "https://api.pokewallet.io/sets/-36",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
         }
       ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
       "language": "zh-tw",
       "code": "CS4AC",
       "seriesId": "ktcg:series:zh-tw:sword-and-shield",
+      "officialCardCount": 184,
       "knownCardCount": 184,
       "availability": "available",
       "visuals": []
@@ -338,17 +587,49 @@
       "schemaVersion": 2,
       "id": "ktcg:set:zh-tw:cs4bc",
       "name": "Nine Colors Gathering - Origin",
-      "aliases": [],
+      "aliases": [
+        "Super Electric Breaker: B"
+      ],
       "sources": [
         {
           "provider": "king_tcg",
           "sourceId": "v269:regional:zh-tw:CS4BC"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-37",
+          "url": "https://api.pokewallet.io/sets/-37",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
         }
       ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
       "language": "zh-tw",
       "code": "CS4BC",
       "seriesId": "ktcg:series:zh-tw:sword-and-shield",
+      "officialCardCount": 177,
       "knownCardCount": 177,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:zh-tw:cs5-1c",
+      "name": "Ancient Roar",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "pokewallet",
+          "sourceId": "-38",
+          "url": "https://api.pokewallet.io/sets/-38",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
+      "language": "zh-tw",
+      "code": "CS5.1C",
+      "seriesId": "ktcg:series:zh-tw:sword-and-shield",
+      "officialCardCount": 23,
+      "knownCardCount": 23,
       "availability": "available",
       "visuals": []
     },
@@ -373,12 +654,20 @@
         {
           "provider": "tcgdex",
           "sourceId": "CS55C"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-39",
+          "url": "https://api.pokewallet.io/sets/-39",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
         }
       ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
       "language": "zh-tw",
       "code": "CS55C",
       "seriesId": "ktcg:series:zh-tw:sword-and-shield",
       "year": 2024,
+      "officialCardCount": 89,
       "knownCardCount": 89,
       "availability": "available",
       "visuals": []
@@ -387,16 +676,26 @@
       "schemaVersion": 2,
       "id": "ktcg:set:zh-tw:cs5ac",
       "name": "Brave Stars - Charm",
-      "aliases": [],
+      "aliases": [
+        "Transformation Masquerade: A"
+      ],
       "sources": [
         {
           "provider": "king_tcg",
           "sourceId": "v269:regional:zh-tw:CS5AC"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-40",
+          "url": "https://api.pokewallet.io/sets/-40",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
         }
       ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
       "language": "zh-tw",
       "code": "CS5AC",
       "seriesId": "ktcg:series:zh-tw:sword-and-shield",
+      "officialCardCount": 176,
       "knownCardCount": 176,
       "availability": "available",
       "visuals": []
@@ -405,17 +704,49 @@
       "schemaVersion": 2,
       "id": "ktcg:set:zh-tw:cs5bc",
       "name": "Brave Stars - Brave",
-      "aliases": [],
+      "aliases": [
+        "Transformation Masquerade: B"
+      ],
       "sources": [
         {
           "provider": "king_tcg",
           "sourceId": "v269:regional:zh-tw:CS5BC"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-41",
+          "url": "https://api.pokewallet.io/sets/-41",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
         }
       ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
       "language": "zh-tw",
       "code": "CS5BC",
       "seriesId": "ktcg:series:zh-tw:sword-and-shield",
+      "officialCardCount": 178,
       "knownCardCount": 178,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:zh-tw:cs6-1c",
+      "name": "Wild Force",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "pokewallet",
+          "sourceId": "-42",
+          "url": "https://api.pokewallet.io/sets/-42",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
+      "language": "zh-tw",
+      "code": "CS6.1C",
+      "seriesId": "ktcg:series:zh-tw:sword-and-shield",
+      "officialCardCount": 24,
+      "knownCardCount": 24,
       "availability": "available",
       "visuals": []
     },
@@ -424,17 +755,26 @@
       "id": "ktcg:set:zh-tw:cs65c",
       "name": "Victory Star Guide",
       "aliases": [
-        "CS6.5C"
+        "CS6.5C",
+        "Victory Stars"
       ],
       "sources": [
         {
           "provider": "king_tcg",
           "sourceId": "v269:regional:zh-tw:CS65C"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-43",
+          "url": "https://api.pokewallet.io/sets/-43",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
         }
       ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
       "language": "zh-tw",
       "code": "CS65C",
       "seriesId": "ktcg:series:zh-tw:sword-and-shield",
+      "officialCardCount": 96,
       "knownCardCount": 96,
       "availability": "available",
       "visuals": []
@@ -443,16 +783,26 @@
       "schemaVersion": 2,
       "id": "ktcg:set:zh-tw:cs6ac",
       "name": "Azure Shadow - Roar",
-      "aliases": [],
+      "aliases": [
+        "Temporal Partners: A"
+      ],
       "sources": [
         {
           "provider": "king_tcg",
           "sourceId": "v269:regional:zh-tw:CS6AC"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-44",
+          "url": "https://api.pokewallet.io/sets/-44",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
         }
       ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
       "language": "zh-tw",
       "code": "CS6AC",
       "seriesId": "ktcg:series:zh-tw:sword-and-shield",
+      "officialCardCount": 169,
       "knownCardCount": 169,
       "availability": "available",
       "visuals": []
@@ -461,17 +811,159 @@
       "schemaVersion": 2,
       "id": "ktcg:set:zh-tw:cs6bc",
       "name": "Azure Shadow - Pursuit",
-      "aliases": [],
+      "aliases": [
+        "Temporal Partners: B"
+      ],
       "sources": [
         {
           "provider": "king_tcg",
           "sourceId": "v269:regional:zh-tw:CS6BC"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-45",
+          "url": "https://api.pokewallet.io/sets/-45",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
         }
       ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
       "language": "zh-tw",
       "code": "CS6BC",
       "seriesId": "ktcg:series:zh-tw:sword-and-shield",
+      "officialCardCount": 172,
       "knownCardCount": 172,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:zh-tw:csdc",
+      "name": "Dynamax Collection",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "pokewallet",
+          "sourceId": "-46",
+          "url": "https://api.pokewallet.io/sets/-46",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
+      "language": "zh-tw",
+      "code": "CSDC",
+      "seriesId": "ktcg:series:zh-tw:sword-and-shield",
+      "officialCardCount": 25,
+      "knownCardCount": 25,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:zh-tw:csfc",
+      "name": "Chinese Full Art Collection",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "pokewallet",
+          "sourceId": "-48",
+          "url": "https://api.pokewallet.io/sets/-48",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
+      "language": "zh-tw",
+      "code": "CSFC",
+      "seriesId": "ktcg:series:zh-tw:chinese-collections",
+      "officialCardCount": 26,
+      "knownCardCount": 26,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:zh-tw:csgc",
+      "name": "Chinese Gold Collection",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "pokewallet",
+          "sourceId": "-49",
+          "url": "https://api.pokewallet.io/sets/-49",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
+      "language": "zh-tw",
+      "code": "CSGC",
+      "seriesId": "ktcg:series:zh-tw:chinese-collections",
+      "officialCardCount": 8,
+      "knownCardCount": 8,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:zh-tw:csic",
+      "name": "Chinese Illustration Collection",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "pokewallet",
+          "sourceId": "-50",
+          "url": "https://api.pokewallet.io/sets/-50",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
+      "language": "zh-tw",
+      "code": "CSIC",
+      "seriesId": "ktcg:series:zh-tw:chinese-collections",
+      "officialCardCount": 8,
+      "knownCardCount": 8,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:zh-tw:csjc",
+      "name": "Chinese Jump Collection",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "pokewallet",
+          "sourceId": "-51",
+          "url": "https://api.pokewallet.io/sets/-51",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
+      "language": "zh-tw",
+      "code": "CSJC",
+      "seriesId": "ktcg:series:zh-tw:chinese-collections",
+      "officialCardCount": 16,
+      "knownCardCount": 16,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:zh-tw:csm1-5c",
+      "name": "Sun & Moon Chinese: 1.5",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "pokewallet",
+          "sourceId": "-52",
+          "url": "https://api.pokewallet.io/sets/-52",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
+      "language": "zh-tw",
+      "code": "CSM1.5C",
+      "seriesId": "ktcg:series:zh-tw:sun-and-moon",
+      "officialCardCount": 88,
+      "knownCardCount": 88,
       "availability": "available",
       "visuals": []
     },
@@ -479,16 +971,26 @@
       "schemaVersion": 2,
       "id": "ktcg:set:zh-tw:csm1ac",
       "name": "Storming Emergence Radiant",
-      "aliases": [],
+      "aliases": [
+        "Sun & Moon Chinese: A"
+      ],
       "sources": [
         {
           "provider": "king_tcg",
           "sourceId": "v269:regional:zh-tw:CSM1AC"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-53",
+          "url": "https://api.pokewallet.io/sets/-53",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
         }
       ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
       "language": "zh-tw",
       "code": "CSM1AC",
       "seriesId": "ktcg:series:zh-tw:sun-and-moon",
+      "officialCardCount": 211,
       "knownCardCount": 211,
       "availability": "available",
       "visuals": []
@@ -502,11 +1004,19 @@
         {
           "provider": "king_tcg",
           "sourceId": "v269:regional:zh-tw:CSM1BC"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-54",
+          "url": "https://api.pokewallet.io/sets/-54",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
         }
       ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
       "language": "zh-tw",
       "code": "CSM1BC",
       "seriesId": "ktcg:series:zh-tw:sun-and-moon",
+      "officialCardCount": 204,
       "knownCardCount": 204,
       "availability": "available",
       "visuals": []
@@ -520,12 +1030,42 @@
         {
           "provider": "king_tcg",
           "sourceId": "v269:regional:zh-tw:CSM1CC"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-55",
+          "url": "https://api.pokewallet.io/sets/-55",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
         }
       ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
       "language": "zh-tw",
       "code": "CSM1CC",
       "seriesId": "ktcg:series:zh-tw:sun-and-moon",
+      "officialCardCount": 212,
       "knownCardCount": 212,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:zh-tw:csm2-5c",
+      "name": "CSM2.5C",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "pokewallet",
+          "sourceId": "-56",
+          "url": "https://api.pokewallet.io/sets/-56",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
+      "language": "zh-tw",
+      "code": "CSM2.5C",
+      "seriesId": "ktcg:series:zh-tw:sun-and-moon",
+      "officialCardCount": 99,
+      "knownCardCount": 99,
       "availability": "available",
       "visuals": []
     },
@@ -538,11 +1078,19 @@
         {
           "provider": "king_tcg",
           "sourceId": "v269:regional:zh-tw:CSM2AC"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-57",
+          "url": "https://api.pokewallet.io/sets/-57",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
         }
       ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
       "language": "zh-tw",
       "code": "CSM2AC",
       "seriesId": "ktcg:series:zh-tw:sun-and-moon",
+      "officialCardCount": 194,
       "knownCardCount": 194,
       "availability": "available",
       "visuals": []
@@ -556,11 +1104,19 @@
         {
           "provider": "king_tcg",
           "sourceId": "v269:regional:zh-tw:CSM2BC"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-58",
+          "url": "https://api.pokewallet.io/sets/-58",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
         }
       ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
       "language": "zh-tw",
       "code": "CSM2BC",
       "seriesId": "ktcg:series:zh-tw:sun-and-moon",
+      "officialCardCount": 193,
       "knownCardCount": 193,
       "availability": "available",
       "visuals": []
@@ -574,12 +1130,152 @@
         {
           "provider": "king_tcg",
           "sourceId": "v269:regional:zh-tw:CSM2CC"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-59",
+          "url": "https://api.pokewallet.io/sets/-59",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
         }
       ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
       "language": "zh-tw",
       "code": "CSM2CC",
       "seriesId": "ktcg:series:zh-tw:sun-and-moon",
+      "officialCardCount": 192,
       "knownCardCount": 192,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:zh-tw:csmac",
+      "name": "CSMAC",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "pokewallet",
+          "sourceId": "-60",
+          "url": "https://api.pokewallet.io/sets/-60",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
+      "language": "zh-tw",
+      "code": "CSMAC",
+      "seriesId": "ktcg:series:zh-tw:sun-and-moon",
+      "officialCardCount": 19,
+      "knownCardCount": 19,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:zh-tw:csmc",
+      "name": "CSMC",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "pokewallet",
+          "sourceId": "-61",
+          "url": "https://api.pokewallet.io/sets/-61",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
+      "language": "zh-tw",
+      "code": "CSMC",
+      "seriesId": "ktcg:series:zh-tw:sun-and-moon",
+      "officialCardCount": 13,
+      "knownCardCount": 13,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:zh-tw:csmjc",
+      "name": "CSMJC",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "pokewallet",
+          "sourceId": "-62",
+          "url": "https://api.pokewallet.io/sets/-62",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
+      "language": "zh-tw",
+      "code": "CSMJC",
+      "seriesId": "ktcg:series:zh-tw:sun-and-moon",
+      "officialCardCount": 15,
+      "knownCardCount": 15,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:zh-tw:csmlc",
+      "name": "CSMLC",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "pokewallet",
+          "sourceId": "-63",
+          "url": "https://api.pokewallet.io/sets/-63",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
+      "language": "zh-tw",
+      "code": "CSMLC",
+      "seriesId": "ktcg:series:zh-tw:sun-and-moon",
+      "officialCardCount": 5,
+      "knownCardCount": 5,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:zh-tw:csmyc",
+      "name": "CSMYC",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "pokewallet",
+          "sourceId": "-64",
+          "url": "https://api.pokewallet.io/sets/-64",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
+      "language": "zh-tw",
+      "code": "CSMYC",
+      "seriesId": "ktcg:series:zh-tw:sun-and-moon",
+      "officialCardCount": 8,
+      "knownCardCount": 8,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:zh-tw:csuc",
+      "name": "CSUC",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "pokewallet",
+          "sourceId": "-65",
+          "url": "https://api.pokewallet.io/sets/-65",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
+      "language": "zh-tw",
+      "code": "CSUC",
+      "seriesId": "ktcg:series:zh-tw:chinese-collections",
+      "officialCardCount": 13,
+      "knownCardCount": 13,
       "availability": "available",
       "visuals": []
     },
@@ -631,12 +1327,20 @@
         {
           "provider": "tcgdex",
           "sourceId": "csv1c"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-66",
+          "url": "https://api.pokewallet.io/sets/-66",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
         }
       ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
       "language": "zh-tw",
       "code": "CSV1C",
       "seriesId": "ktcg:series:zh-tw:scarlet-and-violet",
       "year": 2025,
+      "officialCardCount": 167,
       "knownCardCount": 167,
       "availability": "available",
       "visuals": []
@@ -658,12 +1362,20 @@
         {
           "provider": "tcgdex",
           "sourceId": "csv2c"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-67",
+          "url": "https://api.pokewallet.io/sets/-67",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
         }
       ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
       "language": "zh-tw",
       "code": "CSV2C",
       "seriesId": "ktcg:series:zh-tw:scarlet-and-violet",
       "year": 2025,
+      "officialCardCount": 163,
       "knownCardCount": 163,
       "availability": "available",
       "visuals": []
@@ -685,12 +1397,20 @@
         {
           "provider": "tcgdex",
           "sourceId": "csv3c"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-68",
+          "url": "https://api.pokewallet.io/sets/-68",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
         }
       ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
       "language": "zh-tw",
       "code": "CSV3C",
       "seriesId": "ktcg:series:zh-tw:scarlet-and-violet",
       "year": 2025,
+      "officialCardCount": 165,
       "knownCardCount": 165,
       "availability": "available",
       "visuals": []
@@ -712,12 +1432,20 @@
         {
           "provider": "tcgdex",
           "sourceId": "csv4c"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-69",
+          "url": "https://api.pokewallet.io/sets/-69",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
         }
       ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
       "language": "zh-tw",
       "code": "CSV4C",
       "seriesId": "ktcg:series:zh-tw:scarlet-and-violet",
       "year": 2025,
+      "officialCardCount": 165,
       "knownCardCount": 165,
       "availability": "available",
       "visuals": []
@@ -739,12 +1467,20 @@
         {
           "provider": "tcgdex",
           "sourceId": "csv5c"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-70",
+          "url": "https://api.pokewallet.io/sets/-70",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
         }
       ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
       "language": "zh-tw",
       "code": "CSV5C",
       "seriesId": "ktcg:series:zh-tw:scarlet-and-violet",
       "year": 2025,
+      "officialCardCount": 164,
       "knownCardCount": 164,
       "availability": "available",
       "visuals": []
@@ -842,11 +1578,19 @@
         {
           "provider": "king_tcg",
           "sourceId": "v269:regional:zh-tw:CSV9.5C"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-243",
+          "url": "https://api.pokewallet.io/sets/-243",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
         }
       ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
       "language": "zh-tw",
       "code": "CSV9.5C",
       "seriesId": "ktcg:series:zh-tw:simplified-chinese",
+      "officialCardCount": 259,
       "knownCardCount": 259,
       "availability": "available",
       "visuals": []
@@ -879,6 +1623,28 @@
     },
     {
       "schemaVersion": 2,
+      "id": "ktcg:set:zh-tw:csvh3c",
+      "name": "CSVH3C",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "pokewallet",
+          "sourceId": "-71",
+          "url": "https://api.pokewallet.io/sets/-71",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
+      "language": "zh-tw",
+      "code": "CSVH3C",
+      "seriesId": "ktcg:series:zh-tw:scarlet-and-violet",
+      "officialCardCount": 101,
+      "knownCardCount": 101,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
       "id": "ktcg:set:zh-tw:csvl1c",
       "name": "Departure Special Pack",
       "aliases": [],
@@ -886,11 +1652,19 @@
         {
           "provider": "king_tcg",
           "sourceId": "v269:regional:zh-tw:CSVL1C"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-72",
+          "url": "https://api.pokewallet.io/sets/-72",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
         }
       ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
       "language": "zh-tw",
       "code": "CSVL1C",
       "seriesId": "ktcg:series:zh-tw:scarlet-and-violet",
+      "officialCardCount": 139,
       "knownCardCount": 139,
       "availability": "available",
       "visuals": []
@@ -914,6 +1688,72 @@
     },
     {
       "schemaVersion": 2,
+      "id": "ktcg:set:zh-tw:csxc",
+      "name": "CSXC",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "pokewallet",
+          "sourceId": "-73",
+          "url": "https://api.pokewallet.io/sets/-73",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
+      "language": "zh-tw",
+      "code": "CSXC",
+      "seriesId": "ktcg:series:zh-tw:chinese-collections",
+      "officialCardCount": 20,
+      "knownCardCount": 20,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:zh-tw:csyc",
+      "name": "CSYC",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "pokewallet",
+          "sourceId": "-74",
+          "url": "https://api.pokewallet.io/sets/-74",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
+      "language": "zh-tw",
+      "code": "CSYC",
+      "seriesId": "ktcg:series:zh-tw:chinese-collections",
+      "officialCardCount": 16,
+      "knownCardCount": 16,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:zh-tw:cszc",
+      "name": "CSZC",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "pokewallet",
+          "sourceId": "-75",
+          "url": "https://api.pokewallet.io/sets/-75",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
+        }
+      ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
+      "language": "zh-tw",
+      "code": "CSZC",
+      "seriesId": "ktcg:series:zh-tw:chinese-collections",
+      "officialCardCount": 68,
+      "knownCardCount": 68,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
       "id": "ktcg:set:zh-tw:nrgy",
       "name": "Energies",
       "aliases": [
@@ -923,11 +1763,19 @@
         {
           "provider": "king_tcg",
           "sourceId": "v269:regional:zh-tw:NRGY"
+        },
+        {
+          "provider": "pokewallet",
+          "sourceId": "-47",
+          "url": "https://api.pokewallet.io/sets/-47",
+          "lastSyncedAt": "2026-08-31T14:41:18.795Z"
         }
       ],
+      "lastSyncedAt": "2026-08-31T14:41:18.795Z",
       "language": "zh-tw",
       "code": "NRGY",
       "seriesId": "ktcg:series:zh-tw:promos",
+      "officialCardCount": 20,
       "knownCardCount": 20,
       "availability": "available",
       "visuals": []
