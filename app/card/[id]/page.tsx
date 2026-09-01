@@ -40,6 +40,7 @@ import {
 } from "../../../lib/priceIntelligence";
 import { getCondition, getPrintingVariant } from "../../../lib/storage";
 import type { CardCondition, CardPrintVariantKey, PokemonCard, PredictionResult } from "../../../lib/types";
+import { applyPrintVariantV285 } from "../../../lib/market/request";
 
 type ChartPoint = {
   date: string;
@@ -120,11 +121,11 @@ export default function CardPage() {
         const selectedPrintVariant = availablePrintings.some((variant) => variant.key === storedPrinting)
           ? storedPrinting
           : availablePrintings[0].key;
-        const catalogueCard: PokemonCard = {
+        const catalogueCard = applyPrintVariantV285({
           ...result,
           selectedPrintVariant,
           condition: (getCondition(result.id) || "Near Mint") as CardCondition,
-        };
+        }, selectedPrintVariant);
 
         // Render catalogue data immediately. Market enrichment remains isolated.
         setCard(catalogueCard);
@@ -323,7 +324,7 @@ export default function CardPage() {
 
   const changePrintingVariant = async (variant: CardPrintVariantKey) => {
     if (!card) return;
-    const baseCard: PokemonCard = { ...card, selectedPrintVariant: variant };
+    const baseCard = applyPrintVariantV285(card, variant);
     setCard(baseCard);
     setIsLoadingMarket(true);
     try {
