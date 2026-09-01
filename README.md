@@ -2,7 +2,7 @@
 
 King_TCG est une application Next.js de recherche, collection et analyse de cartes Pokémon TCG. Elle réunit un catalogue multilingue, la gestion de collection, les favoris, un scanner assisté par IA, une estimation PSA et une agrégation de données marché.
 
-**Version actuelle : V281 — M6 locale et recherche PriceCharting FR fiable.**
+**Version actuelle : V283 — catalogue chinois local récupéré via PokéWallet.**
 
 ## Fonctions principales
 
@@ -22,10 +22,12 @@ King_TCG est une application Next.js de recherche, collection et analyse de cart
 |---|---:|---:|---:|---|
 | FR | 18 | 244 | 19 797 | 172 complètes, 10 partielles |
 | EN | 20 | 203 | 21 066 | 199 complètes |
-| JP | 13 | 122 | 113 | M6 complète côté données, 121 extensions à synchroniser |
-| CN | 5 | 42 | 0 | métadonnées prêtes, cartes à synchroniser |
+| JP | 13 | 122 | 322 | M3, M6 et SV9A complètes, 119 extensions à synchroniser |
+| CN | 6 | 66 | 6 053 | 53 complètes, 7 partielles, 6 en métadonnées |
 
-Les extensions JP/CN sont visibles avec leur nom, code et série même lorsque leurs cartes ne sont pas encore disponibles localement. M6 contient 113 cartes locales avec leurs données et prix disponibles, mais TCGdex ne publie pas encore leurs visuels. King_TCG n’invente jamais une carte, un visuel ou un prix manquant.
+Les extensions JP/CN sont visibles avec leur nom, code et série même lorsque leurs cartes ne sont pas encore disponibles localement. M3 contient 117 cartes, M6 en contient 113 et SV9A en contient 92 avec 92 visuels japonais vérifiés. Le catalogue chinois contient désormais 60 extensions ouvrables, 6 053 identités et une référence visuelle PokéWallet pour chaque identité. Les différentes impressions d’un même numéro sont fusionnées en variantes afin d’éviter les faux doublons.
+
+Six extensions chinoises restent explicitement en métadonnées car PokéWallet ne publie pas encore leurs cartes : `CSV10C`, `CSV9C`, `CSV8C`, `CSV7C`, `CSVL2C` et `CSV6C`. King_TCG n’invente jamais une carte, un visuel ou un prix manquant.
 
 ## Sources de données
 
@@ -97,16 +99,9 @@ npm run test:market-cache:live
 npm run lint
 npx tsc --noEmit
 npm run build
-npm run audit:security
-npm run audit:catalog-v2-local
-npm run audit:search-catalog
-npm run audit:market-scanner
-npm run audit:psa-identity
-npm run audit:v281
-npm run audit:market-cache
-npm run audit:market-cache:persistent
-npm run audit:market-history
 ```
+
+Les générateurs et audits internes sont conservés dans l’archive locale complète du projet. Ils ne sont pas nécessaires au build de production et ne sont pas publiés sur GitHub/Vercel.
 
 ## Architecture utile
 
@@ -116,9 +111,17 @@ components/             Composants d’interface
 lib/catalog-v2/         Modèle, imports et chargement du catalogue local
 lib/market-cache/       Cache partagé, Redis, métriques et historique
 public/data/catalog-v2/ Manifest et fichiers JSON par langue/extension
-scripts/                Audits et générateurs reproductibles
-docs/                   État du projet, procédures et rapports techniques
 ```
+
+Les dossiers techniques `scripts/` et `docs/` existent uniquement dans l’archive locale complète. Le déploiement contient le code de l’application, les données nécessaires et ce README.
+
+## Déploiement GitHub et Vercel
+
+1. envoyer uniquement le contenu du patch GitHub/Vercel dans le dépôt ;
+2. conserver les variables sensibles dans les paramètres Vercel ;
+3. lancer un nouveau déploiement après toute modification des variables Redis ou API ;
+4. vérifier que `npm run build` passe avant la mise en production ;
+5. ne jamais publier `.env.local`, les tokens, les dossiers `docs/` ou `scripts/`.
 
 ## Principes de fiabilité
 
@@ -128,6 +131,7 @@ docs/                   État du projet, procédures et rapports techniques
 4. Les codes `CS*`, `CSV*` et `CBB*` restent chinois et ne sont jamais classés japonais.
 5. Scanner et PSA restent isolés du moteur de prix ; le Scanner ouvre la fiche après validation, puis cette fiche enrichit une seule carte.
 6. Les synchronisations de catalogue sont additives et contrôlées avant publication.
+7. Le code interne historique `zh-tw` reste temporairement un alias de compatibilité pour le catalogue chinois simplifié ; la source PokéWallet est toujours interrogée avec sa langue `chn` afin de ne pas mélanger les cartes traditionnelles et simplifiées.
 
 ## État des tests réels
 
@@ -139,15 +143,6 @@ Les audits statiques, le typage, le lint et le build sont exécutés avant livra
 - rendu final sur Android et iPhone ;
 - réponses et quotas réels des fournisseurs externes.
 
-## Documentation
+## Documentation publiée
 
-- [`docs/PROJECT_STATUS.md`](docs/PROJECT_STATUS.md) — état détaillé actuel ;
-- [`docs/SEARCH_CATALOG_V278.md`](docs/SEARCH_CATALOG_V278.md) — intégration visible Recherche/Catalogue ;
-- [`docs/MARKET_SCANNER_V279.md`](docs/MARKET_SCANNER_V279.md) — contrat prix FR/EN/JP/CN et raccord Scanner ;
-- [`docs/PSA_IDENTITY_V280.md`](docs/PSA_IDENTITY_V280.md) — dédoublonnage et regroupement PSA ;
-- [`docs/M6_PRICECHARTING_V281.md`](docs/M6_PRICECHARTING_V281.md) — M6 locale et filtrage PriceCharting FR ;
-- [`docs/MARKET_HISTORY_METRICS_V277.md`](docs/MARKET_HISTORY_METRICS_V277.md) — Redis, métriques et historique ;
-- [`docs/FINAL_ROADMAP.md`](docs/FINAL_ROADMAP.md) — prochaines étapes ;
-- [`docs/INDEX.md`](docs/INDEX.md) — index de toute la documentation.
-
-Les anciens rapports sont conservés dans `docs/archive/` pour la traçabilité, sans encombrer ce README.
+Ce README est la documentation complète publiée avec l’application. Les rapports de reprise, audits détaillés et historiques de versions restent dans l’archive locale complète afin de préserver la continuité du projet sans alourdir GitHub ni le déploiement Vercel.
