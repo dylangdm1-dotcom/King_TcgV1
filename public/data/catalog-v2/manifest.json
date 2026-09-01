@@ -1,8 +1,8 @@
 {
   "schemaVersion": 2,
   "formatVersion": 1,
-  "catalogVersion": "v283-cn-pokewallet-2026-08-31",
-  "generatedAt": "2026-08-31T14:41:18.795Z",
+  "catalogVersion": "v286-jp-mega-batch-2",
+  "generatedAt": "2026-09-01T00:00:00.000Z",
   "source": {
     "provider": "tcgdex-cards-database + king-tcg-bootstrap",
     "revision": "607921dc77f3507668c11dcf0c8a846e5a1d195e",
@@ -12,16 +12,16 @@
     {
       "provider": "tcgdex",
       "language": "ja",
-      "revision": "v282-jp-batch1-2026-08-31",
-      "importedAt": "2026-08-31T13:27:06.988Z",
-      "snapshotCount": 3,
-      "cardCount": 322
+      "revision": "v286-jp-mega-batch-2",
+      "importedAt": "2026-09-01T00:00:00.000Z",
+      "snapshotCount": 9,
+      "cardCount": 1110
     },
     {
       "provider": "pokewallet",
       "language": "zh-tw",
-      "revision": "v283-cn-pokewallet-2026-08-31",
-      "importedAt": "2026-08-31T14:41:18.795Z",
+      "revision": "v286-jp-mega-batch-2",
+      "importedAt": "2026-09-01T00:00:00.000Z",
       "snapshotCount": 60,
       "cardCount": 6053
     }
@@ -5906,8 +5906,8 @@
       },
       "sets": {
         "path": "ja/sets.json",
-        "bytes": 67065,
-        "sha256": "db69cdcab28135e9d89e629fee7bdda9ee45b9ffbae50c8fbea3d9307fe7a88e"
+        "bytes": 68845,
+        "sha256": "1ca44ba29c0ad5d3907196dee5e9d9739386d42dd20c9dab05258594da8f0933"
       },
       "groups": {
         "path": "ja/groups.json",
@@ -5918,10 +5918,10 @@
         "series": 13,
         "sets": 122,
         "groups": 1,
-        "cards": 322,
-        "completeSets": 3,
+        "cards": 1110,
+        "completeSets": 9,
         "partialSets": 0,
-        "metadataOnlySets": 119,
+        "metadataOnlySets": 113,
         "announcedSets": 0
       },
       "setEntries": [
@@ -6097,29 +6097,57 @@
           "setId": "ktcg:set:ja:m1l",
           "code": "M1L",
           "name": "Mega Brave",
-          "status": "metadata_only",
-          "cardCount": 0
+          "status": "complete",
+          "cardCount": 92,
+          "sourceCardCount": 92,
+          "officialCardCount": 63,
+          "cards": {
+            "path": "ja/cards/m1l-e8de3b22d7.json",
+            "bytes": 56042,
+            "sha256": "37ced7d9a32aed900955917d893d5400ba8867607ff0df609cba134ee37b4c27"
+          }
         },
         {
           "setId": "ktcg:set:ja:m1s",
           "code": "M1S",
           "name": "Mega Symphonia",
-          "status": "metadata_only",
-          "cardCount": 0
+          "status": "complete",
+          "cardCount": 92,
+          "sourceCardCount": 92,
+          "officialCardCount": 63,
+          "cards": {
+            "path": "ja/cards/m1s-3742fb5580.json",
+            "bytes": 56074,
+            "sha256": "6292e5fe1557999813022a97d903b6034ea89dce514bbcf35991bef4eadfbeb1"
+          }
         },
         {
           "setId": "ktcg:set:ja:m2",
           "code": "M2",
           "name": "Phantasmal Flames",
-          "status": "metadata_only",
-          "cardCount": 0
+          "status": "complete",
+          "cardCount": 116,
+          "sourceCardCount": 116,
+          "officialCardCount": 80,
+          "cards": {
+            "path": "ja/cards/m2-801568f7f7.json",
+            "bytes": 70248,
+            "sha256": "9b7c93b25e00732cfd14ec988dbfca2de876941f76dae7822e53fba9bbcd12d1"
+          }
         },
         {
           "setId": "ktcg:set:ja:m2a",
           "code": "M2A",
           "name": "Ascended Heroes",
-          "status": "metadata_only",
-          "cardCount": 0
+          "status": "complete",
+          "cardCount": 250,
+          "sourceCardCount": 250,
+          "officialCardCount": 193,
+          "cards": {
+            "path": "ja/cards/m2a-54551abf3f.json",
+            "bytes": 166002,
+            "sha256": "2476c9b4e6c6c9f647984206b8d796a6baf7144b7478e571a6187f8f1e1ec737"
+          }
         },
         {
           "setId": "ktcg:set:ja:m3",
@@ -6139,15 +6167,29 @@
           "setId": "ktcg:set:ja:m4",
           "code": "M4",
           "name": "Pitch Black",
-          "status": "metadata_only",
-          "cardCount": 0
+          "status": "complete",
+          "cardCount": 120,
+          "sourceCardCount": 120,
+          "officialCardCount": 83,
+          "cards": {
+            "path": "ja/cards/m4-c7e34df329.json",
+            "bytes": 72679,
+            "sha256": "27cc84bd423c0167adf618d5c9a6de8692935ae714fdec0470766489621a20b2"
+          }
         },
         {
           "setId": "ktcg:set:ja:m5",
           "code": "M5",
           "name": "Abyss Eye",
-          "status": "metadata_only",
-          "cardCount": 0
+          "status": "complete",
+          "cardCount": 118,
+          "sourceCardCount": 118,
+          "officialCardCount": 81,
+          "cards": {
+            "path": "ja/cards/m5-de91be4cfa.json",
+            "bytes": 71524,
+            "sha256": "13e764f62014fbc6a2e8a2ef17e356700e224da20a2f7dd015329ed33e369068"
+          }
         },
         {
           "setId": "ktcg:set:ja:m6",
