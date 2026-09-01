@@ -17,6 +17,7 @@ import {
 } from "./local/client";
 import type { CatalogLocalCoverageStatusV2 } from "./local/schema";
 import { CHINESE_SET_CATALOG } from "../regionalSetCatalog";
+import { pokewalletPrintVariantsV285 } from "./printVariants";
 
 export interface SearchCatalogSetV278 {
   id: string;
@@ -95,8 +96,6 @@ function cardVariants(card: CatalogCardV2): CardPrintVariant[] {
 function runtimeCardId(card: CatalogCardV2): string {
   const tcgdex = card.sources.find((source) => source.provider === "tcgdex" && source.sourceId);
   if (tcgdex) return `tcgdex-${card.language}-${tcgdex.sourceId}`;
-  const pokewallet = card.sources.find((source) => source.provider === "pokewallet" && source.sourceId);
-  if (pokewallet) return `pokewallet-${card.language}-${pokewallet.sourceId}`;
   return card.id;
 }
 
@@ -120,19 +119,31 @@ function toPokemonCard(
 ): PokemonCard {
   const candidates = visualUrls(card.visual, card.visuals);
   const pokewallet = card.sources.find((source) => source.provider === "pokewallet" && source.sourceId);
-  const large = card.visuals.find((visual) => visual.kind === "card")?.url || card.visual?.url || candidates[0] || "/placeholder.png";
-  const small = card.visuals.find((visual) => visual.kind === "thumbnail")?.url || candidates[0] || large;
+  const providerVariants = pokewalletPrintVariantsV285(card);
+  const variants = providerVariants.length ? providerVariants : cardVariants(card);
+  const primaryVariant = variants[0];
+  const large = primaryVariant?.images?.large || card.visuals.find((visual) => visual.kind === "card")?.url || card.visual?.url || candidates[0] || "/placeholder.png";
+  const small = primaryVariant?.images?.small || card.visuals.find((visual) => visual.kind === "thumbnail")?.url || candidates[0] || large;
   const images = setImages(set);
 
   return {
     id: runtimeCardId(card),
-    ...(pokewallet ? { providerId: pokewallet.sourceId } : {}),
+    ...(primaryVariant?.providerId || pokewallet?.sourceId
+      ? { providerId: primaryVariant?.providerId || pokewallet?.sourceId }
+      : {}),
     name: card.name,
     number: card.number,
     rarity: card.rarity === "None" ? undefined : card.rarity,
     images: { small, large },
-    imageCandidates: Array.from(new Set([large, small, ...candidates, "/placeholder.png"])),
-    availablePrintVariants: cardVariants(card),
+    imageCandidates: Array.from(new Set([
+      ...(primaryVariant?.imageCandidates || []),
+      large,
+      small,
+      ...candidates,
+      "/placeholder.png",
+    ])),
+    availablePrintVariants: variants,
+    selectedPrintVariant: primaryVariant?.key,
     set: {
       id: runtimeSetId(card, set),
       name: set.name,
