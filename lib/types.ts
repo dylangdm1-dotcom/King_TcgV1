@@ -16,7 +16,8 @@ export type CardPrintVariantKey =
   | "Reverse Holofoil"
   | "Poké Ball"
   | "Master Ball"
-  | "First Edition";
+  | "First Edition"
+  | `PokéWallet:${string}`;
 
 export interface CardPrintVariant {
   key: CardPrintVariantKey;
@@ -24,6 +25,13 @@ export interface CardPrintVariant {
   foil?: string;
   tcgplayerId?: number;
   cardmarketId?: number;
+  /** Identité exacte de l'impression chez le fournisseur régional. */
+  providerId?: string;
+  /** Type physique transmis aux fournisseurs marché, distinct de la clé de sélection. */
+  marketPrinting?: "Normal" | "Holofoil" | "Reverse Holofoil" | "Poké Ball" | "Master Ball" | "First Edition";
+  /** Visuels propres à cette impression, sans dupliquer l'identité catalogue. */
+  images?: { small: string; large: string };
+  imageCandidates?: string[];
   /** Cotations attachées précisément à cette impression lorsque le fournisseur les expose. */
   pricing?: {
     cardmarket?: Record<string, unknown>;
