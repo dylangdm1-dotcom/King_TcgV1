@@ -11,6 +11,7 @@ export interface MarketCacheIdentityInput {
   condition?: string;
   variantCardmarketId?: number;
   variantTcgplayerId?: number;
+  providerId?: string;
 }
 
 function token(value: unknown): string {
@@ -35,7 +36,7 @@ function normalizedNumber(value: unknown): string {
  * et l'état ne peuvent donc jamais partager silencieusement la même cotation.
  */
 export function buildMarketCacheKeyV275(input: MarketCacheIdentityInput): string {
-  return [
+  const parts: unknown[] = [
     `market-v${MARKET_CACHE_SCHEMA_VERSION}`,
     input.id,
     input.language,
@@ -45,6 +46,9 @@ export function buildMarketCacheKeyV275(input: MarketCacheIdentityInput): string
     input.condition || "Near Mint",
     input.variantCardmarketId || "",
     input.variantTcgplayerId || "",
-  ].map(token).join(":");
+  ];
+  // Préserve toutes les anciennes clés hors catalogue régional. Seules les
+  // impressions qui possèdent un providerId obtiennent un segment distinct.
+  if (input.providerId) parts.push(input.providerId);
+  return parts.map(token).join(":");
 }
-
