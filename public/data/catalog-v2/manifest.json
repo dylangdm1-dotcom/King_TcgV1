@@ -1,8 +1,8 @@
 {
   "schemaVersion": 2,
   "formatVersion": 1,
-  "catalogVersion": "v281-m6-2026-08-28",
-  "generatedAt": "2026-08-28T07:53:27.895Z",
+  "catalogVersion": "v282-jp-batch1-2026-08-31",
+  "generatedAt": "2026-08-31T13:27:06.988Z",
   "source": {
     "provider": "tcgdex-cards-database + king-tcg-bootstrap",
     "revision": "607921dc77f3507668c11dcf0c8a846e5a1d195e",
@@ -13,18 +13,18 @@
       "language": "fr",
       "series": {
         "path": "fr/series.json",
-        "bytes": 48116,
-        "sha256": "0c197a6221c0bb55bbf62291976ddc482c4c5dc7e9452ba95445f20318913ea3"
+        "bytes": 48119,
+        "sha256": "ec7db67f73ccb1c95b46852d25f9eeaced3240b968668e2c6ffacbbd3692062e"
       },
       "sets": {
         "path": "fr/sets.json",
-        "bytes": 151056,
-        "sha256": "2b3a587bc71d9faac6d92123b9fed1bd1c03ef78707a771a877d18b41f79eb43"
+        "bytes": 151059,
+        "sha256": "50807174727365ebb2c6e8e88edfaf76c1529d59923663d469ab9776987037eb"
       },
       "groups": {
         "path": "fr/groups.json",
-        "bytes": 125,
-        "sha256": "a6d4e3f9b2cb0c6be193796949fd7090214e8edc750397e65dda687287fe4c60"
+        "bytes": 128,
+        "sha256": "06e7581779f6a69db3c7205d1c39414b0a117eb41bc23f2409b9bce90fa1302d"
       },
       "stats": {
         "series": 18,
@@ -3031,18 +3031,18 @@
       "language": "en",
       "series": {
         "path": "en/series.json",
-        "bytes": 44873,
-        "sha256": "dd3e01ba63b88324d6399c928de7aa4b50f361622f8380810fdc651e1b007ac6"
+        "bytes": 44876,
+        "sha256": "d70bf08f4dd299325fe5863e6dc9c07adc2923a51566ff471e98b9e5a5317ab1"
       },
       "sets": {
         "path": "en/sets.json",
-        "bytes": 135387,
-        "sha256": "de7e89987f43674237ff6452525b9efa911d9dcfc8ab61968678a4e4e34fdd40"
+        "bytes": 135390,
+        "sha256": "3a66e9c57a8d9d661e0b784559da6def5014b608a9555ac592eda308bef71267"
       },
       "groups": {
         "path": "en/groups.json",
-        "bytes": 125,
-        "sha256": "e40e24e9cdbf14b2fbaea559c853b0ba06248b8c77dc52a4fe414c5537c390ef"
+        "bytes": 128,
+        "sha256": "bbd0c7b58d4bb840592b6dc3988270841ebf4a2b171a4210f65d6f11aad938c8"
       },
       "stats": {
         "series": 20,
@@ -5883,27 +5883,27 @@
       "language": "ja",
       "series": {
         "path": "ja/series.json",
-        "bytes": 27061,
-        "sha256": "0ded860daa3beae319a948b88cc346717d1fbf5a6aaa08ac84959d57e2fb73eb"
+        "bytes": 27064,
+        "sha256": "41c6894c0949eac9a126c83ecf66da0736bb94a06ad2eaae8d7593986f6f3070"
       },
       "sets": {
         "path": "ja/sets.json",
-        "bytes": 66585,
-        "sha256": "b201162d0a9c8586240129f3becabd4fe0b8cb224fe3fdc99b6afcc1a5a20080"
+        "bytes": 67065,
+        "sha256": "db69cdcab28135e9d89e629fee7bdda9ee45b9ffbae50c8fbea3d9307fe7a88e"
       },
       "groups": {
         "path": "ja/groups.json",
-        "bytes": 788,
-        "sha256": "e5b6881a4d33e1098ec82a14d8dcdfe2a660c2a8b833dc4b05c19fa3870c90c3"
+        "bytes": 791,
+        "sha256": "439459e9eccb1f37301e284fa7ad8027e5386951dd42b59eda8340fe861eef2a"
       },
       "stats": {
         "series": 13,
         "sets": 122,
         "groups": 1,
-        "cards": 113,
-        "completeSets": 1,
+        "cards": 322,
+        "completeSets": 3,
         "partialSets": 0,
-        "metadataOnlySets": 121,
+        "metadataOnlySets": 119,
         "announcedSets": 0
       },
       "setEntries": [
@@ -6107,8 +6107,15 @@
           "setId": "ktcg:set:ja:m3",
           "code": "M3",
           "name": "Perfect Order",
-          "status": "metadata_only",
-          "cardCount": 0
+          "status": "complete",
+          "cardCount": 117,
+          "sourceCardCount": 117,
+          "officialCardCount": 80,
+          "cards": {
+            "path": "ja/cards/m3-43ccf4d080.json",
+            "bytes": 70845,
+            "sha256": "4e676c455b1c7c9d456c69b4c211275ed232a120a486b05c64e713891b2d86f1"
+          }
         },
         {
           "setId": "ktcg:set:ja:m4",
@@ -6667,8 +6674,15 @@
           "setId": "ktcg:set:ja:sv9a",
           "code": "SV9A",
           "name": "Heat Wave Arena",
-          "status": "metadata_only",
-          "cardCount": 0
+          "status": "complete",
+          "cardCount": 92,
+          "sourceCardCount": 92,
+          "officialCardCount": 63,
+          "cards": {
+            "path": "ja/cards/sv9a-f5f7aaf23d.json",
+            "bytes": 154216,
+            "sha256": "0fda290893694aa9bd6d503faed60b51b56143a95a14bd50cc23dbc567e1ca2c"
+          }
         },
         {
           "setId": "ktcg:set:ja:sws",
@@ -6774,18 +6788,18 @@
       "language": "zh-tw",
       "series": {
         "path": "zh-tw/series.json",
-        "bytes": 7886,
-        "sha256": "32b5a6110857e51ca16e3e4336990defe28d90294ce2711ca703e368a5c1f3c8"
+        "bytes": 7889,
+        "sha256": "5302dc3a01d062409853f367f3ca2e5b8d53049b62c9db6f568ef672cff0e02c"
       },
       "sets": {
         "path": "zh-tw/sets.json",
-        "bytes": 23162,
-        "sha256": "e6327286b021cebe260602c2c680362f83454e2067898fa565310250c6a9f6c9"
+        "bytes": 23165,
+        "sha256": "5c52caeeb1fdbb8beca6f5123b274403e6b3a444fa56a7fd7e4265e2ac037633"
       },
       "groups": {
         "path": "zh-tw/groups.json",
-        "bytes": 7100,
-        "sha256": "a55b23b1724a786a3ecfd13d75bf424ef6249d49e44add456f95bbb730d3b2ce"
+        "bytes": 7103,
+        "sha256": "db74e8a3a61fde3f69155b70dced40735da58660d99d68f19daf094f747d9ef4"
       },
       "stats": {
         "series": 5,
@@ -7101,10 +7115,10 @@
     {
       "provider": "tcgdex",
       "language": "ja",
-      "revision": "v281-m6-2026-08-28",
-      "importedAt": "2026-08-28T07:53:27.895Z",
-      "snapshotCount": 1,
-      "cardCount": 113
+      "revision": "v282-jp-batch1-2026-08-31",
+      "importedAt": "2026-08-31T13:27:06.988Z",
+      "snapshotCount": 3,
+      "cardCount": 322
     }
   ]
 }
