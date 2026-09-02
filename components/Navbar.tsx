@@ -11,6 +11,7 @@ import {
   ArrowLeft,
   CircleDollarSign,
   BadgeCheck,
+  PackageOpen,
 } from "lucide-react";
 import NotificationBell from "@/components/notifications/NotificationBell";
 
@@ -18,6 +19,7 @@ const links = [
   { href: "/dashboard", icon: LayoutDashboard, label: "Dashboard" },
   { href: "/scanner", icon: Camera, label: "Scanner", main: true },
   { href: "/recherche", icon: Search, label: "Recherche" },
+  { href: "/items", icon: PackageOpen, label: "Items", premium: true },
   { href: "/collection", icon: Library, label: "Collection" },
   { href: "/psa", icon: BadgeCheck, label: "PSA", premium: true },
   { href: "/parametres", icon: Settings, label: "Paramètres" },
