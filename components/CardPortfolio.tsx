@@ -104,6 +104,11 @@ export default function CardPortfolio({ card, currentValue, onPrintingVariantCha
         <h2 className="text-sm font-bold uppercase tracking-widest text-zinc-400 flex items-center gap-2">
           <Briefcase className="w-4 h-4 text-cyan-400" /> Suivi du Portefeuille
         </h2>
+        {availableVariants.length > 1 ? (
+          <p className="mt-1 text-[10px] font-semibold text-cyan-300/80">
+            {availableVariants.length} impressions physiques reliées à cette carte unique.
+          </p>
+        ) : null}
       </div>
 
       <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">

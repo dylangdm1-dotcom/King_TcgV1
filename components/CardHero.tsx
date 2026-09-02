@@ -22,6 +22,8 @@ type Props = {
   score?: number;
   trend?: "up" | "down" | "stable";
   recommendation?: string;
+  identityCount?: number;
+  providerPrintCount?: number;
 };
 
 export default function CardHero({
@@ -35,6 +37,8 @@ export default function CardHero({
   score = 0,
   trend = "stable",
   recommendation = "",
+  identityCount = 0,
+  providerPrintCount = 0,
 }: Props) {
   const candidates = useMemo(
     () => Array.from(new Set([image, ...imageCandidates, "/placeholder.png"].filter(Boolean))),
@@ -83,6 +87,12 @@ export default function CardHero({
           <span className="inline-flex items-center gap-1.5 rounded-lg border border-amber-400/16 bg-amber-400/[0.05] px-2.5 py-1.5 text-[9px] font-black text-amber-200">
             <Award className="h-3.5 w-3.5" /> {rarity || "Standard"}
           </span>
+          {identityCount > 0 ? (
+            <span className="inline-flex items-center gap-1.5 rounded-lg border border-violet-400/16 bg-violet-400/[0.05] px-2.5 py-1.5 text-[9px] font-black text-violet-200">
+              <Layers className="h-3.5 w-3.5" /> {identityCount} cartes
+              {providerPrintCount > identityCount ? ` · ${providerPrintCount} impressions` : ""}
+            </span>
+          ) : null}
         </div>
 
         <div className="grid grid-cols-3 gap-1 rounded-[16px] bg-[#0c141c] p-2.5">
