@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 import { CatalogLocalFileV2Schema } from "../local/schema";
+import { CatalogCoverageBasisV2Schema } from "../schema";
 
 export const CATALOG_REGIONAL_SNAPSHOT_FORMAT_VERSION = 1 as const;
 
@@ -23,6 +24,9 @@ export const CatalogRegionalSnapshotV2Schema = z.object({
   status: z.enum(["complete", "partial"]),
   expectedCardCount: z.number().int().nonnegative().optional(),
   receivedCardCount: z.number().int().nonnegative(),
+  identityCount: z.number().int().nonnegative().optional(),
+  providerPrintCount: z.number().int().nonnegative().optional(),
+  coverageBasis: CatalogCoverageBasisV2Schema.optional(),
   payload: z.unknown(),
 });
 export type CatalogRegionalSnapshotV2 = z.infer<typeof CatalogRegionalSnapshotV2Schema>;
@@ -35,6 +39,9 @@ export const CatalogRegionalSnapshotEntryV2Schema = z.object({
   status: z.enum(["complete", "partial"]),
   expectedCardCount: z.number().int().nonnegative().optional(),
   receivedCardCount: z.number().int().nonnegative(),
+  identityCount: z.number().int().nonnegative().optional(),
+  providerPrintCount: z.number().int().nonnegative().optional(),
+  coverageBasis: CatalogCoverageBasisV2Schema.optional(),
   file: CatalogLocalFileV2Schema,
 });
 
@@ -52,4 +59,3 @@ export const CatalogRegionalSnapshotIndexV2Schema = z.object({
   })).default([]),
 });
 export type CatalogRegionalSnapshotIndexV2 = z.infer<typeof CatalogRegionalSnapshotIndexV2Schema>;
-

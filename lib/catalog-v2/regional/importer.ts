@@ -46,6 +46,10 @@ export function importRegionalSnapshotsV2(
     coverage.set(`${source.language}:${source.canonicalSetId}`, {
       status: source.status,
       sourceCardCount: source.expectedCardCount ?? source.receivedCardCount,
+      identityCount: source.identityCount ?? batch.cards.length,
+      providerPrintCount: source.providerPrintCount ?? source.receivedCardCount,
+      coverageBasis: source.coverageBasis
+        ?? (source.provider === "pokewallet" ? "provider_prints" : "canonical_identities"),
     });
   }
   const result = syncCatalogV2(current, batches, catalogVersion);
@@ -54,4 +58,3 @@ export function importRegionalSnapshotsV2(
   }
   return { ...result, coverage };
 }
-
