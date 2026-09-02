@@ -2,6 +2,10 @@ import type { PokemonCard } from "./types";
 
 export type SetLike = {
   id?: string;
+  canonicalId?: string;
+  aliases?: string[];
+  displayCode?: string;
+  mergedSetIds?: string[];
   name?: string;
   series?: string | { name?: string };
   releaseDate?: string;
@@ -102,6 +106,12 @@ export function setIdAliases(idOrName?: string): string[] {
 
   const chinese = clean.match(/^(csv\d+)([a-z]+)$/);
   if (chinese) aliases.add(chinese[1]);
+
+  // Le suffixe C identifie le catalogue chinois, mais certains OCR ne lisent
+  // que le code imprimé sans ce suffixe. L'alias reste limité aux familles CN.
+  if (/^(?:cs|cbb)/.test(clean) && clean.endsWith("c")) {
+    aliases.add(clean.slice(0, -1));
+  }
 
   // PokéCardex / fournisseurs peuvent écrire CSV9.5C sous la forme CSV95C.
   if (clean === "csv95c" || clean === "csv95") {
