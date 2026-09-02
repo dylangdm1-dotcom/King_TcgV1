@@ -1,11 +1,11 @@
 {
   "schemaVersion": 2,
   "formatVersion": 1,
-  "catalogVersion": "v291-search-dedup-jp-details",
-  "generatedAt": "2026-09-02T12:23:52.976Z",
+  "catalogVersion": "v292-cn-identity-print-coverage",
+  "generatedAt": "2026-09-02T14:44:52.447Z",
   "source": {
     "provider": "tcgdex-cards-database + king-tcg-bootstrap",
-    "revision": "v291-search-dedup-jp-details",
+    "revision": "v292-cn-identity-print-coverage",
     "license": "TCGdex cards-database MIT; King_TCG metadata"
   },
   "regionalSources": [
@@ -23,7 +23,9 @@
       "revision": "v287-jp-mass-summary",
       "importedAt": "2026-09-01T20:50:00.000Z",
       "snapshotCount": 60,
-      "cardCount": 6053
+      "cardCount": 6053,
+      "identityCount": 6053,
+      "providerPrintCount": 6890
     }
   ],
   "languages": {
@@ -7301,8 +7303,8 @@
       },
       "sets": {
         "path": "zh-tw/sets.json",
-        "bytes": 48686,
-        "sha256": "ad975dd2f0a4e14a6397fe9cfd6c1ab0a955a115ae125f32c619c626cfe1d00d"
+        "bytes": 55681,
+        "sha256": "65514dac47a8194b2b018c942db7570ec9c0494811cbde05e3e9cdce0b572ac6"
       },
       "groups": {
         "path": "zh-tw/groups.json",
@@ -7314,8 +7316,8 @@
         "sets": 66,
         "groups": 10,
         "cards": 6053,
-        "completeSets": 53,
-        "partialSets": 7,
+        "completeSets": 60,
+        "partialSets": 0,
         "metadataOnlySets": 6,
         "announcedSets": 0
       },
@@ -7332,7 +7334,10 @@
             "path": "zh-tw/cards/151c-1bfbf0801e.json",
             "bytes": 516433,
             "sha256": "4b4dc2c3a826474db6f346327118477010fa1b4bd2213bd5111cd394a701ea92"
-          }
+          },
+          "identityCount": 192,
+          "providerPrintCount": 192,
+          "coverageBasis": "canonical_identities"
         },
         {
           "setId": "ktcg:set:zh-tw:30thp",
@@ -7346,13 +7351,16 @@
             "path": "zh-tw/cards/30thp-90e23db83c.json",
             "bytes": 24422,
             "sha256": "96a67634946e9cbba7ccffece887a10f05d17e8cc7064983ef7bbc128b7ddd07"
-          }
+          },
+          "identityCount": 9,
+          "providerPrintCount": 9,
+          "coverageBasis": "canonical_identities"
         },
         {
           "setId": "ktcg:set:zh-tw:cbb1c",
           "code": "CBB1C",
           "name": "Gem Pack Volume 1",
-          "status": "partial",
+          "status": "complete",
           "cardCount": 18,
           "sourceCardCount": 115,
           "officialCardCount": 115,
@@ -7360,13 +7368,16 @@
             "path": "zh-tw/cards/cbb1c-8def6d9d38.json",
             "bytes": 234945,
             "sha256": "8c83ae0786430137c270928ab4b36173b6090e8a73bb352efdca07f110f1e7e0"
-          }
+          },
+          "identityCount": 18,
+          "providerPrintCount": 115,
+          "coverageBasis": "provider_prints"
         },
         {
           "setId": "ktcg:set:zh-tw:cbb2c",
           "code": "CBB2C",
           "name": "Gem Pack Volume 2",
-          "status": "partial",
+          "status": "complete",
           "cardCount": 11,
           "sourceCardCount": 140,
           "officialCardCount": 140,
@@ -7374,13 +7385,16 @@
             "path": "zh-tw/cards/cbb2c-371128daf8.json",
             "bytes": 277945,
             "sha256": "7406f8bb2e3efd2fa5d301b31074356ce73c36f73e58bbbb13f0070b7aeddf5d"
-          }
+          },
+          "identityCount": 11,
+          "providerPrintCount": 140,
+          "coverageBasis": "provider_prints"
         },
         {
           "setId": "ktcg:set:zh-tw:cbb3c",
           "code": "CBB3C",
           "name": "Gem Pack Volume 3",
-          "status": "partial",
+          "status": "complete",
           "cardCount": 20,
           "sourceCardCount": 136,
           "officialCardCount": 136,
@@ -7388,13 +7402,16 @@
             "path": "zh-tw/cards/cbb3c-4a795a95f2.json",
             "bytes": 277006,
             "sha256": "6f5e7202d2bdfc161810aa9a17215a0798617c5e24d735569a296a62faeb04d0"
-          }
+          },
+          "identityCount": 20,
+          "providerPrintCount": 136,
+          "coverageBasis": "provider_prints"
         },
         {
           "setId": "ktcg:set:zh-tw:cbb4c",
           "code": "CBB4C",
           "name": "Gem Pack Volume 4",
-          "status": "partial",
+          "status": "complete",
           "cardCount": 28,
           "sourceCardCount": 192,
           "officialCardCount": 192,
@@ -7402,13 +7419,16 @@
             "path": "zh-tw/cards/cbb4c-0459f3dfec.json",
             "bytes": 390238,
             "sha256": "d42663e671561f747b866a1dc2238673da73fdc795987874fadb4cbb1740d107"
-          }
+          },
+          "identityCount": 28,
+          "providerPrintCount": 192,
+          "coverageBasis": "provider_prints"
         },
         {
           "setId": "ktcg:set:zh-tw:cbb5c",
           "code": "CBB5C",
           "name": "Gem Pack Volume 5",
-          "status": "partial",
+          "status": "complete",
           "cardCount": 28,
           "sourceCardCount": 194,
           "officialCardCount": 194,
@@ -7416,13 +7436,16 @@
             "path": "zh-tw/cards/cbb5c-a43d009510.json",
             "bytes": 394079,
             "sha256": "afaad790f9a7a6f297e8944af6bfda21addceb389af1e02a32b3ba05e588b393"
-          }
+          },
+          "identityCount": 28,
+          "providerPrintCount": 194,
+          "coverageBasis": "provider_prints"
         },
         {
           "setId": "ktcg:set:zh-tw:cbb6c",
           "code": "CBB6C",
           "name": "Gem Pack Volume 6",
-          "status": "partial",
+          "status": "complete",
           "cardCount": 28,
           "sourceCardCount": 192,
           "officialCardCount": 192,
@@ -7430,13 +7453,16 @@
             "path": "zh-tw/cards/cbb6c-429a6826f1.json",
             "bytes": 390562,
             "sha256": "034ab63e25044f0a9f4d0d2855209e97f5d19d665af557705b63537561729db7"
-          }
+          },
+          "identityCount": 28,
+          "providerPrintCount": 192,
+          "coverageBasis": "provider_prints"
         },
         {
           "setId": "ktcg:set:zh-tw:cs1-5c",
           "code": "CS1.5C",
           "name": "Dynamax Tactics",
-          "status": "partial",
+          "status": "complete",
           "cardCount": 95,
           "sourceCardCount": 96,
           "officialCardCount": 96,
@@ -7444,7 +7470,10 @@
             "path": "zh-tw/cards/cs1.5c-8d6acd2169.json",
             "bytes": 258200,
             "sha256": "9c82ce2dc89394295597a44a2d1528ce36fc5739d73b0080e3dc47c3ba04cc96"
-          }
+          },
+          "identityCount": 95,
+          "providerPrintCount": 96,
+          "coverageBasis": "provider_prints"
         },
         {
           "setId": "ktcg:set:zh-tw:cs1ac",
@@ -7458,7 +7487,10 @@
             "path": "zh-tw/cards/cs1ac-1243099934.json",
             "bytes": 584603,
             "sha256": "10120de7764443e922695cafc5d5f2462fb0aa1a110f9a4eca3dea0bda485546"
-          }
+          },
+          "identityCount": 217,
+          "providerPrintCount": 217,
+          "coverageBasis": "canonical_identities"
         },
         {
           "setId": "ktcg:set:zh-tw:cs1bc",
@@ -7472,7 +7504,10 @@
             "path": "zh-tw/cards/cs1bc-7586684531.json",
             "bytes": 536106,
             "sha256": "a6fc4a85eff58abf36af0f4733ef48a55b0b602ba02965a19df7f4ede59c8f7d"
-          }
+          },
+          "identityCount": 199,
+          "providerPrintCount": 199,
+          "coverageBasis": "canonical_identities"
         },
         {
           "setId": "ktcg:set:zh-tw:cs2-5c",
@@ -7486,7 +7521,10 @@
             "path": "zh-tw/cards/cs2.5c-e078557606.json",
             "bytes": 213104,
             "sha256": "2fce366918d8e93e4aedca20c5a341d08608bcbf1e27cbc038ffd525b47a7269"
-          }
+          },
+          "identityCount": 79,
+          "providerPrintCount": 79,
+          "coverageBasis": "canonical_identities"
         },
         {
           "setId": "ktcg:set:zh-tw:cs2ac",
@@ -7500,7 +7538,10 @@
             "path": "zh-tw/cards/cs2ac-beac0b0f6a.json",
             "bytes": 385097,
             "sha256": "abbdc8c1428a7dc4dbf1fa4b6dd7b285c7d682a1ca8f62e442d957d0578d4a5c"
-          }
+          },
+          "identityCount": 143,
+          "providerPrintCount": 143,
+          "coverageBasis": "canonical_identities"
         },
         {
           "setId": "ktcg:set:zh-tw:cs2bc",
@@ -7514,7 +7555,10 @@
             "path": "zh-tw/cards/cs2bc-9f0a360ff6.json",
             "bytes": 385113,
             "sha256": "48d10689f68bfb23c30e55e12e74aa3a78d05a235a4bd6fbc1ad159d71c02c29"
-          }
+          },
+          "identityCount": 143,
+          "providerPrintCount": 143,
+          "coverageBasis": "canonical_identities"
         },
         {
           "setId": "ktcg:set:zh-tw:cs3-5c",
@@ -7528,7 +7572,10 @@
             "path": "zh-tw/cards/cs3.5c-f42c75bbab.json",
             "bytes": 242692,
             "sha256": "e7aa5587787620295c0dafbde515233a553c1d66be394a97b23258a95c824f59"
-          }
+          },
+          "identityCount": 90,
+          "providerPrintCount": 90,
+          "coverageBasis": "canonical_identities"
         },
         {
           "setId": "ktcg:set:zh-tw:cs3ac",
@@ -7542,7 +7589,10 @@
             "path": "zh-tw/cards/cs3ac-6e7da75521.json",
             "bytes": 495948,
             "sha256": "56a97e179eb3b3127719e8a56d95cd1a54879d36545c2f4b9754f48535510ca0"
-          }
+          },
+          "identityCount": 184,
+          "providerPrintCount": 184,
+          "coverageBasis": "canonical_identities"
         },
         {
           "setId": "ktcg:set:zh-tw:cs3bc",
@@ -7556,7 +7606,10 @@
             "path": "zh-tw/cards/cs3bc-8b10fd557b.json",
             "bytes": 482412,
             "sha256": "d4882bf355ed1b882129b047c7a17f6c498b2b74d990adfcdad4d692c5c797a0"
-          }
+          },
+          "identityCount": 179,
+          "providerPrintCount": 179,
+          "coverageBasis": "canonical_identities"
         },
         {
           "setId": "ktcg:set:zh-tw:cs4-1c",
@@ -7570,7 +7623,10 @@
             "path": "zh-tw/cards/cs4.1c-1c508ebcaf.json",
             "bytes": 62214,
             "sha256": "cbe3ebd08be9b629c44d82c5c7a0ac0393b2f175e38b676d4a33472abcda700a"
-          }
+          },
+          "identityCount": 23,
+          "providerPrintCount": 23,
+          "coverageBasis": "canonical_identities"
         },
         {
           "setId": "ktcg:set:zh-tw:cs4-5c",
@@ -7584,7 +7640,10 @@
             "path": "zh-tw/cards/cs4.5c-7382a51d94.json",
             "bytes": 223816,
             "sha256": "3e164aefc40723733046b4266ea38dff24cda852ae18ec1ea713019138a28fe3"
-          }
+          },
+          "identityCount": 83,
+          "providerPrintCount": 83,
+          "coverageBasis": "canonical_identities"
         },
         {
           "setId": "ktcg:set:zh-tw:cs4ac",
@@ -7598,7 +7657,10 @@
             "path": "zh-tw/cards/cs4ac-318794403b.json",
             "bytes": 495589,
             "sha256": "a1f5606b6079b6569f987d19e6d20e5a586c98c804bcf18a73544fb5cc4c45c5"
-          }
+          },
+          "identityCount": 184,
+          "providerPrintCount": 184,
+          "coverageBasis": "canonical_identities"
         },
         {
           "setId": "ktcg:set:zh-tw:cs4bc",
@@ -7612,7 +7674,10 @@
             "path": "zh-tw/cards/cs4bc-92ade51653.json",
             "bytes": 476847,
             "sha256": "9546dcab006db8e06b98dc3305a035f01cfaa41f3fbda9a9e4615ad8b4434ec5"
-          }
+          },
+          "identityCount": 177,
+          "providerPrintCount": 177,
+          "coverageBasis": "canonical_identities"
         },
         {
           "setId": "ktcg:set:zh-tw:cs5-1c",
@@ -7626,7 +7691,10 @@
             "path": "zh-tw/cards/cs5.1c-015eb6dd73.json",
             "bytes": 62288,
             "sha256": "5ed03c0dafd65b082a6ae4c12725cec88bf3b705ad5107440461f1f22f1186eb"
-          }
+          },
+          "identityCount": 23,
+          "providerPrintCount": 23,
+          "coverageBasis": "canonical_identities"
         },
         {
           "setId": "ktcg:set:zh-tw:cs55c",
@@ -7640,7 +7708,10 @@
             "path": "zh-tw/cards/cs55c-4b945efce9.json",
             "bytes": 239882,
             "sha256": "43b8b9e8967ea05e3c70f22b35de68d2fa7b049e7586c4e4dde21caa8ba3862b"
-          }
+          },
+          "identityCount": 89,
+          "providerPrintCount": 89,
+          "coverageBasis": "canonical_identities"
         },
         {
           "setId": "ktcg:set:zh-tw:cs5ac",
@@ -7654,7 +7725,10 @@
             "path": "zh-tw/cards/cs5ac-133a5d2b3c.json",
             "bytes": 474168,
             "sha256": "7fbda37295b792e520262e1c834c4f1d1856c3d1b0c70fd765c819d274b00c06"
-          }
+          },
+          "identityCount": 176,
+          "providerPrintCount": 176,
+          "coverageBasis": "canonical_identities"
         },
         {
           "setId": "ktcg:set:zh-tw:cs5bc",
@@ -7668,7 +7742,10 @@
             "path": "zh-tw/cards/cs5bc-a98de98d21.json",
             "bytes": 479613,
             "sha256": "d7d9f19254cb598906edb9d6566059856547a21e85cca1e71f32edc0324ec87f"
-          }
+          },
+          "identityCount": 178,
+          "providerPrintCount": 178,
+          "coverageBasis": "canonical_identities"
         },
         {
           "setId": "ktcg:set:zh-tw:cs6-1c",
@@ -7682,7 +7759,10 @@
             "path": "zh-tw/cards/cs6.1c-e6411e6f46.json",
             "bytes": 64896,
             "sha256": "6367beab622a571b5ba54236a342cfae2ac556bf1b770e4e13d2d4e3f274ff1e"
-          }
+          },
+          "identityCount": 24,
+          "providerPrintCount": 24,
+          "coverageBasis": "canonical_identities"
         },
         {
           "setId": "ktcg:set:zh-tw:cs65c",
@@ -7696,7 +7776,10 @@
             "path": "zh-tw/cards/cs65c-c1539f4914.json",
             "bytes": 258606,
             "sha256": "27aaf2cc51f4353ea097676eb56d2e22678c348134ac51d1f4e92e8182d2c997"
-          }
+          },
+          "identityCount": 96,
+          "providerPrintCount": 96,
+          "coverageBasis": "canonical_identities"
         },
         {
           "setId": "ktcg:set:zh-tw:cs6ac",
@@ -7710,7 +7793,10 @@
             "path": "zh-tw/cards/cs6ac-796b22936e.json",
             "bytes": 455221,
             "sha256": "f396b68a128bf8e859fd43b96b18cc91494cb71de17a6ee76b699f60e5bde1e3"
-          }
+          },
+          "identityCount": 169,
+          "providerPrintCount": 169,
+          "coverageBasis": "canonical_identities"
         },
         {
           "setId": "ktcg:set:zh-tw:cs6bc",
@@ -7724,7 +7810,10 @@
             "path": "zh-tw/cards/cs6bc-2bfe179aba.json",
             "bytes": 463314,
             "sha256": "d03462d0a9c5528b6bcdc73383638ad87f05f661b93c8ce5db70c27cac6bfaaf"
-          }
+          },
+          "identityCount": 172,
+          "providerPrintCount": 172,
+          "coverageBasis": "canonical_identities"
         },
         {
           "setId": "ktcg:set:zh-tw:csdc",
@@ -7738,7 +7827,10 @@
             "path": "zh-tw/cards/csdc-c2d7f3bf4c.json",
             "bytes": 67420,
             "sha256": "65c2fa8e9d5fb81d479e011e317234101e660283d98297822d8af4d20ac36b33"
-          }
+          },
+          "identityCount": 25,
+          "providerPrintCount": 25,
+          "coverageBasis": "canonical_identities"
         },
         {
           "setId": "ktcg:set:zh-tw:csfc",
@@ -7752,7 +7844,10 @@
             "path": "zh-tw/cards/csfc-e32d1381f9.json",
             "bytes": 70165,
             "sha256": "b94962d4bc5c8c8c97deab905589ab481ea1ab605b422ed641088c50b6733de1"
-          }
+          },
+          "identityCount": 26,
+          "providerPrintCount": 26,
+          "coverageBasis": "canonical_identities"
         },
         {
           "setId": "ktcg:set:zh-tw:csgc",
@@ -7766,7 +7861,10 @@
             "path": "zh-tw/cards/csgc-798131cccf.json",
             "bytes": 21704,
             "sha256": "9b82f5ba54f3975ef5ecf4b3983a8d5249f59d055fb50a274646b51201b0db33"
-          }
+          },
+          "identityCount": 8,
+          "providerPrintCount": 8,
+          "coverageBasis": "canonical_identities"
         },
         {
           "setId": "ktcg:set:zh-tw:csic",
@@ -7780,7 +7878,10 @@
             "path": "zh-tw/cards/csic-d1f21ae31d.json",
             "bytes": 21682,
             "sha256": "f4fddccef9009fdf12bb1caad380050a69086e6ad05e51a536eb9440d98bd88e"
-          }
+          },
+          "identityCount": 8,
+          "providerPrintCount": 8,
+          "coverageBasis": "canonical_identities"
         },
         {
           "setId": "ktcg:set:zh-tw:csjc",
@@ -7794,7 +7895,10 @@
             "path": "zh-tw/cards/csjc-a6218c806e.json",
             "bytes": 43215,
             "sha256": "c78e19269c9f01dddb6578ae92eb5aa01b279a24894c82bef50747ccaf2cd421"
-          }
+          },
+          "identityCount": 16,
+          "providerPrintCount": 16,
+          "coverageBasis": "canonical_identities"
         },
         {
           "setId": "ktcg:set:zh-tw:csm1-5c",
@@ -7808,7 +7912,10 @@
             "path": "zh-tw/cards/csm1.5c-7386fbe898.json",
             "bytes": 237562,
             "sha256": "ac1a36c1a064c5d1e836d6b95439cdddc4784871d545b4e89cb316edb3f00354"
-          }
+          },
+          "identityCount": 88,
+          "providerPrintCount": 88,
+          "coverageBasis": "canonical_identities"
         },
         {
           "setId": "ktcg:set:zh-tw:csm1ac",
@@ -7822,7 +7929,10 @@
             "path": "zh-tw/cards/csm1ac-40d8f4dfdf.json",
             "bytes": 568723,
             "sha256": "92c857f9084fb38916888cc2e195d1c65007c47272d5db979d22aab7a04f4ae4"
-          }
+          },
+          "identityCount": 211,
+          "providerPrintCount": 211,
+          "coverageBasis": "canonical_identities"
         },
         {
           "setId": "ktcg:set:zh-tw:csm1bc",
@@ -7836,7 +7946,10 @@
             "path": "zh-tw/cards/csm1bc-422a2c0935.json",
             "bytes": 336462,
             "sha256": "633e1c872dc452d8e0ed8272df10e6a0c2079857d3034c796cb41b6196d2f5bf"
-          }
+          },
+          "identityCount": 204,
+          "providerPrintCount": 204,
+          "coverageBasis": "canonical_identities"
         },
         {
           "setId": "ktcg:set:zh-tw:csm1cc",
@@ -7850,7 +7963,10 @@
             "path": "zh-tw/cards/csm1cc-d389da8fc7.json",
             "bytes": 349701,
             "sha256": "128f3ce835fd33f93e39883079a76ab2b9f5d27ab3daee9c781efeaa053fe4f5"
-          }
+          },
+          "identityCount": 212,
+          "providerPrintCount": 212,
+          "coverageBasis": "canonical_identities"
         },
         {
           "setId": "ktcg:set:zh-tw:csm2-5c",
@@ -7864,7 +7980,10 @@
             "path": "zh-tw/cards/csm2.5c-a8ee5c91bb.json",
             "bytes": 163818,
             "sha256": "7b0206005198651b5be0bffa8f196a2e5cb25ba770df0893e430cf502620773e"
-          }
+          },
+          "identityCount": 99,
+          "providerPrintCount": 99,
+          "coverageBasis": "canonical_identities"
         },
         {
           "setId": "ktcg:set:zh-tw:csm2ac",
@@ -7878,7 +7997,10 @@
             "path": "zh-tw/cards/csm2ac-d37498a9e8.json",
             "bytes": 320096,
             "sha256": "27a78224953595ca3a899e0b74f7ac9306f5ace240595dfb406f8f3088e15de9"
-          }
+          },
+          "identityCount": 194,
+          "providerPrintCount": 194,
+          "coverageBasis": "canonical_identities"
         },
         {
           "setId": "ktcg:set:zh-tw:csm2bc",
@@ -7892,7 +8014,10 @@
             "path": "zh-tw/cards/csm2bc-97dab0c857.json",
             "bytes": 318410,
             "sha256": "d8d6ae209fde17845403f33fb1f49e7b79ceb28b1b147aba6a1d2ec32953325c"
-          }
+          },
+          "identityCount": 193,
+          "providerPrintCount": 193,
+          "coverageBasis": "canonical_identities"
         },
         {
           "setId": "ktcg:set:zh-tw:csm2cc",
@@ -7906,7 +8031,10 @@
             "path": "zh-tw/cards/csm2cc-a0def00959.json",
             "bytes": 316990,
             "sha256": "09da604d80b1c084aec7a780b7b2bf7b3214ea688bf9ddab11f2b7beda5e7de5"
-          }
+          },
+          "identityCount": 192,
+          "providerPrintCount": 192,
+          "coverageBasis": "canonical_identities"
         },
         {
           "setId": "ktcg:set:zh-tw:csmac",
@@ -7920,7 +8048,10 @@
             "path": "zh-tw/cards/csmac-3e0db33d80.json",
             "bytes": 31169,
             "sha256": "41e36758208902e1026b2f26fb8b2b337107a34abb84f2caf95eeddc5b518ad1"
-          }
+          },
+          "identityCount": 19,
+          "providerPrintCount": 19,
+          "coverageBasis": "canonical_identities"
         },
         {
           "setId": "ktcg:set:zh-tw:csmc",
@@ -7934,7 +8065,10 @@
             "path": "zh-tw/cards/csmc-d5b56cef95.json",
             "bytes": 21150,
             "sha256": "0b40bc4861cdcc77a24f141df2065f94e504f15d8b860c9fd633226ee22e2289"
-          }
+          },
+          "identityCount": 13,
+          "providerPrintCount": 13,
+          "coverageBasis": "canonical_identities"
         },
         {
           "setId": "ktcg:set:zh-tw:csmjc",
@@ -7948,7 +8082,10 @@
             "path": "zh-tw/cards/csmjc-0643663aad.json",
             "bytes": 24589,
             "sha256": "f4e29642a7139d709ca254de05eb6b8f3e63f432429baeb27ae8273b6ff3385c"
-          }
+          },
+          "identityCount": 15,
+          "providerPrintCount": 15,
+          "coverageBasis": "canonical_identities"
         },
         {
           "setId": "ktcg:set:zh-tw:csmlc",
@@ -7962,7 +8099,10 @@
             "path": "zh-tw/cards/csmlc-ae32929e8f.json",
             "bytes": 8292,
             "sha256": "ec20381e1979439a5b779f72d7822908932da08c6b79e9653b530ad55e2fde61"
-          }
+          },
+          "identityCount": 5,
+          "providerPrintCount": 5,
+          "coverageBasis": "canonical_identities"
         },
         {
           "setId": "ktcg:set:zh-tw:csmyc",
@@ -7976,7 +8116,10 @@
             "path": "zh-tw/cards/csmyc-907ba0bbf0.json",
             "bytes": 13144,
             "sha256": "ad3b919c9d68535816889ba1a0befb8b18b3447380737f56905ca706d6ef5b9c"
-          }
+          },
+          "identityCount": 8,
+          "providerPrintCount": 8,
+          "coverageBasis": "canonical_identities"
         },
         {
           "setId": "ktcg:set:zh-tw:csuc",
@@ -7990,7 +8133,10 @@
             "path": "zh-tw/cards/csuc-2fba0ce386.json",
             "bytes": 21147,
             "sha256": "4bcb06663d2f9bd405eeff5bc265941f5898843f205f13a34b98384e2781223e"
-          }
+          },
+          "identityCount": 13,
+          "providerPrintCount": 13,
+          "coverageBasis": "canonical_identities"
         },
         {
           "setId": "ktcg:set:zh-tw:csv10c",
@@ -7998,7 +8144,10 @@
           "name": "Chasing Glory Together",
           "status": "metadata_only",
           "cardCount": 0,
-          "officialCardCount": 287
+          "officialCardCount": 287,
+          "identityCount": 0,
+          "providerPrintCount": 0,
+          "coverageBasis": "canonical_identities"
         },
         {
           "setId": "ktcg:set:zh-tw:csv1c",
@@ -8012,7 +8161,10 @@
             "path": "zh-tw/cards/csv1c-b62f0dbeb9.json",
             "bytes": 273628,
             "sha256": "89944d274429f64a9d4253ec706d7f27e7cd049e45bdee3c83c32068aa2da138"
-          }
+          },
+          "identityCount": 167,
+          "providerPrintCount": 167,
+          "coverageBasis": "canonical_identities"
         },
         {
           "setId": "ktcg:set:zh-tw:csv2c",
@@ -8026,7 +8178,10 @@
             "path": "zh-tw/cards/csv2c-84f398eec1.json",
             "bytes": 266955,
             "sha256": "a25494fe79cfb9454265f1493951c03638be89179ede3b188757a4d6cd709ff8"
-          }
+          },
+          "identityCount": 163,
+          "providerPrintCount": 163,
+          "coverageBasis": "canonical_identities"
         },
         {
           "setId": "ktcg:set:zh-tw:csv3c",
@@ -8040,7 +8195,10 @@
             "path": "zh-tw/cards/csv3c-dc0e5b9e9e.json",
             "bytes": 270276,
             "sha256": "b60f5491265bdc3b211f9446696fcba724be5dbbec3a7ef05b787d2367498b0d"
-          }
+          },
+          "identityCount": 165,
+          "providerPrintCount": 165,
+          "coverageBasis": "canonical_identities"
         },
         {
           "setId": "ktcg:set:zh-tw:csv4c",
@@ -8054,7 +8212,10 @@
             "path": "zh-tw/cards/csv4c-162c6b2073.json",
             "bytes": 270261,
             "sha256": "19eecf5f21f20d262cce4bf0f1e6cc7a5280f6c7446d063ed70b24fa09b0a275"
-          }
+          },
+          "identityCount": 165,
+          "providerPrintCount": 165,
+          "coverageBasis": "canonical_identities"
         },
         {
           "setId": "ktcg:set:zh-tw:csv5c",
@@ -8068,28 +8229,40 @@
             "path": "zh-tw/cards/csv5c-ce581f71ef.json",
             "bytes": 268519,
             "sha256": "d20283634954a82fecab7009980233038ff3fc09a9495f717be45b4ca8317509"
-          }
+          },
+          "identityCount": 164,
+          "providerPrintCount": 164,
+          "coverageBasis": "canonical_identities"
         },
         {
           "setId": "ktcg:set:zh-tw:csv6c",
           "code": "CSV6C",
           "name": "Arcane Truth",
           "status": "metadata_only",
-          "cardCount": 0
+          "cardCount": 0,
+          "identityCount": 0,
+          "providerPrintCount": 0,
+          "coverageBasis": "canonical_identities"
         },
         {
           "setId": "ktcg:set:zh-tw:csv7c",
           "code": "CSV7C",
           "name": "Blade Awakenings",
           "status": "metadata_only",
-          "cardCount": 0
+          "cardCount": 0,
+          "identityCount": 0,
+          "providerPrintCount": 0,
+          "coverageBasis": "canonical_identities"
         },
         {
           "setId": "ktcg:set:zh-tw:csv8c",
           "code": "CSV8C",
           "name": "Brilliant Fantasy",
           "status": "metadata_only",
-          "cardCount": 0
+          "cardCount": 0,
+          "identityCount": 0,
+          "providerPrintCount": 0,
+          "coverageBasis": "canonical_identities"
         },
         {
           "setId": "ktcg:set:zh-tw:csv9-5c",
@@ -8103,14 +8276,20 @@
             "path": "zh-tw/cards/csv9.5c-6c9637cffd.json",
             "bytes": 433979,
             "sha256": "3f213134b8fd28b0a308734eb1fd28df9aa4aaf6d58f4eface43e04774593c23"
-          }
+          },
+          "identityCount": 259,
+          "providerPrintCount": 259,
+          "coverageBasis": "canonical_identities"
         },
         {
           "setId": "ktcg:set:zh-tw:csv9c",
           "code": "CSV9C",
           "name": "Stellar Crystal",
           "status": "metadata_only",
-          "cardCount": 0
+          "cardCount": 0,
+          "identityCount": 0,
+          "providerPrintCount": 0,
+          "coverageBasis": "canonical_identities"
         },
         {
           "setId": "ktcg:set:zh-tw:csvh3c",
@@ -8124,7 +8303,10 @@
             "path": "zh-tw/cards/csvh3c-544490abe4.json",
             "bytes": 167119,
             "sha256": "1ac792be01013c8d6173df4ec70ed68a9d49123f4d88ee63119fb799ecc64ee8"
-          }
+          },
+          "identityCount": 101,
+          "providerPrintCount": 101,
+          "coverageBasis": "canonical_identities"
         },
         {
           "setId": "ktcg:set:zh-tw:csvl1c",
@@ -8138,14 +8320,20 @@
             "path": "zh-tw/cards/csvl1c-b173f3c843.json",
             "bytes": 229807,
             "sha256": "de4446a63401a18a7793f073a083277113b70ffc6b7903e7adee4d302599f90a"
-          }
+          },
+          "identityCount": 139,
+          "providerPrintCount": 139,
+          "coverageBasis": "canonical_identities"
         },
         {
           "setId": "ktcg:set:zh-tw:csvl2c",
           "code": "CSVL2C",
           "name": "Travel Special Pack",
           "status": "metadata_only",
-          "cardCount": 0
+          "cardCount": 0,
+          "identityCount": 0,
+          "providerPrintCount": 0,
+          "coverageBasis": "canonical_identities"
         },
         {
           "setId": "ktcg:set:zh-tw:csxc",
@@ -8159,7 +8347,10 @@
             "path": "zh-tw/cards/csxc-1fe12da5d3.json",
             "bytes": 32586,
             "sha256": "24f2a70e2deebee3af8d5b9394459e68c68c456a750e32a1020cb3078a35421b"
-          }
+          },
+          "identityCount": 20,
+          "providerPrintCount": 20,
+          "coverageBasis": "canonical_identities"
         },
         {
           "setId": "ktcg:set:zh-tw:csyc",
@@ -8173,7 +8364,10 @@
             "path": "zh-tw/cards/csyc-c4a1d5b4ea.json",
             "bytes": 25987,
             "sha256": "5b0ba793b2dad47d8e33d8bcfecfa81715922cea172a60a97cab68805b3dc2c4"
-          }
+          },
+          "identityCount": 16,
+          "providerPrintCount": 16,
+          "coverageBasis": "canonical_identities"
         },
         {
           "setId": "ktcg:set:zh-tw:cszc",
@@ -8187,7 +8381,10 @@
             "path": "zh-tw/cards/cszc-ce53f082d0.json",
             "bytes": 110557,
             "sha256": "423b1fe556c9153bf7cb045641cabafc838ba108cca83403a3b3fbc7aa5c36fc"
-          }
+          },
+          "identityCount": 68,
+          "providerPrintCount": 68,
+          "coverageBasis": "canonical_identities"
         },
         {
           "setId": "ktcg:set:zh-tw:nrgy",
@@ -8201,7 +8398,10 @@
             "path": "zh-tw/cards/nrgy-d8c16dd395.json",
             "bytes": 32628,
             "sha256": "e9aa15d8fc971ddf4b0e1ebafffabe2f7f41e2984985b58125a835bd71fc036d"
-          }
+          },
+          "identityCount": 20,
+          "providerPrintCount": 20,
+          "coverageBasis": "canonical_identities"
         }
       ]
     }
