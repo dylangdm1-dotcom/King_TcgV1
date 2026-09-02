@@ -53,24 +53,16 @@ import {
   normalizeSetId,
   localizedSetCode,
 } from "../../lib/setCatalog";
+import {
+  groupSearchCatalogSetsV297,
+  localizedCatalogSeriesNameV297,
+  type SearchCatalogGroupingV297,
+} from "../../lib/catalog-v2/searchSeries";
 
 const PAGE_SIZE = 24;
 const VIEW_MODE_STORAGE_KEY = "king_tcg_search_view_v278";
+const GROUPING_MODE_STORAGE_KEY = "king_tcg_search_grouping_v297";
 type SearchViewMode = "compact3" | "grid" | "large";
-
-const GENERATION_ORDER = [
-  "MEGA",
-  "Écarlate & Violet",
-  "Épée & Bouclier",
-  "Soleil & Lune",
-  "XY",
-  "Noir & Blanc",
-  "HeartGold & SoulSilver",
-  "Diamant & Perle",
-  "Promos",
-  "Collections chinoises",
-  "Séries classiques",
-];
 
 type SetItem = {
   id: string;
@@ -385,13 +377,14 @@ export default function Recherche() {
   const [catalogLoading, setCatalogLoading] = useState(false);
   const [visible, setVisible] = useState(PAGE_SIZE);
   const [viewMode, setViewMode] = useState<SearchViewMode>("grid");
+  const [groupingMode, setGroupingMode] = useState<SearchCatalogGroupingV297>("series");
   const [searchMode, setSearchMode] = useState<"text" | "set">("text");
   const [selectedLanguage, setSelectedLanguage] = useState<LanguageCode>("fr");
   const [allSetsList, setAllSetsList] = useState<SetItem[]>([]);
-  const [selectedGeneration, setSelectedGeneration] = useState<string>("all");
+  const [selectedCatalogGroup, setSelectedCatalogGroup] = useState<string>("all");
   const [selectedSetId, setSelectedSetId] = useState<string>("");
   const [setSearch, setSetSearch] = useState("");
-  const [expandedGeneration, setExpandedGeneration] = useState<string | null>(null);
+  const [expandedCatalogGroup, setExpandedCatalogGroup] = useState<string | null>(null);
   const [catalogNotice, setCatalogNotice] = useState("");
   const initialSetHandledRef = useRef(false);
   const [filters, setFilters] = useState<SearchFiltersType>({
@@ -408,6 +401,10 @@ export default function Recherche() {
       if (stored === "compact3" || stored === "grid" || stored === "large") {
         setViewMode(stored);
       }
+      const storedGrouping = localStorage.getItem(GROUPING_MODE_STORAGE_KEY);
+      if (storedGrouping === "series" || storedGrouping === "generation") {
+        setGroupingMode(storedGrouping);
+      }
     } catch {}
   }, []);
 
@@ -415,6 +412,15 @@ export default function Recherche() {
     setViewMode(mode);
     try {
       localStorage.setItem(VIEW_MODE_STORAGE_KEY, mode);
+    } catch {}
+  };
+
+  const selectGroupingMode = (mode: SearchCatalogGroupingV297) => {
+    setGroupingMode(mode);
+    setSelectedCatalogGroup("all");
+    setExpandedCatalogGroup(null);
+    try {
+      localStorage.setItem(GROUPING_MODE_STORAGE_KEY, mode);
     } catch {}
   };
 
@@ -438,11 +444,11 @@ export default function Recherche() {
         });
         validSets.sort(compareSetsNewestFirst);
         setAllSetsList(validSets);
-        setExpandedGeneration(null);
+        setExpandedCatalogGroup(null);
       } catch (error) {
         console.error("[King_TCG] Erreur chargement des séries :", error);
       } finally {
-        setSelectedGeneration("all");
+        setSelectedCatalogGroup("all");
         setSelectedSetId("");
         setCards([]);
         setLoading(false);
@@ -453,27 +459,18 @@ export default function Recherche() {
     void loadSets();
   }, [selectedLanguage]);
 
-  const groupedSets = useMemo(() => {
-    const groups: Record<string, SetItem[]> = {};
-    for (const set of allSetsList) {
-      // Une date fournisseur future ne doit jamais masquer une extension qui
-      // publie déjà réellement des cartes.
-      if (isFutureRelease(set) && !hasPublishedCards(set)) continue;
-      const generation = getGeneration(set);
-      if (!groups[generation]) groups[generation] = [];
-      groups[generation].push(set);
-    }
-    Object.values(groups).forEach((sets) => sets.sort(compareSetsNewestFirst));
-    return groups;
-  }, [allSetsList]);
-
-  const availableGenerations = useMemo(() => {
-    const known = GENERATION_ORDER.filter((generation) => groupedSets[generation]?.length);
-    const extra = Object.keys(groupedSets)
-      .filter((generation) => !GENERATION_ORDER.includes(generation))
-      .sort((a, b) => a.localeCompare(b, "fr", { sensitivity: "base" }));
-    return [...known, ...extra];
-  }, [groupedSets]);
+  const catalogGroups = useMemo(() => {
+    // Une date fournisseur future ne doit jamais masquer une extension qui
+    // publie déjà réellement des cartes.
+    const visibleSets = allSetsList.filter((set) => !isFutureRelease(set) || hasPublishedCards(set));
+    return groupSearchCatalogSetsV297({
+      sets: visibleSets,
+      language: selectedLanguage,
+      mode: groupingMode,
+      generationOf: getGeneration,
+      compareSets: compareSetsNewestFirst,
+    });
+  }, [allSetsList, groupingMode, selectedLanguage]);
 
   const availableSetCount = useMemo(
     () => allSetsList.filter((set) => hasPublishedCards(set)).length,
@@ -497,19 +494,17 @@ export default function Recherche() {
 
   const visibleSetGroups = useMemo(() => {
     const normalized = setSearch.trim().toLowerCase();
-    const entries = availableGenerations
-      .filter((generation) => selectedGeneration === "all" || selectedGeneration === generation)
-      .map((generation) => {
-        const sets = groupedSets[generation].filter((set) => {
+    return catalogGroups
+      .filter((group) => selectedCatalogGroup === "all" || selectedCatalogGroup === group.id)
+      .map((group) => {
+        const sets = group.sets.filter((set) => {
           if (!normalized) return true;
-          return `${localizedSetName(set, selectedLanguage)} ${set.name} ${(set.aliases || []).join(" ")} ${localizedSetCode(set.id, selectedLanguage)} ${set.id} ${set.series || ""} ${set.releaseDate || ""}`.toLowerCase().includes(normalized);
+          return `${localizedSetName(set, selectedLanguage)} ${set.name} ${(set.aliases || []).join(" ")} ${localizedSetCode(set.id, selectedLanguage)} ${set.id} ${localizedCatalogSeriesNameV297(set.series, selectedLanguage)} ${set.series || ""} ${set.releaseDate || ""}`.toLowerCase().includes(normalized);
         });
-        return [generation, sets] as const;
+        return { ...group, sets };
       })
-      .filter(([, sets]) => sets.length > 0);
-
-    return entries;
-  }, [availableGenerations, groupedSets, selectedGeneration, selectedLanguage, setSearch]);
+      .filter((group) => group.sets.length > 0);
+  }, [catalogGroups, selectedCatalogGroup, selectedLanguage, setSearch]);
 
   const executeSearch = useCallback(async (searchTerm: string) => {
     const value = searchTerm.trim();
@@ -594,11 +589,16 @@ export default function Recherche() {
     setSearchMode("set");
     const selected = allSetsList.find((set) => set.id === requestedSet);
     if (selected) {
-      setSelectedGeneration(getGeneration(selected));
-      setExpandedGeneration(getGeneration(selected));
+      const parentGroup = catalogGroups.find((group) =>
+        group.sets.some((set) => normalizeSetId(set.id) === normalizeSetId(selected.id))
+      );
+      if (parentGroup) {
+        setSelectedCatalogGroup(parentGroup.id);
+        setExpandedCatalogGroup(parentGroup.id);
+      }
     }
     void handleSetSelect(requestedSet);
-  }, [allSetsList]);
+  }, [allSetsList, catalogGroups]);
 
   const filteredCards = useMemo(() => filterCards(cards, filters), [cards, filters]);
   const displayedCards = filteredCards.slice(0, visible);
@@ -707,7 +707,23 @@ export default function Recherche() {
               </div>
             ) : (
               <div className="space-y-4">
-                <div className="grid gap-3 lg:grid-cols-[1fr_auto]">
+                <div className="grid gap-3 lg:grid-cols-[auto_1fr_auto]">
+                  <div className="grid grid-cols-2 gap-1 rounded-xl border border-cyan-400/14 bg-[#0c141c] p-1">
+                    <button
+                      type="button"
+                      onClick={() => selectGroupingMode("series")}
+                      className={`rounded-lg border px-3 py-2 text-[9px] font-black uppercase tracking-[0.08em] transition ${groupingMode === "series" ? "border-cyan-300/40 bg-cyan-400/[0.10] text-cyan-200" : "border-transparent text-zinc-300"}`}
+                    >
+                      Séries
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => selectGroupingMode("generation")}
+                      className={`rounded-lg border px-3 py-2 text-[9px] font-black uppercase tracking-[0.08em] transition ${groupingMode === "generation" ? "border-cyan-300/40 bg-cyan-400/[0.10] text-cyan-200" : "border-transparent text-zinc-300"}`}
+                    >
+                      Générations
+                    </button>
+                  </div>
                   <div className="relative">
                     <Search className="absolute left-4 top-3.5 h-4 w-4 text-zinc-600" />
                     <input
@@ -718,37 +734,40 @@ export default function Recherche() {
                     />
                   </div>
                   <select
-                    value={selectedGeneration}
-                    onChange={(event) => setSelectedGeneration(event.target.value)}
+                    value={selectedCatalogGroup}
+                    onChange={(event) => {
+                      setSelectedCatalogGroup(event.target.value);
+                      setExpandedCatalogGroup(event.target.value === "all" ? null : event.target.value);
+                    }}
                     className="kt-control border px-4 py-3.5 text-xs font-bold outline-none"
                     style={{ colorScheme: "dark" }}
                   >
-                    <option value="all">Toutes les générations</option>
-                    {availableGenerations.map((generation) => (
-                      <option key={generation} value={generation}>{generation}</option>
+                    <option value="all">{groupingMode === "series" ? "Toutes les séries" : "Toutes les générations"}</option>
+                    {catalogGroups.map((group) => (
+                      <option key={group.id} value={group.id}>{group.label} · {group.sets.length}</option>
                     ))}
                   </select>
                 </div>
 
                 <div className="space-y-3">
-                  {visibleSetGroups.map(([generation, generationSets]) => {
-                    const expanded = expandedGeneration === generation;
-                    const newestSet = generationSets[0];
+                  {visibleSetGroups.map((catalogGroup) => {
+                    const expanded = expandedCatalogGroup === catalogGroup.id;
+                    const newestSet = catalogGroup.sets[0];
 
                     return (
-                      <section key={generation} className="kt-panel min-w-0 max-w-full overflow-hidden">
+                      <section key={catalogGroup.id} className="kt-panel min-w-0 max-w-full overflow-hidden">
                         <button
                           type="button"
-                          onClick={() => setExpandedGeneration(expandedGeneration === generation ? null : generation)}
+                          onClick={() => setExpandedCatalogGroup(expandedCatalogGroup === catalogGroup.id ? null : catalogGroup.id)}
                           className="flex w-full min-w-0 items-center justify-between gap-3 overflow-hidden px-4 py-3.5 text-left transition hover:bg-cyan-400/[0.025]"
                         >
                           <span className="min-w-0 flex-1">
                             <span className="flex items-center gap-2">
-                              <span className="block truncate text-xs font-black text-white">{generation}</span>
-                              <span className="rounded-full bg-cyan-400/[0.07] px-2 py-0.5 text-[9px] font-black text-cyan-300">{generationSets.length}</span>
+                              <span className="block truncate text-xs font-black text-white">{catalogGroup.label}</span>
+                              <span className="rounded-full bg-cyan-400/[0.07] px-2 py-0.5 text-[9px] font-black text-cyan-300">{catalogGroup.sets.length}</span>
                             </span>
                             <span className="mt-0.5 flex min-w-0 items-center gap-1.5 text-[10px] font-semibold text-zinc-200">
-                              <span className="shrink-0">{generationSets.length} extension{generationSets.length > 1 ? "s" : ""}</span>
+                              <span className="shrink-0">{catalogGroup.sets.length} extension{catalogGroup.sets.length > 1 ? "s" : ""}</span>
                               {newestSet ? <span className="truncate">· dernière : {yearLabel(effectiveSetReleaseDate(newestSet.id, newestSet.releaseDate))}</span> : null}
                             </span>
                           </span>
@@ -757,7 +776,7 @@ export default function Recherche() {
 
                         {expanded ? (
                           <div className="grid min-w-0 gap-2 border-t border-white/[0.06] p-2.5 sm:grid-cols-2 xl:grid-cols-3">
-                            {generationSets.map((set) => (
+                            {catalogGroup.sets.map((set) => (
                               <button
                                 type="button"
                                 key={set.id}
@@ -776,7 +795,7 @@ export default function Recherche() {
                                   </span>
                                   <span className="mt-1 flex min-w-0 items-center gap-1.5 overflow-hidden text-[10px] font-semibold uppercase tracking-wide text-zinc-200">
                                     <span className="inline-flex shrink-0 items-center gap-1"><CalendarDays className="h-2.5 w-2.5 text-amber-300" /> {yearLabel(effectiveSetReleaseDate(set.id, set.releaseDate))}</span>
-                                    <span className="truncate">{set.series || generation}</span>
+                                    <span className="truncate">{localizedCatalogSeriesNameV297(set.series, selectedLanguage)}</span>
                                   </span>
                                 </span>
 
