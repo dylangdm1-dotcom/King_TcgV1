@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "formatVersion": 1,
-  "catalogVersion": "v287-jp-mass-import",
+  "catalogVersion": "v291-search-dedup-jp-details",
   "language": "ja",
   "setId": "ktcg:set:ja:neo3",
   "status": "complete",
@@ -16,15 +16,21 @@
         {
           "provider": "tcgdex",
           "sourceId": "neo3-001",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:neo3",
       "number": "001",
-      "variants": [],
-      "visuals": []
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": [],
+      "rarity": "Common"
     },
     {
       "schemaVersion": 2,
@@ -35,15 +41,21 @@
         {
           "provider": "tcgdex",
           "sourceId": "neo3-002",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:neo3",
       "number": "002",
-      "variants": [],
-      "visuals": []
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": [],
+      "rarity": "Common"
     },
     {
       "schemaVersion": 2,
@@ -54,15 +66,21 @@
         {
           "provider": "tcgdex",
           "sourceId": "neo3-003",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:neo3",
       "number": "003",
-      "variants": [],
-      "visuals": []
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": [],
+      "rarity": "Common"
     },
     {
       "schemaVersion": 2,
@@ -73,15 +91,21 @@
         {
           "provider": "tcgdex",
           "sourceId": "neo3-004",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:neo3",
       "number": "004",
-      "variants": [],
-      "visuals": []
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": [],
+      "rarity": "Uncommon"
     },
     {
       "schemaVersion": 2,
@@ -92,15 +116,21 @@
         {
           "provider": "tcgdex",
           "sourceId": "neo3-005",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:neo3",
       "number": "005",
-      "variants": [],
-      "visuals": []
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": [],
+      "rarity": "Uncommon"
     },
     {
       "schemaVersion": 2,
@@ -111,15 +141,21 @@
         {
           "provider": "tcgdex",
           "sourceId": "neo3-006",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:neo3",
       "number": "006",
-      "variants": [],
-      "visuals": []
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holofoil"
+        }
+      ],
+      "visuals": [],
+      "rarity": "Holo Rare"
     },
     {
       "schemaVersion": 2,
@@ -130,15 +166,21 @@
         {
           "provider": "tcgdex",
           "sourceId": "neo3-007",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:neo3",
       "number": "007",
-      "variants": [],
-      "visuals": []
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holofoil"
+        }
+      ],
+      "visuals": [],
+      "rarity": "Holo Rare"
     },
     {
       "schemaVersion": 2,
@@ -149,15 +191,21 @@
         {
           "provider": "tcgdex",
           "sourceId": "neo3-008",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:neo3",
       "number": "008",
-      "variants": [],
-      "visuals": []
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": [],
+      "rarity": "Common"
     },
     {
       "schemaVersion": 2,
@@ -168,15 +216,21 @@
         {
           "provider": "tcgdex",
           "sourceId": "neo3-009",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:neo3",
       "number": "009",
-      "variants": [],
-      "visuals": []
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": [],
+      "rarity": "Uncommon"
     },
     {
       "schemaVersion": 2,
@@ -187,15 +241,21 @@
         {
           "provider": "tcgdex",
           "sourceId": "neo3-010",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:neo3",
       "number": "010",
-      "variants": [],
-      "visuals": []
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holofoil"
+        }
+      ],
+      "visuals": [],
+      "rarity": "Holo Rare"
     },
     {
       "schemaVersion": 2,
@@ -206,15 +266,21 @@
         {
           "provider": "tcgdex",
           "sourceId": "neo3-011",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:neo3",
       "number": "011",
-      "variants": [],
-      "visuals": []
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holofoil"
+        }
+      ],
+      "visuals": [],
+      "rarity": "Holo Rare"
     },
     {
       "schemaVersion": 2,
@@ -225,15 +291,21 @@
         {
           "provider": "tcgdex",
           "sourceId": "neo3-012",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:neo3",
       "number": "012",
-      "variants": [],
-      "visuals": []
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": [],
+      "rarity": "Common"
     },
     {
       "schemaVersion": 2,
@@ -244,15 +316,21 @@
         {
           "provider": "tcgdex",
           "sourceId": "neo3-013",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:neo3",
       "number": "013",
-      "variants": [],
-      "visuals": []
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": [],
+      "rarity": "Common"
     },
     {
       "schemaVersion": 2,
@@ -263,15 +341,21 @@
         {
           "provider": "tcgdex",
           "sourceId": "neo3-014",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:neo3",
       "number": "014",
-      "variants": [],
-      "visuals": []
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": [],
+      "rarity": "Common"
     },
     {
       "schemaVersion": 2,
@@ -282,15 +366,21 @@
         {
           "provider": "tcgdex",
           "sourceId": "neo3-015",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:neo3",
       "number": "015",
-      "variants": [],
-      "visuals": []
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": [],
+      "rarity": "Common"
     },
     {
       "schemaVersion": 2,
@@ -301,15 +391,21 @@
         {
           "provider": "tcgdex",
           "sourceId": "neo3-016",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:neo3",
       "number": "016",
-      "variants": [],
-      "visuals": []
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": [],
+      "rarity": "Common"
     },
     {
       "schemaVersion": 2,
@@ -320,15 +416,21 @@
         {
           "provider": "tcgdex",
           "sourceId": "neo3-017",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:neo3",
       "number": "017",
-      "variants": [],
-      "visuals": []
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": [],
+      "rarity": "Uncommon"
     },
     {
       "schemaVersion": 2,
@@ -339,15 +441,21 @@
         {
           "provider": "tcgdex",
           "sourceId": "neo3-018",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:neo3",
       "number": "018",
-      "variants": [],
-      "visuals": []
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": [],
+      "rarity": "Uncommon"
     },
     {
       "schemaVersion": 2,
@@ -358,15 +466,21 @@
         {
           "provider": "tcgdex",
           "sourceId": "neo3-019",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:neo3",
       "number": "019",
-      "variants": [],
-      "visuals": []
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": [],
+      "rarity": "Uncommon"
     },
     {
       "schemaVersion": 2,
@@ -377,15 +491,21 @@
         {
           "provider": "tcgdex",
           "sourceId": "neo3-020",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:neo3",
       "number": "020",
-      "variants": [],
-      "visuals": []
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holofoil"
+        }
+      ],
+      "visuals": [],
+      "rarity": "Holo Rare"
     },
     {
       "schemaVersion": 2,
@@ -396,15 +516,21 @@
         {
           "provider": "tcgdex",
           "sourceId": "neo3-021",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:neo3",
       "number": "021",
-      "variants": [],
-      "visuals": []
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holofoil"
+        }
+      ],
+      "visuals": [],
+      "rarity": "Holo Rare"
     },
     {
       "schemaVersion": 2,
@@ -415,15 +541,21 @@
         {
           "provider": "tcgdex",
           "sourceId": "neo3-022",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:neo3",
       "number": "022",
-      "variants": [],
-      "visuals": []
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": [],
+      "rarity": "Secret Rare"
     },
     {
       "schemaVersion": 2,
@@ -434,15 +566,21 @@
         {
           "provider": "tcgdex",
           "sourceId": "neo3-023",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:neo3",
       "number": "023",
-      "variants": [],
-      "visuals": []
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": [],
+      "rarity": "Secret Rare"
     },
     {
       "schemaVersion": 2,
@@ -453,15 +591,21 @@
         {
           "provider": "tcgdex",
           "sourceId": "neo3-024",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:neo3",
       "number": "024",
-      "variants": [],
-      "visuals": []
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": [],
+      "rarity": "Common"
     },
     {
       "schemaVersion": 2,
@@ -472,15 +616,21 @@
         {
           "provider": "tcgdex",
           "sourceId": "neo3-025",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:neo3",
       "number": "025",
-      "variants": [],
-      "visuals": []
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": [],
+      "rarity": "Uncommon"
     },
     {
       "schemaVersion": 2,
@@ -491,15 +641,21 @@
         {
           "provider": "tcgdex",
           "sourceId": "neo3-026",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:neo3",
       "number": "026",
-      "variants": [],
-      "visuals": []
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": [],
+      "rarity": "Uncommon"
     },
     {
       "schemaVersion": 2,
@@ -510,15 +666,21 @@
         {
           "provider": "tcgdex",
           "sourceId": "neo3-027",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:neo3",
       "number": "027",
-      "variants": [],
-      "visuals": []
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": [],
+      "rarity": "Uncommon"
     },
     {
       "schemaVersion": 2,
@@ -529,15 +691,21 @@
         {
           "provider": "tcgdex",
           "sourceId": "neo3-028",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:neo3",
       "number": "028",
-      "variants": [],
-      "visuals": []
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holofoil"
+        }
+      ],
+      "visuals": [],
+      "rarity": "Holo Rare"
     },
     {
       "schemaVersion": 2,
@@ -548,15 +716,21 @@
         {
           "provider": "tcgdex",
           "sourceId": "neo3-029",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:neo3",
       "number": "029",
-      "variants": [],
-      "visuals": []
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holofoil"
+        }
+      ],
+      "visuals": [],
+      "rarity": "Holo Rare"
     },
     {
       "schemaVersion": 2,
@@ -567,15 +741,21 @@
         {
           "provider": "tcgdex",
           "sourceId": "neo3-030",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:neo3",
       "number": "030",
-      "variants": [],
-      "visuals": []
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": [],
+      "rarity": "Common"
     },
     {
       "schemaVersion": 2,
@@ -586,15 +766,21 @@
         {
           "provider": "tcgdex",
           "sourceId": "neo3-031",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:neo3",
       "number": "031",
-      "variants": [],
-      "visuals": []
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": [],
+      "rarity": "Common"
     },
     {
       "schemaVersion": 2,
@@ -605,15 +791,21 @@
         {
           "provider": "tcgdex",
           "sourceId": "neo3-032",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:neo3",
       "number": "032",
-      "variants": [],
-      "visuals": []
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": [],
+      "rarity": "Uncommon"
     },
     {
       "schemaVersion": 2,
@@ -624,15 +816,21 @@
         {
           "provider": "tcgdex",
           "sourceId": "neo3-033",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:neo3",
       "number": "033",
-      "variants": [],
-      "visuals": []
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": [],
+      "rarity": "Uncommon"
     },
     {
       "schemaVersion": 2,
@@ -643,15 +841,21 @@
         {
           "provider": "tcgdex",
           "sourceId": "neo3-034",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:neo3",
       "number": "034",
-      "variants": [],
-      "visuals": []
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holofoil"
+        }
+      ],
+      "visuals": [],
+      "rarity": "Holo Rare"
     },
     {
       "schemaVersion": 2,
@@ -662,15 +866,21 @@
         {
           "provider": "tcgdex",
           "sourceId": "neo3-035",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:neo3",
       "number": "035",
-      "variants": [],
-      "visuals": []
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holofoil"
+        }
+      ],
+      "visuals": [],
+      "rarity": "Holo Rare"
     },
     {
       "schemaVersion": 2,
@@ -681,15 +891,21 @@
         {
           "provider": "tcgdex",
           "sourceId": "neo3-036",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:neo3",
       "number": "036",
-      "variants": [],
-      "visuals": []
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holofoil"
+        }
+      ],
+      "visuals": [],
+      "rarity": "Holo Rare"
     },
     {
       "schemaVersion": 2,
@@ -700,15 +916,21 @@
         {
           "provider": "tcgdex",
           "sourceId": "neo3-037",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:neo3",
       "number": "037",
-      "variants": [],
-      "visuals": []
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": [],
+      "rarity": "Common"
     },
     {
       "schemaVersion": 2,
@@ -719,15 +941,21 @@
         {
           "provider": "tcgdex",
           "sourceId": "neo3-038",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:neo3",
       "number": "038",
-      "variants": [],
-      "visuals": []
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": [],
+      "rarity": "Common"
     },
     {
       "schemaVersion": 2,
@@ -738,15 +966,21 @@
         {
           "provider": "tcgdex",
           "sourceId": "neo3-039",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:neo3",
       "number": "039",
-      "variants": [],
-      "visuals": []
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": [],
+      "rarity": "Uncommon"
     },
     {
       "schemaVersion": 2,
@@ -757,15 +991,21 @@
         {
           "provider": "tcgdex",
           "sourceId": "neo3-040",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:neo3",
       "number": "040",
-      "variants": [],
-      "visuals": []
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": [],
+      "rarity": "Uncommon"
     },
     {
       "schemaVersion": 2,
@@ -776,15 +1016,21 @@
         {
           "provider": "tcgdex",
           "sourceId": "neo3-041",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:neo3",
       "number": "041",
-      "variants": [],
-      "visuals": []
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": [],
+      "rarity": "Uncommon"
     },
     {
       "schemaVersion": 2,
@@ -795,15 +1041,21 @@
         {
           "provider": "tcgdex",
           "sourceId": "neo3-042",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:neo3",
       "number": "042",
-      "variants": [],
-      "visuals": []
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holofoil"
+        }
+      ],
+      "visuals": [],
+      "rarity": "Holo Rare"
     },
     {
       "schemaVersion": 2,
@@ -814,15 +1066,21 @@
         {
           "provider": "tcgdex",
           "sourceId": "neo3-043",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:neo3",
       "number": "043",
-      "variants": [],
-      "visuals": []
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": [],
+      "rarity": "Common"
     },
     {
       "schemaVersion": 2,
@@ -833,15 +1091,21 @@
         {
           "provider": "tcgdex",
           "sourceId": "neo3-044",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:neo3",
       "number": "044",
-      "variants": [],
-      "visuals": []
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holofoil"
+        }
+      ],
+      "visuals": [],
+      "rarity": "Holo Rare"
     },
     {
       "schemaVersion": 2,
@@ -852,15 +1116,21 @@
         {
           "provider": "tcgdex",
           "sourceId": "neo3-045",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:neo3",
       "number": "045",
-      "variants": [],
-      "visuals": []
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holofoil"
+        }
+      ],
+      "visuals": [],
+      "rarity": "Holo Rare"
     },
     {
       "schemaVersion": 2,
@@ -871,15 +1141,21 @@
         {
           "provider": "tcgdex",
           "sourceId": "neo3-046",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:neo3",
       "number": "046",
-      "variants": [],
-      "visuals": []
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": [],
+      "rarity": "Common"
     },
     {
       "schemaVersion": 2,
@@ -890,15 +1166,21 @@
         {
           "provider": "tcgdex",
           "sourceId": "neo3-047",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:neo3",
       "number": "047",
-      "variants": [],
-      "visuals": []
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": [],
+      "rarity": "Common"
     },
     {
       "schemaVersion": 2,
@@ -909,15 +1191,21 @@
         {
           "provider": "tcgdex",
           "sourceId": "neo3-048",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:neo3",
       "number": "048",
-      "variants": [],
-      "visuals": []
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": [],
+      "rarity": "Common"
     },
     {
       "schemaVersion": 2,
@@ -928,15 +1216,21 @@
         {
           "provider": "tcgdex",
           "sourceId": "neo3-049",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:neo3",
       "number": "049",
-      "variants": [],
-      "visuals": []
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": [],
+      "rarity": "Uncommon"
     },
     {
       "schemaVersion": 2,
@@ -947,15 +1241,21 @@
         {
           "provider": "tcgdex",
           "sourceId": "neo3-050",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:neo3",
       "number": "050",
-      "variants": [],
-      "visuals": []
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holofoil"
+        }
+      ],
+      "visuals": [],
+      "rarity": "Holo Rare"
     },
     {
       "schemaVersion": 2,
@@ -966,15 +1266,21 @@
         {
           "provider": "tcgdex",
           "sourceId": "neo3-051",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:neo3",
       "number": "051",
-      "variants": [],
-      "visuals": []
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holofoil"
+        }
+      ],
+      "visuals": [],
+      "rarity": "Holo Rare"
     },
     {
       "schemaVersion": 2,
@@ -985,15 +1291,21 @@
         {
           "provider": "tcgdex",
           "sourceId": "neo3-052",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:neo3",
       "number": "052",
-      "variants": [],
-      "visuals": []
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holofoil"
+        }
+      ],
+      "visuals": [],
+      "rarity": "Holo Rare"
     },
     {
       "schemaVersion": 2,
@@ -1004,15 +1316,21 @@
         {
           "provider": "tcgdex",
           "sourceId": "neo3-053",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:neo3",
       "number": "053",
-      "variants": [],
-      "visuals": []
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": [],
+      "rarity": "Common"
     },
     {
       "schemaVersion": 2,
@@ -1023,15 +1341,21 @@
         {
           "provider": "tcgdex",
           "sourceId": "neo3-054",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:neo3",
       "number": "054",
-      "variants": [],
-      "visuals": []
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": [],
+      "rarity": "Uncommon"
     },
     {
       "schemaVersion": 2,
@@ -1042,15 +1366,21 @@
         {
           "provider": "tcgdex",
           "sourceId": "neo3-055",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:neo3",
       "number": "055",
-      "variants": [],
-      "visuals": []
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": [],
+      "rarity": "Uncommon"
     },
     {
       "schemaVersion": 2,
@@ -1061,15 +1391,21 @@
         {
           "provider": "tcgdex",
           "sourceId": "neo3-056",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:neo3",
       "number": "056",
-      "variants": [],
-      "visuals": []
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": [],
+      "rarity": "Uncommon"
     },
     {
       "schemaVersion": 2,
@@ -1080,15 +1416,21 @@
         {
           "provider": "tcgdex",
           "sourceId": "neo3-057",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:neo3",
       "number": "057",
-      "variants": [],
-      "visuals": []
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visuals": [],
+      "rarity": "Uncommon"
     }
   ]
 }

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "formatVersion": 1,
-  "catalogVersion": "v287-jp-mass-import",
+  "catalogVersion": "v291-search-dedup-jp-details",
   "language": "ja",
   "setId": "ktcg:set:ja:sv8a",
   "status": "complete",
@@ -16,14 +16,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-001",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "001",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/001/high.webp",
         "kind": "card",
@@ -72,14 +81,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-002",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "002",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/002/high.webp",
         "kind": "card",
@@ -128,14 +146,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-003",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "003",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/003/high.webp",
         "kind": "card",
@@ -173,7 +196,8 @@
             "lastSyncedAt": "2026-09-01T20:50:00.000Z"
           }
         }
-      ]
+      ],
+      "rarity": "Double rare"
     },
     {
       "schemaVersion": 2,
@@ -184,14 +208,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-004",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "004",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/004/high.webp",
         "kind": "card",
@@ -240,14 +273,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-005",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "005",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/005/high.webp",
         "kind": "card",
@@ -296,14 +338,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-006",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "006",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/006/high.webp",
         "kind": "card",
@@ -352,14 +403,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-007",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "007",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/007/high.webp",
         "kind": "card",
@@ -408,14 +468,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-008",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "008",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/008/high.webp",
         "kind": "card",
@@ -464,14 +533,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-009",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "009",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/009/high.webp",
         "kind": "card",
@@ -520,14 +598,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-010",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "010",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/010/high.webp",
         "kind": "card",
@@ -565,7 +648,8 @@
             "lastSyncedAt": "2026-09-01T20:50:00.000Z"
           }
         }
-      ]
+      ],
+      "rarity": "Double rare"
     },
     {
       "schemaVersion": 2,
@@ -576,14 +660,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-011",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "011",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/011/high.webp",
         "kind": "card",
@@ -632,14 +725,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-012",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "012",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/012/high.webp",
         "kind": "card",
@@ -688,14 +790,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-013",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "013",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/013/high.webp",
         "kind": "card",
@@ -744,14 +855,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-014",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "014",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/014/high.webp",
         "kind": "card",
@@ -800,14 +920,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-015",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "015",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/015/high.webp",
         "kind": "card",
@@ -856,14 +985,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-016",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "016",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/016/high.webp",
         "kind": "card",
@@ -901,7 +1035,8 @@
             "lastSyncedAt": "2026-09-01T20:50:00.000Z"
           }
         }
-      ]
+      ],
+      "rarity": "Double rare"
     },
     {
       "schemaVersion": 2,
@@ -912,14 +1047,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-017",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "017",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/017/high.webp",
         "kind": "card",
@@ -968,14 +1112,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-018",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "018",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/018/high.webp",
         "kind": "card",
@@ -1024,14 +1177,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-019",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "019",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/019/high.webp",
         "kind": "card",
@@ -1069,7 +1227,8 @@
             "lastSyncedAt": "2026-09-01T20:50:00.000Z"
           }
         }
-      ]
+      ],
+      "rarity": "Double rare"
     },
     {
       "schemaVersion": 2,
@@ -1080,14 +1239,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-020",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "020",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/020/high.webp",
         "kind": "card",
@@ -1125,7 +1289,8 @@
             "lastSyncedAt": "2026-09-01T20:50:00.000Z"
           }
         }
-      ]
+      ],
+      "rarity": "Double rare"
     },
     {
       "schemaVersion": 2,
@@ -1136,14 +1301,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-021",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "021",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/021/high.webp",
         "kind": "card",
@@ -1192,14 +1366,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-022",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "022",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/022/high.webp",
         "kind": "card",
@@ -1237,7 +1416,8 @@
             "lastSyncedAt": "2026-09-01T20:50:00.000Z"
           }
         }
-      ]
+      ],
+      "rarity": "Double rare"
     },
     {
       "schemaVersion": 2,
@@ -1248,14 +1428,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-023",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "023",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/023/high.webp",
         "kind": "card",
@@ -1304,14 +1493,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-024",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "024",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/024/high.webp",
         "kind": "card",
@@ -1360,14 +1558,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-025",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "025",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/025/high.webp",
         "kind": "card",
@@ -1416,14 +1623,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-026",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "026",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/026/high.webp",
         "kind": "card",
@@ -1461,7 +1673,8 @@
             "lastSyncedAt": "2026-09-01T20:50:00.000Z"
           }
         }
-      ]
+      ],
+      "rarity": "Double rare"
     },
     {
       "schemaVersion": 2,
@@ -1472,14 +1685,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-027",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "027",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/027/high.webp",
         "kind": "card",
@@ -1517,7 +1735,8 @@
             "lastSyncedAt": "2026-09-01T20:50:00.000Z"
           }
         }
-      ]
+      ],
+      "rarity": "Double rare"
     },
     {
       "schemaVersion": 2,
@@ -1528,14 +1747,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-028",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "028",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/028/high.webp",
         "kind": "card",
@@ -1584,14 +1812,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-029",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "029",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/029/high.webp",
         "kind": "card",
@@ -1640,14 +1877,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-030",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "030",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/030/high.webp",
         "kind": "card",
@@ -1696,14 +1942,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-031",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "031",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/031/high.webp",
         "kind": "card",
@@ -1741,7 +1992,8 @@
             "lastSyncedAt": "2026-09-01T20:50:00.000Z"
           }
         }
-      ]
+      ],
+      "rarity": "Double rare"
     },
     {
       "schemaVersion": 2,
@@ -1752,14 +2004,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-032",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "032",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/032/high.webp",
         "kind": "card",
@@ -1808,14 +2069,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-033",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "033",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/033/high.webp",
         "kind": "card",
@@ -1864,14 +2134,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-034",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "034",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/034/high.webp",
         "kind": "card",
@@ -1920,14 +2199,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-035",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "035",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/035/high.webp",
         "kind": "card",
@@ -1976,14 +2264,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-036",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "036",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/036/high.webp",
         "kind": "card",
@@ -2032,14 +2329,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-037",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "037",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/037/high.webp",
         "kind": "card",
@@ -2088,14 +2394,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-038",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "038",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/038/high.webp",
         "kind": "card",
@@ -2144,14 +2459,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-039",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "039",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/039/high.webp",
         "kind": "card",
@@ -2189,7 +2509,8 @@
             "lastSyncedAt": "2026-09-01T20:50:00.000Z"
           }
         }
-      ]
+      ],
+      "rarity": "Double rare"
     },
     {
       "schemaVersion": 2,
@@ -2200,14 +2521,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-040",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "040",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/040/high.webp",
         "kind": "card",
@@ -2256,14 +2586,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-041",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "041",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/041/high.webp",
         "kind": "card",
@@ -2301,7 +2636,8 @@
             "lastSyncedAt": "2026-09-01T20:50:00.000Z"
           }
         }
-      ]
+      ],
+      "rarity": "Double rare"
     },
     {
       "schemaVersion": 2,
@@ -2312,14 +2648,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-042",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "042",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/042/high.webp",
         "kind": "card",
@@ -2368,14 +2713,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-043",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "043",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/043/high.webp",
         "kind": "card",
@@ -2424,14 +2778,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-044",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "044",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/044/high.webp",
         "kind": "card",
@@ -2480,14 +2843,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-045",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "045",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/045/high.webp",
         "kind": "card",
@@ -2536,14 +2908,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-046",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "046",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/046/high.webp",
         "kind": "card",
@@ -2581,7 +2958,8 @@
             "lastSyncedAt": "2026-09-01T20:50:00.000Z"
           }
         }
-      ]
+      ],
+      "rarity": "Double rare"
     },
     {
       "schemaVersion": 2,
@@ -2592,14 +2970,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-047",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "047",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/047/high.webp",
         "kind": "card",
@@ -2648,14 +3035,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-048",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "048",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/048/high.webp",
         "kind": "card",
@@ -2704,14 +3100,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-049",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "049",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/049/high.webp",
         "kind": "card",
@@ -2749,7 +3150,8 @@
             "lastSyncedAt": "2026-09-01T20:50:00.000Z"
           }
         }
-      ]
+      ],
+      "rarity": "Double rare"
     },
     {
       "schemaVersion": 2,
@@ -2760,14 +3162,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-050",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "050",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/050/high.webp",
         "kind": "card",
@@ -2805,7 +3212,8 @@
             "lastSyncedAt": "2026-09-01T20:50:00.000Z"
           }
         }
-      ]
+      ],
+      "rarity": "Double rare"
     },
     {
       "schemaVersion": 2,
@@ -2816,14 +3224,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-051",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "051",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/051/high.webp",
         "kind": "card",
@@ -2872,14 +3289,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-052",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "052",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/052/high.webp",
         "kind": "card",
@@ -2917,7 +3339,8 @@
             "lastSyncedAt": "2026-09-01T20:50:00.000Z"
           }
         }
-      ]
+      ],
+      "rarity": "Double rare"
     },
     {
       "schemaVersion": 2,
@@ -2928,14 +3351,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-053",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "053",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/053/high.webp",
         "kind": "card",
@@ -2984,14 +3416,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-054",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "054",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/054/high.webp",
         "kind": "card",
@@ -3029,7 +3466,8 @@
             "lastSyncedAt": "2026-09-01T20:50:00.000Z"
           }
         }
-      ]
+      ],
+      "rarity": "Double rare"
     },
     {
       "schemaVersion": 2,
@@ -3040,14 +3478,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-055",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "055",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/055/high.webp",
         "kind": "card",
@@ -3096,14 +3543,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-056",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "056",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/056/high.webp",
         "kind": "card",
@@ -3141,7 +3593,8 @@
             "lastSyncedAt": "2026-09-01T20:50:00.000Z"
           }
         }
-      ]
+      ],
+      "rarity": "Double rare"
     },
     {
       "schemaVersion": 2,
@@ -3152,14 +3605,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-057",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "057",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/057/high.webp",
         "kind": "card",
@@ -3208,14 +3670,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-058",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "058",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/058/high.webp",
         "kind": "card",
@@ -3264,14 +3735,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-059",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "059",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/059/high.webp",
         "kind": "card",
@@ -3320,14 +3800,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-060",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "060",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/060/high.webp",
         "kind": "card",
@@ -3376,14 +3865,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-061",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "061",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/061/high.webp",
         "kind": "card",
@@ -3432,14 +3930,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-062",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "062",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/062/high.webp",
         "kind": "card",
@@ -3488,14 +3995,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-063",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "063",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/063/high.webp",
         "kind": "card",
@@ -3533,7 +4045,8 @@
             "lastSyncedAt": "2026-09-01T20:50:00.000Z"
           }
         }
-      ]
+      ],
+      "rarity": "Double rare"
     },
     {
       "schemaVersion": 2,
@@ -3544,14 +4057,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-064",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "064",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/064/high.webp",
         "kind": "card",
@@ -3600,14 +4122,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-065",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "065",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/065/high.webp",
         "kind": "card",
@@ -3656,14 +4187,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-066",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "066",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/066/high.webp",
         "kind": "card",
@@ -3712,14 +4252,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-067",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "067",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/067/high.webp",
         "kind": "card",
@@ -3768,14 +4317,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-068",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "068",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/068/high.webp",
         "kind": "card",
@@ -3824,14 +4382,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-069",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "069",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/069/high.webp",
         "kind": "card",
@@ -3869,7 +4432,8 @@
             "lastSyncedAt": "2026-09-01T20:50:00.000Z"
           }
         }
-      ]
+      ],
+      "rarity": "Double rare"
     },
     {
       "schemaVersion": 2,
@@ -3880,14 +4444,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-070",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "070",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/070/high.webp",
         "kind": "card",
@@ -3936,14 +4509,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-071",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "071",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/071/high.webp",
         "kind": "card",
@@ -3992,14 +4574,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-072",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "072",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/072/high.webp",
         "kind": "card",
@@ -4048,14 +4639,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-073",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "073",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/073/high.webp",
         "kind": "card",
@@ -4104,14 +4704,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-074",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "074",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/074/high.webp",
         "kind": "card",
@@ -4149,7 +4754,8 @@
             "lastSyncedAt": "2026-09-01T20:50:00.000Z"
           }
         }
-      ]
+      ],
+      "rarity": "Double rare"
     },
     {
       "schemaVersion": 2,
@@ -4160,14 +4766,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-075",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "075",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/075/high.webp",
         "kind": "card",
@@ -4216,14 +4831,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-076",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "076",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/076/high.webp",
         "kind": "card",
@@ -4272,14 +4896,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-077",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "077",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/077/high.webp",
         "kind": "card",
@@ -4328,14 +4961,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-078",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "078",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/078/high.webp",
         "kind": "card",
@@ -4373,7 +5011,8 @@
             "lastSyncedAt": "2026-09-01T20:50:00.000Z"
           }
         }
-      ]
+      ],
+      "rarity": "Double rare"
     },
     {
       "schemaVersion": 2,
@@ -4384,14 +5023,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-079",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "079",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/079/high.webp",
         "kind": "card",
@@ -4440,14 +5088,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-080",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "080",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/080/high.webp",
         "kind": "card",
@@ -4496,14 +5153,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-081",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "081",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/081/high.webp",
         "kind": "card",
@@ -4552,14 +5218,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-082",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "082",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/082/high.webp",
         "kind": "card",
@@ -4608,14 +5283,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-083",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "083",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/083/high.webp",
         "kind": "card",
@@ -4664,14 +5348,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-084",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "084",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/084/high.webp",
         "kind": "card",
@@ -4720,14 +5413,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-085",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "085",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/085/high.webp",
         "kind": "card",
@@ -4776,14 +5478,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-086",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "086",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/086/high.webp",
         "kind": "card",
@@ -4832,14 +5543,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-087",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "087",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/087/high.webp",
         "kind": "card",
@@ -4888,14 +5608,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-088",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "088",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/088/high.webp",
         "kind": "card",
@@ -4933,7 +5658,8 @@
             "lastSyncedAt": "2026-09-01T20:50:00.000Z"
           }
         }
-      ]
+      ],
+      "rarity": "Double rare"
     },
     {
       "schemaVersion": 2,
@@ -4944,14 +5670,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-089",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "089",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/089/high.webp",
         "kind": "card",
@@ -5000,14 +5735,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-090",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "090",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/090/high.webp",
         "kind": "card",
@@ -5056,14 +5800,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-091",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "091",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/091/high.webp",
         "kind": "card",
@@ -5101,7 +5850,8 @@
             "lastSyncedAt": "2026-09-01T20:50:00.000Z"
           }
         }
-      ]
+      ],
+      "rarity": "Double rare"
     },
     {
       "schemaVersion": 2,
@@ -5112,14 +5862,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-092",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "092",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/092/high.webp",
         "kind": "card",
@@ -5168,14 +5927,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-093",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "093",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/093/high.webp",
         "kind": "card",
@@ -5213,7 +5977,8 @@
             "lastSyncedAt": "2026-09-01T20:50:00.000Z"
           }
         }
-      ]
+      ],
+      "rarity": "Double rare"
     },
     {
       "schemaVersion": 2,
@@ -5224,14 +5989,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-094",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "094",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/094/high.webp",
         "kind": "card",
@@ -5280,14 +6054,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-095",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "095",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/095/high.webp",
         "kind": "card",
@@ -5336,14 +6119,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-096",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "096",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/096/high.webp",
         "kind": "card",
@@ -5392,14 +6184,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-097",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "097",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/097/high.webp",
         "kind": "card",
@@ -5448,14 +6249,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-098",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "098",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/098/high.webp",
         "kind": "card",
@@ -5504,14 +6314,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-099",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "099",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/099/high.webp",
         "kind": "card",
@@ -5560,14 +6379,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-100",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "100",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/100/high.webp",
         "kind": "card",
@@ -5616,14 +6444,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-101",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "101",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/101/high.webp",
         "kind": "card",
@@ -5661,7 +6494,8 @@
             "lastSyncedAt": "2026-09-01T20:50:00.000Z"
           }
         }
-      ]
+      ],
+      "rarity": "Double rare"
     },
     {
       "schemaVersion": 2,
@@ -5672,14 +6506,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-102",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "102",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/102/high.webp",
         "kind": "card",
@@ -5717,7 +6556,8 @@
             "lastSyncedAt": "2026-09-01T20:50:00.000Z"
           }
         }
-      ]
+      ],
+      "rarity": "Double rare"
     },
     {
       "schemaVersion": 2,
@@ -5728,14 +6568,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-103",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "103",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/103/high.webp",
         "kind": "card",
@@ -5773,7 +6618,8 @@
             "lastSyncedAt": "2026-09-01T20:50:00.000Z"
           }
         }
-      ]
+      ],
+      "rarity": "Double rare"
     },
     {
       "schemaVersion": 2,
@@ -5784,14 +6630,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-104",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "104",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/104/high.webp",
         "kind": "card",
@@ -5829,7 +6680,8 @@
             "lastSyncedAt": "2026-09-01T20:50:00.000Z"
           }
         }
-      ]
+      ],
+      "rarity": "Double rare"
     },
     {
       "schemaVersion": 2,
@@ -5840,14 +6692,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-105",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "105",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/105/high.webp",
         "kind": "card",
@@ -5885,7 +6742,8 @@
             "lastSyncedAt": "2026-09-01T20:50:00.000Z"
           }
         }
-      ]
+      ],
+      "rarity": "Double rare"
     },
     {
       "schemaVersion": 2,
@@ -5896,14 +6754,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-106",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "106",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/106/high.webp",
         "kind": "card",
@@ -5952,14 +6819,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-107",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "107",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/107/high.webp",
         "kind": "card",
@@ -6008,14 +6884,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-108",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "108",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/108/high.webp",
         "kind": "card",
@@ -6064,14 +6949,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-109",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "109",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/109/high.webp",
         "kind": "card",
@@ -6120,14 +7014,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-110",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "110",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/110/high.webp",
         "kind": "card",
@@ -6176,14 +7079,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-111",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "111",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/111/high.webp",
         "kind": "card",
@@ -6232,14 +7144,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-112",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "112",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/112/high.webp",
         "kind": "card",
@@ -6288,14 +7209,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-113",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "113",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/113/high.webp",
         "kind": "card",
@@ -6344,14 +7274,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-114",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "114",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/114/high.webp",
         "kind": "card",
@@ -6400,14 +7339,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-115",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "115",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/115/high.webp",
         "kind": "card",
@@ -6456,14 +7404,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-116",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "116",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/116/high.webp",
         "kind": "card",
@@ -6512,14 +7469,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-117",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "117",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/117/high.webp",
         "kind": "card",
@@ -6557,7 +7519,8 @@
             "lastSyncedAt": "2026-09-01T20:50:00.000Z"
           }
         }
-      ]
+      ],
+      "rarity": "Double rare"
     },
     {
       "schemaVersion": 2,
@@ -6568,14 +7531,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-118",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "118",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/118/high.webp",
         "kind": "card",
@@ -6624,14 +7596,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-119",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "119",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/119/high.webp",
         "kind": "card",
@@ -6680,14 +7661,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-120",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "120",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/120/high.webp",
         "kind": "card",
@@ -6725,7 +7711,8 @@
             "lastSyncedAt": "2026-09-01T20:50:00.000Z"
           }
         }
-      ]
+      ],
+      "rarity": "Double rare"
     },
     {
       "schemaVersion": 2,
@@ -6736,14 +7723,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-121",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "121",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/121/high.webp",
         "kind": "card",
@@ -6792,14 +7788,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-122",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "122",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/122/high.webp",
         "kind": "card",
@@ -6848,14 +7853,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-123",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "123",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/123/high.webp",
         "kind": "card",
@@ -6904,14 +7918,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-124",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "124",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/124/high.webp",
         "kind": "card",
@@ -6949,7 +7968,8 @@
             "lastSyncedAt": "2026-09-01T20:50:00.000Z"
           }
         }
-      ]
+      ],
+      "rarity": "Double rare"
     },
     {
       "schemaVersion": 2,
@@ -6960,14 +7980,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-125",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "125",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/125/high.webp",
         "kind": "card",
@@ -7016,14 +8045,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-126",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "126",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/126/high.webp",
         "kind": "card",
@@ -7061,7 +8095,8 @@
             "lastSyncedAt": "2026-09-01T20:50:00.000Z"
           }
         }
-      ]
+      ],
+      "rarity": "Double rare"
     },
     {
       "schemaVersion": 2,
@@ -7072,14 +8107,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-127",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "127",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/127/high.webp",
         "kind": "card",
@@ -7128,14 +8172,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-128",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "128",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/128/high.webp",
         "kind": "card",
@@ -7184,14 +8237,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-129",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "129",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/129/high.webp",
         "kind": "card",
@@ -7240,14 +8302,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-130",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "130",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/130/high.webp",
         "kind": "card",
@@ -7296,14 +8367,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-131",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "131",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/131/high.webp",
         "kind": "card",
@@ -7352,14 +8432,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-132",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "132",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/132/high.webp",
         "kind": "card",
@@ -7408,14 +8497,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-133",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "133",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/133/high.webp",
         "kind": "card",
@@ -7464,14 +8562,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-134",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "134",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/134/high.webp",
         "kind": "card",
@@ -7509,7 +8612,8 @@
             "lastSyncedAt": "2026-09-01T20:50:00.000Z"
           }
         }
-      ]
+      ],
+      "rarity": "Double rare"
     },
     {
       "schemaVersion": 2,
@@ -7520,14 +8624,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-135",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "135",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/135/high.webp",
         "kind": "card",
@@ -7576,14 +8689,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-136",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "136",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/136/high.webp",
         "kind": "card",
@@ -7621,7 +8739,8 @@
             "lastSyncedAt": "2026-09-01T20:50:00.000Z"
           }
         }
-      ]
+      ],
+      "rarity": "Double rare"
     },
     {
       "schemaVersion": 2,
@@ -7632,14 +8751,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-137",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "137",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/137/high.webp",
         "kind": "card",
@@ -7688,14 +8816,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-138",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "138",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/138/high.webp",
         "kind": "card",
@@ -7744,14 +8881,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-139",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "139",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/139/high.webp",
         "kind": "card",
@@ -7800,14 +8946,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-140",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "140",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/140/high.webp",
         "kind": "card",
@@ -7856,14 +9011,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-141",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "141",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/141/high.webp",
         "kind": "card",
@@ -7912,14 +9076,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-142",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "142",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/142/high.webp",
         "kind": "card",
@@ -7968,14 +9137,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-143",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "143",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/143/high.webp",
         "kind": "card",
@@ -8024,14 +9202,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-144",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "144",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/144/high.webp",
         "kind": "card",
@@ -8080,14 +9267,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-145",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "145",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/145/high.webp",
         "kind": "card",
@@ -8136,14 +9332,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-146",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "146",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/146/high.webp",
         "kind": "card",
@@ -8192,14 +9393,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-147",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "147",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/147/high.webp",
         "kind": "card",
@@ -8248,14 +9458,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-148",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "148",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/148/high.webp",
         "kind": "card",
@@ -8304,14 +9519,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-149",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "149",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/149/high.webp",
         "kind": "card",
@@ -8360,14 +9580,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-150",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "150",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/150/high.webp",
         "kind": "card",
@@ -8416,14 +9645,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-151",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "151",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/151/high.webp",
         "kind": "card",
@@ -8472,14 +9710,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-152",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "152",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/152/high.webp",
         "kind": "card",
@@ -8528,14 +9771,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-153",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "153",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/153/high.webp",
         "kind": "card",
@@ -8584,14 +9836,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-154",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "154",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/154/high.webp",
         "kind": "card",
@@ -8640,14 +9901,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-155",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "155",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/155/high.webp",
         "kind": "card",
@@ -8696,14 +9966,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-156",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "156",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/156/high.webp",
         "kind": "card",
@@ -8752,14 +10031,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-157",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "157",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/157/high.webp",
         "kind": "card",
@@ -8808,14 +10096,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-158",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "158",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/158/high.webp",
         "kind": "card",
@@ -8864,14 +10161,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-159",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "159",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/159/high.webp",
         "kind": "card",
@@ -8920,14 +10222,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-160",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "160",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/160/high.webp",
         "kind": "card",
@@ -8976,14 +10287,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-161",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "161",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/161/high.webp",
         "kind": "card",
@@ -9032,14 +10352,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-162",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "162",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/162/high.webp",
         "kind": "card",
@@ -9088,14 +10417,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-163",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "163",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/163/high.webp",
         "kind": "card",
@@ -9144,14 +10482,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-164",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "164",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/164/high.webp",
         "kind": "card",
@@ -9200,14 +10547,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-165",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "165",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/165/high.webp",
         "kind": "card",
@@ -9256,14 +10612,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-166",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "166",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/166/high.webp",
         "kind": "card",
@@ -9312,14 +10677,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-167",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "167",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/167/high.webp",
         "kind": "card",
@@ -9368,14 +10742,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-168",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "168",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/168/high.webp",
         "kind": "card",
@@ -9424,14 +10807,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-169",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "169",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/169/high.webp",
         "kind": "card",
@@ -9480,14 +10872,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-170",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "170",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/170/high.webp",
         "kind": "card",
@@ -9536,14 +10937,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-171",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "171",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/171/high.webp",
         "kind": "card",
@@ -9592,14 +11002,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-172",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "172",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/172/high.webp",
         "kind": "card",
@@ -9648,14 +11067,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-173",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "173",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/173/high.webp",
         "kind": "card",
@@ -9704,14 +11132,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-174",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "174",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/174/high.webp",
         "kind": "card",
@@ -9760,14 +11197,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-175",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "175",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/175/high.webp",
         "kind": "card",
@@ -9816,14 +11262,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-176",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "176",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/176/high.webp",
         "kind": "card",
@@ -9872,14 +11327,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-177",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "177",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/177/high.webp",
         "kind": "card",
@@ -9928,14 +11392,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-178",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "178",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/178/high.webp",
         "kind": "card",
@@ -9984,14 +11457,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-179",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "179",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/179/high.webp",
         "kind": "card",
@@ -10040,14 +11522,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-180",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "180",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/180/high.webp",
         "kind": "card",
@@ -10096,14 +11587,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-181",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "181",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/181/high.webp",
         "kind": "card",
@@ -10152,14 +11652,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-182",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "182",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/182/high.webp",
         "kind": "card",
@@ -10208,14 +11717,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-183",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "183",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/183/high.webp",
         "kind": "card",
@@ -10264,14 +11782,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-184",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "184",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/184/high.webp",
         "kind": "card",
@@ -10320,14 +11843,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-185",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "185",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/185/high.webp",
         "kind": "card",
@@ -10376,14 +11908,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-186",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "186",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/186/high.webp",
         "kind": "card",
@@ -10432,14 +11973,23 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-187",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "187",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        },
+        {
+          "kind": "reverse",
+          "label": "Reverse Holofoil"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/187/high.webp",
         "kind": "card",
@@ -10488,14 +12038,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-188",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "188",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/188/high.webp",
         "kind": "card",
@@ -10544,14 +12099,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-189",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "189",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/189/high.webp",
         "kind": "card",
@@ -10600,14 +12160,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-190",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "190",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/190/high.webp",
         "kind": "card",
@@ -10656,14 +12221,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-191",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "191",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/191/high.webp",
         "kind": "card",
@@ -10712,14 +12282,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-192",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "192",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/192/high.webp",
         "kind": "card",
@@ -10768,14 +12343,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-193",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "193",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/193/high.webp",
         "kind": "card",
@@ -10824,14 +12404,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-194",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "194",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/194/high.webp",
         "kind": "card",
@@ -10880,14 +12465,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-195",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "195",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/195/high.webp",
         "kind": "card",
@@ -10936,14 +12526,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-196",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "196",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/196/high.webp",
         "kind": "card",
@@ -10992,14 +12587,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-197",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "197",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/197/high.webp",
         "kind": "card",
@@ -11048,14 +12648,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-198",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "198",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/198/high.webp",
         "kind": "card",
@@ -11104,14 +12709,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-199",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "199",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/199/high.webp",
         "kind": "card",
@@ -11160,14 +12770,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-200",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "200",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/200/high.webp",
         "kind": "card",
@@ -11216,14 +12831,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-201",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "201",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/201/high.webp",
         "kind": "card",
@@ -11272,14 +12892,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-202",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "202",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/202/high.webp",
         "kind": "card",
@@ -11328,14 +12953,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-203",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "203",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/203/high.webp",
         "kind": "card",
@@ -11384,14 +13014,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-204",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "204",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/204/high.webp",
         "kind": "card",
@@ -11440,14 +13075,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-205",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "205",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/205/high.webp",
         "kind": "card",
@@ -11496,14 +13136,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-206",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "206",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/206/high.webp",
         "kind": "card",
@@ -11552,14 +13197,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-207",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "207",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/207/high.webp",
         "kind": "card",
@@ -11608,14 +13258,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-208",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "208",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/208/high.webp",
         "kind": "card",
@@ -11664,14 +13319,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-209",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "209",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/209/high.webp",
         "kind": "card",
@@ -11720,14 +13380,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-210",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "210",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/210/high.webp",
         "kind": "card",
@@ -11776,14 +13441,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-211",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "211",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/211/high.webp",
         "kind": "card",
@@ -11832,14 +13502,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-212",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "212",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/212/high.webp",
         "kind": "card",
@@ -11888,14 +13563,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-213",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "213",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/213/high.webp",
         "kind": "card",
@@ -11944,14 +13624,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-214",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "214",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/214/high.webp",
         "kind": "card",
@@ -12000,14 +13685,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-215",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "215",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/215/high.webp",
         "kind": "card",
@@ -12056,14 +13746,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-216",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "216",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/216/high.webp",
         "kind": "card",
@@ -12112,14 +13807,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-217",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "217",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/217/high.webp",
         "kind": "card",
@@ -12168,14 +13868,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-218",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "218",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/218/high.webp",
         "kind": "card",
@@ -12224,14 +13929,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-219",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "219",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/219/high.webp",
         "kind": "card",
@@ -12280,14 +13990,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-220",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "220",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/220/high.webp",
         "kind": "card",
@@ -12336,14 +14051,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-221",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "221",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/221/high.webp",
         "kind": "card",
@@ -12392,14 +14112,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-222",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "222",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/222/high.webp",
         "kind": "card",
@@ -12448,14 +14173,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-223",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "223",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/223/high.webp",
         "kind": "card",
@@ -12504,14 +14234,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-224",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "224",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/224/high.webp",
         "kind": "card",
@@ -12560,14 +14295,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-225",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "225",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/225/high.webp",
         "kind": "card",
@@ -12616,14 +14356,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-226",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "226",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/226/high.webp",
         "kind": "card",
@@ -12672,14 +14417,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-227",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "227",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/227/high.webp",
         "kind": "card",
@@ -12728,14 +14478,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-228",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "228",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/228/high.webp",
         "kind": "card",
@@ -12784,14 +14539,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-229",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "229",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/229/high.webp",
         "kind": "card",
@@ -12840,14 +14600,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-230",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "230",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/230/high.webp",
         "kind": "card",
@@ -12896,14 +14661,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-231",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "231",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/231/high.webp",
         "kind": "card",
@@ -12952,14 +14722,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-232",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "232",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/232/high.webp",
         "kind": "card",
@@ -13008,14 +14783,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-233",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "233",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/233/high.webp",
         "kind": "card",
@@ -13064,14 +14844,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-234",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "234",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/234/high.webp",
         "kind": "card",
@@ -13120,14 +14905,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-235",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "235",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/235/high.webp",
         "kind": "card",
@@ -13176,14 +14966,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-236",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "236",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/236/high.webp",
         "kind": "card",
@@ -13232,14 +15027,19 @@
         {
           "provider": "tcgdex",
           "sourceId": "SV8a-237",
-          "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+          "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
       "language": "ja",
       "setId": "ktcg:set:ja:sv8a",
       "number": "237",
-      "variants": [],
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal"
+        }
+      ],
       "visual": {
         "url": "https://assets.tcgdex.net/ja/SV/SV8a/237/high.webp",
         "kind": "card",
