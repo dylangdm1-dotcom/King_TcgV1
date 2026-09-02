@@ -19,7 +19,25 @@
       "Pas de prix officiel de sortie",
       "Pas de cote française exacte",
       "Pas de ventes individuelles",
-      "Pas de hotlink d'images en V289"
+      "Visuels EN servis via le proxy cache King_TCG ; aucune image FR déduite de ces visuels"
+    ]
+  },
+  {
+    "id": "cardtrader",
+    "purpose": "Préparation du catalogue scellé FR, références visuelles et futures cotes EUR",
+    "status": "api_required",
+    "enabled": false,
+    "apiKeyRequired": true,
+    "environmentVariable": "CARDTRADER_API_TOKEN",
+    "rateLimit": {
+      "providerRequests": 200,
+      "windowSeconds": 10,
+      "kingTcgInternalRequests": 180
+    },
+    "limitations": [
+      "Aucun produit FR publié avant test réel du jeton",
+      "Chaque visuel devra correspondre au produit et à la langue annoncée",
+      "Les prix boutique et les cotes marché resteront séparés"
     ]
   }
 ]
