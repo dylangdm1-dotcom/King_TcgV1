@@ -3,6 +3,7 @@ import { z } from "zod";
 import {
   CATALOG_SCHEMA_VERSION,
   CatalogCardV2Schema,
+  CatalogCoverageBasisV2Schema,
   CatalogLanguageV2Schema,
   CatalogSeriesV2Schema,
   CatalogSetGroupV2Schema,
@@ -34,6 +35,9 @@ export const CatalogLocalSetManifestV2Schema = z.object({
   name: z.string().trim().min(1).max(240),
   status: CatalogLocalCoverageStatusV2Schema,
   cardCount: z.number().int().nonnegative(),
+  identityCount: z.number().int().nonnegative().optional(),
+  providerPrintCount: z.number().int().nonnegative().optional(),
+  coverageBasis: CatalogCoverageBasisV2Schema.optional(),
   sourceCardCount: z.number().int().nonnegative().optional(),
   officialCardCount: z.number().int().nonnegative().optional(),
   cards: CatalogLocalFileV2Schema.optional(),
@@ -69,6 +73,8 @@ export const CatalogLocalRegionalSourceV2Schema = z.object({
   importedAt: z.string().datetime({ offset: true }),
   snapshotCount: z.number().int().nonnegative(),
   cardCount: z.number().int().nonnegative(),
+  identityCount: z.number().int().nonnegative().optional(),
+  providerPrintCount: z.number().int().nonnegative().optional(),
 });
 export type CatalogLocalRegionalSourceV2 = z.infer<typeof CatalogLocalRegionalSourceV2Schema>;
 
@@ -113,6 +119,9 @@ export const CatalogLocalCardsFileV2Schema = CatalogLocalEnvelopeV2Schema.extend
   setId: z.string().trim().min(1).max(240),
   status: CatalogLocalCoverageStatusV2Schema,
   sourceCardCount: z.number().int().nonnegative().optional(),
+  identityCount: z.number().int().nonnegative().optional(),
+  providerPrintCount: z.number().int().nonnegative().optional(),
+  coverageBasis: CatalogCoverageBasisV2Schema.optional(),
   cards: z.array(CatalogCardV2Schema),
 });
 export type CatalogLocalCardsFileV2 = z.infer<typeof CatalogLocalCardsFileV2Schema>;

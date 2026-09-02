@@ -4,6 +4,7 @@ import path from "path";
 
 import type { CatalogSetV2, CatalogSnapshotV2 } from "../schema";
 import { CatalogSnapshotV2Schema } from "../schema";
+import { coverageCountV292, type CatalogCoverageBasisV292 } from "../counts";
 import {
   CATALOG_LOCAL_FORMAT_VERSION,
   CatalogLocalManifestV2Schema,
@@ -16,6 +17,9 @@ import {
 export interface CatalogLocalCoverageInputV2 {
   status?: CatalogLocalCoverageStatusV2;
   sourceCardCount?: number;
+  identityCount?: number;
+  providerPrintCount?: number;
+  coverageBasis?: CatalogCoverageBasisV292;
 }
 
 export interface WriteLocalCatalogOptionsV2 {
@@ -60,7 +64,14 @@ function statusForSet(
 ): CatalogLocalCoverageStatusV2 {
   if (coverage?.status) return coverage.status;
   if (coverage?.sourceCardCount !== undefined && cardCount > 0) {
-    return cardCount >= coverage.sourceCardCount ? "complete" : "partial";
+    const covered = coverageCountV292({
+      cardCount,
+      identityCount: coverage.identityCount,
+      providerPrintCount: coverage.providerPrintCount,
+      sourceCardCount: coverage.sourceCardCount,
+      coverageBasis: coverage.coverageBasis,
+    });
+    return covered >= coverage.sourceCardCount ? "complete" : "partial";
   }
   if (previous && previous.cardCount === cardCount) return previous.status;
   if (cardCount > 0) return "partial";
@@ -114,12 +125,18 @@ export function writeLocalCatalogSnapshotV2(
       counts[status] += 1;
       cardCount += cards.length;
       const sourceCardCount = coverage?.sourceCardCount ?? previous?.sourceCardCount;
+      const identityCount = coverage?.identityCount ?? cards.length;
+      const providerPrintCount = coverage?.providerPrintCount ?? previous?.providerPrintCount ?? cards.length;
+      const coverageBasis = coverage?.coverageBasis ?? previous?.coverageBasis ?? "canonical_identities";
       const cardsFile = cards.length > 0
         ? writeJson(outputRoot, `${language}/cards/${safeFilename(set)}`, {
             ...envelope,
             setId: set.id,
             status,
             ...(sourceCardCount !== undefined ? { sourceCardCount } : {}),
+            identityCount,
+            providerPrintCount,
+            coverageBasis,
             cards,
           })
         : undefined;
@@ -129,6 +146,9 @@ export function writeLocalCatalogSnapshotV2(
         name: set.name,
         status,
         cardCount: cards.length,
+        identityCount,
+        providerPrintCount,
+        coverageBasis,
         ...(sourceCardCount !== undefined ? { sourceCardCount } : {}),
         ...(set.officialCardCount !== undefined ? { officialCardCount: set.officialCardCount } : {}),
         ...(cardsFile ? { cards: cardsFile } : {}),
