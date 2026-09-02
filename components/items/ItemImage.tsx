@@ -23,7 +23,7 @@ export default function ItemImage({ item, className = "" }: { item: SealedItem; 
   }
 
   return (
-    // URLs futures contrôlées par le catalogue ; le repli évite toute image inventée.
+    // Les URLs sont internes à King_TCG ; le serveur contrôle et met en cache la source autorisée.
     // eslint-disable-next-line @next/next/no-img-element
     <img
       src={src}
