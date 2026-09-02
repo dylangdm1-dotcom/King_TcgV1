@@ -66,6 +66,14 @@ export interface ItemCatalogManifest {
   verifiedItemCount: number;
   priceCoverage: number;
   priceQuoteCount?: number;
+  imageCount?: number;
+  languageStatus?: Partial<Record<ItemLanguage, {
+    state: "ready" | "preparation" | "future";
+    itemCount: number;
+    imageCount: number;
+    quoteCount: number;
+    note?: string;
+  }>>;
   languages: ItemLanguage[];
   categories: ItemCategory[];
   files: {
