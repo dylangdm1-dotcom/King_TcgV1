@@ -23,14 +23,14 @@ export const ITEM_SOURCE_REGISTRY: ItemSourceDescriptor[] = [
   },
   {
     id: "cardtrader",
-    label: "CardTrader · futur catalogue scellé FR",
+    label: "CardTrader · prévisualisation du catalogue scellé FR",
     purposes: ["identity", "current_market", "image"],
     state: "api_required",
     requiresApiKey: true,
     canHotlinkImages: false,
     persistenceAllowed: true,
     rateLimit: { requests: 200, windowMs: 10_000, internalLimit: 180 },
-    notes: "Connecteur serveur V290 prêt. Import FR différé jusqu’à configuration et validation d’un échantillon réel.",
+    notes: "Prévisualisation V294 privée. Les candidats FR ne sont publiés qu’après validation du nom, de la langue et du visuel.",
   },
 ];
 

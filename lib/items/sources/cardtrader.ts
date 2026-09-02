@@ -1,5 +1,5 @@
 import "server-only";
-import { CARDTRADER_RATE_LIMIT, waitForCardTraderSlot } from "./cardtrader-rate-limit";
+import { CARDTRADER_RATE_LIMIT, waitForCardTraderMarketplaceSlot, waitForCardTraderSlot } from "./cardtrader-rate-limit";
 import type { CardTraderApiStatus } from "./cardtrader-types";
 
 const BASE_URL = "https://api.cardtrader.com/api/v2";
@@ -24,6 +24,7 @@ export async function cardTraderGet<T>(pathname: string, searchParams?: Record<s
   if (!/^\/[a-z0-9/_-]+$/i.test(pathname)) throw new Error("cardtrader_invalid_path");
 
   await waitForCardTraderSlot();
+  if (pathname.startsWith("/marketplace/")) await waitForCardTraderMarketplaceSlot();
   const url = new URL(`${BASE_URL}${pathname}`);
   Object.entries(searchParams || {}).forEach(([key, value]) => url.searchParams.set(key, String(value)));
 
