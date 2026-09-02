@@ -28,9 +28,14 @@ export default function Home() {
 
   const upcomingKingTcgItems = [
     {
-      title: "57 produits scellés réels",
-      text: "Mega Evolution et Phantasmal Flames sont maintenant disponibles avec 54 cotes TCGplayer EN/US en USD.",
-      badge: "V289",
+      title: "57 produits scellés illustrés",
+      text: "Le premier lot EN dispose maintenant de ses visuels fournisseur, avec 54 cotes TCGplayer EN/US en USD.",
+      badge: "V290",
+    },
+    {
+      title: "Catalogue Items français propre",
+      text: "Le connecteur CardTrader est préparé ; le catalogue FR reste vide jusqu’à validation réelle des produits et visuels.",
+      badge: "V290",
     },
     {
       title: "Espace Items indépendant",
@@ -132,7 +137,7 @@ export default function Home() {
           <div className="kt-rise-in relative z-10 mx-auto max-w-3xl space-y-5">
             <span className="mx-auto inline-flex items-center gap-1.5 rounded-full border border-cyan-400/20 bg-cyan-400/[0.06] px-3 py-1.5 text-[9px] font-black uppercase tracking-[0.14em] text-cyan-300">
               <Sparkles className="w-3 h-3" />
-              King_TCG V289 • Accès anticipé
+              King_TCG V290 • Accès anticipé
             </span>
 
             <h1 className="flex items-center justify-center">
@@ -198,7 +203,7 @@ export default function Home() {
                     Actus & à venir
                   </span>
                   <span className="mt-0.5 block truncate text-[11px] font-bold text-zinc-300">
-                    Premier catalogue Items réel, cotes EN/US et prochaines langues
+                    Visuels Items EN disponibles · catalogue FR en préparation
                   </span>
                 </span>
               </div>
