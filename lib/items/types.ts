@@ -84,6 +84,17 @@ export interface ItemCatalogManifest {
   };
 }
 
+export interface ItemSourceStatus {
+  cardtrader: {
+    configured: boolean;
+    state: "ready" | "configuration_required";
+    publicLimit: number;
+    internalLimit: number;
+    windowMs: number;
+    marketplaceMinimumIntervalMs: number;
+  } | null;
+}
+
 export interface ItemCollectionEntry {
   quantity: number;
   buyPrice: number;

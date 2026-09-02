@@ -1,4 +1,4 @@
-import type { ItemCatalogManifest, SealedItem } from "./types";
+import type { ItemCatalogManifest, ItemSourceStatus, SealedItem } from "./types";
 
 export async function fetchItemCatalog(signal?: AbortSignal): Promise<{ items: SealedItem[]; manifest: ItemCatalogManifest | null }> {
   try {
@@ -22,5 +22,16 @@ export async function fetchItemById(id: string, signal?: AbortSignal): Promise<S
     return json?.data || null;
   } catch {
     return null;
+  }
+}
+
+export async function fetchItemSourceStatus(signal?: AbortSignal): Promise<ItemSourceStatus> {
+  try {
+    const response = await fetch("/api/items/sources", { signal, cache: "no-store" });
+    if (!response.ok) return { cardtrader: null };
+    const json = await response.json();
+    return { cardtrader: json?.cardtrader || null };
+  } catch {
+    return { cardtrader: null };
   }
 }
