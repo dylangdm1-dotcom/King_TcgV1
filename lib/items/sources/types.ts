@@ -9,5 +9,6 @@ export interface ItemSourceDescriptor {
   requiresApiKey: boolean;
   canHotlinkImages: boolean;
   persistenceAllowed: boolean;
+  rateLimit?: { requests: number; windowMs: number; internalLimit?: number };
   notes: string;
 }
