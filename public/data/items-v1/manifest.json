@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "catalogVersion": "v289-tcgcsv-en-first-batch",
+  "access": "premium_or_pro",
+  "itemCount": 57,
+  "verifiedItemCount": 57,
+  "priceCoverage": 94.74,
+  "priceQuoteCount": 54,
+  "languages": ["fr", "en", "ja", "zh-tw", "multi"],
+  "categories": [
+    "etb",
+    "booster_box",
+    "booster",
+    "bundle",
+    "upc",
+    "collection_box",
+    "tin",
+    "deck",
+    "special_collection",
+    "other"
+  ],
+  "files": {
+    "catalog": "catalog.json",
+    "categories": "categories.json",
+    "sources": "sources.json",
+    "languageCatalogs": {
+      "fr": "fr/catalog.json",
+      "en": "en/index.json",
+      "ja": "ja/catalog.json",
+      "zh-tw": "zh-tw/catalog.json",
+      "multi": "multi/catalog.json"
+    }
+  }
+}

@@ -1,0 +1,25 @@
+[
+  {
+    "id": "official-retail",
+    "purpose": "Référence produit et prix de sortie officiel",
+    "status": "research_required",
+    "enabled": false
+  },
+  {
+    "id": "tcgcsv-tcgplayer",
+    "purpose": "Identité produit et cote actuelle du marché EN/US",
+    "status": "ready",
+    "enabled": true,
+    "cost": "free",
+    "apiKeyRequired": false,
+    "syncInterval": "24h",
+    "currency": "USD",
+    "language": "en",
+    "limitations": [
+      "Pas de prix officiel de sortie",
+      "Pas de cote française exacte",
+      "Pas de ventes individuelles",
+      "Pas de hotlink d'images en V289"
+    ]
+  }
+]
