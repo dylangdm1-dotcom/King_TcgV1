@@ -41,7 +41,7 @@ function categoryFor(name: string): ItemCategory | null {
   return CATEGORY_RULES.find((rule) => rule.pattern.test(normalized))?.category || null;
 }
 
-function safeImage(url: unknown): { url?: string; host?: string } {
+export function safeCardTraderImage(url: unknown): { url?: string; host?: string } {
   try {
     const parsed = new URL(String(url || ""));
     if (parsed.protocol !== "https:") return {};
@@ -114,7 +114,7 @@ export async function previewCardTraderFrenchExpansion(expansionId: number) {
     const offers = frenchOffers(products, blueprint.id);
     if (!offers.length) return [];
     const prices = offers.map(euroPrice).filter((price): price is number => price !== null);
-    const image = safeImage(blueprint.image_url);
+    const image = safeCardTraderImage(blueprint.image_url);
     return [{
       blueprintId: blueprint.id,
       name: String(blueprint.name || "").trim(),
