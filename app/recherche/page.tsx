@@ -26,6 +26,7 @@ import {
 import Navbar from "../../components/Navbar";
 import SearchFilters from "../../components/SearchFilters";
 import CatalogCoverageBadge from "../../components/search/CatalogCoverageBadge";
+import CatalogSetCounts from "../../components/search/CatalogSetCounts";
 import CatalogLanguageSummary from "../../components/search/CatalogLanguageSummary";
 import {
   searchCards,
@@ -80,7 +81,9 @@ type SetItem = {
   total?: number;
   printedTotal?: number;
   identityCount?: number;
+  providerPrintCount?: number;
   sourceCardCount?: number;
+  coverageBasis?: "canonical_identities" | "provider_prints";
   releaseDate?: string;
   images?: { symbol?: string; logo?: string };
   availability?: "available" | "announced" | "unknown" | "metadata_only";
@@ -778,21 +781,13 @@ export default function Recherche() {
                                 </span>
 
                                 <span className="shrink-0 pl-1 text-right">
-                                  <span className="block text-[11px] font-black text-zinc-200">{set.sourceCardCount || set.total || set.printedTotal || "—"}</span>
-                                  <span className={`block text-[9px] font-bold uppercase tracking-wide ${
-                                    set.availability === "announced"
-                                      ? "text-amber-300"
-                                      : set.availability === "metadata_only"
-                                        ? "text-zinc-400"
-                                        : "text-zinc-600"
-                                  }`}>
-                                    {set.availability === "announced"
-                                      ? "à venir"
-                                      : set.availability === "metadata_only"
-                                        ? "référencée"
-                                        : set.sourceCardCount && set.identityCount && set.sourceCardCount > set.identityCount
-                                          ? "impressions"
-                                          : "cartes"}
+                                  <span className={set.availability === "announced" ? "text-amber-300" : set.availability === "metadata_only" ? "text-zinc-400" : "text-zinc-200"}>
+                                    <CatalogSetCounts
+                                      compact
+                                      identityCount={set.identityCount || set.total}
+                                      providerPrintCount={set.providerPrintCount || set.identityCount || set.total}
+                                      availability={set.availability}
+                                    />
                                   </span>
                                   <span className="mt-0.5 block max-w-[64px] truncate text-[10px] font-black uppercase text-violet-300">{set.displayCode || localizedSetCode(set.id, selectedLanguage)}</span>
                                 </span>
@@ -816,8 +811,8 @@ export default function Recherche() {
             <div className="flex min-w-0 items-center gap-2 rounded-xl border border-cyan-400/14 bg-cyan-400/[0.035] px-3.5 py-2 text-[10px] font-bold uppercase tracking-[0.11em] text-zinc-300">
               <Filter className="h-3.5 w-3.5 shrink-0 text-cyan-300" />
               <span>{filteredCards.length} carte{filteredCards.length > 1 ? "s" : ""} unique{filteredCards.length > 1 ? "s" : ""}</span>
-              {selectedSetSummary?.sourceCardCount && selectedSetSummary.sourceCardCount > filteredCards.length
-                ? <span className="whitespace-nowrap font-normal text-cyan-100/75">· {selectedSetSummary.sourceCardCount} impressions regroupées</span>
+              {selectedSetSummary?.providerPrintCount && selectedSetSummary.providerPrintCount > filteredCards.length
+                ? <span className="whitespace-nowrap font-normal text-cyan-100/75">· {selectedSetSummary.providerPrintCount} impressions regroupées</span>
                 : null}
               {query ? <span className="truncate font-normal text-zinc-200">· {query}</span> : null}
             </div>
