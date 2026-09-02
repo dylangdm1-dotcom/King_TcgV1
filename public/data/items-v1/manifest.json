@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "catalogVersion": "v288-items-foundation",
+  "access": "premium_or_pro",
+  "itemCount": 0,
+  "verifiedItemCount": 0,
+  "priceCoverage": 0,
+  "languages": ["fr", "en", "ja", "zh-tw", "multi"],
+  "categories": [
+    "etb",
+    "booster_box",
+    "booster",
+    "bundle",
+    "upc",
+    "collection_box",
+    "tin",
+    "deck",
+    "special_collection",
+    "other"
+  ],
+  "files": {
+    "catalog": "catalog.json",
+    "categories": "categories.json",
+    "sources": "sources.json",
+    "languageCatalogs": {
+      "fr": "fr/catalog.json",
+      "en": "en/catalog.json",
+      "ja": "ja/catalog.json",
+      "zh-tw": "zh-tw/catalog.json",
+      "multi": "multi/catalog.json"
+    }
+  }
+}

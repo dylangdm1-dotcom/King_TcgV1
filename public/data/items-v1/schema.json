@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "King_TCG Sealed Item V1",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["id", "slug", "name", "category", "language", "sources", "catalogStatus", "priceStatus"],
+    "properties": {
+      "id": { "type": "string", "minLength": 1 },
+      "slug": { "type": "string", "minLength": 1 },
+      "name": { "type": "string", "minLength": 1 },
+      "category": { "enum": ["etb", "booster_box", "booster", "bundle", "upc", "collection_box", "tin", "deck", "special_collection", "other"] },
+      "language": { "enum": ["fr", "en", "ja", "zh-tw", "multi"] },
+      "catalogStatus": { "enum": ["verified", "partial", "user_created"] },
+      "priceStatus": { "enum": ["available", "not_connected", "not_listed"] },
+      "sources": { "type": "array" },
+      "quotes": { "type": "array" }
+    },
+    "additionalProperties": true
+  }
+}
