@@ -9,6 +9,7 @@ import {
   isSimplifiedChineseSetCode,
 } from "../../../../lib/regionalSetCatalog";
 import { isPhysicalBrowsableSet } from "../../../../lib/setCatalog";
+import { catalogCountsV292 } from "../../../../lib/catalog-v2/counts";
 
 const POKEWALLET = "https://api.pokewallet.io";
 const TCGDEX = "https://api.tcgdex.net/v2";
@@ -351,6 +352,7 @@ export async function GET(request: NextRequest) {
   if (language === "zh-tw" && !setCode && !apiKey) {
     const sets = CHINESE_SET_CATALOG.map((entry) => {
       const auditedCount = CHINESE_AUDITED_AVAILABLE_SET_COUNTS[entry.code] || 0;
+      const counts = catalogCountsV292({ providerPrintCount: auditedCount });
       return {
         id: entry.code,
         name: entry.name,
@@ -360,6 +362,8 @@ export async function GET(request: NextRequest) {
         releaseDate: entry.releaseDate || "",
         images: {},
         availability: auditedCount > 0 ? "available" : "metadata_only",
+        providerPrintCount: counts.providerPrintCount,
+        coverageBasis: "provider_prints",
       };
     });
     return NextResponse.json({ success: true, sets, source: "local-cn-no-key" }, { headers: CATALOG_CACHE_HEADERS });
@@ -508,6 +512,8 @@ export async function GET(request: NextRequest) {
           images: {},
           availability:
             providerCount > 0 || auditedCount > 0 ? "available" : "metadata_only",
+          providerPrintCount: providerCount || auditedCount,
+          coverageBasis: "provider_prints",
         };
       });
 
@@ -530,6 +536,8 @@ export async function GET(request: NextRequest) {
           releaseDate: String(raw?.release_date || ""),
           images: {},
           availability: Number(raw?.card_count || 0) > 0 ? "available" : "metadata_only",
+          providerPrintCount: Number(raw?.card_count || 0),
+          coverageBasis: "provider_prints",
         });
       }
 
