@@ -58,7 +58,7 @@ export default function ItemsPageContent() {
           <div className="flex items-start gap-3">
             <span className="kt-page-icon flex shrink-0 items-center justify-center text-amber-300"><PackageOpen className="h-5 w-5" /></span>
             <div>
-              <div className="mb-2 flex flex-wrap items-center gap-2"><ItemAccessBadge /><span className="rounded-full border border-cyan-300/15 bg-cyan-300/[0.05] px-2 py-1 text-[8px] font-black uppercase tracking-[0.08em] text-cyan-300">V288 · Bêta</span></div>
+              <div className="mb-2 flex flex-wrap items-center gap-2"><ItemAccessBadge /><span className="rounded-full border border-cyan-300/15 bg-cyan-300/[0.05] px-2 py-1 text-[8px] font-black uppercase tracking-[0.08em] text-cyan-300">V290 · Bêta</span></div>
               <h1 className="kt-page-title">Items <span className="text-cyan-300">Pokémon scellés</span></h1>
               <p className="kt-page-subtitle mt-1 max-w-2xl">Espace indépendant pour ETB, displays, boosters, coffrets, bundles, UPC et autres produits scellés. Aucun résultat carte ou extension n’est mélangé ici.</p>
             </div>
@@ -74,10 +74,14 @@ export default function ItemsPageContent() {
 
       <ItemCreateForm open={createOpen} onClose={() => setCreateOpen(false)} onCreated={() => setFilters((current) => ({ ...current, availability: "personal" }))} />
       <ItemCatalogStatus manifest={manifest} offline={offline} />
+      <section className="grid gap-2 sm:grid-cols-2">
+        <div className="rounded-[15px] border border-amber-300/[0.16] bg-amber-300/[0.035] px-4 py-3"><p className="text-[9px] font-black uppercase tracking-[0.1em] text-amber-300">FR · En préparation</p><p className="mt-1 text-[10px] leading-5 text-zinc-300">CardTrader est préparé côté serveur. Aucun produit, prix ou emballage anglais n’est utilisé pour remplir artificiellement le catalogue français.</p></div>
+        <div className="rounded-[15px] border border-cyan-300/[0.16] bg-cyan-300/[0.035] px-4 py-3"><p className="text-[9px] font-black uppercase tracking-[0.1em] text-cyan-300">EN · Disponible</p><p className="mt-1 text-[10px] leading-5 text-zinc-300">57 produits réels avec leurs visuels fournisseur ; 54 disposent d’une cote TCGplayer EN/US conservée en USD.</p></div>
+      </section>
       <ItemStats catalog={stats.verified} personal={stats.personal} collection={collectionCount} favorites={favoriteCount} />
 
       <section className="rounded-[16px] border border-amber-300/[0.14] bg-amber-300/[0.035] px-4 py-3">
-        <div className="flex items-start gap-3"><ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-amber-300" /><div><p className="text-[9px] font-black uppercase tracking-[0.09em] text-amber-200">Données fiables uniquement</p><p className="mt-1 text-[10px] leading-5 text-zinc-300">Les premières cotes proviennent du marché TCGplayer EN/US via TCGCSV et restent affichées en USD. Elles ne sont jamais présentées comme une cote FR. Le prix de sortie officiel reste séparé. {ITEM_BETA_ACCESS.note}</p></div></div>
+        <div className="flex items-start gap-3"><ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-amber-300" /><div><p className="text-[9px] font-black uppercase tracking-[0.09em] text-amber-200">Données fiables uniquement</p><p className="mt-1 text-[10px] leading-5 text-zinc-300">Les visuels et cotes actuellement affichés restent identifiés EN/US. CardTrader est limité en interne à 180 requêtes par fenêtre de 10 secondes sur les 200 disponibles. Le prix de sortie officiel reste séparé. {ITEM_BETA_ACCESS.note}</p></div></div>
       </section>
 
       <ItemToolbar filters={filters} onChange={(patch) => setFilters((current) => ({ ...current, ...patch }))} onReset={() => setFilters(DEFAULT_ITEM_FILTERS)} />
