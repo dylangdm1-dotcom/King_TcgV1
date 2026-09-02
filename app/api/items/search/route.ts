@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { boundedQuery, enforceRateLimit } from "@/lib/api/security";
 import { ITEM_CATEGORIES, ITEM_LANGUAGES } from "@/lib/items/categories";
-import { getServerItemCatalog } from "@/lib/items/catalog";
+import { getServerItemBundleV296 } from "@/lib/items/catalog";
 import { filterSealedItems } from "@/lib/items/filters";
 import type { ItemCategory, ItemLanguage } from "@/lib/items/types";
 
@@ -17,7 +17,8 @@ export async function GET(request: Request) {
   const language = rawLanguage === "all" || ITEM_LANGUAGES.includes(rawLanguage as ItemLanguage) ? rawLanguage : "all";
   const category = rawCategory === "all" || ITEM_CATEGORIES.includes(rawCategory as ItemCategory) ? rawCategory : "all";
 
-  const data = filterSealedItems(getServerItemCatalog(), {
+  const bundle = await getServerItemBundleV296({ refreshFrench: true });
+  const data = filterSealedItems(bundle.items, {
     query: query.value,
     language: language as ItemLanguage | "all",
     category: category as ItemCategory | "all",
@@ -30,5 +31,6 @@ export async function GET(request: Request) {
     data,
     count: data.length,
     status: data.length ? "available" : "empty",
+    runtime: bundle.runtime,
   });
 }

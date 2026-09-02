@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
-import { apiError, enforceRateLimit, safeIdentifier } from "@/lib/api/security";
+import { apiError, boundedQuery, enforceRateLimit, safeIdentifier } from "@/lib/api/security";
+import { safeCardTraderImage } from "@/lib/items/sources/cardtrader-catalog";
 
 const MAX_IMAGE_BYTES = 5 * 1024 * 1024;
 
@@ -8,11 +9,20 @@ export async function GET(request: Request) {
   if (rateLimited) return rateLimited;
 
   const { searchParams } = new URL(request.url);
-  const product = safeIdentifier(searchParams.get("product"), 12, /^\d{1,12}$/);
-  if ("error" in product) return product.error;
-  const size = searchParams.get("size") === "small" ? "small" : "large";
-  const suffix = size === "small" ? "200w" : "in_1000x1000";
-  const upstreamUrl = `https://tcgplayer-cdn.tcgplayer.com/product/${product.value}_${suffix}.jpg`;
+  let upstreamUrl: string;
+  if (searchParams.get("source") === "cardtrader") {
+    const requested = boundedQuery(searchParams.get("url"), 1_200);
+    if ("error" in requested) return requested.error;
+    const image = safeCardTraderImage(requested.value);
+    if (!image.url) return apiError("URL visuelle CardTrader invalide.", 400, "invalid_cardtrader_image_url");
+    upstreamUrl = image.url;
+  } else {
+    const product = safeIdentifier(searchParams.get("product"), 12, /^\d{1,12}$/);
+    if ("error" in product) return product.error;
+    const size = searchParams.get("size") === "small" ? "small" : "large";
+    const suffix = size === "small" ? "200w" : "in_1000x1000";
+    upstreamUrl = `https://tcgplayer-cdn.tcgplayer.com/product/${product.value}_${suffix}.jpg`;
+  }
 
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 12_000);
