@@ -2,7 +2,7 @@
 
 King_TCG est une application Next.js de recherche, collection et analyse de cartes Pokémon TCG. Elle réunit un catalogue multilingue, la gestion de collection, les favoris, un scanner assisté par IA, une estimation PSA et une agrégation de données marché.
 
-**Version actuelle : V283 — catalogue chinois local récupéré via PokéWallet.**
+**Version actuelle : V288 — espace Items Pokémon scellés indépendant.**
 
 ## Fonctions principales
 
@@ -15,6 +15,24 @@ King_TCG est une application Next.js de recherche, collection et analyse de cart
 - estimation PSA expérimentale avec PriceCharting et eBay, regroupée par langue, carte, extension, édition, variante et grade ;
 - Cote King_TCG construite à partir des sources compatibles disponibles ;
 - cache marché partagé et historique quotidien persistant via Redis REST.
+- espace Items séparé de Recherche cartes/extensions, avec fiches, filtres, références personnelles, collection, favoris et export CSV ;
+- accès Items prévu pour Premium et PRO, avec aperçu ouvert pendant la bêta ;
+- formule PRO préparée pour un futur scanner de stock gros volume sans prix et des exports professionnels.
+
+## Espace Items V288
+
+La route `/items` est entièrement indépendante de `/recherche` : une recherche de cartes ou d’extensions ne renvoie jamais de produit scellé, et une recherche Items ne renvoie jamais de carte. Les ETB, displays, boosters, bundles, UPC, coffrets, Pokébox, decks et collections spéciales possèdent leur propre modèle de données et leurs propres routes `/api/items/*`.
+
+La V288 permet déjà :
+
+- d’enregistrer une référence personnelle sans la faire passer pour une donnée officielle ;
+- d’ajouter un Item à la collection avec quantité, prix d’achat, date et notes ;
+- d’ajouter un Item aux favoris ;
+- d’ouvrir une fiche dédiée ;
+- d’exporter l’inventaire Items en CSV ;
+- de distinguer le futur prix de sortie officiel de la future cote marché actuelle.
+
+Le catalogue public démarre volontairement à zéro : aucun produit, visuel ou prix n’est simulé. Une source sera activée seulement après validation de son API, de son coût, de ses quotas et de ses conditions d’utilisation. Les références personnelles restent locales au navigateur.
 
 ## Couverture du catalogue
 
@@ -22,16 +40,24 @@ King_TCG est une application Next.js de recherche, collection et analyse de cart
 |---|---:|---:|---:|---|
 | FR | 18 | 244 | 19 797 | 172 complètes, 10 partielles |
 | EN | 20 | 203 | 21 066 | 199 complètes |
-| JP | 13 | 122 | 322 | M3, M6 et SV9A complètes, 119 extensions à synchroniser |
+| JP | 13 | 122 | 8 440 | 73 complètes, 49 extensions en métadonnées |
 | CN | 6 | 66 | 6 053 | 53 complètes, 7 partielles, 6 en métadonnées |
 
-Les extensions JP/CN sont visibles avec leur nom, code et série même lorsque leurs cartes ne sont pas encore disponibles localement. M3 contient 117 cartes, M6 en contient 113 et SV9A en contient 92 avec 92 visuels japonais vérifiés. Le catalogue chinois contient désormais 60 extensions ouvrables, 6 053 identités et une référence visuelle PokéWallet pour chaque identité. Les différentes impressions d’un même numéro sont fusionnées en variantes afin d’éviter les faux doublons.
+Les extensions JP/CN sont visibles avec leur nom, code et série même lorsque leurs cartes ne sont pas encore disponibles localement. La V287 ajoute en une passe 64 extensions japonaises ouvrables et 7 330 cartes locales : le catalogue JP atteint 8 440 cartes réparties dans 73 extensions complètes. Il contient 3 794 cartes avec une référence visuelle TCGdex, dont les 92 visuels déjà présents avant la V287. Les cartes sans URL fournisseur utilisent un placeholder sans faux visuel.
+
+En mode japonais, Recherche affiche désormais le nom japonais fourni par TCGdex tout en conservant le nom anglais comme alias recherchable. Parmi les 49 extensions encore en métadonnées, 30 existent dans l’index TCGdex mais ne publient actuellement aucune liste de cartes, et 19 sont absentes de cet index. Elles ne sont pas déclarées complètes artificiellement.
+
+Le catalogue chinois contient 60 extensions ouvrables, 6 053 identités et une référence visuelle PokéWallet pour chaque identité. Les différentes impressions d’un même numéro sont regroupées sous une identité afin d’éviter les faux doublons. La Recherche distingue maintenant le nombre de cartes uniques du nombre d’impressions fournisseur ; par exemple CBB6C contient 28 identités et 192 impressions regroupées.
+
+Les collections chinoises disposent de leur propre catégorie d’affichage. Les noms King_TCG vérifiés remplacent également les libellés fournisseur réduits à un simple code (`CSVH3C`, `CSM2.5C`, `CSMAC`, `CSMC`, `CSMJC`, `CSMLC`, `CSMYC`, `CSUC`, `CSXC`, `CSYC` et `CSZC`).
+
+Lorsqu'une identité chinoise possède plusieurs impressions PokéWallet, la fiche propose maintenant chaque impression dans le sélecteur Version. Le changement met à jour le visuel et l'identifiant fournisseur avant l'appel Prix. Les caches marché sont séparés par impression, tandis que la Recherche et le Scanner conservent une seule identité par carte.
 
 Six extensions chinoises restent explicitement en métadonnées car PokéWallet ne publie pas encore leurs cartes : `CSV10C`, `CSV9C`, `CSV8C`, `CSV7C`, `CSVL2C` et `CSV6C`. King_TCG n’invente jamais une carte, un visuel ou un prix manquant.
 
 ## Sources de données
 
-- **TCGdex** : catalogue et visuels FR/EN, catalogue JP lorsqu’il est disponible ;
+- **TCGdex** : catalogue et visuels FR/EN/JP lorsqu’ils sont disponibles ;
 - **Pokémon TCG API** : repli anglais uniquement ;
 - **PokéWallet** : données chinoises autorisées lorsqu’une clé est configurée ;
 - **Cardmarket, TCGPlayer, JustTCG et eBay** : données marché selon la langue, la carte et la disponibilité ;
@@ -111,6 +137,8 @@ components/             Composants d’interface
 lib/catalog-v2/         Modèle, imports et chargement du catalogue local
 lib/market-cache/       Cache partagé, Redis, métriques et historique
 public/data/catalog-v2/ Manifest et fichiers JSON par langue/extension
+public/data/items-v1/    Catalogue indépendant des produits scellés
+lib/items/               Identité, recherche, stockage et prix Items
 ```
 
 Les dossiers techniques `scripts/` et `docs/` existent uniquement dans l’archive locale complète. Le déploiement contient le code de l’application, les données nécessaires et ce README.
