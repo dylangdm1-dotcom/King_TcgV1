@@ -15,6 +15,9 @@ import {
   Sparkles,
   Star,
   UserRound,
+  PackageOpen,
+  Boxes,
+  FileSpreadsheet,
 } from "lucide-react";
 import Navbar from "../../../components/Navbar";
 
@@ -84,6 +87,34 @@ const premiumHighlights = [
     title: "Opportunités Premium",
     description: "Potentiel estimé, niveau de confiance et signaux prioritaires.",
     icon: Star,
+  },
+  {
+    title: "Items Pokémon scellés",
+    description: "Recherche, collection et favoris dédiés aux produits scellés, séparés des cartes.",
+    icon: PackageOpen,
+  },
+] as const;
+
+const proHighlights = [
+  {
+    title: "Toutes les fonctions Premium",
+    description: "Le niveau PRO reprend l’intégralité de Premium.",
+    icon: Crown,
+  },
+  {
+    title: "Scanner de stock gros volume",
+    description: "Inventaire de 40 à 50 cartes par session, sans calcul de prix automatique.",
+    icon: Boxes,
+  },
+  {
+    title: "Export professionnel",
+    description: "Listing structuré exportable en CSV et Excel pour les logiciels métier.",
+    icon: FileSpreadsheet,
+  },
+  {
+    title: "Outils Items avancés",
+    description: "Suivi de stock et analyses de produits scellés à mesure de leur activation.",
+    icon: PackageOpen,
   },
 ] as const;
 
@@ -210,7 +241,7 @@ export default function AccountManagementPage() {
               <span className="h-px flex-1 bg-gradient-to-r from-cyan-400/40 to-transparent" />
             </div>
 
-            <div className="grid gap-4 lg:grid-cols-2">
+            <div className="grid gap-4 lg:grid-cols-3">
               <article className="kt-plan-card kt-plan-normal relative overflow-hidden rounded-[18px] border p-4 sm:p-5">
                 <div className="pointer-events-none absolute -left-20 -top-24 h-56 w-56 rounded-full bg-cyan-400/[0.055] blur-3xl" />
                 <div className="pointer-events-none absolute -bottom-28 -right-20 h-64 w-64 rounded-full bg-cyan-400/[0.05] blur-3xl" />
@@ -376,6 +407,28 @@ export default function AccountManagementPage() {
                     <Crown className="h-4 w-4" />
                     Passer Premium · 4,99 € / mois
                   </button>
+                </div>
+              </article>
+
+              <article className="kt-plan-card relative overflow-hidden rounded-[18px] border border-amber-200/25 p-4 sm:p-5">
+                <div className="pointer-events-none absolute -right-20 -top-24 h-60 w-60 rounded-full bg-cyan-300/[0.06] blur-3xl" />
+                <div className="relative flex flex-col items-center text-center">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-[13px] border border-amber-200/35 bg-amber-200/[0.09] text-amber-200"><Boxes className="h-5 w-5" /></span>
+                  <h3 className="mt-3 text-[17px] font-black tracking-tight text-white sm:text-[19px]"><span className="text-amber-200">PRO</span> KING_TCG</h3>
+                  <p className="mt-1 text-[12px] font-medium text-zinc-200">Pour vendeurs, boutiques et gros collectionneurs.</p>
+                  <div className="mt-4 rounded-full border border-amber-200/20 bg-amber-200/[0.06] px-3 py-1 text-[10px] font-black uppercase tracking-[0.08em] text-amber-200">Tarif à définir · en étude</div>
+                  <div className="mt-4 w-full rounded-[14px] border border-cyan-300/18 bg-cyan-300/[0.045] px-4 py-3 text-left"><p className="text-[10px] font-black uppercase tracking-[0.08em] text-cyan-300">Scanner PRO</p><p className="mt-1 text-[11px] leading-5 text-zinc-300">Listing fiable en gros lot, puis export. Les prix ne font volontairement pas partie de ce scanner.</p></div>
+                </div>
+                <div className="relative mt-5 border-t border-amber-200/15 pt-5">
+                  <div className="kt-feature-list overflow-hidden rounded-[16px] bg-black/15">
+                    {proHighlights.map(({ title, description, icon: Icon }, index) => (
+                      <div key={title} className={`flex items-center gap-3 px-3.5 py-3 ${index > 0 ? "border-t border-white/[0.06]" : ""}`}>
+                        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-amber-200/[0.08] text-amber-200"><Icon className="h-4 w-4" /></span>
+                        <div className="min-w-0 flex-1 text-left"><p className="text-[11px] font-black text-white">{title}</p><p className="mt-0.5 text-[10px] leading-4 text-zinc-300">{description}</p></div>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-[14px] border border-amber-200/25 bg-amber-200/[0.055] px-4 py-3.5 text-[10px] font-black uppercase tracking-[0.06em] text-amber-200"><ShieldCheck className="h-4 w-4" /> Formule en préparation</div>
                 </div>
               </article>
             </div>
