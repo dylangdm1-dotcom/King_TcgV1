@@ -96,8 +96,9 @@ export async function loadCardTraderPokemonReference() {
   return { game: pokemon, categories, expansions };
 }
 
-export async function previewCardTraderFrenchExpansion(expansionId: number) {
-  const reference = await loadCardTraderPokemonReference();
+type CardTraderPokemonReference = Awaited<ReturnType<typeof loadCardTraderPokemonReference>>;
+
+async function previewFrenchExpansionFromReference(reference: CardTraderPokemonReference, expansionId: number) {
   const expansion = reference.expansions.find((candidate) => candidate.id === expansionId);
   if (!expansion) throw new Error("cardtrader_expansion_not_found");
 
@@ -146,4 +147,32 @@ export async function previewCardTraderFrenchExpansion(expansionId: number) {
       withEurPrice: candidates.filter((candidate) => Number.isFinite(candidate.lowestEur)).length,
     },
   };
+}
+
+export async function previewCardTraderFrenchExpansion(expansionId: number) {
+  return previewFrenchExpansionFromReference(await loadCardTraderPokemonReference(), expansionId);
+}
+
+export async function previewCardTraderFrenchCatalog(options?: {
+  expansionIds?: number[];
+  maximumExpansions?: number;
+}) {
+  const reference = await loadCardTraderPokemonReference();
+  const explicitIds = Array.from(new Set((options?.expansionIds || []).filter((id) => Number.isInteger(id) && id > 0)));
+  const maximum = Math.max(1, Math.min(12, Number(options?.maximumExpansions) || 6));
+  const selected = explicitIds.length
+    ? explicitIds.slice(0, maximum)
+    : [...reference.expansions].sort((a, b) => b.id - a.id).slice(0, maximum).map((expansion) => expansion.id);
+  const previews = [];
+  const failures: Array<{ expansionId: number; error: string }> = [];
+
+  for (const expansionId of selected) {
+    try {
+      previews.push(await previewFrenchExpansionFromReference(reference, expansionId));
+    } catch (error) {
+      failures.push({ expansionId, error: error instanceof Error ? error.message : "cardtrader_unknown_error" });
+    }
+  }
+
+  return { selectedExpansionIds: selected, previews, failures };
 }
