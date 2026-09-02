@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { Bookmark, Crown, FileSpreadsheet, Library, PackageOpen, Plus, ShieldCheck, Store } from "lucide-react";
-import { ITEM_BETA_ACCESS, fetchItemCatalog, filterSealedItems, DEFAULT_ITEM_FILTERS, getCustomItems, getItemCollection, getItemFavorites, itemCatalogStats } from "@/lib/items";
+import { ITEM_BETA_ACCESS, fetchItemCatalog, fetchItemSourceStatus, filterSealedItems, DEFAULT_ITEM_FILTERS, getCustomItems, getItemCollection, getItemFavorites, itemCatalogStats } from "@/lib/items";
 import type { ItemCatalogManifest, ItemSearchFilters, SealedItem } from "@/lib/items/types";
 import ItemAccessBadge from "./ItemAccessBadge";
 import ItemCard from "./ItemCard";
@@ -23,6 +23,7 @@ export default function ItemsPageContent() {
   const [createOpen, setCreateOpen] = useState(false);
   const [collectionCount, setCollectionCount] = useState(0);
   const [favoriteCount, setFavoriteCount] = useState(0);
+  const [cardTraderReady, setCardTraderReady] = useState<boolean | null>(null);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -38,6 +39,7 @@ export default function ItemsPageContent() {
       setOffline(!result.manifest);
       setLoading(false);
     });
+    fetchItemSourceStatus(controller.signal).then((result) => setCardTraderReady(result.cardtrader?.configured ?? null));
     window.addEventListener("king_tcg_items_update", syncLocal);
     return () => { controller.abort(); window.removeEventListener("king_tcg_items_update", syncLocal); };
   }, []);
@@ -58,7 +60,7 @@ export default function ItemsPageContent() {
           <div className="flex items-start gap-3">
             <span className="kt-page-icon flex shrink-0 items-center justify-center text-amber-300"><PackageOpen className="h-5 w-5" /></span>
             <div>
-              <div className="mb-2 flex flex-wrap items-center gap-2"><ItemAccessBadge /><span className="rounded-full border border-cyan-300/15 bg-cyan-300/[0.05] px-2 py-1 text-[8px] font-black uppercase tracking-[0.08em] text-cyan-300">V290 · Bêta</span></div>
+              <div className="mb-2 flex flex-wrap items-center gap-2"><ItemAccessBadge /><span className="rounded-full border border-cyan-300/15 bg-cyan-300/[0.05] px-2 py-1 text-[8px] font-black uppercase tracking-[0.08em] text-cyan-300">V294 · Bêta</span></div>
               <h1 className="kt-page-title">Items <span className="text-cyan-300">Pokémon scellés</span></h1>
               <p className="kt-page-subtitle mt-1 max-w-2xl">Espace indépendant pour ETB, displays, boosters, coffrets, bundles, UPC et autres produits scellés. Aucun résultat carte ou extension n’est mélangé ici.</p>
             </div>
@@ -75,7 +77,7 @@ export default function ItemsPageContent() {
       <ItemCreateForm open={createOpen} onClose={() => setCreateOpen(false)} onCreated={() => setFilters((current) => ({ ...current, availability: "personal" }))} />
       <ItemCatalogStatus manifest={manifest} offline={offline} />
       <section className="grid gap-2 sm:grid-cols-2">
-        <div className="rounded-[15px] border border-amber-300/[0.16] bg-amber-300/[0.035] px-4 py-3"><p className="text-[9px] font-black uppercase tracking-[0.1em] text-amber-300">FR · En préparation</p><p className="mt-1 text-[10px] leading-5 text-zinc-300">CardTrader est préparé côté serveur. Aucun produit, prix ou emballage anglais n’est utilisé pour remplir artificiellement le catalogue français.</p></div>
+        <div className="rounded-[15px] border border-amber-300/[0.16] bg-amber-300/[0.035] px-4 py-3"><p className="text-[9px] font-black uppercase tracking-[0.1em] text-amber-300">FR · En préparation</p><p className="mt-1 text-[10px] leading-5 text-zinc-300">{cardTraderReady === true ? "Connecteur CardTrader actif sur cet environnement. Les candidats FR restent soumis à validation du nom, de la langue et du visuel avant publication." : cardTraderReady === false ? "CardTrader attend sa variable serveur sur cet environnement. Aucun produit anglais ne remplit artificiellement le catalogue français." : "Vérification du connecteur CardTrader en cours. Aucun produit anglais ne remplit artificiellement le catalogue français."}</p></div>
         <div className="rounded-[15px] border border-cyan-300/[0.16] bg-cyan-300/[0.035] px-4 py-3"><p className="text-[9px] font-black uppercase tracking-[0.1em] text-cyan-300">EN · Disponible</p><p className="mt-1 text-[10px] leading-5 text-zinc-300">57 produits réels avec leurs visuels fournisseur ; 54 disposent d’une cote TCGplayer EN/US conservée en USD.</p></div>
       </section>
       <ItemStats catalog={stats.verified} personal={stats.personal} collection={collectionCount} favorites={favoriteCount} />
