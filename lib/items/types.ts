@@ -65,6 +65,7 @@ export interface ItemCatalogManifest {
   itemCount: number;
   verifiedItemCount: number;
   priceCoverage: number;
+  priceQuoteCount?: number;
   languages: ItemLanguage[];
   categories: ItemCategory[];
   files: {
