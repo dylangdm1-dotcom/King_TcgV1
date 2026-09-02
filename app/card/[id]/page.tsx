@@ -394,6 +394,8 @@ export default function CardPage() {
                   score={score}
                   trend={trend}
                   recommendation={recommendation}
+                  identityCount={card.set?.identityCount || card.set?.total || 0}
+                  providerPrintCount={card.set?.providerPrintCount || card.set?.identityCount || card.set?.total || 0}
                 />
 
                 <div className="kt-subpanel p-4">
