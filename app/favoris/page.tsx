@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import Link from "next/link";
 import {
   Bookmark,
   Search,
@@ -12,6 +13,8 @@ import {
   Filter,
   LayoutGrid,
   Maximize2,
+  PackageOpen,
+  ArrowRight,
 } from "lucide-react";
 
 import Navbar from "../../components/Navbar";
@@ -272,6 +275,11 @@ export default function FavorisPage() {
               )}
             </div>
           </section>
+
+          <Link href="/favoris/items" className="kt-section-surface flex items-center justify-between rounded-[15px] border p-3.5 transition hover:border-amber-300/25">
+            <span className="flex items-center gap-3"><PackageOpen className="h-4 w-4 text-amber-300" /><span><span className="block text-[10px] font-black text-white">Favoris Items scellés</span><span className="mt-0.5 block text-[9px] text-zinc-400">Watchlist séparée des cartes · Premium / PRO</span></span></span>
+            <ArrowRight className="h-4 w-4 text-amber-300" />
+          </Link>
 
           {/* ======================================================
               KPI V5.0
