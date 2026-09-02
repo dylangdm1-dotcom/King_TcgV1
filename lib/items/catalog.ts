@@ -4,6 +4,7 @@ import catalogEnIndex from "@/public/data/items-v1/en/index.json";
 import manifestData from "@/public/data/items-v1/manifest.json";
 import type { ItemCatalogManifest, SealedItem } from "./types";
 import { isItemCatalogManifest, parseItemCatalog } from "./validation";
+import { getCardTraderFrenchRuntimeSnapshotV296, withFrenchRuntimeManifestV296 } from "./sources/cardtrader-runtime";
 
 function indexedItems(index: { items?: Array<{ path?: string }> }): SealedItem[] {
   const rows = Array.isArray(index?.items) ? index.items : [];
@@ -53,4 +54,28 @@ export function getServerItemManifest(): ItemCatalogManifest {
 
 export function getServerItemById(idOrSlug: string): SealedItem | null {
   return catalog.find((item) => item.id === idOrSlug || item.slug === idOrSlug) || null;
+}
+
+export async function getServerItemBundleV296(options?: { refreshFrench?: boolean }) {
+  const snapshot = await getCardTraderFrenchRuntimeSnapshotV296({ refresh: Boolean(options?.refreshFrench) });
+  const seen = new Set<string>();
+  const items = parseItemCatalog([...(snapshot?.items || []), ...catalog])
+    .filter((item) => !seen.has(item.id) && Boolean(seen.add(item.id)));
+  return {
+    items,
+    manifest: withFrenchRuntimeManifestV296(getServerItemManifest(), snapshot),
+    runtime: snapshot ? {
+      state: snapshot.items.length ? "preview" : "empty",
+      generatedAt: snapshot.generatedAt,
+      freshUntil: snapshot.freshUntil,
+      itemCount: snapshot.items.length,
+      expansionIds: snapshot.expansionIds,
+      failures: snapshot.failures.length,
+    } : { state: "unavailable", itemCount: 0 },
+  };
+}
+
+export async function getServerItemByIdV296(idOrSlug: string): Promise<SealedItem | null> {
+  const bundle = await getServerItemBundleV296({ refreshFrench: true });
+  return bundle.items.find((item) => item.id === idOrSlug || item.slug === idOrSlug) || null;
 }
