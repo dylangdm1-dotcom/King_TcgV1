@@ -33,6 +33,11 @@ import ScannerOverlay from "@/components/scanner/ScannerOverlay";
 
 import { captureFrame } from "@/lib/scanner/capture";
 import { searchCardsForScan } from "@/lib/scanner/searchFromScan";
+import {
+  scanCardEvidenceV293,
+  scanLanguageLabelV293,
+  scannerCacheKeyV293,
+} from "@/lib/scanner/catalogIdentity";
 import type { QuadImageQuality, QuadSlotIndex } from "@/lib/scanner/quadScanner";
 
 import Navbar from "@/components/Navbar";
@@ -563,14 +568,14 @@ export default function ScannerPage() {
           : "Carte détectée");
 
       setStatus(
-        `IA : ${detectedLabel} (${(scanResult.language ?? "FR").toUpperCase()})`
+        `IA : ${detectedLabel} (${scanLanguageLabelV293(scanResult.language)})`
       );
 
       // =================================================
       // 5 - CACHE V5
       // =================================================
 
-      const cacheKey = `scan_${scanResult.cardName}_${scanResult.cardNumber || "no_num"}_${scanResult.setName || "no_set"}_${scanResult.language ?? "fr"}`;
+      const cacheKey = scannerCacheKeyV293(scanResult);
 
       let bestCard: PokemonCard | null =
         getCachedCardData<PokemonCard>(cacheKey) || null;
@@ -578,7 +583,7 @@ export default function ScannerPage() {
       if (bestCard) {
         logger.cache("Carte trouvée dans cache V5.", bestCard);
       } else {
-        setStatus(`Recherche TCG ${(scanResult.language ?? "FR").toUpperCase()}...`);
+        setStatus(`Recherche TCG ${scanLanguageLabelV293(scanResult.language)}...`);
 
         logger.api("Recherche Pokémon TCG V5", scanResult);
 
@@ -747,7 +752,7 @@ export default function ScannerPage() {
         needsSecondPass: Boolean(data.needsReview),
       };
 
-      const cacheKey = `scan_${scanResult.cardName}_${scanResult.cardNumber || "no_num"}_${scanResult.setName || "no_set"}_${scanResult.language ?? "fr"}`;
+      const cacheKey = scannerCacheKeyV293(scanResult);
       const cached = getCachedCardData<PokemonCard>(cacheKey) || null;
       const cards = cached ? [cached] : await searchCardsForScan(scanResult);
       if (!cards?.length) {
@@ -759,62 +764,23 @@ export default function ScannerPage() {
         };
       }
 
-      const cleanNumber = (value?: string | null) =>
-        String(value ?? "")
-          .toLowerCase()
-          .split("/")[0]
-          .replace(/[^a-z0-9]/g, "")
-          .replace(/^0+(?=\d)/, "");
-      const cleanText = (value?: string | null) =>
-        String(value ?? "")
-          .normalize("NFD")
-          .replace(/[\u0300-\u036f]/g, "")
-          .toLowerCase()
-          .replace(/[^a-z0-9\u3040-\u30ff\u3400-\u9fff]+/g, " ")
-          .trim();
-
-      const wantedNumber = cleanNumber(scanResult.cardNumber);
-      const wantedSet = cleanText(scanResult.setName || scanResult.setSymbol);
-      const wantedNames = [
-        scanResult.cardName,
-        scanResult.pokemonName,
-        ...(scanResult.possibleNames || []),
-      ].map(cleanText).filter(Boolean);
       const modelConfidence = normalizeConfidenceRatio(scanResult.confidence);
 
       const ranked = cards.map((card) => {
-        const numberExact = Boolean(wantedNumber) && cleanNumber(card.number) === wantedNumber;
-        const cardSetId = cleanText(card.set?.id);
-        const cardSetName = cleanText(card.set?.name);
-        const cardSeries = cleanText(card.set?.series);
-        const setValues = [cardSetId, cardSetName, cardSeries].filter(Boolean);
-        const setCompatible = Boolean(wantedSet) && setValues.some((value) =>
-          value === wantedSet || value.includes(wantedSet) || wantedSet.includes(value)
-        );
-        const cardName = cleanText(card.name);
-        const nameExact = wantedNames.some((name) => name === cardName);
-        const nameCompatible = nameExact || wantedNames.some((name) =>
-          name.length >= 3 && cardName.length >= 3 &&
-          (name.includes(cardName) || cardName.includes(name))
-        );
-
-        const signalCount = Number(numberExact) + Number(setCompatible) + Number(nameCompatible);
+        const evidence = scanCardEvidenceV293(card, scanResult);
         const confidence = Math.min(
           0.97,
-          (numberExact ? 0.38 : 0) +
-          (setCompatible ? 0.28 : 0) +
-          (nameExact ? 0.24 : nameCompatible ? 0.16 : 0) +
+          (evidence.numberExact ? 0.38 : evidence.numberCompatible ? 0.12 : 0) +
+          (evidence.setExact ? 0.28 : evidence.setCompatible ? 0.16 : 0) +
+          (evidence.nameExact ? 0.24 : evidence.nameCompatible ? 0.16 : 0) +
           modelConfidence * 0.07 +
           Math.min(1, Math.max(0, context.quality?.score ?? 0.5)) * 0.03
         );
 
         return {
           card,
-          confidence,
-          signalCount,
-          numberExact,
-          setCompatible,
-          nameCompatible,
+          confidence: evidence.languageExact ? confidence : 0,
+          ...evidence,
         };
       });
       ranked.sort((a, b) => b.confidence - a.confidence);
@@ -824,8 +790,9 @@ export default function ScannerPage() {
       }
 
       const identityMismatch =
-        (Boolean(wantedNumber) && !best.numberExact) ||
-        (Boolean(wantedSet) && !best.setCompatible);
+        !best.languageExact ||
+        (best.numberRequested && !best.numberExact) ||
+        (best.setRequested && !best.setCompatible);
       const weakIdentity = best.signalCount < 2;
       const requiresReview = Boolean(
         scanResult.needsSecondPass ||
@@ -1312,7 +1279,7 @@ export default function ScannerPage() {
                 <div className="text-xs font-black uppercase text-white">
                   {detectedCard.name}
                   {detectedCard.language
-                    ? ` (${detectedCard.language.toUpperCase()})`
+                    ? ` (${scanLanguageLabelV293(detectedCard.language)})`
                     : ""}
                 </div>
 
