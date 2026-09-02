@@ -1,4 +1,3 @@
-import { timingSafeEqual } from "crypto";
 import { NextResponse } from "next/server";
 import {
   apiError,
@@ -6,6 +5,7 @@ import {
   readJsonBodyWithLimit,
   rejectOversizedContentLength,
 } from "@/lib/api/security";
+import { authorizeKingTcgDiagnostic } from "@/lib/api/privateToken";
 import { clearMemoryMarketHistoryV277, MARKET_HISTORY_MAX_POINTS_V277 } from "@/lib/market-cache/history";
 import { getMarketCacheMetricsV277, resetMarketCacheMetricsV277 } from "@/lib/market-cache/metrics";
 import {
@@ -17,29 +17,10 @@ import { clearServerMarketCacheV275 } from "@/lib/market-cache/server";
 
 export const dynamic = "force-dynamic";
 
-function authorized(request: Request): "ok" | "missing_configuration" | "invalid" {
-  const expected = String(process.env.KING_TCG_CACHE_STATUS_TOKEN || "").trim();
-  if (!expected) return "missing_configuration";
-  const provided = String(request.headers.get("x-king-tcg-cache-token") || "").trim();
-  const expectedBuffer = Buffer.from(expected);
-  const providedBuffer = Buffer.from(provided);
-  if (expectedBuffer.length !== providedBuffer.length) return "invalid";
-  return timingSafeEqual(expectedBuffer, providedBuffer) ? "ok" : "invalid";
-}
-
-function authorize(request: Request): NextResponse | null {
-  const result = authorized(request);
-  if (result === "ok") return null;
-  if (result === "missing_configuration") {
-    return apiError("Diagnostic Redis non configuré.", 503, "cache_status_not_configured");
-  }
-  return apiError("Accès refusé.", 401, "unauthorized");
-}
-
 export async function GET(request: Request) {
   const limited = enforceRateLimit(request, "market-cache-status", { limit: 20, windowMs: 60_000 });
   if (limited) return limited;
-  const denied = authorize(request);
+  const denied = authorizeKingTcgDiagnostic(request);
   if (denied) return denied;
 
   const probe = await probeMarketRedisV277();
@@ -56,7 +37,7 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   const limited = enforceRateLimit(request, "market-cache-status-action", { limit: 5, windowMs: 60_000 });
   if (limited) return limited;
-  const denied = authorize(request);
+  const denied = authorizeKingTcgDiagnostic(request);
   if (denied) return denied;
   const oversized = rejectOversizedContentLength(request, 2_000);
   if (oversized) return oversized;
