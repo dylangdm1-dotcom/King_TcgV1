@@ -1,11 +1,31 @@
 {
   "schemaVersion": 1,
-  "catalogVersion": "v289-tcgcsv-en-first-batch",
+  "catalogVersion": "v290-fr-preparation-en-images-cardtrader",
   "access": "premium_or_pro",
   "itemCount": 57,
   "verifiedItemCount": 57,
   "priceCoverage": 94.74,
   "priceQuoteCount": 54,
+  "imageCount": 57,
+  "languageStatus": {
+    "fr": {
+      "state": "preparation",
+      "itemCount": 0,
+      "imageCount": 0,
+      "quoteCount": 0,
+      "note": "Catalogue FR propre en préparation via CardTrader ; aucune donnée provisoire publiée."
+    },
+    "en": {
+      "state": "ready",
+      "itemCount": 57,
+      "imageCount": 57,
+      "quoteCount": 54,
+      "note": "Premier lot EN/US disponible avec visuels fournisseur mis en cache par King_TCG."
+    },
+    "ja": { "state": "future", "itemCount": 0, "imageCount": 0, "quoteCount": 0 },
+    "zh-tw": { "state": "future", "itemCount": 0, "imageCount": 0, "quoteCount": 0 },
+    "multi": { "state": "future", "itemCount": 0, "imageCount": 0, "quoteCount": 0 }
+  },
   "languages": ["fr", "en", "ja", "zh-tw", "multi"],
   "categories": [
     "etb",
