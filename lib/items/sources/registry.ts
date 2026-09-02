@@ -12,14 +12,14 @@ export const ITEM_SOURCE_REGISTRY: ItemSourceDescriptor[] = [
     notes: "Aucune ingestion automatisée avant validation des conditions de réutilisation.",
   },
   {
-    id: "authorized-market",
-    label: "API marché autorisée à sélectionner",
-    purposes: ["identity", "current_market", "image"],
-    state: "api_required",
-    requiresApiKey: true,
+    id: "tcgcsv-tcgplayer",
+    label: "TCGCSV · données marché TCGplayer",
+    purposes: ["identity", "current_market"],
+    state: "ready",
+    requiresApiKey: false,
     canHotlinkImages: false,
-    persistenceAllowed: false,
-    notes: "Coût, quotas, langues et droit de stockage à mesurer avant activation.",
+    persistenceAllowed: true,
+    notes: "Synchronisation serveur quotidienne maximum, marché EN/US et prix USD.",
   },
 ];
 
