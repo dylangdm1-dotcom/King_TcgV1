@@ -9,7 +9,7 @@ import {
   Layers, Library, Bookmark, Wallet, 
   LayoutDashboard, Camera, Star, Zap, Sparkles, Search,
   Bell, TrendingUp, Crown, BadgeCheck, Handshake, ChevronDown,
-  ExternalLink, Video, Heart, CalendarDays, Newspaper, CircleDollarSign
+  ExternalLink, Video, Heart, CalendarDays, Newspaper, CircleDollarSign, PackageOpen
 } from "lucide-react";
 import { getCollection, getFavorites } from "@/lib/storage";
 import { getCardById } from "@/lib/pokemon";
@@ -28,29 +28,29 @@ export default function Home() {
 
   const upcomingKingTcgItems = [
     {
-      title: "Extensions manquantes par langue",
-      text: "Ajouter les séries encore absentes ou incomplètes selon les langues FR, EN, JP et CN, sans casser les catalogues déjà validés.",
-      badge: "Catalogues",
+      title: "Catalogue japonais enrichi",
+      text: "La B287 a ajouté 64 extensions japonaises ouvrables et 7 330 cartes locales.",
+      badge: "B287",
     },
     {
-      title: "Prix manquants par marché",
-      text: "Étendre la couverture Cardmarket, eBay, TCGPlayer et JustTCG lorsque certaines cartes ou langues n'ont pas encore de cotation exploitable.",
-      badge: "Marché",
+      title: "Espace Items indépendant",
+      text: "ETB, displays, boosters, coffrets, bundles et UPC disposent maintenant de leur propre recherche et de leur propre fiche.",
+      badge: "V288",
     },
     {
-      title: "Images CN encore manquantes",
-      text: "Améliorer la couverture des visuels, notamment pour certaines cartes chinoises, tout en conservant les images déjà mises en cache.",
-      badge: "Images",
+      title: "Collection et favoris Items",
+      text: "Les produits scellés restent séparés des cartes, avec quantités, achats, favoris et export CSV dédiés.",
+      badge: "V288",
     },
     {
-      title: "Variantes et états plus précis",
-      text: "Renforcer la correspondance entre langue, impression, variante et état afin d'utiliser le bon prix pour chaque version physique.",
-      badge: "Données",
+      title: "Cotes de produits scellés",
+      text: "Prochaine étape : connecter une source autorisée en séparant prix de sortie officiel et cote actuelle du marché.",
+      badge: "À venir",
     },
     {
-      title: "Ventes de cartes · Premium",
-      text: "Historique des cartes vendues, prix de vente et bénéfices réalisés.",
-      badge: "Premium",
+      title: "Scanner de stock PRO",
+      text: "Étude d’un inventaire gros volume sans prix, exportable en CSV ou Excel.",
+      badge: "PRO",
     },
   ] as const;
 
@@ -132,7 +132,7 @@ export default function Home() {
           <div className="kt-rise-in relative z-10 mx-auto max-w-3xl space-y-5">
             <span className="mx-auto inline-flex items-center gap-1.5 rounded-full border border-cyan-400/20 bg-cyan-400/[0.06] px-3 py-1.5 text-[9px] font-black uppercase tracking-[0.14em] text-cyan-300">
               <Sparkles className="w-3 h-3" />
-              King_TCG v5.0 • Accès anticipé
+              King_TCG V288 • Accès anticipé
             </span>
 
             <h1 className="flex items-center justify-center">
@@ -140,7 +140,7 @@ export default function Home() {
             </h1>
 
             <p className="mx-auto max-w-xl text-[12px] leading-6 text-zinc-300 sm:text-[13px]">
-              Scannez, recherchez et organisez vos cartes Pokémon, puis suivez leur valeur grâce aux données de marché réunies dans une interface simple.
+              Scannez et organisez vos cartes Pokémon, puis gérez séparément vos produits scellés dans le nouvel espace Items.
             </p>
 
             {/* Scanner IA */}
@@ -198,7 +198,7 @@ export default function Home() {
                     Actus & à venir
                   </span>
                   <span className="mt-0.5 block truncate text-[11px] font-bold text-zinc-300">
-                    Sorties Pokémon, nouveautés et travaux à venir sur King_TCG
+                    B287, nouvel espace Items V288 et prochaines connexions de données
                   </span>
                 </span>
               </div>
@@ -247,11 +247,11 @@ export default function Home() {
                   <div className="divide-y divide-cyan-200/[0.07]">
                     {upcomingKingTcgItems.map((item) => (
                       <div key={item.title} className="flex items-start gap-2 py-1.5 first:pt-0 last:pb-0">
-                        <span className={`mt-[3px] h-1.5 w-1.5 shrink-0 rounded-full ${item.badge === "Premium" ? "bg-amber-300/80" : "bg-cyan-300/70"}`} />
+                        <span className={`mt-[3px] h-1.5 w-1.5 shrink-0 rounded-full ${item.badge === "PRO" ? "bg-amber-300/80" : "bg-cyan-300/70"}`} />
                         <p className="min-w-0 text-[9px] leading-4 text-zinc-300">
-                          <span className={`font-black ${item.badge === "Premium" ? "text-amber-300" : "text-cyan-200"}`}>{item.badge}</span>
+                          <span className={`font-black ${item.badge === "PRO" ? "text-amber-300" : "text-cyan-200"}`}>{item.badge}</span>
                           <span className="text-zinc-500"> · </span>
-                          <span className={`font-bold ${item.badge === "Premium" ? "text-amber-100" : "text-white"}`}>{item.title}</span>
+                          <span className={`font-bold ${item.badge === "PRO" ? "text-amber-100" : "text-white"}`}>{item.title}</span>
                           <span className="hidden sm:inline"> — {item.text}</span>
                         </p>
                       </div>
@@ -328,9 +328,17 @@ export default function Home() {
 
             <QuickCard
               href="/recherche"
-              title="Recherche"
-              subtitle="Cartes, extensions, images et cotations"
+              title="Cartes & extensions"
+              subtitle="Recherche uniquement les cartes et leurs extensions"
               icon={<Search className="w-5 h-5 text-cyan-400" />}
+            />
+
+            <QuickCard
+              href="/items"
+              title="Items scellés"
+              badge="Premium · PRO"
+              subtitle="ETB, displays, boosters, coffrets, bundles et UPC"
+              icon={<PackageOpen className="h-5 w-5 text-amber-300" />}
             />
 
             <QuickCard
