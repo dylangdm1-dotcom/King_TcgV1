@@ -32,6 +32,7 @@ import {
   mergeSearchCatalogSetsV278,
   type SearchLocalSetCardsV278,
 } from "./catalog-v2/search";
+import { dedupeSearchCatalogSetsV291 } from "./catalog-v2/searchSetDedupe";
 
 const TCGDEX_URL = "https://api.tcgdex.net/v2";
 
@@ -1594,7 +1595,7 @@ export async function getAllSets(lang: LanguageCode = "fr"): Promise<any[]> {
         series: typeof set.series === "string" ? set.series : set.series?.name,
       });
     });
-    return localSets.sort(compareSetsNewestFirst);
+    return dedupeSearchCatalogSetsV291(localSets, targetLang).sort(compareSetsNewestFirst);
   }
 
   if (targetLang === "zh-tw") {
