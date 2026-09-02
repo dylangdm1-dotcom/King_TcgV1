@@ -2,9 +2,9 @@
 
 King_TCG est une application Next.js de recherche, collection et analyse de cartes Pokémon TCG. Elle réunit un catalogue multilingue, la gestion de collection, les favoris, un scanner assisté par IA, une estimation PSA et une agrégation de données marché.
 
-**Version actuelle : V294 — Prévisualisation contrôlée du catalogue Items FR.**
+**Version actuelle : V296 — Items FR automatiques en vérification.**
 
-La V294 conserve l’alignement Scanner V293 et ajoute le premier flux réel de contrôle CardTrader pour les Items français. Une route privée découvre les catégories et extensions Pokémon, filtre les produits scellés, demande uniquement les offres de langue `fr`, mesure la disponibilité des visuels et extrait la cote EUR minimale. Les résultats restent des candidats à contrôler : aucun nom, emballage ou prix n’est publié automatiquement dans le catalogue FR.
+La V296 supprime toute manipulation propriétaire du parcours normal. La page `/items` déclenche automatiquement, si nécessaire, une synchronisation CardTrader des dernières extensions Pokémon, conserve uniquement les produits scellés proposés en français et affiche leurs fiches avec le statut « en vérification ». Les noms, emballages et cotes peuvent ainsi être contrôlés directement sur le site. Redis empêche les synchronisations multiples et conserve le lot sept jours ; une donnée fraîche est réutilisée pendant 24 heures.
 
 Les comptes et abonnements restent volontairement désactivés. Leur mise en place est planifiée seulement après la stabilisation complète de PSA.
 
@@ -42,9 +42,9 @@ La source utilisée est **TCGCSV** : gratuite, sans clé API, mise à jour quoti
 
 Les langues ne sont pas mélangées : les visuels TCGplayer restent marqués EN et ne deviennent jamais des emballages FR. Le navigateur charge une URL interne `/api/items/image` ; le serveur contrôle strictement l’identifiant fournisseur et met la réponse en cache. Le prix officiel de sortie n’est pas fourni par TCGCSV et reste donc `—`.
 
-Le catalogue français est déclaré **en préparation**. Son fichier reste vide afin de ne jamais traduire automatiquement un produit anglais, convertir une cote USD en cote FR ou afficher un emballage international comme français. La route privée `/api/items/cardtrader/preview` permet maintenant de rechercher une extension puis d’inspecter ses candidats FR réels avec catégorie, quantité, visuel disponible et cote EUR. Elle exige `CARDTRADER_API_TOKEN` côté serveur et l’en-tête propriétaire protégé par `KING_TCG_CACHE_STATUS_TOKEN`.
+Le catalogue français est déclaré **en vérification bêta**. Son socle statique reste vide, mais `/api/items/catalog`, `/api/items/search` et `/api/items/[id]` fusionnent automatiquement le snapshot FR CardTrader conservé dans Redis. Aucun token n’est demandé dans l’interface. Les visuels passent par `/api/items/image`, qui accepte uniquement les URL HTTPS appartenant à CardTrader. Les fiches partielles affichent leur cote minimale CardTrader en EUR comme donnée de marché, jamais comme prix magasin officiel.
 
-Le quota CardTrader déclaré est de 200 requêtes par fenêtre de 10 secondes. King_TCG conserve une marge à 180 requêtes et espace en plus les lectures Marketplace d’au moins 1,1 seconde. Les prévisualisations sont limitées à 8 par minute et restent privées ; les imports ne sont jamais lancés depuis les navigateurs publics.
+Le quota CardTrader déclaré est de 200 requêtes par fenêtre de 10 secondes. King_TCG conserve une marge à 180 requêtes et espace les lectures Marketplace d’au moins 1,1 seconde. Un verrou Redis distribué autorise une seule reconstruction du snapshot FR à la fois ; les visiteurs suivants relisent le cache au lieu de rappeler CardTrader.
 
 ## Couverture du catalogue
 
