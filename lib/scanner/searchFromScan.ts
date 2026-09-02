@@ -12,41 +12,21 @@ import {
   normalizeSetId,
   parseSetReleaseDate,
   setCodeRecency,
-  setIdAliases,
 } from "@/lib/setCatalog";
+import {
+  catalogSetTokensV293,
+  normalizeScanLanguageV293,
+  normalizeScanNumberV293,
+  normalizeScanTextV293,
+  scanCardEvidenceV293,
+  scanSetCompatibilityV293,
+  scanSetTokensV293,
+} from "@/lib/scanner/catalogIdentity";
 
 const SEARCH_TIMEOUT_MS = 12_000;
 const MAX_SET_CANDIDATES = 5;
 const MAX_NAME_CANDIDATES = 5;
 const MAX_SCAN_CANDIDATES = 10;
-
-function normalizeText(value?: string | null) {
-  return String(value ?? "")
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .toLowerCase()
-    .replace(/[^a-z0-9\u3040-\u30ff\u3400-\u9fff]+/g, " ")
-    .trim();
-}
-
-function compactText(value?: string | null) {
-  return normalizeText(value).replace(/\s+/g, "");
-}
-
-function cleanCardNumber(value?: string | null) {
-  const raw = String(value ?? "").trim().toLowerCase();
-  if (!raw) return "";
-  const firstPart = raw.split("/")[0] ?? raw;
-  return firstPart.replace(/[^a-z0-9]/g, "").replace(/^0+(?=\d)/, "");
-}
-
-function toLanguageCode(language?: string | null): LanguageCode {
-  const value = String(language ?? "fr").toLowerCase().replace("_", "-");
-  if (["ja", "jp", "jpn", "japanese", "japonais"].includes(value)) return "ja";
-  if (["zh", "zh-cn", "zh-tw", "cn", "tw", "chinese", "chinois"].includes(value)) return "zh-tw";
-  if (["en", "eng", "english", "anglais"].includes(value)) return "en";
-  return "fr";
-}
 
 async function withTimeout<T>(promise: Promise<T>, fallback: T, label: string): Promise<T> {
   let timer: ReturnType<typeof setTimeout> | undefined;
@@ -72,10 +52,10 @@ function dedupe(cards: PokemonCard[]) {
   const map = new Map<string, PokemonCard>();
   for (const card of cards) {
     const key = [
-      normalizeText(card.name),
-      cleanCardNumber(card.number),
+      normalizeScanTextV293(card.name),
+      normalizeScanNumberV293(card.number),
       normalizeSetId(card.set?.id),
-      normalizeText(card.variant),
+      normalizeScanTextV293(card.variant),
     ].join("_");
     const previous = map.get(key);
     if (!previous || (!previous.images?.large && card.images?.large)) map.set(key, card);
@@ -94,42 +74,22 @@ function getNames(scan: CardScanResult) {
 }
 
 function getSetTargets(scan: CardScanResult) {
-  return Array.from(
-    new Set(
-      [scan.setSymbol, scan.setName]
-        .filter((value): value is string => Boolean(value?.trim()))
-        .flatMap((value) => [
-          normalizeText(value),
-          compactText(value),
-          ...setIdAliases(value),
-        ])
-        .filter(Boolean)
-    )
-  );
+  return Array.from(scanSetTokensV293(scan));
 }
 
 function scoreSet(set: any, scan: CardScanResult) {
   const targets = getSetTargets(scan);
   if (!targets.length) return 0;
 
+  const compatibility = scanSetCompatibilityV293(scan, set);
+  if (!compatibility.compatible) return 0;
+  const available = catalogSetTokensV293(set);
   const id = normalizeSetId(set?.id);
-  const name = normalizeText(set?.name);
-  const series = normalizeText(set?.series?.name ?? set?.series);
-  const compactName = compactText(set?.name);
-  const haystack = `${id} ${name} ${series}`;
 
-  let score = 0;
+  let score = compatibility.exact ? 4_000 : compatibility.compatible ? 1_200 : 0;
   for (const target of targets) {
-    const compactTarget = target.replace(/\s+/g, "");
-    if (id && id === compactTarget) score += 2_400;
-    else if (id && (id.includes(compactTarget) || compactTarget.includes(id))) score += 1_000;
-
-    if (name && name === target) score += 1_700;
-    else if (name && (name.includes(target) || target.includes(name))) score += 850;
-
-    if (compactName && compactName === compactTarget) score += 1_500;
-    if (series && series.includes(target)) score += 220;
-    if (haystack.includes(target)) score += 100;
+    if (id && id === normalizeSetId(target)) score += 2_400;
+    if (available.has(target)) score += 1_000;
   }
 
   const release = parseSetReleaseDate(effectiveSetReleaseDate(set?.id, set?.releaseDate));
@@ -139,45 +99,22 @@ function scoreSet(set: any, scan: CardScanResult) {
 
 function scoreCard(card: PokemonCard, scan: CardScanResult, language: LanguageCode) {
   let score = 0;
-  const targetNumber = cleanCardNumber(scan.cardNumber);
-  const cardNumber = cleanCardNumber(card.number);
-  const cardName = normalizeText(card.name);
-  const names = getNames(scan).map(normalizeText).filter(Boolean);
-  const setTargets = getSetTargets(scan);
-  const cardSetId = normalizeSetId(card.set?.id);
-  const cardSetName = normalizeText(card.set?.name);
-  const cardSet = `${cardSetId} ${cardSetName}`;
+  const evidence = scanCardEvidenceV293(card, scan);
 
-  if (targetNumber) {
-    if (cardNumber === targetNumber) score += 2_200;
-    else if (cardNumber.endsWith(targetNumber) || targetNumber.endsWith(cardNumber)) score += 520;
-    else if (cardNumber) score -= 700;
+  if (!evidence.languageExact) return -10_000;
+  if (evidence.numberRequested) {
+    if (evidence.numberExact) score += 2_200;
+    else if (evidence.numberCompatible) score += 520;
+    else score -= 700;
   }
 
-  let bestNameScore = 0;
-  for (const name of names) {
-    if (cardName === name) bestNameScore = Math.max(bestNameScore, 1_000);
-    else if (cardName.startsWith(name) || name.startsWith(cardName)) bestNameScore = Math.max(bestNameScore, 620);
-    else if (cardName.includes(name) || name.includes(cardName)) bestNameScore = Math.max(bestNameScore, 360);
-  }
-  score += bestNameScore;
-
-  let matchedSet = false;
-  for (const setTarget of setTargets) {
-    const compactTarget = setTarget.replace(/\s+/g, "");
-    if (cardSetId && cardSetId === compactTarget) {
-      score += 1_900;
-      matchedSet = true;
-    } else if (cardSet.includes(setTarget) || cardSetId.includes(compactTarget)) {
-      score += 850;
-      matchedSet = true;
-    }
-  }
-  if (setTargets.length && !matchedSet) score -= 280;
+  score += evidence.nameExact ? 1_000 : evidence.nameCompatible ? 480 : 0;
+  score += evidence.setExact ? 1_900 : evidence.setCompatible ? 850 : 0;
+  if (evidence.setRequested && !evidence.setCompatible) score -= 700;
 
   if (scan.rarity && card.rarity) {
-    const scanRarity = normalizeText(scan.rarity);
-    const cardRarity = normalizeText(card.rarity);
+    const scanRarity = normalizeScanTextV293(scan.rarity);
+    const cardRarity = normalizeScanTextV293(card.rarity);
     if (scanRarity === cardRarity || cardRarity.includes(scanRarity) || scanRarity.includes(cardRarity)) score += 80;
   }
 
@@ -242,8 +179,8 @@ function rankCards(cards: PokemonCard[], scan: CardScanResult, language: Languag
  * déclenchée une seule fois, sur la fiche de la carte finalement validée.
  */
 export async function searchCardsForScan(scan: CardScanResult): Promise<PokemonCard[]> {
-  const language = toLanguageCode(scan.language);
-  const targetNumber = cleanCardNumber(scan.cardNumber);
+  const language = normalizeScanLanguageV293(scan.language) as LanguageCode;
+  const targetNumber = normalizeScanNumberV293(scan.cardNumber);
   const hasDetectedSet = Boolean(scan.setName || scan.setSymbol);
   let candidates: PokemonCard[] = [];
 
