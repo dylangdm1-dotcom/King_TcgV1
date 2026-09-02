@@ -2,7 +2,7 @@
 
 King_TCG est une application Next.js de recherche, collection et analyse de cartes Pokémon TCG. Elle réunit un catalogue multilingue, la gestion de collection, les favoris, un scanner assisté par IA, une estimation PSA et une agrégation de données marché.
 
-**Version actuelle : V288 — espace Items Pokémon scellés indépendant.**
+**Version actuelle : V290 — visuels Items EN et préparation propre du catalogue FR.**
 
 ## Fonctions principales
 
@@ -19,7 +19,7 @@ King_TCG est une application Next.js de recherche, collection et analyse de cart
 - accès Items prévu pour Premium et PRO, avec aperçu ouvert pendant la bêta ;
 - formule PRO préparée pour un futur scanner de stock gros volume sans prix et des exports professionnels.
 
-## Espace Items V288
+## Espace Items V290
 
 La route `/items` est entièrement indépendante de `/recherche` : une recherche de cartes ou d’extensions ne renvoie jamais de produit scellé, et une recherche Items ne renvoie jamais de carte. Les ETB, displays, boosters, bundles, UPC, coffrets, Pokébox, decks et collections spéciales possèdent leur propre modèle de données et leurs propres routes `/api/items/*`.
 
@@ -32,7 +32,15 @@ La V288 permet déjà :
 - d’exporter l’inventaire Items en CSV ;
 - de distinguer le futur prix de sortie officiel de la future cote marché actuelle.
 
-Le catalogue public démarre volontairement à zéro : aucun produit, visuel ou prix n’est simulé. Une source sera activée seulement après validation de son API, de son coût, de ses quotas et de ses conditions d’utilisation. Les références personnelles restent locales au navigateur.
+Le premier lot public contient **57 produits scellés anglais** issus de deux extensions : `ME01: Mega Evolution` et `ME02: Phantasmal Flames`. Les **57 références disposent maintenant d’un visuel fournisseur** servi par une route King_TCG contrôlée et mise en cache. Parmi elles, **54 disposent d’une cote actuelle TCGplayer en USD** et 3 restent explicitement sans cote. Aucun prix manquant n’est inventé.
+
+La source utilisée est **TCGCSV** : gratuite, sans clé API, mise à jour quotidiennement et prévue pour une ingestion serveur. King_TCG respecte une synchronisation maximale toutes les 24 heures avec un User-Agent identifiable. La donnée reste classée EN/US : elle n’est jamais présentée comme une cote française exacte.
+
+La V290 ne mélange pas les langues : les visuels TCGplayer restent marqués EN et ne deviennent jamais des emballages FR. Le navigateur charge une URL interne `/api/items/image` ; le serveur contrôle strictement l’identifiant fournisseur et met la réponse en cache. Le prix officiel de sortie n’est pas fourni par TCGCSV et reste donc `—`.
+
+Le catalogue français est maintenant déclaré **en préparation**. Son fichier reste vide afin de ne jamais traduire automatiquement un produit anglais, convertir une cote USD en cote FR ou afficher un emballage international comme français. Le connecteur serveur CardTrader est prêt pour récupérer ultérieurement catégories, extensions, produits et références visuelles après configuration de `CARDTRADER_API_TOKEN` et validation d’un échantillon réel.
+
+Le quota CardTrader déclaré pour le projet est de 200 requêtes par fenêtre de 10 secondes. King_TCG conserve une marge et limite son orchestrateur à 180 requêtes par fenêtre. Cette limite est interne à chaque instance ; les futurs imports resteront exécutés par lots contrôlés, pas depuis les navigateurs des utilisateurs.
 
 ## Couverture du catalogue
 
@@ -62,6 +70,8 @@ Six extensions chinoises restent explicitement en métadonnées car PokéWallet 
 - **PokéWallet** : données chinoises autorisées lorsqu’une clé est configurée ;
 - **Cardmarket, TCGPlayer, JustTCG et eBay** : données marché selon la langue, la carte et la disponibilité ;
 - **PriceCharting et eBay** : références complémentaires pour la partie PSA.
+- **TCGCSV / TCGplayer** : identité et cote actuelle en USD des produits scellés EN, synchronisées au maximum une fois par jour.
+- **CardTrader** : connecteur serveur préparé pour le futur catalogue Items FR, avec jeton privé obligatoire et aucune donnée FR publiée avant validation.
 
 Une donnée provenant d’une autre langue reste classée comme comparable ou indicative. Elle ne devient jamais silencieusement un prix exact local.
 
@@ -85,6 +95,7 @@ Les secrets restent exclusivement côté serveur et ne doivent jamais utiliser l
 GEMINI_API_KEY=
 POKEMON_TCG_API_KEY=
 POKEWALLET_API_KEY=
+CARDTRADER_API_TOKEN=
 JUSTTCG_API_KEY=
 EBAY_CLIENT_ID=
 EBAY_CLIENT_SECRET=
