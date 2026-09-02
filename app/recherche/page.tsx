@@ -25,6 +25,8 @@ import {
 } from "lucide-react";
 import Navbar from "../../components/Navbar";
 import SearchFilters from "../../components/SearchFilters";
+import CatalogCoverageBadge from "../../components/search/CatalogCoverageBadge";
+import CatalogLanguageSummary from "../../components/search/CatalogLanguageSummary";
 import {
   searchCards,
   searchCardsBySetId,
@@ -84,6 +86,8 @@ type SetItem = {
   availability?: "available" | "announced" | "unknown" | "metadata_only";
   coverage?: "complete" | "partial" | "metadata_only" | "announced";
   localCardsAvailable?: boolean;
+  displayCode?: string;
+  mergedSetIds?: string[];
 };
 
 
@@ -623,7 +627,7 @@ export default function Recherche() {
                   Rechercher une carte
                 </h1>
                 <p className="kt-search-intro-note mt-2">
-                  Recherchez par nom ou parcourez le catalogue local par série et extension. Les cartes FR, EN et CN disponibles sont chargées localement ; le catalogue JP progresse extension par extension.
+                  Recherchez par nom ou parcourez le catalogue local par série et extension. Chaque langue reste isolée, les alias en double sont regroupés et les données incomplètes sont signalées sans résultat inventé.
                 </p>
               </div>
 
@@ -656,6 +660,14 @@ export default function Recherche() {
                 </span>
               </div>
             </div>
+
+            {!catalogLoading ? (
+              <CatalogLanguageSummary
+                total={allSetsList.length}
+                available={availableSetCount}
+                pending={metadataSetCount + announcedSetCount}
+              />
+            ) : null}
 
             <div className="grid grid-cols-2 gap-2 rounded-2xl border border-sky-300/20 bg-sky-300/[0.055] p-1.5">
               <button
@@ -755,7 +767,10 @@ export default function Recherche() {
                                 </span>
 
                                 <span className="min-w-0 overflow-hidden">
-                                  <span className="block truncate text-[11px] font-black text-white" title={set.name}>{localizedSetName(set, selectedLanguage)}</span>
+                                  <span className="flex min-w-0 items-center gap-1.5">
+                                    <span className="block min-w-0 flex-1 truncate text-[11px] font-black text-white" title={set.name}>{localizedSetName(set, selectedLanguage)}</span>
+                                    <CatalogCoverageBadge coverage={set.coverage} />
+                                  </span>
                                   <span className="mt-1 flex min-w-0 items-center gap-1.5 overflow-hidden text-[10px] font-semibold uppercase tracking-wide text-zinc-200">
                                     <span className="inline-flex shrink-0 items-center gap-1"><CalendarDays className="h-2.5 w-2.5 text-amber-300" /> {yearLabel(effectiveSetReleaseDate(set.id, set.releaseDate))}</span>
                                     <span className="truncate">{set.series || generation}</span>
@@ -779,7 +794,7 @@ export default function Recherche() {
                                           ? "impressions"
                                           : "cartes"}
                                   </span>
-                                  <span className="mt-0.5 block max-w-[54px] truncate text-[10px] font-black uppercase text-violet-300">{localizedSetCode(set.id, selectedLanguage)}</span>
+                                  <span className="mt-0.5 block max-w-[64px] truncate text-[10px] font-black uppercase text-violet-300">{set.displayCode || localizedSetCode(set.id, selectedLanguage)}</span>
                                 </span>
                               </button>
                             ))}
