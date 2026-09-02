@@ -33,11 +33,38 @@ export function localizedSetCode(id: string | undefined, lang: "fr" | "en" | "ja
   const raw = String(id || "").trim();
   if (!raw) return "";
 
-  // TCGdex uses universal Scarlet & Violet ids such as sv08.5.
-  // In the French product line, those sets are displayed as EV8.5.
   if (lang === "fr") {
-    const match = raw.match(/^sv0?(\d+)(\.\d+[a-z]?)?$/i);
-    if (match) return `EV${Number(match[1])}${match[2] || ""}`;
+    // Les numéros commerciaux FR ne suivent pas toujours l'ordre des ids
+    // TCGdex internationaux. Ces exceptions proviennent des alias du catalogue
+    // français et évitent d'afficher un faux code calculé.
+    const exact: Record<string, string> = {
+      cel25: "EB07.5",
+      g1: "XY07.5",
+      sm115: "SL11.5",
+      "sv01": "EV01",
+      "sv02": "EV03",
+      "sv03": "EV02",
+      "sv04": "EV04",
+      "sv04.5": "EV04.5",
+      "sv05": "EV05",
+      "sv06": "EV06",
+      "sv06.5": "EV06.5",
+      "sv07": "EV07",
+      "sv08": "EV08",
+      "sv08.5": "EV09",
+      "sv10": "EV08.5",
+      "sv10.5w": "EV10",
+      "sv10.5b": "EV10.5",
+    };
+    const known = exact[raw.toLowerCase()];
+    if (known) return known;
+
+    const swordShield = raw.match(/^swsh0?(\d+)(\.\d+)?$/i);
+    if (swordShield) return `EB${String(Number(swordShield[1])).padStart(2, "0")}${swordShield[2] || ""}`;
+    const sunMoon = raw.match(/^sm0?(\d+)(\.\d+)?$/i);
+    if (sunMoon) return `SL${String(Number(sunMoon[1])).padStart(2, "0")}${sunMoon[2] || ""}`;
+    const xy = raw.match(/^xy0?(\d+)(\.\d+)?$/i);
+    if (xy) return `XY${String(Number(xy[1])).padStart(2, "0")}${xy[2] || ""}`;
   }
 
   return raw;
