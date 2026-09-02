@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "formatVersion": 1,
-  "catalogVersion": "v283-cn-pokewallet-2026-08-31",
+  "catalogVersion": "v292-cn-identity-print-coverage",
   "language": "zh-tw",
   "sets": [
     {
@@ -39,7 +39,10 @@
       "officialCardCount": 192,
       "knownCardCount": 192,
       "availability": "available",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 192,
+      "providerPrintCount": 192,
+      "coverageBasis": "canonical_identities"
     },
     {
       "schemaVersion": 2,
@@ -68,7 +71,10 @@
       "officialCardCount": 9,
       "knownCardCount": 9,
       "availability": "available",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 9,
+      "providerPrintCount": 9,
+      "coverageBasis": "canonical_identities"
     },
     {
       "schemaVersion": 2,
@@ -101,9 +107,12 @@
       "seriesId": "ktcg:series:zh-tw:scarlet-and-violet",
       "year": 2025,
       "officialCardCount": 115,
-      "knownCardCount": 115,
+      "knownCardCount": 18,
       "availability": "available",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 18,
+      "providerPrintCount": 115,
+      "coverageBasis": "provider_prints"
     },
     {
       "schemaVersion": 2,
@@ -136,9 +145,12 @@
       "seriesId": "ktcg:series:zh-tw:scarlet-and-violet",
       "year": 2025,
       "officialCardCount": 140,
-      "knownCardCount": 140,
+      "knownCardCount": 11,
       "availability": "available",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 11,
+      "providerPrintCount": 140,
+      "coverageBasis": "provider_prints"
     },
     {
       "schemaVersion": 2,
@@ -171,9 +183,12 @@
       "seriesId": "ktcg:series:zh-tw:scarlet-and-violet",
       "year": 2025,
       "officialCardCount": 136,
-      "knownCardCount": 136,
+      "knownCardCount": 20,
       "availability": "available",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 20,
+      "providerPrintCount": 136,
+      "coverageBasis": "provider_prints"
     },
     {
       "schemaVersion": 2,
@@ -205,9 +220,12 @@
       "seriesId": "ktcg:series:zh-tw:scarlet-and-violet",
       "year": 2026,
       "officialCardCount": 192,
-      "knownCardCount": 192,
+      "knownCardCount": 28,
       "availability": "available",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 28,
+      "providerPrintCount": 192,
+      "coverageBasis": "provider_prints"
     },
     {
       "schemaVersion": 2,
@@ -239,9 +257,12 @@
       "seriesId": "ktcg:series:zh-tw:scarlet-and-violet",
       "year": 2026,
       "officialCardCount": 194,
-      "knownCardCount": 194,
+      "knownCardCount": 28,
       "availability": "available",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 28,
+      "providerPrintCount": 194,
+      "coverageBasis": "provider_prints"
     },
     {
       "schemaVersion": 2,
@@ -273,9 +294,12 @@
       "year": 2026,
       "releaseDate": "2026-08-07",
       "officialCardCount": 192,
-      "knownCardCount": 192,
+      "knownCardCount": 28,
       "availability": "available",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 28,
+      "providerPrintCount": 192,
+      "coverageBasis": "provider_prints"
     },
     {
       "schemaVersion": 2,
@@ -295,9 +319,12 @@
       "code": "CS1.5C",
       "seriesId": "ktcg:series:zh-tw:sword-and-shield",
       "officialCardCount": 96,
-      "knownCardCount": 96,
+      "knownCardCount": 95,
       "availability": "available",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 95,
+      "providerPrintCount": 96,
+      "coverageBasis": "provider_prints"
     },
     {
       "schemaVersion": 2,
@@ -325,7 +352,10 @@
       "officialCardCount": 217,
       "knownCardCount": 217,
       "availability": "available",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 217,
+      "providerPrintCount": 217,
+      "coverageBasis": "canonical_identities"
     },
     {
       "schemaVersion": 2,
@@ -353,7 +383,10 @@
       "officialCardCount": 199,
       "knownCardCount": 199,
       "availability": "available",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 199,
+      "providerPrintCount": 199,
+      "coverageBasis": "canonical_identities"
     },
     {
       "schemaVersion": 2,
@@ -375,7 +408,10 @@
       "officialCardCount": 79,
       "knownCardCount": 79,
       "availability": "available",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 79,
+      "providerPrintCount": 79,
+      "coverageBasis": "canonical_identities"
     },
     {
       "schemaVersion": 2,
@@ -403,7 +439,10 @@
       "officialCardCount": 143,
       "knownCardCount": 143,
       "availability": "available",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 143,
+      "providerPrintCount": 143,
+      "coverageBasis": "canonical_identities"
     },
     {
       "schemaVersion": 2,
@@ -431,7 +470,10 @@
       "officialCardCount": 143,
       "knownCardCount": 143,
       "availability": "available",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 143,
+      "providerPrintCount": 143,
+      "coverageBasis": "canonical_identities"
     },
     {
       "schemaVersion": 2,
@@ -453,7 +495,10 @@
       "officialCardCount": 90,
       "knownCardCount": 90,
       "availability": "available",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 90,
+      "providerPrintCount": 90,
+      "coverageBasis": "canonical_identities"
     },
     {
       "schemaVersion": 2,
@@ -481,7 +526,10 @@
       "officialCardCount": 184,
       "knownCardCount": 184,
       "availability": "available",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 184,
+      "providerPrintCount": 184,
+      "coverageBasis": "canonical_identities"
     },
     {
       "schemaVersion": 2,
@@ -509,7 +557,10 @@
       "officialCardCount": 179,
       "knownCardCount": 179,
       "availability": "available",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 179,
+      "providerPrintCount": 179,
+      "coverageBasis": "canonical_identities"
     },
     {
       "schemaVersion": 2,
@@ -531,7 +582,10 @@
       "officialCardCount": 23,
       "knownCardCount": 23,
       "availability": "available",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 23,
+      "providerPrintCount": 23,
+      "coverageBasis": "canonical_identities"
     },
     {
       "schemaVersion": 2,
@@ -553,7 +607,10 @@
       "officialCardCount": 83,
       "knownCardCount": 83,
       "availability": "available",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 83,
+      "providerPrintCount": 83,
+      "coverageBasis": "canonical_identities"
     },
     {
       "schemaVersion": 2,
@@ -581,7 +638,10 @@
       "officialCardCount": 184,
       "knownCardCount": 184,
       "availability": "available",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 184,
+      "providerPrintCount": 184,
+      "coverageBasis": "canonical_identities"
     },
     {
       "schemaVersion": 2,
@@ -609,7 +669,10 @@
       "officialCardCount": 177,
       "knownCardCount": 177,
       "availability": "available",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 177,
+      "providerPrintCount": 177,
+      "coverageBasis": "canonical_identities"
     },
     {
       "schemaVersion": 2,
@@ -631,7 +694,10 @@
       "officialCardCount": 23,
       "knownCardCount": 23,
       "availability": "available",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 23,
+      "providerPrintCount": 23,
+      "coverageBasis": "canonical_identities"
     },
     {
       "schemaVersion": 2,
@@ -670,7 +736,10 @@
       "officialCardCount": 89,
       "knownCardCount": 89,
       "availability": "available",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 89,
+      "providerPrintCount": 89,
+      "coverageBasis": "canonical_identities"
     },
     {
       "schemaVersion": 2,
@@ -698,7 +767,10 @@
       "officialCardCount": 176,
       "knownCardCount": 176,
       "availability": "available",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 176,
+      "providerPrintCount": 176,
+      "coverageBasis": "canonical_identities"
     },
     {
       "schemaVersion": 2,
@@ -726,7 +798,10 @@
       "officialCardCount": 178,
       "knownCardCount": 178,
       "availability": "available",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 178,
+      "providerPrintCount": 178,
+      "coverageBasis": "canonical_identities"
     },
     {
       "schemaVersion": 2,
@@ -748,7 +823,10 @@
       "officialCardCount": 24,
       "knownCardCount": 24,
       "availability": "available",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 24,
+      "providerPrintCount": 24,
+      "coverageBasis": "canonical_identities"
     },
     {
       "schemaVersion": 2,
@@ -777,7 +855,10 @@
       "officialCardCount": 96,
       "knownCardCount": 96,
       "availability": "available",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 96,
+      "providerPrintCount": 96,
+      "coverageBasis": "canonical_identities"
     },
     {
       "schemaVersion": 2,
@@ -805,7 +886,10 @@
       "officialCardCount": 169,
       "knownCardCount": 169,
       "availability": "available",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 169,
+      "providerPrintCount": 169,
+      "coverageBasis": "canonical_identities"
     },
     {
       "schemaVersion": 2,
@@ -833,7 +917,10 @@
       "officialCardCount": 172,
       "knownCardCount": 172,
       "availability": "available",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 172,
+      "providerPrintCount": 172,
+      "coverageBasis": "canonical_identities"
     },
     {
       "schemaVersion": 2,
@@ -855,7 +942,10 @@
       "officialCardCount": 25,
       "knownCardCount": 25,
       "availability": "available",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 25,
+      "providerPrintCount": 25,
+      "coverageBasis": "canonical_identities"
     },
     {
       "schemaVersion": 2,
@@ -877,7 +967,10 @@
       "officialCardCount": 26,
       "knownCardCount": 26,
       "availability": "available",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 26,
+      "providerPrintCount": 26,
+      "coverageBasis": "canonical_identities"
     },
     {
       "schemaVersion": 2,
@@ -899,7 +992,10 @@
       "officialCardCount": 8,
       "knownCardCount": 8,
       "availability": "available",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 8,
+      "providerPrintCount": 8,
+      "coverageBasis": "canonical_identities"
     },
     {
       "schemaVersion": 2,
@@ -921,7 +1017,10 @@
       "officialCardCount": 8,
       "knownCardCount": 8,
       "availability": "available",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 8,
+      "providerPrintCount": 8,
+      "coverageBasis": "canonical_identities"
     },
     {
       "schemaVersion": 2,
@@ -943,7 +1042,10 @@
       "officialCardCount": 16,
       "knownCardCount": 16,
       "availability": "available",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 16,
+      "providerPrintCount": 16,
+      "coverageBasis": "canonical_identities"
     },
     {
       "schemaVersion": 2,
@@ -965,7 +1067,10 @@
       "officialCardCount": 88,
       "knownCardCount": 88,
       "availability": "available",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 88,
+      "providerPrintCount": 88,
+      "coverageBasis": "canonical_identities"
     },
     {
       "schemaVersion": 2,
@@ -993,7 +1098,10 @@
       "officialCardCount": 211,
       "knownCardCount": 211,
       "availability": "available",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 211,
+      "providerPrintCount": 211,
+      "coverageBasis": "canonical_identities"
     },
     {
       "schemaVersion": 2,
@@ -1019,7 +1127,10 @@
       "officialCardCount": 204,
       "knownCardCount": 204,
       "availability": "available",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 204,
+      "providerPrintCount": 204,
+      "coverageBasis": "canonical_identities"
     },
     {
       "schemaVersion": 2,
@@ -1045,7 +1156,10 @@
       "officialCardCount": 212,
       "knownCardCount": 212,
       "availability": "available",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 212,
+      "providerPrintCount": 212,
+      "coverageBasis": "canonical_identities"
     },
     {
       "schemaVersion": 2,
@@ -1067,7 +1181,10 @@
       "officialCardCount": 99,
       "knownCardCount": 99,
       "availability": "available",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 99,
+      "providerPrintCount": 99,
+      "coverageBasis": "canonical_identities"
     },
     {
       "schemaVersion": 2,
@@ -1093,7 +1210,10 @@
       "officialCardCount": 194,
       "knownCardCount": 194,
       "availability": "available",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 194,
+      "providerPrintCount": 194,
+      "coverageBasis": "canonical_identities"
     },
     {
       "schemaVersion": 2,
@@ -1119,7 +1239,10 @@
       "officialCardCount": 193,
       "knownCardCount": 193,
       "availability": "available",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 193,
+      "providerPrintCount": 193,
+      "coverageBasis": "canonical_identities"
     },
     {
       "schemaVersion": 2,
@@ -1145,7 +1268,10 @@
       "officialCardCount": 192,
       "knownCardCount": 192,
       "availability": "available",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 192,
+      "providerPrintCount": 192,
+      "coverageBasis": "canonical_identities"
     },
     {
       "schemaVersion": 2,
@@ -1167,7 +1293,10 @@
       "officialCardCount": 19,
       "knownCardCount": 19,
       "availability": "available",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 19,
+      "providerPrintCount": 19,
+      "coverageBasis": "canonical_identities"
     },
     {
       "schemaVersion": 2,
@@ -1189,7 +1318,10 @@
       "officialCardCount": 13,
       "knownCardCount": 13,
       "availability": "available",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 13,
+      "providerPrintCount": 13,
+      "coverageBasis": "canonical_identities"
     },
     {
       "schemaVersion": 2,
@@ -1211,7 +1343,10 @@
       "officialCardCount": 15,
       "knownCardCount": 15,
       "availability": "available",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 15,
+      "providerPrintCount": 15,
+      "coverageBasis": "canonical_identities"
     },
     {
       "schemaVersion": 2,
@@ -1233,7 +1368,10 @@
       "officialCardCount": 5,
       "knownCardCount": 5,
       "availability": "available",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 5,
+      "providerPrintCount": 5,
+      "coverageBasis": "canonical_identities"
     },
     {
       "schemaVersion": 2,
@@ -1255,7 +1393,10 @@
       "officialCardCount": 8,
       "knownCardCount": 8,
       "availability": "available",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 8,
+      "providerPrintCount": 8,
+      "coverageBasis": "canonical_identities"
     },
     {
       "schemaVersion": 2,
@@ -1277,7 +1418,10 @@
       "officialCardCount": 13,
       "knownCardCount": 13,
       "availability": "available",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 13,
+      "providerPrintCount": 13,
+      "coverageBasis": "canonical_identities"
     },
     {
       "schemaVersion": 2,
@@ -1305,7 +1449,10 @@
       "releaseDate": "2026-07-16",
       "officialCardCount": 287,
       "availability": "metadata_only",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 0,
+      "providerPrintCount": 0,
+      "coverageBasis": "canonical_identities"
     },
     {
       "schemaVersion": 2,
@@ -1343,7 +1490,10 @@
       "officialCardCount": 167,
       "knownCardCount": 167,
       "availability": "available",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 167,
+      "providerPrintCount": 167,
+      "coverageBasis": "canonical_identities"
     },
     {
       "schemaVersion": 2,
@@ -1378,7 +1528,10 @@
       "officialCardCount": 163,
       "knownCardCount": 163,
       "availability": "available",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 163,
+      "providerPrintCount": 163,
+      "coverageBasis": "canonical_identities"
     },
     {
       "schemaVersion": 2,
@@ -1413,7 +1566,10 @@
       "officialCardCount": 165,
       "knownCardCount": 165,
       "availability": "available",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 165,
+      "providerPrintCount": 165,
+      "coverageBasis": "canonical_identities"
     },
     {
       "schemaVersion": 2,
@@ -1448,7 +1604,10 @@
       "officialCardCount": 165,
       "knownCardCount": 165,
       "availability": "available",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 165,
+      "providerPrintCount": 165,
+      "coverageBasis": "canonical_identities"
     },
     {
       "schemaVersion": 2,
@@ -1483,7 +1642,10 @@
       "officialCardCount": 164,
       "knownCardCount": 164,
       "availability": "available",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 164,
+      "providerPrintCount": 164,
+      "coverageBasis": "canonical_identities"
     },
     {
       "schemaVersion": 2,
@@ -1509,7 +1671,10 @@
       "seriesId": "ktcg:series:zh-tw:scarlet-and-violet",
       "year": 2025,
       "availability": "metadata_only",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 0,
+      "providerPrintCount": 0,
+      "coverageBasis": "canonical_identities"
     },
     {
       "schemaVersion": 2,
@@ -1538,7 +1703,10 @@
       "seriesId": "ktcg:series:zh-tw:scarlet-and-violet",
       "year": 2026,
       "availability": "metadata_only",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 0,
+      "providerPrintCount": 0,
+      "coverageBasis": "canonical_identities"
     },
     {
       "schemaVersion": 2,
@@ -1564,7 +1732,10 @@
       "seriesId": "ktcg:series:zh-tw:scarlet-and-violet",
       "year": 2026,
       "availability": "metadata_only",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 0,
+      "providerPrintCount": 0,
+      "coverageBasis": "canonical_identities"
     },
     {
       "schemaVersion": 2,
@@ -1593,7 +1764,10 @@
       "officialCardCount": 259,
       "knownCardCount": 259,
       "availability": "available",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 259,
+      "providerPrintCount": 259,
+      "coverageBasis": "canonical_identities"
     },
     {
       "schemaVersion": 2,
@@ -1619,7 +1793,10 @@
       "seriesId": "ktcg:series:zh-tw:scarlet-and-violet",
       "year": 2026,
       "availability": "metadata_only",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 0,
+      "providerPrintCount": 0,
+      "coverageBasis": "canonical_identities"
     },
     {
       "schemaVersion": 2,
@@ -1641,7 +1818,10 @@
       "officialCardCount": 101,
       "knownCardCount": 101,
       "availability": "available",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 101,
+      "providerPrintCount": 101,
+      "coverageBasis": "canonical_identities"
     },
     {
       "schemaVersion": 2,
@@ -1667,7 +1847,10 @@
       "officialCardCount": 139,
       "knownCardCount": 139,
       "availability": "available",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 139,
+      "providerPrintCount": 139,
+      "coverageBasis": "canonical_identities"
     },
     {
       "schemaVersion": 2,
@@ -1684,7 +1867,10 @@
       "code": "CSVL2C",
       "seriesId": "ktcg:series:zh-tw:scarlet-and-violet",
       "availability": "metadata_only",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 0,
+      "providerPrintCount": 0,
+      "coverageBasis": "canonical_identities"
     },
     {
       "schemaVersion": 2,
@@ -1706,7 +1892,10 @@
       "officialCardCount": 20,
       "knownCardCount": 20,
       "availability": "available",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 20,
+      "providerPrintCount": 20,
+      "coverageBasis": "canonical_identities"
     },
     {
       "schemaVersion": 2,
@@ -1728,7 +1917,10 @@
       "officialCardCount": 16,
       "knownCardCount": 16,
       "availability": "available",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 16,
+      "providerPrintCount": 16,
+      "coverageBasis": "canonical_identities"
     },
     {
       "schemaVersion": 2,
@@ -1750,7 +1942,10 @@
       "officialCardCount": 68,
       "knownCardCount": 68,
       "availability": "available",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 68,
+      "providerPrintCount": 68,
+      "coverageBasis": "canonical_identities"
     },
     {
       "schemaVersion": 2,
@@ -1778,7 +1973,10 @@
       "officialCardCount": 20,
       "knownCardCount": 20,
       "availability": "available",
-      "visuals": []
+      "visuals": [],
+      "identityCount": 20,
+      "providerPrintCount": 20,
+      "coverageBasis": "canonical_identities"
     }
   ]
 }
