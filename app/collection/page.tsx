@@ -12,6 +12,7 @@ import {
   ShieldCheck,
   PieChart,
   Puzzle,
+  PackageOpen,
 } from "lucide-react";
 
 import Navbar from "../../components/Navbar";
@@ -343,6 +344,11 @@ export default function BibliothequePage() {
               </div>
             </div>
           </section>
+
+          <Link href="/collection/items" className="kt-section-surface flex items-center justify-between rounded-[15px] border p-3.5 transition hover:border-amber-300/25">
+            <span className="flex items-center gap-3"><PackageOpen className="h-4 w-4 text-amber-300" /><span><span className="block text-[10px] font-black text-white">Collection Items scellés</span><span className="mt-0.5 block text-[9px] text-zinc-400">Inventaire séparé des cartes · Premium / PRO</span></span></span>
+            <ArrowRight className="h-4 w-4 text-amber-300" />
+          </Link>
 
           {/* Métriques KPIs Uniformisées V5.0 */}
           <section className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
