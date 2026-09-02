@@ -77,7 +77,7 @@ export default function ItemsPageContent() {
       <ItemStats catalog={stats.verified} personal={stats.personal} collection={collectionCount} favorites={favoriteCount} />
 
       <section className="rounded-[16px] border border-amber-300/[0.14] bg-amber-300/[0.035] px-4 py-3">
-        <div className="flex items-start gap-3"><ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-amber-300" /><div><p className="text-[9px] font-black uppercase tracking-[0.09em] text-amber-200">Données fiables uniquement</p><p className="mt-1 text-[10px] leading-5 text-zinc-300">Aucun produit, visuel ou prix n’est simulé. Le prix de sortie officiel et la cote marché actuelle resteront séparés. {ITEM_BETA_ACCESS.note}</p></div></div>
+        <div className="flex items-start gap-3"><ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-amber-300" /><div><p className="text-[9px] font-black uppercase tracking-[0.09em] text-amber-200">Données fiables uniquement</p><p className="mt-1 text-[10px] leading-5 text-zinc-300">Les premières cotes proviennent du marché TCGplayer EN/US via TCGCSV et restent affichées en USD. Elles ne sont jamais présentées comme une cote FR. Le prix de sortie officiel reste séparé. {ITEM_BETA_ACCESS.note}</p></div></div>
       </section>
 
       <ItemToolbar filters={filters} onChange={(patch) => setFilters((current) => ({ ...current, ...patch }))} onReset={() => setFilters(DEFAULT_ITEM_FILTERS)} />
