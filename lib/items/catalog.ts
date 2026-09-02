@@ -1,11 +1,6 @@
 import { readFileSync } from "node:fs";
 import path from "node:path";
-import catalogData from "@/public/data/items-v1/catalog.json";
-import catalogFr from "@/public/data/items-v1/fr/catalog.json";
 import catalogEnIndex from "@/public/data/items-v1/en/index.json";
-import catalogJa from "@/public/data/items-v1/ja/catalog.json";
-import catalogZh from "@/public/data/items-v1/zh-tw/catalog.json";
-import catalogMulti from "@/public/data/items-v1/multi/catalog.json";
 import manifestData from "@/public/data/items-v1/manifest.json";
 import type { ItemCatalogManifest, SealedItem } from "./types";
 import { isItemCatalogManifest, parseItemCatalog } from "./validation";
@@ -24,13 +19,25 @@ function indexedItems(index: { items?: Array<{ path?: string }> }): SealedItem[]
   }));
 }
 
+function optionalCatalog(relative: string): SealedItem[] {
+  if (!/^[a-z0-9/_-]+\.json$/i.test(relative)) return [];
+  try {
+    const filename = path.join(process.cwd(), "public/data/items-v1", relative);
+    return parseItemCatalog(JSON.parse(readFileSync(filename, "utf8")));
+  } catch {
+    // Les catalogues de langue vides sont facultatifs et ne doivent pas bloquer
+    // un déploiement lorsque seuls les lots réellement alimentés sont publiés.
+    return [];
+  }
+}
+
 const catalog = parseItemCatalog([
-  ...parseItemCatalog(catalogData),
-  ...parseItemCatalog(catalogFr),
+  ...optionalCatalog("catalog.json"),
+  ...optionalCatalog("fr/catalog.json"),
   ...indexedItems(catalogEnIndex),
-  ...parseItemCatalog(catalogJa),
-  ...parseItemCatalog(catalogZh),
-  ...parseItemCatalog(catalogMulti),
+  ...optionalCatalog("ja/catalog.json"),
+  ...optionalCatalog("zh-tw/catalog.json"),
+  ...optionalCatalog("multi/catalog.json"),
 ]);
 
 export function getServerItemCatalog(): SealedItem[] {
