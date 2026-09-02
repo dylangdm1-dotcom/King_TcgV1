@@ -2,7 +2,11 @@
 
 King_TCG est une application Next.js de recherche, collection et analyse de cartes Pokémon TCG. Elle réunit un catalogue multilingue, la gestion de collection, les favoris, un scanner assisté par IA, une estimation PSA et une agrégation de données marché.
 
-**Version actuelle : V290 — visuels Items EN et préparation propre du catalogue FR.**
+**Version actuelle : V294 — Prévisualisation contrôlée du catalogue Items FR.**
+
+La V294 conserve l’alignement Scanner V293 et ajoute le premier flux réel de contrôle CardTrader pour les Items français. Une route privée découvre les catégories et extensions Pokémon, filtre les produits scellés, demande uniquement les offres de langue `fr`, mesure la disponibilité des visuels et extrait la cote EUR minimale. Les résultats restent des candidats à contrôler : aucun nom, emballage ou prix n’est publié automatiquement dans le catalogue FR.
+
+Les comptes et abonnements restent volontairement désactivés. Leur mise en place est planifiée seulement après la stabilisation complète de PSA.
 
 ## Fonctions principales
 
@@ -19,11 +23,11 @@ King_TCG est une application Next.js de recherche, collection et analyse de cart
 - accès Items prévu pour Premium et PRO, avec aperçu ouvert pendant la bêta ;
 - formule PRO préparée pour un futur scanner de stock gros volume sans prix et des exports professionnels.
 
-## Espace Items V290
+## Espace Items
 
 La route `/items` est entièrement indépendante de `/recherche` : une recherche de cartes ou d’extensions ne renvoie jamais de produit scellé, et une recherche Items ne renvoie jamais de carte. Les ETB, displays, boosters, bundles, UPC, coffrets, Pokébox, decks et collections spéciales possèdent leur propre modèle de données et leurs propres routes `/api/items/*`.
 
-La V288 permet déjà :
+Fonctions actuellement disponibles :
 
 - d’enregistrer une référence personnelle sans la faire passer pour une donnée officielle ;
 - d’ajouter un Item à la collection avec quantité, prix d’achat, date et notes ;
@@ -36,11 +40,11 @@ Le premier lot public contient **57 produits scellés anglais** issus de deux ex
 
 La source utilisée est **TCGCSV** : gratuite, sans clé API, mise à jour quotidiennement et prévue pour une ingestion serveur. King_TCG respecte une synchronisation maximale toutes les 24 heures avec un User-Agent identifiable. La donnée reste classée EN/US : elle n’est jamais présentée comme une cote française exacte.
 
-La V290 ne mélange pas les langues : les visuels TCGplayer restent marqués EN et ne deviennent jamais des emballages FR. Le navigateur charge une URL interne `/api/items/image` ; le serveur contrôle strictement l’identifiant fournisseur et met la réponse en cache. Le prix officiel de sortie n’est pas fourni par TCGCSV et reste donc `—`.
+Les langues ne sont pas mélangées : les visuels TCGplayer restent marqués EN et ne deviennent jamais des emballages FR. Le navigateur charge une URL interne `/api/items/image` ; le serveur contrôle strictement l’identifiant fournisseur et met la réponse en cache. Le prix officiel de sortie n’est pas fourni par TCGCSV et reste donc `—`.
 
-Le catalogue français est maintenant déclaré **en préparation**. Son fichier reste vide afin de ne jamais traduire automatiquement un produit anglais, convertir une cote USD en cote FR ou afficher un emballage international comme français. Le connecteur serveur CardTrader est prêt pour récupérer ultérieurement catégories, extensions, produits et références visuelles après configuration de `CARDTRADER_API_TOKEN` et validation d’un échantillon réel.
+Le catalogue français est déclaré **en préparation**. Son fichier reste vide afin de ne jamais traduire automatiquement un produit anglais, convertir une cote USD en cote FR ou afficher un emballage international comme français. La route privée `/api/items/cardtrader/preview` permet maintenant de rechercher une extension puis d’inspecter ses candidats FR réels avec catégorie, quantité, visuel disponible et cote EUR. Elle exige `CARDTRADER_API_TOKEN` côté serveur et l’en-tête propriétaire protégé par `KING_TCG_CACHE_STATUS_TOKEN`.
 
-Le quota CardTrader déclaré pour le projet est de 200 requêtes par fenêtre de 10 secondes. King_TCG conserve une marge et limite son orchestrateur à 180 requêtes par fenêtre. Cette limite est interne à chaque instance ; les futurs imports resteront exécutés par lots contrôlés, pas depuis les navigateurs des utilisateurs.
+Le quota CardTrader déclaré est de 200 requêtes par fenêtre de 10 secondes. King_TCG conserve une marge à 180 requêtes et espace en plus les lectures Marketplace d’au moins 1,1 seconde. Les prévisualisations sont limitées à 8 par minute et restent privées ; les imports ne sont jamais lancés depuis les navigateurs publics.
 
 ## Couverture du catalogue
 
@@ -49,13 +53,13 @@ Le quota CardTrader déclaré pour le projet est de 200 requêtes par fenêtre d
 | FR | 18 | 244 | 19 797 | 172 complètes, 10 partielles |
 | EN | 20 | 203 | 21 066 | 199 complètes |
 | JP | 13 | 122 | 8 440 | 73 complètes, 49 extensions en métadonnées |
-| CN | 6 | 66 | 6 053 | 53 complètes, 7 partielles, 6 en métadonnées |
+| CN | 6 | 66 | 6 053 | 60 complètes, 6 en métadonnées |
 
-Les extensions JP/CN sont visibles avec leur nom, code et série même lorsque leurs cartes ne sont pas encore disponibles localement. La V287 ajoute en une passe 64 extensions japonaises ouvrables et 7 330 cartes locales : le catalogue JP atteint 8 440 cartes réparties dans 73 extensions complètes. Il contient 3 794 cartes avec une référence visuelle TCGdex, dont les 92 visuels déjà présents avant la V287. Les cartes sans URL fournisseur utilisent un placeholder sans faux visuel.
+Les extensions JP/CN sont visibles avec leur nom, code et série même lorsque leurs cartes ne sont pas encore disponibles localement. Le catalogue JP atteint 8 440 cartes réparties dans 73 extensions complètes et contient 3 794 cartes avec une référence visuelle TCGdex. Les cartes sans URL fournisseur utilisent un placeholder sans faux visuel.
 
 En mode japonais, Recherche affiche désormais le nom japonais fourni par TCGdex tout en conservant le nom anglais comme alias recherchable. Parmi les 49 extensions encore en métadonnées, 30 existent dans l’index TCGdex mais ne publient actuellement aucune liste de cartes, et 19 sont absentes de cet index. Elles ne sont pas déclarées complètes artificiellement.
 
-Le catalogue chinois contient 60 extensions ouvrables, 6 053 identités et une référence visuelle PokéWallet pour chaque identité. Les différentes impressions d’un même numéro sont regroupées sous une identité afin d’éviter les faux doublons. La Recherche distingue maintenant le nombre de cartes uniques du nombre d’impressions fournisseur ; par exemple CBB6C contient 28 identités et 192 impressions regroupées.
+Le catalogue chinois contient 60 extensions ouvrables, **6 053 identités canoniques et 6 890 impressions PokéWallet**. Les différentes impressions d’un même numéro sont regroupées sous une identité afin d’éviter les faux doublons. La Recherche distingue maintenant le nombre de cartes uniques du nombre d’impressions fournisseur ; par exemple CBB6C contient 28 identités et 192 impressions regroupées. Les 7 anciennes extensions « partielles » passent à « complètes » car leurs identifiants d’impression couvrent réellement 100 % du total fournisseur.
 
 Les collections chinoises disposent de leur propre catégorie d’affichage. Les noms King_TCG vérifiés remplacent également les libellés fournisseur réduits à un simple code (`CSVH3C`, `CSM2.5C`, `CSMAC`, `CSMC`, `CSMJC`, `CSMLC`, `CSMYC`, `CSUC`, `CSXC`, `CSYC` et `CSZC`).
 
@@ -71,7 +75,7 @@ Six extensions chinoises restent explicitement en métadonnées car PokéWallet 
 - **Cardmarket, TCGPlayer, JustTCG et eBay** : données marché selon la langue, la carte et la disponibilité ;
 - **PriceCharting et eBay** : références complémentaires pour la partie PSA.
 - **TCGCSV / TCGplayer** : identité et cote actuelle en USD des produits scellés EN, synchronisées au maximum une fois par jour.
-- **CardTrader** : connecteur serveur préparé pour le futur catalogue Items FR, avec jeton privé obligatoire et aucune donnée FR publiée avant validation.
+- **CardTrader** : prévisualisation serveur privée des futurs Items FR, avec jeton obligatoire, preuve de langue par offre Marketplace et validation manuelle avant publication.
 
 Une donnée provenant d’une autre langue reste classée comme comparable ou indicative. Elle ne devient jamais silencieusement un prix exact local.
 
