@@ -184,6 +184,11 @@ export interface PokemonCard {
     series?: string;
     printedTotal?: number;
     total?: number;
+    /** Nombre de cartes uniques affichées dans la grille. */
+    identityCount?: number;
+    /** Nombre d'impressions physiques couvertes par le fournisseur. */
+    providerPrintCount?: number;
+    coverageBasis?: "canonical_identities" | "provider_prints";
     releaseDate?: string;
 
     images?: {

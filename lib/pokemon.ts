@@ -40,7 +40,14 @@ const CACHE_KEY = "king_tcg_cards_cache_v17_stable_details";
 
 const cache = new Map<string, PokemonCard>();
 const searchCache = new Map<string, PokemonCard[]>();
-const setMetadataCache = new Map<string, { name?: string; releaseDate?: string; series?: string }>();
+const setMetadataCache = new Map<string, {
+  name?: string;
+  releaseDate?: string;
+  series?: string;
+  identityCount?: number;
+  providerPrintCount?: number;
+  coverageBasis?: "canonical_identities" | "provider_prints";
+}>();
 
 export type LanguageCode = "fr" | "en" | "ja" | "zh-tw";
 
@@ -578,6 +585,9 @@ function normalizeTCGdexCard(card: any, lang: LanguageCode, parentSet?: any): Po
         undefined,
       printedTotal: parentSet?.cardCount?.official ?? card.set?.cardCount?.official ?? 0,
       total: parentSet?.cardCount?.total ?? card.set?.cardCount?.total ?? 0,
+      identityCount: setMeta?.identityCount,
+      providerPrintCount: setMeta?.providerPrintCount,
+      coverageBasis: setMeta?.coverageBasis,
       releaseDate: effectiveSetReleaseDate(setId, parentSet?.releaseDate || card.set?.releaseDate || setMeta?.releaseDate || ""),
       images: {
         symbol: card.set?.symbol ? `${card.set.symbol}.png` : parentSet?.symbol ? `${parentSet.symbol}.png` : "",
@@ -860,6 +870,9 @@ function applySetMetadataAndRecentSort(cards: PokemonCard[]): PokemonCard[] {
       name: card.set.name || meta.name || "Extension inconnue",
       releaseDate: card.set.releaseDate || meta.releaseDate || "",
       series: card.set.series || meta.series || "Pokémon TCG",
+      identityCount: card.set.identityCount || meta.identityCount,
+      providerPrintCount: card.set.providerPrintCount || meta.providerPrintCount,
+      coverageBasis: card.set.coverageBasis || meta.coverageBasis,
     };
   });
   return [...cards].sort((a, b) => {
@@ -1593,6 +1606,9 @@ export async function getAllSets(lang: LanguageCode = "fr"): Promise<any[]> {
         name: set.name,
         releaseDate: set.releaseDate || "",
         series: typeof set.series === "string" ? set.series : set.series?.name,
+        identityCount: Number(set.identityCount || set.total || 0),
+        providerPrintCount: Number(set.providerPrintCount || set.identityCount || set.total || 0),
+        coverageBasis: set.coverageBasis,
       });
     });
     return dedupeSearchCatalogSetsV291(localSets, targetLang).sort(compareSetsNewestFirst);
@@ -1610,6 +1626,9 @@ export async function getAllSets(lang: LanguageCode = "fr"): Promise<any[]> {
         name: set.name,
         releaseDate: set.releaseDate || "",
         series: typeof set.series === "string" ? set.series : set.series?.name,
+        identityCount: Number(set.identityCount || set.total || 0),
+        providerPrintCount: Number(set.providerPrintCount || set.identityCount || set.total || 0),
+        coverageBasis: set.coverageBasis,
       });
     });
     return mergedRegional;
@@ -1709,6 +1728,9 @@ export async function getAllSets(lang: LanguageCode = "fr"): Promise<any[]> {
       name: set.name,
       releaseDate: set.releaseDate || "",
       series: typeof set.series === "string" ? set.series : set.series?.name,
+      identityCount: Number(set.identityCount || set.total || 0),
+      providerPrintCount: Number(set.providerPrintCount || set.identityCount || set.total || 0),
+      coverageBasis: set.coverageBasis,
     });
   });
 
