@@ -10,8 +10,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "King_TCG - Scanner & Collection Pokémon",
-  description: "Analyse, collection et investissement Pokémon. Scannez et suivez vos cartes en temps réel.",
+  title: "King_TCG - Cartes & Items Pokémon",
+  description: "Recherche, scanner, collection de cartes et espace indépendant pour les produits Pokémon scellés.",
 };
 
 export default function RootLayout({
