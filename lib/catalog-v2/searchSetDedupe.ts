@@ -17,7 +17,7 @@ function normalizeLabel(value: unknown): string {
 
 function setScore(set: SearchCatalogSetV291): number {
   const coverage = set.coverage === "complete" ? 4 : set.coverage === "partial" ? 3 : set.coverage === "announced" ? 2 : 1;
-  return (set.localCardsAvailable ? 1_000_000 : 0) + coverage * 100_000 + Number(set.identityCount || 0) * 100 + Number(set.sourceCardCount || set.total || 0);
+  return (set.localCardsAvailable ? 1_000_000 : 0) + coverage * 100_000 + Number(set.identityCount || 0) * 100 + Number(set.providerPrintCount || set.sourceCardCount || set.total || 0);
 }
 
 function mergeDuplicateSets(sets: SearchCatalogSetV291[], language: CatalogLanguageV2): SearchCatalogSetV291 {
@@ -40,6 +40,11 @@ function mergeDuplicateSets(sets: SearchCatalogSetV291[], language: CatalogLangu
     aliases: Array.from(aliases),
     mergedSetIds: Array.from(mergedSetIds),
     displayCode: localizedCode || winner.id,
+    identityCount: Math.max(...ranked.map((set) => Number(set.identityCount || set.total || 0))),
+    providerPrintCount: Math.max(...ranked.map((set) => Number(set.providerPrintCount || set.identityCount || set.total || 0))),
+    coverageBasis: ranked.some((set) => set.coverageBasis === "provider_prints")
+      ? "provider_prints"
+      : winner.coverageBasis,
   };
 }
 

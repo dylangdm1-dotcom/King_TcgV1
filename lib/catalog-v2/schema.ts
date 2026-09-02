@@ -13,6 +13,12 @@ export const CatalogAvailabilityV2Schema = z.enum([
 ]);
 export type CatalogAvailabilityV2 = z.infer<typeof CatalogAvailabilityV2Schema>;
 
+export const CatalogCoverageBasisV2Schema = z.enum([
+  "canonical_identities",
+  "provider_prints",
+]);
+export type CatalogCoverageBasisV2 = z.infer<typeof CatalogCoverageBasisV2Schema>;
+
 export const CatalogSourceV2Schema = z.object({
   provider: z.string().trim().min(1).max(80),
   sourceId: z.string().trim().min(1).max(180),
@@ -53,6 +59,9 @@ export const CatalogSetV2Schema = CatalogBaseEntityV2Schema.extend({
   releaseDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
   officialCardCount: z.number().int().nonnegative().optional(),
   knownCardCount: z.number().int().nonnegative().optional(),
+  identityCount: z.number().int().nonnegative().optional(),
+  providerPrintCount: z.number().int().nonnegative().optional(),
+  coverageBasis: CatalogCoverageBasisV2Schema.optional(),
   availability: CatalogAvailabilityV2Schema,
   visual: CatalogVisualV2Schema.optional(),
   visuals: z.array(CatalogVisualV2Schema).default([]),

@@ -18,6 +18,7 @@ import {
 import type { CatalogLocalCoverageStatusV2 } from "./local/schema";
 import { CHINESE_SET_CATALOG } from "../regionalSetCatalog";
 import { pokewalletPrintVariantsV285 } from "./printVariants";
+import { catalogCountsV292, type CatalogCoverageBasisV292 } from "./counts";
 
 export interface SearchCatalogSetV278 {
   id: string;
@@ -28,7 +29,9 @@ export interface SearchCatalogSetV278 {
   total: number;
   printedTotal: number;
   identityCount: number;
+  providerPrintCount: number;
   sourceCardCount: number;
+  coverageBasis: CatalogCoverageBasisV292;
   releaseDate?: string;
   images: { symbol?: string; logo?: string };
   availability: "available" | "announced" | "metadata_only" | "unknown";
@@ -129,6 +132,14 @@ function toPokemonCard(
   const large = primaryVariant?.images?.large || card.visuals.find((visual) => visual.kind === "card")?.url || card.visual?.url || candidates[0] || "/placeholder.png";
   const small = primaryVariant?.images?.small || card.visuals.find((visual) => visual.kind === "thumbnail")?.url || candidates[0] || large;
   const images = setImages(set);
+  const counts = catalogCountsV292({
+    cardCount,
+    identityCount: set.identityCount,
+    providerPrintCount: set.providerPrintCount,
+    knownCardCount: set.knownCardCount,
+    officialCardCount: set.officialCardCount,
+    coverageBasis: set.coverageBasis,
+  });
 
   return {
     id: runtimeCardId(card),
@@ -154,6 +165,9 @@ function toPokemonCard(
       series: seriesName,
       printedTotal: set.officialCardCount || cardCount,
       total: set.knownCardCount || cardCount,
+      identityCount: counts.identityCount || cardCount,
+      providerPrintCount: counts.providerPrintCount || cardCount,
+      coverageBasis: set.coverageBasis || "canonical_identities",
       releaseDate: set.releaseDate,
       images,
     },
@@ -178,6 +192,16 @@ export async function loadSearchCatalogSetsV278(
       : language === "zh-tw"
         ? canonicalChineseSetName(set.code, set.name)
         : set.name;
+    const counts = catalogCountsV292({
+      cardCount: entry?.cardCount,
+      identityCount: entry?.identityCount ?? set.identityCount,
+      providerPrintCount: entry?.providerPrintCount ?? set.providerPrintCount,
+      sourceCardCount: entry?.sourceCardCount,
+      knownCardCount: set.knownCardCount,
+      officialCardCount: entry?.officialCardCount ?? set.officialCardCount,
+      coverageBasis: entry?.coverageBasis ?? set.coverageBasis,
+    });
+    const coverageBasis = entry?.coverageBasis ?? set.coverageBasis ?? "canonical_identities";
     return {
       id: set.code,
       canonicalId: set.id,
@@ -186,10 +210,12 @@ export async function loadSearchCatalogSetsV278(
         ? set.aliases
         : Array.from(new Set([...set.aliases, set.name])),
       series: seriesNames.get(set.seriesId) || "Pokémon TCG",
-      total: entry?.sourceCardCount || set.knownCardCount || entry?.cardCount || set.officialCardCount || 0,
+      total: counts.identityCount || counts.officialCardCount,
       printedTotal: entry?.officialCardCount || set.officialCardCount || 0,
-      identityCount: entry?.cardCount || 0,
+      identityCount: counts.identityCount,
+      providerPrintCount: counts.providerPrintCount,
       sourceCardCount: entry?.sourceCardCount || entry?.cardCount || 0,
+      coverageBasis,
       releaseDate: set.releaseDate,
       images: setImages(set),
       availability: availabilityFromCoverage(coverage),
@@ -222,7 +248,9 @@ export async function loadSearchCatalogSetCardsV278(
       ? { ...set, name: japaneseSetName(set.name, set.aliases) }
       : set;
   return {
-    status: file.status,
+    // Le manifeste V292 est la source de vérité de couverture. Certains chunks
+    // historiques conservent leur ancien statut sans nécessiter de commit massif.
+    status: entry.status,
     cards: file.cards.map((card) => toPokemonCard(card, runtimeSet, seriesName, file.cards.length)),
   };
 }
@@ -253,6 +281,9 @@ export function mergeSearchCatalogSetsV278(
       releaseDate: live.releaseDate || local.releaseDate || "",
       total: liveHasCards ? Number(live.total || live.printedTotal || local.total || 0) : local.total,
       printedTotal: Number(live.printedTotal || local.printedTotal || 0),
+      identityCount: Number(local.identityCount || live.identityCount || live.total || 0),
+      providerPrintCount: Number(local.providerPrintCount || live.providerPrintCount || live.total || 0),
+      coverageBasis: local.coverageBasis || live.coverageBasis || "canonical_identities",
       availability: liveHasCards ? "available" : local.availability,
       images: { ...(local.images || {}), ...(live.images || {}) },
     });

@@ -57,3 +57,12 @@ export function pokewalletPrintVariantsV285(card: CatalogCardV2): CardPrintVaria
     };
   });
 }
+
+/** Compte les impressions physiques réellement reliées à l'identité canonique. */
+export function pokewalletPrintCountV292(card: CatalogCardV2): number {
+  return new Set(
+    card.sources
+      .filter((source) => source.provider === "pokewallet" && source.sourceId)
+      .map((source) => source.sourceId)
+  ).size;
+}
