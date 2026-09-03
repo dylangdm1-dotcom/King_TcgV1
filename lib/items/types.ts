@@ -84,6 +84,16 @@ export interface ItemCatalogManifest {
   };
 }
 
+export interface ItemCatalogRuntime {
+  state: "ready" | "empty" | "error" | "unavailable";
+  generatedAt?: number;
+  freshUntil?: number;
+  itemCount: number;
+  expansionIds?: number[];
+  failures?: number;
+  lastError?: string;
+}
+
 export interface ItemSourceStatus {
   cardtrader: {
     configured: boolean;

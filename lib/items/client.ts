@@ -1,16 +1,17 @@
-import type { ItemCatalogManifest, ItemSourceStatus, SealedItem } from "./types";
+import type { ItemCatalogManifest, ItemCatalogRuntime, ItemSourceStatus, SealedItem } from "./types";
 
-export async function fetchItemCatalog(signal?: AbortSignal): Promise<{ items: SealedItem[]; manifest: ItemCatalogManifest | null }> {
+export async function fetchItemCatalog(signal?: AbortSignal): Promise<{ items: SealedItem[]; manifest: ItemCatalogManifest | null; runtime: ItemCatalogRuntime | null }> {
   try {
     const response = await fetch("/api/items/catalog", { signal, cache: "no-store" });
-    if (!response.ok) return { items: [], manifest: null };
+    if (!response.ok) return { items: [], manifest: null, runtime: null };
     const json = await response.json();
     return {
       items: Array.isArray(json?.data) ? json.data : [],
       manifest: json?.manifest || null,
+      runtime: json?.runtime || null,
     };
   } catch {
-    return { items: [], manifest: null };
+    return { items: [], manifest: null, runtime: null };
   }
 }
 
