@@ -2,11 +2,11 @@
 
 King_TCG est une application Next.js de recherche, collection et analyse de cartes Pokémon TCG. Elle réunit un catalogue multilingue, la gestion de collection, les favoris, un scanner assisté par IA, une estimation PSA et une agrégation de données marché.
 
-**Version actuelle : V299 — 4 292 cartes japonaises supplémentaires, sans mélange JP/CN.**
+**Version actuelle : V300 — visuels JP vérifiés, Items FR regroupés et compteur Recherche clarifié.**
 
 La Recherche permet désormais de parcourir séparément les **séries réelles** et les grandes **générations**. Les 18 séries FR, 20 EN, 15 JP et 6 CN restent reliées à leurs extensions, avec des libellés compréhensibles en français pour les séries japonaises et chinoises. Une identité canonique ne peut apparaître que dans une seule section et les 55 alias FR sans cartes restent fusionnés avec leur extension navigable.
 
-La V299 ajoute 4 292 cartes japonaises réelles issues de 43 extensions TCGdex jusque-là absentes du catalogue visible. L'extension SM3 déjà déclarée est remplie sans doublon ; les codes chinois `CS*` exposés à tort dans l'index japonais restent exclus. Le catalogue atteint 59 648 cartes locales toutes langues confondues. Les visuels absents restent des placeholders explicites.
+La V300 conserve les apports V299 et ajoute uniquement ce que TCGdex publie réellement : 49 cartes `M-P` et 88 références visuelles (`SVK`, `SVLN`, `SVLS`). Le catalogue atteint 59 697 cartes locales toutes langues confondues. `M-P` est complète à 132/132 ; `WEB1` reste honnêtement partielle à 47/48. Les visuels absents restent des placeholders explicites.
 
 L’espace Items synchronise automatiquement les produits scellés français disponibles sur CardTrader et les fusionne avec les 57 produits EN existants. Un snapshot FR rempli reste frais 24 heures ; un résultat vide est retenté après 10 minutes et une erreur fournisseur après 5 minutes. La grille charge les visuels EN par lots de 16, en miniature et en différé, afin d’éviter les rafales qui faisaient échouer les 57 images simultanées. Aucun token ni export manuel n’est demandé dans l’interface.
 
@@ -46,7 +46,7 @@ La source utilisée est **TCGCSV** : gratuite, sans clé API, mise à jour quoti
 
 Les langues ne sont pas mélangées : les visuels TCGplayer restent marqués EN et ne deviennent jamais des emballages FR. Le navigateur charge une URL interne `/api/items/image` ; le serveur contrôle strictement l’identifiant fournisseur et met la réponse en cache. Le prix officiel de sortie n’est pas fourni par TCGCSV. King_TCG accepte uniquement une valeur publiée par une source officielle française : aucune conversion d’un MSRP américain ni aucun prix de boutique/revente n’est présenté comme prix officiel. Sans preuve officielle FR, la valeur reste donc `—`.
 
-Le catalogue français est déclaré **en synchronisation bêta**. Son socle statique reste vide, mais `/api/items/catalog`, `/api/items/search` et `/api/items/[id]` fusionnent automatiquement le snapshot FR CardTrader conservé dans Redis. La V298 utilise de nouvelles clés Redis afin qu’un ancien snapshot V296 vide ne bloque plus le remplissage. Elle inspecte jusqu’aux 12 extensions Pokémon les plus récentes, conserve les résultats valides même si une extension échoue et montre dans `/items` l’état réel `ready`, `empty` ou `error`. Aucun token n’est demandé dans l’interface. Les visuels passent par `/api/items/image`, qui accepte uniquement les URL HTTPS appartenant à CardTrader. Les fiches partielles affichent leur cote minimale CardTrader en EUR comme donnée de marché, jamais comme prix magasin officiel.
+Le catalogue français est déclaré **en synchronisation bêta**. Son socle statique reste vide, mais `/api/items/catalog`, `/api/items/search` et `/api/items/[id]` fusionnent automatiquement le snapshot FR CardTrader conservé dans Redis. La V300 affecte à chaque Item FR un chemin canonique `fr/items/...json` et regroupe les variantes d’illustration d’un même booster unitaire ou d’une même Mini Tin sous une seule référence. Les visuels fournisseur restent disponibles comme candidats, mais six façades d’un booster ne créent plus six produits ni six cotes. Les blisters promo, lots et coffrets différents restent séparés. Aucun token n’est demandé dans l’interface. Les visuels passent par `/api/items/image`, qui accepte uniquement les URL HTTPS appartenant à CardTrader.
 
 Le quota CardTrader déclaré est de 200 requêtes par fenêtre de 10 secondes. King_TCG conserve une marge à 180 requêtes et espace les lectures Marketplace d’au moins 1,1 seconde. Un verrou Redis distribué autorise une seule reconstruction du snapshot FR à la fois ; les visiteurs suivants relisent le cache au lieu de rappeler CardTrader. Les trois routes dynamiques Items utilisent `private, no-store` pour ne plus figer publiquement pendant une heure un résultat FR vide.
 
@@ -56,12 +56,12 @@ Le quota CardTrader déclaré est de 200 requêtes par fenêtre de 10 secondes. 
 |---|---:|---:|---:|---|
 | FR | 18 | 244 | 19 797 | 172 complètes, 10 partielles |
 | EN | 20 | 203 | 21 066 | 199 complètes |
-| JP | 15 | 164 | 12 732 | 114 complètes, 2 partielles, 48 en métadonnées |
+| JP | 15 | 164 | 12 781 | 115 complètes, 1 partielle, 48 en métadonnées |
 | CN | 6 | 66 | 6 053 | 60 complètes, 6 en métadonnées |
 
-Les extensions JP/CN sont visibles avec leur nom, code et série même lorsque leurs cartes ne sont pas encore disponibles localement. Le catalogue JP atteint 12 732 cartes : 114 extensions complètes, 2 partielles et 48 encore limitées aux métadonnées. Il conserve 3 794 cartes avec une référence visuelle TCGdex, 9 927 raretés publiées et 12 643 définitions de variantes. Les cartes sans URL fournisseur utilisent un placeholder sans faux visuel.
+Les extensions JP/CN sont visibles avec leur nom, code et série même lorsque leurs cartes ne sont pas encore disponibles localement. Le catalogue JP atteint 12 781 cartes : 115 extensions complètes, 1 partielle et 48 encore limitées aux métadonnées. Il conserve 3 882 cartes avec une référence visuelle TCGdex. Les cartes sans URL fournisseur utilisent un placeholder sans faux visuel.
 
-En mode japonais, Recherche affiche le nom japonais fourni par TCGdex tout en conservant les alias déjà connus. Parmi les 48 extensions encore en métadonnées, 29 routes TCGdex connues ne publient aucune liste de cartes et 19 codes restent absents de l'index. `MP` reste explicitement partielle avec 83 cartes disponibles sur 132 connues et `WEB1` avec 47 sur 48. Treize fichiers promo `SV-P` sans nom japonais ont été ignorés au lieu de fabriquer des cartes.
+En mode japonais, Recherche affiche le nom japonais fourni par TCGdex tout en conservant les alias déjà connus. Le compteur ne dit plus « à compléter » : il indique « sans cartes publiées » pour les extensions conservées en métadonnées mais dont aucune carte n’est fournie. `MP` est désormais complète à 132/132 et `WEB1` reste à 47/48. Treize fichiers promo `SV-P` sans nom japonais ont été ignorés au lieu de fabriquer des cartes.
 
 Le catalogue chinois contient 60 extensions ouvrables, **6 053 identités canoniques et 6 890 impressions PokéWallet**. Les différentes impressions d’un même numéro sont regroupées sous une identité afin d’éviter les faux doublons. La Recherche distingue maintenant le nombre de cartes uniques du nombre d’impressions fournisseur ; par exemple CBB6C contient 28 identités et 192 impressions regroupées. Les 7 anciennes extensions « partielles » passent à « complètes » car leurs identifiants d’impression couvrent réellement 100 % du total fournisseur.
 
