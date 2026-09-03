@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "formatVersion": 1,
-  "catalogVersion": "v299-jp-provider-gap",
+  "catalogVersion": "v300-visuals-items-fr",
   "language": "ja",
   "setId": "ktcg:set:ja:svls",
   "status": "complete",
@@ -19,15 +19,52 @@
         {
           "provider": "tcgdex",
           "sourceId": "SVLS-001",
-          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+          "lastSyncedAt": "2026-09-03T19:46:42.607Z"
         }
       ],
-      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "lastSyncedAt": "2026-09-03T19:46:42.607Z",
       "language": "ja",
       "setId": "ktcg:set:ja:svls",
       "number": "001",
       "variants": [],
-      "visuals": []
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SVLS/001/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SVLS-001",
+          "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SVLS/001/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SVLS-001",
+            "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SVLS/001/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SVLS-001",
+            "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+          }
+        }
+      ]
     },
     {
       "schemaVersion": 2,
@@ -38,15 +75,52 @@
         {
           "provider": "tcgdex",
           "sourceId": "SVLS-002",
-          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+          "lastSyncedAt": "2026-09-03T19:46:42.607Z"
         }
       ],
-      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "lastSyncedAt": "2026-09-03T19:46:42.607Z",
       "language": "ja",
       "setId": "ktcg:set:ja:svls",
       "number": "002",
       "variants": [],
-      "visuals": []
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SVLS/002/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SVLS-002",
+          "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SVLS/002/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SVLS-002",
+            "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SVLS/002/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SVLS-002",
+            "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+          }
+        }
+      ]
     },
     {
       "schemaVersion": 2,
@@ -57,15 +131,52 @@
         {
           "provider": "tcgdex",
           "sourceId": "SVLS-003",
-          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+          "lastSyncedAt": "2026-09-03T19:46:42.607Z"
         }
       ],
-      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "lastSyncedAt": "2026-09-03T19:46:42.607Z",
       "language": "ja",
       "setId": "ktcg:set:ja:svls",
       "number": "003",
       "variants": [],
-      "visuals": []
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SVLS/003/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SVLS-003",
+          "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SVLS/003/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SVLS-003",
+            "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SVLS/003/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SVLS-003",
+            "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+          }
+        }
+      ]
     },
     {
       "schemaVersion": 2,
@@ -76,15 +187,52 @@
         {
           "provider": "tcgdex",
           "sourceId": "SVLS-004",
-          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+          "lastSyncedAt": "2026-09-03T19:46:42.607Z"
         }
       ],
-      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "lastSyncedAt": "2026-09-03T19:46:42.607Z",
       "language": "ja",
       "setId": "ktcg:set:ja:svls",
       "number": "004",
       "variants": [],
-      "visuals": []
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SVLS/004/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SVLS-004",
+          "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SVLS/004/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SVLS-004",
+            "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SVLS/004/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SVLS-004",
+            "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+          }
+        }
+      ]
     },
     {
       "schemaVersion": 2,
@@ -95,15 +243,52 @@
         {
           "provider": "tcgdex",
           "sourceId": "SVLS-005",
-          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+          "lastSyncedAt": "2026-09-03T19:46:42.607Z"
         }
       ],
-      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "lastSyncedAt": "2026-09-03T19:46:42.607Z",
       "language": "ja",
       "setId": "ktcg:set:ja:svls",
       "number": "005",
       "variants": [],
-      "visuals": []
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SVLS/005/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SVLS-005",
+          "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SVLS/005/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SVLS-005",
+            "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SVLS/005/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SVLS-005",
+            "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+          }
+        }
+      ]
     },
     {
       "schemaVersion": 2,
@@ -114,15 +299,52 @@
         {
           "provider": "tcgdex",
           "sourceId": "SVLS-006",
-          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+          "lastSyncedAt": "2026-09-03T19:46:42.607Z"
         }
       ],
-      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "lastSyncedAt": "2026-09-03T19:46:42.607Z",
       "language": "ja",
       "setId": "ktcg:set:ja:svls",
       "number": "006",
       "variants": [],
-      "visuals": []
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SVLS/006/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SVLS-006",
+          "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SVLS/006/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SVLS-006",
+            "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SVLS/006/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SVLS-006",
+            "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+          }
+        }
+      ]
     },
     {
       "schemaVersion": 2,
@@ -133,15 +355,52 @@
         {
           "provider": "tcgdex",
           "sourceId": "SVLS-007",
-          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+          "lastSyncedAt": "2026-09-03T19:46:42.607Z"
         }
       ],
-      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "lastSyncedAt": "2026-09-03T19:46:42.607Z",
       "language": "ja",
       "setId": "ktcg:set:ja:svls",
       "number": "007",
       "variants": [],
-      "visuals": []
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SVLS/007/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SVLS-007",
+          "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SVLS/007/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SVLS-007",
+            "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SVLS/007/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SVLS-007",
+            "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+          }
+        }
+      ]
     },
     {
       "schemaVersion": 2,
@@ -152,15 +411,52 @@
         {
           "provider": "tcgdex",
           "sourceId": "SVLS-008",
-          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+          "lastSyncedAt": "2026-09-03T19:46:42.607Z"
         }
       ],
-      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "lastSyncedAt": "2026-09-03T19:46:42.607Z",
       "language": "ja",
       "setId": "ktcg:set:ja:svls",
       "number": "008",
       "variants": [],
-      "visuals": []
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SVLS/008/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SVLS-008",
+          "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SVLS/008/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SVLS-008",
+            "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SVLS/008/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SVLS-008",
+            "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+          }
+        }
+      ]
     },
     {
       "schemaVersion": 2,
@@ -171,15 +467,52 @@
         {
           "provider": "tcgdex",
           "sourceId": "SVLS-009",
-          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+          "lastSyncedAt": "2026-09-03T19:46:42.607Z"
         }
       ],
-      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "lastSyncedAt": "2026-09-03T19:46:42.607Z",
       "language": "ja",
       "setId": "ktcg:set:ja:svls",
       "number": "009",
       "variants": [],
-      "visuals": []
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SVLS/009/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SVLS-009",
+          "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SVLS/009/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SVLS-009",
+            "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SVLS/009/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SVLS-009",
+            "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+          }
+        }
+      ]
     },
     {
       "schemaVersion": 2,
@@ -190,15 +523,52 @@
         {
           "provider": "tcgdex",
           "sourceId": "SVLS-010",
-          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+          "lastSyncedAt": "2026-09-03T19:46:42.607Z"
         }
       ],
-      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "lastSyncedAt": "2026-09-03T19:46:42.607Z",
       "language": "ja",
       "setId": "ktcg:set:ja:svls",
       "number": "010",
       "variants": [],
-      "visuals": []
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SVLS/010/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SVLS-010",
+          "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SVLS/010/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SVLS-010",
+            "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SVLS/010/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SVLS-010",
+            "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+          }
+        }
+      ]
     },
     {
       "schemaVersion": 2,
@@ -209,15 +579,52 @@
         {
           "provider": "tcgdex",
           "sourceId": "SVLS-011",
-          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+          "lastSyncedAt": "2026-09-03T19:46:42.607Z"
         }
       ],
-      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "lastSyncedAt": "2026-09-03T19:46:42.607Z",
       "language": "ja",
       "setId": "ktcg:set:ja:svls",
       "number": "011",
       "variants": [],
-      "visuals": []
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SVLS/011/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SVLS-011",
+          "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SVLS/011/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SVLS-011",
+            "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SVLS/011/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SVLS-011",
+            "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+          }
+        }
+      ]
     },
     {
       "schemaVersion": 2,
@@ -228,15 +635,52 @@
         {
           "provider": "tcgdex",
           "sourceId": "SVLS-012",
-          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+          "lastSyncedAt": "2026-09-03T19:46:42.607Z"
         }
       ],
-      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "lastSyncedAt": "2026-09-03T19:46:42.607Z",
       "language": "ja",
       "setId": "ktcg:set:ja:svls",
       "number": "012",
       "variants": [],
-      "visuals": []
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SVLS/012/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SVLS-012",
+          "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SVLS/012/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SVLS-012",
+            "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SVLS/012/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SVLS-012",
+            "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+          }
+        }
+      ]
     },
     {
       "schemaVersion": 2,
@@ -247,15 +691,52 @@
         {
           "provider": "tcgdex",
           "sourceId": "SVLS-013",
-          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+          "lastSyncedAt": "2026-09-03T19:46:42.607Z"
         }
       ],
-      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "lastSyncedAt": "2026-09-03T19:46:42.607Z",
       "language": "ja",
       "setId": "ktcg:set:ja:svls",
       "number": "013",
       "variants": [],
-      "visuals": []
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SVLS/013/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SVLS-013",
+          "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SVLS/013/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SVLS-013",
+            "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SVLS/013/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SVLS-013",
+            "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+          }
+        }
+      ]
     },
     {
       "schemaVersion": 2,
@@ -266,15 +747,52 @@
         {
           "provider": "tcgdex",
           "sourceId": "SVLS-014",
-          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+          "lastSyncedAt": "2026-09-03T19:46:42.607Z"
         }
       ],
-      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "lastSyncedAt": "2026-09-03T19:46:42.607Z",
       "language": "ja",
       "setId": "ktcg:set:ja:svls",
       "number": "014",
       "variants": [],
-      "visuals": []
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SVLS/014/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SVLS-014",
+          "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SVLS/014/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SVLS-014",
+            "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SVLS/014/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SVLS-014",
+            "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+          }
+        }
+      ]
     },
     {
       "schemaVersion": 2,
@@ -285,15 +803,52 @@
         {
           "provider": "tcgdex",
           "sourceId": "SVLS-015",
-          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+          "lastSyncedAt": "2026-09-03T19:46:42.607Z"
         }
       ],
-      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "lastSyncedAt": "2026-09-03T19:46:42.607Z",
       "language": "ja",
       "setId": "ktcg:set:ja:svls",
       "number": "015",
       "variants": [],
-      "visuals": []
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SVLS/015/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SVLS-015",
+          "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SVLS/015/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SVLS-015",
+            "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SVLS/015/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SVLS-015",
+            "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+          }
+        }
+      ]
     },
     {
       "schemaVersion": 2,
@@ -304,15 +859,52 @@
         {
           "provider": "tcgdex",
           "sourceId": "SVLS-016",
-          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+          "lastSyncedAt": "2026-09-03T19:46:42.607Z"
         }
       ],
-      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "lastSyncedAt": "2026-09-03T19:46:42.607Z",
       "language": "ja",
       "setId": "ktcg:set:ja:svls",
       "number": "016",
       "variants": [],
-      "visuals": []
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SVLS/016/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SVLS-016",
+          "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SVLS/016/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SVLS-016",
+            "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SVLS/016/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SVLS-016",
+            "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+          }
+        }
+      ]
     },
     {
       "schemaVersion": 2,
@@ -323,15 +915,52 @@
         {
           "provider": "tcgdex",
           "sourceId": "SVLS-017",
-          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+          "lastSyncedAt": "2026-09-03T19:46:42.607Z"
         }
       ],
-      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "lastSyncedAt": "2026-09-03T19:46:42.607Z",
       "language": "ja",
       "setId": "ktcg:set:ja:svls",
       "number": "017",
       "variants": [],
-      "visuals": []
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SVLS/017/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SVLS-017",
+          "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SVLS/017/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SVLS-017",
+            "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SVLS/017/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SVLS-017",
+            "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+          }
+        }
+      ]
     },
     {
       "schemaVersion": 2,
@@ -342,15 +971,52 @@
         {
           "provider": "tcgdex",
           "sourceId": "SVLS-018",
-          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+          "lastSyncedAt": "2026-09-03T19:46:42.607Z"
         }
       ],
-      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "lastSyncedAt": "2026-09-03T19:46:42.607Z",
       "language": "ja",
       "setId": "ktcg:set:ja:svls",
       "number": "018",
       "variants": [],
-      "visuals": []
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SVLS/018/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SVLS-018",
+          "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SVLS/018/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SVLS-018",
+            "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SVLS/018/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SVLS-018",
+            "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+          }
+        }
+      ]
     },
     {
       "schemaVersion": 2,
@@ -361,15 +1027,52 @@
         {
           "provider": "tcgdex",
           "sourceId": "SVLS-019",
-          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+          "lastSyncedAt": "2026-09-03T19:46:42.607Z"
         }
       ],
-      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "lastSyncedAt": "2026-09-03T19:46:42.607Z",
       "language": "ja",
       "setId": "ktcg:set:ja:svls",
       "number": "019",
       "variants": [],
-      "visuals": []
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SVLS/019/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SVLS-019",
+          "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SVLS/019/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SVLS-019",
+            "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SVLS/019/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SVLS-019",
+            "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+          }
+        }
+      ]
     },
     {
       "schemaVersion": 2,
@@ -380,15 +1083,52 @@
         {
           "provider": "tcgdex",
           "sourceId": "SVLS-020",
-          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+          "lastSyncedAt": "2026-09-03T19:46:42.607Z"
         }
       ],
-      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "lastSyncedAt": "2026-09-03T19:46:42.607Z",
       "language": "ja",
       "setId": "ktcg:set:ja:svls",
       "number": "020",
       "variants": [],
-      "visuals": []
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SVLS/020/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SVLS-020",
+          "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SVLS/020/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SVLS-020",
+            "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SVLS/020/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SVLS-020",
+            "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+          }
+        }
+      ]
     },
     {
       "schemaVersion": 2,
@@ -399,15 +1139,52 @@
         {
           "provider": "tcgdex",
           "sourceId": "SVLS-021",
-          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+          "lastSyncedAt": "2026-09-03T19:46:42.607Z"
         }
       ],
-      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "lastSyncedAt": "2026-09-03T19:46:42.607Z",
       "language": "ja",
       "setId": "ktcg:set:ja:svls",
       "number": "021",
       "variants": [],
-      "visuals": []
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SVLS/021/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SVLS-021",
+          "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SVLS/021/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SVLS-021",
+            "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SVLS/021/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SVLS-021",
+            "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+          }
+        }
+      ]
     },
     {
       "schemaVersion": 2,
@@ -418,15 +1195,52 @@
         {
           "provider": "tcgdex",
           "sourceId": "SVLS-022",
-          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+          "lastSyncedAt": "2026-09-03T19:46:42.607Z"
         }
       ],
-      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "lastSyncedAt": "2026-09-03T19:46:42.607Z",
       "language": "ja",
       "setId": "ktcg:set:ja:svls",
       "number": "022",
       "variants": [],
-      "visuals": []
+      "visual": {
+        "url": "https://assets.tcgdex.net/ja/SV/SVLS/022/high.webp",
+        "kind": "card",
+        "status": "candidate",
+        "width": 734,
+        "height": 1024,
+        "source": {
+          "provider": "tcgdex",
+          "sourceId": "SVLS-022",
+          "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+        }
+      },
+      "visuals": [
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SVLS/022/high.webp",
+          "kind": "card",
+          "status": "candidate",
+          "width": 734,
+          "height": 1024,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SVLS-022",
+            "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+          }
+        },
+        {
+          "url": "https://assets.tcgdex.net/ja/SV/SVLS/022/low.webp",
+          "kind": "thumbnail",
+          "status": "candidate",
+          "width": 245,
+          "height": 337,
+          "source": {
+            "provider": "tcgdex",
+            "sourceId": "SVLS-022",
+            "lastSyncedAt": "2026-09-03T19:46:42.607Z"
+          }
+        }
+      ]
     }
   ]
 }
