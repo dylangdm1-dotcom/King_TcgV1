@@ -4,7 +4,7 @@ import catalogEnIndex from "@/public/data/items-v1/en/index.json";
 import manifestData from "@/public/data/items-v1/manifest.json";
 import type { ItemCatalogManifest, SealedItem } from "./types";
 import { isItemCatalogManifest, parseItemCatalog } from "./validation";
-import { getCardTraderFrenchRuntimeSnapshotV300, withFrenchRuntimeManifestV300 } from "./sources/cardtrader-runtime";
+import { getCardTraderFrenchRuntimeSnapshotV301, withFrenchRuntimeManifestV301 } from "./sources/cardtrader-runtime";
 
 function indexedItems(index: { items?: Array<{ path?: string }> }): SealedItem[] {
   const rows = Array.isArray(index?.items) ? index.items : [];
@@ -56,14 +56,14 @@ export function getServerItemById(idOrSlug: string): SealedItem | null {
   return catalog.find((item) => item.id === idOrSlug || item.slug === idOrSlug) || null;
 }
 
-export async function getServerItemBundleV300(options?: { refreshFrench?: boolean }) {
-  const snapshot = await getCardTraderFrenchRuntimeSnapshotV300({ refresh: Boolean(options?.refreshFrench) });
+export async function getServerItemBundleV301(options?: { refreshFrench?: boolean }) {
+  const snapshot = await getCardTraderFrenchRuntimeSnapshotV301({ refresh: Boolean(options?.refreshFrench) });
   const seen = new Set<string>();
   const items = parseItemCatalog([...(snapshot?.items || []), ...catalog])
     .filter((item) => !seen.has(item.id) && Boolean(seen.add(item.id)));
   return {
     items,
-    manifest: withFrenchRuntimeManifestV300(getServerItemManifest(), snapshot),
+    manifest: withFrenchRuntimeManifestV301(getServerItemManifest(), snapshot),
     runtime: snapshot ? {
       state: snapshot.state,
       generatedAt: snapshot.generatedAt,
@@ -76,7 +76,7 @@ export async function getServerItemBundleV300(options?: { refreshFrench?: boolea
   };
 }
 
-export async function getServerItemByIdV300(idOrSlug: string): Promise<SealedItem | null> {
-  const bundle = await getServerItemBundleV300({ refreshFrench: true });
+export async function getServerItemByIdV301(idOrSlug: string): Promise<SealedItem | null> {
+  const bundle = await getServerItemBundleV301({ refreshFrench: true });
   return bundle.items.find((item) => item.id === idOrSlug || item.slug === idOrSlug) || null;
 }
