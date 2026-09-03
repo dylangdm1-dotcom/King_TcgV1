@@ -24,6 +24,10 @@
     "audit:market-scanner": "node scripts/audit-market-scanner-v279.mjs",
     "audit:psa-identity": "node scripts/audit-psa-identity-v280.mjs",
     "audit:v281": "node scripts/audit-v281.mjs",
+    "audit:v282": "node scripts/audit-v282.mjs",
+    "catalog-v2:import-jp-v299": "node scripts/import-japanese-gap-v299.mjs",
+    "audit:v298": "node scripts/audit-v298.mjs",
+    "audit:v299": "node scripts/audit-v299.mjs",
     "test:market-cache:live": "node scripts/test-market-cache-live-v277.mjs"
   },
   "dependencies": {
