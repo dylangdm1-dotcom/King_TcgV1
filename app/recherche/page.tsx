@@ -659,7 +659,7 @@ export default function Recherche() {
                 <span aria-live="polite" className="px-1 text-center text-[9px] font-bold tracking-[0.04em] text-cyan-200/80 md:text-right">
                   {catalogLoading
                     ? "Chargement du catalogue local…"
-                    : `${allSetsList.length} extension${allSetsList.length > 1 ? "s" : ""} référencée${allSetsList.length > 1 ? "s" : ""} · ${availableSetCount} avec cartes${metadataSetCount > 0 ? ` · ${metadataSetCount} à synchroniser` : ""}${announcedSetCount > 0 ? ` · ${announcedSetCount} annoncée${announcedSetCount > 1 ? "s" : ""}` : ""}`}
+                    : `${allSetsList.length} extension${allSetsList.length > 1 ? "s" : ""} référencée${allSetsList.length > 1 ? "s" : ""} · ${availableSetCount} avec cartes${metadataSetCount > 0 ? ` · ${metadataSetCount} sans cartes publiées` : ""}${announcedSetCount > 0 ? ` · ${announcedSetCount} annoncée${announcedSetCount > 1 ? "s" : ""}` : ""}`}
                 </span>
               </div>
             </div>
