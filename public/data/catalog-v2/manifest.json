@@ -1,12 +1,12 @@
 {
   "schemaVersion": 2,
   "formatVersion": 1,
-  "catalogVersion": "v300-visuals-items-fr",
-  "generatedAt": "2026-09-03T19:46:42.607Z",
+  "catalogVersion": "v301-jp-tcgplayer-visuals-items-fr",
+  "generatedAt": "2026-09-03T20:37:40.308Z",
   "source": {
     "provider": "tcgdex-cards-database + king-tcg-bootstrap",
-    "revision": "v300-visuals-items-fr",
-    "license": "TCGdex cards-database MIT; King_TCG metadata"
+    "revision": "v301-jp-tcgplayer-visuals-items-fr",
+    "license": "TCGdex cards-database MIT; TCGplayer visual references; King_TCG metadata"
   },
   "regionalSources": [
     {
@@ -6031,8 +6031,8 @@
           "officialCardCount": 27,
           "cards": {
             "path": "ja/cards/cp2-42fcee8025.json",
-            "bytes": 16984,
-            "sha256": "141a32d34cc0ebe7f41f33bfc632621890d357dad228f790001e54dbbd4eb850"
+            "bytes": 52098,
+            "sha256": "08adf95f9100b2c511a3f9283ecab96de3c61faff9a78d65da2370860dadaf12"
           }
         },
         {
@@ -6164,8 +6164,8 @@
           "officialCardCount": 63,
           "cards": {
             "path": "ja/cards/m1l-e8de3b22d7.json",
-            "bytes": 54850,
-            "sha256": "f5b70e75a001d44a545ca1b29decc7c85069a5119602d33278b73e289ad2bb98"
+            "bytes": 174456,
+            "sha256": "4fa01053c4eb7982c9e35624331616012ca97bbc899e0303ed3cbdbb335842a7"
           }
         },
         {
@@ -6178,8 +6178,8 @@
           "officialCardCount": 63,
           "cards": {
             "path": "ja/cards/m1s-3742fb5580.json",
-            "bytes": 54882,
-            "sha256": "1bad91b09720d8fc8392f96961cdb32d8fd14459e6e904ad15741d41371bcfa3"
+            "bytes": 174488,
+            "sha256": "24b3a8ccb25a3c2ec15d985057de22888b0d2e6c548653ede7dd25721711dfb4"
           }
         },
         {
@@ -6192,8 +6192,8 @@
           "officialCardCount": 80,
           "cards": {
             "path": "ja/cards/m2-801568f7f7.json",
-            "bytes": 68696,
-            "sha256": "84c2ab14237482e2e1fdd8a0862a1f79aa92df03bd3ec20856a71095db952f4d"
+            "bytes": 219502,
+            "sha256": "cecf8d9ecb426e9770da5ca57ca1ab961dfff430c41531120635df93b2a22b2d"
           }
         },
         {
@@ -6220,8 +6220,8 @@
           "officialCardCount": 80,
           "cards": {
             "path": "ja/cards/m3-43ccf4d080.json",
-            "bytes": 69258,
-            "sha256": "132fc4350d59521f2cff7ee22242ff09bfdb9fc0073e227c8357ac08060ab515"
+            "bytes": 221364,
+            "sha256": "6d1aa333fb8af277bc6776089c639b7a1052e736e64dcb390e9c38a70fec3184"
           }
         },
         {
@@ -6262,8 +6262,8 @@
           "officialCardCount": 76,
           "cards": {
             "path": "ja/cards/m6-14b95f88fd.json",
-            "bytes": 67018,
-            "sha256": "f3486ea777e34cca06d5d49be769d1d7f49eeab82b16d05f035e52ae23ebc37f"
+            "bytes": 213924,
+            "sha256": "f398512e632d19b6e843e1c887ab2b979de5ab4b151c18c8038c0b449957180e"
           }
         },
         {
@@ -6303,8 +6303,8 @@
           "officialCardCount": 0,
           "cards": {
             "path": "ja/cards/mp-4380771dc0.json",
-            "bytes": 80688,
-            "sha256": "422fc58f64e3f72caac748cd69c2366af5f51a70de0366817429bcb424ad36ca"
+            "bytes": 110601,
+            "sha256": "841945f0092b69bfa3396b22b9382de49edceda2bef82c3610e7a16d8f2f362d"
           }
         },
         {
@@ -6518,8 +6518,8 @@
           "officialCardCount": 102,
           "cards": {
             "path": "ja/cards/pmcg1-7d17f20828.json",
-            "bytes": 61072,
-            "sha256": "5b5497813ca4bac378affa903e1cdf7123df16ee462ebc9f384c958f62a30cf5"
+            "bytes": 193678,
+            "sha256": "d41db7d655cee4a066f9f0ae75c00f5787723c3827931522c78f11941bae3f86"
           }
         },
         {
@@ -6532,8 +6532,8 @@
           "officialCardCount": 48,
           "cards": {
             "path": "ja/cards/pmcg2-cb4cae1b56.json",
-            "bytes": 28809,
-            "sha256": "d6237b562c3db90567e18f375f07daeb604636306201b6c37e520694d8cef77b"
+            "bytes": 89915,
+            "sha256": "25f48182f7f2217b17d7eaf21ca73c113bf6e0ab6b0b30781c503b3096be932a"
           }
         },
         {
@@ -6546,8 +6546,8 @@
           "officialCardCount": 48,
           "cards": {
             "path": "ja/cards/pmcg3-e4714b0ff9.json",
-            "bytes": 28791,
-            "sha256": "208e0db9de4de135344fb70c6e58333d0efd580872aadea1d377a5d70804334b"
+            "bytes": 91197,
+            "sha256": "00beee7e27afc3a8ca67a6d0c55b3cf58e67bf3c15cb356b0cb119306dd7bd38"
           }
         },
         {
@@ -6560,8 +6560,8 @@
           "officialCardCount": 65,
           "cards": {
             "path": "ja/cards/pmcg4-acb462ed53.json",
-            "bytes": 39399,
-            "sha256": "0a326dc02c391990ba4f0f1f7c20985b1ea5cc4419549474e2284bea7f295673"
+            "bytes": 123905,
+            "sha256": "e505a3e979a4cf92166df22e169c88ebcdd0db0ce548ac2d0b768a30e054c46b"
           }
         },
         {
@@ -6574,8 +6574,8 @@
           "officialCardCount": 96,
           "cards": {
             "path": "ja/cards/pmcg5-9f844ee78a.json",
-            "bytes": 58194,
-            "sha256": "50609ed95af43078529c622f6ba6263bbd12345bccb8f1504fafeacad082ec98"
+            "bytes": 173900,
+            "sha256": "3a197c6996e97401f2f6b0533eb951cadfc21108d5930b7b6a1d4330d022c6b6"
           }
         },
         {
@@ -6588,8 +6588,8 @@
           "officialCardCount": 98,
           "cards": {
             "path": "ja/cards/pmcg6-f5e40f4c58.json",
-            "bytes": 59619,
-            "sha256": "8806a78f39e1ac982b87a2501221541fa72c9f026fed074375eb6f00a16a6444"
+            "bytes": 185725,
+            "sha256": "b27831e682d948f804e5309e2f9a9ddd6f96937792869682c194d11468da9626"
           }
         },
         {
@@ -6707,8 +6707,8 @@
           "officialCardCount": 172,
           "cards": {
             "path": "ja/cards/s12a-a6476cce3b.json",
-            "bytes": 431955,
-            "sha256": "67191dc674336e388c808084206416c6a9cafd0656ce15a8e44b43e710cddb1f"
+            "bytes": 437161,
+            "sha256": "95d8dc74d46f9a32015435d5117b92678fbc4e598ae2d5ca101aeccd6c278277"
           }
         },
         {
@@ -6756,8 +6756,8 @@
           "officialCardCount": 70,
           "cards": {
             "path": "ja/cards/s5i-19ca343055.json",
-            "bytes": 54145,
-            "sha256": "1194f46135983c231eddecf5c85c097caf069746ca3d754bcd695f9b72e904ee"
+            "bytes": 172451,
+            "sha256": "3eef58373cc54ffefd99d97e5127a5616cccd6fe5900dd9f9f5336d5f33056b4"
           }
         },
         {
@@ -6784,8 +6784,8 @@
           "officialCardCount": 70,
           "cards": {
             "path": "ja/cards/s6h-6d6d5b0f1d.json",
-            "bytes": 56545,
-            "sha256": "7cad32a2212be51187123bc7e913fe1d97d5cf3f4deec90ffd2ebc413a7234fe"
+            "bytes": 180051,
+            "sha256": "ba1392f29b7c02afe1225c6cf0e20d069254990c06fad7e2673d0278cd4fe3f3"
           }
         },
         {
@@ -6798,8 +6798,8 @@
           "officialCardCount": 70,
           "cards": {
             "path": "ja/cards/s6k-95dac59680.json",
-            "bytes": 56408,
-            "sha256": "d3cba662837ccf80b1b84c232a32a3e36b91bb4d001140fa4875cc269401eef3"
+            "bytes": 179914,
+            "sha256": "b0528c311e1c4353cc07946adcf20915ed01a1d82337aedf128682af0c34ef5a"
           }
         },
         {
@@ -6812,8 +6812,8 @@
           "officialCardCount": 67,
           "cards": {
             "path": "ja/cards/s7d-15663d29e2.json",
-            "bytes": 53562,
-            "sha256": "7204437d2cc3798a2e63a0012c4091da1aa53314c0333d14728fc32e6beaaa22"
+            "bytes": 170568,
+            "sha256": "59d998aeb7c7774e02bf2f59194175070e40c5a98441ea901bc20c11cb5a7798"
           }
         },
         {
@@ -6833,8 +6833,8 @@
           "officialCardCount": 100,
           "cards": {
             "path": "ja/cards/s8-dc795b07ee.json",
-            "bytes": 76195,
-            "sha256": "069f1be75aa9df0aa72bcf9cd2d99bad843102663b58e7bd5e1d34b2b4dacc71"
+            "bytes": 243901,
+            "sha256": "4232e64393a8e338f02258ff05f94149db0b7fb0ee01b7b88c9a1711400b0339"
           }
         },
         {
@@ -6854,8 +6854,8 @@
           "officialCardCount": 184,
           "cards": {
             "path": "ja/cards/s8b-3a057507a0.json",
-            "bytes": 176101,
-            "sha256": "3bfc3054063c101c3659da7b57f034cb4ccb7550457808e7ae401ac7b03177d2"
+            "bytes": 536207,
+            "sha256": "bb4e26c0220525c8c95b1eab938d2f6aa6f7b8f9e0f33fd1982b426e2d6f1232"
           }
         },
         {
@@ -7476,8 +7476,8 @@
           "officialCardCount": 98,
           "cards": {
             "path": "ja/cards/sv10-b3b20a0fbb.json",
-            "bytes": 185527,
-            "sha256": "9d513c99edf8ff00b34f31f78ec673b2ddc5d2626bba0be57fd24d2f6e2a58ab"
+            "bytes": 229733,
+            "sha256": "ba0b1777ab2f6e3e696eef95c9854bff0f679c903180e6c6c61d3e2cd86229c0"
           }
         },
         {
@@ -7490,8 +7490,8 @@
           "officialCardCount": 174,
           "cards": {
             "path": "ja/cards/sv11b-7c41db74c4.json",
-            "bytes": 111673,
-            "sha256": "38d99e10b7d31314b62190cf3bd58ce87052af862856a2719710c36857dd7329"
+            "bytes": 337879,
+            "sha256": "3c7b96723d9a234a1c06d9eeafc34c0e021ee6423f43f547e247d96e549f125c"
           }
         },
         {
@@ -7504,8 +7504,8 @@
           "officialCardCount": 86,
           "cards": {
             "path": "ja/cards/sv11w-d2ef2c4d52.json",
-            "bytes": 111675,
-            "sha256": "d9e5757d137fb999d7d23c100d0164493e2dfbed998ef3ded512b4dd1846f9ad"
+            "bytes": 337881,
+            "sha256": "9876864f689e23c9bfbdce8231e99cad493cd7bc8c5ae389b0c4fba83230ef14"
           }
         },
         {
@@ -7700,8 +7700,8 @@
           "officialCardCount": 71,
           "cards": {
             "path": "ja/cards/sv5m-9f41a81248.json",
-            "bytes": 59882,
-            "sha256": "49027ca74933165ee609600b82b87eb8b133c113ee9728b22959b08fab14ffe0"
+            "bytes": 189888,
+            "sha256": "a10b9f6101ddac583f9e5e78be7acd6e61e22c80dabdb0889f17d1be0fd195a3"
           }
         },
         {
@@ -7770,8 +7770,8 @@
           "officialCardCount": 106,
           "cards": {
             "path": "ja/cards/sv8-8117ccf4e0.json",
-            "bytes": 195402,
-            "sha256": "648cdba60698a6c4acd258a9973bd93b11e629531b9f94868aad543ddaf791be"
+            "bytes": 237008,
+            "sha256": "45293142622a4c6ca13b9b4083f2bf7a7b50f19c3fe4304d371050503dd8d286"
           }
         },
         {
@@ -7880,8 +7880,8 @@
           "officialCardCount": 0,
           "cards": {
             "path": "ja/cards/svp-3d428fc7d9.json",
-            "bytes": 180104,
-            "sha256": "6fa8c56c296cdc5b7a3e6c82e9ec55a8305ebd1674b49a35e2a54bc6faf4e338"
+            "bytes": 425818,
+            "sha256": "931ed625e84a793cf6bb4bc31c77c2e0ec4ac5f6545b20be3f5df37a04c67d99"
           }
         },
         {
