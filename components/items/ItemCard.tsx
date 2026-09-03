@@ -14,7 +14,7 @@ export default function ItemCard({ item, compact = false }: { item: SealedItem; 
   return (
     <article className="kt-item-card group flex h-full min-w-0 flex-col overflow-hidden rounded-[18px] border border-cyan-300/[0.12] bg-[#0a1118]">
       <Link href={`/items/${encodeItemRouteId(routeId)}`} className={`relative block overflow-hidden bg-black/20 ${compact ? "aspect-square" : "aspect-[4/3]"}`}>
-        <ItemImage item={item} className="h-full w-full p-4 transition duration-300 group-hover:scale-[1.025]" />
+        <ItemImage item={item} preferSmall className="h-full w-full p-4 transition duration-300 group-hover:scale-[1.025]" />
         <span className="absolute left-2 top-2"><ItemCatalogBadge status={item.catalogStatus} /></span>
       </Link>
       <div className="flex flex-1 flex-col p-3">
@@ -27,9 +27,9 @@ export default function ItemCard({ item, compact = false }: { item: SealedItem; 
         </div>
         {item.releaseDate ? <p className="mt-2 flex items-center gap-1.5 text-[9px] text-zinc-400"><CalendarDays className="h-3 w-3" /> {new Date(item.releaseDate).toLocaleDateString("fr-FR")}</p> : null}
         <div className="mt-auto pt-3">
-          <div className="mb-2 flex items-center justify-between gap-2 border-t border-white/[0.06] pt-2">
-            <span className="text-[8px] font-bold uppercase tracking-[0.08em] text-zinc-500">Cote actuelle</span>
-            <span className={`text-[11px] font-black ${pricing.currentMarket ? "text-emerald-300" : "text-zinc-500"}`}>{formatItemMoney(pricing.currentMarket)}</span>
+          <div className="mb-2 space-y-1.5 border-t border-white/[0.06] pt-2">
+            <div className="flex items-center justify-between gap-2"><span className="text-[8px] font-bold uppercase tracking-[0.08em] text-zinc-500">Cote actuelle</span><span className={`text-[11px] font-black ${pricing.currentMarket ? "text-emerald-300" : "text-zinc-500"}`}>{formatItemMoney(pricing.currentMarket)}</span></div>
+            <div className="flex items-center justify-between gap-2"><span className="text-[8px] font-bold uppercase tracking-[0.08em] text-zinc-500">Sortie officielle FR</span><span className={`text-[10px] font-black ${pricing.officialRetail ? "text-amber-300" : "text-zinc-600"}`}>{formatItemMoney(pricing.officialRetail)}</span></div>
           </div>
           <ItemActions itemId={item.id} compact />
         </div>

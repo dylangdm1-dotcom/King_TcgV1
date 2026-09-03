@@ -1,17 +1,19 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { ImageOff, PackageOpen } from "lucide-react";
 import type { SealedItem } from "@/lib/items/types";
 
-export default function ItemImage({ item, className = "" }: { item: SealedItem; className?: string }) {
+export default function ItemImage({ item, className = "", preferSmall = false }: { item: SealedItem; className?: string; preferSmall?: boolean }) {
   const candidates = useMemo(() => Array.from(new Set([
-    item.images?.large,
-    item.images?.small,
+    preferSmall ? item.images?.small : item.images?.large,
+    preferSmall ? item.images?.large : item.images?.small,
     ...(item.imageCandidates || []),
-  ].filter(Boolean))) as string[], [item.imageCandidates, item.images?.large, item.images?.small]);
+  ].filter(Boolean))) as string[], [item.imageCandidates, item.images?.large, item.images?.small, preferSmall]);
   const [index, setIndex] = useState(0);
   const src = candidates[index];
+
+  useEffect(() => setIndex(0), [item.id, candidates]);
 
   if (!src) {
     return (
@@ -28,6 +30,8 @@ export default function ItemImage({ item, className = "" }: { item: SealedItem; 
     <img
       src={src}
       alt={item.name}
+      loading="lazy"
+      decoding="async"
       className={`object-contain ${className}`}
       onError={() => setIndex((current) => current + 1)}
     />

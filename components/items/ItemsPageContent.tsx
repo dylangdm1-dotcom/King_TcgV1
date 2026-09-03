@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { Bookmark, Crown, FileSpreadsheet, Library, PackageOpen, Plus, ShieldCheck, Store } from "lucide-react";
 import { ITEM_BETA_ACCESS, fetchItemCatalog, fetchItemSourceStatus, filterSealedItems, DEFAULT_ITEM_FILTERS, getCustomItems, getItemCollection, getItemFavorites, itemCatalogStats } from "@/lib/items";
-import type { ItemCatalogManifest, ItemSearchFilters, SealedItem } from "@/lib/items/types";
+import type { ItemCatalogManifest, ItemCatalogRuntime, ItemSearchFilters, SealedItem } from "@/lib/items/types";
 import ItemAccessBadge from "./ItemAccessBadge";
 import ItemCard from "./ItemCard";
 import ItemCatalogStatus from "./ItemCatalogStatus";
@@ -24,6 +24,8 @@ export default function ItemsPageContent() {
   const [collectionCount, setCollectionCount] = useState(0);
   const [favoriteCount, setFavoriteCount] = useState(0);
   const [cardTraderReady, setCardTraderReady] = useState<boolean | null>(null);
+  const [runtime, setRuntime] = useState<ItemCatalogRuntime | null>(null);
+  const [visibleCount, setVisibleCount] = useState(16);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -36,6 +38,7 @@ export default function ItemsPageContent() {
     fetchItemCatalog(controller.signal).then((result) => {
       setCatalog(result.items);
       setManifest(result.manifest);
+      setRuntime(result.runtime);
       setOffline(!result.manifest);
       setLoading(false);
     });
@@ -51,6 +54,17 @@ export default function ItemsPageContent() {
   const results = useMemo(() => filterSealedItems(allItems, filters), [allItems, filters]);
   const stats = useMemo(() => itemCatalogStats(allItems), [allItems]);
   const filtered = Boolean(filters.query || filters.language !== "all" || filters.category !== "all" || filters.availability !== "all");
+  const visibleResults = results.slice(0, visibleCount);
+
+  useEffect(() => setVisibleCount(16), [filters]);
+
+  const frenchStatus = (() => {
+    if (manifest?.languageStatus?.fr?.itemCount) return `${manifest.languageStatus.fr.itemCount} produits français chargés automatiquement avec visuels et cotes CardTrader.`;
+    if (runtime?.state === "error") return `La synchronisation FR a échoué temporairement (${runtime.lastError || "erreur fournisseur"}). Elle sera retentée automatiquement sans bloquer les items EN.`;
+    if (runtime?.state === "empty") return "CardTrader n’a renvoyé aucun produit FR exploitable dans le lot actuel. Un nouveau lot sera retenté automatiquement.";
+    if (cardTraderReady === false) return "CardTrader attend sa variable serveur sur cet environnement. Aucun produit anglais ne remplit artificiellement le catalogue français.";
+    return "Synchronisation automatique CardTrader FR en cours. Aucun produit anglais ne remplit artificiellement le catalogue français.";
+  })();
 
   return (
     <div className="kt-page-wrap space-y-5">
@@ -60,7 +74,7 @@ export default function ItemsPageContent() {
           <div className="flex items-start gap-3">
             <span className="kt-page-icon flex shrink-0 items-center justify-center text-amber-300"><PackageOpen className="h-5 w-5" /></span>
             <div>
-              <div className="mb-2 flex flex-wrap items-center gap-2"><ItemAccessBadge /><span className="rounded-full border border-cyan-300/15 bg-cyan-300/[0.05] px-2 py-1 text-[8px] font-black uppercase tracking-[0.08em] text-cyan-300">V296 · Bêta</span></div>
+              <div className="mb-2 flex flex-wrap items-center gap-2"><ItemAccessBadge /><span className="rounded-full border border-cyan-300/15 bg-cyan-300/[0.05] px-2 py-1 text-[8px] font-black uppercase tracking-[0.08em] text-cyan-300">V298 · Bêta</span></div>
               <h1 className="kt-page-title">Items <span className="text-cyan-300">Pokémon scellés</span></h1>
               <p className="kt-page-subtitle mt-1 max-w-2xl">Espace indépendant pour ETB, displays, boosters, coffrets, bundles, UPC et autres produits scellés. Aucun résultat carte ou extension n’est mélangé ici.</p>
             </div>
@@ -77,7 +91,7 @@ export default function ItemsPageContent() {
       <ItemCreateForm open={createOpen} onClose={() => setCreateOpen(false)} onCreated={() => setFilters((current) => ({ ...current, availability: "personal" }))} />
       <ItemCatalogStatus manifest={manifest} offline={offline} />
       <section className="grid gap-2 sm:grid-cols-2">
-        <div className="rounded-[15px] border border-amber-300/[0.16] bg-amber-300/[0.035] px-4 py-3"><p className="text-[9px] font-black uppercase tracking-[0.1em] text-amber-300">FR · En vérification{manifest?.languageStatus?.fr?.itemCount ? ` · ${manifest.languageStatus.fr.itemCount}` : ""}</p><p className="mt-1 text-[10px] leading-5 text-zinc-300">{cardTraderReady === true ? "Les nouveaux candidats CardTrader FR sont chargés automatiquement et mis en cache. Vérifie simplement leurs noms, emballages et cotes directement dans cette page." : cardTraderReady === false ? "CardTrader attend sa variable serveur sur cet environnement. Aucun produit anglais ne remplit artificiellement le catalogue français." : "Vérification du connecteur CardTrader en cours. Aucun produit anglais ne remplit artificiellement le catalogue français."}</p></div>
+        <div className="rounded-[15px] border border-amber-300/[0.16] bg-amber-300/[0.035] px-4 py-3"><p className="text-[9px] font-black uppercase tracking-[0.1em] text-amber-300">FR · Synchronisation{manifest?.languageStatus?.fr?.itemCount ? ` · ${manifest.languageStatus.fr.itemCount}` : ""}</p><p className="mt-1 text-[10px] leading-5 text-zinc-300">{frenchStatus}</p></div>
         <div className="rounded-[15px] border border-cyan-300/[0.16] bg-cyan-300/[0.035] px-4 py-3"><p className="text-[9px] font-black uppercase tracking-[0.1em] text-cyan-300">EN · Disponible</p><p className="mt-1 text-[10px] leading-5 text-zinc-300">57 produits réels avec leurs visuels fournisseur ; 54 disposent d’une cote TCGplayer EN/US conservée en USD.</p></div>
       </section>
       <ItemStats catalog={stats.verified} personal={stats.personal} collection={collectionCount} favorites={favoriteCount} />
@@ -93,7 +107,7 @@ export default function ItemsPageContent() {
         <div className="flex items-center gap-2 text-[8px] font-bold uppercase tracking-[0.08em] text-zinc-500"><Crown className="h-3.5 w-3.5 text-amber-300" /> Premium / PRO <FileSpreadsheet className="ml-1 h-3.5 w-3.5 text-cyan-300" /></div>
       </div>
 
-      {loading ? <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4">{Array.from({ length: 4 }).map((_, index) => <div key={index} className="aspect-[.82] animate-pulse rounded-[18px] border border-white/[0.05] bg-white/[0.03]" />)}</div> : results.length ? <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4">{results.map((item) => <ItemCard key={item.id} item={item} />)}</div> : <ItemEmptyState filtered={filtered} onCreate={() => setCreateOpen(true)} />}
+      {loading ? <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4">{Array.from({ length: 4 }).map((_, index) => <div key={index} className="aspect-[.82] animate-pulse rounded-[18px] border border-white/[0.05] bg-white/[0.03]" />)}</div> : results.length ? <><div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4">{visibleResults.map((item) => <ItemCard key={item.id} item={item} />)}</div>{visibleCount < results.length ? <button type="button" onClick={() => setVisibleCount((count) => count + 16)} className="mx-auto flex items-center justify-center rounded-[13px] border border-cyan-300/25 bg-cyan-300/[0.06] px-5 py-3 text-[9px] font-black uppercase tracking-[0.09em] text-cyan-200">Afficher 16 produits de plus · {results.length - visibleCount} restants</button> : null}</> : <ItemEmptyState filtered={filtered} onCreate={() => setCreateOpen(true)} />}
     </div>
   );
 }
