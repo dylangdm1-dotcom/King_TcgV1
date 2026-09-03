@@ -74,7 +74,7 @@ export default function ItemsPageContent() {
           <div className="flex items-start gap-3">
             <span className="kt-page-icon flex shrink-0 items-center justify-center text-amber-300"><PackageOpen className="h-5 w-5" /></span>
             <div>
-              <div className="mb-2 flex flex-wrap items-center gap-2"><ItemAccessBadge /><span className="rounded-full border border-cyan-300/15 bg-cyan-300/[0.05] px-2 py-1 text-[8px] font-black uppercase tracking-[0.08em] text-cyan-300">V300 · Bêta</span></div>
+              <div className="mb-2 flex flex-wrap items-center gap-2"><ItemAccessBadge /><span className="rounded-full border border-cyan-300/15 bg-cyan-300/[0.05] px-2 py-1 text-[8px] font-black uppercase tracking-[0.08em] text-cyan-300">V301 · Bêta</span></div>
               <h1 className="kt-page-title">Items <span className="text-cyan-300">Pokémon scellés</span></h1>
               <p className="kt-page-subtitle mt-1 max-w-2xl">Espace indépendant pour ETB, displays, boosters, coffrets, bundles, UPC et autres produits scellés. Aucun résultat carte ou extension n’est mélangé ici.</p>
             </div>
