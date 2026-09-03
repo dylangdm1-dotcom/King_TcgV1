@@ -76,7 +76,7 @@ function euroPrice(product: CardTraderMarketplaceProduct): number | null {
 
 export async function loadCardTraderPokemonReference() {
   const games = list<CardTraderGame>(await cardTraderGet<CardTraderGame[]>("/games"));
-  const pokemon = games.find((game) => /pokemon/i.test(`${game.name} ${game.display_name}`));
+  const pokemon = games.find((game) => normalizeItemText(`${game.name} ${game.display_name}`).includes("pokemon"));
   if (!pokemon || !positiveInteger(pokemon.id)) throw new Error("cardtrader_pokemon_game_missing");
 
   const [rawCategories, rawExpansions] = await Promise.all([
@@ -156,23 +156,28 @@ export async function previewCardTraderFrenchExpansion(expansionId: number) {
 export async function previewCardTraderFrenchCatalog(options?: {
   expansionIds?: number[];
   maximumExpansions?: number;
+  minimumCandidates?: number;
 }) {
   const reference = await loadCardTraderPokemonReference();
   const explicitIds = Array.from(new Set((options?.expansionIds || []).filter((id) => Number.isInteger(id) && id > 0)));
-  const maximum = Math.max(1, Math.min(12, Number(options?.maximumExpansions) || 6));
+  const maximum = Math.max(1, Math.min(30, Number(options?.maximumExpansions) || 12));
+  const minimumCandidates = Math.max(0, Math.min(500, Number(options?.minimumCandidates) || 0));
   const selected = explicitIds.length
     ? explicitIds.slice(0, maximum)
     : [...reference.expansions].sort((a, b) => b.id - a.id).slice(0, maximum).map((expansion) => expansion.id);
   const previews = [];
+  const processedExpansionIds: number[] = [];
   const failures: Array<{ expansionId: number; error: string }> = [];
 
   for (const expansionId of selected) {
+    processedExpansionIds.push(expansionId);
     try {
       previews.push(await previewFrenchExpansionFromReference(reference, expansionId));
     } catch (error) {
       failures.push({ expansionId, error: error instanceof Error ? error.message : "cardtrader_unknown_error" });
     }
+    if (minimumCandidates && previews.reduce((sum, preview) => sum + preview.candidates.length, 0) >= minimumCandidates) break;
   }
 
-  return { selectedExpansionIds: selected, previews, failures };
+  return { selectedExpansionIds: processedExpansionIds, previews, failures };
 }
