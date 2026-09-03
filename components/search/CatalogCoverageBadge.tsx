@@ -4,7 +4,7 @@ type Coverage = "complete" | "partial" | "metadata_only" | "announced" | undefin
 const CONFIG = {
   complete: { label: "Complet", title: "Toutes les identités ou impressions attendues sont couvertes.", css: "border-emerald-400/25 bg-emerald-400/[0.08] text-emerald-200", Icon: CheckCircle2 },
   partial: { label: "Partiel", title: "La source fournit encore une couverture incomplète.", css: "border-amber-400/25 bg-amber-400/[0.08] text-amber-200", Icon: LoaderCircle },
-  metadata_only: { label: "À synchroniser", title: "Extension connue, mais aucune carte exploitable n'est disponible.", css: "border-zinc-400/20 bg-zinc-400/[0.06] text-zinc-300", Icon: Database },
+  metadata_only: { label: "Sans cartes", title: "Extension référencée, mais le fournisseur ne publie encore aucune carte exploitable.", css: "border-zinc-400/20 bg-zinc-400/[0.06] text-zinc-300", Icon: Database },
   announced: { label: "Annoncé", title: "Extension annoncée, cartes non publiées.", css: "border-violet-400/25 bg-violet-400/[0.08] text-violet-200", Icon: Clock3 },
 } as const;
 
