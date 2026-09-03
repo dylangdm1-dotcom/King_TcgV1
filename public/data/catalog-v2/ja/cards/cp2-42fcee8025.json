@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "formatVersion": 1,
-  "catalogVersion": "v299-jp-provider-gap",
+  "catalogVersion": "v301-jp-tcgplayer-visuals-items-fr",
   "language": "ja",
   "setId": "ktcg:set:ja:cp2",
   "status": "complete",
@@ -22,7 +22,7 @@
           "lastSyncedAt": "2026-09-03T13:22:09.774Z"
         }
       ],
-      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:cp2",
       "number": "001",
@@ -34,7 +34,47 @@
           "rawLabel": "normal"
         }
       ],
-      "visuals": []
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=605332&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "605332",
+            "url": "https://www.tcgplayer.com/product/605332",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=605332&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "605332",
+            "url": "https://www.tcgplayer.com/product/605332",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=605332&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "605332",
+          "url": "https://www.tcgplayer.com/product/605332",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -48,7 +88,7 @@
           "lastSyncedAt": "2026-09-03T13:22:09.774Z"
         }
       ],
-      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:cp2",
       "number": "002",
@@ -60,7 +100,47 @@
           "rawLabel": "holo"
         }
       ],
-      "visuals": []
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=605350&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "605350",
+            "url": "https://www.tcgplayer.com/product/605350",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=605350&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "605350",
+            "url": "https://www.tcgplayer.com/product/605350",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=605350&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "605350",
+          "url": "https://www.tcgplayer.com/product/605350",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -74,7 +154,7 @@
           "lastSyncedAt": "2026-09-03T13:22:09.774Z"
         }
       ],
-      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:cp2",
       "number": "003",
@@ -86,7 +166,47 @@
           "rawLabel": "normal"
         }
       ],
-      "visuals": []
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=605335&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "605335",
+            "url": "https://www.tcgplayer.com/product/605335",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=605335&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "605335",
+            "url": "https://www.tcgplayer.com/product/605335",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=605335&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "605335",
+          "url": "https://www.tcgplayer.com/product/605335",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -100,7 +220,7 @@
           "lastSyncedAt": "2026-09-03T13:22:09.774Z"
         }
       ],
-      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:cp2",
       "number": "004",
@@ -112,7 +232,47 @@
           "rawLabel": "normal"
         }
       ],
-      "visuals": []
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=605330&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "605330",
+            "url": "https://www.tcgplayer.com/product/605330",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=605330&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "605330",
+            "url": "https://www.tcgplayer.com/product/605330",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=605330&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "605330",
+          "url": "https://www.tcgplayer.com/product/605330",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -126,7 +286,7 @@
           "lastSyncedAt": "2026-09-03T13:22:09.774Z"
         }
       ],
-      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:cp2",
       "number": "005",
@@ -138,7 +298,47 @@
           "rawLabel": "holo"
         }
       ],
-      "visuals": []
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=605346&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "605346",
+            "url": "https://www.tcgplayer.com/product/605346",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=605346&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "605346",
+            "url": "https://www.tcgplayer.com/product/605346",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=605346&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "605346",
+          "url": "https://www.tcgplayer.com/product/605346",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -152,7 +352,7 @@
           "lastSyncedAt": "2026-09-03T13:22:09.774Z"
         }
       ],
-      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:cp2",
       "number": "006",
@@ -164,7 +364,47 @@
           "rawLabel": "normal"
         }
       ],
-      "visuals": []
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=605336&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "605336",
+            "url": "https://www.tcgplayer.com/product/605336",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=605336&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "605336",
+            "url": "https://www.tcgplayer.com/product/605336",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=605336&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "605336",
+          "url": "https://www.tcgplayer.com/product/605336",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -178,7 +418,7 @@
           "lastSyncedAt": "2026-09-03T13:22:09.774Z"
         }
       ],
-      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:cp2",
       "number": "007",
@@ -190,7 +430,47 @@
           "rawLabel": "normal"
         }
       ],
-      "visuals": []
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=605337&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "605337",
+            "url": "https://www.tcgplayer.com/product/605337",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=605337&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "605337",
+            "url": "https://www.tcgplayer.com/product/605337",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=605337&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "605337",
+          "url": "https://www.tcgplayer.com/product/605337",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -204,7 +484,7 @@
           "lastSyncedAt": "2026-09-03T13:22:09.774Z"
         }
       ],
-      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:cp2",
       "number": "008",
@@ -216,7 +496,47 @@
           "rawLabel": "holo"
         }
       ],
-      "visuals": []
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=605348&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "605348",
+            "url": "https://www.tcgplayer.com/product/605348",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=605348&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "605348",
+            "url": "https://www.tcgplayer.com/product/605348",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=605348&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "605348",
+          "url": "https://www.tcgplayer.com/product/605348",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -230,7 +550,7 @@
           "lastSyncedAt": "2026-09-03T13:22:09.774Z"
         }
       ],
-      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:cp2",
       "number": "009",
@@ -242,7 +562,47 @@
           "rawLabel": "holo"
         }
       ],
-      "visuals": []
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=605354&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "605354",
+            "url": "https://www.tcgplayer.com/product/605354",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=605354&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "605354",
+            "url": "https://www.tcgplayer.com/product/605354",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=605354&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "605354",
+          "url": "https://www.tcgplayer.com/product/605354",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -256,7 +616,7 @@
           "lastSyncedAt": "2026-09-03T13:22:09.774Z"
         }
       ],
-      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:cp2",
       "number": "010",
@@ -268,7 +628,47 @@
           "rawLabel": "normal"
         }
       ],
-      "visuals": []
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=605333&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "605333",
+            "url": "https://www.tcgplayer.com/product/605333",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=605333&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "605333",
+            "url": "https://www.tcgplayer.com/product/605333",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=605333&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "605333",
+          "url": "https://www.tcgplayer.com/product/605333",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -282,7 +682,7 @@
           "lastSyncedAt": "2026-09-03T13:22:09.774Z"
         }
       ],
-      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:cp2",
       "number": "011",
@@ -294,7 +694,47 @@
           "rawLabel": "normal"
         }
       ],
-      "visuals": []
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=605353&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "605353",
+            "url": "https://www.tcgplayer.com/product/605353",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=605353&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "605353",
+            "url": "https://www.tcgplayer.com/product/605353",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=605353&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "605353",
+          "url": "https://www.tcgplayer.com/product/605353",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -308,7 +748,7 @@
           "lastSyncedAt": "2026-09-03T13:22:09.774Z"
         }
       ],
-      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:cp2",
       "number": "012",
@@ -320,7 +760,47 @@
           "rawLabel": "holo"
         }
       ],
-      "visuals": []
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=605340&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "605340",
+            "url": "https://www.tcgplayer.com/product/605340",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=605340&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "605340",
+            "url": "https://www.tcgplayer.com/product/605340",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=605340&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "605340",
+          "url": "https://www.tcgplayer.com/product/605340",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -334,7 +814,7 @@
           "lastSyncedAt": "2026-09-03T13:22:09.774Z"
         }
       ],
-      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:cp2",
       "number": "013",
@@ -346,7 +826,47 @@
           "rawLabel": "normal"
         }
       ],
-      "visuals": []
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=605339&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "605339",
+            "url": "https://www.tcgplayer.com/product/605339",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=605339&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "605339",
+            "url": "https://www.tcgplayer.com/product/605339",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=605339&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "605339",
+          "url": "https://www.tcgplayer.com/product/605339",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -360,7 +880,7 @@
           "lastSyncedAt": "2026-09-03T13:22:09.774Z"
         }
       ],
-      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:cp2",
       "number": "014",
@@ -372,7 +892,47 @@
           "rawLabel": "normal"
         }
       ],
-      "visuals": []
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=605347&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "605347",
+            "url": "https://www.tcgplayer.com/product/605347",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=605347&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "605347",
+            "url": "https://www.tcgplayer.com/product/605347",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=605347&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "605347",
+          "url": "https://www.tcgplayer.com/product/605347",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -386,7 +946,7 @@
           "lastSyncedAt": "2026-09-03T13:22:09.774Z"
         }
       ],
-      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:cp2",
       "number": "015",
@@ -398,7 +958,47 @@
           "rawLabel": "normal"
         }
       ],
-      "visuals": []
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=605338&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "605338",
+            "url": "https://www.tcgplayer.com/product/605338",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=605338&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "605338",
+            "url": "https://www.tcgplayer.com/product/605338",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=605338&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "605338",
+          "url": "https://www.tcgplayer.com/product/605338",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -412,7 +1012,7 @@
           "lastSyncedAt": "2026-09-03T13:22:09.774Z"
         }
       ],
-      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:cp2",
       "number": "016",
@@ -424,7 +1024,47 @@
           "rawLabel": "normal"
         }
       ],
-      "visuals": []
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=605341&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "605341",
+            "url": "https://www.tcgplayer.com/product/605341",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=605341&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "605341",
+            "url": "https://www.tcgplayer.com/product/605341",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=605341&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "605341",
+          "url": "https://www.tcgplayer.com/product/605341",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -438,7 +1078,7 @@
           "lastSyncedAt": "2026-09-03T13:22:09.774Z"
         }
       ],
-      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:cp2",
       "number": "017",
@@ -450,7 +1090,47 @@
           "rawLabel": "holo"
         }
       ],
-      "visuals": []
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=605334&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "605334",
+            "url": "https://www.tcgplayer.com/product/605334",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=605334&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "605334",
+            "url": "https://www.tcgplayer.com/product/605334",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=605334&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "605334",
+          "url": "https://www.tcgplayer.com/product/605334",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -464,7 +1144,7 @@
           "lastSyncedAt": "2026-09-03T13:22:09.774Z"
         }
       ],
-      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:cp2",
       "number": "018",
@@ -476,7 +1156,47 @@
           "rawLabel": "holo"
         }
       ],
-      "visuals": []
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=605342&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "605342",
+            "url": "https://www.tcgplayer.com/product/605342",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=605342&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "605342",
+            "url": "https://www.tcgplayer.com/product/605342",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=605342&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "605342",
+          "url": "https://www.tcgplayer.com/product/605342",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -490,7 +1210,7 @@
           "lastSyncedAt": "2026-09-03T13:22:09.774Z"
         }
       ],
-      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:cp2",
       "number": "019",
@@ -502,7 +1222,47 @@
           "rawLabel": "holo"
         }
       ],
-      "visuals": []
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=605343&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "605343",
+            "url": "https://www.tcgplayer.com/product/605343",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=605343&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "605343",
+            "url": "https://www.tcgplayer.com/product/605343",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=605343&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "605343",
+          "url": "https://www.tcgplayer.com/product/605343",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -516,7 +1276,7 @@
           "lastSyncedAt": "2026-09-03T13:22:09.774Z"
         }
       ],
-      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:cp2",
       "number": "020",
@@ -528,7 +1288,47 @@
           "rawLabel": "holo"
         }
       ],
-      "visuals": []
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=605329&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "605329",
+            "url": "https://www.tcgplayer.com/product/605329",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=605329&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "605329",
+            "url": "https://www.tcgplayer.com/product/605329",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=605329&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "605329",
+          "url": "https://www.tcgplayer.com/product/605329",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -542,7 +1342,7 @@
           "lastSyncedAt": "2026-09-03T13:22:09.774Z"
         }
       ],
-      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:cp2",
       "number": "021",
@@ -554,7 +1354,47 @@
           "rawLabel": "holo"
         }
       ],
-      "visuals": []
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=605352&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "605352",
+            "url": "https://www.tcgplayer.com/product/605352",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=605352&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "605352",
+            "url": "https://www.tcgplayer.com/product/605352",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=605352&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "605352",
+          "url": "https://www.tcgplayer.com/product/605352",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -568,7 +1408,7 @@
           "lastSyncedAt": "2026-09-03T13:22:09.774Z"
         }
       ],
-      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:cp2",
       "number": "022",
@@ -580,7 +1420,47 @@
           "rawLabel": "normal"
         }
       ],
-      "visuals": []
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=605344&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "605344",
+            "url": "https://www.tcgplayer.com/product/605344",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=605344&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "605344",
+            "url": "https://www.tcgplayer.com/product/605344",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=605344&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "605344",
+          "url": "https://www.tcgplayer.com/product/605344",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -594,7 +1474,7 @@
           "lastSyncedAt": "2026-09-03T13:22:09.774Z"
         }
       ],
-      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:cp2",
       "number": "023",
@@ -606,7 +1486,47 @@
           "rawLabel": "holo"
         }
       ],
-      "visuals": []
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=605349&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "605349",
+            "url": "https://www.tcgplayer.com/product/605349",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=605349&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "605349",
+            "url": "https://www.tcgplayer.com/product/605349",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=605349&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "605349",
+          "url": "https://www.tcgplayer.com/product/605349",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -620,7 +1540,7 @@
           "lastSyncedAt": "2026-09-03T13:22:09.774Z"
         }
       ],
-      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:cp2",
       "number": "024",
@@ -632,7 +1552,47 @@
           "rawLabel": "holo"
         }
       ],
-      "visuals": []
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=605328&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "605328",
+            "url": "https://www.tcgplayer.com/product/605328",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=605328&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "605328",
+            "url": "https://www.tcgplayer.com/product/605328",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=605328&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "605328",
+          "url": "https://www.tcgplayer.com/product/605328",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -646,7 +1606,7 @@
           "lastSyncedAt": "2026-09-03T13:22:09.774Z"
         }
       ],
-      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:cp2",
       "number": "025",
@@ -658,7 +1618,47 @@
           "rawLabel": "normal"
         }
       ],
-      "visuals": []
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=605351&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "605351",
+            "url": "https://www.tcgplayer.com/product/605351",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=605351&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "605351",
+            "url": "https://www.tcgplayer.com/product/605351",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=605351&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "605351",
+          "url": "https://www.tcgplayer.com/product/605351",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -672,7 +1672,7 @@
           "lastSyncedAt": "2026-09-03T13:22:09.774Z"
         }
       ],
-      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:cp2",
       "number": "026",
@@ -684,7 +1684,47 @@
           "rawLabel": "normal"
         }
       ],
-      "visuals": []
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=605331&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "605331",
+            "url": "https://www.tcgplayer.com/product/605331",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=605331&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "605331",
+            "url": "https://www.tcgplayer.com/product/605331",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=605331&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "605331",
+          "url": "https://www.tcgplayer.com/product/605331",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -698,7 +1738,7 @@
           "lastSyncedAt": "2026-09-03T13:22:09.774Z"
         }
       ],
-      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:cp2",
       "number": "027",
@@ -710,7 +1750,47 @@
           "rawLabel": "normal"
         }
       ],
-      "visuals": []
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=605345&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "605345",
+            "url": "https://www.tcgplayer.com/product/605345",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=605345&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "605345",
+            "url": "https://www.tcgplayer.com/product/605345",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=605345&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "605345",
+          "url": "https://www.tcgplayer.com/product/605345",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     }
   ]
 }

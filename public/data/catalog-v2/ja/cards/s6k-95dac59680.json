@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "formatVersion": 1,
-  "catalogVersion": "v291-search-dedup-jp-details",
+  "catalogVersion": "v301-jp-tcgplayer-visuals-items-fr",
   "language": "ja",
   "setId": "ktcg:set:ja:s6k",
   "status": "complete",
@@ -19,7 +19,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "001",
@@ -29,8 +29,48 @@
           "label": "Normal"
         }
       ],
-      "visuals": [],
-      "rarity": "Common"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569229&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569229",
+            "url": "https://www.tcgplayer.com/product/569229",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569229&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569229",
+            "url": "https://www.tcgplayer.com/product/569229",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Common",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569229&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569229",
+          "url": "https://www.tcgplayer.com/product/569229",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -44,7 +84,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "002",
@@ -54,8 +94,48 @@
           "label": "Normal"
         }
       ],
-      "visuals": [],
-      "rarity": "Common"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569230&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569230",
+            "url": "https://www.tcgplayer.com/product/569230",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569230&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569230",
+            "url": "https://www.tcgplayer.com/product/569230",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Common",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569230&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569230",
+          "url": "https://www.tcgplayer.com/product/569230",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -69,7 +149,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "003",
@@ -79,8 +159,48 @@
           "label": "Holofoil"
         }
       ],
-      "visuals": [],
-      "rarity": "Double rare"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569231&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569231",
+            "url": "https://www.tcgplayer.com/product/569231",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569231&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569231",
+            "url": "https://www.tcgplayer.com/product/569231",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Double rare",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569231&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569231",
+          "url": "https://www.tcgplayer.com/product/569231",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -94,7 +214,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "004",
@@ -104,8 +224,48 @@
           "label": "Holofoil"
         }
       ],
-      "visuals": [],
-      "rarity": "Triple Rare"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569232&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569232",
+            "url": "https://www.tcgplayer.com/product/569232",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569232&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569232",
+            "url": "https://www.tcgplayer.com/product/569232",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Triple Rare",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569232&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569232",
+          "url": "https://www.tcgplayer.com/product/569232",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -119,7 +279,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "005",
@@ -129,8 +289,48 @@
           "label": "Normal"
         }
       ],
-      "visuals": [],
-      "rarity": "Common"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569233&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569233",
+            "url": "https://www.tcgplayer.com/product/569233",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569233&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569233",
+            "url": "https://www.tcgplayer.com/product/569233",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Common",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569233&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569233",
+          "url": "https://www.tcgplayer.com/product/569233",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -144,7 +344,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "006",
@@ -154,8 +354,48 @@
           "label": "Normal"
         }
       ],
-      "visuals": [],
-      "rarity": "Common"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569234&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569234",
+            "url": "https://www.tcgplayer.com/product/569234",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569234&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569234",
+            "url": "https://www.tcgplayer.com/product/569234",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Common",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569234&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569234",
+          "url": "https://www.tcgplayer.com/product/569234",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -169,7 +409,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "007",
@@ -179,8 +419,48 @@
           "label": "Normal"
         }
       ],
-      "visuals": [],
-      "rarity": "Uncommon"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569235&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569235",
+            "url": "https://www.tcgplayer.com/product/569235",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569235&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569235",
+            "url": "https://www.tcgplayer.com/product/569235",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Uncommon",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569235&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569235",
+          "url": "https://www.tcgplayer.com/product/569235",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -194,7 +474,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "008",
@@ -204,8 +484,48 @@
           "label": "Holofoil"
         }
       ],
-      "visuals": [],
-      "rarity": "Rare"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569236&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569236",
+            "url": "https://www.tcgplayer.com/product/569236",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569236&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569236",
+            "url": "https://www.tcgplayer.com/product/569236",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Rare",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569236&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569236",
+          "url": "https://www.tcgplayer.com/product/569236",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -219,7 +539,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "009",
@@ -229,8 +549,48 @@
           "label": "Normal"
         }
       ],
-      "visuals": [],
-      "rarity": "Common"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569237&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569237",
+            "url": "https://www.tcgplayer.com/product/569237",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569237&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569237",
+            "url": "https://www.tcgplayer.com/product/569237",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Common",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569237&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569237",
+          "url": "https://www.tcgplayer.com/product/569237",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -244,7 +604,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "010",
@@ -254,8 +614,48 @@
           "label": "Normal"
         }
       ],
-      "visuals": [],
-      "rarity": "Uncommon"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569238&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569238",
+            "url": "https://www.tcgplayer.com/product/569238",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569238&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569238",
+            "url": "https://www.tcgplayer.com/product/569238",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Uncommon",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569238&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569238",
+          "url": "https://www.tcgplayer.com/product/569238",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -269,7 +669,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "011",
@@ -279,8 +679,48 @@
           "label": "Normal"
         }
       ],
-      "visuals": [],
-      "rarity": "Common"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569239&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569239",
+            "url": "https://www.tcgplayer.com/product/569239",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569239&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569239",
+            "url": "https://www.tcgplayer.com/product/569239",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Common",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569239&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569239",
+          "url": "https://www.tcgplayer.com/product/569239",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -294,7 +734,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "012",
@@ -304,8 +744,48 @@
           "label": "Holofoil"
         }
       ],
-      "visuals": [],
-      "rarity": "Rare"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569240&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569240",
+            "url": "https://www.tcgplayer.com/product/569240",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569240&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569240",
+            "url": "https://www.tcgplayer.com/product/569240",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Rare",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569240&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569240",
+          "url": "https://www.tcgplayer.com/product/569240",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -319,7 +799,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "013",
@@ -329,8 +809,48 @@
           "label": "Normal"
         }
       ],
-      "visuals": [],
-      "rarity": "Common"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569241&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569241",
+            "url": "https://www.tcgplayer.com/product/569241",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569241&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569241",
+            "url": "https://www.tcgplayer.com/product/569241",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Common",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569241&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569241",
+          "url": "https://www.tcgplayer.com/product/569241",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -344,7 +864,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "014",
@@ -354,8 +874,48 @@
           "label": "Normal"
         }
       ],
-      "visuals": [],
-      "rarity": "Common"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569242&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569242",
+            "url": "https://www.tcgplayer.com/product/569242",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569242&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569242",
+            "url": "https://www.tcgplayer.com/product/569242",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Common",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569242&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569242",
+          "url": "https://www.tcgplayer.com/product/569242",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -369,7 +929,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "015",
@@ -379,8 +939,48 @@
           "label": "Normal"
         }
       ],
-      "visuals": [],
-      "rarity": "Common"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569243&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569243",
+            "url": "https://www.tcgplayer.com/product/569243",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569243&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569243",
+            "url": "https://www.tcgplayer.com/product/569243",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Common",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569243&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569243",
+          "url": "https://www.tcgplayer.com/product/569243",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -394,7 +994,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "016",
@@ -404,8 +1004,48 @@
           "label": "Holofoil"
         }
       ],
-      "visuals": [],
-      "rarity": "Rare"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569244&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569244",
+            "url": "https://www.tcgplayer.com/product/569244",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569244&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569244",
+            "url": "https://www.tcgplayer.com/product/569244",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Rare",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569244&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569244",
+          "url": "https://www.tcgplayer.com/product/569244",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -419,7 +1059,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "017",
@@ -429,8 +1069,48 @@
           "label": "Holofoil"
         }
       ],
-      "visuals": [],
-      "rarity": "Double rare"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569245&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569245",
+            "url": "https://www.tcgplayer.com/product/569245",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569245&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569245",
+            "url": "https://www.tcgplayer.com/product/569245",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Double rare",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569245&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569245",
+          "url": "https://www.tcgplayer.com/product/569245",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -444,7 +1124,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "018",
@@ -454,8 +1134,48 @@
           "label": "Normal"
         }
       ],
-      "visuals": [],
-      "rarity": "Common"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569246&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569246",
+            "url": "https://www.tcgplayer.com/product/569246",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569246&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569246",
+            "url": "https://www.tcgplayer.com/product/569246",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Common",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569246&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569246",
+          "url": "https://www.tcgplayer.com/product/569246",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -469,7 +1189,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "019",
@@ -479,8 +1199,48 @@
           "label": "Normal"
         }
       ],
-      "visuals": [],
-      "rarity": "Common"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569247&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569247",
+            "url": "https://www.tcgplayer.com/product/569247",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569247&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569247",
+            "url": "https://www.tcgplayer.com/product/569247",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Common",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569247&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569247",
+          "url": "https://www.tcgplayer.com/product/569247",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -494,7 +1254,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "020",
@@ -504,8 +1264,48 @@
           "label": "Normal"
         }
       ],
-      "visuals": [],
-      "rarity": "Uncommon"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569248&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569248",
+            "url": "https://www.tcgplayer.com/product/569248",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569248&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569248",
+            "url": "https://www.tcgplayer.com/product/569248",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Uncommon",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569248&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569248",
+          "url": "https://www.tcgplayer.com/product/569248",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -519,7 +1319,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "021",
@@ -529,8 +1329,48 @@
           "label": "Normal"
         }
       ],
-      "visuals": [],
-      "rarity": "Common"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569249&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569249",
+            "url": "https://www.tcgplayer.com/product/569249",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569249&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569249",
+            "url": "https://www.tcgplayer.com/product/569249",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Common",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569249&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569249",
+          "url": "https://www.tcgplayer.com/product/569249",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -544,7 +1384,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "022",
@@ -554,8 +1394,48 @@
           "label": "Normal"
         }
       ],
-      "visuals": [],
-      "rarity": "Uncommon"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569250&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569250",
+            "url": "https://www.tcgplayer.com/product/569250",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569250&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569250",
+            "url": "https://www.tcgplayer.com/product/569250",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Uncommon",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569250&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569250",
+          "url": "https://www.tcgplayer.com/product/569250",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -569,7 +1449,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "023",
@@ -579,8 +1459,48 @@
           "label": "Normal"
         }
       ],
-      "visuals": [],
-      "rarity": "Common"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569251&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569251",
+            "url": "https://www.tcgplayer.com/product/569251",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569251&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569251",
+            "url": "https://www.tcgplayer.com/product/569251",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Common",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569251&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569251",
+          "url": "https://www.tcgplayer.com/product/569251",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -594,7 +1514,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "024",
@@ -604,8 +1524,48 @@
           "label": "Holofoil"
         }
       ],
-      "visuals": [],
-      "rarity": "Double rare"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569252&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569252",
+            "url": "https://www.tcgplayer.com/product/569252",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569252&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569252",
+            "url": "https://www.tcgplayer.com/product/569252",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Double rare",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569252&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569252",
+          "url": "https://www.tcgplayer.com/product/569252",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -619,7 +1579,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "025",
@@ -629,8 +1589,48 @@
           "label": "Normal"
         }
       ],
-      "visuals": [],
-      "rarity": "Common"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569253&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569253",
+            "url": "https://www.tcgplayer.com/product/569253",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569253&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569253",
+            "url": "https://www.tcgplayer.com/product/569253",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Common",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569253&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569253",
+          "url": "https://www.tcgplayer.com/product/569253",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -644,7 +1644,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "026",
@@ -654,8 +1654,48 @@
           "label": "Normal"
         }
       ],
-      "visuals": [],
-      "rarity": "Uncommon"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569254&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569254",
+            "url": "https://www.tcgplayer.com/product/569254",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569254&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569254",
+            "url": "https://www.tcgplayer.com/product/569254",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Uncommon",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569254&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569254",
+          "url": "https://www.tcgplayer.com/product/569254",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -669,7 +1709,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "027",
@@ -679,8 +1719,48 @@
           "label": "Holofoil"
         }
       ],
-      "visuals": [],
-      "rarity": "Rare"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569255&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569255",
+            "url": "https://www.tcgplayer.com/product/569255",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569255&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569255",
+            "url": "https://www.tcgplayer.com/product/569255",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Rare",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569255&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569255",
+          "url": "https://www.tcgplayer.com/product/569255",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -694,7 +1774,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "028",
@@ -704,8 +1784,48 @@
           "label": "Normal"
         }
       ],
-      "visuals": [],
-      "rarity": "Common"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569256&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569256",
+            "url": "https://www.tcgplayer.com/product/569256",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569256&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569256",
+            "url": "https://www.tcgplayer.com/product/569256",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Common",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569256&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569256",
+          "url": "https://www.tcgplayer.com/product/569256",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -719,7 +1839,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "029",
@@ -729,8 +1849,48 @@
           "label": "Holofoil"
         }
       ],
-      "visuals": [],
-      "rarity": "Rare"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569257&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569257",
+            "url": "https://www.tcgplayer.com/product/569257",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569257&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569257",
+            "url": "https://www.tcgplayer.com/product/569257",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Rare",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569257&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569257",
+          "url": "https://www.tcgplayer.com/product/569257",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -744,7 +1904,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "030",
@@ -754,8 +1914,48 @@
           "label": "Normal"
         }
       ],
-      "visuals": [],
-      "rarity": "Common"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569258&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569258",
+            "url": "https://www.tcgplayer.com/product/569258",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569258&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569258",
+            "url": "https://www.tcgplayer.com/product/569258",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Common",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569258&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569258",
+          "url": "https://www.tcgplayer.com/product/569258",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -769,7 +1969,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "031",
@@ -779,8 +1979,48 @@
           "label": "Normal"
         }
       ],
-      "visuals": [],
-      "rarity": "Uncommon"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569259&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569259",
+            "url": "https://www.tcgplayer.com/product/569259",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569259&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569259",
+            "url": "https://www.tcgplayer.com/product/569259",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Uncommon",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569259&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569259",
+          "url": "https://www.tcgplayer.com/product/569259",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -794,7 +2034,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "032",
@@ -804,8 +2044,48 @@
           "label": "Normal"
         }
       ],
-      "visuals": [],
-      "rarity": "Common"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569260&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569260",
+            "url": "https://www.tcgplayer.com/product/569260",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569260&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569260",
+            "url": "https://www.tcgplayer.com/product/569260",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Common",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569260&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569260",
+          "url": "https://www.tcgplayer.com/product/569260",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -819,7 +2099,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "033",
@@ -829,8 +2109,48 @@
           "label": "Normal"
         }
       ],
-      "visuals": [],
-      "rarity": "Uncommon"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569261&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569261",
+            "url": "https://www.tcgplayer.com/product/569261",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569261&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569261",
+            "url": "https://www.tcgplayer.com/product/569261",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Uncommon",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569261&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569261",
+          "url": "https://www.tcgplayer.com/product/569261",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -844,7 +2164,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "034",
@@ -854,8 +2174,48 @@
           "label": "Normal"
         }
       ],
-      "visuals": [],
-      "rarity": "Common"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569262&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569262",
+            "url": "https://www.tcgplayer.com/product/569262",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569262&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569262",
+            "url": "https://www.tcgplayer.com/product/569262",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Common",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569262&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569262",
+          "url": "https://www.tcgplayer.com/product/569262",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -869,7 +2229,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "035",
@@ -879,8 +2239,48 @@
           "label": "Normal"
         }
       ],
-      "visuals": [],
-      "rarity": "Common"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569263&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569263",
+            "url": "https://www.tcgplayer.com/product/569263",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569263&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569263",
+            "url": "https://www.tcgplayer.com/product/569263",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Common",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569263&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569263",
+          "url": "https://www.tcgplayer.com/product/569263",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -894,7 +2294,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "036",
@@ -904,8 +2304,48 @@
           "label": "Holofoil"
         }
       ],
-      "visuals": [],
-      "rarity": "Double rare"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569264&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569264",
+            "url": "https://www.tcgplayer.com/product/569264",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569264&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569264",
+            "url": "https://www.tcgplayer.com/product/569264",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Double rare",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569264&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569264",
+          "url": "https://www.tcgplayer.com/product/569264",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -919,7 +2359,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "037",
@@ -929,8 +2369,48 @@
           "label": "Holofoil"
         }
       ],
-      "visuals": [],
-      "rarity": "Triple Rare"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569265&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569265",
+            "url": "https://www.tcgplayer.com/product/569265",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569265&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569265",
+            "url": "https://www.tcgplayer.com/product/569265",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Triple Rare",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569265&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569265",
+          "url": "https://www.tcgplayer.com/product/569265",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -944,7 +2424,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "038",
@@ -954,8 +2434,48 @@
           "label": "Normal"
         }
       ],
-      "visuals": [],
-      "rarity": "Common"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569266&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569266",
+            "url": "https://www.tcgplayer.com/product/569266",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569266&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569266",
+            "url": "https://www.tcgplayer.com/product/569266",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Common",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569266&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569266",
+          "url": "https://www.tcgplayer.com/product/569266",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -969,7 +2489,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "039",
@@ -979,8 +2499,48 @@
           "label": "Normal"
         }
       ],
-      "visuals": [],
-      "rarity": "Uncommon"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569267&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569267",
+            "url": "https://www.tcgplayer.com/product/569267",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569267&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569267",
+            "url": "https://www.tcgplayer.com/product/569267",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Uncommon",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569267&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569267",
+          "url": "https://www.tcgplayer.com/product/569267",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -994,7 +2554,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "040",
@@ -1004,8 +2564,48 @@
           "label": "Normal"
         }
       ],
-      "visuals": [],
-      "rarity": "Common"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569268&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569268",
+            "url": "https://www.tcgplayer.com/product/569268",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569268&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569268",
+            "url": "https://www.tcgplayer.com/product/569268",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Common",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569268&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569268",
+          "url": "https://www.tcgplayer.com/product/569268",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -1019,7 +2619,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "041",
@@ -1029,8 +2629,48 @@
           "label": "Normal"
         }
       ],
-      "visuals": [],
-      "rarity": "Common"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569269&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569269",
+            "url": "https://www.tcgplayer.com/product/569269",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569269&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569269",
+            "url": "https://www.tcgplayer.com/product/569269",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Common",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569269&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569269",
+          "url": "https://www.tcgplayer.com/product/569269",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -1044,7 +2684,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "042",
@@ -1054,8 +2694,48 @@
           "label": "Normal"
         }
       ],
-      "visuals": [],
-      "rarity": "Common"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569270&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569270",
+            "url": "https://www.tcgplayer.com/product/569270",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569270&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569270",
+            "url": "https://www.tcgplayer.com/product/569270",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Common",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569270&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569270",
+          "url": "https://www.tcgplayer.com/product/569270",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -1069,7 +2749,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "043",
@@ -1079,8 +2759,48 @@
           "label": "Holofoil"
         }
       ],
-      "visuals": [],
-      "rarity": "Rare"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569271&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569271",
+            "url": "https://www.tcgplayer.com/product/569271",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569271&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569271",
+            "url": "https://www.tcgplayer.com/product/569271",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Rare",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569271&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569271",
+          "url": "https://www.tcgplayer.com/product/569271",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -1094,7 +2814,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "044",
@@ -1104,8 +2824,48 @@
           "label": "Normal"
         }
       ],
-      "visuals": [],
-      "rarity": "Common"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569272&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569272",
+            "url": "https://www.tcgplayer.com/product/569272",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569272&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569272",
+            "url": "https://www.tcgplayer.com/product/569272",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Common",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569272&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569272",
+          "url": "https://www.tcgplayer.com/product/569272",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -1119,7 +2879,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "045",
@@ -1129,8 +2889,48 @@
           "label": "Normal"
         }
       ],
-      "visuals": [],
-      "rarity": "Uncommon"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569273&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569273",
+            "url": "https://www.tcgplayer.com/product/569273",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569273&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569273",
+            "url": "https://www.tcgplayer.com/product/569273",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Uncommon",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569273&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569273",
+          "url": "https://www.tcgplayer.com/product/569273",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -1144,7 +2944,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "046",
@@ -1154,8 +2954,48 @@
           "label": "Normal"
         }
       ],
-      "visuals": [],
-      "rarity": "Uncommon"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569274&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569274",
+            "url": "https://www.tcgplayer.com/product/569274",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569274&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569274",
+            "url": "https://www.tcgplayer.com/product/569274",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Uncommon",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569274&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569274",
+          "url": "https://www.tcgplayer.com/product/569274",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -1169,7 +3009,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "047",
@@ -1179,8 +3019,48 @@
           "label": "Normal"
         }
       ],
-      "visuals": [],
-      "rarity": "Common"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569275&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569275",
+            "url": "https://www.tcgplayer.com/product/569275",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569275&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569275",
+            "url": "https://www.tcgplayer.com/product/569275",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Common",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569275&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569275",
+          "url": "https://www.tcgplayer.com/product/569275",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -1194,7 +3074,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "048",
@@ -1204,8 +3084,48 @@
           "label": "Normal"
         }
       ],
-      "visuals": [],
-      "rarity": "Uncommon"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569276&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569276",
+            "url": "https://www.tcgplayer.com/product/569276",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569276&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569276",
+            "url": "https://www.tcgplayer.com/product/569276",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Uncommon",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569276&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569276",
+          "url": "https://www.tcgplayer.com/product/569276",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -1219,7 +3139,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "049",
@@ -1229,8 +3149,48 @@
           "label": "Holofoil"
         }
       ],
-      "visuals": [],
-      "rarity": "Double rare"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569277&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569277",
+            "url": "https://www.tcgplayer.com/product/569277",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569277&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569277",
+            "url": "https://www.tcgplayer.com/product/569277",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Double rare",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569277&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569277",
+          "url": "https://www.tcgplayer.com/product/569277",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -1244,7 +3204,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "050",
@@ -1254,8 +3214,48 @@
           "label": "Holofoil"
         }
       ],
-      "visuals": [],
-      "rarity": "Triple Rare"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569278&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569278",
+            "url": "https://www.tcgplayer.com/product/569278",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569278&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569278",
+            "url": "https://www.tcgplayer.com/product/569278",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Triple Rare",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569278&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569278",
+          "url": "https://www.tcgplayer.com/product/569278",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -1269,7 +3269,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "051",
@@ -1279,8 +3279,48 @@
           "label": "Holofoil"
         }
       ],
-      "visuals": [],
-      "rarity": "Rare"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569279&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569279",
+            "url": "https://www.tcgplayer.com/product/569279",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569279&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569279",
+            "url": "https://www.tcgplayer.com/product/569279",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Rare",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569279&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569279",
+          "url": "https://www.tcgplayer.com/product/569279",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -1294,7 +3334,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "052",
@@ -1304,8 +3344,48 @@
           "label": "Holofoil"
         }
       ],
-      "visuals": [],
-      "rarity": "Double rare"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569280&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569280",
+            "url": "https://www.tcgplayer.com/product/569280",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569280&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569280",
+            "url": "https://www.tcgplayer.com/product/569280",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Double rare",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569280&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569280",
+          "url": "https://www.tcgplayer.com/product/569280",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -1319,7 +3399,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "053",
@@ -1329,8 +3409,48 @@
           "label": "Normal"
         }
       ],
-      "visuals": [],
-      "rarity": "Common"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569281&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569281",
+            "url": "https://www.tcgplayer.com/product/569281",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569281&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569281",
+            "url": "https://www.tcgplayer.com/product/569281",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Common",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569281&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569281",
+          "url": "https://www.tcgplayer.com/product/569281",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -1344,7 +3464,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "054",
@@ -1354,8 +3474,48 @@
           "label": "Normal"
         }
       ],
-      "visuals": [],
-      "rarity": "Common"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569282&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569282",
+            "url": "https://www.tcgplayer.com/product/569282",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569282&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569282",
+            "url": "https://www.tcgplayer.com/product/569282",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Common",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569282&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569282",
+          "url": "https://www.tcgplayer.com/product/569282",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -1369,7 +3529,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "055",
@@ -1379,8 +3539,48 @@
           "label": "Normal"
         }
       ],
-      "visuals": [],
-      "rarity": "Common"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569283&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569283",
+            "url": "https://www.tcgplayer.com/product/569283",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569283&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569283",
+            "url": "https://www.tcgplayer.com/product/569283",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Common",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569283&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569283",
+          "url": "https://www.tcgplayer.com/product/569283",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -1394,7 +3594,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "056",
@@ -1404,8 +3604,48 @@
           "label": "Normal"
         }
       ],
-      "visuals": [],
-      "rarity": "Common"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569284&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569284",
+            "url": "https://www.tcgplayer.com/product/569284",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569284&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569284",
+            "url": "https://www.tcgplayer.com/product/569284",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Common",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569284&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569284",
+          "url": "https://www.tcgplayer.com/product/569284",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -1419,7 +3659,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "057",
@@ -1429,8 +3669,48 @@
           "label": "Normal"
         }
       ],
-      "visuals": [],
-      "rarity": "Uncommon"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569285&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569285",
+            "url": "https://www.tcgplayer.com/product/569285",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569285&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569285",
+            "url": "https://www.tcgplayer.com/product/569285",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Uncommon",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569285&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569285",
+          "url": "https://www.tcgplayer.com/product/569285",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -1444,7 +3724,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "058",
@@ -1454,8 +3734,48 @@
           "label": "Normal"
         }
       ],
-      "visuals": [],
-      "rarity": "Common"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569286&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569286",
+            "url": "https://www.tcgplayer.com/product/569286",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569286&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569286",
+            "url": "https://www.tcgplayer.com/product/569286",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Common",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569286&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569286",
+          "url": "https://www.tcgplayer.com/product/569286",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -1469,7 +3789,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "059",
@@ -1479,8 +3799,48 @@
           "label": "Holofoil"
         }
       ],
-      "visuals": [],
-      "rarity": "Rare"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569287&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569287",
+            "url": "https://www.tcgplayer.com/product/569287",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569287&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569287",
+            "url": "https://www.tcgplayer.com/product/569287",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Rare",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569287&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569287",
+          "url": "https://www.tcgplayer.com/product/569287",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -1494,7 +3854,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "060",
@@ -1504,8 +3864,48 @@
           "label": "Normal"
         }
       ],
-      "visuals": [],
-      "rarity": "Uncommon"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569288&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569288",
+            "url": "https://www.tcgplayer.com/product/569288",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569288&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569288",
+            "url": "https://www.tcgplayer.com/product/569288",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Uncommon",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569288&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569288",
+          "url": "https://www.tcgplayer.com/product/569288",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -1519,7 +3919,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "061",
@@ -1529,8 +3929,48 @@
           "label": "Normal"
         }
       ],
-      "visuals": [],
-      "rarity": "Uncommon"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569289&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569289",
+            "url": "https://www.tcgplayer.com/product/569289",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569289&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569289",
+            "url": "https://www.tcgplayer.com/product/569289",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Uncommon",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569289&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569289",
+          "url": "https://www.tcgplayer.com/product/569289",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -1544,7 +3984,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "062",
@@ -1554,8 +3994,48 @@
           "label": "Normal"
         }
       ],
-      "visuals": [],
-      "rarity": "Uncommon"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569290&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569290",
+            "url": "https://www.tcgplayer.com/product/569290",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569290&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569290",
+            "url": "https://www.tcgplayer.com/product/569290",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Uncommon",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569290&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569290",
+          "url": "https://www.tcgplayer.com/product/569290",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -1569,7 +4049,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "063",
@@ -1579,8 +4059,48 @@
           "label": "Normal"
         }
       ],
-      "visuals": [],
-      "rarity": "Uncommon"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569291&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569291",
+            "url": "https://www.tcgplayer.com/product/569291",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569291&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569291",
+            "url": "https://www.tcgplayer.com/product/569291",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Uncommon",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569291&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569291",
+          "url": "https://www.tcgplayer.com/product/569291",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -1594,7 +4114,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "064",
@@ -1604,8 +4124,48 @@
           "label": "Normal"
         }
       ],
-      "visuals": [],
-      "rarity": "Uncommon"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569292&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569292",
+            "url": "https://www.tcgplayer.com/product/569292",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569292&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569292",
+            "url": "https://www.tcgplayer.com/product/569292",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Uncommon",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569292&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569292",
+          "url": "https://www.tcgplayer.com/product/569292",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -1619,7 +4179,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "065",
@@ -1629,8 +4189,48 @@
           "label": "Normal"
         }
       ],
-      "visuals": [],
-      "rarity": "Uncommon"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569293&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569293",
+            "url": "https://www.tcgplayer.com/product/569293",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569293&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569293",
+            "url": "https://www.tcgplayer.com/product/569293",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Uncommon",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569293&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569293",
+          "url": "https://www.tcgplayer.com/product/569293",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -1644,7 +4244,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "066",
@@ -1654,8 +4254,48 @@
           "label": "Normal"
         }
       ],
-      "visuals": [],
-      "rarity": "Uncommon"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569294&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569294",
+            "url": "https://www.tcgplayer.com/product/569294",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569294&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569294",
+            "url": "https://www.tcgplayer.com/product/569294",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Uncommon",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569294&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569294",
+          "url": "https://www.tcgplayer.com/product/569294",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -1669,7 +4309,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "067",
@@ -1679,8 +4319,48 @@
           "label": "Normal"
         }
       ],
-      "visuals": [],
-      "rarity": "Uncommon"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569295&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569295",
+            "url": "https://www.tcgplayer.com/product/569295",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569295&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569295",
+            "url": "https://www.tcgplayer.com/product/569295",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Uncommon",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569295&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569295",
+          "url": "https://www.tcgplayer.com/product/569295",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -1694,7 +4374,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "068",
@@ -1704,8 +4384,48 @@
           "label": "Normal"
         }
       ],
-      "visuals": [],
-      "rarity": "Uncommon"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569296&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569296",
+            "url": "https://www.tcgplayer.com/product/569296",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569296&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569296",
+            "url": "https://www.tcgplayer.com/product/569296",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Uncommon",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569296&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569296",
+          "url": "https://www.tcgplayer.com/product/569296",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -1719,7 +4439,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "069",
@@ -1729,8 +4449,48 @@
           "label": "Normal"
         }
       ],
-      "visuals": [],
-      "rarity": "Uncommon"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569297&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569297",
+            "url": "https://www.tcgplayer.com/product/569297",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569297&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569297",
+            "url": "https://www.tcgplayer.com/product/569297",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Uncommon",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569297&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569297",
+          "url": "https://www.tcgplayer.com/product/569297",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -1744,7 +4504,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "070",
@@ -1754,8 +4514,48 @@
           "label": "Normal"
         }
       ],
-      "visuals": [],
-      "rarity": "Uncommon"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569298&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569298",
+            "url": "https://www.tcgplayer.com/product/569298",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569298&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569298",
+            "url": "https://www.tcgplayer.com/product/569298",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Uncommon",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569298&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569298",
+          "url": "https://www.tcgplayer.com/product/569298",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -1769,7 +4569,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "071",
@@ -1779,8 +4579,48 @@
           "label": "Holofoil"
         }
       ],
-      "visuals": [],
-      "rarity": "Ultra Rare"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569299&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569299",
+            "url": "https://www.tcgplayer.com/product/569299",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569299&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569299",
+            "url": "https://www.tcgplayer.com/product/569299",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Ultra Rare",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569299&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569299",
+          "url": "https://www.tcgplayer.com/product/569299",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -1794,7 +4634,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "072",
@@ -1804,8 +4644,48 @@
           "label": "Holofoil"
         }
       ],
-      "visuals": [],
-      "rarity": "Ultra Rare"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569300&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569300",
+            "url": "https://www.tcgplayer.com/product/569300",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569300&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569300",
+            "url": "https://www.tcgplayer.com/product/569300",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Ultra Rare",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569300&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569300",
+          "url": "https://www.tcgplayer.com/product/569300",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -1819,7 +4699,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "073",
@@ -1829,8 +4709,48 @@
           "label": "Holofoil"
         }
       ],
-      "visuals": [],
-      "rarity": "Ultra Rare"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569301&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569301",
+            "url": "https://www.tcgplayer.com/product/569301",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569301&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569301",
+            "url": "https://www.tcgplayer.com/product/569301",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Ultra Rare",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569301&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569301",
+          "url": "https://www.tcgplayer.com/product/569301",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -1844,7 +4764,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "074",
@@ -1854,8 +4774,48 @@
           "label": "Holofoil"
         }
       ],
-      "visuals": [],
-      "rarity": "Ultra Rare"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569302&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569302",
+            "url": "https://www.tcgplayer.com/product/569302",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569302&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569302",
+            "url": "https://www.tcgplayer.com/product/569302",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Ultra Rare",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569302&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569302",
+          "url": "https://www.tcgplayer.com/product/569302",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -1869,7 +4829,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "075",
@@ -1879,8 +4839,48 @@
           "label": "Holofoil"
         }
       ],
-      "visuals": [],
-      "rarity": "Ultra Rare"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569303&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569303",
+            "url": "https://www.tcgplayer.com/product/569303",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569303&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569303",
+            "url": "https://www.tcgplayer.com/product/569303",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Ultra Rare",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569303&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569303",
+          "url": "https://www.tcgplayer.com/product/569303",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -1894,7 +4894,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "076",
@@ -1904,8 +4904,48 @@
           "label": "Holofoil"
         }
       ],
-      "visuals": [],
-      "rarity": "Ultra Rare"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569304&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569304",
+            "url": "https://www.tcgplayer.com/product/569304",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569304&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569304",
+            "url": "https://www.tcgplayer.com/product/569304",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Ultra Rare",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569304&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569304",
+          "url": "https://www.tcgplayer.com/product/569304",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -1919,7 +4959,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "077",
@@ -1929,8 +4969,48 @@
           "label": "Holofoil"
         }
       ],
-      "visuals": [],
-      "rarity": "Ultra Rare"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569305&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569305",
+            "url": "https://www.tcgplayer.com/product/569305",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569305&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569305",
+            "url": "https://www.tcgplayer.com/product/569305",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Ultra Rare",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569305&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569305",
+          "url": "https://www.tcgplayer.com/product/569305",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -1944,7 +5024,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "078",
@@ -1954,8 +5034,48 @@
           "label": "Holofoil"
         }
       ],
-      "visuals": [],
-      "rarity": "Ultra Rare"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569306&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569306",
+            "url": "https://www.tcgplayer.com/product/569306",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569306&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569306",
+            "url": "https://www.tcgplayer.com/product/569306",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Ultra Rare",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569306&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569306",
+          "url": "https://www.tcgplayer.com/product/569306",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -1969,7 +5089,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "079",
@@ -1979,8 +5099,48 @@
           "label": "Holofoil"
         }
       ],
-      "visuals": [],
-      "rarity": "Ultra Rare"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569307&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569307",
+            "url": "https://www.tcgplayer.com/product/569307",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569307&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569307",
+            "url": "https://www.tcgplayer.com/product/569307",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Ultra Rare",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569307&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569307",
+          "url": "https://www.tcgplayer.com/product/569307",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -1994,7 +5154,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "080",
@@ -2004,8 +5164,48 @@
           "label": "Holofoil"
         }
       ],
-      "visuals": [],
-      "rarity": "Ultra Rare"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569308&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569308",
+            "url": "https://www.tcgplayer.com/product/569308",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569308&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569308",
+            "url": "https://www.tcgplayer.com/product/569308",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Ultra Rare",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569308&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569308",
+          "url": "https://www.tcgplayer.com/product/569308",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -2019,7 +5219,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "081",
@@ -2029,8 +5229,48 @@
           "label": "Holofoil"
         }
       ],
-      "visuals": [],
-      "rarity": "Ultra Rare"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569309&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569309",
+            "url": "https://www.tcgplayer.com/product/569309",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569309&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569309",
+            "url": "https://www.tcgplayer.com/product/569309",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Ultra Rare",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569309&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569309",
+          "url": "https://www.tcgplayer.com/product/569309",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -2044,7 +5284,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "082",
@@ -2054,8 +5294,48 @@
           "label": "Holofoil"
         }
       ],
-      "visuals": [],
-      "rarity": "Ultra Rare"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569310&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569310",
+            "url": "https://www.tcgplayer.com/product/569310",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569310&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569310",
+            "url": "https://www.tcgplayer.com/product/569310",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Ultra Rare",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569310&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569310",
+          "url": "https://www.tcgplayer.com/product/569310",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -2069,7 +5349,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "083",
@@ -2079,8 +5359,48 @@
           "label": "Holofoil"
         }
       ],
-      "visuals": [],
-      "rarity": "Ultra Rare"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569311&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569311",
+            "url": "https://www.tcgplayer.com/product/569311",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569311&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569311",
+            "url": "https://www.tcgplayer.com/product/569311",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Ultra Rare",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569311&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569311",
+          "url": "https://www.tcgplayer.com/product/569311",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -2094,7 +5414,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "084",
@@ -2104,8 +5424,48 @@
           "label": "Holofoil"
         }
       ],
-      "visuals": [],
-      "rarity": "Hyper rare"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569312&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569312",
+            "url": "https://www.tcgplayer.com/product/569312",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569312&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569312",
+            "url": "https://www.tcgplayer.com/product/569312",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Hyper rare",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569312&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569312",
+          "url": "https://www.tcgplayer.com/product/569312",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -2119,7 +5479,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "085",
@@ -2129,8 +5489,48 @@
           "label": "Holofoil"
         }
       ],
-      "visuals": [],
-      "rarity": "Hyper rare"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569313&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569313",
+            "url": "https://www.tcgplayer.com/product/569313",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569313&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569313",
+            "url": "https://www.tcgplayer.com/product/569313",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Hyper rare",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569313&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569313",
+          "url": "https://www.tcgplayer.com/product/569313",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -2144,7 +5544,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "086",
@@ -2154,8 +5554,48 @@
           "label": "Holofoil"
         }
       ],
-      "visuals": [],
-      "rarity": "Secret Rare"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569314&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569314",
+            "url": "https://www.tcgplayer.com/product/569314",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569314&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569314",
+            "url": "https://www.tcgplayer.com/product/569314",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Secret Rare",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569314&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569314",
+          "url": "https://www.tcgplayer.com/product/569314",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -2169,7 +5609,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "087",
@@ -2179,8 +5619,48 @@
           "label": "Holofoil"
         }
       ],
-      "visuals": [],
-      "rarity": "Hyper rare"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569315&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569315",
+            "url": "https://www.tcgplayer.com/product/569315",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569315&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569315",
+            "url": "https://www.tcgplayer.com/product/569315",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Hyper rare",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569315&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569315",
+          "url": "https://www.tcgplayer.com/product/569315",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -2194,7 +5674,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "088",
@@ -2204,8 +5684,48 @@
           "label": "Holofoil"
         }
       ],
-      "visuals": [],
-      "rarity": "Hyper rare"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569316&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569316",
+            "url": "https://www.tcgplayer.com/product/569316",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569316&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569316",
+            "url": "https://www.tcgplayer.com/product/569316",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Hyper rare",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569316&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569316",
+          "url": "https://www.tcgplayer.com/product/569316",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -2219,7 +5739,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "089",
@@ -2229,8 +5749,48 @@
           "label": "Holofoil"
         }
       ],
-      "visuals": [],
-      "rarity": "Hyper rare"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569317&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569317",
+            "url": "https://www.tcgplayer.com/product/569317",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569317&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569317",
+            "url": "https://www.tcgplayer.com/product/569317",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Hyper rare",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569317&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569317",
+          "url": "https://www.tcgplayer.com/product/569317",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -2244,7 +5804,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "090",
@@ -2254,8 +5814,48 @@
           "label": "Holofoil"
         }
       ],
-      "visuals": [],
-      "rarity": "Hyper rare"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569318&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569318",
+            "url": "https://www.tcgplayer.com/product/569318",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569318&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569318",
+            "url": "https://www.tcgplayer.com/product/569318",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Hyper rare",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569318&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569318",
+          "url": "https://www.tcgplayer.com/product/569318",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -2269,7 +5869,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "091",
@@ -2279,8 +5879,48 @@
           "label": "Holofoil"
         }
       ],
-      "visuals": [],
-      "rarity": "Hyper rare"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569319&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569319",
+            "url": "https://www.tcgplayer.com/product/569319",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569319&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569319",
+            "url": "https://www.tcgplayer.com/product/569319",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Hyper rare",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569319&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569319",
+          "url": "https://www.tcgplayer.com/product/569319",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -2294,7 +5934,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "092",
@@ -2304,8 +5944,48 @@
           "label": "Holofoil"
         }
       ],
-      "visuals": [],
-      "rarity": "Secret Rare"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569320&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569320",
+            "url": "https://www.tcgplayer.com/product/569320",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569320&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569320",
+            "url": "https://www.tcgplayer.com/product/569320",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Secret Rare",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569320&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569320",
+          "url": "https://www.tcgplayer.com/product/569320",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -2319,7 +5999,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "093",
@@ -2329,8 +6009,48 @@
           "label": "Holofoil"
         }
       ],
-      "visuals": [],
-      "rarity": "Secret Rare"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569321&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569321",
+            "url": "https://www.tcgplayer.com/product/569321",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569321&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569321",
+            "url": "https://www.tcgplayer.com/product/569321",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Secret Rare",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569321&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569321",
+          "url": "https://www.tcgplayer.com/product/569321",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -2344,7 +6064,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "094",
@@ -2354,8 +6074,48 @@
           "label": "Holofoil"
         }
       ],
-      "visuals": [],
-      "rarity": "Secret Rare"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569322&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569322",
+            "url": "https://www.tcgplayer.com/product/569322",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=569322&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "569322",
+            "url": "https://www.tcgplayer.com/product/569322",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Secret Rare",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=569322&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "569322",
+          "url": "https://www.tcgplayer.com/product/569322",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     },
     {
       "schemaVersion": 2,
@@ -2369,7 +6129,7 @@
           "lastSyncedAt": "2026-09-02T12:23:52.976Z"
         }
       ],
-      "lastSyncedAt": "2026-09-02T12:23:52.976Z",
+      "lastSyncedAt": "2026-09-03T20:37:40.308Z",
       "language": "ja",
       "setId": "ktcg:set:ja:s6k",
       "number": "095",
@@ -2379,8 +6139,48 @@
           "label": "Holofoil"
         }
       ],
-      "visuals": [],
-      "rarity": "Secret Rare"
+      "visuals": [
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=577290&size=high",
+          "kind": "card",
+          "status": "verified",
+          "width": 1000,
+          "height": 1000,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "577290",
+            "url": "https://www.tcgplayer.com/product/577290",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        },
+        {
+          "url": "/api/catalog/image?provider=tcgplayer&product=577290&size=low",
+          "kind": "thumbnail",
+          "status": "verified",
+          "width": 200,
+          "height": 200,
+          "source": {
+            "provider": "tcgplayer",
+            "sourceId": "577290",
+            "url": "https://www.tcgplayer.com/product/577290",
+            "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+          }
+        }
+      ],
+      "rarity": "Secret Rare",
+      "visual": {
+        "url": "/api/catalog/image?provider=tcgplayer&product=577290&size=high",
+        "kind": "card",
+        "status": "verified",
+        "width": 1000,
+        "height": 1000,
+        "source": {
+          "provider": "tcgplayer",
+          "sourceId": "577290",
+          "url": "https://www.tcgplayer.com/product/577290",
+          "lastSyncedAt": "2026-09-03T20:37:40.308Z"
+        }
+      }
     }
   ]
 }
