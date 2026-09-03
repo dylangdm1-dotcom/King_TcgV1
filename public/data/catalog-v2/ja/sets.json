@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "formatVersion": 1,
-  "catalogVersion": "v287-jp-mass-import",
+  "catalogVersion": "v299-jp-provider-gap",
   "language": "ja",
   "sets": [
     {
@@ -320,6 +320,30 @@
       "year": 2015,
       "officialCardCount": 34,
       "knownCardCount": 34,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:ja:cp2",
+      "name": "伝説キラコレクション",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "CP2",
+          "url": "https://api.tcgdex.net/v2/ja/sets/CP2",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "code": "CP2",
+      "seriesId": "ktcg:series:ja:xy",
+      "year": 2015,
+      "releaseDate": "2015-07-18",
+      "officialCardCount": 27,
+      "knownCardCount": 27,
       "availability": "available",
       "visuals": []
     },
@@ -910,6 +934,30 @@
     },
     {
       "schemaVersion": 2,
+      "id": "ktcg:set:ja:mc",
+      "name": "スタートデッキ100 バトルコレクション",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "MC",
+          "url": "https://api.tcgdex.net/v2/ja/sets/MC",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "code": "MC",
+      "seriesId": "ktcg:series:ja:mega-evolution",
+      "year": 2025,
+      "releaseDate": "2025-12-19",
+      "officialCardCount": 742,
+      "knownCardCount": 774,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
       "id": "ktcg:set:ja:mcc",
       "name": "Miracle Crystal",
       "aliases": [],
@@ -924,6 +972,30 @@
       "seriesId": "ktcg:series:ja:pcg",
       "year": 2006,
       "availability": "metadata_only",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:ja:mp",
+      "name": "メガ プロモカード",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "M-P",
+          "url": "https://api.tcgdex.net/v2/ja/sets/M-P",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "code": "MP",
+      "seriesId": "ktcg:series:ja:mega-evolution",
+      "year": 2025,
+      "releaseDate": "2025-07-28",
+      "officialCardCount": 0,
+      "knownCardCount": 132,
+      "availability": "available",
       "visuals": []
     },
     {
@@ -1312,6 +1384,102 @@
       "year": 2005,
       "officialCardCount": 86,
       "knownCardCount": 86,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:ja:pcg6",
+      "name": "ホロンの研究塔",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "PCG6",
+          "url": "https://api.tcgdex.net/v2/ja/sets/PCG6",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "code": "PCG6",
+      "seriesId": "ktcg:series:ja:pcg",
+      "year": 2005,
+      "releaseDate": "2005-10-28",
+      "officialCardCount": 86,
+      "knownCardCount": 86,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:ja:pcg7",
+      "name": "ホロンの幻影",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "PCG7",
+          "url": "https://api.tcgdex.net/v2/ja/sets/PCG7",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "code": "PCG7",
+      "seriesId": "ktcg:series:ja:pcg",
+      "year": 2006,
+      "releaseDate": "2006-01-27",
+      "officialCardCount": 52,
+      "knownCardCount": 52,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:ja:pcg8",
+      "name": "きせきの結晶",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "PCG8",
+          "url": "https://api.tcgdex.net/v2/ja/sets/PCG8",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "code": "PCG8",
+      "seriesId": "ktcg:series:ja:pcg",
+      "year": 2006,
+      "releaseDate": "2006-03-10",
+      "officialCardCount": 75,
+      "knownCardCount": 75,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:ja:pcg9",
+      "name": "さいはての攻防",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "PCG9",
+          "url": "https://api.tcgdex.net/v2/ja/sets/PCG9",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "code": "PCG9",
+      "seriesId": "ktcg:series:ja:pcg",
+      "year": 2006,
+      "releaseDate": "2006-06-29",
+      "officialCardCount": 68,
+      "knownCardCount": 68,
       "availability": "available",
       "visuals": []
     },
@@ -2341,6 +2509,198 @@
     },
     {
       "schemaVersion": 2,
+      "id": "ktcg:set:ja:sm10",
+      "name": "ダブルブレイズ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM10",
+          "url": "https://api.tcgdex.net/v2/ja/sets/SM10",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "code": "SM10",
+      "seriesId": "ktcg:series:ja:sun-and-moon",
+      "year": 2019,
+      "releaseDate": "2019-03-01",
+      "officialCardCount": 95,
+      "knownCardCount": 116,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:ja:sm10a",
+      "name": "ジージーエンド",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM10a",
+          "url": "https://api.tcgdex.net/v2/ja/sets/SM10a",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "code": "SM10A",
+      "seriesId": "ktcg:series:ja:sun-and-moon",
+      "year": 2019,
+      "releaseDate": "2019-04-05",
+      "officialCardCount": 54,
+      "knownCardCount": 69,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:ja:sm10b",
+      "name": "スカイレジェンド",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM10b",
+          "url": "https://api.tcgdex.net/v2/ja/sets/SM10b",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "code": "SM10B",
+      "seriesId": "ktcg:series:ja:sun-and-moon",
+      "year": 2019,
+      "releaseDate": "2019-04-26",
+      "officialCardCount": 56,
+      "knownCardCount": 69,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:ja:sm11",
+      "name": "ミラクルツイン",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM11",
+          "url": "https://api.tcgdex.net/v2/ja/sets/SM11",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "code": "SM11",
+      "seriesId": "ktcg:series:ja:sun-and-moon",
+      "year": 2019,
+      "releaseDate": "2019-05-31",
+      "officialCardCount": 94,
+      "knownCardCount": 115,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:ja:sm11a",
+      "name": "リミックスバウト",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM11a",
+          "url": "https://api.tcgdex.net/v2/ja/sets/SM11a",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "code": "SM11A",
+      "seriesId": "ktcg:series:ja:sun-and-moon",
+      "year": 2019,
+      "releaseDate": "2019-07-05",
+      "officialCardCount": 64,
+      "knownCardCount": 80,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:ja:sm11b",
+      "name": "ドリームリーグ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM11b",
+          "url": "https://api.tcgdex.net/v2/ja/sets/SM11b",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "code": "SM11B",
+      "seriesId": "ktcg:series:ja:sun-and-moon",
+      "year": 2019,
+      "releaseDate": "2019-08-02",
+      "officialCardCount": 49,
+      "knownCardCount": 75,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:ja:sm12",
+      "name": "オルタージェネシス",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM12",
+          "url": "https://api.tcgdex.net/v2/ja/sets/SM12",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "code": "SM12",
+      "seriesId": "ktcg:series:ja:sun-and-moon",
+      "year": 2019,
+      "releaseDate": "2019-09-06",
+      "officialCardCount": 95,
+      "knownCardCount": 117,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:ja:sm12a",
+      "name": "TAG TEAM GX タッグオールスターズ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM12a",
+          "url": "https://api.tcgdex.net/v2/ja/sets/SM12a",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "code": "SM12A",
+      "seriesId": "ktcg:series:ja:sun-and-moon",
+      "year": 2019,
+      "releaseDate": "2019-10-04",
+      "officialCardCount": 173,
+      "knownCardCount": 226,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
       "id": "ktcg:set:ja:sm1m",
       "name": "Collection Moon",
       "aliases": [
@@ -2367,6 +2727,30 @@
       "year": 2016,
       "officialCardCount": 60,
       "knownCardCount": 73,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:ja:sm1p",
+      "name": "サン＆ムーン",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM1p",
+          "url": "https://api.tcgdex.net/v2/ja/sets/SM1p",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "code": "SM1P",
+      "seriesId": "ktcg:series:ja:sun-and-moon",
+      "year": 2017,
+      "releaseDate": "2017-01-27",
+      "officialCardCount": 51,
+      "knownCardCount": 68,
       "availability": "available",
       "visuals": []
     },
@@ -2403,12 +2787,85 @@
     },
     {
       "schemaVersion": 2,
+      "id": "ktcg:set:ja:sm2k",
+      "name": "キミを待つ島々",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM2K",
+          "url": "https://api.tcgdex.net/v2/ja/sets/SM2K",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "code": "SM2K",
+      "seriesId": "ktcg:series:ja:sun-and-moon",
+      "year": 2017,
+      "releaseDate": "2017-03-17",
+      "officialCardCount": 50,
+      "knownCardCount": 61,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:ja:sm2l",
+      "name": "アローラの月光",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM2L",
+          "url": "https://api.tcgdex.net/v2/ja/sets/SM2L",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "code": "SM2L",
+      "seriesId": "ktcg:series:ja:sun-and-moon",
+      "year": 2017,
+      "releaseDate": "2017-03-17",
+      "officialCardCount": 50,
+      "knownCardCount": 62,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:ja:sm2p",
+      "name": "新たなる試練の向こう",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM2p",
+          "url": "https://api.tcgdex.net/v2/ja/sets/SM2p",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "code": "SM2P",
+      "seriesId": "ktcg:series:ja:sun-and-moon",
+      "year": 2017,
+      "releaseDate": "2017-04-21",
+      "officialCardCount": 49,
+      "knownCardCount": 65,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
       "id": "ktcg:set:ja:sm3",
       "name": "Shining Legends",
       "aliases": [
         "SLG",
         "ひかる伝説",
-        "SM3"
+        "SM3",
+        "SM3p"
       ],
       "sources": [
         {
@@ -2420,15 +2877,47 @@
           "sourceId": "SM3+",
           "url": "https://api.tcgdex.net/v2/ja/sets/SM3%2B",
           "lastSyncedAt": "2026-09-01T20:50:00.000Z"
+        },
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM3p",
+          "url": "https://api.tcgdex.net/v2/ja/sets/SM3p",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
         }
       ],
-      "lastSyncedAt": "2026-09-01T20:50:00.000Z",
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
       "language": "ja",
       "code": "SM3",
       "seriesId": "ktcg:series:ja:sun-and-moon",
       "year": 2017,
+      "releaseDate": "2017-07-15",
       "officialCardCount": 72,
-      "availability": "metadata_only",
+      "knownCardCount": 82,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:ja:sm3h",
+      "name": "闘う虹を見たか",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM3H",
+          "url": "https://api.tcgdex.net/v2/ja/sets/SM3H",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "code": "SM3H",
+      "seriesId": "ktcg:series:ja:sun-and-moon",
+      "year": 2017,
+      "releaseDate": "2017-06-16",
+      "officialCardCount": 51,
+      "knownCardCount": 64,
+      "availability": "available",
       "visuals": []
     },
     {
@@ -2459,6 +2948,342 @@
       "year": 2017,
       "officialCardCount": 51,
       "knownCardCount": 64,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:ja:sm4a",
+      "name": "超次元の暴獣",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM4A",
+          "url": "https://api.tcgdex.net/v2/ja/sets/SM4A",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "code": "SM4A",
+      "seriesId": "ktcg:series:ja:sun-and-moon",
+      "year": 2017,
+      "releaseDate": "2017-09-15",
+      "officialCardCount": 50,
+      "knownCardCount": 61,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:ja:sm4p",
+      "name": "GXバトルブースト",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM4p",
+          "url": "https://api.tcgdex.net/v2/ja/sets/SM4p",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "code": "SM4P",
+      "seriesId": "ktcg:series:ja:sun-and-moon",
+      "year": 2017,
+      "releaseDate": "2017-10-20",
+      "officialCardCount": 114,
+      "knownCardCount": 125,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:ja:sm4s",
+      "name": "覚醒の勇者",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM4S",
+          "url": "https://api.tcgdex.net/v2/ja/sets/SM4S",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "code": "SM4S",
+      "seriesId": "ktcg:series:ja:sun-and-moon",
+      "year": 2017,
+      "releaseDate": "2017-09-15",
+      "officialCardCount": 50,
+      "knownCardCount": 62,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:ja:sm5m",
+      "name": "ウルトラムーン",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM5M",
+          "url": "https://api.tcgdex.net/v2/ja/sets/SM5M",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "code": "SM5M",
+      "seriesId": "ktcg:series:ja:sun-and-moon",
+      "year": 2017,
+      "releaseDate": "2017-12-08",
+      "officialCardCount": 66,
+      "knownCardCount": 78,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:ja:sm5p",
+      "name": "ウルトラフォース",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM5p",
+          "url": "https://api.tcgdex.net/v2/ja/sets/SM5p",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "code": "SM5P",
+      "seriesId": "ktcg:series:ja:sun-and-moon",
+      "year": 2018,
+      "releaseDate": "2018-01-19",
+      "officialCardCount": 50,
+      "knownCardCount": 63,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:ja:sm5s",
+      "name": "ウルトラサン",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM5S",
+          "url": "https://api.tcgdex.net/v2/ja/sets/SM5S",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "code": "SM5S",
+      "seriesId": "ktcg:series:ja:sun-and-moon",
+      "year": 2017,
+      "releaseDate": "2017-12-08",
+      "officialCardCount": 66,
+      "knownCardCount": 78,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:ja:sm6",
+      "name": "禁断の光",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6",
+          "url": "https://api.tcgdex.net/v2/ja/sets/SM6",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "code": "SM6",
+      "seriesId": "ktcg:series:ja:sun-and-moon",
+      "year": 2018,
+      "releaseDate": "2018-03-02",
+      "officialCardCount": 94,
+      "knownCardCount": 110,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:ja:sm6a",
+      "name": "ドラゴンストーム",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a",
+          "url": "https://api.tcgdex.net/v2/ja/sets/SM6a",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "code": "SM6A",
+      "seriesId": "ktcg:series:ja:sun-and-moon",
+      "year": 2018,
+      "releaseDate": "2018-04-06",
+      "officialCardCount": 53,
+      "knownCardCount": 66,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:ja:sm6b",
+      "name": "チャンピオンロード",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6b",
+          "url": "https://api.tcgdex.net/v2/ja/sets/SM6b",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "code": "SM6B",
+      "seriesId": "ktcg:series:ja:sun-and-moon",
+      "year": 2018,
+      "releaseDate": "2018-05-30",
+      "officialCardCount": 66,
+      "knownCardCount": 86,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:ja:sm7",
+      "name": "裂空のカリスマ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM7",
+          "url": "https://api.tcgdex.net/v2/ja/sets/SM7",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "code": "SM7",
+      "seriesId": "ktcg:series:ja:sun-and-moon",
+      "year": 2018,
+      "releaseDate": "2018-06-01",
+      "officialCardCount": 96,
+      "knownCardCount": 112,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:ja:sm7a",
+      "name": "迅雷スパーク",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM7a",
+          "url": "https://api.tcgdex.net/v2/ja/sets/SM7a",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "code": "SM7A",
+      "seriesId": "ktcg:series:ja:sun-and-moon",
+      "year": 2018,
+      "releaseDate": "2018-08-03",
+      "officialCardCount": 50,
+      "knownCardCount": 73,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:ja:sm7b",
+      "name": "フェアリーライズ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM7b",
+          "url": "https://api.tcgdex.net/v2/ja/sets/SM7b",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "code": "SM7B",
+      "seriesId": "ktcg:series:ja:sun-and-moon",
+      "year": 2018,
+      "releaseDate": "2018-08-03",
+      "officialCardCount": 50,
+      "knownCardCount": 63,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:ja:sm8",
+      "name": "超爆インパクト",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM8",
+          "url": "https://api.tcgdex.net/v2/ja/sets/SM8",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "code": "SM8",
+      "seriesId": "ktcg:series:ja:sun-and-moon",
+      "year": 2018,
+      "releaseDate": "2018-09-07",
+      "officialCardCount": 95,
+      "knownCardCount": 111,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:ja:sm8a",
+      "name": "ダークオーダー",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM8a",
+          "url": "https://api.tcgdex.net/v2/ja/sets/SM8a",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "code": "SM8A",
+      "seriesId": "ktcg:series:ja:sun-and-moon",
+      "year": 2018,
+      "releaseDate": "2018-10-05",
+      "officialCardCount": 52,
+      "knownCardCount": 65,
       "availability": "available",
       "visuals": []
     },
@@ -2521,6 +3346,54 @@
       "year": 2018,
       "officialCardCount": 95,
       "knownCardCount": 118,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:ja:sm9a",
+      "name": "ナイトユニゾン",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM9a",
+          "url": "https://api.tcgdex.net/v2/ja/sets/SM9a",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "code": "SM9A",
+      "seriesId": "ktcg:series:ja:sun-and-moon",
+      "year": 2019,
+      "releaseDate": "2019-01-11",
+      "officialCardCount": 55,
+      "knownCardCount": 70,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:ja:sm9b",
+      "name": "フルメタルウォール",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM9b",
+          "url": "https://api.tcgdex.net/v2/ja/sets/SM9b",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "code": "SM9B",
+      "seriesId": "ktcg:series:ja:sun-and-moon",
+      "year": 2019,
+      "releaseDate": "2019-02-01",
+      "officialCardCount": 54,
+      "knownCardCount": 69,
       "availability": "available",
       "visuals": []
     },
@@ -3391,6 +4264,102 @@
     },
     {
       "schemaVersion": 2,
+      "id": "ktcg:set:ja:svk",
+      "name": "デッキビルドBOX ステラミラクル",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SVK",
+          "url": "https://api.tcgdex.net/v2/ja/sets/SVK",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "code": "SVK",
+      "seriesId": "ktcg:series:ja:scarlet-and-violet",
+      "year": 2024,
+      "releaseDate": "2024-07-19",
+      "officialCardCount": 44,
+      "knownCardCount": 44,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:ja:svln",
+      "name": "スターターセット テラスタイプ：ステラ ニンフィアex",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SVLN",
+          "url": "https://api.tcgdex.net/v2/ja/sets/SVLN",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "code": "SVLN",
+      "seriesId": "ktcg:series:ja:scarlet-and-violet",
+      "year": 2024,
+      "releaseDate": "2024-08-30",
+      "officialCardCount": 22,
+      "knownCardCount": 22,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:ja:svls",
+      "name": "スターターセット テラスタイプ：ステラ ソウブレイズex",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SVLS",
+          "url": "https://api.tcgdex.net/v2/ja/sets/SVLS",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "code": "SVLS",
+      "seriesId": "ktcg:series:ja:scarlet-and-violet",
+      "year": 2024,
+      "releaseDate": "2024-08-30",
+      "officialCardCount": 22,
+      "knownCardCount": 22,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:ja:svp",
+      "name": "スカーレット&バイオレット プロモカード",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SV-P",
+          "url": "https://api.tcgdex.net/v2/ja/sets/SV-P",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "code": "SVP",
+      "seriesId": "ktcg:series:ja:scarlet-and-violet",
+      "year": 2022,
+      "releaseDate": "2022-11-29",
+      "officialCardCount": 0,
+      "knownCardCount": 288,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
       "id": "ktcg:set:ja:sws",
       "name": "Sword & Shield",
       "aliases": [],
@@ -3405,6 +4374,54 @@
       "seriesId": "ktcg:series:ja:sword-and-shield",
       "year": 2019,
       "availability": "metadata_only",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:ja:vs1",
+      "name": "ポケモンカード★VS",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1",
+          "url": "https://api.tcgdex.net/v2/ja/sets/VS1",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "code": "VS1",
+      "seriesId": "ktcg:series:ja:vs",
+      "year": 2001,
+      "releaseDate": "2001-07-19",
+      "officialCardCount": 141,
+      "knownCardCount": 143,
+      "availability": "available",
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:set:ja:web1",
+      "name": "ポケモンカード★web",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "web1",
+          "url": "https://api.tcgdex.net/v2/ja/sets/web1",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "code": "WEB1",
+      "seriesId": "ktcg:series:ja:web",
+      "year": 2001,
+      "releaseDate": "2001-10-20",
+      "officialCardCount": 48,
+      "knownCardCount": 48,
+      "availability": "available",
       "visuals": []
     },
     {

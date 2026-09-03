@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "formatVersion": 1,
-  "catalogVersion": "v273-local-2026-08-27",
+  "catalogVersion": "v299-jp-provider-gap",
   "language": "ja",
   "series": [
     {
@@ -1066,6 +1066,38 @@
           "sourceId": "v269:display:ja:SWS"
         }
       ],
+      "language": "ja"
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:series:ja:vs",
+      "name": "VS",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1",
+          "url": "https://api.tcgdex.net/v2/ja/sets/VS1",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja"
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:series:ja:web",
+      "name": "web",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "web1",
+          "url": "https://api.tcgdex.net/v2/ja/sets/web1",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
       "language": "ja"
     },
     {
