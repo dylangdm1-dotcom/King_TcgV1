@@ -1,21 +1,21 @@
 {
   "schemaVersion": 2,
   "formatVersion": 1,
-  "catalogVersion": "v292-cn-identity-print-coverage",
-  "generatedAt": "2026-09-02T14:44:52.447Z",
+  "catalogVersion": "v299-jp-provider-gap",
+  "generatedAt": "2026-09-03T13:22:09.774Z",
   "source": {
     "provider": "tcgdex-cards-database + king-tcg-bootstrap",
-    "revision": "v292-cn-identity-print-coverage",
+    "revision": "v299-jp-provider-gap",
     "license": "TCGdex cards-database MIT; King_TCG metadata"
   },
   "regionalSources": [
     {
       "provider": "tcgdex",
       "language": "ja",
-      "revision": "v287-jp-mass-summary",
-      "importedAt": "2026-09-01T20:50:00.000Z",
-      "snapshotCount": 73,
-      "cardCount": 8440
+      "revision": "v299-jp-provider-gap",
+      "importedAt": "2026-09-03T13:22:09.774Z",
+      "snapshotCount": 116,
+      "cardCount": 12732
     },
     {
       "provider": "pokewallet",
@@ -5903,13 +5903,13 @@
       "language": "ja",
       "series": {
         "path": "ja/series.json",
-        "bytes": 27064,
-        "sha256": "41c6894c0949eac9a126c83ecf66da0736bb94a06ad2eaae8d7593986f6f3070"
+        "bytes": 27879,
+        "sha256": "94615c4111488a169b706be257386402c2934595fe8a9cc5de43f5a036e317fe"
       },
       "sets": {
         "path": "ja/sets.json",
-        "bytes": 96354,
-        "sha256": "84279c1732f6246447d73a71d0223836950888a427d2435c865ca9b3d802eac7"
+        "bytes": 124847,
+        "sha256": "ecc475c9e94fac1fdae632a6650012f64f8ab23c8ccf587c2093052a9eac87c2"
       },
       "groups": {
         "path": "ja/groups.json",
@@ -5917,13 +5917,13 @@
         "sha256": "439459e9eccb1f37301e284fa7ad8027e5386951dd42b59eda8340fe861eef2a"
       },
       "stats": {
-        "series": 13,
-        "sets": 122,
+        "series": 15,
+        "sets": 164,
         "groups": 1,
-        "cards": 8440,
-        "completeSets": 73,
-        "partialSets": 0,
-        "metadataOnlySets": 49,
+        "cards": 12732,
+        "completeSets": 114,
+        "partialSets": 2,
+        "metadataOnlySets": 48,
         "announcedSets": 0
       },
       "setEntries": [
@@ -6016,6 +6016,23 @@
             "path": "ja/cards/cp1-3246d01a05.json",
             "bytes": 20726,
             "sha256": "2708b1ebe7e66c00d7fff21e20c3e95d34dc437890c9f69e47157bb61e761f9e"
+          }
+        },
+        {
+          "setId": "ktcg:set:ja:cp2",
+          "code": "CP2",
+          "name": "伝説キラコレクション",
+          "status": "complete",
+          "cardCount": 27,
+          "identityCount": 27,
+          "providerPrintCount": 27,
+          "coverageBasis": "canonical_identities",
+          "sourceCardCount": 27,
+          "officialCardCount": 27,
+          "cards": {
+            "path": "ja/cards/cp2-42fcee8025.json",
+            "bytes": 16984,
+            "sha256": "141a32d34cc0ebe7f41f33bfc632621890d357dad228f790001e54dbbd4eb850"
           }
         },
         {
@@ -6250,11 +6267,45 @@
           }
         },
         {
+          "setId": "ktcg:set:ja:mc",
+          "code": "MC",
+          "name": "スタートデッキ100 バトルコレクション",
+          "status": "complete",
+          "cardCount": 774,
+          "identityCount": 774,
+          "providerPrintCount": 774,
+          "coverageBasis": "canonical_identities",
+          "sourceCardCount": 774,
+          "officialCardCount": 742,
+          "cards": {
+            "path": "ja/cards/mc-8b9f311c32.json",
+            "bytes": 460322,
+            "sha256": "54a5110e8d1ac184b160b46573e599ea2f761242f10149b9c95ffcf3ff366320"
+          }
+        },
+        {
           "setId": "ktcg:set:ja:mcc",
           "code": "MCC",
           "name": "Miracle Crystal",
           "status": "metadata_only",
           "cardCount": 0
+        },
+        {
+          "setId": "ktcg:set:ja:mp",
+          "code": "MP",
+          "name": "メガ プロモカード",
+          "status": "partial",
+          "cardCount": 83,
+          "identityCount": 83,
+          "providerPrintCount": 83,
+          "coverageBasis": "canonical_identities",
+          "sourceCardCount": 132,
+          "officialCardCount": 0,
+          "cards": {
+            "path": "ja/cards/mp-4380771dc0.json",
+            "bytes": 51936,
+            "sha256": "29f576b98cdef16d5b1cdfee58f12826312900f778287e221fc98946f610d519"
+          }
         },
         {
           "setId": "ktcg:set:ja:neo1",
@@ -6387,6 +6438,74 @@
             "path": "ja/cards/pcg5-eb5e10c02b.json",
             "bytes": 51086,
             "sha256": "807267ca5282ee06b552bf4f116cc03433a8dcafa54affcd53d2b58cbf0bd7d4"
+          }
+        },
+        {
+          "setId": "ktcg:set:ja:pcg6",
+          "code": "PCG6",
+          "name": "ホロンの研究塔",
+          "status": "complete",
+          "cardCount": 86,
+          "identityCount": 86,
+          "providerPrintCount": 86,
+          "coverageBasis": "canonical_identities",
+          "sourceCardCount": 86,
+          "officialCardCount": 86,
+          "cards": {
+            "path": "ja/cards/pcg6-218f71a94e.json",
+            "bytes": 69174,
+            "sha256": "71946cccd574ce5b7d2cc91b117461da45ce7054b66522aea1208938da564abb"
+          }
+        },
+        {
+          "setId": "ktcg:set:ja:pcg7",
+          "code": "PCG7",
+          "name": "ホロンの幻影",
+          "status": "complete",
+          "cardCount": 52,
+          "identityCount": 52,
+          "providerPrintCount": 52,
+          "coverageBasis": "canonical_identities",
+          "sourceCardCount": 52,
+          "officialCardCount": 52,
+          "cards": {
+            "path": "ja/cards/pcg7-cbb4787e23.json",
+            "bytes": 42428,
+            "sha256": "b06b58db025ee7625ec6bc6ffcb84d2c5e40a45098c04e33f958068c99a43564"
+          }
+        },
+        {
+          "setId": "ktcg:set:ja:pcg8",
+          "code": "PCG8",
+          "name": "きせきの結晶",
+          "status": "complete",
+          "cardCount": 75,
+          "identityCount": 75,
+          "providerPrintCount": 75,
+          "coverageBasis": "canonical_identities",
+          "sourceCardCount": 75,
+          "officialCardCount": 75,
+          "cards": {
+            "path": "ja/cards/pcg8-be5f7f2df1.json",
+            "bytes": 59935,
+            "sha256": "6f861a8935c69fac4b483cd8aa5ffd2e4a966e55503aa93990558bfc7e9a5cfb"
+          }
+        },
+        {
+          "setId": "ktcg:set:ja:pcg9",
+          "code": "PCG9",
+          "name": "さいはての攻防",
+          "status": "complete",
+          "cardCount": 68,
+          "identityCount": 68,
+          "providerPrintCount": 68,
+          "coverageBasis": "canonical_identities",
+          "sourceCardCount": 68,
+          "officialCardCount": 68,
+          "cards": {
+            "path": "ja/cards/pcg9-fb9107edf0.json",
+            "bytes": 55323,
+            "sha256": "e389700c2db069d8312733115b94034ebd7c725e57bd64a6c302f57a024fc27a"
           }
         },
         {
@@ -6768,6 +6887,142 @@
           }
         },
         {
+          "setId": "ktcg:set:ja:sm10",
+          "code": "SM10",
+          "name": "ダブルブレイズ",
+          "status": "complete",
+          "cardCount": 116,
+          "identityCount": 116,
+          "providerPrintCount": 116,
+          "coverageBasis": "canonical_identities",
+          "sourceCardCount": 116,
+          "officialCardCount": 95,
+          "cards": {
+            "path": "ja/cards/sm10-1d444a93a5.json",
+            "bytes": 72828,
+            "sha256": "8d0d3a2904aab3e6b0e792abe9a43ea055eb2965b519aad4fd5f95ac1d50e935"
+          }
+        },
+        {
+          "setId": "ktcg:set:ja:sm10a",
+          "code": "SM10A",
+          "name": "ジージーエンド",
+          "status": "complete",
+          "cardCount": 69,
+          "identityCount": 69,
+          "providerPrintCount": 69,
+          "coverageBasis": "canonical_identities",
+          "sourceCardCount": 69,
+          "officialCardCount": 54,
+          "cards": {
+            "path": "ja/cards/sm10a-bacf77aaae.json",
+            "bytes": 43676,
+            "sha256": "92031ad1f41e4a8f1059e4949ae42892d58efd00b8eeb58015480ad613f67907"
+          }
+        },
+        {
+          "setId": "ktcg:set:ja:sm10b",
+          "code": "SM10B",
+          "name": "スカイレジェンド",
+          "status": "complete",
+          "cardCount": 69,
+          "identityCount": 69,
+          "providerPrintCount": 69,
+          "coverageBasis": "canonical_identities",
+          "sourceCardCount": 69,
+          "officialCardCount": 56,
+          "cards": {
+            "path": "ja/cards/sm10b-8d804b01ba.json",
+            "bytes": 43810,
+            "sha256": "28e084858fc89e87d076428cb89b043f82d0b8b4f5bb844195459be9f0f4c3ce"
+          }
+        },
+        {
+          "setId": "ktcg:set:ja:sm11",
+          "code": "SM11",
+          "name": "ミラクルツイン",
+          "status": "complete",
+          "cardCount": 115,
+          "identityCount": 115,
+          "providerPrintCount": 115,
+          "coverageBasis": "canonical_identities",
+          "sourceCardCount": 115,
+          "officialCardCount": 94,
+          "cards": {
+            "path": "ja/cards/sm11-2a0d210e01.json",
+            "bytes": 72259,
+            "sha256": "849f408844e873a380315790157b80f810dd69c77d337ff14b4fecadb1073287"
+          }
+        },
+        {
+          "setId": "ktcg:set:ja:sm11a",
+          "code": "SM11A",
+          "name": "リミックスバウト",
+          "status": "complete",
+          "cardCount": 80,
+          "identityCount": 80,
+          "providerPrintCount": 80,
+          "coverageBasis": "canonical_identities",
+          "sourceCardCount": 80,
+          "officialCardCount": 64,
+          "cards": {
+            "path": "ja/cards/sm11a-7aa50d8140.json",
+            "bytes": 50830,
+            "sha256": "450073ebc7cd1275725dc2c948997cc395ef1eb7804b7a83da44e84e1d5770f2"
+          }
+        },
+        {
+          "setId": "ktcg:set:ja:sm11b",
+          "code": "SM11B",
+          "name": "ドリームリーグ",
+          "status": "complete",
+          "cardCount": 75,
+          "identityCount": 75,
+          "providerPrintCount": 75,
+          "coverageBasis": "canonical_identities",
+          "sourceCardCount": 75,
+          "officialCardCount": 49,
+          "cards": {
+            "path": "ja/cards/sm11b-ceff50a00a.json",
+            "bytes": 47373,
+            "sha256": "1e942a46bacb50db7ac051e5e583cba1c9d9be90afd5f69ff3e11ecf4b09ba3d"
+          }
+        },
+        {
+          "setId": "ktcg:set:ja:sm12",
+          "code": "SM12",
+          "name": "オルタージェネシス",
+          "status": "complete",
+          "cardCount": 117,
+          "identityCount": 117,
+          "providerPrintCount": 117,
+          "coverageBasis": "canonical_identities",
+          "sourceCardCount": 117,
+          "officialCardCount": 95,
+          "cards": {
+            "path": "ja/cards/sm12-ffda10bba2.json",
+            "bytes": 73640,
+            "sha256": "c6eb31c2a6090d1c9db5f40cbe2253044a8ad35ee273e00b953d4412df4aef6a"
+          }
+        },
+        {
+          "setId": "ktcg:set:ja:sm12a",
+          "code": "SM12A",
+          "name": "TAG TEAM GX タッグオールスターズ",
+          "status": "complete",
+          "cardCount": 226,
+          "identityCount": 226,
+          "providerPrintCount": 226,
+          "coverageBasis": "canonical_identities",
+          "sourceCardCount": 226,
+          "officialCardCount": 173,
+          "cards": {
+            "path": "ja/cards/sm12a-cff998ce34.json",
+            "bytes": 139247,
+            "sha256": "19df61bbfbd87640d16ffad536d42ac3d7f500a4d7a99a89268a61c44c6e1cf6"
+          }
+        },
+        {
           "setId": "ktcg:set:ja:sm1m",
           "code": "SM1M",
           "name": "Collection Moon",
@@ -6779,6 +7034,23 @@
             "path": "ja/cards/sm1m-8d72169dcf.json",
             "bytes": 43622,
             "sha256": "156f9fd7ab4fcd549f9c0f307787b8192d7eccdc2525a8127993568a9f2a1970"
+          }
+        },
+        {
+          "setId": "ktcg:set:ja:sm1p",
+          "code": "SM1P",
+          "name": "サン＆ムーン",
+          "status": "complete",
+          "cardCount": 68,
+          "identityCount": 68,
+          "providerPrintCount": 68,
+          "coverageBasis": "canonical_identities",
+          "sourceCardCount": 68,
+          "officialCardCount": 51,
+          "cards": {
+            "path": "ja/cards/sm1p-63800e8196.json",
+            "bytes": 41670,
+            "sha256": "c75128f5672fbe5c9a863483624f40e56e9228873359f4c8b7fa56ccd8292c78"
           }
         },
         {
@@ -6796,11 +7068,89 @@
           }
         },
         {
+          "setId": "ktcg:set:ja:sm2k",
+          "code": "SM2K",
+          "name": "キミを待つ島々",
+          "status": "complete",
+          "cardCount": 61,
+          "identityCount": 61,
+          "providerPrintCount": 61,
+          "coverageBasis": "canonical_identities",
+          "sourceCardCount": 61,
+          "officialCardCount": 50,
+          "cards": {
+            "path": "ja/cards/sm2k-c208795662.json",
+            "bytes": 38410,
+            "sha256": "ffbf093ee022046ef88707678284f4aa7df64d77b0c634188d01f3550b17d026"
+          }
+        },
+        {
+          "setId": "ktcg:set:ja:sm2l",
+          "code": "SM2L",
+          "name": "アローラの月光",
+          "status": "complete",
+          "cardCount": 62,
+          "identityCount": 62,
+          "providerPrintCount": 62,
+          "coverageBasis": "canonical_identities",
+          "sourceCardCount": 62,
+          "officialCardCount": 50,
+          "cards": {
+            "path": "ja/cards/sm2l-10e2131c54.json",
+            "bytes": 38955,
+            "sha256": "38038bff3bb02e983500dafd45fabd05ed6e907ffd36a003a89d9bf98493b2d0"
+          }
+        },
+        {
+          "setId": "ktcg:set:ja:sm2p",
+          "code": "SM2P",
+          "name": "新たなる試練の向こう",
+          "status": "complete",
+          "cardCount": 65,
+          "identityCount": 65,
+          "providerPrintCount": 65,
+          "coverageBasis": "canonical_identities",
+          "sourceCardCount": 65,
+          "officialCardCount": 49,
+          "cards": {
+            "path": "ja/cards/sm2p-12cb6c93e0.json",
+            "bytes": 39801,
+            "sha256": "42b749a0edbe069f5599568d520db0e24aaa00f722c541c1ae4a11a45e3e2362"
+          }
+        },
+        {
           "setId": "ktcg:set:ja:sm3",
           "code": "SM3",
           "name": "Shining Legends",
-          "status": "metadata_only",
-          "cardCount": 0
+          "status": "complete",
+          "cardCount": 82,
+          "identityCount": 82,
+          "providerPrintCount": 82,
+          "coverageBasis": "canonical_identities",
+          "sourceCardCount": 82,
+          "officialCardCount": 72,
+          "cards": {
+            "path": "ja/cards/sm3-ce476bd230.json",
+            "bytes": 51377,
+            "sha256": "13f0df0d2a6a90e738b7ba098c45e6fd1f758865a029bf734459cf7e13c05913"
+          }
+        },
+        {
+          "setId": "ktcg:set:ja:sm3h",
+          "code": "SM3H",
+          "name": "闘う虹を見たか",
+          "status": "complete",
+          "cardCount": 64,
+          "identityCount": 64,
+          "providerPrintCount": 64,
+          "coverageBasis": "canonical_identities",
+          "sourceCardCount": 64,
+          "officialCardCount": 51,
+          "cards": {
+            "path": "ja/cards/sm3h-8e98d38d4b.json",
+            "bytes": 40263,
+            "sha256": "b6444c513e84939a472a8710f8515ee9b5cb359f30c17a2e2c773b20e26cd748"
+          }
         },
         {
           "setId": "ktcg:set:ja:sm3n",
@@ -6814,6 +7164,244 @@
             "path": "ja/cards/sm3n-4071a4e483.json",
             "bytes": 38273,
             "sha256": "2ff6851952452c609d695a8f02ecea51117d2ec035cbabc8a1b6475cf980e623"
+          }
+        },
+        {
+          "setId": "ktcg:set:ja:sm4a",
+          "code": "SM4A",
+          "name": "超次元の暴獣",
+          "status": "complete",
+          "cardCount": 61,
+          "identityCount": 61,
+          "providerPrintCount": 61,
+          "coverageBasis": "canonical_identities",
+          "sourceCardCount": 61,
+          "officialCardCount": 50,
+          "cards": {
+            "path": "ja/cards/sm4a-127f1bb370.json",
+            "bytes": 38375,
+            "sha256": "f9d7b131d3c82fd849ac0c860f4a50eb40cd47949e55cb3673fa471341e87df2"
+          }
+        },
+        {
+          "setId": "ktcg:set:ja:sm4p",
+          "code": "SM4P",
+          "name": "GXバトルブースト",
+          "status": "complete",
+          "cardCount": 125,
+          "identityCount": 125,
+          "providerPrintCount": 125,
+          "coverageBasis": "canonical_identities",
+          "sourceCardCount": 125,
+          "officialCardCount": 114,
+          "cards": {
+            "path": "ja/cards/sm4p-17a72db501.json",
+            "bytes": 76015,
+            "sha256": "7e663867e91d8a495ccc57fe7e47e4b171392d7410d790c79f967aab19232e14"
+          }
+        },
+        {
+          "setId": "ktcg:set:ja:sm4s",
+          "code": "SM4S",
+          "name": "覚醒の勇者",
+          "status": "complete",
+          "cardCount": 62,
+          "identityCount": 62,
+          "providerPrintCount": 62,
+          "coverageBasis": "canonical_identities",
+          "sourceCardCount": 62,
+          "officialCardCount": 50,
+          "cards": {
+            "path": "ja/cards/sm4s-7041cfa001.json",
+            "bytes": 39076,
+            "sha256": "0e77ce314cb58131f3e7252d7bc0ddb4ab7ef0e28fe32bd3b9afd755cf14faae"
+          }
+        },
+        {
+          "setId": "ktcg:set:ja:sm5m",
+          "code": "SM5M",
+          "name": "ウルトラムーン",
+          "status": "complete",
+          "cardCount": 78,
+          "identityCount": 78,
+          "providerPrintCount": 78,
+          "coverageBasis": "canonical_identities",
+          "sourceCardCount": 78,
+          "officialCardCount": 66,
+          "cards": {
+            "path": "ja/cards/sm5m-56ec6e0062.json",
+            "bytes": 49079,
+            "sha256": "43bfe5ec91b6cd1ebf04134313082d6e54b94c32b385714eb5baa0119c65560d"
+          }
+        },
+        {
+          "setId": "ktcg:set:ja:sm5p",
+          "code": "SM5P",
+          "name": "ウルトラフォース",
+          "status": "complete",
+          "cardCount": 63,
+          "identityCount": 63,
+          "providerPrintCount": 63,
+          "coverageBasis": "canonical_identities",
+          "sourceCardCount": 63,
+          "officialCardCount": 50,
+          "cards": {
+            "path": "ja/cards/sm5p-16dc35b0b0.json",
+            "bytes": 38598,
+            "sha256": "432fcc2c38ce9cc11b6a4e61976bdc2011298693eaa9ad6d1b631a3f562e1b73"
+          }
+        },
+        {
+          "setId": "ktcg:set:ja:sm5s",
+          "code": "SM5S",
+          "name": "ウルトラサン",
+          "status": "complete",
+          "cardCount": 78,
+          "identityCount": 78,
+          "providerPrintCount": 78,
+          "coverageBasis": "canonical_identities",
+          "sourceCardCount": 78,
+          "officialCardCount": 66,
+          "cards": {
+            "path": "ja/cards/sm5s-04691a3a53.json",
+            "bytes": 49145,
+            "sha256": "81f571511484119f0f31a953846cba175589ecbc4ea159abbf9ac910a84b7826"
+          }
+        },
+        {
+          "setId": "ktcg:set:ja:sm6",
+          "code": "SM6",
+          "name": "禁断の光",
+          "status": "complete",
+          "cardCount": 110,
+          "identityCount": 110,
+          "providerPrintCount": 110,
+          "coverageBasis": "canonical_identities",
+          "sourceCardCount": 110,
+          "officialCardCount": 94,
+          "cards": {
+            "path": "ja/cards/sm6-48cfe4c726.json",
+            "bytes": 68675,
+            "sha256": "1976548d1404c2cc5fa940315fccedc6be1aa5cc290331992f05aaf80f77beba"
+          }
+        },
+        {
+          "setId": "ktcg:set:ja:sm6a",
+          "code": "SM6A",
+          "name": "ドラゴンストーム",
+          "status": "complete",
+          "cardCount": 66,
+          "identityCount": 66,
+          "providerPrintCount": 66,
+          "coverageBasis": "canonical_identities",
+          "sourceCardCount": 66,
+          "officialCardCount": 53,
+          "cards": {
+            "path": "ja/cards/sm6a-2ca8ff9734.json",
+            "bytes": 41438,
+            "sha256": "8988fbdd1aa7f86ed684a400fadcf454402c04e2ccce3966462fe99f2455216f"
+          }
+        },
+        {
+          "setId": "ktcg:set:ja:sm6b",
+          "code": "SM6B",
+          "name": "チャンピオンロード",
+          "status": "complete",
+          "cardCount": 86,
+          "identityCount": 86,
+          "providerPrintCount": 86,
+          "coverageBasis": "canonical_identities",
+          "sourceCardCount": 86,
+          "officialCardCount": 66,
+          "cards": {
+            "path": "ja/cards/sm6b-fc1998fa2b.json",
+            "bytes": 54007,
+            "sha256": "f89d5580e66751ee41842c63a27099288ec6f18e1ce34cb1a2a9afe1546147bb"
+          }
+        },
+        {
+          "setId": "ktcg:set:ja:sm7",
+          "code": "SM7",
+          "name": "裂空のカリスマ",
+          "status": "complete",
+          "cardCount": 112,
+          "identityCount": 112,
+          "providerPrintCount": 112,
+          "coverageBasis": "canonical_identities",
+          "sourceCardCount": 112,
+          "officialCardCount": 96,
+          "cards": {
+            "path": "ja/cards/sm7-75a3a0efeb.json",
+            "bytes": 69828,
+            "sha256": "453f452dce9a161b68c913ca0e77aa31088c75506a7f42829cf34685a7485172"
+          }
+        },
+        {
+          "setId": "ktcg:set:ja:sm7a",
+          "code": "SM7A",
+          "name": "迅雷スパーク",
+          "status": "complete",
+          "cardCount": 73,
+          "identityCount": 73,
+          "providerPrintCount": 73,
+          "coverageBasis": "canonical_identities",
+          "sourceCardCount": 73,
+          "officialCardCount": 50,
+          "cards": {
+            "path": "ja/cards/sm7a-7cdb0081dd.json",
+            "bytes": 45981,
+            "sha256": "4ca195a9949f9bfdd94c0cefd305455274f7af29172a063ac68519be47636ca8"
+          }
+        },
+        {
+          "setId": "ktcg:set:ja:sm7b",
+          "code": "SM7B",
+          "name": "フェアリーライズ",
+          "status": "complete",
+          "cardCount": 63,
+          "identityCount": 63,
+          "providerPrintCount": 63,
+          "coverageBasis": "canonical_identities",
+          "sourceCardCount": 63,
+          "officialCardCount": 50,
+          "cards": {
+            "path": "ja/cards/sm7b-a1a50feb68.json",
+            "bytes": 39662,
+            "sha256": "a2bbdba15e0e4521c9d56dfcbe61cdd243d53684deef0d41fa6f44076fbfb94e"
+          }
+        },
+        {
+          "setId": "ktcg:set:ja:sm8",
+          "code": "SM8",
+          "name": "超爆インパクト",
+          "status": "complete",
+          "cardCount": 111,
+          "identityCount": 111,
+          "providerPrintCount": 111,
+          "coverageBasis": "canonical_identities",
+          "sourceCardCount": 111,
+          "officialCardCount": 95,
+          "cards": {
+            "path": "ja/cards/sm8-099b6f0ce3.json",
+            "bytes": 69241,
+            "sha256": "d860b0c3e0acb14c7e58b60fda804b85d6e60247822c487dd4dd355fc8e4b3f2"
+          }
+        },
+        {
+          "setId": "ktcg:set:ja:sm8a",
+          "code": "SM8A",
+          "name": "ダークオーダー",
+          "status": "complete",
+          "cardCount": 65,
+          "identityCount": 65,
+          "providerPrintCount": 65,
+          "coverageBasis": "canonical_identities",
+          "sourceCardCount": 65,
+          "officialCardCount": 52,
+          "cards": {
+            "path": "ja/cards/sm8a-9e646e48f7.json",
+            "bytes": 40838,
+            "sha256": "bc15ca3137bdaa17b1d5d3ac044861fd7397a4e7e5ca10e75a4e8d3613cb0d22"
           }
         },
         {
@@ -6842,6 +7430,40 @@
             "path": "ja/cards/sm9-66add61fb2.json",
             "bytes": 70346,
             "sha256": "e1f3874537d414e4d1d92ae6b238e3b0dfd30f790125dd9366b4f86c2efcff08"
+          }
+        },
+        {
+          "setId": "ktcg:set:ja:sm9a",
+          "code": "SM9A",
+          "name": "ナイトユニゾン",
+          "status": "complete",
+          "cardCount": 70,
+          "identityCount": 70,
+          "providerPrintCount": 70,
+          "coverageBasis": "canonical_identities",
+          "sourceCardCount": 70,
+          "officialCardCount": 55,
+          "cards": {
+            "path": "ja/cards/sm9a-72dd350646.json",
+            "bytes": 44085,
+            "sha256": "312057ae97269eb205bc66c1b5d8c61cc0a8488e89922b711716e1f9830c1e89"
+          }
+        },
+        {
+          "setId": "ktcg:set:ja:sm9b",
+          "code": "SM9B",
+          "name": "フルメタルウォール",
+          "status": "complete",
+          "cardCount": 69,
+          "identityCount": 69,
+          "providerPrintCount": 69,
+          "coverageBasis": "canonical_identities",
+          "sourceCardCount": 69,
+          "officialCardCount": 54,
+          "cards": {
+            "path": "ja/cards/sm9b-d4337d4339.json",
+            "bytes": 43526,
+            "sha256": "aa0c89c4724e80e261ac66ebfa63508d9449ad8ed84fbc960c02ae8669a8c554"
           }
         },
         {
@@ -7195,11 +7817,113 @@
           }
         },
         {
+          "setId": "ktcg:set:ja:svk",
+          "code": "SVK",
+          "name": "デッキビルドBOX ステラミラクル",
+          "status": "complete",
+          "cardCount": 44,
+          "identityCount": 44,
+          "providerPrintCount": 44,
+          "coverageBasis": "canonical_identities",
+          "sourceCardCount": 44,
+          "officialCardCount": 44,
+          "cards": {
+            "path": "ja/cards/svk-87ec2a24a5.json",
+            "bytes": 21649,
+            "sha256": "52cdd104b64292d581ac0c71731cb63251c517c825d5386224f2edc1334a15e2"
+          }
+        },
+        {
+          "setId": "ktcg:set:ja:svln",
+          "code": "SVLN",
+          "name": "スターターセット テラスタイプ：ステラ ニンフィアex",
+          "status": "complete",
+          "cardCount": 22,
+          "identityCount": 22,
+          "providerPrintCount": 22,
+          "coverageBasis": "canonical_identities",
+          "sourceCardCount": 22,
+          "officialCardCount": 22,
+          "cards": {
+            "path": "ja/cards/svln-32e07e56e7.json",
+            "bytes": 10945,
+            "sha256": "ded4c99c66a6fe5b3e509e98ba1ffd99d50c19a79a7598b5b0a3cad8874c88be"
+          }
+        },
+        {
+          "setId": "ktcg:set:ja:svls",
+          "code": "SVLS",
+          "name": "スターターセット テラスタイプ：ステラ ソウブレイズex",
+          "status": "complete",
+          "cardCount": 22,
+          "identityCount": 22,
+          "providerPrintCount": 22,
+          "coverageBasis": "canonical_identities",
+          "sourceCardCount": 22,
+          "officialCardCount": 22,
+          "cards": {
+            "path": "ja/cards/svls-31d31bb202.json",
+            "bytes": 10954,
+            "sha256": "aa8e5b04bac9120ba9eaf7f3c549ac8ca89d54346b8e0f2e8d6da679e5eec784"
+          }
+        },
+        {
+          "setId": "ktcg:set:ja:svp",
+          "code": "SVP",
+          "name": "スカーレット&バイオレット プロモカード",
+          "status": "complete",
+          "cardCount": 288,
+          "identityCount": 288,
+          "providerPrintCount": 288,
+          "coverageBasis": "canonical_identities",
+          "sourceCardCount": 288,
+          "officialCardCount": 0,
+          "cards": {
+            "path": "ja/cards/svp-3d428fc7d9.json",
+            "bytes": 180104,
+            "sha256": "6fa8c56c296cdc5b7a3e6c82e9ec55a8305ebd1674b49a35e2a54bc6faf4e338"
+          }
+        },
+        {
           "setId": "ktcg:set:ja:sws",
           "code": "SWS",
           "name": "Sword & Shield",
           "status": "metadata_only",
           "cardCount": 0
+        },
+        {
+          "setId": "ktcg:set:ja:vs1",
+          "code": "VS1",
+          "name": "ポケモンカード★VS",
+          "status": "complete",
+          "cardCount": 143,
+          "identityCount": 143,
+          "providerPrintCount": 143,
+          "coverageBasis": "canonical_identities",
+          "sourceCardCount": 143,
+          "officialCardCount": 141,
+          "cards": {
+            "path": "ja/cards/vs1-5681c2a7d1.json",
+            "bytes": 115191,
+            "sha256": "4cb68fa952275759ac48a2980d856e8972f05ff0f8a291a0b0ccddc2868b9b9d"
+          }
+        },
+        {
+          "setId": "ktcg:set:ja:web1",
+          "code": "WEB1",
+          "name": "ポケモンカード★web",
+          "status": "partial",
+          "cardCount": 47,
+          "identityCount": 47,
+          "providerPrintCount": 47,
+          "coverageBasis": "canonical_identities",
+          "sourceCardCount": 48,
+          "officialCardCount": 48,
+          "cards": {
+            "path": "ja/cards/web1-69e1c97548.json",
+            "bytes": 37697,
+            "sha256": "4ae0ee002c8118a0f4896a811e02f0b87f2f7501f6cdb93346f1ea3f2effe09b"
+          }
         },
         {
           "setId": "ktcg:set:ja:xy10",
@@ -7328,16 +8052,16 @@
           "name": "Collect 151",
           "status": "complete",
           "cardCount": 192,
+          "identityCount": 192,
+          "providerPrintCount": 192,
+          "coverageBasis": "canonical_identities",
           "sourceCardCount": 192,
           "officialCardCount": 192,
           "cards": {
             "path": "zh-tw/cards/151c-1bfbf0801e.json",
             "bytes": 516433,
             "sha256": "4b4dc2c3a826474db6f346327118477010fa1b4bd2213bd5111cd394a701ea92"
-          },
-          "identityCount": 192,
-          "providerPrintCount": 192,
-          "coverageBasis": "canonical_identities"
+          }
         },
         {
           "setId": "ktcg:set:zh-tw:30thp",
@@ -7345,16 +8069,16 @@
           "name": "30th Anniversary Celebration",
           "status": "complete",
           "cardCount": 9,
+          "identityCount": 9,
+          "providerPrintCount": 9,
+          "coverageBasis": "canonical_identities",
           "sourceCardCount": 9,
           "officialCardCount": 9,
           "cards": {
             "path": "zh-tw/cards/30thp-90e23db83c.json",
             "bytes": 24422,
             "sha256": "96a67634946e9cbba7ccffece887a10f05d17e8cc7064983ef7bbc128b7ddd07"
-          },
-          "identityCount": 9,
-          "providerPrintCount": 9,
-          "coverageBasis": "canonical_identities"
+          }
         },
         {
           "setId": "ktcg:set:zh-tw:cbb1c",
@@ -7362,16 +8086,16 @@
           "name": "Gem Pack Volume 1",
           "status": "complete",
           "cardCount": 18,
+          "identityCount": 18,
+          "providerPrintCount": 115,
+          "coverageBasis": "provider_prints",
           "sourceCardCount": 115,
           "officialCardCount": 115,
           "cards": {
             "path": "zh-tw/cards/cbb1c-8def6d9d38.json",
             "bytes": 234945,
             "sha256": "8c83ae0786430137c270928ab4b36173b6090e8a73bb352efdca07f110f1e7e0"
-          },
-          "identityCount": 18,
-          "providerPrintCount": 115,
-          "coverageBasis": "provider_prints"
+          }
         },
         {
           "setId": "ktcg:set:zh-tw:cbb2c",
@@ -7379,16 +8103,16 @@
           "name": "Gem Pack Volume 2",
           "status": "complete",
           "cardCount": 11,
+          "identityCount": 11,
+          "providerPrintCount": 140,
+          "coverageBasis": "provider_prints",
           "sourceCardCount": 140,
           "officialCardCount": 140,
           "cards": {
             "path": "zh-tw/cards/cbb2c-371128daf8.json",
             "bytes": 277945,
             "sha256": "7406f8bb2e3efd2fa5d301b31074356ce73c36f73e58bbbb13f0070b7aeddf5d"
-          },
-          "identityCount": 11,
-          "providerPrintCount": 140,
-          "coverageBasis": "provider_prints"
+          }
         },
         {
           "setId": "ktcg:set:zh-tw:cbb3c",
@@ -7396,16 +8120,16 @@
           "name": "Gem Pack Volume 3",
           "status": "complete",
           "cardCount": 20,
+          "identityCount": 20,
+          "providerPrintCount": 136,
+          "coverageBasis": "provider_prints",
           "sourceCardCount": 136,
           "officialCardCount": 136,
           "cards": {
             "path": "zh-tw/cards/cbb3c-4a795a95f2.json",
             "bytes": 277006,
             "sha256": "6f5e7202d2bdfc161810aa9a17215a0798617c5e24d735569a296a62faeb04d0"
-          },
-          "identityCount": 20,
-          "providerPrintCount": 136,
-          "coverageBasis": "provider_prints"
+          }
         },
         {
           "setId": "ktcg:set:zh-tw:cbb4c",
@@ -7413,16 +8137,16 @@
           "name": "Gem Pack Volume 4",
           "status": "complete",
           "cardCount": 28,
+          "identityCount": 28,
+          "providerPrintCount": 192,
+          "coverageBasis": "provider_prints",
           "sourceCardCount": 192,
           "officialCardCount": 192,
           "cards": {
             "path": "zh-tw/cards/cbb4c-0459f3dfec.json",
             "bytes": 390238,
             "sha256": "d42663e671561f747b866a1dc2238673da73fdc795987874fadb4cbb1740d107"
-          },
-          "identityCount": 28,
-          "providerPrintCount": 192,
-          "coverageBasis": "provider_prints"
+          }
         },
         {
           "setId": "ktcg:set:zh-tw:cbb5c",
@@ -7430,16 +8154,16 @@
           "name": "Gem Pack Volume 5",
           "status": "complete",
           "cardCount": 28,
+          "identityCount": 28,
+          "providerPrintCount": 194,
+          "coverageBasis": "provider_prints",
           "sourceCardCount": 194,
           "officialCardCount": 194,
           "cards": {
             "path": "zh-tw/cards/cbb5c-a43d009510.json",
             "bytes": 394079,
             "sha256": "afaad790f9a7a6f297e8944af6bfda21addceb389af1e02a32b3ba05e588b393"
-          },
-          "identityCount": 28,
-          "providerPrintCount": 194,
-          "coverageBasis": "provider_prints"
+          }
         },
         {
           "setId": "ktcg:set:zh-tw:cbb6c",
@@ -7447,16 +8171,16 @@
           "name": "Gem Pack Volume 6",
           "status": "complete",
           "cardCount": 28,
+          "identityCount": 28,
+          "providerPrintCount": 192,
+          "coverageBasis": "provider_prints",
           "sourceCardCount": 192,
           "officialCardCount": 192,
           "cards": {
             "path": "zh-tw/cards/cbb6c-429a6826f1.json",
             "bytes": 390562,
             "sha256": "034ab63e25044f0a9f4d0d2855209e97f5d19d665af557705b63537561729db7"
-          },
-          "identityCount": 28,
-          "providerPrintCount": 192,
-          "coverageBasis": "provider_prints"
+          }
         },
         {
           "setId": "ktcg:set:zh-tw:cs1-5c",
@@ -7464,16 +8188,16 @@
           "name": "Dynamax Tactics",
           "status": "complete",
           "cardCount": 95,
+          "identityCount": 95,
+          "providerPrintCount": 96,
+          "coverageBasis": "provider_prints",
           "sourceCardCount": 96,
           "officialCardCount": 96,
           "cards": {
             "path": "zh-tw/cards/cs1.5c-8d6acd2169.json",
             "bytes": 258200,
             "sha256": "9c82ce2dc89394295597a44a2d1528ce36fc5739d73b0080e3dc47c3ba04cc96"
-          },
-          "identityCount": 95,
-          "providerPrintCount": 96,
-          "coverageBasis": "provider_prints"
+          }
         },
         {
           "setId": "ktcg:set:zh-tw:cs1ac",
@@ -7481,16 +8205,16 @@
           "name": "Dynamax Clash Thunder",
           "status": "complete",
           "cardCount": 217,
+          "identityCount": 217,
+          "providerPrintCount": 217,
+          "coverageBasis": "canonical_identities",
           "sourceCardCount": 217,
           "officialCardCount": 217,
           "cards": {
             "path": "zh-tw/cards/cs1ac-1243099934.json",
             "bytes": 584603,
             "sha256": "10120de7764443e922695cafc5d5f2462fb0aa1a110f9a4eca3dea0bda485546"
-          },
-          "identityCount": 217,
-          "providerPrintCount": 217,
-          "coverageBasis": "canonical_identities"
+          }
         },
         {
           "setId": "ktcg:set:zh-tw:cs1bc",
@@ -7498,16 +8222,16 @@
           "name": "Dynamax Clash Flame",
           "status": "complete",
           "cardCount": 199,
+          "identityCount": 199,
+          "providerPrintCount": 199,
+          "coverageBasis": "canonical_identities",
           "sourceCardCount": 199,
           "officialCardCount": 199,
           "cards": {
             "path": "zh-tw/cards/cs1bc-7586684531.json",
             "bytes": 536106,
             "sha256": "a6fc4a85eff58abf36af0f4733ef48a55b0b602ba02965a19df7f4ede59c8f7d"
-          },
-          "identityCount": 199,
-          "providerPrintCount": 199,
-          "coverageBasis": "canonical_identities"
+          }
         },
         {
           "setId": "ktcg:set:zh-tw:cs2-5c",
@@ -7515,16 +8239,16 @@
           "name": "Brilliant Counterattack",
           "status": "complete",
           "cardCount": 79,
+          "identityCount": 79,
+          "providerPrintCount": 79,
+          "coverageBasis": "canonical_identities",
           "sourceCardCount": 79,
           "officialCardCount": 79,
           "cards": {
             "path": "zh-tw/cards/cs2.5c-e078557606.json",
             "bytes": 213104,
             "sha256": "2fce366918d8e93e4aedca20c5a341d08608bcbf1e27cbc038ffd525b47a7269"
-          },
-          "identityCount": 79,
-          "providerPrintCount": 79,
-          "coverageBasis": "canonical_identities"
+          }
         },
         {
           "setId": "ktcg:set:zh-tw:cs2ac",
@@ -7532,16 +8256,16 @@
           "name": "Vivid Portrayals Obsidian",
           "status": "complete",
           "cardCount": 143,
+          "identityCount": 143,
+          "providerPrintCount": 143,
+          "coverageBasis": "canonical_identities",
           "sourceCardCount": 143,
           "officialCardCount": 143,
           "cards": {
             "path": "zh-tw/cards/cs2ac-beac0b0f6a.json",
             "bytes": 385097,
             "sha256": "abbdc8c1428a7dc4dbf1fa4b6dd7b285c7d682a1ca8f62e442d957d0578d4a5c"
-          },
-          "identityCount": 143,
-          "providerPrintCount": 143,
-          "coverageBasis": "canonical_identities"
+          }
         },
         {
           "setId": "ktcg:set:zh-tw:cs2bc",
@@ -7549,16 +8273,16 @@
           "name": "Vivid Portrayals Indigo",
           "status": "complete",
           "cardCount": 143,
+          "identityCount": 143,
+          "providerPrintCount": 143,
+          "coverageBasis": "canonical_identities",
           "sourceCardCount": 143,
           "officialCardCount": 143,
           "cards": {
             "path": "zh-tw/cards/cs2bc-9f0a360ff6.json",
             "bytes": 385113,
             "sha256": "48d10689f68bfb23c30e55e12e74aa3a78d05a235a4bd6fbc1ad159d71c02c29"
-          },
-          "identityCount": 143,
-          "providerPrintCount": 143,
-          "coverageBasis": "canonical_identities"
+          }
         },
         {
           "setId": "ktcg:set:zh-tw:cs3-5c",
@@ -7566,16 +8290,16 @@
           "name": "Scorching Skies",
           "status": "complete",
           "cardCount": 90,
+          "identityCount": 90,
+          "providerPrintCount": 90,
+          "coverageBasis": "canonical_identities",
           "sourceCardCount": 90,
           "officialCardCount": 90,
           "cards": {
             "path": "zh-tw/cards/cs3.5c-f42c75bbab.json",
             "bytes": 242692,
             "sha256": "e7aa5587787620295c0dafbde515233a553c1d66be394a97b23258a95c824f59"
-          },
-          "identityCount": 90,
-          "providerPrintCount": 90,
-          "coverageBasis": "canonical_identities"
+          }
         },
         {
           "setId": "ktcg:set:zh-tw:cs3ac",
@@ -7583,16 +8307,16 @@
           "name": "Primordial Arts Overgrow",
           "status": "complete",
           "cardCount": 184,
+          "identityCount": 184,
+          "providerPrintCount": 184,
+          "coverageBasis": "canonical_identities",
           "sourceCardCount": 184,
           "officialCardCount": 184,
           "cards": {
             "path": "zh-tw/cards/cs3ac-6e7da75521.json",
             "bytes": 495948,
             "sha256": "56a97e179eb3b3127719e8a56d95cd1a54879d36545c2f4b9754f48535510ca0"
-          },
-          "identityCount": 184,
-          "providerPrintCount": 184,
-          "coverageBasis": "canonical_identities"
+          }
         },
         {
           "setId": "ktcg:set:zh-tw:cs3bc",
@@ -7600,16 +8324,16 @@
           "name": "Primordial Arts Torrent",
           "status": "complete",
           "cardCount": 179,
+          "identityCount": 179,
+          "providerPrintCount": 179,
+          "coverageBasis": "canonical_identities",
           "sourceCardCount": 179,
           "officialCardCount": 179,
           "cards": {
             "path": "zh-tw/cards/cs3bc-8b10fd557b.json",
             "bytes": 482412,
             "sha256": "d4882bf355ed1b882129b047c7a17f6c498b2b74d990adfcdad4d692c5c797a0"
-          },
-          "identityCount": 179,
-          "providerPrintCount": 179,
-          "coverageBasis": "canonical_identities"
+          }
         },
         {
           "setId": "ktcg:set:zh-tw:cs4-1c",
@@ -7617,16 +8341,16 @@
           "name": "Paradise Dragona",
           "status": "complete",
           "cardCount": 23,
+          "identityCount": 23,
+          "providerPrintCount": 23,
+          "coverageBasis": "canonical_identities",
           "sourceCardCount": 23,
           "officialCardCount": 23,
           "cards": {
             "path": "zh-tw/cards/cs4.1c-1c508ebcaf.json",
             "bytes": 62214,
             "sha256": "cbe3ebd08be9b629c44d82c5c7a0ac0393b2f175e38b676d4a33472abcda700a"
-          },
-          "identityCount": 23,
-          "providerPrintCount": 23,
-          "coverageBasis": "canonical_identities"
+          }
         },
         {
           "setId": "ktcg:set:zh-tw:cs4-5c",
@@ -7634,16 +8358,16 @@
           "name": "Final Flame Dance",
           "status": "complete",
           "cardCount": 83,
+          "identityCount": 83,
+          "providerPrintCount": 83,
+          "coverageBasis": "canonical_identities",
           "sourceCardCount": 83,
           "officialCardCount": 83,
           "cards": {
             "path": "zh-tw/cards/cs4.5c-7382a51d94.json",
             "bytes": 223816,
             "sha256": "3e164aefc40723733046b4266ea38dff24cda852ae18ec1ea713019138a28fe3"
-          },
-          "identityCount": 83,
-          "providerPrintCount": 83,
-          "coverageBasis": "canonical_identities"
+          }
         },
         {
           "setId": "ktcg:set:zh-tw:cs4ac",
@@ -7651,16 +8375,16 @@
           "name": "Nine Colors Gathering - Friends",
           "status": "complete",
           "cardCount": 184,
+          "identityCount": 184,
+          "providerPrintCount": 184,
+          "coverageBasis": "canonical_identities",
           "sourceCardCount": 184,
           "officialCardCount": 184,
           "cards": {
             "path": "zh-tw/cards/cs4ac-318794403b.json",
             "bytes": 495589,
             "sha256": "a1f5606b6079b6569f987d19e6d20e5a586c98c804bcf18a73544fb5cc4c45c5"
-          },
-          "identityCount": 184,
-          "providerPrintCount": 184,
-          "coverageBasis": "canonical_identities"
+          }
         },
         {
           "setId": "ktcg:set:zh-tw:cs4bc",
@@ -7668,16 +8392,16 @@
           "name": "Nine Colors Gathering - Origin",
           "status": "complete",
           "cardCount": 177,
+          "identityCount": 177,
+          "providerPrintCount": 177,
+          "coverageBasis": "canonical_identities",
           "sourceCardCount": 177,
           "officialCardCount": 177,
           "cards": {
             "path": "zh-tw/cards/cs4bc-92ade51653.json",
             "bytes": 476847,
             "sha256": "9546dcab006db8e06b98dc3305a035f01cfaa41f3fbda9a9e4615ad8b4434ec5"
-          },
-          "identityCount": 177,
-          "providerPrintCount": 177,
-          "coverageBasis": "canonical_identities"
+          }
         },
         {
           "setId": "ktcg:set:zh-tw:cs5-1c",
@@ -7685,16 +8409,16 @@
           "name": "Ancient Roar",
           "status": "complete",
           "cardCount": 23,
+          "identityCount": 23,
+          "providerPrintCount": 23,
+          "coverageBasis": "canonical_identities",
           "sourceCardCount": 23,
           "officialCardCount": 23,
           "cards": {
             "path": "zh-tw/cards/cs5.1c-015eb6dd73.json",
             "bytes": 62288,
             "sha256": "5ed03c0dafd65b082a6ae4c12725cec88bf3b705ad5107440461f1f22f1186eb"
-          },
-          "identityCount": 23,
-          "providerPrintCount": 23,
-          "coverageBasis": "canonical_identities"
+          }
         },
         {
           "setId": "ktcg:set:zh-tw:cs55c",
@@ -7702,16 +8426,16 @@
           "name": "Shadow of Glory",
           "status": "complete",
           "cardCount": 89,
+          "identityCount": 89,
+          "providerPrintCount": 89,
+          "coverageBasis": "canonical_identities",
           "sourceCardCount": 89,
           "officialCardCount": 89,
           "cards": {
             "path": "zh-tw/cards/cs55c-4b945efce9.json",
             "bytes": 239882,
             "sha256": "43b8b9e8967ea05e3c70f22b35de68d2fa7b049e7586c4e4dde21caa8ba3862b"
-          },
-          "identityCount": 89,
-          "providerPrintCount": 89,
-          "coverageBasis": "canonical_identities"
+          }
         },
         {
           "setId": "ktcg:set:zh-tw:cs5ac",
@@ -7719,16 +8443,16 @@
           "name": "Brave Stars - Charm",
           "status": "complete",
           "cardCount": 176,
+          "identityCount": 176,
+          "providerPrintCount": 176,
+          "coverageBasis": "canonical_identities",
           "sourceCardCount": 176,
           "officialCardCount": 176,
           "cards": {
             "path": "zh-tw/cards/cs5ac-133a5d2b3c.json",
             "bytes": 474168,
             "sha256": "7fbda37295b792e520262e1c834c4f1d1856c3d1b0c70fd765c819d274b00c06"
-          },
-          "identityCount": 176,
-          "providerPrintCount": 176,
-          "coverageBasis": "canonical_identities"
+          }
         },
         {
           "setId": "ktcg:set:zh-tw:cs5bc",
@@ -7736,16 +8460,16 @@
           "name": "Brave Stars - Brave",
           "status": "complete",
           "cardCount": 178,
+          "identityCount": 178,
+          "providerPrintCount": 178,
+          "coverageBasis": "canonical_identities",
           "sourceCardCount": 178,
           "officialCardCount": 178,
           "cards": {
             "path": "zh-tw/cards/cs5bc-a98de98d21.json",
             "bytes": 479613,
             "sha256": "d7d9f19254cb598906edb9d6566059856547a21e85cca1e71f32edc0324ec87f"
-          },
-          "identityCount": 178,
-          "providerPrintCount": 178,
-          "coverageBasis": "canonical_identities"
+          }
         },
         {
           "setId": "ktcg:set:zh-tw:cs6-1c",
@@ -7753,16 +8477,16 @@
           "name": "Wild Force",
           "status": "complete",
           "cardCount": 24,
+          "identityCount": 24,
+          "providerPrintCount": 24,
+          "coverageBasis": "canonical_identities",
           "sourceCardCount": 24,
           "officialCardCount": 24,
           "cards": {
             "path": "zh-tw/cards/cs6.1c-e6411e6f46.json",
             "bytes": 64896,
             "sha256": "6367beab622a571b5ba54236a342cfae2ac556bf1b770e4e13d2d4e3f274ff1e"
-          },
-          "identityCount": 24,
-          "providerPrintCount": 24,
-          "coverageBasis": "canonical_identities"
+          }
         },
         {
           "setId": "ktcg:set:zh-tw:cs65c",
@@ -7770,16 +8494,16 @@
           "name": "Victory Star Guide",
           "status": "complete",
           "cardCount": 96,
+          "identityCount": 96,
+          "providerPrintCount": 96,
+          "coverageBasis": "canonical_identities",
           "sourceCardCount": 96,
           "officialCardCount": 96,
           "cards": {
             "path": "zh-tw/cards/cs65c-c1539f4914.json",
             "bytes": 258606,
             "sha256": "27aaf2cc51f4353ea097676eb56d2e22678c348134ac51d1f4e92e8182d2c997"
-          },
-          "identityCount": 96,
-          "providerPrintCount": 96,
-          "coverageBasis": "canonical_identities"
+          }
         },
         {
           "setId": "ktcg:set:zh-tw:cs6ac",
@@ -7787,16 +8511,16 @@
           "name": "Azure Shadow - Roar",
           "status": "complete",
           "cardCount": 169,
+          "identityCount": 169,
+          "providerPrintCount": 169,
+          "coverageBasis": "canonical_identities",
           "sourceCardCount": 169,
           "officialCardCount": 169,
           "cards": {
             "path": "zh-tw/cards/cs6ac-796b22936e.json",
             "bytes": 455221,
             "sha256": "f396b68a128bf8e859fd43b96b18cc91494cb71de17a6ee76b699f60e5bde1e3"
-          },
-          "identityCount": 169,
-          "providerPrintCount": 169,
-          "coverageBasis": "canonical_identities"
+          }
         },
         {
           "setId": "ktcg:set:zh-tw:cs6bc",
@@ -7804,16 +8528,16 @@
           "name": "Azure Shadow - Pursuit",
           "status": "complete",
           "cardCount": 172,
+          "identityCount": 172,
+          "providerPrintCount": 172,
+          "coverageBasis": "canonical_identities",
           "sourceCardCount": 172,
           "officialCardCount": 172,
           "cards": {
             "path": "zh-tw/cards/cs6bc-2bfe179aba.json",
             "bytes": 463314,
             "sha256": "d03462d0a9c5528b6bcdc73383638ad87f05f661b93c8ce5db70c27cac6bfaaf"
-          },
-          "identityCount": 172,
-          "providerPrintCount": 172,
-          "coverageBasis": "canonical_identities"
+          }
         },
         {
           "setId": "ktcg:set:zh-tw:csdc",
@@ -7821,16 +8545,16 @@
           "name": "Dynamax Collection",
           "status": "complete",
           "cardCount": 25,
+          "identityCount": 25,
+          "providerPrintCount": 25,
+          "coverageBasis": "canonical_identities",
           "sourceCardCount": 25,
           "officialCardCount": 25,
           "cards": {
             "path": "zh-tw/cards/csdc-c2d7f3bf4c.json",
             "bytes": 67420,
             "sha256": "65c2fa8e9d5fb81d479e011e317234101e660283d98297822d8af4d20ac36b33"
-          },
-          "identityCount": 25,
-          "providerPrintCount": 25,
-          "coverageBasis": "canonical_identities"
+          }
         },
         {
           "setId": "ktcg:set:zh-tw:csfc",
@@ -7838,16 +8562,16 @@
           "name": "Chinese Full Art Collection",
           "status": "complete",
           "cardCount": 26,
+          "identityCount": 26,
+          "providerPrintCount": 26,
+          "coverageBasis": "canonical_identities",
           "sourceCardCount": 26,
           "officialCardCount": 26,
           "cards": {
             "path": "zh-tw/cards/csfc-e32d1381f9.json",
             "bytes": 70165,
             "sha256": "b94962d4bc5c8c8c97deab905589ab481ea1ab605b422ed641088c50b6733de1"
-          },
-          "identityCount": 26,
-          "providerPrintCount": 26,
-          "coverageBasis": "canonical_identities"
+          }
         },
         {
           "setId": "ktcg:set:zh-tw:csgc",
@@ -7855,16 +8579,16 @@
           "name": "Chinese Gold Collection",
           "status": "complete",
           "cardCount": 8,
+          "identityCount": 8,
+          "providerPrintCount": 8,
+          "coverageBasis": "canonical_identities",
           "sourceCardCount": 8,
           "officialCardCount": 8,
           "cards": {
             "path": "zh-tw/cards/csgc-798131cccf.json",
             "bytes": 21704,
             "sha256": "9b82f5ba54f3975ef5ecf4b3983a8d5249f59d055fb50a274646b51201b0db33"
-          },
-          "identityCount": 8,
-          "providerPrintCount": 8,
-          "coverageBasis": "canonical_identities"
+          }
         },
         {
           "setId": "ktcg:set:zh-tw:csic",
@@ -7872,16 +8596,16 @@
           "name": "Chinese Illustration Collection",
           "status": "complete",
           "cardCount": 8,
+          "identityCount": 8,
+          "providerPrintCount": 8,
+          "coverageBasis": "canonical_identities",
           "sourceCardCount": 8,
           "officialCardCount": 8,
           "cards": {
             "path": "zh-tw/cards/csic-d1f21ae31d.json",
             "bytes": 21682,
             "sha256": "f4fddccef9009fdf12bb1caad380050a69086e6ad05e51a536eb9440d98bd88e"
-          },
-          "identityCount": 8,
-          "providerPrintCount": 8,
-          "coverageBasis": "canonical_identities"
+          }
         },
         {
           "setId": "ktcg:set:zh-tw:csjc",
@@ -7889,16 +8613,16 @@
           "name": "Chinese Jump Collection",
           "status": "complete",
           "cardCount": 16,
+          "identityCount": 16,
+          "providerPrintCount": 16,
+          "coverageBasis": "canonical_identities",
           "sourceCardCount": 16,
           "officialCardCount": 16,
           "cards": {
             "path": "zh-tw/cards/csjc-a6218c806e.json",
             "bytes": 43215,
             "sha256": "c78e19269c9f01dddb6578ae92eb5aa01b279a24894c82bef50747ccaf2cd421"
-          },
-          "identityCount": 16,
-          "providerPrintCount": 16,
-          "coverageBasis": "canonical_identities"
+          }
         },
         {
           "setId": "ktcg:set:zh-tw:csm1-5c",
@@ -7906,16 +8630,16 @@
           "name": "Sun & Moon Chinese: 1.5",
           "status": "complete",
           "cardCount": 88,
+          "identityCount": 88,
+          "providerPrintCount": 88,
+          "coverageBasis": "canonical_identities",
           "sourceCardCount": 88,
           "officialCardCount": 88,
           "cards": {
             "path": "zh-tw/cards/csm1.5c-7386fbe898.json",
             "bytes": 237562,
             "sha256": "ac1a36c1a064c5d1e836d6b95439cdddc4784871d545b4e89cb316edb3f00354"
-          },
-          "identityCount": 88,
-          "providerPrintCount": 88,
-          "coverageBasis": "canonical_identities"
+          }
         },
         {
           "setId": "ktcg:set:zh-tw:csm1ac",
@@ -7923,16 +8647,16 @@
           "name": "Storming Emergence Radiant",
           "status": "complete",
           "cardCount": 211,
+          "identityCount": 211,
+          "providerPrintCount": 211,
+          "coverageBasis": "canonical_identities",
           "sourceCardCount": 211,
           "officialCardCount": 211,
           "cards": {
             "path": "zh-tw/cards/csm1ac-40d8f4dfdf.json",
             "bytes": 568723,
             "sha256": "92c857f9084fb38916888cc2e195d1c65007c47272d5db979d22aab7a04f4ae4"
-          },
-          "identityCount": 211,
-          "providerPrintCount": 211,
-          "coverageBasis": "canonical_identities"
+          }
         },
         {
           "setId": "ktcg:set:zh-tw:csm1bc",
@@ -7940,16 +8664,16 @@
           "name": "Storming Emergence Verdant",
           "status": "complete",
           "cardCount": 204,
+          "identityCount": 204,
+          "providerPrintCount": 204,
+          "coverageBasis": "canonical_identities",
           "sourceCardCount": 204,
           "officialCardCount": 204,
           "cards": {
             "path": "zh-tw/cards/csm1bc-422a2c0935.json",
             "bytes": 336462,
             "sha256": "633e1c872dc452d8e0ed8272df10e6a0c2079857d3034c796cb41b6196d2f5bf"
-          },
-          "identityCount": 204,
-          "providerPrintCount": 204,
-          "coverageBasis": "canonical_identities"
+          }
         },
         {
           "setId": "ktcg:set:zh-tw:csm1cc",
@@ -7957,16 +8681,16 @@
           "name": "Storming Emergence Abundant",
           "status": "complete",
           "cardCount": 212,
+          "identityCount": 212,
+          "providerPrintCount": 212,
+          "coverageBasis": "canonical_identities",
           "sourceCardCount": 212,
           "officialCardCount": 212,
           "cards": {
             "path": "zh-tw/cards/csm1cc-d389da8fc7.json",
             "bytes": 349701,
             "sha256": "128f3ce835fd33f93e39883079a76ab2b9f5d27ab3daee9c781efeaa053fe4f5"
-          },
-          "identityCount": 212,
-          "providerPrintCount": 212,
-          "coverageBasis": "canonical_identities"
+          }
         },
         {
           "setId": "ktcg:set:zh-tw:csm2-5c",
@@ -7974,16 +8698,16 @@
           "name": "CSM2.5C",
           "status": "complete",
           "cardCount": 99,
+          "identityCount": 99,
+          "providerPrintCount": 99,
+          "coverageBasis": "canonical_identities",
           "sourceCardCount": 99,
           "officialCardCount": 99,
           "cards": {
             "path": "zh-tw/cards/csm2.5c-a8ee5c91bb.json",
             "bytes": 163818,
             "sha256": "7b0206005198651b5be0bffa8f196a2e5cb25ba770df0893e430cf502620773e"
-          },
-          "identityCount": 99,
-          "providerPrintCount": 99,
-          "coverageBasis": "canonical_identities"
+          }
         },
         {
           "setId": "ktcg:set:zh-tw:csm2ac",
@@ -7991,16 +8715,16 @@
           "name": "Shining Synergy Shower",
           "status": "complete",
           "cardCount": 194,
+          "identityCount": 194,
+          "providerPrintCount": 194,
+          "coverageBasis": "canonical_identities",
           "sourceCardCount": 194,
           "officialCardCount": 194,
           "cards": {
             "path": "zh-tw/cards/csm2ac-d37498a9e8.json",
             "bytes": 320096,
             "sha256": "27a78224953595ca3a899e0b74f7ac9306f5ace240595dfb406f8f3088e15de9"
-          },
-          "identityCount": 194,
-          "providerPrintCount": 194,
-          "coverageBasis": "canonical_identities"
+          }
         },
         {
           "setId": "ktcg:set:zh-tw:csm2bc",
@@ -8008,16 +8732,16 @@
           "name": "Shining Synergy Supreme",
           "status": "complete",
           "cardCount": 193,
+          "identityCount": 193,
+          "providerPrintCount": 193,
+          "coverageBasis": "canonical_identities",
           "sourceCardCount": 193,
           "officialCardCount": 193,
           "cards": {
             "path": "zh-tw/cards/csm2bc-97dab0c857.json",
             "bytes": 318410,
             "sha256": "d8d6ae209fde17845403f33fb1f49e7b79ceb28b1b147aba6a1d2ec32953325c"
-          },
-          "identityCount": 193,
-          "providerPrintCount": 193,
-          "coverageBasis": "canonical_identities"
+          }
         },
         {
           "setId": "ktcg:set:zh-tw:csm2cc",
@@ -8025,16 +8749,16 @@
           "name": "Shining Synergy Summon",
           "status": "complete",
           "cardCount": 192,
+          "identityCount": 192,
+          "providerPrintCount": 192,
+          "coverageBasis": "canonical_identities",
           "sourceCardCount": 192,
           "officialCardCount": 192,
           "cards": {
             "path": "zh-tw/cards/csm2cc-a0def00959.json",
             "bytes": 316990,
             "sha256": "09da604d80b1c084aec7a780b7b2bf7b3214ea688bf9ddab11f2b7beda5e7de5"
-          },
-          "identityCount": 192,
-          "providerPrintCount": 192,
-          "coverageBasis": "canonical_identities"
+          }
         },
         {
           "setId": "ktcg:set:zh-tw:csmac",
@@ -8042,16 +8766,16 @@
           "name": "CSMAC",
           "status": "complete",
           "cardCount": 19,
+          "identityCount": 19,
+          "providerPrintCount": 19,
+          "coverageBasis": "canonical_identities",
           "sourceCardCount": 19,
           "officialCardCount": 19,
           "cards": {
             "path": "zh-tw/cards/csmac-3e0db33d80.json",
             "bytes": 31169,
             "sha256": "41e36758208902e1026b2f26fb8b2b337107a34abb84f2caf95eeddc5b518ad1"
-          },
-          "identityCount": 19,
-          "providerPrintCount": 19,
-          "coverageBasis": "canonical_identities"
+          }
         },
         {
           "setId": "ktcg:set:zh-tw:csmc",
@@ -8059,16 +8783,16 @@
           "name": "CSMC",
           "status": "complete",
           "cardCount": 13,
+          "identityCount": 13,
+          "providerPrintCount": 13,
+          "coverageBasis": "canonical_identities",
           "sourceCardCount": 13,
           "officialCardCount": 13,
           "cards": {
             "path": "zh-tw/cards/csmc-d5b56cef95.json",
             "bytes": 21150,
             "sha256": "0b40bc4861cdcc77a24f141df2065f94e504f15d8b860c9fd633226ee22e2289"
-          },
-          "identityCount": 13,
-          "providerPrintCount": 13,
-          "coverageBasis": "canonical_identities"
+          }
         },
         {
           "setId": "ktcg:set:zh-tw:csmjc",
@@ -8076,16 +8800,16 @@
           "name": "CSMJC",
           "status": "complete",
           "cardCount": 15,
+          "identityCount": 15,
+          "providerPrintCount": 15,
+          "coverageBasis": "canonical_identities",
           "sourceCardCount": 15,
           "officialCardCount": 15,
           "cards": {
             "path": "zh-tw/cards/csmjc-0643663aad.json",
             "bytes": 24589,
             "sha256": "f4e29642a7139d709ca254de05eb6b8f3e63f432429baeb27ae8273b6ff3385c"
-          },
-          "identityCount": 15,
-          "providerPrintCount": 15,
-          "coverageBasis": "canonical_identities"
+          }
         },
         {
           "setId": "ktcg:set:zh-tw:csmlc",
@@ -8093,16 +8817,16 @@
           "name": "CSMLC",
           "status": "complete",
           "cardCount": 5,
+          "identityCount": 5,
+          "providerPrintCount": 5,
+          "coverageBasis": "canonical_identities",
           "sourceCardCount": 5,
           "officialCardCount": 5,
           "cards": {
             "path": "zh-tw/cards/csmlc-ae32929e8f.json",
             "bytes": 8292,
             "sha256": "ec20381e1979439a5b779f72d7822908932da08c6b79e9653b530ad55e2fde61"
-          },
-          "identityCount": 5,
-          "providerPrintCount": 5,
-          "coverageBasis": "canonical_identities"
+          }
         },
         {
           "setId": "ktcg:set:zh-tw:csmyc",
@@ -8110,16 +8834,16 @@
           "name": "CSMYC",
           "status": "complete",
           "cardCount": 8,
+          "identityCount": 8,
+          "providerPrintCount": 8,
+          "coverageBasis": "canonical_identities",
           "sourceCardCount": 8,
           "officialCardCount": 8,
           "cards": {
             "path": "zh-tw/cards/csmyc-907ba0bbf0.json",
             "bytes": 13144,
             "sha256": "ad3b919c9d68535816889ba1a0befb8b18b3447380737f56905ca706d6ef5b9c"
-          },
-          "identityCount": 8,
-          "providerPrintCount": 8,
-          "coverageBasis": "canonical_identities"
+          }
         },
         {
           "setId": "ktcg:set:zh-tw:csuc",
@@ -8127,16 +8851,16 @@
           "name": "CSUC",
           "status": "complete",
           "cardCount": 13,
+          "identityCount": 13,
+          "providerPrintCount": 13,
+          "coverageBasis": "canonical_identities",
           "sourceCardCount": 13,
           "officialCardCount": 13,
           "cards": {
             "path": "zh-tw/cards/csuc-2fba0ce386.json",
             "bytes": 21147,
             "sha256": "4bcb06663d2f9bd405eeff5bc265941f5898843f205f13a34b98384e2781223e"
-          },
-          "identityCount": 13,
-          "providerPrintCount": 13,
-          "coverageBasis": "canonical_identities"
+          }
         },
         {
           "setId": "ktcg:set:zh-tw:csv10c",
@@ -8144,10 +8868,10 @@
           "name": "Chasing Glory Together",
           "status": "metadata_only",
           "cardCount": 0,
-          "officialCardCount": 287,
           "identityCount": 0,
           "providerPrintCount": 0,
-          "coverageBasis": "canonical_identities"
+          "coverageBasis": "canonical_identities",
+          "officialCardCount": 287
         },
         {
           "setId": "ktcg:set:zh-tw:csv1c",
@@ -8155,16 +8879,16 @@
           "name": "Eternal Birth",
           "status": "complete",
           "cardCount": 167,
+          "identityCount": 167,
+          "providerPrintCount": 167,
+          "coverageBasis": "canonical_identities",
           "sourceCardCount": 167,
           "officialCardCount": 167,
           "cards": {
             "path": "zh-tw/cards/csv1c-b62f0dbeb9.json",
             "bytes": 273628,
             "sha256": "89944d274429f64a9d4253ec706d7f27e7cd049e45bdee3c83c32068aa2da138"
-          },
-          "identityCount": 167,
-          "providerPrintCount": 167,
-          "coverageBasis": "canonical_identities"
+          }
         },
         {
           "setId": "ktcg:set:zh-tw:csv2c",
@@ -8172,16 +8896,16 @@
           "name": "Miracle Journey",
           "status": "complete",
           "cardCount": 163,
+          "identityCount": 163,
+          "providerPrintCount": 163,
+          "coverageBasis": "canonical_identities",
           "sourceCardCount": 163,
           "officialCardCount": 163,
           "cards": {
             "path": "zh-tw/cards/csv2c-84f398eec1.json",
             "bytes": 266955,
             "sha256": "a25494fe79cfb9454265f1493951c03638be89179ede3b188757a4d6cd709ff8"
-          },
-          "identityCount": 163,
-          "providerPrintCount": 163,
-          "coverageBasis": "canonical_identities"
+          }
         },
         {
           "setId": "ktcg:set:zh-tw:csv3c",
@@ -8189,16 +8913,16 @@
           "name": "Fearless Terastal",
           "status": "complete",
           "cardCount": 165,
+          "identityCount": 165,
+          "providerPrintCount": 165,
+          "coverageBasis": "canonical_identities",
           "sourceCardCount": 165,
           "officialCardCount": 165,
           "cards": {
             "path": "zh-tw/cards/csv3c-dc0e5b9e9e.json",
             "bytes": 270276,
             "sha256": "b60f5491265bdc3b211f9446696fcba724be5dbbec3a7ef05b787d2367498b0d"
-          },
-          "identityCount": 165,
-          "providerPrintCount": 165,
-          "coverageBasis": "canonical_identities"
+          }
         },
         {
           "setId": "ktcg:set:zh-tw:csv4c",
@@ -8206,16 +8930,16 @@
           "name": "Bonus Round",
           "status": "complete",
           "cardCount": 165,
+          "identityCount": 165,
+          "providerPrintCount": 165,
+          "coverageBasis": "canonical_identities",
           "sourceCardCount": 165,
           "officialCardCount": 165,
           "cards": {
             "path": "zh-tw/cards/csv4c-162c6b2073.json",
             "bytes": 270261,
             "sha256": "19eecf5f21f20d262cce4bf0f1e6cc7a5280f6c7446d063ed70b24fa09b0a275"
-          },
-          "identityCount": 165,
-          "providerPrintCount": 165,
-          "coverageBasis": "canonical_identities"
+          }
         },
         {
           "setId": "ktcg:set:zh-tw:csv5c",
@@ -8223,16 +8947,16 @@
           "name": "Dark Crystal Blaze",
           "status": "complete",
           "cardCount": 164,
+          "identityCount": 164,
+          "providerPrintCount": 164,
+          "coverageBasis": "canonical_identities",
           "sourceCardCount": 164,
           "officialCardCount": 164,
           "cards": {
             "path": "zh-tw/cards/csv5c-ce581f71ef.json",
             "bytes": 268519,
             "sha256": "d20283634954a82fecab7009980233038ff3fc09a9495f717be45b4ca8317509"
-          },
-          "identityCount": 164,
-          "providerPrintCount": 164,
-          "coverageBasis": "canonical_identities"
+          }
         },
         {
           "setId": "ktcg:set:zh-tw:csv6c",
@@ -8270,16 +8994,16 @@
           "name": "Grand Terastal Gathering",
           "status": "complete",
           "cardCount": 259,
+          "identityCount": 259,
+          "providerPrintCount": 259,
+          "coverageBasis": "canonical_identities",
           "sourceCardCount": 259,
           "officialCardCount": 259,
           "cards": {
             "path": "zh-tw/cards/csv9.5c-6c9637cffd.json",
             "bytes": 433979,
             "sha256": "3f213134b8fd28b0a308734eb1fd28df9aa4aaf6d58f4eface43e04774593c23"
-          },
-          "identityCount": 259,
-          "providerPrintCount": 259,
-          "coverageBasis": "canonical_identities"
+          }
         },
         {
           "setId": "ktcg:set:zh-tw:csv9c",
@@ -8297,16 +9021,16 @@
           "name": "CSVH3C",
           "status": "complete",
           "cardCount": 101,
+          "identityCount": 101,
+          "providerPrintCount": 101,
+          "coverageBasis": "canonical_identities",
           "sourceCardCount": 101,
           "officialCardCount": 101,
           "cards": {
             "path": "zh-tw/cards/csvh3c-544490abe4.json",
             "bytes": 167119,
             "sha256": "1ac792be01013c8d6173df4ec70ed68a9d49123f4d88ee63119fb799ecc64ee8"
-          },
-          "identityCount": 101,
-          "providerPrintCount": 101,
-          "coverageBasis": "canonical_identities"
+          }
         },
         {
           "setId": "ktcg:set:zh-tw:csvl1c",
@@ -8314,16 +9038,16 @@
           "name": "Departure Special Pack",
           "status": "complete",
           "cardCount": 139,
+          "identityCount": 139,
+          "providerPrintCount": 139,
+          "coverageBasis": "canonical_identities",
           "sourceCardCount": 139,
           "officialCardCount": 139,
           "cards": {
             "path": "zh-tw/cards/csvl1c-b173f3c843.json",
             "bytes": 229807,
             "sha256": "de4446a63401a18a7793f073a083277113b70ffc6b7903e7adee4d302599f90a"
-          },
-          "identityCount": 139,
-          "providerPrintCount": 139,
-          "coverageBasis": "canonical_identities"
+          }
         },
         {
           "setId": "ktcg:set:zh-tw:csvl2c",
@@ -8341,16 +9065,16 @@
           "name": "CSXC",
           "status": "complete",
           "cardCount": 20,
+          "identityCount": 20,
+          "providerPrintCount": 20,
+          "coverageBasis": "canonical_identities",
           "sourceCardCount": 20,
           "officialCardCount": 20,
           "cards": {
             "path": "zh-tw/cards/csxc-1fe12da5d3.json",
             "bytes": 32586,
             "sha256": "24f2a70e2deebee3af8d5b9394459e68c68c456a750e32a1020cb3078a35421b"
-          },
-          "identityCount": 20,
-          "providerPrintCount": 20,
-          "coverageBasis": "canonical_identities"
+          }
         },
         {
           "setId": "ktcg:set:zh-tw:csyc",
@@ -8358,16 +9082,16 @@
           "name": "CSYC",
           "status": "complete",
           "cardCount": 16,
+          "identityCount": 16,
+          "providerPrintCount": 16,
+          "coverageBasis": "canonical_identities",
           "sourceCardCount": 16,
           "officialCardCount": 16,
           "cards": {
             "path": "zh-tw/cards/csyc-c4a1d5b4ea.json",
             "bytes": 25987,
             "sha256": "5b0ba793b2dad47d8e33d8bcfecfa81715922cea172a60a97cab68805b3dc2c4"
-          },
-          "identityCount": 16,
-          "providerPrintCount": 16,
-          "coverageBasis": "canonical_identities"
+          }
         },
         {
           "setId": "ktcg:set:zh-tw:cszc",
@@ -8375,16 +9099,16 @@
           "name": "CSZC",
           "status": "complete",
           "cardCount": 68,
+          "identityCount": 68,
+          "providerPrintCount": 68,
+          "coverageBasis": "canonical_identities",
           "sourceCardCount": 68,
           "officialCardCount": 68,
           "cards": {
             "path": "zh-tw/cards/cszc-ce53f082d0.json",
             "bytes": 110557,
             "sha256": "423b1fe556c9153bf7cb045641cabafc838ba108cca83403a3b3fbc7aa5c36fc"
-          },
-          "identityCount": 68,
-          "providerPrintCount": 68,
-          "coverageBasis": "canonical_identities"
+          }
         },
         {
           "setId": "ktcg:set:zh-tw:nrgy",
@@ -8392,16 +9116,16 @@
           "name": "Energies",
           "status": "complete",
           "cardCount": 20,
+          "identityCount": 20,
+          "providerPrintCount": 20,
+          "coverageBasis": "canonical_identities",
           "sourceCardCount": 20,
           "officialCardCount": 20,
           "cards": {
             "path": "zh-tw/cards/nrgy-d8c16dd395.json",
             "bytes": 32628,
             "sha256": "e9aa15d8fc971ddf4b0e1ebafffabe2f7f41e2984985b58125a835bd71fc036d"
-          },
-          "identityCount": 20,
-          "providerPrintCount": 20,
-          "coverageBasis": "canonical_identities"
+          }
         }
       ]
     }
