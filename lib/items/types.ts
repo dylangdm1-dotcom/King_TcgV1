@@ -40,6 +40,8 @@ export interface SealedItemPriceQuote {
 export interface SealedItem {
   id: string;
   slug: string;
+  /** Chemin canonique prévu dans le catalogue Items, stable entre deux synchronisations. */
+  catalogPath?: string;
   name: string;
   category: ItemCategory;
   language: ItemLanguage;
@@ -51,6 +53,9 @@ export interface SealedItem {
   contents?: string[];
   images?: SealedItemImage;
   imageCandidates?: string[];
+  /** Variantes de façade regroupées sous une seule identité produit. */
+  groupedVariantCount?: number;
+  groupedVariantNames?: string[];
   sources: SealedItemSource[];
   catalogStatus: ItemCatalogStatus;
   priceStatus: ItemPriceStatus;
