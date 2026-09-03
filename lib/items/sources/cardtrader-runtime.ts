@@ -1,19 +1,20 @@
 import "server-only";
 import { slugifyItem } from "../identity";
+import { frenchItemCatalogPathV300, groupFrenchItemsByPackagingV300 } from "../grouping";
 import type { ItemCatalogManifest, SealedItem } from "../types";
 import { isMarketRedisConfiguredV277, executeMarketRedisCommandV277 } from "@/lib/market-cache/persistent";
 import { previewCardTraderFrenchCatalog } from "./cardtrader-catalog";
 import type { CardTraderFrenchItemCandidate } from "./cardtrader-types";
 
-const SNAPSHOT_KEY = "king-tcg:items-fr:v298:snapshot";
-const LOCK_KEY = "king-tcg:items-fr:v298:refresh-lock";
+const SNAPSHOT_KEY = "king-tcg:items-fr:v300:snapshot";
+const LOCK_KEY = "king-tcg:items-fr:v300:refresh-lock";
 const READY_FRESH_MS = 24 * 60 * 60 * 1000;
 const EMPTY_RETRY_MS = 10 * 60 * 1000;
 const ERROR_RETRY_MS = 5 * 60 * 1000;
 const RETENTION_SECONDS = 14 * 24 * 60 * 60;
 
-export interface RuntimeSnapshotV298 {
-  version: "items-fr-runtime-v298";
+export interface RuntimeSnapshotV300 {
+  version: "items-fr-runtime-v300";
   state: "ready" | "empty" | "error";
   generatedAt: number;
   freshUntil: number;
@@ -25,8 +26,8 @@ export interface RuntimeSnapshotV298 {
 }
 
 type RuntimeGlobal = typeof globalThis & {
-  __kingTcgItemsFrSnapshotV298?: RuntimeSnapshotV298;
-  __kingTcgItemsFrRefreshV298?: Promise<RuntimeSnapshotV298>;
+  __kingTcgItemsFrSnapshotV300?: RuntimeSnapshotV300;
+  __kingTcgItemsFrRefreshV300?: Promise<RuntimeSnapshotV300>;
 };
 
 const runtime = globalThis as RuntimeGlobal;
@@ -39,31 +40,31 @@ function configuredExpansionIds(): number[] {
     .slice(0, 12);
 }
 
-function parseSnapshot(value: unknown): RuntimeSnapshotV298 | null {
+function parseSnapshot(value: unknown): RuntimeSnapshotV300 | null {
   if (typeof value !== "string" || !value) return null;
   try {
-    const parsed = JSON.parse(value) as RuntimeSnapshotV298;
-    if (parsed?.version !== "items-fr-runtime-v298" || !Array.isArray(parsed.items) || !Number.isFinite(parsed.freshUntil)) return null;
+    const parsed = JSON.parse(value) as RuntimeSnapshotV300;
+    if (parsed?.version !== "items-fr-runtime-v300" || !Array.isArray(parsed.items) || !Number.isFinite(parsed.freshUntil)) return null;
     return parsed;
   } catch {
     return null;
   }
 }
 
-async function readSnapshot(): Promise<RuntimeSnapshotV298 | null> {
-  if (runtime.__kingTcgItemsFrSnapshotV298) return runtime.__kingTcgItemsFrSnapshotV298;
+async function readSnapshot(): Promise<RuntimeSnapshotV300 | null> {
+  if (runtime.__kingTcgItemsFrSnapshotV300) return runtime.__kingTcgItemsFrSnapshotV300;
   if (!isMarketRedisConfiguredV277()) return null;
   try {
     const snapshot = parseSnapshot(await executeMarketRedisCommandV277(["GET", SNAPSHOT_KEY]));
-    if (snapshot) runtime.__kingTcgItemsFrSnapshotV298 = snapshot;
+    if (snapshot) runtime.__kingTcgItemsFrSnapshotV300 = snapshot;
     return snapshot;
   } catch {
     return null;
   }
 }
 
-async function writeSnapshot(snapshot: RuntimeSnapshotV298): Promise<void> {
-  runtime.__kingTcgItemsFrSnapshotV298 = snapshot;
+async function writeSnapshot(snapshot: RuntimeSnapshotV300): Promise<void> {
+  runtime.__kingTcgItemsFrSnapshotV300 = snapshot;
   if (!isMarketRedisConfiguredV277()) return;
   try {
     await executeMarketRedisCommandV277(["SET", SNAPSHOT_KEY, JSON.stringify(snapshot), "EX", RETENTION_SECONDS]);
@@ -117,6 +118,7 @@ function candidateToItem(candidate: CardTraderFrenchItemCandidate, generatedAt: 
   return {
     id: `ktcg:item:cardtrader:${candidate.blueprintId}`,
     slug,
+    catalogPath: frenchItemCatalogPathV300({ name, category: candidate.itemCategory, setIds: candidate.expansionCode ? [candidate.expansionCode] : undefined }),
     name,
     category: candidate.itemCategory,
     language: "fr",
@@ -132,7 +134,7 @@ function candidateToItem(candidate: CardTraderFrenchItemCandidate, generatedAt: 
   };
 }
 
-async function synchronize(): Promise<RuntimeSnapshotV298> {
+async function synchronize(): Promise<RuntimeSnapshotV300> {
   const generatedAt = Date.now();
   const explicitIds = configuredExpansionIds();
   const result = await previewCardTraderFrenchCatalog({
@@ -140,17 +142,18 @@ async function synchronize(): Promise<RuntimeSnapshotV298> {
     maximumExpansions: explicitIds.length || 12,
   });
   const seen = new Set<string>();
-  const items = result.previews
+  const rawItems = result.previews
     .flatMap((preview) => preview.candidates)
     .map((candidate) => candidateToItem(candidate, generatedAt))
     .filter((item): item is SealedItem => Boolean(item))
     .filter((item) => !seen.has(item.id) && Boolean(seen.add(item.id)));
+  const items = groupFrenchItemsByPackagingV300(rawItems);
   const allFailed = result.selectedExpansionIds.length > 0 && result.failures.length === result.selectedExpansionIds.length;
-  const state: RuntimeSnapshotV298["state"] = items.length ? "ready" : allFailed ? "error" : "empty";
+  const state: RuntimeSnapshotV300["state"] = items.length ? "ready" : allFailed ? "error" : "empty";
   const lastError = state === "error" ? result.failures.map((failure) => failure.error).join(", ").slice(0, 300) : undefined;
   const freshFor = state === "ready" ? READY_FRESH_MS : state === "empty" ? EMPTY_RETRY_MS : ERROR_RETRY_MS;
-  const snapshot: RuntimeSnapshotV298 = {
-    version: "items-fr-runtime-v298",
+  const snapshot: RuntimeSnapshotV300 = {
+    version: "items-fr-runtime-v300",
     state,
     generatedAt,
     freshUntil: generatedAt + freshFor,
@@ -164,12 +167,12 @@ async function synchronize(): Promise<RuntimeSnapshotV298> {
   return snapshot;
 }
 
-async function refreshOnce(): Promise<RuntimeSnapshotV298> {
-  if (runtime.__kingTcgItemsFrRefreshV298) return runtime.__kingTcgItemsFrRefreshV298;
-  runtime.__kingTcgItemsFrRefreshV298 = (async () => {
+async function refreshOnce(): Promise<RuntimeSnapshotV300> {
+  if (runtime.__kingTcgItemsFrRefreshV300) return runtime.__kingTcgItemsFrRefreshV300;
+  runtime.__kingTcgItemsFrRefreshV300 = (async () => {
     const lease = await acquireRefreshLock();
     if (!lease.acquired) return (await readSnapshot()) || {
-      version: "items-fr-runtime-v298",
+      version: "items-fr-runtime-v300",
       state: "empty",
       generatedAt: Date.now(),
       freshUntil: Date.now() + EMPTY_RETRY_MS,
@@ -185,13 +188,13 @@ async function refreshOnce(): Promise<RuntimeSnapshotV298> {
     }
   })();
   try {
-    return await runtime.__kingTcgItemsFrRefreshV298;
+    return await runtime.__kingTcgItemsFrRefreshV300;
   } finally {
-    runtime.__kingTcgItemsFrRefreshV298 = undefined;
+    runtime.__kingTcgItemsFrRefreshV300 = undefined;
   }
 }
 
-export async function getCardTraderFrenchRuntimeSnapshotV298(options?: { refresh?: boolean }): Promise<RuntimeSnapshotV298 | null> {
+export async function getCardTraderFrenchRuntimeSnapshotV300(options?: { refresh?: boolean }): Promise<RuntimeSnapshotV300 | null> {
   const cached = await readSnapshot();
   if (cached && cached.freshUntil > Date.now()) return cached;
   if (!options?.refresh || !process.env.CARDTRADER_API_TOKEN) return cached;
@@ -199,8 +202,8 @@ export async function getCardTraderFrenchRuntimeSnapshotV298(options?: { refresh
     return await refreshOnce();
   } catch (error) {
     const generatedAt = Date.now();
-    const failure: RuntimeSnapshotV298 = {
-      version: "items-fr-runtime-v298",
+    const failure: RuntimeSnapshotV300 = {
+      version: "items-fr-runtime-v300",
       state: "error",
       generatedAt: cached?.generatedAt || generatedAt,
       freshUntil: generatedAt + ERROR_RETRY_MS,
@@ -215,7 +218,7 @@ export async function getCardTraderFrenchRuntimeSnapshotV298(options?: { refresh
   }
 }
 
-export function withFrenchRuntimeManifestV298(manifest: ItemCatalogManifest, snapshot: RuntimeSnapshotV298 | null): ItemCatalogManifest {
+export function withFrenchRuntimeManifestV300(manifest: ItemCatalogManifest, snapshot: RuntimeSnapshotV300 | null): ItemCatalogManifest {
   const frenchItems = snapshot?.items || [];
   const frenchImages = frenchItems.filter((item) => item.images?.small || item.images?.large).length;
   const frenchQuotes = frenchItems.filter((item) => item.quotes?.some((quote) => quote.kind === "current_market")).length;
@@ -226,7 +229,7 @@ export function withFrenchRuntimeManifestV298(manifest: ItemCatalogManifest, sna
       : "Synchronisation CardTrader FR en attente d’un lot exploitable.";
   return {
     ...manifest,
-    catalogVersion: frenchItems.length ? "v298-cardtrader-fr-runtime" : "v298-items-images-fr-runtime",
+    catalogVersion: frenchItems.length ? "v300-cardtrader-fr-grouped" : "v300-items-images-fr-runtime",
     itemCount: manifest.itemCount + frenchItems.length,
     priceQuoteCount: (manifest.priceQuoteCount || 0) + frenchQuotes,
     imageCount: (manifest.imageCount || 0) + frenchImages,
