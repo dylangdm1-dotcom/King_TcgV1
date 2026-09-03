@@ -1,0 +1,1730 @@
+{
+  "schemaVersion": 2,
+  "formatVersion": 1,
+  "catalogVersion": "v299-jp-provider-gap",
+  "language": "ja",
+  "setId": "ktcg:set:ja:sm6a",
+  "status": "complete",
+  "sourceCardCount": 66,
+  "identityCount": 66,
+  "providerPrintCount": 66,
+  "coverageBasis": "canonical_identities",
+  "cards": [
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:001",
+      "name": "ヒトカゲ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-001",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "001",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:002",
+      "name": "リザード",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-002",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "002",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:003",
+      "name": "リザードン",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-003",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "003",
+      "rarity": "Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "holo"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:004",
+      "name": "ビクティニ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-004",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "004",
+      "rarity": "Rare Holo",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "holo"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:005",
+      "name": "ダルマッカ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-005",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "005",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:006",
+      "name": "ヒヒダルマ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-006",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "006",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:007",
+      "name": "クイタラン",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-007",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "007",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:008",
+      "name": "レシラムGX",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-008",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "008",
+      "rarity": "Double rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "holo"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:009",
+      "name": "ヤトウモリ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-009",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "009",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:010",
+      "name": "エンニュート",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-010",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "010",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:011",
+      "name": "タッツー",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-011",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "011",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:012",
+      "name": "タッツー",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-012",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "012",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:013",
+      "name": "シードラ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-013",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "013",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:014",
+      "name": "キングドラGX",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-014",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "014",
+      "rarity": "Double rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "holo"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:015",
+      "name": "コイキング",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-015",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "015",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:016",
+      "name": "ギャラドス",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-016",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "016",
+      "rarity": "Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "holo"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:017",
+      "name": "ラプラス",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-017",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "017",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:018",
+      "name": "ウパー",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-018",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "018",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:019",
+      "name": "ヌオー",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-019",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "019",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:020",
+      "name": "サニーゴ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-020",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "020",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:021",
+      "name": "ヒンバス",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-021",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "021",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:022",
+      "name": "ミロカロス",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-022",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "022",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:023",
+      "name": "ヨワシ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-023",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "023",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:024",
+      "name": "ナックラー",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-024",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "024",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:025",
+      "name": "ミニリュウ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-025",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "025",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:026",
+      "name": "ミニリュウ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-026",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "026",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:027",
+      "name": "ハクリュー",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-027",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "027",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:028",
+      "name": "カイリューGX",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-028",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "028",
+      "rarity": "Double rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "holo"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:029",
+      "name": "ビブラーバ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-029",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "029",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:030",
+      "name": "フライゴン",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-030",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "030",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:031",
+      "name": "チルタリス",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-031",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "031",
+      "rarity": "Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "holo"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:032",
+      "name": "クリムガン",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-032",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "032",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:033",
+      "name": "ゼクロム",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-033",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "033",
+      "rarity": "Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "holo"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:034",
+      "name": "キュレム",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-034",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "034",
+      "rarity": "Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "holo"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:035",
+      "name": "ホワイトキュレムGX",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-035",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "035",
+      "rarity": "Double rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "holo"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:036",
+      "name": "ジガルデ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-036",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "036",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:037",
+      "name": "バクガメス",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-037",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "037",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:038",
+      "name": "ジジーロン",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-038",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "038",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:039",
+      "name": "ジャラコ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-039",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "039",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:040",
+      "name": "ジャランゴ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-040",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "040",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:041",
+      "name": "ジャラランガ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-041",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "041",
+      "rarity": "Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "holo"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:042",
+      "name": "チルット",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-042",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "042",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:043",
+      "name": "アクアパッチ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-043",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "043",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:044",
+      "name": "いれかえフロート",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-044",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "044",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:045",
+      "name": "火打石",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-045",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "045",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:046",
+      "name": "竜の鉤爪",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-046",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "046",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:047",
+      "name": "カキ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-047",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "047",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:048",
+      "name": "カツラの一発勝負",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-048",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "048",
+      "rarity": "Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "holo"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:049",
+      "name": "ヒガナ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-049",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "049",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:050",
+      "name": "ワタル♢",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-050",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "050",
+      "rarity": "Rare Holo",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "holo"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:051",
+      "name": "ヴェラ火山公園",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-051",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "051",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:052",
+      "name": "喰いつくされた原野",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-052",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "052",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:053",
+      "name": "せせらぎの丘",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-053",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "053",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:054",
+      "name": "レシラムGX",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-054",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "054",
+      "rarity": "Ultra Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "holo"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:055",
+      "name": "キングドラGX",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-055",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "055",
+      "rarity": "Ultra Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "holo"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:056",
+      "name": "カイリューGX",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-056",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "056",
+      "rarity": "Ultra Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "holo"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:057",
+      "name": "ホワイトキュレムGX",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-057",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "057",
+      "rarity": "Ultra Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "holo"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:058",
+      "name": "カツラの一発勝負",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-058",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "058",
+      "rarity": "Ultra Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "holo"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:059",
+      "name": "ヒガナ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-059",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "059",
+      "rarity": "Ultra Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "holo"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:060",
+      "name": "レシラムGX",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-060",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "060",
+      "rarity": "Hyper rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "holo"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:061",
+      "name": "キングドラGX",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-061",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "061",
+      "rarity": "Hyper rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "holo"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:062",
+      "name": "カイリューGX",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-062",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "062",
+      "rarity": "Hyper rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "holo"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:063",
+      "name": "ホワイトキュレムGX",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-063",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "063",
+      "rarity": "Hyper rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "holo"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:064",
+      "name": "いれかえフロート",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-064",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "064",
+      "rarity": "Secret Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "holo"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:065",
+      "name": "火打石",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-065",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "065",
+      "rarity": "Secret Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "holo"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-sm6a:066",
+      "name": "竜の鉤爪",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "SM6a-066",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:sm6a",
+      "number": "066",
+      "rarity": "Secret Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "holo"
+        }
+      ],
+      "visuals": []
+    }
+  ]
+}

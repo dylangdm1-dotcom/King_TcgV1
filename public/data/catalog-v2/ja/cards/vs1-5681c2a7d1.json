@@ -1,0 +1,4574 @@
+{
+  "schemaVersion": 2,
+  "formatVersion": 1,
+  "catalogVersion": "v299-jp-provider-gap",
+  "language": "ja",
+  "setId": "ktcg:set:ja:vs1",
+  "status": "complete",
+  "sourceCardCount": 143,
+  "identityCount": 143,
+  "providerPrintCount": 143,
+  "coverageBasis": "canonical_identities",
+  "cards": [
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:001",
+      "name": "フォークナーのpidgeot",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-001",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "001",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "holo"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:002",
+      "name": "フォークナーの恐怖",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-002",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "002",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:003",
+      "name": "フォークナーのファーフェッチ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-003",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "003",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:004",
+      "name": "フォークナーのドドリオ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-004",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "004",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:005",
+      "name": "フォークナーはトイッチです",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-005",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "005",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:006",
+      "name": "フォークナーのデリビード",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-006",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "006",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:007",
+      "name": "フォークナーのスカルモリー",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-007",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "007",
+      "rarity": "Holo Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "holo"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:008",
+      "name": "Bugsyの蝶",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-008",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "008",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:009",
+      "name": "BugsyのBeedrill",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-009",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "009",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:010",
+      "name": "Bugsy's Pinsir",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-010",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "010",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:011",
+      "name": "BugsyのLedian",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-011",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "011",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:012",
+      "name": "Bugsy's Yanma",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-012",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "012",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:013",
+      "name": "Bugsy's Scizor",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-013",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "013",
+      "rarity": "Holo Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "holo"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:014",
+      "name": "ホイットニーのクレファー",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-014",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "014",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:015",
+      "name": "ホイットニーのウィッグライツ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-015",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "015",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:016",
+      "name": "ホイットニーのペルシャ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-016",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "016",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:017",
+      "name": "ホイットニーのリキトゥン",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-017",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "017",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:018",
+      "name": "ホイットニーのフレット",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-018",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "018",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:019",
+      "name": "ホイットニーのミルタンク",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-019",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "019",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:020",
+      "name": "モーティのニネタール",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-020",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "020",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:021",
+      "name": "モーティのジェンガー",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-021",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "021",
+      "rarity": "Common",
+      "variants": [],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:022",
+      "name": "モーティの催眠",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-022",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "022",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:023",
+      "name": "モーティのマロワック",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-023",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "023",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:024",
+      "name": "MortyのNoctowl",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-024",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "024",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:025",
+      "name": "モーティのマークロー",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-025",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "025",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "holo"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:026",
+      "name": "モーティのミスレアバス",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-026",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "026",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:027",
+      "name": "ジャスミンのライチュ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-027",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "027",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:028",
+      "name": "ジャスミンのマグネトン",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-028",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "028",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:029",
+      "name": "ジャスミンのエレクトアバズ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-029",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "029",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:030",
+      "name": "ジャスミンのジョルテオン",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-030",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "030",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:031",
+      "name": "ジャスミンのアンファロス",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-031",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "031",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:032",
+      "name": "JasmineのSteelix",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-032",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "032",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "holo"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:033",
+      "name": "チャックの入門",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-033",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "033",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:034",
+      "name": "チャックのpoliwrath",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-034",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "034",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:035",
+      "name": "チャックのライドン",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-035",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "035",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:036",
+      "name": "チャックのタウロス",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-036",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "036",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:037",
+      "name": "チャックのグランブル",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-037",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "037",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:038",
+      "name": "チャックのドンファン",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-038",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "038",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:039",
+      "name": "プライスのデューゴン",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-039",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "039",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:040",
+      "name": "プライスのクロイスター",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-040",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "040",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:041",
+      "name": "プライスのラプラ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-041",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "041",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:042",
+      "name": "プライスのarticuno",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-042",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "042",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:043",
+      "name": "プライスのスニーエル",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-043",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "043",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "holo"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:044",
+      "name": "プライスのピロスワイン",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-044",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "044",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:045",
+      "name": "プライスのデリビード",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-045",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "045",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:046",
+      "name": "クレアの爆風",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-046",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "046",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:047",
+      "name": "クレアのジンクス",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-047",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "047",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:048",
+      "name": "クレアのギャラドス",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-048",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "048",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:049",
+      "name": "クレアのドラゴナイト",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-049",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "049",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:050",
+      "name": "クレアの政治",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-050",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "050",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:051",
+      "name": "クレアのマンティン",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-051",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "051",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:052",
+      "name": "クレアのキングドラ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-052",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "052",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:053",
+      "name": "Surge's Raichu中t",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-053",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "053",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:054",
+      "name": "Surge's Lanturn中t",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-054",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "054",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:055",
+      "name": "サブリナのXatu",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-055",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "055",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:056",
+      "name": "サブリナのエスペオン",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-056",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "056",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:057",
+      "name": "ミスティのラプラ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-057",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "057",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:058",
+      "name": "ミスティのquagsire",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-058",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "058",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:059",
+      "name": "エリカのベロッソム",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-059",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "059",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:060",
+      "name": "エリカのジャンプラフ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-060",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "060",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:061",
+      "name": "ジャニーンのビードリル",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-061",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "061",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:062",
+      "name": "ジャニーンのアーボック",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-062",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "062",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:063",
+      "name": "ジャニーンの毒",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-063",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "063",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:064",
+      "name": "ジャニーンのおしっこ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-064",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "064",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:065",
+      "name": "ジャニーンのアリアドス",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-065",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "065",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:066",
+      "name": "ジャニーンのクロバット",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-066",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "066",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:067",
+      "name": "ジャニーンのシャックル",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-067",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "067",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:068",
+      "name": "ブロックのomastar",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-068",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "068",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:069",
+      "name": "ブロックのカブトップ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-069",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "069",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:070",
+      "name": "ブレインの染色",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-070",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "070",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:071",
+      "name": "ブレインのマグカルゴ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-071",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "071",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:072",
+      "name": "ウィルのスローブロ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-072",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "072",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:073",
+      "name": "ウィルのexeggutor",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-073",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "073",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:074",
+      "name": "ウィルのジンクス",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-074",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "074",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:075",
+      "name": "ウィルのxatu",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-075",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "075",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:076",
+      "name": "ウィルのエスペオン",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-076",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "076",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:078",
+      "name": "ウィルのギラファリグ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-078",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "078",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:079",
+      "name": "コガのクロバット",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-079",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "079",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:080",
+      "name": "Koga's Forretress",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-080",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "080",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:081",
+      "name": "ブルーノのマチャンプ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-081",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "081",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:082",
+      "name": "ブルーノのヒットモンリー",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-082",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "082",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:083",
+      "name": "ブルーノのヒットモンチャン",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-083",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "083",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:084",
+      "name": "ブルーノのスチールス",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-084",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "084",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "holo"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:085",
+      "name": "ブルーノのウルサリング",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-085",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "085",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:086",
+      "name": "ブルーノのヒットモントップ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-086",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "086",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:087",
+      "name": "カレンズラピダッシュ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-087",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "087",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:088",
+      "name": "カレンのマグマー",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-088",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "088",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:089",
+      "name": "カレンのフレレオン",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-089",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "089",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:090",
+      "name": "カレンのタイラニター",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-090",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "090",
+      "rarity": "Holo Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "holo"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:091",
+      "name": "カレンのウンブレオン",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-091",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "091",
+      "rarity": "Holo Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "holo"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:092",
+      "name": "カレンの猟犬",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-092",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "092",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:093",
+      "name": "ロケットのウォブバッフェット",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-093",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "093",
+      "rarity": "Holo Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "holo"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:094",
+      "name": "ロケットのライコウ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-094",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "094",
+      "rarity": "Holo Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "holo"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:095",
+      "name": "ロケットのentei",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-095",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "095",
+      "rarity": "Holo Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "holo"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:096",
+      "name": "Rocket's Suicune",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-096",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "096",
+      "rarity": "Holo Rare",
+      "variants": [
+        {
+          "kind": "holo",
+          "label": "Holo",
+          "rawLabel": "holo"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:097",
+      "name": "ランスのカリザード",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-097",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "097",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:098",
+      "name": "ランスのギャラドス",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-098",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "098",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:099",
+      "name": "ランスのアエロダクチル",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-099",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "099",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:100",
+      "name": "ランスのドラゴナイト",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-100",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "100",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:101",
+      "name": "ランスのアンファロス",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-101",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "101",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:102",
+      "name": "ランスのキングドラ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-102",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "102",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:103",
+      "name": "フォークナーのテクニカルマシン01",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-103",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "103",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:104",
+      "name": "フォークナーのテクニカルマシン02",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-104",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "104",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:105",
+      "name": "Bugsyのテクニカルマシン01",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-105",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "105",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:106",
+      "name": "Bugsyのテクニカルマシン02",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-106",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "106",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:107",
+      "name": "ホイットニーのテクニカルマシン01",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-107",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "107",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:108",
+      "name": "ホイットニーのテクニカルマシン02",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-108",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "108",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:109",
+      "name": "Morty's Technical Machine 01",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-109",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "109",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:110",
+      "name": "Morty's Technical Machine 02",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-110",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "110",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:111",
+      "name": "ジャスミンのテクニカルマシン01",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-111",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "111",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:112",
+      "name": "ジャスミンのテクニカルマシン02",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-112",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "112",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:113",
+      "name": "チャックのテクニカルマシン01",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-113",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "113",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:114",
+      "name": "チャックのテクニカルマシン02",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-114",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "114",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:115",
+      "name": "プライスのテクニカルマシン01",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-115",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "115",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:116",
+      "name": "プライスのテクニカルマシン02",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-116",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "116",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:117",
+      "name": "Clair's Technical Machine 01",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-117",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "117",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:118",
+      "name": "Clair's Technical Machine 02",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-118",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "118",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:119",
+      "name": "ジャニーンのテクニカルマシン01",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-119",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "119",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:120",
+      "name": "ジャニーンのテクニカルマシン02",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-120",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "120",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:121",
+      "name": "ウィルのテクニカルマシン01",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-121",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "121",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:122",
+      "name": "ウィルのテクニカルマシン02",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-122",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "122",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:123",
+      "name": "ブルーノのテクニカルマシン01",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-123",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "123",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:124",
+      "name": "ブルーノのテクニカルマシン02",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-124",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "124",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:125",
+      "name": "カレンのテクニカルマシン01",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-125",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "125",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:126",
+      "name": "カレンのテクニカルマシン02",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-126",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "126",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:127",
+      "name": "ロケットのテクニカルマシン01",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-127",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "127",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:128",
+      "name": "ランスのテクニカルマシン01",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-128",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "128",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:129",
+      "name": "ランスのテクニカルマシン02",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-129",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "129",
+      "rarity": "Uncommon",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:130",
+      "name": "ポーション",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-130",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "130",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:131",
+      "name": "Moomooミルク",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-131",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "131",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:132",
+      "name": "フルヒール",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-132",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "132",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:133",
+      "name": "ポケモン反転",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-133",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "133",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:134",
+      "name": "スイッチ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-134",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "134",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:135",
+      "name": "ワープポイント",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-135",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "135",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:136",
+      "name": "スーパースクープアップ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-136",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "136",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:137",
+      "name": "エネルギーの流れ",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-137",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "137",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:138",
+      "name": "エネルギー電荷",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-138",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "138",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:139",
+      "name": "エネルギーアーク",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-139",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "139",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:140",
+      "name": "エネルギー回復",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-140",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "140",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:141",
+      "name": "マスターボール",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-141",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "141",
+      "rarity": "Common",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:143",
+      "name": "金属エネルギー",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-143",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "143",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:144",
+      "name": "闇のエネルギー",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-144",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "144",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    },
+    {
+      "schemaVersion": 2,
+      "id": "ktcg:card:ja:ktcg-set-ja-vs1:151",
+      "name": "レインボーエネルギー",
+      "aliases": [],
+      "sources": [
+        {
+          "provider": "tcgdex",
+          "sourceId": "VS1-151",
+          "lastSyncedAt": "2026-09-03T13:22:09.774Z"
+        }
+      ],
+      "lastSyncedAt": "2026-09-03T13:22:09.774Z",
+      "language": "ja",
+      "setId": "ktcg:set:ja:vs1",
+      "number": "151",
+      "variants": [
+        {
+          "kind": "normal",
+          "label": "Normal",
+          "rawLabel": "normal"
+        },
+        {
+          "kind": "stamp",
+          "label": "Stamp · 1st edition",
+          "rawLabel": "1st-edition stamp",
+          "stampName": "1st edition"
+        }
+      ],
+      "visuals": []
+    }
+  ]
+}
