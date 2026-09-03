@@ -22,6 +22,7 @@ export default function ItemCard({ item, compact = false }: { item: SealedItem; 
           <div className="min-w-0">
             <p className="text-[8px] font-black uppercase tracking-[0.1em] text-cyan-300">{itemCategoryLabel(item.category)} · {itemLanguageLabel(item.language)}</p>
             <Link href={`/items/${encodeItemRouteId(routeId)}`} className="mt-1 line-clamp-2 block text-[11px] font-black leading-4 text-white hover:text-cyan-200">{item.name}</Link>
+            {item.groupedVariantCount && item.groupedVariantCount > 1 ? <p className="mt-1 text-[8px] font-bold text-cyan-300/80">{item.groupedVariantCount} illustrations regroupées</p> : null}
           </div>
           <ChevronRight className="mt-1 h-4 w-4 shrink-0 text-zinc-600 transition group-hover:text-cyan-300" />
         </div>
