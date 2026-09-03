@@ -1,11 +1,11 @@
 import { NextResponse } from "next/server";
 import { enforceRateLimit } from "@/lib/api/security";
-import { getServerItemBundleV298 } from "@/lib/items/catalog";
+import { getServerItemBundleV300 } from "@/lib/items/catalog";
 
 export async function GET(request: Request) {
   const rateLimited = enforceRateLimit(request, "items-catalog", { limit: 180, windowMs: 60_000 });
   if (rateLimited) return rateLimited;
-  const bundle = await getServerItemBundleV298({ refreshFrench: true });
+  const bundle = await getServerItemBundleV300({ refreshFrench: true });
 
   return NextResponse.json(
     {
