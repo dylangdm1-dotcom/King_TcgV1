@@ -1,21 +1,21 @@
 {
   "schemaVersion": 2,
   "formatVersion": 1,
-  "catalogVersion": "v299-jp-provider-gap",
-  "generatedAt": "2026-09-03T13:22:09.774Z",
+  "catalogVersion": "v300-visuals-items-fr",
+  "generatedAt": "2026-09-03T19:46:42.607Z",
   "source": {
     "provider": "tcgdex-cards-database + king-tcg-bootstrap",
-    "revision": "v299-jp-provider-gap",
+    "revision": "v300-visuals-items-fr",
     "license": "TCGdex cards-database MIT; King_TCG metadata"
   },
   "regionalSources": [
     {
       "provider": "tcgdex",
       "language": "ja",
-      "revision": "v299-jp-provider-gap",
-      "importedAt": "2026-09-03T13:22:09.774Z",
+      "revision": "v300-visuals-items-fr",
+      "importedAt": "2026-09-03T19:46:42.607Z",
       "snapshotCount": 116,
-      "cardCount": 12732
+      "cardCount": 12781
     },
     {
       "provider": "pokewallet",
@@ -5908,8 +5908,8 @@
       },
       "sets": {
         "path": "ja/sets.json",
-        "bytes": 124847,
-        "sha256": "ecc475c9e94fac1fdae632a6650012f64f8ab23c8ccf587c2093052a9eac87c2"
+        "bytes": 124848,
+        "sha256": "36b9c670379425a1aa140e5bbd15660d3e42ead8cc7e5767d2ee06295f04a91f"
       },
       "groups": {
         "path": "ja/groups.json",
@@ -5920,9 +5920,9 @@
         "series": 15,
         "sets": 164,
         "groups": 1,
-        "cards": 12732,
-        "completeSets": 114,
-        "partialSets": 2,
+        "cards": 12781,
+        "completeSets": 115,
+        "partialSets": 1,
         "metadataOnlySets": 48,
         "announcedSets": 0
       },
@@ -6294,17 +6294,17 @@
           "setId": "ktcg:set:ja:mp",
           "code": "MP",
           "name": "メガ プロモカード",
-          "status": "partial",
-          "cardCount": 83,
-          "identityCount": 83,
-          "providerPrintCount": 83,
+          "status": "complete",
+          "cardCount": 132,
+          "identityCount": 132,
+          "providerPrintCount": 132,
           "coverageBasis": "canonical_identities",
           "sourceCardCount": 132,
           "officialCardCount": 0,
           "cards": {
             "path": "ja/cards/mp-4380771dc0.json",
-            "bytes": 51936,
-            "sha256": "29f576b98cdef16d5b1cdfee58f12826312900f778287e221fc98946f610d519"
+            "bytes": 80688,
+            "sha256": "422fc58f64e3f72caac748cd69c2366af5f51a70de0366817429bcb424ad36ca"
           }
         },
         {
@@ -7829,8 +7829,8 @@
           "officialCardCount": 44,
           "cards": {
             "path": "ja/cards/svk-87ec2a24a5.json",
-            "bytes": 21649,
-            "sha256": "52cdd104b64292d581ac0c71731cb63251c517c825d5386224f2edc1334a15e2"
+            "bytes": 68686,
+            "sha256": "8eb7add5b5e39301743db3f6b2c551c4061663c686acbe9cac4c715eb7bfc524"
           }
         },
         {
@@ -7846,8 +7846,8 @@
           "officialCardCount": 22,
           "cards": {
             "path": "ja/cards/svln-32e07e56e7.json",
-            "bytes": 10945,
-            "sha256": "ded4c99c66a6fe5b3e509e98ba1ffd99d50c19a79a7598b5b0a3cad8874c88be"
+            "bytes": 34596,
+            "sha256": "cacff059addacccc1071646f71a99dc0507360d240ef57b4484baac0b8445599"
           }
         },
         {
@@ -7863,8 +7863,8 @@
           "officialCardCount": 22,
           "cards": {
             "path": "ja/cards/svls-31d31bb202.json",
-            "bytes": 10954,
-            "sha256": "aa8e5b04bac9120ba9eaf7f3c549ac8ca89d54346b8e0f2e8d6da679e5eec784"
+            "bytes": 34605,
+            "sha256": "51ef04ee63e4caaa155dd6e5e8f3f44084139221b3462344f52fe9fc52c83262"
           }
         },
         {
