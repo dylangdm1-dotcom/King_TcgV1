@@ -23,6 +23,8 @@ import {
   Grid2X2,
   Crown,
   FileSpreadsheet,
+  Pencil,
+  Save,
 } from "lucide-react";
 
 import ScannerCamera, {
@@ -40,7 +42,7 @@ import {
   scannerCacheKeyV293,
 } from "@/lib/scanner/catalogIdentity";
 import type { QuadImageQuality, QuadSlotIndex } from "@/lib/scanner/quadScanner";
-import { buildScannerInventoryCsvV303, SCANNER_INVENTORY_LIMIT_V303 } from "@/lib/scanner/inventoryExport";
+import { buildScannerListingCsvV305, SCANNER_LISTING_LIMIT_V305 } from "@/lib/scanner/inventoryExport";
 
 import Navbar from "@/components/Navbar";
 
@@ -62,15 +64,18 @@ interface ConfidenceResult {
 
 const SCAN_REQUEST_TIMEOUT_MS = 35_000;
 
-const SCANNER_MONTHLY_LIMIT = 50;
+// Accès Alpha : le backend d'abonnement appliquera ensuite 30 / 500 / 550
+// selon Normal / Premium / PRO. Le plafond le plus haut permet de tester le PRO.
+const SCANNER_MONTHLY_LIMIT = 550;
 const SCANNER_BATCH_LIMIT = 4;
 const SCANNER_QUOTA_KEY = "king_tcg_scanner_quota_v1";
 const SCANNER_BATCH_KEY = "king_tcg_scanner_batch_v1";
 const SCANNER_QUAD_KEY = "king_tcg_scanner_quad_v1";
-const SCANNER_INVENTORY_KEY = "king_tcg_scanner_inventory_v303";
+const SCANNER_INVENTORY_KEY = "king_tcg_scanner_listing_v305";
+const SCANNER_INVENTORY_LEGACY_KEY = "king_tcg_scanner_inventory_v303";
 const SCANNER_BATCH_QUOTA_KEY = "king_tcg_scanner_batch_quota_v1";
 const SCANNER_QUAD_QUOTA_KEY = "king_tcg_scanner_quad_quota_v1";
-const SCANNER_INVENTORY_QUOTA_KEY = "king_tcg_scanner_inventory_quota_v303";
+const SCANNER_INVENTORY_QUOTA_KEY = "king_tcg_scanner_listing_quota_v305";
 
 function scannerCardHref(cardId: string) {
   return `/card/${encodeURIComponent(cardId)}?source=scanner`;
@@ -179,6 +184,8 @@ export default function ScannerPage() {
   const [batchList, setBatchList] = useState<ScannedBatchItem[]>([]);
   const [quadList, setQuadList] = useState<ScannedBatchItem[]>([]);
   const [inventoryList, setInventoryList] = useState<ScannedBatchItem[]>([]);
+  const [listingCaptureSize, setListingCaptureSize] = useState<2 | 4>(4);
+  const [editingListingId, setEditingListingId] = useState<string | null>(null);
   const [quotaUsed, setQuotaUsed] = useState(0);
   const [quotaEnd, setQuotaEnd] = useState("");
   const [batchQuotaConsumed, setBatchQuotaConsumed] = useState(false);
@@ -212,11 +219,12 @@ export default function ScannerPage() {
           })));
         }
       }
-      const rawInventory = window.localStorage.getItem(SCANNER_INVENTORY_KEY);
+      const rawInventory = window.localStorage.getItem(SCANNER_INVENTORY_KEY)
+        || window.localStorage.getItem(SCANNER_INVENTORY_LEGACY_KEY);
       if (rawInventory) {
         const items = JSON.parse(rawInventory);
         if (Array.isArray(items) && items.length > 0) {
-          setInventoryList(items.slice(0, SCANNER_INVENTORY_LIMIT_V303).map((item: any) => ({
+          setInventoryList(items.slice(0, SCANNER_LISTING_LIMIT_V305).map((item: any) => ({
             ...item,
             scannedAt: new Date(item.scannedAt),
           })));
@@ -327,6 +335,22 @@ export default function ScannerPage() {
 
   const handleQuadCardIdentified = useCallback((card: PokemonCard, slot: number, confidence = 0) => {
     const quadSlot = slot as QuadSlotIndex;
+    if (batchCaptureMode === "inventory") {
+      setInventoryList((prev) => {
+        if (prev.length >= SCANNER_LISTING_LIMIT_V305) return prev;
+        const item: ScannedBatchItem = {
+          id: `listing_${card.id}_${Date.now()}_${slot}`,
+          card,
+          scannedAt: new Date(),
+          confidence,
+          quadSlot,
+        };
+        // Une ligne représente une carte physique : les doublons sont conservés.
+        return [...prev, item].slice(0, SCANNER_LISTING_LIMIT_V305);
+      });
+      setStatus(`Listing PRO : carte ajoutée — ${card.name} · ${card.number || "N° à vérifier"}`);
+      return;
+    }
     setQuadList((prev) => {
       const item: ScannedBatchItem = {
         id: `${card.id}_${Date.now()}_${slot}`,
@@ -342,19 +366,23 @@ export default function ScannerPage() {
         .slice(0, SCANNER_BATCH_LIMIT);
     });
     setStatus(`Quad : carte ${slot + 1} identifiée — ${card.name}`);
-  }, []);
+  }, [batchCaptureMode]);
 
   const handleQuadProgress = useCallback((slots: QuadSlotProgress[]) => {
     setQuadProgress(slots);
-    const confirmed = slots.filter((slot) => slot.status === "success").length;
-    const review = slots.filter((slot) => slot.status === "review").length;
-    const processing = slots.filter((slot) => slot.status === "processing").length;
+    const activeSlots = batchCaptureMode === "inventory"
+      ? slots.slice(0, listingCaptureSize)
+      : slots;
+    const confirmed = activeSlots.filter((slot) => slot.status === "success").length;
+    const review = activeSlots.filter((slot) => slot.status === "review").length;
+    const processing = activeSlots.filter((slot) => slot.status === "processing").length;
+    const modeLabel = batchCaptureMode === "inventory" ? "Listing PRO" : "Quad";
     if (processing > 0) {
-      setStatus(`Quad : ${confirmed}/4 confirmée(s) · ${processing} analyse(s) en cours…`);
+      setStatus(`${modeLabel} : ${confirmed}/${activeSlots.length} confirmée(s) · ${processing} analyse(s) en cours…`);
     } else if (review > 0) {
-      setStatus(`Quad : ${confirmed}/4 confirmée(s) · ${review} correspondance(s) à vérifier.`);
+      setStatus(`${modeLabel} : ${confirmed}/${activeSlots.length} confirmée(s) · ${review} correspondance(s) à vérifier.`);
     }
-  }, []);
+  }, [batchCaptureMode, listingCaptureSize]);
 
   const handleCardsIdentified = useCallback(
     (cards: PokemonCard[]) => {
@@ -366,11 +394,18 @@ export default function ScannerPage() {
       // ScannerCamera n'utilise ce callback final que pour le Quad.
       // Les cartes sont déjà ajoutées une par une via handleQuadCardIdentified.
       if (scanMode === "batch") {
-        if (!consumeSuccessfulSession(batchCaptureMode === "grouped" ? "quad" : "batch")) {
+        const sessionType = batchCaptureMode === "grouped"
+          ? "quad"
+          : batchCaptureMode === "inventory"
+            ? "inventory"
+            : "batch";
+        if (!consumeSuccessfulSession(sessionType)) {
           setStatus("Quota Scanner atteint. Renouvellement le 5 du mois.");
           return;
         }
-            setStatus(`Quad terminé : ${cards.length} carte(s) reconnue(s).`);
+        setStatus(batchCaptureMode === "inventory"
+          ? `Listing PRO : ${cards.length} carte(s) ajoutée(s) · ${Math.min(SCANNER_LISTING_LIMIT_V305, inventoryList.length + cards.length)}/40.`
+          : `Quad terminé : ${cards.length} carte(s) reconnue(s).`);
         triggerHaptic(60);
         return;
       }
@@ -382,7 +417,7 @@ export default function ScannerPage() {
       }
       router.push(scannerCardHref(cards[0].id));
     },
-    [scanMode, batchCaptureMode, router, consumeSuccessfulSession, triggerHaptic]
+    [scanMode, batchCaptureMode, inventoryList.length, router, consumeSuccessfulSession, triggerHaptic]
   );
 
   // =====================================================
@@ -455,10 +490,10 @@ export default function ScannerPage() {
       return;
     }
     const sequentialList = batchCaptureMode === "inventory" ? inventoryList : batchList;
-    const sequentialLimit = batchCaptureMode === "inventory" ? SCANNER_INVENTORY_LIMIT_V303 : SCANNER_BATCH_LIMIT;
+    const sequentialLimit = batchCaptureMode === "inventory" ? SCANNER_LISTING_LIMIT_V305 : SCANNER_BATCH_LIMIT;
     if (scanMode === "batch" && batchCaptureMode !== "grouped" && sequentialList.length >= sequentialLimit) {
       setStatus(batchCaptureMode === "inventory"
-        ? "Inventaire PRO plein (40/40). Exportez ou videz la session."
+        ? "Listing PRO plein (40/40). Exportez ou videz la session."
         : "Session batch pleine (4/4). Videz la session pour recommencer.");
         return;
     }
@@ -679,8 +714,8 @@ export default function ScannerPage() {
         };
 
         if (batchCaptureMode === "inventory") {
-          setInventoryList((prev) => [batchItem, ...prev].slice(0, SCANNER_INVENTORY_LIMIT_V303));
-          logger.scan("Carte ajoutée à l’inventaire Scanner 4.0.");
+          setInventoryList((prev) => [batchItem, ...prev].slice(0, SCANNER_LISTING_LIMIT_V305));
+          logger.scan("Carte ajoutée au Listing PRO Scanner 4.0.");
         } else {
           setBatchList((prev) => [batchItem, ...prev].slice(0, SCANNER_BATCH_LIMIT));
           logger.scan("Carte ajoutée au batch V5.");
@@ -707,6 +742,29 @@ export default function ScannerPage() {
     } else {
       setBatchList((prev) => prev.filter((item) => item.id !== id));
     }
+  };
+
+  const updateListingItem = (
+    id: string,
+    field: "name" | "number" | "setName" | "setId",
+    value: string
+  ) => {
+    setInventoryList((current) => current.map((item) => {
+      if (item.id !== id) return item;
+      if (field === "name" || field === "number") {
+        return { ...item, card: { ...item.card, [field]: value } };
+      }
+      return {
+        ...item,
+        card: {
+          ...item.card,
+          set: {
+            ...item.card.set,
+            [field === "setName" ? "name" : "id"]: value,
+          },
+        },
+      };
+    }));
   };
 
   const clearBatch = () => {
@@ -743,7 +801,7 @@ export default function ScannerPage() {
   const exportBatch = () => {
     const inventoryMode = batchCaptureMode === "inventory";
     const dataStr = inventoryMode
-      ? buildScannerInventoryCsvV303(inventoryList)
+      ? buildScannerListingCsvV305(inventoryList)
       : JSON.stringify(batchCaptureMode === "grouped" ? quadList : batchList, null, 2);
     const blob = new Blob([dataStr], {
       type: inventoryMode ? "text/csv;charset=utf-8" : "application/json",
@@ -753,7 +811,7 @@ export default function ScannerPage() {
     const link = document.createElement("a");
 
     link.href = url;
-    link.download = `king_tcg_${inventoryMode ? "inventaire_pro" : "scan_batch"}_${new Date()
+    link.download = `king_tcg_${inventoryMode ? "listing_pro" : "scan_batch"}_${new Date()
       .toISOString()
       .slice(0, 10)}.${inventoryMode ? "csv" : "json"}`;
 
@@ -886,7 +944,7 @@ export default function ScannerPage() {
   const retryQuadSlot = useCallback(async (slot: QuadSlotIndex) => {
     if (!cameraRef.current || scanning) return;
     setScanning(true);
-    setStatus(`Quad : nouvelle capture de la carte ${slot + 1}…`);
+    setStatus(`${batchCaptureMode === "inventory" ? "Listing PRO" : "Quad"} : nouvelle capture de la carte ${slot + 1}…`);
     try {
       await cameraRef.current.retryGroupedSlot(slot);
     } catch (error: any) {
@@ -895,11 +953,13 @@ export default function ScannerPage() {
     } finally {
       setScanning(false);
     }
-  }, [scanning]);
+  }, [scanning, batchCaptureMode]);
 
   const acceptQuadCandidate = useCallback((slot: QuadSlotProgress) => {
     if (!slot.card) return;
-    if (!quadQuotaConsumed && !consumeSuccessfulSession("quad")) {
+    const quotaMode = batchCaptureMode === "inventory" ? "inventory" : "quad";
+    const quotaAlreadyConsumed = quotaMode === "inventory" ? inventoryQuotaConsumed : quadQuotaConsumed;
+    if (!quotaAlreadyConsumed && !consumeSuccessfulSession(quotaMode)) {
       setStatus("Quota Scanner atteint. Renouvellement le 5 du mois.");
       return;
     }
@@ -909,8 +969,8 @@ export default function ScannerPage() {
         ? { ...item, status: "success", message: "Correspondance validée manuellement" }
         : item
     ));
-    setStatus(`Quad : carte ${slot.slot + 1} validée — ${slot.card.name}`);
-  }, [quadQuotaConsumed, consumeSuccessfulSession, handleQuadCardIdentified]);
+    setStatus(`${batchCaptureMode === "inventory" ? "Listing PRO" : "Quad"} : carte ${slot.slot + 1} validée — ${slot.card.name}`);
+  }, [batchCaptureMode, inventoryQuotaConsumed, quadQuotaConsumed, consumeSuccessfulSession, handleQuadCardIdentified]);
 
   const handlePrimaryScan = async () => {
     const currentQuota = readQuota();
@@ -921,24 +981,27 @@ export default function ScannerPage() {
       return;
     }
     const activeSessionList = batchCaptureMode === "grouped" ? quadList : batchCaptureMode === "inventory" ? inventoryList : batchList;
-    const activeLimit = batchCaptureMode === "inventory" ? SCANNER_INVENTORY_LIMIT_V303 : SCANNER_BATCH_LIMIT;
+    const activeLimit = batchCaptureMode === "inventory" ? SCANNER_LISTING_LIMIT_V305 : SCANNER_BATCH_LIMIT;
     if (scanMode === "batch" && activeSessionList.length >= activeLimit) {
       setStatus(batchCaptureMode === "grouped"
         ? "Session Quad pleine (4/4). Videz la session pour recommencer."
         : batchCaptureMode === "inventory"
-          ? "Inventaire PRO plein (40/40). Exportez ou videz la session."
+          ? "Listing PRO plein (40/40). Exportez ou videz la session."
           : "Session Batch pleine (4/4). Videz la session pour recommencer.");
       return;
     }
-    if (scanMode === "batch" && batchCaptureMode === "grouped") {
+    if (scanMode === "batch" && (batchCaptureMode === "grouped" || batchCaptureMode === "inventory")) {
       if (!cameraRef.current || scanning) return;
       const label = groupedLanguage === "fr" ? "FR" : groupedLanguage === "en" ? "EN" : groupedLanguage === "ja" ? "JP" : "CN";
+      const groupedCount = batchCaptureMode === "inventory" ? listingCaptureSize : 4;
       setScanning(true);
       resetScanState();
-      setQuadProgress(EMPTY_QUAD_PROGRESS.map((slot) => ({ ...slot })));
-      setStatus(`Quad ${label} : analyse progressive des quatre cartes…`);
+      setQuadProgress(EMPTY_QUAD_PROGRESS.slice(0, groupedCount).map((slot) => ({ ...slot })));
+      setStatus(batchCaptureMode === "inventory"
+        ? `Listing PRO ${label} : analyse de ${groupedCount} cartes, sans prix ni visuels…`
+        : `Quad ${label} : analyse progressive des quatre cartes…`);
       try {
-        await cameraRef.current.openGroupedScanner();
+        await cameraRef.current.openGroupedScanner(groupedCount);
       } catch (error: any) {
         logger.error("SCAN", "Erreur Quad", error);
         setStatus(error?.message || "Erreur pendant le Quad.");
@@ -969,7 +1032,7 @@ export default function ScannerPage() {
     } else if (captureMode === "grouped") {
       setStatus("Quad · Premium : placez 4 cartes dans une seule photo.");
     } else if (captureMode === "inventory") {
-      setStatus("Inventaire · PRO : scannez jusqu’à 40 cartes puis exportez le tableau Excel.");
+      setStatus("Listing · PRO : choisissez 2 ou 4 cartes par photo, jusqu’à 40 lignes exportables.");
     } else {
       setStatus("Batch · Premium : scannez jusqu’à 4 cartes à la suite.");
     }
@@ -985,7 +1048,7 @@ export default function ScannerPage() {
   const quadConfirmedCount = quadProgress.filter((slot) => slot.status === "success").length;
   const quadReviewCount = quadProgress.filter((slot) => slot.status === "review").length;
   const visibleSessionList = batchCaptureMode === "grouped" ? quadList : batchCaptureMode === "inventory" ? inventoryList : batchList;
-  const visibleSessionLimit = batchCaptureMode === "inventory" ? SCANNER_INVENTORY_LIMIT_V303 : SCANNER_BATCH_LIMIT;
+  const visibleSessionLimit = batchCaptureMode === "inventory" ? SCANNER_LISTING_LIMIT_V305 : SCANNER_BATCH_LIMIT;
 
   return (
     <>
@@ -1005,7 +1068,7 @@ export default function ScannerPage() {
                 Scanner de Cartes
               </h1>
               <p className="kt-page-subtitle mt-0.5">
-                Identifiez une carte puis ouvrez sa fiche marché complète.
+                Identifiez une carte, scannez un lot ou créez un Listing PRO jusqu’à 40 lignes.
               </p>
             </div>
 
@@ -1084,19 +1147,19 @@ export default function ScannerPage() {
                   onClick={() => selectScannerMode("batch", "inventory")}
                   className={`rounded-2xl border-2 px-2 py-3 text-center transition-all ${
                     modeSelected && scanMode === "batch" && batchCaptureMode === "inventory"
-                      ? "border-emerald-300 bg-emerald-500/[0.14] shadow-[0_0_24px_rgba(52,211,153,.10)]"
-                      : "border-emerald-300/70 bg-emerald-500/[0.06] hover:border-emerald-200 hover:bg-emerald-500/[0.10]"
+                      ? "border-[#f5c451] bg-[#f5c451]/[0.14] shadow-[0_0_28px_rgba(245,196,81,.16)]"
+                      : "border-[#f5c451]/70 bg-[#f5c451]/[0.065] hover:border-[#ffe29a] hover:bg-[#f5c451]/[0.11]"
                   }`}
                 >
-                  <FileSpreadsheet className="mx-auto h-5 w-5 text-emerald-300" />
-                  <span className="mt-1.5 block text-[10px] font-black uppercase tracking-[0.09em] text-emerald-300">
-                    Inventaire
+                  <FileSpreadsheet className="mx-auto h-5 w-5 text-[#f5c451]" />
+                  <span className="mt-1.5 block text-[10px] font-black uppercase tracking-[0.09em] text-[#ffe29a]">
+                    Listing
                   </span>
                   <span className="mx-auto mt-1 inline-flex items-center justify-center gap-0.5 rounded-full border border-amber-300/30 bg-amber-300/[0.08] px-1.5 py-0.5 text-[6px] font-black uppercase tracking-[0.06em] text-amber-300">
                     <Crown className="h-2.5 w-2.5" /> PRO
                   </span>
                   <span className="mt-1.5 block text-[7px] font-bold leading-3 text-zinc-300">
-                    40 cartes · Excel
+                    2 ou 4 · 40 lignes
                   </span>
                 </button>
               </div>
@@ -1128,7 +1191,7 @@ export default function ScannerPage() {
                   : batchCaptureMode === "grouped"
                     ? "border-amber-300/45 bg-violet-400/[0.065] shadow-[0_0_26px_rgba(245,196,81,.07)]"
                     : batchCaptureMode === "inventory"
-                      ? "border-emerald-300/45 bg-emerald-400/[0.06] shadow-[0_0_26px_rgba(52,211,153,.06)]"
+                      ? "border-[#f5c451]/55 bg-[#f5c451]/[0.065] shadow-[0_0_30px_rgba(245,196,81,.10)]"
                       : "border-amber-300/45 bg-sky-400/[0.065] shadow-[0_0_26px_rgba(245,196,81,.07)]"
               }`}
             >
@@ -1148,7 +1211,7 @@ export default function ScannerPage() {
                         : batchCaptureMode === "grouped"
                           ? "Quad · Premium"
                           : batchCaptureMode === "inventory"
-                            ? "Inventaire · PRO"
+                            ? "Listing · PRO"
                             : "Batch · Premium"}
                     </p>
                   </div>
@@ -1158,7 +1221,7 @@ export default function ScannerPage() {
                       : batchCaptureMode === "grouped"
                         ? "text-violet-200"
                         : batchCaptureMode === "inventory"
-                          ? "text-emerald-200"
+                          ? "text-[#ffe29a]"
                           : "text-sky-200"
                   }`}>
                     {scanMode === "single"
@@ -1166,7 +1229,7 @@ export default function ScannerPage() {
                       : batchCaptureMode === "grouped"
                         ? "Quad · Scan simultané"
                         : batchCaptureMode === "inventory"
-                          ? "Inventaire · 40 cartes"
+                          ? "Listing PRO · 40 cartes"
                           : "Batch · Scan multiples"}
                   </h2>
                   <p className="mt-1 text-[10px] leading-4 text-zinc-100">
@@ -1175,12 +1238,12 @@ export default function ScannerPage() {
                       : batchCaptureMode === "grouped"
                         ? "Capturez jusqu’à 4 cartes sur une seule photo."
                         : batchCaptureMode === "inventory"
-                          ? "Listez jusqu’à 40 cartes physiques : nom, numéro et extension, sans visuel ni prix requis."
+                          ? "Scannez 2 ou 4 cartes à la fois : nom, numéro et extension, sans visuel ni prix."
                           : "Scannez jusqu’à 4 cartes à la suite dans la même session."}
                   </p>
                 </div>
                 <div className="shrink-0 whitespace-nowrap">
-                  <PremiumBadge tone={scanMode === "single" ? "cyan" : "violet"}>
+                  <PremiumBadge tone={scanMode === "single" ? "cyan" : batchCaptureMode === "inventory" ? "amber" : "violet"}>
                     {scanMode === "single"
                       ? "Mono"
                       : batchCaptureMode === "grouped"
@@ -1204,27 +1267,46 @@ export default function ScannerPage() {
             </div>
           </div>
 
-          {/* Réglage spécifique Quad — sans répéter le module de présentation */}
+          {/* Réglages des captures groupées Quad et Listing PRO */}
           <AnimatePresence initial={false}>
-            {modeSelected && scanMode === "batch" && batchCaptureMode === "grouped" && (
+            {modeSelected && scanMode === "batch" && (batchCaptureMode === "grouped" || batchCaptureMode === "inventory") && (
               <motion.section
                 initial={{ opacity: 0, y: -8 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.22 }}
               >
-                <div className="rounded-[16px] border border-violet-300/18 bg-violet-400/[0.045] p-3">
+                <div className={`rounded-[16px] border p-3 ${batchCaptureMode === "inventory" ? "border-[#f5c451]/30 bg-[#f5c451]/[0.055]" : "border-violet-300/18 bg-violet-400/[0.045]"}`}>
                   <div className="flex items-center gap-2">
-                    <Languages className="h-4 w-4 text-violet-300" />
+                    <Languages className={`h-4 w-4 ${batchCaptureMode === "inventory" ? "text-[#f5c451]" : "text-violet-300"}`} />
                     <div>
-                      <p className="text-[10px] font-black uppercase tracking-[0.14em] text-violet-300">
-                        Langue des 4 cartes
+                      <p className={`text-[10px] font-black uppercase tracking-[0.14em] ${batchCaptureMode === "inventory" ? "text-[#ffe29a]" : "text-violet-300"}`}>
+                        Langue du lot
                       </p>
                       <p className="mt-0.5 text-[10px] text-zinc-100">
-                        Les quatre cartes doivent être de la même langue pour cibler le bon catalogue.
+                        Les cartes de la photo doivent être de la même langue pour cibler le bon catalogue.
                       </p>
                     </div>
                   </div>
+
+                  {batchCaptureMode === "inventory" ? (
+                    <div className="mt-3 grid grid-cols-2 gap-2 rounded-xl border border-[#f5c451]/18 bg-black/15 p-1.5">
+                      {([2, 4] as const).map((size) => (
+                        <button
+                          key={size}
+                          type="button"
+                          onClick={() => {
+                            setListingCaptureSize(size);
+                            setQuadProgress(EMPTY_QUAD_PROGRESS.slice(0, size).map((slot) => ({ ...slot })));
+                            setStatus(`Listing PRO : mode ${size} cartes par photo sélectionné.`);
+                          }}
+                          className={`rounded-lg border px-3 py-2 text-[10px] font-black uppercase transition-all ${listingCaptureSize === size ? "border-[#f5c451]/65 bg-[#f5c451]/[0.16] text-[#fff2bf]" : "border-white/[0.06] bg-white/[0.025] text-zinc-300"}`}
+                        >
+                          {size} cartes / photo
+                        </button>
+                      ))}
+                    </div>
+                  ) : null}
 
                   <div className="mt-3 grid grid-cols-4 gap-1.5">
                     {[
@@ -1238,11 +1320,13 @@ export default function ScannerPage() {
                         type="button"
                         onClick={() => {
                           setGroupedLanguage(value as "fr" | "en" | "ja" | "zh-tw");
-                          setStatus(`Quad ${label} : placez jusqu’à 4 cartes ${label} dans les zones.`);
+                          setStatus(`${batchCaptureMode === "inventory" ? "Listing PRO" : "Quad"} ${label} : placez les cartes ${label} dans les zones.`);
                         }}
                         className={`rounded-xl border px-2 py-2 text-[10px] font-black transition-all ${
                           groupedLanguage === value
-                            ? "border-violet-300/50 bg-violet-400/15 text-violet-200"
+                            ? batchCaptureMode === "inventory"
+                              ? "border-[#f5c451]/60 bg-[#f5c451]/[0.14] text-[#fff2bf]"
+                              : "border-violet-300/50 bg-violet-400/15 text-violet-200"
                             : "border-white/[0.06] bg-white/[0.035] text-zinc-100"
                         }`}
                       >
@@ -1256,7 +1340,7 @@ export default function ScannerPage() {
           </AnimatePresence>
 
           {/* CAMERA */}
-          <div ref={cameraSectionRef} data-scan-mode={scanMode === "single" ? "single" : batchCaptureMode === "grouped" ? "quad" : "batch"} className="kt-scanner-stage kt-scan-grid relative aspect-[9/16] overflow-hidden rounded-[24px] border bg-black shadow-[0_24px_70px_rgba(0,0,0,.55)]">
+          <div ref={cameraSectionRef} data-scan-mode={scanMode === "single" ? "single" : batchCaptureMode === "grouped" ? "quad" : batchCaptureMode === "inventory" ? "listing" : "batch"} className="kt-scanner-stage kt-scan-grid relative aspect-[9/16] overflow-hidden rounded-[24px] border bg-black shadow-[0_24px_70px_rgba(0,0,0,.55)]">
             <ScannerCamera
               ref={cameraRef}
               onReady={handleCameraReady}
@@ -1273,27 +1357,28 @@ export default function ScannerPage() {
               quadSlots={quadProgress}
               ready={ready}
               onScan={handlePrimaryScan}
-              mode={scanMode === "batch" && batchCaptureMode === "grouped" ? "quad" : scanMode === "batch" ? "batch" : "single"}
+              mode={scanMode === "batch" && batchCaptureMode === "grouped" ? "quad" : scanMode === "batch" && batchCaptureMode === "inventory" ? "listing" : scanMode === "batch" ? "batch" : "single"}
+              groupedCount={listingCaptureSize}
             />
           </div>
 
-          {scanMode === "batch" && batchCaptureMode === "grouped" && (
-            <section className="kt-premium-panel rounded-[18px] p-3.5">
+          {scanMode === "batch" && (batchCaptureMode === "grouped" || batchCaptureMode === "inventory") && (
+            <section className={`kt-premium-panel rounded-[18px] p-3.5 ${batchCaptureMode === "inventory" ? "kt-listing-progress" : ""}`}>
               <div className="flex items-center justify-between gap-3">
                 <div>
-                  <p className="text-[10px] font-black uppercase tracking-[0.14em] text-violet-200">Résultats progressifs</p>
+                  <p className={`text-[10px] font-black uppercase tracking-[0.14em] ${batchCaptureMode === "inventory" ? "text-[#ffe29a]" : "text-violet-200"}`}>Résultats progressifs</p>
                   <p className="mt-1 text-[10px] text-zinc-200">
-                    {quadConfirmedCount}/4 confirmée(s)
+                    {quadConfirmedCount}/{batchCaptureMode === "inventory" ? listingCaptureSize : 4} confirmée(s)
                     {quadReviewCount > 0 ? ` · ${quadReviewCount} à vérifier` : ""}
                   </p>
                 </div>
-                <span className="rounded-full border border-violet-300/25 bg-violet-400/[0.08] px-2.5 py-1 text-[10px] font-black text-violet-200">
-                  {quadConfirmedCount}/4
+                <span className={`rounded-full border px-2.5 py-1 text-[10px] font-black ${batchCaptureMode === "inventory" ? "border-[#f5c451]/35 bg-[#f5c451]/[0.09] text-[#ffe29a]" : "border-violet-300/25 bg-violet-400/[0.08] text-violet-200"}`}>
+                  {quadConfirmedCount}/{batchCaptureMode === "inventory" ? listingCaptureSize : 4}
                 </span>
               </div>
 
               <div className="mt-3 grid grid-cols-2 gap-2">
-                {quadProgress.map((slot) => {
+                {quadProgress.slice(0, batchCaptureMode === "inventory" ? listingCaptureSize : 4).map((slot) => {
                   const success = slot.status === "success";
                   const review = slot.status === "review";
                   const error = slot.status === "error";
@@ -1443,7 +1528,7 @@ export default function ScannerPage() {
                 Aucun mode sélectionné
               </p>
               <p className="mx-auto mt-1 max-w-md text-[10px] leading-4 text-zinc-400">
-                Choisissez Mono, Batch, Quad ou Inventaire ci-dessus pour ouvrir la caméra correspondante.
+                Choisissez Mono, Batch, Quad ou Listing ci-dessus pour ouvrir la caméra correspondante.
               </p>
             </section>
           )}
@@ -1458,12 +1543,12 @@ export default function ScannerPage() {
                     {batchCaptureMode === "grouped" ? (
                       <Grid2X2 className="h-4 w-4 text-violet-300" />
                     ) : batchCaptureMode === "inventory" ? (
-                      <FileSpreadsheet className="h-4 w-4 text-emerald-300" />
+                      <FileSpreadsheet className="h-4 w-4 text-[#f5c451]" />
                     ) : (
                       <Layers className="h-4 w-4 text-sky-300" />
                     )}
                     <p className="text-[10px] font-black uppercase tracking-[0.14em] text-white">
-                      {batchCaptureMode === "grouped" ? "Résultats Quad" : batchCaptureMode === "inventory" ? "Inventaire PRO" : "Résultats Batch"}
+                      {batchCaptureMode === "grouped" ? "Résultats Quad" : batchCaptureMode === "inventory" ? "Listing PRO" : "Résultats Batch"}
                     </p>
                   </div>
                   <p className="mt-1 text-[10px] text-zinc-300">
@@ -1478,7 +1563,7 @@ export default function ScannerPage() {
                     className="inline-flex items-center gap-1 rounded-lg border border-cyan-300/18 bg-cyan-400/[0.05] px-2 py-1.5 text-[8px] font-black uppercase text-cyan-300"
                   >
                     <Download className="h-3 w-3" />
-                    {batchCaptureMode === "inventory" ? "Excel CSV" : "Export"}
+                    {batchCaptureMode === "inventory" ? "Exporter CSV" : "Export"}
                   </button>
                   <button
                     type="button"
@@ -1492,12 +1577,17 @@ export default function ScannerPage() {
               </div>
 
               <div className="mt-3 space-y-2">
-                {visibleSessionList.map((item) => (
+                {visibleSessionList.map((item, index) => (
                   <div
                     key={item.id}
-                    className="flex items-center justify-between gap-3 rounded-xl border border-white/[0.06] bg-white/[0.02] p-2.5"
+                    className={`flex items-center justify-between gap-3 rounded-xl border p-2.5 ${batchCaptureMode === "inventory" ? "border-[#f5c451]/18 bg-[#f5c451]/[0.035]" : "border-white/[0.06] bg-white/[0.02]"}`}
                   >
                     <div className="flex min-w-0 items-center gap-3">
+                      {batchCaptureMode === "inventory" ? (
+                        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-[#f5c451]/25 bg-[#f5c451]/[0.08] text-[10px] font-black tabular-nums text-[#ffe29a]">
+                          {index + 1}
+                        </span>
+                      ) : null}
                       {batchCaptureMode !== "inventory" && item.card.images?.small ? (
                         <div className="relative h-14 w-10 shrink-0 overflow-hidden rounded-lg bg-neutral-800">
                           <Image
@@ -1509,22 +1599,48 @@ export default function ScannerPage() {
                         </div>
                       ) : null}
 
-                      <div className="min-w-0">
-                        <h4 className="truncate text-xs font-black uppercase text-white">
-                          {item.card.name}
-                        </h4>
-                        <p className="truncate text-[10px] text-zinc-300">
-                          N° {item.card.number} • {item.card.set?.name}
-                        </p>
+                      <div className="min-w-0 flex-1">
+                        {batchCaptureMode === "inventory" && editingListingId === item.id ? (
+                          <div className="grid grid-cols-2 gap-1.5 sm:grid-cols-4">
+                            <input aria-label="Nom de la carte" value={item.card.name} onChange={(event) => updateListingItem(item.id, "name", event.target.value)} className="col-span-2 rounded-lg border border-[#f5c451]/25 bg-black/25 px-2 py-1.5 text-[10px] font-bold text-white outline-none focus:border-[#f5c451]/60 sm:col-span-1" />
+                            <input aria-label="Numéro de la carte" value={item.card.number || ""} onChange={(event) => updateListingItem(item.id, "number", event.target.value)} className="rounded-lg border border-[#f5c451]/25 bg-black/25 px-2 py-1.5 text-[10px] text-white outline-none focus:border-[#f5c451]/60" />
+                            <input aria-label="Nom de l'extension" value={item.card.set?.name || ""} onChange={(event) => updateListingItem(item.id, "setName", event.target.value)} className="rounded-lg border border-[#f5c451]/25 bg-black/25 px-2 py-1.5 text-[10px] text-white outline-none focus:border-[#f5c451]/60" />
+                            <input aria-label="Code de l'extension" value={item.card.set?.id || ""} onChange={(event) => updateListingItem(item.id, "setId", event.target.value)} className="col-span-2 rounded-lg border border-[#f5c451]/25 bg-black/25 px-2 py-1.5 text-[10px] text-white outline-none focus:border-[#f5c451]/60 sm:col-span-1" />
+                          </div>
+                        ) : (
+                          <>
+                            <h4 className="truncate text-xs font-black uppercase text-white">
+                              {item.card.name}
+                            </h4>
+                            <p className="truncate text-[10px] text-zinc-300">
+                              N° {item.card.number || "—"} • {item.card.set?.name || "Extension à vérifier"}
+                            </p>
+                            {batchCaptureMode === "inventory" ? (
+                              <p className="mt-0.5 truncate text-[9px] font-bold text-[#d8bd78]">
+                                {item.card.set?.id || "Code —"} · {scanLanguageLabelV293(item.card.dataLanguage || groupedLanguage)} · {Math.round(item.confidence * 100)}%
+                              </p>
+                            ) : null}
+                          </>
+                        )}
                         {typeof item.quadSlot === "number" ? (
-                          <p className="mt-0.5 text-[9px] font-bold text-violet-300">
-                            Zone Quad {item.quadSlot + 1}
+                          <p className={`mt-0.5 text-[9px] font-bold ${batchCaptureMode === "inventory" ? "text-[#f5c451]" : "text-violet-300"}`}>
+                            {batchCaptureMode === "inventory" ? `Zone ${item.quadSlot + 1}` : `Zone Quad ${item.quadSlot + 1}`}
                           </p>
                         ) : null}
                       </div>
                     </div>
 
                     <div className="flex shrink-0 items-center gap-1">
+                      {batchCaptureMode === "inventory" ? (
+                        <button
+                          type="button"
+                          onClick={() => setEditingListingId((current) => current === item.id ? null : item.id)}
+                          className="rounded-lg border border-[#f5c451]/20 bg-[#f5c451]/[0.06] p-2 text-[#ffe29a] transition hover:bg-[#f5c451]/[0.12]"
+                          aria-label={editingListingId === item.id ? "Enregistrer la correction" : "Corriger la ligne"}
+                        >
+                          {editingListingId === item.id ? <Save className="h-3.5 w-3.5" /> : <Pencil className="h-3.5 w-3.5" />}
+                        </button>
+                      ) : null}
                       {batchCaptureMode !== "inventory" ? <button
                         type="button"
                         onClick={() => router.push(scannerCardHref(item.card.id))}
@@ -1536,7 +1652,10 @@ export default function ScannerPage() {
                       </button> : null}
                       <button
                         type="button"
-                        onClick={() => removeBatchItem(item.id)}
+                        onClick={() => {
+                          removeBatchItem(item.id);
+                          if (editingListingId === item.id) setEditingListingId(null);
+                        }}
                         className="rounded-lg p-2 text-zinc-400 transition-colors hover:bg-rose-400/[0.05] hover:text-rose-400"
                         aria-label="Supprimer de la session"
                       >
