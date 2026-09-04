@@ -1,5 +1,7 @@
 import type { CollectionMap } from "./types";
 import { getSales, SALES_STORAGE_KEY, type CardSale } from "./sales";
+import { psaService, PSA_COLLECTION_STORAGE_KEY } from "./psa/psaService";
+import type { PSACard } from "./psa/types";
 
 //
 // 💾 STORAGE ENGINE
@@ -271,12 +273,13 @@ export function getTotalInvestment(): number {
 //
 
 export type BackupData = {
-  version: "3.9";
+  version: "3.9" | "3.9-psa";
   exportedAt: string;
   favorites: string[];
   collection: CollectionMap;
   collectionInfos: Record<string, CollectionInfo>;
   sales?: CardSale[];
+  psaCollection?: PSACard[];
 };
 
 /**
@@ -286,12 +289,13 @@ export function exportBackup() {
   if (typeof window === "undefined") return;
 
   const data: BackupData = {
-    version: "3.9",
+    version: "3.9-psa",
     exportedAt: new Date().toISOString(),
     favorites: getFavorites(),
     collection: getCollection(),
     collectionInfos: getCollectionInfos(),
     sales: getSales(),
+    psaCollection: psaService.getCollection(),
   };
 
   const blob = new Blob([JSON.stringify(data, null, 2)], {
@@ -332,6 +336,9 @@ export function importBackup(
         JSON.stringify(parsed.collectionInfos || {})
       );
       localStorage.setItem(SALES_STORAGE_KEY, JSON.stringify(parsed.sales || []));
+      if (Array.isArray(parsed.psaCollection)) {
+        psaService.saveCollection(parsed.psaCollection);
+      }
     } else {
       // Mode MERGE (Fusion)
       const currentFavs = getFavorites();
@@ -368,6 +375,14 @@ export function importBackup(
       const salesById = new Map(getSales().map((sale) => [sale.id, sale]));
       (parsed.sales || []).forEach((sale) => salesById.set(sale.id, sale));
       localStorage.setItem(SALES_STORAGE_KEY, JSON.stringify(Array.from(salesById.values())));
+
+      const psaByCertificate = new Map(
+        psaService.getCollection().map((card) => [card.psaCertNumber, card])
+      );
+      (parsed.psaCollection || []).forEach((card) => {
+        if (card?.psaCertNumber) psaByCertificate.set(card.psaCertNumber, card);
+      });
+      psaService.saveCollection(Array.from(psaByCertificate.values()));
     }
 
     notifyStorageUpdate();
@@ -388,6 +403,7 @@ export function clearAllData() {
   localStorage.removeItem(COLLECTION_KEY);
   localStorage.removeItem(COLLECTION_INFO_KEY);
   localStorage.removeItem(SALES_STORAGE_KEY);
+  localStorage.removeItem(PSA_COLLECTION_STORAGE_KEY);
 
   notifyStorageUpdate();
 }
