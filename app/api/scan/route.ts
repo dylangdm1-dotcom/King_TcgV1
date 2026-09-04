@@ -10,6 +10,8 @@ import {
   rejectOversizedContentLength,
 } from "@/lib/api/security";
 import { getCachedCardData, setCachedCardData } from "@/lib/pokemonCache";
+import { attachGuestQuota, reserveGuestScan } from "@/lib/auth/guest-quota";
+import { consumeAuthenticatedScan, resolveRequestUser } from "@/lib/auth/supabase-rest";
 
 export const maxDuration = 45;
 
@@ -188,6 +190,12 @@ export async function POST(req: NextRequest) {
     const imageBase64 = typeof (body as any)?.imageBase64 === "string"
       ? (body as any).imageBase64
       : "";
+    const sessionId = typeof (body as any)?.sessionId === "string"
+      ? (body as any).sessionId.slice(0, 120)
+      : `legacy-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+    const requestedMode = ["mono", "batch", "quad", "listing"].includes((body as any)?.mode)
+      ? (body as any).mode
+      : "mono";
     if (!imageBase64) return apiError("Image manquante.", 400, "missing_image");
     if (imageBase64.length > MAX_SCAN_BASE64_LENGTH) {
       return apiError("Image trop volumineuse.", 413, "image_too_large");
@@ -202,11 +210,37 @@ export async function POST(req: NextRequest) {
     if (!base64Data || /[^a-zA-Z0-9+/=]/.test(base64Data)) {
       return apiError("Données d’image invalides.", 400, "invalid_image_data");
     }
+
+    const authenticated = await resolveRequestUser(req);
+    let guestReservation: ReturnType<typeof reserveGuestScan> | null = null;
+    let entitlement: any;
+    if (authenticated) {
+      entitlement = await consumeAuthenticatedScan(authenticated.user.id, sessionId, requestedMode);
+    } else {
+      if (requestedMode !== "mono") {
+        return NextResponse.json({ error: "Connectez-vous avec une formule compatible pour utiliser ce mode.", code: "upgrade_required" }, { status: 403 });
+      }
+      guestReservation = reserveGuestScan(req, sessionId);
+      entitlement = { allowed: guestReservation.allowed, used: guestReservation.used, limit: 5, reason: guestReservation.reason };
+    }
+    if (!entitlement?.allowed) {
+      const accountRequired = entitlement?.reason === "account_required" || entitlement?.reason === "quota_exceeded";
+      return NextResponse.json(
+        { error: accountRequired ? "Quota Scanner atteint. Créez un compte ou passez à une formule supérieure." : entitlement?.reason === "upgrade_required" ? "Cette fonction nécessite Premium ou PRO." : "Scanner temporairement indisponible : configuration des comptes incomplète.", code: entitlement?.reason || "scan_forbidden", quota: entitlement },
+        { status: accountRequired ? 401 : entitlement?.reason === "upgrade_required" ? 403 : 503 }
+      );
+    }
+
+    const quotaPayload = { used: Number(entitlement.used) || 0, limit: entitlement.limit ?? null, unlimited: Boolean(entitlement.unlimited) };
+    const withQuota = (response: NextResponse) => {
+      if (guestReservation?.allowed) attachGuestQuota(response, guestReservation.quota);
+      return response;
+    };
     const imageHash = `scan_img_${base64Data.slice(0, 100)}_${base64Data.slice(-50)}`;
     const cachedResponse = getCachedCardData<any>(imageHash);
 
     if (cachedResponse) {
-      return NextResponse.json({ success: true, modelUsed: "cache", fromCache: true, data: cachedResponse });
+      return withQuota(NextResponse.json({ success: true, modelUsed: "cache", fromCache: true, data: cachedResponse, quota: quotaPayload }));
     }
 
     const genAI = new GoogleGenerativeAI(apiKey);
@@ -246,7 +280,7 @@ export async function POST(req: NextRequest) {
         const identitySignals = [hasName, hasNumber, hasSet].filter(Boolean).length;
 
         if (identitySignals === 0) {
-          return NextResponse.json(
+          return withQuota(NextResponse.json(
             {
               success: false,
               error:
@@ -254,7 +288,7 @@ export async function POST(req: NextRequest) {
               data,
             },
             { status: 422 }
-          );
+          ));
         }
 
         // Gemini propose un niveau de confiance, mais le serveur le borne selon
@@ -271,7 +305,7 @@ export async function POST(req: NextRequest) {
 
         setCachedCardData(imageHash, responseData, 1000 * 60 * 30);
         logger.gemini(`Scan réussi en ${Date.now() - startTime} ms avec ${modelName}`);
-        return NextResponse.json({ success: true, modelUsed: modelName, fromCache: false, data: responseData });
+        return withQuota(NextResponse.json({ success: true, modelUsed: modelName, fromCache: false, data: responseData, quota: quotaPayload }));
       } catch (error: any) {
         const message = error?.message || String(error);
         if (message.includes("429") || error?.status === 429) rateLimited = true;
@@ -279,7 +313,7 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    return NextResponse.json(
+    return withQuota(NextResponse.json(
       {
         error: rateLimited
           ? "Quota Gemini dépassé temporairement"
@@ -287,7 +321,7 @@ export async function POST(req: NextRequest) {
         ...(process.env.NODE_ENV === "development" && lastRaw ? { rawResponse: lastRaw } : {}),
       },
       { status: rateLimited ? 429 : 422 }
-    );
+    ));
   } catch (error: any) {
     logger.error("GEMINI", "Erreur serveur globale pendant le scan", error);
     return NextResponse.json(

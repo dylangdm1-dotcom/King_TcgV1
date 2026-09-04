@@ -137,7 +137,7 @@ export default function Home() {
           <div className="kt-rise-in relative z-10 mx-auto max-w-3xl space-y-5">
             <span className="mx-auto inline-flex items-center gap-1.5 rounded-full border border-cyan-400/20 bg-cyan-400/[0.06] px-3 py-1.5 text-[9px] font-black uppercase tracking-[0.14em] text-cyan-300">
               <Sparkles className="w-3 h-3" />
-              King_TCG V305 • Final Alpha
+              King_TCG V306 • Web définitive
             </span>
 
             <h1 className="flex items-center justify-center">

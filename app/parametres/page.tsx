@@ -463,7 +463,7 @@ export default function SettingsPage() {
                   "Alertes, opportunités et analyses de marché",
                   "Export / import",
                   "Ventes Premium — module préparé, activation à venir",
-                  "Comptes Cloud / Premium — en cours de préparation",
+                  "Comptes Google, Cloud et abonnements — actifs après configuration Vercel",
                 ].map((item) => (
                   <div key={item} className="kt-subpanel flex items-start gap-2 px-3 py-2.5">
                     <ShieldCheck className="mt-0.5 h-3.5 w-3.5 shrink-0 text-cyan-300" />

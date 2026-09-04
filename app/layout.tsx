@@ -1,8 +1,9 @@
-import "./globals.css";
+import "@/app/globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { PokemonProvider } from "../components/providers/PokemonProvider";
-import { ThemeProvider } from "../components/providers/ThemeProvider";
+import { PokemonProvider } from "@/components/providers/PokemonProvider";
+import { ThemeProvider } from "@/components/providers/ThemeProvider";
+import { AccountProvider } from "@/components/providers/AccountProvider";
 import { Analytics } from "@vercel/analytics/next";
 
 const inter = Inter({
@@ -36,9 +37,7 @@ export default function RootLayout({
       </head>
       <body className={`${inter.className} antialiased bg-zinc-950 text-white`}>
         <ThemeProvider>
-          <PokemonProvider>
-            {children}
-          </PokemonProvider>
+          <AccountProvider><PokemonProvider>{children}</PokemonProvider></AccountProvider>
         </ThemeProvider>
         <Analytics />
       </body>

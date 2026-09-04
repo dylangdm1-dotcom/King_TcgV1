@@ -54,6 +54,7 @@ import {
 
 import type { PokemonCard, CardScanResult } from "@/lib/types";
 import { PremiumBadge, PremiumCard, PremiumSectionHeading } from "@/components/ui/PremiumPrimitives";
+import { useAccount } from "@/components/providers/AccountProvider";
 
 interface ConfidenceResult {
   global: number;
@@ -64,8 +65,8 @@ interface ConfidenceResult {
 
 const SCAN_REQUEST_TIMEOUT_MS = 35_000;
 
-// Accès Alpha : le backend d'abonnement appliquera ensuite 30 / 500 / 550
-// selon Normal / Premium / PRO. Le plafond le plus haut permet de tester le PRO.
+// Valeur conservée uniquement pour migrer l'ancien compteur navigateur.
+// La V306 applique désormais les droits et quotas réels côté serveur.
 const SCANNER_MONTHLY_LIMIT = 550;
 const SCANNER_BATCH_LIMIT = 4;
 const SCANNER_QUOTA_KEY = "king_tcg_scanner_quota_v1";
@@ -115,7 +116,7 @@ function writeQuota(used: number) {
   return next;
 }
 
-async function requestScanAnalysis(imageBase64: string) {
+async function requestScanAnalysis(imageBase64: string, sessionId: string, mode: "mono" | "batch" | "quad" | "listing") {
   const controller = new AbortController();
   const timeout = window.setTimeout(() => controller.abort(), SCAN_REQUEST_TIMEOUT_MS);
 
@@ -123,7 +124,7 @@ async function requestScanAnalysis(imageBase64: string) {
     const response = await fetch("/api/scan", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ imageBase64 }),
+      body: JSON.stringify({ imageBase64, sessionId, mode }),
       signal: controller.signal,
     });
 
@@ -132,6 +133,8 @@ async function requestScanAnalysis(imageBase64: string) {
       const message =
         response.status === 429
           ? "Quota Gemini temporairement atteint. Réessayez dans un instant."
+          : response.status === 401
+            ? "Vos 5 scans invités sont utilisés. Connectez-vous pour continuer."
           : payload?.error || "Analyse de la carte indisponible.";
       throw new Error(message);
     }
@@ -164,8 +167,10 @@ const EMPTY_QUAD_PROGRESS: QuadSlotProgress[] = [
 
 export default function ScannerPage() {
   const cameraRef = useRef<ScannerCameraHandle>(null);
+  const activeScanSessionRef = useRef("");
   const cameraSectionRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
+  const { account, refreshAccount } = useAccount();
 
   const [ready, setReady] = useState(false);
   const [scanning, setScanning] = useState(false);
@@ -192,6 +197,14 @@ export default function ScannerPage() {
   const [quadQuotaConsumed, setQuadQuotaConsumed] = useState(false);
   const [inventoryQuotaConsumed, setInventoryQuotaConsumed] = useState(false);
   const [quadProgress, setQuadProgress] = useState<QuadSlotProgress[]>(EMPTY_QUAD_PROGRESS);
+
+  const scannerLimit = account.scanLimit ?? Number.MAX_SAFE_INTEGER;
+  const quotaBlocked = !account.unlimited && quotaUsed >= scannerLimit;
+
+  useEffect(() => {
+    setQuotaUsed(account.scansUsed);
+    setQuotaEnd(account.quotaEndsAt || "");
+  }, [account.scansUsed, account.quotaEndsAt]);
 
   useEffect(() => {
     const quota = readQuota();
@@ -263,21 +276,11 @@ export default function ScannerPage() {
     } catch {}
   }, [inventoryList]);
 
-  const quotaBlocked = quotaUsed >= SCANNER_MONTHLY_LIMIT;
-
   const consumeSuccessfulSession = useCallback((mode: "single" | "batch" | "quad" | "inventory") => {
     if (mode === "batch" && batchQuotaConsumed) return true;
     if (mode === "quad" && quadQuotaConsumed) return true;
     if (mode === "inventory" && inventoryQuotaConsumed) return true;
-    const current = readQuota();
-    if (current.used >= SCANNER_MONTHLY_LIMIT) {
-      setQuotaUsed(current.used);
-      setQuotaEnd(current.end);
-      return false;
-    }
-    const next = writeQuota(current.used + 1);
-    setQuotaUsed(next.used);
-    setQuotaEnd(next.end);
+    if (quotaBlocked) return false;
     if (mode === "batch") {
       setBatchQuotaConsumed(true);
       try { window.localStorage.setItem(SCANNER_BATCH_QUOTA_KEY, "1"); } catch {}
@@ -288,8 +291,9 @@ export default function ScannerPage() {
       setInventoryQuotaConsumed(true);
       try { window.localStorage.setItem(SCANNER_INVENTORY_QUOTA_KEY, "1"); } catch {}
     }
+    void refreshAccount();
     return true;
-  }, [batchQuotaConsumed, quadQuotaConsumed, inventoryQuotaConsumed]);
+  }, [batchQuotaConsumed, quadQuotaConsumed, inventoryQuotaConsumed, quotaBlocked, refreshAccount]);
 
   // =====================================================
   // HAPTIC FEEDBACK
@@ -482,11 +486,8 @@ export default function ScannerPage() {
       return;
     }
 
-    const currentQuota = readQuota();
-    if (currentQuota.used >= SCANNER_MONTHLY_LIMIT) {
-      setQuotaUsed(currentQuota.used);
-      setQuotaEnd(currentQuota.end);
-      setStatus(`Quota Scanner atteint (${SCANNER_MONTHLY_LIMIT}/${SCANNER_MONTHLY_LIMIT}). Renouvellement le ${new Date(currentQuota.end).toLocaleDateString("fr-FR")}.`);
+    if (quotaBlocked) {
+      setStatus(`Quota Scanner atteint (${scannerLimit}/${scannerLimit}). Connectez-vous ou choisissez une formule supérieure.`);
       return;
     }
     const sequentialList = batchCaptureMode === "inventory" ? inventoryList : batchList;
@@ -538,7 +539,9 @@ export default function ScannerPage() {
       setStatus("Analyse IA Gemini V5...");
       logger.gemini("Envoi image vers /api/scan");
 
-      const resData = await requestScanAnalysis(image64);
+      const apiMode = scanMode === "single" ? "mono" : batchCaptureMode === "inventory" ? "listing" : "batch";
+      const resData = await requestScanAnalysis(image64, activeScanSessionRef.current || crypto.randomUUID(), apiMode);
+      if (resData?.quota) setQuotaUsed(Number(resData.quota.used) || 0);
 
       logger.gemini("Réponse Gemini V5", resData);
 
@@ -828,7 +831,9 @@ export default function ScannerPage() {
     context: { slot: QuadSlotIndex; attempt: 1 | 2; quality?: QuadImageQuality }
   ): Promise<QuadIdentificationResult> => {
     try {
-      const resData = await requestScanAnalysis(imageBase64);
+      const apiMode = batchCaptureMode === "inventory" ? "listing" : "quad";
+      const resData = await requestScanAnalysis(imageBase64, activeScanSessionRef.current || crypto.randomUUID(), apiMode);
+      if (resData?.quota) setQuotaUsed(Number(resData.quota.used) || 0);
 
       if (!resData.success || !resData.data) {
         return {
@@ -973,12 +978,19 @@ export default function ScannerPage() {
   }, [batchCaptureMode, inventoryQuotaConsumed, quadQuotaConsumed, consumeSuccessfulSession, handleQuadCardIdentified]);
 
   const handlePrimaryScan = async () => {
-    const currentQuota = readQuota();
-    if (currentQuota.used >= SCANNER_MONTHLY_LIMIT) {
-      setQuotaUsed(currentQuota.used);
-      setQuotaEnd(currentQuota.end);
-      setStatus(`Quota Scanner atteint (${SCANNER_MONTHLY_LIMIT}/${SCANNER_MONTHLY_LIMIT}). Renouvellement le ${new Date(currentQuota.end).toLocaleDateString("fr-FR")}.`);
+    if (quotaBlocked) {
+      setStatus(`Quota Scanner atteint (${scannerLimit}/${scannerLimit}). Connectez-vous ou choisissez une formule supérieure.`);
       return;
+    }
+    const sessionAlreadyOpen = scanMode === "batch" && (
+      batchCaptureMode === "inventory" ? inventoryQuotaConsumed
+        : batchCaptureMode === "grouped" ? quadQuotaConsumed
+          : batchQuotaConsumed
+    );
+    if (scanMode === "single" || !sessionAlreadyOpen || !activeScanSessionRef.current) {
+      activeScanSessionRef.current = typeof crypto !== "undefined" && "randomUUID" in crypto
+        ? crypto.randomUUID()
+        : `scan-${Date.now()}-${Math.random()}`;
     }
     const activeSessionList = batchCaptureMode === "grouped" ? quadList : batchCaptureMode === "inventory" ? inventoryList : batchList;
     const activeLimit = batchCaptureMode === "inventory" ? SCANNER_LISTING_LIMIT_V305 : SCANNER_BATCH_LIMIT;
@@ -1018,6 +1030,16 @@ export default function ScannerPage() {
     mode: "single" | "batch",
     captureMode: "individual" | "grouped" | "inventory" = "individual"
   ) => {
+    if (captureMode === "inventory" && !account.features.listing) {
+      setStatus("Listing est réservé aux comptes PRO. Activez PRO depuis la page Compte.");
+      router.push("/parametres/compte");
+      return;
+    }
+    if ((captureMode === "individual" && mode === "batch" || captureMode === "grouped") && !account.features.batch) {
+      setStatus("Batch et Quad nécessitent la formule Premium ou PRO.");
+      router.push("/parametres/compte");
+      return;
+    }
     setScanMode(mode);
     setBatchCaptureMode(captureMode);
     setModeSelected(true);
@@ -1175,10 +1197,10 @@ export default function ScannerPage() {
           <div className="rounded-[18px] border border-emerald-300/24 bg-emerald-400/[0.055] px-4 py-3 flex items-center justify-between gap-3 shadow-[0_10px_28px_rgba(16,185,129,.06)]">
             <div>
               <p className="text-[10px] font-bold uppercase tracking-[0.11em] text-emerald-300">Quota scanner</p>
-              <p className="mt-0.5 text-xs font-black text-emerald-100">{quotaUsed} / {SCANNER_MONTHLY_LIMIT} sessions</p>
-              <p className="mt-0.5 text-[10px] text-zinc-200">Renouvellement le {quotaEnd ? new Date(quotaEnd).toLocaleDateString("fr-FR") : "5 du mois"}</p>
+              <p className="mt-0.5 text-xs font-black text-emerald-100">{account.unlimited ? "Sessions illimitées" : `${quotaUsed} / ${scannerLimit} sessions`}</p>
+              <p className="mt-0.5 text-[10px] text-zinc-200">{account.authenticated ? `Formule ${account.roleLabel}` : "Invité · compte requis après 5 scans"}</p>
             </div>
-            <span className={`rounded-full border px-2.5 py-1 text-[10px] font-black ${quotaBlocked ? "border-amber-300/30 bg-amber-400/[0.08] text-amber-300" : "border-emerald-300/30 bg-emerald-400/[0.09] text-emerald-300"}`}>{Math.max(0, SCANNER_MONTHLY_LIMIT - quotaUsed)} restantes</span>
+            <span className={`rounded-full border px-2.5 py-1 text-[10px] font-black ${quotaBlocked ? "border-amber-300/30 bg-amber-400/[0.08] text-amber-300" : "border-emerald-300/30 bg-emerald-400/[0.09] text-emerald-300"}`}>{account.unlimited ? "Illimité" : `${Math.max(0, scannerLimit - quotaUsed)} restantes`}</span>
           </div>
 
           {modeSelected ? (
