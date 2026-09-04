@@ -33,6 +33,7 @@ const ACCOUNT_DATA_KEYS = [
   "king_tcg_psa_collection_v1",
   "king_tcg_price_history",
   "king_tcg_signal_snapshot_v1",
+  "king_tcg_sales_v1",
 ] as const;
 
 const CACHE_KEYS: ReadonlySet<string> = new Set([
