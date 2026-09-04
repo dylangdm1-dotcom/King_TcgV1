@@ -38,6 +38,7 @@ import { filterCards, type SearchFilters as SearchFiltersType } from "../../lib/
 import { type PokemonCard } from "../../lib/types";
 import { getMarketData } from "../../lib/marketEngine";
 import { getCachedMarketCardV275 } from "../../lib/priceClient";
+import { cardThumbnailCandidates } from "../../lib/cardImages";
 import {
   addToCollection,
   getCardQuantity,
@@ -114,19 +115,10 @@ function yearLabel(date?: string) {
 }
 
 
-function SearchResultCard({ card, compact = false }: { card: PokemonCard; compact?: boolean }) {
+function SearchResultCard({ card, compact = false, priority = false }: { card: PokemonCard; compact?: boolean; priority?: boolean }) {
   const imageCandidates = useMemo(
-    () =>
-      Array.from(
-        new Set(
-          [
-            card.images?.large,
-            card.images?.small,
-            ...(card.imageCandidates ?? []),
-          ].filter(Boolean)
-        )
-      ) as string[],
-    [card.images?.large, card.images?.small, card.imageCandidates]
+    () => cardThumbnailCandidates(card),
+    [card]
   );
   const [imageIndex, setImageIndex] = useState(0);
   const imageSrc = imageCandidates[imageIndex] || "";
@@ -188,7 +180,9 @@ function SearchResultCard({ card, compact = false }: { card: PokemonCard; compac
               <img
                 src={imageSrc}
                 alt={card.name}
-                loading="lazy"
+                loading={priority ? "eager" : "lazy"}
+                fetchPriority={priority ? "high" : "auto"}
+                decoding="async"
                 onError={() => setImageIndex((current) => current + 1)}
                 className="h-full w-full object-contain p-1 drop-shadow-[0_8px_10px_rgba(0,0,0,.4)]"
               />
@@ -254,7 +248,9 @@ function SearchResultCard({ card, compact = false }: { card: PokemonCard; compac
             <img
               src={imageSrc}
               alt={card.name}
-              loading="lazy"
+              loading={priority ? "eager" : "lazy"}
+              fetchPriority={priority ? "high" : "auto"}
+              decoding="async"
               onError={() => setImageIndex((current) => current + 1)}
               className="relative z-10 h-full w-full object-contain p-2.5 drop-shadow-[0_18px_20px_rgba(0,0,0,.46)] transition duration-300 group-hover:scale-[1.035]"
             />
@@ -894,7 +890,7 @@ export default function Recherche() {
                   transition={{ duration: 0.24, delay: Math.min(index, 10) * 0.018 }}
                   className={viewMode === "large" ? "w-full max-w-md" : "min-w-0 w-full"}
                 >
-                  <SearchResultCard card={card} compact={viewMode === "compact3"} />
+                  <SearchResultCard card={card} compact={viewMode === "compact3"} priority={index < 6} />
                 </motion.div>
               ))}
             </motion.div>

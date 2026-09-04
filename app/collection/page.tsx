@@ -19,7 +19,7 @@ import Navbar from "../../components/Navbar";
 import BackButton from "../../components/BackButton";
 
 import { getCollection, getFavorites, getCondition } from "@/lib/storage";
-import { enrichAndCacheCards, getCardById } from "../../lib/pokemon";
+import { enrichAndCacheCards, getCachedCardsForAnalytics, getCardById } from "../../lib/pokemon";
 import { calculateRealMarketPrices } from "../../lib/priceTracker";
 import { getAdjustedPriceByCondition } from "../../lib/marketEngine";
 import { PokemonCard } from "../../lib/types";
@@ -98,9 +98,31 @@ export default function BibliothequePage() {
     const collectionIds = Object.keys(collection);
     const favoriteIds = getFavorites();
 
+    // Affichage immédiat depuis le cache local. Auparavant la page attendait
+    // un appel réseau TCGdex par carte avant d'afficher le moindre résultat.
+    const cachedById = new Map(
+      getCachedCardsForAnalytics().map((card) => [card.id, card] as const)
+    );
+    const cachedCollection = collectionIds
+      .map((id) => {
+        const card = cachedById.get(id);
+        return card ? { ...card, qty: collection[id] } : null;
+      })
+      .filter((card): card is CollectionCardType => card !== null);
+    const cachedFavorites = favoriteIds
+      .map((id: string) => cachedById.get(id) ?? null)
+      .filter((card): card is PokemonCard => card !== null);
+
+    setCollectionCards(cachedCollection);
+    setFavoriteCards(cachedFavorites);
+    setLoading(false);
+
+    const missingCollectionIds = collectionIds.filter((id) => !cachedById.has(id));
+    const missingFavoriteIds = favoriteIds.filter((id: string) => !cachedById.has(id));
+
     Promise.all([
       Promise.all(
-        collectionIds.map(async (id) => {
+        missingCollectionIds.map(async (id) => {
           try {
             const card = await getCardById(id);
             if (!card) {
@@ -121,7 +143,7 @@ export default function BibliothequePage() {
         })
       ),
       Promise.all(
-        favoriteIds.map(async (id: string) => {
+        missingFavoriteIds.map(async (id: string) => {
           try {
             const card = await getCardById(id);
             return card ?? null;
@@ -147,15 +169,16 @@ export default function BibliothequePage() {
           (card): card is PokemonCard => card !== null
         );
     
-      setCollectionCards(cleanCollection);
-      setFavoriteCards(cleanFavorites);
-      setLoading(false);
+      const completeCollection = [...cachedCollection, ...cleanCollection];
+      const completeFavorites = [...cachedFavorites, ...cleanFavorites];
+      setCollectionCards(completeCollection);
+      setFavoriteCards(completeFavorites);
 
-      void enrichAndCacheCards(cleanCollection).then((fresh) => {
+      void enrichAndCacheCards(completeCollection).then((fresh) => {
         setCollectionCards(
           fresh.map((card, index) => ({
             ...card,
-            qty: cleanCollection[index]?.qty ?? 1,
+            qty: completeCollection[index]?.qty ?? 1,
           }))
         );
       }).catch(() => {});

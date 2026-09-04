@@ -37,6 +37,7 @@ import {
   YAxis,
 } from "recharts";
 import { enrichAndCacheCards, getCardById, getCachedCardsForAnalytics } from "@/lib/pokemon";
+import { toCardThumbnailUrl } from "@/lib/cardImages";
 import { getEffectiveMarketHistory, getLastPrice } from "@/lib/priceHistory";
 import { getInvestmentScore } from "@/lib/investment";
 import {
@@ -326,16 +327,17 @@ export default function DashboardPage() {
         return;
       }
 
-      // Source marché commune : enrichAndCacheCards réutilise immédiatement le dernier
-      // prix connu et ne redemande réellement l'API qu'après 6 h pour chaque carte.
-      const baseCards = (await Promise.all(ids.map((id) => getCardById(id))))
+      // Priorité au cache partagé : l'ouverture du Dashboard ne doit pas
+      // attendre un appel TCGdex par carte déjà connue du navigateur.
+      const analyticsCards = getCachedCardsForAnalytics();
+      const cachedById = new Map(analyticsCards.map((card) => [card.id, card] as const));
+      const baseCards = (await Promise.all(ids.map((id) => cachedById.get(id) ?? getCardById(id))))
         .filter((card): card is PokemonCard => Boolean(card));
-      const synchronizedCards = await enrichAndCacheCards(baseCards);
+      const synchronizedCards = baseCards;
       const synchronizedById = new Map(synchronizedCards.map((card) => [card.id, card]));
 
       // Les tendances Premium lisent uniquement le cache navigateur existant.
       // Aucun appel API n'est déclenché par l'ouverture du bloc Premium.
-      const analyticsCards = getCachedCardsForAnalytics();
       setMarketTrendSamples(
         analyticsCards
           .map((card) => ({
@@ -428,10 +430,7 @@ export default function DashboardPage() {
                   rarity:
                     card.rarity,
                   images: {
-                    small:
-                      card.images
-                        ?.small ||
-                      "",
+                    small: toCardThumbnailUrl(card.images?.small || card.images?.large || ""),
                     large:
                       card.images
                         ?.large ||
@@ -478,6 +477,12 @@ export default function DashboardPage() {
       setCards(
         validCards
       );
+
+      // Les prix se rafraîchissent après le premier affichage. Les événements
+      // marché existants remettent ensuite à jour les calculs depuis le cache.
+      void enrichAndCacheCards(baseCards).catch((error) => {
+        console.warn("[King_TCG] Actualisation marché différée :", error);
+      });
     } catch (error) {
       console.error(
         "[King_TCG] Dashboard refresh error:",
