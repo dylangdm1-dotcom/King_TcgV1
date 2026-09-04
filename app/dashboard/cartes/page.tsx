@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { ArrowDownWideNarrow, ArrowRight, Search, SlidersHorizontal, TrendingDown, TrendingUp, WalletCards } from "lucide-react";
+import { ArrowDownWideNarrow, ArrowRight, CircleDollarSign, Search, SlidersHorizontal, TrendingDown, TrendingUp, WalletCards } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import { getBuyPrice, getCardQuantity, getCollection, getCondition } from "@/lib/storage";
 import { getCardById } from "@/lib/pokemon";
@@ -155,7 +155,7 @@ export default function DashboardCardsPage() {
                     </div>
                     <div className="kt-subpanel mt-2 flex items-center justify-between px-3 py-2">
                       <span className="flex items-center gap-1.5 text-[10px] font-black text-zinc-100">{performance >= 0 ? <TrendingUp className="h-3.5 w-3.5 text-emerald-200" /> : <TrendingDown className="h-3.5 w-3.5 text-rose-300" />} Rendement {performance >= 0 ? "+" : ""}{performance.toFixed(1)}%</span>
-                      <Link href={`/card/${card.id}`} className="flex items-center gap-1 rounded-lg border border-sky-300/15 bg-sky-400/[0.07] px-2 py-1 text-[10px] font-bold uppercase tracking-[0.11em] text-sky-200">Fiche <ArrowRight className="h-3 w-3" /></Link>
+                      <span className="flex items-center gap-1.5"><Link href={`/ventes?card=${encodeURIComponent(card.id)}`} className="flex items-center gap-1 rounded-lg border border-amber-300/20 bg-amber-300/[0.07] px-2 py-1 text-[10px] font-bold uppercase tracking-[0.11em] text-amber-200"><CircleDollarSign className="h-3 w-3" /> Vendre</Link><Link href={`/card/${card.id}`} className="flex items-center gap-1 rounded-lg border border-sky-300/15 bg-sky-400/[0.07] px-2 py-1 text-[10px] font-bold uppercase tracking-[0.11em] text-sky-200">Fiche <ArrowRight className="h-3 w-3" /></Link></span>
                     </div>
                   </article>
                 );
