@@ -1,4 +1,5 @@
 import type { CollectionMap } from "./types";
+import { getSales, SALES_STORAGE_KEY, type CardSale } from "./sales";
 
 //
 // 💾 STORAGE ENGINE
@@ -275,6 +276,7 @@ export type BackupData = {
   favorites: string[];
   collection: CollectionMap;
   collectionInfos: Record<string, CollectionInfo>;
+  sales?: CardSale[];
 };
 
 /**
@@ -289,6 +291,7 @@ export function exportBackup() {
     favorites: getFavorites(),
     collection: getCollection(),
     collectionInfos: getCollectionInfos(),
+    sales: getSales(),
   };
 
   const blob = new Blob([JSON.stringify(data, null, 2)], {
@@ -328,6 +331,7 @@ export function importBackup(
         COLLECTION_INFO_KEY,
         JSON.stringify(parsed.collectionInfos || {})
       );
+      localStorage.setItem(SALES_STORAGE_KEY, JSON.stringify(parsed.sales || []));
     } else {
       // Mode MERGE (Fusion)
       const currentFavs = getFavorites();
@@ -360,6 +364,10 @@ export function importBackup(
         COLLECTION_INFO_KEY,
         JSON.stringify(mergedInfos)
       );
+
+      const salesById = new Map(getSales().map((sale) => [sale.id, sale]));
+      (parsed.sales || []).forEach((sale) => salesById.set(sale.id, sale));
+      localStorage.setItem(SALES_STORAGE_KEY, JSON.stringify(Array.from(salesById.values())));
     }
 
     notifyStorageUpdate();
@@ -379,6 +387,7 @@ export function clearAllData() {
   localStorage.removeItem(FAV_KEY);
   localStorage.removeItem(COLLECTION_KEY);
   localStorage.removeItem(COLLECTION_INFO_KEY);
+  localStorage.removeItem(SALES_STORAGE_KEY);
 
   notifyStorageUpdate();
 }
