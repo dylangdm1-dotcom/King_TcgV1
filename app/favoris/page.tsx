@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import {
   Bookmark,
@@ -23,7 +23,7 @@ import CardResult from "@/components/cards/CardResult";
 import CollectionCardTile from "@/components/cards/CollectionCardTile";
 
 import { getFavorites } from "../../lib/storage";
-import { getCardById } from "../../lib/pokemon";
+import { getCachedCardsForAnalytics, getCardById } from "../../lib/pokemon";
 import { calculateRealMarketPrices } from "../../lib/priceTracker";
 import { PokemonCard } from "../../lib/types";
 
@@ -54,11 +54,13 @@ export default function FavorisPage() {
   const [sortBy, setSortBy] = useState<SortOption>("value_desc");
   const [filterRarity, setFilterRarity] = useState<string>("all");
   const [viewMode, setViewMode] = useState<"compact" | "large">("compact");
+  const loadRequestRef = useRef(0);
 
   // ======================================================
   // Chargement favoris V5.0
   // ======================================================
   const loadFavorites = async () => {
+    const requestId = ++loadRequestRef.current;
     setLoading(true);
     try {
       const favoriteIds = getFavorites();
@@ -68,8 +70,26 @@ export default function FavorisPage() {
         return;
       }
 
+      // Réutilise immédiatement les cartes et les cotes déjà en cache.
+      const cachedById = new Map(
+        getCachedCardsForAnalytics().map((card) => [card.id, card] as const)
+      );
+      const cachedFavorites = favoriteIds
+        .map((id: string) => cachedById.get(id) ?? null)
+        .filter((card): card is PokemonCard => card !== null);
+
+      setCards(cachedFavorites);
+
+      const missingIds = favoriteIds.filter((id: string) => !cachedById.has(id));
+      if (!missingIds.length) {
+        setLoading(false);
+        return;
+      }
+
+      setLoading(cachedFavorites.length === 0);
+
       const results = await Promise.all(
-        favoriteIds.map(async (id: string) => {
+        missingIds.map(async (id: string) => {
           try {
             const card = await getCardById(id);
             return card ?? null;
@@ -84,11 +104,16 @@ export default function FavorisPage() {
         })
       );
 
-      const validCards = results.filter(
-        (card): card is PokemonCard => card !== null
-      );
+      if (requestId !== loadRequestRef.current) return;
 
-      setCards(validCards);
+      results.forEach((card) => {
+        if (card) cachedById.set(card.id, card);
+      });
+      setCards(
+        favoriteIds
+          .map((id: string) => cachedById.get(id) ?? null)
+          .filter((card): card is PokemonCard => card !== null)
+      );
     } catch (error) {
       console.error(
         "[King_TCG V5.0] Erreur globale Watchlist :",
@@ -96,7 +121,7 @@ export default function FavorisPage() {
       );
       setCards([]);
     } finally {
-      setLoading(false);
+      if (requestId === loadRequestRef.current) setLoading(false);
     }
   };
 
@@ -129,6 +154,7 @@ export default function FavorisPage() {
     );
 
     return () => {
+      loadRequestRef.current += 1;
       if (refreshTimer) clearTimeout(refreshTimer);
       window.removeEventListener(
         "storage_favorites_update",

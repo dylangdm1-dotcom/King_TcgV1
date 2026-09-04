@@ -1,7 +1,7 @@
 // app/page.tsx
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Navbar from "@/components/Navbar";
@@ -11,9 +11,10 @@ import {
   Bell, TrendingUp, Crown, BadgeCheck, Handshake, ChevronDown,
   ExternalLink, Video, Heart, CalendarDays, Newspaper, CircleDollarSign, PackageOpen
 } from "lucide-react";
-import { getCollection, getFavorites } from "@/lib/storage";
-import { getCardById } from "@/lib/pokemon";
-import { getMarketData } from "@/lib/marketEngine";
+import { getCollection, getCondition, getFavorites } from "@/lib/storage";
+import { getCachedCardsForAnalytics, getCardById } from "@/lib/pokemon";
+import { getAdjustedPriceByCondition } from "@/lib/marketEngine";
+import { calculateRealMarketPrices } from "@/lib/priceTracker";
 import { UPCOMING_OFFICIAL_RELEASES } from "@/lib/setCatalog";
 
 export default function Home() {
@@ -25,6 +26,7 @@ export default function Home() {
   const [portfolioValue, setPortfolioValue] = useState(0);
   const [creatorOpen, setCreatorOpen] = useState(false);
   const [newsOpen, setNewsOpen] = useState(false);
+  const statsRequestRef = useRef(0);
 
   const upcomingKingTcgItems = [
     {
@@ -61,6 +63,7 @@ export default function Home() {
 
   useEffect(() => {
     async function loadStats() {
+      const requestId = ++statsRequestRef.current;
       const collection = getCollection();
       const ids = Object.keys(collection);
 
@@ -80,33 +83,51 @@ export default function Home() {
 
       setFavorites(getFavorites().length);
 
-      let value = 0;
+      // Même source que Collection : les cartes et leurs cotes déjà enrichies
+      // sont disponibles immédiatement, sans nouvel appel TCGdex par carte.
+      const cardsById = new Map(
+        getCachedCardsForAnalytics().map((card) => [card.id, card] as const)
+      );
 
-      const cards = await Promise.all(
-        ids.map(async (id) => {
-          const card = await getCardById(id);
+      const calculatePortfolioValue = () =>
+        ids.reduce((value, id) => {
+          const card = cardsById.get(id);
+          if (!card) return value;
 
-          if (!card) return null;
+          const entry = collection[id] as any;
+          const qty = typeof entry === "number" ? entry : entry?.quantity || 1;
+          const market = calculateRealMarketPrices(card);
+          const unitPrice = getAdjustedPriceByCondition(
+            market.average || 0,
+            getCondition(id)
+          );
 
-          return {
-            card,
-            qty: collection[id],
-          };
+          return value + unitPrice * qty;
+        }, 0);
+
+      // Affichage instantané des prix déjà visibles dans Collection/Dashboard.
+      setPortfolioValue(calculatePortfolioValue());
+
+      const missingIds = ids.filter((id) => !cardsById.has(id));
+      if (!missingIds.length) return;
+
+      const missingCards = await Promise.all(
+        missingIds.map(async (id) => {
+          try {
+            return await getCardById(id);
+          } catch {
+            return null;
+          }
         })
       );
 
-      cards.filter(Boolean).forEach((item: any) => {
-        const market = getMarketData(item.card);
+      if (requestId !== statsRequestRef.current) return;
 
-        const qty =
-          typeof item.qty === "number"
-            ? item.qty
-            : item.qty?.quantity || 1;
-
-        value += (market?.average || 0) * qty;
+      missingCards.forEach((card) => {
+        if (card) cardsById.set(card.id, card);
       });
 
-      setPortfolioValue(value);
+      setPortfolioValue(calculatePortfolioValue());
     }
 
     loadStats();
@@ -115,10 +136,19 @@ export default function Home() {
       "king_tcg_update",
       loadStats
     );
+    window.addEventListener(
+      "king_tcg_market_price_update",
+      loadStats
+    );
 
     return () => {
+      statsRequestRef.current += 1;
       window.removeEventListener(
         "king_tcg_update",
+        loadStats
+      );
+      window.removeEventListener(
+        "king_tcg_market_price_update",
         loadStats
       );
     };

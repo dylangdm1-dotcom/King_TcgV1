@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   Search,
   ArrowUpDown,
@@ -20,7 +20,7 @@ import CardResult from "@/components/cards/CardResult";
 import CollectionCardTile from "@/components/cards/CollectionCardTile";
 
 import { getCollection } from "../../../lib/storage";
-import { enrichAndCacheCards, getCardById } from "../../../lib/pokemon";
+import { enrichAndCacheCards, getCachedCardsForAnalytics, getCardById } from "../../../lib/pokemon";
 import { calculateRealMarketPrices } from "../../../lib/priceTracker";
 import { PokemonCard } from "../../../lib/types";
 
@@ -58,8 +58,10 @@ export default function CollectionToutPage() {
   const [sortBy, setSortBy] = useState<SortOption>("value_desc");
   const [filterRarity, setFilterRarity] = useState<string>("all");
   const [viewMode, setViewMode] = useState<"compact" | "large">("compact");
+  const loadRequestRef = useRef(0);
 
   const loadCollection = async () => {
+    const requestId = ++loadRequestRef.current;
     setLoading(true);
     try {
       const collection = getCollection();
@@ -75,8 +77,32 @@ export default function CollectionToutPage() {
         return;
       }
 
+      // Affiche d'abord le cache partagé déjà utilisé par Collection/Dashboard.
+      // L'inventaire n'attend plus un aller-retour TCGdex pour chaque carte.
+      const cachedById = new Map(
+        getCachedCardsForAnalytics().map((card) => [card.id, card] as const)
+      );
+      const cachedCards = ids
+        .map((id) => {
+          const card = cachedById.get(id);
+          return card ? { ...card, qty: safeCollection[id] ?? 1 } : null;
+        })
+        .filter((card) => card !== null) as CollectionCardType[];
+
+      setCards(cachedCards);
+
+      const missingIds = ids.filter((id) => !cachedById.has(id));
+      if (!missingIds.length) {
+        setLoading(false);
+        return;
+      }
+
+      // On conserve le squelette uniquement lors d'une toute première ouverture
+      // sans aucune donnée locale disponible.
+      setLoading(cachedCards.length === 0);
+
       const results = await Promise.all(
-        ids.map(async (id) => {
+        missingIds.map(async (id) => {
           try {
             const card = await getCardById(id);
             if (!card) {
@@ -97,16 +123,27 @@ export default function CollectionToutPage() {
         })
       );
 
-      const cleaned = results.filter(
-        (card) => card !== null
-      ) as CollectionCardType[];
-      
-      setCards(cleaned);
-      void enrichAndCacheCards(cleaned).then((fresh) => {
+      if (requestId !== loadRequestRef.current) return;
+
+      results.forEach((card) => {
+        if (card) cachedById.set(card.id, card);
+      });
+      const complete = ids
+        .map((id) => {
+          const card = cachedById.get(id);
+          return card ? { ...card, qty: safeCollection[id] ?? 1 } : null;
+        })
+        .filter((card) => card !== null) as CollectionCardType[];
+
+      setCards(complete);
+      setLoading(false);
+
+      void enrichAndCacheCards(complete).then((fresh) => {
+        if (requestId !== loadRequestRef.current) return;
         setCards(
-          fresh.map((card, index) => ({
+          fresh.map((card) => ({
             ...card,
-            qty: cleaned[index]?.qty ?? 1,
+            qty: safeCollection[card.id] ?? 1,
           }))
         );
       }).catch(() => {});
@@ -116,7 +153,7 @@ export default function CollectionToutPage() {
         error
       );
     } finally {
-      setLoading(false);
+      if (requestId === loadRequestRef.current) setLoading(false);
     }
   };
 
@@ -127,9 +164,12 @@ export default function CollectionToutPage() {
     };
     window.addEventListener("king_tcg_update", refresh);
     window.addEventListener("storage_collection_update", refresh);
+    window.addEventListener("king_tcg_market_price_update", refresh);
     return () => {
+      loadRequestRef.current += 1;
       window.removeEventListener("king_tcg_update", refresh);
       window.removeEventListener("storage_collection_update", refresh);
+      window.removeEventListener("king_tcg_market_price_update", refresh);
     };
   }, []);
 
