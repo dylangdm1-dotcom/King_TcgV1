@@ -27,7 +27,14 @@ const CATEGORY_RULES: Array<{ pattern: RegExp; category: ItemCategory }> = [
 const EXCLUDED_CATEGORY = /single|oversized|token|sleeve|playmat|album|binder|dice|storage|empty/i;
 
 function list<T>(value: unknown): T[] {
-  return Array.isArray(value) ? value as T[] : [];
+  if (Array.isArray(value)) return value as T[];
+  if (value && typeof value === "object") {
+    const record = value as Record<string, unknown>;
+    for (const key of ["data", "results", "games", "items", "categories", "expansions", "blueprints"]) {
+      if (Array.isArray(record[key])) return record[key] as T[];
+    }
+  }
+  return [];
 }
 
 function positiveInteger(value: unknown): number | null {
@@ -76,7 +83,12 @@ function euroPrice(product: CardTraderMarketplaceProduct): number | null {
 
 export async function loadCardTraderPokemonReference() {
   const games = list<CardTraderGame>(await cardTraderGet<CardTraderGame[]>("/games"));
-  const pokemon = games.find((game) => normalizeItemText(`${game.name} ${game.display_name}`).includes("pokemon"));
+  // CardTrader documente Pokémon avec game_id=5. Le repli évite qu'un champ
+  // de libellé absent ou une enveloppe de réponse modifiée bloque tout le
+  // catalogue FR alors que les routes catégories/extensions restent valides.
+  const pokemon = games.find((game) => normalizeItemText(`${game.name} ${game.display_name}`).includes("pokemon")) ||
+    games.find((game) => Number(game.id) === 5) ||
+    { id: 5, name: "Pokemon", display_name: "Pokémon" };
   if (!pokemon || !positiveInteger(pokemon.id)) throw new Error("cardtrader_pokemon_game_missing");
 
   const [rawCategories, rawExpansions] = await Promise.all([
@@ -92,6 +104,9 @@ export async function loadCardTraderPokemonReference() {
     .filter((category): category is CardTraderSealedCategory => Boolean(category));
   const expansions = list<CardTraderExpansion>(rawExpansions)
     .filter((expansion) => Number(expansion.game_id) === pokemon.id && positiveInteger(expansion.id));
+
+  if (!categories.length) throw new Error("cardtrader_pokemon_sealed_categories_missing");
+  if (!expansions.length) throw new Error("cardtrader_pokemon_expansions_missing");
 
   return { game: pokemon, categories, expansions };
 }
