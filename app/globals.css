@@ -1950,7 +1950,8 @@ body {
 
 .kt-scanner-stage { border-color: rgba(103,232,249,.32) !important; box-shadow: 0 24px 70px rgba(0,0,0,.55), 0 0 34px rgba(34,211,238,.09); }
 .kt-scanner-stage[data-scan-mode="batch"],
-.kt-scanner-stage[data-scan-mode="quad"] { border-color: rgba(245,196,81,.52) !important; box-shadow: 0 24px 70px rgba(0,0,0,.55), 0 0 36px rgba(245,196,81,.14); }
+.kt-scanner-stage[data-scan-mode="quad"],
+.kt-scanner-stage[data-scan-mode="listing"] { border-color: rgba(245,196,81,.62) !important; box-shadow: 0 24px 70px rgba(0,0,0,.55), 0 0 40px rgba(245,196,81,.16); }
 .kt-scanner-stage::after {
   content: "";
   position: absolute;
@@ -1961,11 +1962,18 @@ body {
   box-shadow: inset 0 0 42px rgba(34,211,238,.045);
 }
 .kt-scanner-stage[data-scan-mode="batch"]::after,
-.kt-scanner-stage[data-scan-mode="quad"]::after {
+.kt-scanner-stage[data-scan-mode="quad"]::after,
+.kt-scanner-stage[data-scan-mode="listing"]::after {
   border-color: rgba(245,196,81,.28);
   box-shadow: inset 0 0 42px rgba(245,196,81,.075);
 }
 .kt-scanner-card-window { box-shadow: 0 0 0 1px rgba(255,255,255,.055), inset 0 0 28px rgba(34,211,238,.045), 0 0 28px rgba(34,211,238,.10); }
+
+.kt-listing-progress {
+  border-color: rgba(245,196,81,.32) !important;
+  background: linear-gradient(180deg, rgba(44,33,12,.42), rgba(13,17,22,.96)) !important;
+  box-shadow: 0 14px 36px rgba(0,0,0,.25), 0 0 28px rgba(245,196,81,.07) !important;
+}
 
 .kt-psa-shell .kt-psa-feature-strip {
   border-color: rgba(103,232,249,.36) !important;
@@ -2336,5 +2344,82 @@ html[data-theme="light"] .kt-items-page .kt-item-card {
   .kt-mobile-nav a {
     min-height: 50px;
     font-size: 7px;
+  }
+}
+
+/* =========================================================
+   KING_TCG V305 — FINAL ALPHA
+   Finition transversale mobile/desktop et Listing PRO gold.
+   ========================================================= */
+:root {
+  --kt-gold: #f5c451;
+  --kt-gold-soft: rgba(245, 196, 81, .10);
+  --kt-focus: rgba(103, 232, 249, .92);
+}
+
+html { scroll-behavior: smooth; }
+
+:is(a, button, input, select, textarea):focus-visible {
+  outline: 2px solid var(--kt-focus);
+  outline-offset: 3px;
+}
+
+button:disabled,
+[aria-disabled="true"] {
+  cursor: not-allowed;
+}
+
+.kt-page-header,
+.kt-hero-surface,
+.kt-section-surface,
+.kt-premium-panel {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.kt-scanner-stage[data-scan-mode="listing"] {
+  background:
+    radial-gradient(circle at 50% 12%, rgba(245,196,81,.10), transparent 38%),
+    #030405;
+}
+
+.kt-scanner-stage[data-scan-mode="listing"]::before {
+  content: "LISTING PRO";
+  position: absolute;
+  z-index: 12;
+  top: 10px;
+  right: 10px;
+  padding: 4px 8px;
+  border: 1px solid rgba(245,196,81,.35);
+  border-radius: 999px;
+  background: rgba(18,12,3,.76);
+  color: #ffe29a;
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: .13em;
+  pointer-events: none;
+}
+
+@media (max-width: 640px) {
+  .kt-page-wrap {
+    padding-inline: 12px;
+    padding-bottom: calc(112px + env(safe-area-inset-bottom));
+  }
+
+  .kt-page-header { padding: 15px 14px; }
+  .kt-page-subtitle { line-height: 1.48; }
+  .kt-scanner-stage { border-radius: 20px !important; }
+
+  :is(button, a)[class*="rounded"] {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
   }
 }

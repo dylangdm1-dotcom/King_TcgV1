@@ -12,6 +12,12 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "King_TCG - Cartes & Items Pokémon",
   description: "Recherche, scanner, collection de cartes et espace indépendant pour les produits Pokémon scellés.",
+  applicationName: "King_TCG",
+  manifest: "/manifest.webmanifest",
+  icons: { icon: "/favicon.ico", apple: "/brands/king-tcg-logo.png" },
+  appleWebApp: { capable: true, statusBarStyle: "black-translucent", title: "King_TCG" },
+  viewport: "width=device-width, initial-scale=1, viewport-fit=cover",
+  themeColor: "#070b10",
 };
 
 export default function RootLayout({

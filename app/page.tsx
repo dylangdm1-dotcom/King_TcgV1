@@ -34,8 +34,8 @@ export default function Home() {
     },
     {
       title: "Catalogue Items français propre",
-      text: "Le connecteur CardTrader est préparé ; le catalogue FR reste vide jusqu’à validation réelle des produits et visuels.",
-      badge: "V290",
+      text: "Le catalogue FR démarre par défaut, regroupe les produits identiques et conserve les visuels disponibles.",
+      badge: "V304",
     },
     {
       title: "Espace Items indépendant",
@@ -53,8 +53,8 @@ export default function Home() {
       badge: "À venir",
     },
     {
-      title: "Scanner de stock PRO",
-      text: "Étude d’un inventaire gros volume sans prix, exportable en CSV ou Excel.",
+      title: "Listing Scanner PRO",
+      text: "Scan accéléré de 2 ou 4 cartes par photo, jusqu’à 40 lignes corrigibles et exportables dans Excel.",
       badge: "PRO",
     },
   ] as const;
@@ -137,7 +137,7 @@ export default function Home() {
           <div className="kt-rise-in relative z-10 mx-auto max-w-3xl space-y-5">
             <span className="mx-auto inline-flex items-center gap-1.5 rounded-full border border-cyan-400/20 bg-cyan-400/[0.06] px-3 py-1.5 text-[9px] font-black uppercase tracking-[0.14em] text-cyan-300">
               <Sparkles className="w-3 h-3" />
-              King_TCG V290 • Accès anticipé
+              King_TCG V305 • Final Alpha
             </span>
 
             <h1 className="flex items-center justify-center">
@@ -155,7 +155,7 @@ export default function Home() {
                 className="mx-auto flex w-full max-w-sm items-center justify-center gap-2 rounded-[16px] border border-cyan-300/35 bg-cyan-400 px-6 py-3.5 text-[11px] font-black uppercase tracking-[0.12em] text-[#031014] shadow-[0_16px_34px_rgba(34,211,238,.16)] transition hover:bg-cyan-300 active:scale-[0.99]"
               >
                 <Camera className="w-4 h-4 text-black" />
-                Scanner IA V5
+                Scanner IA 5.1
                 <Zap className="w-3.5 h-3.5 fill-black" />
               </button>
             </div>
