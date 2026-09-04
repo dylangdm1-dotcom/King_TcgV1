@@ -98,12 +98,12 @@ const premiumHighlights = [
 const proHighlights = [
   {
     title: "Toutes les fonctions Premium",
-    description: "Le niveau PRO reprend l’intégralité de Premium.",
+    description: "Le niveau PRO reprend l’intégralité de Premium avec 550 sessions Scanner par mois.",
     icon: Crown,
   },
   {
-    title: "Scanner de stock gros volume",
-    description: "Inventaire de 40 à 50 cartes par session, sans calcul de prix automatique.",
+    title: "Listing PRO · 2 ou 4 cartes",
+    description: "Deux ou quatre cartes par photo, jusqu’à 40 lignes par session, sans prix ni visuel.",
     icon: Boxes,
   },
   {
@@ -416,8 +416,9 @@ export default function AccountManagementPage() {
                   <span className="flex h-10 w-10 items-center justify-center rounded-[13px] border border-amber-200/35 bg-amber-200/[0.09] text-amber-200"><Boxes className="h-5 w-5" /></span>
                   <h3 className="mt-3 text-[17px] font-black tracking-tight text-white sm:text-[19px]"><span className="text-amber-200">PRO</span> KING_TCG</h3>
                   <p className="mt-1 text-[12px] font-medium text-zinc-200">Pour vendeurs, boutiques et gros collectionneurs.</p>
-                  <div className="mt-4 rounded-full border border-amber-200/20 bg-amber-200/[0.06] px-3 py-1 text-[10px] font-black uppercase tracking-[0.08em] text-amber-200">Tarif à définir · en étude</div>
-                  <div className="mt-4 w-full rounded-[14px] border border-cyan-300/18 bg-cyan-300/[0.045] px-4 py-3 text-left"><p className="text-[10px] font-black uppercase tracking-[0.08em] text-cyan-300">Scanner PRO</p><p className="mt-1 text-[11px] leading-5 text-zinc-300">Listing fiable en gros lot, puis export. Les prix ne font volontairement pas partie de ce scanner.</p></div>
+                  <div className="mt-4 flex items-end justify-center gap-2"><span className="text-[26px] font-black tracking-tight text-white sm:text-[30px]">6,99 €</span><span className="pb-1 text-sm font-bold text-zinc-200">/ mois</span></div>
+                  <div className="mt-3 rounded-full border border-amber-200/20 bg-amber-200/[0.06] px-3 py-1 text-[10px] font-black uppercase tracking-[0.08em] text-amber-200">550 sessions Scanner / mois</div>
+                  <div className="mt-4 w-full rounded-[14px] border border-amber-200/20 bg-amber-200/[0.045] px-4 py-3 text-left"><p className="text-[10px] font-black uppercase tracking-[0.08em] text-amber-200">Listing PRO</p><p className="mt-1 text-[11px] leading-5 text-zinc-300">2 ou 4 cartes par photo, 40 lignes, correction manuelle et export Excel CSV. Aucun appel de prix.</p></div>
                 </div>
                 <div className="relative mt-5 border-t border-amber-200/15 pt-5">
                   <div className="kt-feature-list overflow-hidden rounded-[16px] bg-black/15">
@@ -428,7 +429,7 @@ export default function AccountManagementPage() {
                       </div>
                     ))}
                   </div>
-                  <div className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-[14px] border border-amber-200/25 bg-amber-200/[0.055] px-4 py-3.5 text-[10px] font-black uppercase tracking-[0.06em] text-amber-200"><ShieldCheck className="h-4 w-4" /> Formule en préparation</div>
+                  <button type="button" className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-[14px] border border-amber-200/50 bg-gradient-to-r from-[#76500b] via-[#a06e0b] to-[#684309] px-4 py-3.5 text-[10px] font-black uppercase tracking-[0.06em] text-white shadow-[0_14px_34px_rgba(245,196,81,.11)] transition hover:brightness-110"><Crown className="h-4 w-4" /> Passer PRO · 6,99 € / mois</button>
                 </div>
               </article>
             </div>
