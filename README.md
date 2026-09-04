@@ -2,9 +2,9 @@
 
 King_TCG est une application Next.js de recherche, collection et analyse de cartes Pokémon TCG. Elle réunit un catalogue multilingue, la gestion de collection, les favoris, un scanner assisté par IA, une estimation PSA et une agrégation de données marché.
 
-**Version actuelle : V305 Final Alpha — Items FR/EN, Listing Scanner PRO 2/4 cartes, export Excel et finition mobile/desktop.**
+**Version actuelle : V306 Web définitive — comptes Google Supabase, quotas serveur, administrateur illimité, abonnements Stripe test, Cloud, Items FR/EN, Vente et Listing PRO.**
 
-La V305 transforme l’ancien essai « Inventaire » en **Listing PRO gold** : choix de 2 ou 4 cartes par photo, deux analyses simultanées, accumulation de 40 cartes physiques, correction manuelle et export CSV UTF-8 pour Excel. Ce parcours ne déclenche ni recherche de prix ni affichage de visuel. La capacité Alpha est réglée à 550 sessions afin de tester le niveau PRO ; les droits réels appliqueront ensuite 30 / 500 / 550 selon l’abonnement.
+La V306 reprend tout le contenu de la V305 et active le socle commercial web. Un invité dispose de 5 sessions Scanner puis doit se connecter ; un compte Normal en possède 30/mois, Premium 500/mois et PRO 550/mois. Premium débloque Batch/Quad, PRO débloque le **Listing gold** de 2 ou 4 cartes par photo jusqu’à 40 lignes. Le compte configuré dans `KING_TCG_ADMIN_EMAIL` devient automatiquement Administrateur sans limite. Les quotas et droits sont contrôlés côté serveur et une capture groupée compte comme une seule session.
 
 La Recherche permet désormais de parcourir séparément les **séries réelles** et les grandes **générations**. Les 18 séries FR, 20 EN, 15 JP et 6 CN restent reliées à leurs extensions, avec des libellés compréhensibles en français pour les séries japonaises et chinoises. Une identité canonique ne peut apparaître que dans une seule section et les 55 alias FR sans cartes restent fusionnés avec leur extension navigable.
 
@@ -12,7 +12,7 @@ La V301 conserve les apports V300 et ajoute **2 512 visuels japonais TCGplayer r
 
 L’espace Items synchronise automatiquement les produits scellés français disponibles sur CardTrader et les fusionne avec 53 produits EN distincts. Les cinq façades de la Mega Heroes Mini Tin forment une seule référence avec une galerie de cinq images : les 57 visuels EN restent tous disponibles. Un snapshot FR rempli reste frais 24 heures ; un résultat vide est retenté après 10 minutes et une erreur fournisseur après 5 minutes.
 
-Le parcours Vente est actif localement : sélection depuis la collection, quantité, prix, frais, bénéfice, retrait du stock, historique et annulation restauratrice. Les comptes, droits et paiements Stripe restent réservés à la V304 ; aucune facturation réelle n’est déclenchée par cette version.
+Le parcours Vente est actif : sélection depuis la collection, quantité, prix, frais, bénéfice, retrait du stock, historique et annulation restauratrice. La connexion Google Supabase, la synchronisation Cloud volontaire, Stripe Checkout et le portail client sont câblés. La validation Alpha utilise les clés Stripe `sk_test_`; le webhook signé est la source d’activation ou de retrait des rôles payants.
 
 ## Fonctions principales
 
