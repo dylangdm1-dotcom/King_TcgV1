@@ -52,6 +52,8 @@ export interface SealedItem {
   description?: string;
   contents?: string[];
   images?: SealedItemImage;
+  /** Tous les visuels distincts d'un même produit lorsque seule la façade change. */
+  galleryImages?: SealedItemImage[];
   imageCandidates?: string[];
   /** Variantes de façade regroupées sous une seule identité produit. */
   groupedVariantCount?: number;

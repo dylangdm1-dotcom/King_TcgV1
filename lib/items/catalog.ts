@@ -3,6 +3,7 @@ import path from "node:path";
 import catalogEnIndex from "@/public/data/items-v1/en/index.json";
 import manifestData from "@/public/data/items-v1/manifest.json";
 import type { ItemCatalogManifest, SealedItem } from "./types";
+import { groupItemsByPackagingV301 } from "./grouping";
 import { isItemCatalogManifest, parseItemCatalog } from "./validation";
 import { getCardTraderFrenchRuntimeSnapshotV301, withFrenchRuntimeManifestV301 } from "./sources/cardtrader-runtime";
 
@@ -32,14 +33,14 @@ function optionalCatalog(relative: string): SealedItem[] {
   }
 }
 
-const catalog = parseItemCatalog([
+const catalog = groupItemsByPackagingV301(parseItemCatalog([
   ...optionalCatalog("catalog.json"),
   ...optionalCatalog("fr/catalog.json"),
   ...indexedItems(catalogEnIndex),
   ...optionalCatalog("ja/catalog.json"),
   ...optionalCatalog("zh-tw/catalog.json"),
   ...optionalCatalog("multi/catalog.json"),
-]);
+]));
 
 export function getServerItemCatalog(): SealedItem[] {
   return catalog;

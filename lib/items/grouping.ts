@@ -1,6 +1,6 @@
 import { slugifyItem } from "./identity";
 import { normalizeItemText } from "./normalize";
-import type { SealedItem, SealedItemPriceQuote } from "./types";
+import type { SealedItem, SealedItemImage, SealedItemPriceQuote } from "./types";
 
 const ART_WORDS = "art|artwork|illustration|illustrations|visuel|visuels|design|cover|packaging|motif";
 const ART_SUFFIX = new RegExp(`(?:[-–—:]\\s*)?(?:${ART_WORDS})\\b.*$`, "i");
@@ -13,15 +13,26 @@ function isSingleBoosterName(normalized: string): boolean {
 
 function artFamilyName(item: SealedItem): string | null {
   const normalized = normalizeItemText(item.name);
-  const explicitArt = new RegExp(`\\b(?:${ART_WORDS})\\b`, "i").test(normalized);
   const miniTin = item.category === "tin" && /\bmini\s*tin\b/.test(normalized);
   const singleBooster = item.category === "booster" && isSingleBoosterName(normalized);
+  const explicitArt = new RegExp(`\\b(?:${ART_WORDS})\\b`, "i").test(normalized) && (miniTin || singleBooster);
   if (!explicitArt && !miniTin && !singleBooster) return null;
 
   let base = item.name.trim().replace(ART_SUFFIX, "").trim();
   if (miniTin || singleBooster) base = base.replace(BRACKET_SUFFIX, "").trim();
   base = base.replace(/\s*[-–—:]\s*$/, "").trim();
   return base && normalizeItemText(base) !== normalized ? base : explicitArt ? base || item.name.trim() : null;
+}
+
+function imageKey(image: SealedItemImage): string {
+  return `${image.source || ""}:${image.large || image.small || ""}`;
+}
+
+function mergeGalleryImages(items: readonly SealedItem[]): SealedItemImage[] {
+  const images = items.flatMap((item) => item.galleryImages?.length ? item.galleryImages : item.images ? [item.images] : []);
+  return Array.from(new Map(images
+    .filter((image) => image.small || image.large)
+    .map((image) => [imageKey(image), image])).values());
 }
 
 function unique<T>(values: readonly T[]): T[] {
@@ -44,9 +55,13 @@ function mergeQuotes(items: readonly SealedItem[]): SealedItemPriceQuote[] | und
   return quotes.size ? Array.from(quotes.values()) : undefined;
 }
 
-export function frenchItemCatalogPathV300(item: Pick<SealedItem, "name" | "category" | "setIds">): string {
+export function itemCatalogPathV301(item: Pick<SealedItem, "name" | "category" | "language" | "setIds">): string {
   const set = item.setIds?.find((value) => !value.includes(":")) || "hors-serie";
-  return `fr/items/${slugifyItem(`${set}-${item.category}-${item.name}`)}.json`;
+  return `${item.language}/items/${slugifyItem(`${set}-${item.category}-${item.name}`)}.json`;
+}
+
+export function frenchItemCatalogPathV300(item: Pick<SealedItem, "name" | "category" | "setIds">): string {
+  return itemCatalogPathV301({ ...item, language: "fr" });
 }
 
 /**
@@ -54,12 +69,13 @@ export function frenchItemCatalogPathV300(item: Pick<SealedItem, "name" | "categ
  * booster unitaire ou une Mini Tin. Un blister promo, un coffret ou un lot de
  * plusieurs boosters conserve toujours sa propre identité.
  */
-export function groupFrenchItemsByPackagingV300(input: readonly SealedItem[]): SealedItem[] {
+export function groupItemsByPackagingV301(input: readonly SealedItem[]): SealedItem[] {
   const groups = new Map<string, SealedItem[]>();
   for (const item of input) {
-    const family = item.language === "fr" ? artFamilyName(item) : null;
+    const eligibleLanguage = item.language === "fr" || item.language === "en";
+    const family = eligibleLanguage ? artFamilyName(item) : null;
     const set = item.setIds?.find((value) => !value.includes(":")) || "hors-serie";
-    const key = item.language === "fr"
+    const key = eligibleLanguage
       ? `product:${item.language}:${item.category}:${normalizeItemText(set)}:${normalizeItemText(family || item.name)}`
       : `item:${item.id}`;
     groups.set(key, [...(groups.get(key) || []), item]);
@@ -71,7 +87,8 @@ export function groupFrenchItemsByPackagingV300(input: readonly SealedItem[]): S
     const family = key.startsWith("product:") ? artFamilyName(first) : null;
     const name = family || first.name;
     const slug = slugifyItem(`${first.language}-${first.category}-${first.setIds?.[0] || "hors-serie"}-${name}`);
-    const images = sorted.find((item) => item.images?.small || item.images?.large)?.images;
+    const galleryImages = mergeGalleryImages(sorted);
+    const images = galleryImages[0];
     const imageCandidates = unique(sorted.flatMap((item) => [
       item.images?.small,
       item.images?.large,
@@ -87,20 +104,26 @@ export function groupFrenchItemsByPackagingV300(input: readonly SealedItem[]): S
 
     return {
       ...first,
-      id: grouped ? `ktcg:item:cardtrader-fr:${slug}` : first.id,
+      id: grouped ? `ktcg:item:packaging-group:${slug}` : first.id,
       slug: grouped ? slug : first.slug,
-      catalogPath: frenchItemCatalogPathV300({ ...first, name }),
+      catalogPath: itemCatalogPathV301({ ...first, name }),
       name,
       setIds: unique(sorted.flatMap((item) => item.setIds || [])),
       images,
+      ...(galleryImages.length ? { galleryImages } : {}),
       ...(imageCandidates.length ? { imageCandidates } : {}),
       sources,
       ...(quotes ? { quotes, priceStatus: "available" as const } : {}),
       ...(grouped ? {
         groupedVariantCount: sorted.length,
         groupedVariantNames,
-        description: `${first.description || "Produit scellé français."} ${sorted.length} fiches fournisseur équivalentes ou variantes d’illustration regroupées sous une seule référence ; le contenu et la cote concernent le même type de produit.`,
+        description: `${first.description || "Produit scellé Pokémon."} ${sorted.length} fiches fournisseur équivalentes ou variantes d’illustration regroupées sous une seule référence ; le contenu et la cote concernent le même type de produit.`,
       } : {}),
     };
   });
+}
+
+/** Alias conservé pour les scripts d'audit des versions précédentes. */
+export function groupFrenchItemsByPackagingV300(input: readonly SealedItem[]): SealedItem[] {
+  return groupItemsByPackagingV301(input);
 }
