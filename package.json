@@ -35,6 +35,7 @@
     "audit:v302": "node scripts/audit-v302.mjs",
     "audit:v303": "node scripts/audit-v303.mjs",
     "audit:v304": "node scripts/audit-v304.mjs",
+    "audit:v305": "node scripts/audit-v305.mjs",
     "test:market-cache:live": "node scripts/test-market-cache-live-v277.mjs"
   },
   "dependencies": {

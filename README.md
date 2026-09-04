@@ -2,7 +2,9 @@
 
 King_TCG est une application Next.js de recherche, collection et analyse de cartes Pokémon TCG. Elle réunit un catalogue multilingue, la gestion de collection, les favoris, un scanner assisté par IA, une estimation PSA et une agrégation de données marché.
 
-**Version actuelle : V301 — visuels JP, Items FR/EN regroupés et parcours Vente actif.**
+**Version actuelle : V305 Final Alpha — Items FR/EN, Listing Scanner PRO 2/4 cartes, export Excel et finition mobile/desktop.**
+
+La V305 transforme l’ancien essai « Inventaire » en **Listing PRO gold** : choix de 2 ou 4 cartes par photo, deux analyses simultanées, accumulation de 40 cartes physiques, correction manuelle et export CSV UTF-8 pour Excel. Ce parcours ne déclenche ni recherche de prix ni affichage de visuel. La capacité Alpha est réglée à 550 sessions afin de tester le niveau PRO ; les droits réels appliqueront ensuite 30 / 500 / 550 selon l’abonnement.
 
 La Recherche permet désormais de parcourir séparément les **séries réelles** et les grandes **générations**. Les 18 séries FR, 20 EN, 15 JP et 6 CN restent reliées à leurs extensions, avec des libellés compréhensibles en français pour les séries japonaises et chinoises. Une identité canonique ne peut apparaître que dans une seule section et les 55 alias FR sans cartes restent fusionnés avec leur extension navigable.
 
@@ -19,14 +21,14 @@ Le parcours Vente est actif localement : sélection depuis la collection, quanti
 - vues Recherche compacte (3 cartes par ligne), standard et large ;
 - collection, favoris, dashboard, alertes et opportunités ;
 - ventes de cartes avec historique, bénéfice et mise à jour du portefeuille ;
-- Scanner Mono, Batch et Quad ;
+- Scanner Mono, Batch, Quad et Listing PRO 2/4 cartes ;
 - raccord Scanner → fiche → prix d'une seule carte validée, sans appels marché sur les candidats ;
 - estimation PSA expérimentale avec PriceCharting et eBay, regroupée par langue, carte, extension, édition, variante et grade ;
 - Cote King_TCG construite à partir des sources compatibles disponibles ;
 - cache marché partagé et historique quotidien persistant via Redis REST.
 - espace Items séparé de Recherche cartes/extensions, avec fiches, filtres, références personnelles, collection, favoris et export CSV ;
 - accès Items prévu pour Premium et PRO, avec aperçu ouvert pendant la bêta ;
-- formule PRO préparée pour un futur scanner de stock gros volume sans prix et des exports professionnels.
+- formule PRO à 6,99 €/mois préparée pour 550 sessions Scanner, dont le Listing gros volume sans prix et ses exports professionnels.
 
 ## Espace Items
 
