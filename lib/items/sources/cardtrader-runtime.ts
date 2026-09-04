@@ -1,6 +1,6 @@
 import "server-only";
 import { slugifyItem } from "../identity";
-import { frenchItemCatalogPathV300, groupFrenchItemsByPackagingV300 } from "../grouping";
+import { itemCatalogPathV301, groupItemsByPackagingV301 } from "../grouping";
 import type { ItemCatalogManifest, SealedItem } from "../types";
 import { isMarketRedisConfiguredV277, executeMarketRedisCommandV277 } from "@/lib/market-cache/persistent";
 import { previewCardTraderFrenchCatalog } from "./cardtrader-catalog";
@@ -120,7 +120,7 @@ function candidateToItem(candidate: CardTraderFrenchItemCandidate, generatedAt: 
   return {
     id: `ktcg:item:cardtrader:${candidate.blueprintId}`,
     slug,
-    catalogPath: frenchItemCatalogPathV300({ name, category: candidate.itemCategory, setIds: candidate.expansionCode ? [candidate.expansionCode] : undefined }),
+    catalogPath: itemCatalogPathV301({ name, category: candidate.itemCategory, language: "fr", setIds: candidate.expansionCode ? [candidate.expansionCode] : undefined }),
     name,
     category: candidate.itemCategory,
     language: "fr",
@@ -150,7 +150,7 @@ async function synchronize(): Promise<RuntimeSnapshotV301> {
     .map((candidate) => candidateToItem(candidate, generatedAt))
     .filter((item): item is SealedItem => Boolean(item))
     .filter((item) => !seen.has(item.id) && Boolean(seen.add(item.id)));
-  const items = groupFrenchItemsByPackagingV300(rawItems);
+  const items = groupItemsByPackagingV301(rawItems);
   const allFailed = result.selectedExpansionIds.length > 0 && result.failures.length === result.selectedExpansionIds.length;
   const state: RuntimeSnapshotV301["state"] = items.length ? "ready" : allFailed ? "error" : "empty";
   const lastError = state === "error" ? result.failures.map((failure) => failure.error).join(", ").slice(0, 300) : undefined;
@@ -223,7 +223,7 @@ export async function getCardTraderFrenchRuntimeSnapshotV301(options?: { refresh
 
 export function withFrenchRuntimeManifestV301(manifest: ItemCatalogManifest, snapshot: RuntimeSnapshotV301 | null): ItemCatalogManifest {
   const frenchItems = snapshot?.items || [];
-  const frenchImages = frenchItems.filter((item) => item.images?.small || item.images?.large).length;
+  const frenchImages = frenchItems.reduce((sum, item) => sum + (item.galleryImages?.length || (item.images?.small || item.images?.large ? 1 : 0)), 0);
   const frenchQuotes = frenchItems.filter((item) => item.quotes?.some((quote) => quote.kind === "current_market")).length;
   const note = frenchItems.length >= TARGET_FRENCH_ITEMS
     ? `${frenchItems.length} produits scellés FR CardTrader chargés automatiquement avec chemins canoniques.`
