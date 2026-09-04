@@ -1,7 +1,71 @@
 
 import { PSACard, PSAPrices, PSAGrade, PSALanguage } from "./types";
 
-const LOCAL_STORAGE_KEY = "king_tcg_psa_collection_v1";
+export const PSA_COLLECTION_STORAGE_KEY = "king_tcg_psa_collection_v1";
+export const PSA_COLLECTION_UPDATE_EVENT = "king_tcg_psa_collection_update";
+
+function finiteNonNegative(value: unknown): number {
+  const parsed = Number(value);
+  return Number.isFinite(parsed) && parsed >= 0 ? parsed : 0;
+}
+
+export function normalizePSACertificateV302(value: unknown): string {
+  return String(value ?? "").trim().toUpperCase().replace(/[^A-Z0-9]/g, "");
+}
+
+export function sanitizePSACardV302(value: unknown): PSACard | null {
+  if (!value || typeof value !== "object") return null;
+  const raw = value as Partial<PSACard>;
+  const id = String(raw.id ?? "").trim();
+  const certificate = normalizePSACertificateV302(raw.psaCertNumber);
+  const cardName = String(raw.cardName ?? "").trim();
+  const grade = Number(raw.grade);
+  if (!id || !certificate || !cardName || !Number.isInteger(grade) || grade < 1 || grade > 10) {
+    return null;
+  }
+
+  const language: PSALanguage = raw.language === "en" || raw.language === "ja" ? raw.language : "fr";
+  const createdAt = Number.isNaN(Date.parse(String(raw.createdAt ?? "")))
+    ? new Date().toISOString()
+    : String(raw.createdAt);
+
+  return {
+    ...raw,
+    id,
+    psaCertNumber: certificate,
+    cardName,
+    setName: String(raw.setName ?? "").trim(),
+    cardNumber: String(raw.cardNumber ?? "").trim().toUpperCase(),
+    language,
+    grade: grade as PSAGrade,
+    imageUrl: String(raw.imageUrl ?? "").trim(),
+    estimatedValue: finiteNonNegative(raw.estimatedValue),
+    purchasePrice: finiteNonNegative(raw.purchasePrice),
+    currency: raw.currency === "USD" ? "USD" : "EUR",
+    salesHistory: Array.isArray(raw.salesHistory) ? raw.salesHistory : [],
+    createdAt,
+    updatedAt: Number.isNaN(Date.parse(String(raw.updatedAt ?? "")))
+      ? createdAt
+      : String(raw.updatedAt),
+  };
+}
+
+export function sanitizePSACollectionV302(value: unknown): PSACard[] {
+  if (!Array.isArray(value)) return [];
+  const byCertificate = new Map<string, PSACard>();
+  for (const entry of value) {
+    const card = sanitizePSACardV302(entry);
+    if (!card || byCertificate.has(card.psaCertNumber)) continue;
+    byCertificate.set(card.psaCertNumber, card);
+  }
+  return Array.from(byCertificate.values());
+}
+
+function notifyPSACollectionUpdate(): void {
+  if (typeof window === "undefined") return;
+  window.dispatchEvent(new Event(PSA_COLLECTION_UPDATE_EVENT));
+  window.dispatchEvent(new Event("king_tcg_update"));
+}
 
 /**
  * Vente récente retournée par PriceCharting.
@@ -66,13 +130,13 @@ export const psaService = {
     if (typeof window === "undefined") return [];
 
     try {
-      const data = localStorage.getItem(LOCAL_STORAGE_KEY);
+      const data = localStorage.getItem(PSA_COLLECTION_STORAGE_KEY);
 
       if (!data) return [];
 
-      const cards = JSON.parse(data);
-
-      return Array.isArray(cards) ? cards : [];
+      const cards = sanitizePSACollectionV302(JSON.parse(data));
+      localStorage.setItem(PSA_COLLECTION_STORAGE_KEY, JSON.stringify(cards));
+      return cards;
     } catch (error) {
       console.error(
         "Impossible de charger la collection PSA :",
@@ -88,9 +152,10 @@ export const psaService = {
 
     try {
       localStorage.setItem(
-        LOCAL_STORAGE_KEY,
-        JSON.stringify(cards)
+        PSA_COLLECTION_STORAGE_KEY,
+        JSON.stringify(sanitizePSACollectionV302(cards))
       );
+      notifyPSACollectionUpdate();
     } catch (error) {
       console.error(
         "Impossible de sauvegarder la collection PSA :",
@@ -99,10 +164,11 @@ export const psaService = {
     }
   },
 
-  certificateExists(certNumber: string): boolean {
+  certificateExists(certNumber: string, exceptId?: string): boolean {
+    const normalized = normalizePSACertificateV302(certNumber);
     return this.getCollection().some(
       (card) =>
-        card.psaCertNumber === certNumber.trim()
+        card.id !== exceptId && normalizePSACertificateV302(card.psaCertNumber) === normalized
     );
   },
 
@@ -111,7 +177,7 @@ export const psaService = {
   ): PSACard | undefined {
     return this.getCollection().find(
       (card) =>
-        card.psaCertNumber === certNumber.trim()
+        normalizePSACertificateV302(card.psaCertNumber) === normalizePSACertificateV302(certNumber)
     );
   },
 
@@ -121,7 +187,7 @@ export const psaService = {
     const collection = this.getCollection();
 
     const certNumber =
-      card.psaCertNumber.trim();
+      normalizePSACertificateV302(card.psaCertNumber);
 
     if (!certNumber) {
       throw new Error(
@@ -162,6 +228,33 @@ export const psaService = {
     return newCard;
   },
 
+  updateCard(id: string, patch: Partial<Omit<PSACard, "id" | "createdAt">>): PSACard {
+    const collection = this.getCollection();
+    const index = collection.findIndex((card) => card.id === id);
+    if (index < 0) throw new Error("Carte PSA introuvable.");
+
+    const certificate = normalizePSACertificateV302(
+      patch.psaCertNumber ?? collection[index].psaCertNumber
+    );
+    if (!certificate) throw new Error("Le numéro de certification PSA est obligatoire.");
+    if (this.certificateExists(certificate, id)) {
+      throw new Error("Cette certification PSA est déjà enregistrée.");
+    }
+
+    const updated = sanitizePSACardV302({
+      ...collection[index],
+      ...patch,
+      psaCertNumber: certificate,
+      id,
+      createdAt: collection[index].createdAt,
+      updatedAt: new Date().toISOString(),
+    });
+    if (!updated) throw new Error("Les informations PSA sont invalides.");
+    collection[index] = updated;
+    this.saveCollection(collection);
+    return updated;
+  },
+
   removeCard(id: string): void {
     const collection =
       this.getCollection();
@@ -171,6 +264,12 @@ export const psaService = {
         (card) => card.id !== id
       )
     );
+  },
+
+  clearCollection(): void {
+    if (typeof window === "undefined") return;
+    localStorage.removeItem(PSA_COLLECTION_STORAGE_KEY);
+    notifyPSACollectionUpdate();
   },
 
   /**
@@ -241,7 +340,7 @@ export const psaService = {
       cards.reduce(
         (total, card) =>
           total +
-          (card.estimatedValue ?? 0),
+          finiteNonNegative(card.estimatedValue),
         0
       );
 
@@ -249,7 +348,7 @@ export const psaService = {
       cards.reduce(
         (total, card) =>
           total +
-          (card.purchasePrice ?? 0),
+          finiteNonNegative(card.purchasePrice),
         0
       );
 
@@ -272,8 +371,8 @@ export const psaService = {
       cards.length > 0
         ? [...cards].sort(
             (a, b) =>
-              b.estimatedValue -
-              a.estimatedValue
+              finiteNonNegative(b.estimatedValue) -
+              finiteNonNegative(a.estimatedValue)
           )[0]
         : null;
 
@@ -295,8 +394,8 @@ export const psaService = {
   ): PSACard[] {
     return [...cards].sort(
       (a, b) =>
-        b.estimatedValue -
-        a.estimatedValue
+        finiteNonNegative(b.estimatedValue) -
+        finiteNonNegative(a.estimatedValue)
     );
   },
 
@@ -325,6 +424,8 @@ export const psaService = {
         card.setName,
         card.cardNumber,
         card.psaCertNumber,
+        card.editionKey,
+        card.variantKey,
       ]
         .join(" ")
         .toLowerCase();

@@ -1,4 +1,5 @@
 import { pokemonNames } from "../pokemonTranslator";
+import { extractPSACardNumberV280, normalizePSACardNumberV280 } from "./identity";
 
 export type PriceChartingLanguageV281 = "en" | "fr" | "ja";
 
@@ -82,6 +83,11 @@ export function matchesPriceChartingQueryV281(
   if (language !== "fr") return true;
 
   const haystack = normalize(candidate);
+  const requestedNumber = normalizePSACardNumberV280(query) || extractPSACardNumberV280(query);
+  if (requestedNumber) {
+    const candidateNumber = normalizePSACardNumberV280(candidate) || extractPSACardNumberV280(candidate);
+    if (candidateNumber !== requestedNumber) return false;
+  }
   const groups = frenchPokemonGroups(query);
   if (groups.length > 0) {
     return groups.every((aliases) => aliases.some((alias) => containsPhrase(haystack, alias)));

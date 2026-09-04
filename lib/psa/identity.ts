@@ -52,10 +52,10 @@ function keyToken(value: unknown): string {
 
 export function normalizePSACardNumberV280(value: unknown): string {
   const raw = String(value ?? "").trim().toUpperCase().replace(/\s+/g, "");
-  const fraction = raw.match(/(?:#)?([A-Z]*0*\d{1,4})\/(0*\d{1,4})/);
+  const fraction = raw.match(/(?:#)?([A-Z]*0*\d{1,4})\/([A-Z]*0*\d{1,4})/);
   if (fraction) {
     const left = fraction[1].replace(/^(\D*)0+(?=\d)/, "$1");
-    const right = fraction[2].replace(/^0+(?=\d)/, "");
+    const right = fraction[2].replace(/^(\D*)0+(?=\d)/, "$1");
     return `${left}/${right}`;
   }
   const single = raw.match(/(?:^|#)([A-Z]*0*\d{1,4})(?:\b|$)/);
@@ -64,7 +64,7 @@ export function normalizePSACardNumberV280(value: unknown): string {
 
 export function extractPSACardNumberV280(value: unknown): string {
   const text = String(value ?? "");
-  const fraction = text.match(/\b([A-Z]*\d{1,4}\s*\/\s*\d{1,4})\b/i)?.[1];
+  const fraction = text.match(/\b([A-Z]*\d{1,4}\s*\/\s*[A-Z]*\d{1,4})\b/i)?.[1];
   if (fraction) return normalizePSACardNumberV280(fraction);
   const numbered = text.match(/#\s*([A-Z]*\d{1,4})\b/i)?.[1];
   return normalizePSACardNumberV280(numbered || "");
@@ -128,6 +128,31 @@ export function cleanPSACardNameV280(value: unknown, setName?: unknown): string 
   return name || "carte-inconnue";
 }
 
+/** Conserve les formes utiles (VMAX, VSTAR, ex, GX...) absentes du champ eBay. */
+export function psaDisplayCardNameV302(query: unknown, title: unknown): string {
+  const base = String(query ?? "").trim();
+  if (!base) return "Carte Pokémon";
+
+  const haystack = normalizePSATextV280(title);
+  const normalizedBase = normalizePSATextV280(base);
+  const isMega = phraseInNormalizedText(haystack, `mega ${normalizedBase}`) ||
+    phraseInNormalizedText(haystack, `m ${normalizedBase}`);
+  const form = ["vmax", "vstar", "gx", "ex", "v"].find((candidate) =>
+    new RegExp(`\\b${candidate}\\b`, "i").test(haystack)
+  );
+  const axis = isMega && /\b(?:x|y)\b/i.test(haystack)
+    ? haystack.match(/\b(x|y)\b/i)?.[1]?.toUpperCase()
+    : "";
+
+  return [isMega ? `Méga-${base}` : base, axis, form === "ex" ? "ex" : form?.toUpperCase()]
+    .filter(Boolean)
+    .join(" ");
+}
+
+function phraseInNormalizedText(text: string, phrase: string): boolean {
+  return Boolean(phrase) && ` ${text} `.includes(` ${phrase} `);
+}
+
 export function buildPSACardIdentityV280(input: {
   language: PSALanguageV280;
   cardName?: string;
@@ -143,7 +168,9 @@ export function buildPSACardIdentityV280(input: {
   const cardNumber = normalizePSACardNumberV280(input.cardNumber) || extractPSACardNumberV280(input.title);
   const normalizedName = cleanPSACardNameV280(input.cardName || input.query || input.title, set.name);
   const edition = psaEditionV280(evidence);
-  const variant = psaVariantV280(evidence);
+  const variant = /^(?:SWSH|SVP|SM|XY|BW)\d+$/i.test(cardNumber)
+    ? "promo"
+    : psaVariantV280(evidence);
   const year = releaseYear(evidence);
 
   // A fraction number is usually set-specific. A single number needs the set
@@ -152,7 +179,7 @@ export function buildPSACardIdentityV280(input: {
     ? set.key === "unknown" ? "fraction-number" : set.key
     : `${set.key}:${year || "unknown-year"}`;
   const key = [
-    "psa-v280",
+    "psa-v302",
     input.language,
     keyToken(normalizedName),
     keyToken(cardNumber || "unknown-number"),

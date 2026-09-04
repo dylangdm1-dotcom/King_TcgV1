@@ -70,6 +70,9 @@ export interface PSACard {
   language?: PSALanguage;
   rarity?: string;
   releaseYear?: number;
+  identityKey?: string;
+  editionKey?: string;
+  variantKey?: string;
 
   grade: PSAGrade;
 
@@ -83,6 +86,9 @@ export interface PSACard {
   currency?: Currency;
 
   marketPrices?: PSAPrices;
+  marketSource?: "pricecharting" | "ebay" | "manual";
+  marketSourceUrl?: string;
+  marketUpdatedAt?: string;
 
   /**
    * Historique de ventes personnel.
