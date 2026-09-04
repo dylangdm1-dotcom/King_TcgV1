@@ -1,6 +1,6 @@
 // lib/scanner/quadScanner.ts
 
-import { QUAD_FRAMES } from "@/lib/scanner/quadLayout";
+import { QUAD_FRAMES, type QuadFrame } from "@/lib/scanner/quadLayout";
 
 export type QuadSlotIndex = 0 | 1 | 2 | 3;
 export type QuadSlotStatus =
@@ -44,22 +44,27 @@ export type QuadScanSession = {
   sourceImageUri: string;
   createdAt: string;
   slots: QuadScanItem[];
+  frames: QuadFrame[];
 };
 
 const clamp = (value: number, min = 0, max = 1) =>
   Math.max(min, Math.min(max, value));
 
-export function createQuadScanSession(sourceImageUri: string): QuadScanSession {
+export function createQuadScanSession(
+  sourceImageUri: string,
+  frames: QuadFrame[] = QUAD_FRAMES
+): QuadScanSession {
   return {
     id: `quad_${Date.now()}`,
     sourceImageUri,
     createdAt: new Date().toISOString(),
-    slots: [
-      { slot: 0, label: "Haut - Gauche", croppedImageUri: null, status: "empty" },
-      { slot: 1, label: "Haut - Droite", croppedImageUri: null, status: "empty" },
-      { slot: 2, label: "Bas - Gauche", croppedImageUri: null, status: "empty" },
-      { slot: 3, label: "Bas - Droite", croppedImageUri: null, status: "empty" },
-    ],
+    frames,
+    slots: frames.map((frame) => ({
+      slot: frame.slot,
+      label: frame.label,
+      croppedImageUri: null,
+      status: "empty" as const,
+    })),
   };
 }
 
@@ -121,7 +126,8 @@ function analyseCropQuality(
 
 export async function cropQuadImageVariants(
   sourceImageUri: string,
-  slot: QuadSlotIndex
+  slot: QuadSlotIndex,
+  frames: QuadFrame[] = QUAD_FRAMES
 ): Promise<QuadCropResult> {
   if (typeof window === "undefined") {
     return {
@@ -135,7 +141,7 @@ export async function cropQuadImageVariants(
     const img = new Image();
     img.crossOrigin = "anonymous";
     img.onload = () => {
-      const frame = QUAD_FRAMES.find((item) => item.slot === slot);
+      const frame = frames.find((item) => item.slot === slot);
       if (!frame) {
         reject(new Error("Zone Quad inconnue"));
         return;
@@ -219,7 +225,7 @@ export async function processQuadScan(
     session.slots.map(async (slotItem) => {
       if (selected && !selected.has(slotItem.slot)) return slotItem;
       try {
-        const crop = await cropQuadImageVariants(session.sourceImageUri, slotItem.slot);
+        const crop = await cropQuadImageVariants(session.sourceImageUri, slotItem.slot, session.frames);
         return {
           ...slotItem,
           croppedImageUri: crop.primaryImageUri,
