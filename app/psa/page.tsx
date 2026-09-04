@@ -17,6 +17,7 @@ import {
   BadgeEuro,
   Gem,
   BadgeCheck,
+  Pencil,
 } from "lucide-react";
 
 import Navbar from "@/components/Navbar";
@@ -94,7 +95,7 @@ export default function PSAPage() {
     "collection" | "search" | "estimation"
   >("collection");
 
-  const [priceSearchLanguage, setPriceSearchLanguage] = useState<PSALanguage>("en");
+  const [priceSearchLanguage, setPriceSearchLanguage] = useState<PSALanguage>("fr");
 
   const [collection, setCollection] = useState<PSACard[]>([]);
 
@@ -104,6 +105,7 @@ export default function PSAPage() {
     useState<"all" | PSAGrade>("all");
   const [filterLanguage, setFilterLanguage] =
     useState<"all" | PSALanguage>("all");
+  const [collectionSort, setCollectionSort] = useState<"value" | "profit" | "recent" | "name">("value");
 
   const [priceChartingQuery, setPriceChartingQuery] =
     useState("");
@@ -128,6 +130,7 @@ export default function PSAPage() {
 
   const [isAddModalOpen, setIsAddModalOpen] =
     useState(false);
+  const [editingCardId, setEditingCardId] = useState<string | null>(null);
 
   const [newCert, setNewCert] = useState("");
 
@@ -143,7 +146,12 @@ export default function PSAPage() {
   const [newPurchasePrice, setNewPurchasePrice] = useState(0);
 
   const [newImage, setNewImage] = useState("");
-  const [newLanguage, setNewLanguage] = useState<PSALanguage>("en");
+  const [newLanguage, setNewLanguage] = useState<PSALanguage>("fr");
+  const [newPurchaseDate, setNewPurchaseDate] = useState("");
+  const [newEdition, setNewEdition] = useState("unlimited");
+  const [newVariant, setNewVariant] = useState("standard");
+  const [newMarketSource, setNewMarketSource] = useState<"pricecharting" | "ebay" | "manual">("manual");
+  const [newMarketSourceUrl, setNewMarketSourceUrl] = useState("");
 
   const [selectedMarketPrices, setSelectedMarketPrices] =
     useState<PSAPrices | undefined>(undefined);
@@ -151,6 +159,50 @@ export default function PSAPage() {
   useEffect(() => {
     setCollection(psaService.getCollection());
   }, []);
+
+  const resetCardForm = (language: PSALanguage = priceSearchLanguage) => {
+    setEditingCardId(null);
+    setNewCert("");
+    setNewName("");
+    setNewSet("");
+    setNewNumber("");
+    setNewGrade(10);
+    setNewPrice(0);
+    setNewPurchasePrice(0);
+    setNewPurchaseDate("");
+    setNewImage("");
+    setNewLanguage(language);
+    setNewEdition("unlimited");
+    setNewVariant("standard");
+    setNewMarketSource("manual");
+    setNewMarketSourceUrl("");
+    setSelectedMarketPrices(undefined);
+  };
+
+  const openManualCard = () => {
+    resetCardForm("fr");
+    setIsAddModalOpen(true);
+  };
+
+  const handleEdit = (card: PSACard) => {
+    setEditingCardId(card.id);
+    setNewCert(card.psaCertNumber);
+    setNewName(card.cardName);
+    setNewSet(card.setName);
+    setNewNumber(card.cardNumber);
+    setNewGrade(card.grade);
+    setNewPrice(card.estimatedValue);
+    setNewPurchasePrice(card.purchasePrice || 0);
+    setNewPurchaseDate(card.purchaseDate || "");
+    setNewImage(card.imageUrl || "");
+    setNewLanguage(card.language || "fr");
+    setNewEdition(card.editionKey || "unlimited");
+    setNewVariant(card.variantKey || "standard");
+    setNewMarketSource(card.marketSource || "manual");
+    setNewMarketSourceUrl(card.marketSourceUrl || "");
+    setSelectedMarketPrices(card.marketPrices);
+    setIsAddModalOpen(true);
+  };
 
   const stats = useMemo(
     () => psaService.calculateStats(collection),
@@ -230,11 +282,16 @@ export default function PSAPage() {
     card: PriceChartingCard,
     grade: PSAGrade
   ) => {
+    resetCardForm(card.language || priceSearchLanguage);
     setNewName(card.cardName);
     setNewSet(card.setName);
     setNewNumber(card.cardNumber);
     setNewImage(card.imageUrl);
     setNewLanguage(card.language || priceSearchLanguage);
+    setNewEdition(card.editionKey || "unlimited");
+    setNewVariant(card.variantKey || "standard");
+    setNewMarketSource("pricecharting");
+    setNewMarketSourceUrl(card.sourceUrl);
 
     setSelectedMarketPrices(card.prices);
 
@@ -263,6 +320,7 @@ export default function PSAPage() {
     group: EbayPsaCardGroup,
     gradeSummary: EbayPsaGradeSummary
   ) => {
+    resetCardForm(group.language);
     const marketPrices: PSAPrices = {
       ungraded: 0,
       psa1: group.grades.find((item) => item.grade === 1)?.median || 0,
@@ -286,6 +344,10 @@ export default function PSAPage() {
     setNewGrade(gradeSummary.grade as PSAGrade);
     setNewPrice(gradeSummary.median);
     setNewPurchasePrice(0);
+    setNewEdition(group.editionKey || "unlimited");
+    setNewVariant(group.variantKey || "standard");
+    setNewMarketSource("ebay");
+    setNewMarketSourceUrl(group.grades[0]?.listings[0]?.url || "");
     setSelectedMarketPrices(marketPrices);
     setIsAddModalOpen(true);
   };
@@ -300,7 +362,7 @@ export default function PSAPage() {
     }
 
     try {
-      psaService.addCard({
+      const payload = {
         psaCertNumber: newCert.trim(),
         cardName: newName.trim(),
         setName: newSet.trim(),
@@ -310,24 +372,32 @@ export default function PSAPage() {
         imageUrl: newImage,
         estimatedValue: Number(newPrice) || 0,
         purchasePrice: Number(newPurchasePrice) || 0,
+        purchaseDate: newPurchaseDate || undefined,
         salesHistory: [],
         marketPrices: selectedMarketPrices,
+        editionKey: newEdition,
+        variantKey: newVariant,
+        marketSource: newMarketSource,
+        marketSourceUrl: newMarketSourceUrl || undefined,
+        marketUpdatedAt: newMarketSource === "manual" ? undefined : new Date().toISOString(),
         currency: "EUR",
-      });
+      } satisfies Omit<PSACard, "id" | "createdAt">;
+
+      if (editingCardId) {
+        const existing = collection.find((card) => card.id === editingCardId);
+        psaService.updateCard(editingCardId, {
+          ...payload,
+          salesHistory: existing?.salesHistory || [],
+        });
+      } else {
+        psaService.addCard(payload);
+      }
 
       setCollection(psaService.getCollection());
 
       setIsAddModalOpen(false);
 
-      setNewCert("");
-      setNewName("");
-      setNewSet("");
-      setNewNumber("");
-      setNewPrice(0);
-      setNewPurchasePrice(0);
-      setNewImage("");
-      setNewLanguage(priceSearchLanguage);
-      setSelectedMarketPrices(undefined);
+      resetCardForm();
     } catch (error) {
       console.error(
         "Erreur ajout carte PSA",
@@ -371,12 +441,21 @@ export default function PSAPage() {
       cards = cards.filter((card) => card.language === filterLanguage);
     }
 
-    return cards;
+    return [...cards].sort((left, right) => {
+      if (collectionSort === "profit") {
+        return (right.estimatedValue - (right.purchasePrice || 0)) -
+          (left.estimatedValue - (left.purchasePrice || 0));
+      }
+      if (collectionSort === "recent") return right.createdAt.localeCompare(left.createdAt);
+      if (collectionSort === "name") return left.cardName.localeCompare(right.cardName, "fr");
+      return right.estimatedValue - left.estimatedValue;
+    });
   }, [
     collection,
     collectionSearch,
     filterGrade,
     filterLanguage,
+    collectionSort,
   ]);
 
   return (
@@ -407,22 +486,11 @@ export default function PSAPage() {
               </div>
 
               <button
-                onClick={() => {
-                  setNewCert("");
-                  setNewName("");
-                  setNewSet("");
-                  setNewNumber("");
-                  setNewGrade(10);
-                  setNewPrice(0);
-                  setNewPurchasePrice(0);
-                  setNewImage("");
-                  setSelectedMarketPrices(undefined);
-                  setIsAddModalOpen(true);
-                }}
+                onClick={openManualCard}
                 className="flex w-full items-center justify-center gap-2 rounded-xl border border-cyan-300/40 bg-cyan-300/[0.06] px-4 py-2.5 text-[10px] font-bold uppercase tracking-[0.11em] text-cyan-200 shadow-[inset_0_1px_0_rgba(255,255,255,.05)] transition hover:border-cyan-200/65 hover:bg-cyan-300/[0.10] md:w-auto"
               >
                 <Plus className="h-4 w-4" />
-                Ajouter une dalle
+                Ajouter une carte PSA
               </button>
             </div>
           </section>
@@ -517,7 +585,7 @@ export default function PSAPage() {
                 <StatCard title="Plus-value" value={formatSignedEUR(stats.netProfit)} icon={<TrendingUp className="h-4 w-4" />} tone="green" />
               </div>
 
-              <div className="grid gap-3 md:grid-cols-[1fr_auto_auto]">
+              <div className="grid gap-3 md:grid-cols-[1fr_auto_auto_auto]">
                 <div className="flex-1">
                   <input
                     type="text"
@@ -547,7 +615,7 @@ export default function PSAPage() {
                     Tous les grades
                   </option>
 
-                  {[10, 9, 8, 7, 6, 5].map(
+                  {[10, 9, 8, 7, 6, 5, 4, 3, 2, 1].map(
                     (grade) => (
                       <option
                         key={grade}
@@ -557,6 +625,18 @@ export default function PSAPage() {
                       </option>
                     )
                   )}
+                </select>
+
+                <select
+                  value={collectionSort}
+                  onChange={(event) => setCollectionSort(event.target.value as "value" | "profit" | "recent" | "name")}
+                  className="rounded-[15px] border border-cyan-400/15 bg-[#0a1118] px-4 py-3 text-xs text-white outline-none transition focus:border-cyan-300/45"
+                  aria-label="Trier la collection PSA"
+                >
+                  <option value="value">Valeur décroissante</option>
+                  <option value="profit">Plus-value décroissante</option>
+                  <option value="recent">Ajouts récents</option>
+                  <option value="name">Nom A → Z</option>
                 </select>
 
                 <select
@@ -615,19 +695,29 @@ export default function PSAPage() {
                               <span className="rounded-full border border-cyan-300/20 bg-cyan-400/[0.10] px-2.5 py-1 text-[10px] font-black text-cyan-200 shadow-[0_0_20px_rgba(34,211,238,0.08)]">
                                 PSA {card.grade}
                               </span>
-                              <span className="rounded-full border border-white/10 bg-white/[0.035] px-2.5 py-1 text-[10px] font-bold text-zinc-300">
+                              <span className="rounded-full border border-cyan-300/15 bg-cyan-300/[0.035] px-2.5 py-1 text-[10px] font-bold text-zinc-300">
                                 {psaLanguageLabel(card.language)}
                               </span>
                             </div>
 
-                            <button
-                              type="button"
-                              onClick={() => handleDelete(card.id)}
-                              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-rose-400/20 bg-rose-400/[0.05] text-rose-300 transition hover:border-rose-300/40 hover:bg-rose-400/10 active:scale-95"
-                              aria-label={`Supprimer ${card.cardName} de la collection PSA`}
-                            >
-                              <Trash2 className="w-4 h-4" />
-                            </button>
+                            <div className="flex gap-1.5">
+                              <button
+                                type="button"
+                                onClick={() => handleEdit(card)}
+                                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-cyan-300/20 bg-cyan-300/[0.05] text-cyan-200 transition hover:border-cyan-200/40 hover:bg-cyan-300/10 active:scale-95"
+                                aria-label={`Modifier ${card.cardName}`}
+                              >
+                                <Pencil className="h-4 w-4" />
+                              </button>
+                              <button
+                                type="button"
+                                onClick={() => handleDelete(card.id)}
+                                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-rose-400/20 bg-rose-400/[0.05] text-rose-300 transition hover:border-rose-300/40 hover:bg-rose-400/10 active:scale-95"
+                                aria-label={`Supprimer ${card.cardName} de la collection PSA`}
+                              >
+                                <Trash2 className="w-4 h-4" />
+                              </button>
+                            </div>
                           </div>
 
                           <h3 className="mt-2 break-words text-sm font-black leading-snug text-white">
@@ -640,6 +730,10 @@ export default function PSAPage() {
                               <p className="break-all text-zinc-200">N° {card.cardNumber}</p>
                             )}
                             <p className="break-all text-zinc-200">Certificat : {card.psaCertNumber}</p>
+                            <p className="text-zinc-300">
+                              {card.editionKey === "first-edition" ? "1re édition" : "Édition illimitée"}
+                              {card.variantKey ? ` · ${PSA_VARIANT_LABELS[card.variantKey] || card.variantKey}` : ""}
+                            </p>
                           </div>
 
                         </div>
@@ -761,7 +855,9 @@ export default function PSAPage() {
                             ? "Recherche PSA japonaise :"
                             : "Recherche PSA anglaise :"}
                       </span>{" "}
-                      PriceCharting est utilisé en priorité pour les prix PSA disponibles ; eBay complète les résultats avec des annonces actives compatibles.
+                      {priceSearchLanguage === "fr"
+                        ? "eBay FR fournit les annonces actives vérifiées ; PriceCharting complète avec ses prix et ventes réalisées lorsqu’une fiche française existe."
+                        : "PriceCharting fournit les prix et ventes disponibles ; eBay complète avec des annonces actives compatibles."}
                     </p>
                   </div>
                 </div>
@@ -1315,10 +1411,10 @@ export default function PSAPage() {
       {/* MODAL */}
       {isAddModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4 backdrop-blur-xl">
-          <div className="kt-premium-panel w-full max-w-md rounded-[18px] p-6 space-y-5">
+          <div className="kt-premium-panel max-h-[92vh] w-full max-w-md overflow-y-auto rounded-[18px] p-6 space-y-5">
 
             <h3 className="text-sm font-black uppercase">
-              Ajouter une carte PSA
+              {editingCardId ? "Modifier la carte PSA" : "Ajouter une carte PSA"}
             </h3>
 
             <form
@@ -1377,6 +1473,32 @@ export default function PSAPage() {
               </label>
 
               <div className="grid grid-cols-2 gap-3">
+                <label className="block">
+                  <span className="mb-1.5 block text-[10px] font-bold uppercase tracking-[0.11em] text-zinc-200">Édition</span>
+                  <select
+                    value={newEdition}
+                    onChange={(event) => setNewEdition(event.target.value)}
+                    className="kt-control w-full rounded-xl border px-3 py-3 text-xs"
+                  >
+                    <option value="unlimited">Illimitée</option>
+                    <option value="first-edition">1re édition</option>
+                  </select>
+                </label>
+                <label className="block">
+                  <span className="mb-1.5 block text-[10px] font-bold uppercase tracking-[0.11em] text-zinc-200">Variante</span>
+                  <select
+                    value={newVariant}
+                    onChange={(event) => setNewVariant(event.target.value)}
+                    className="kt-control w-full rounded-xl border px-3 py-3 text-xs"
+                  >
+                    {Object.entries(PSA_VARIANT_LABELS).map(([value, label]) => (
+                      <option key={value} value={value}>{label}</option>
+                    ))}
+                  </select>
+                </label>
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
                 <select
                   value={newGrade}
                   onChange={(e) =>
@@ -1426,12 +1548,34 @@ export default function PSAPage() {
                 />
               </label>
 
+              <label className="block">
+                <span className="mb-1.5 block text-[10px] font-bold uppercase tracking-[0.11em] text-zinc-200">Date d&apos;achat</span>
+                <input
+                  type="date"
+                  value={newPurchaseDate}
+                  onChange={(event) => setNewPurchaseDate(event.target.value)}
+                  className="kt-control w-full rounded-xl border px-3 py-3 text-xs text-white"
+                />
+              </label>
+
+              <label className="block">
+                <span className="mb-1.5 block text-[10px] font-bold uppercase tracking-[0.11em] text-zinc-200">URL du visuel</span>
+                <input
+                  type="url"
+                  value={newImage}
+                  onChange={(event) => setNewImage(event.target.value)}
+                  placeholder="https://…"
+                  className="kt-control w-full rounded-xl border px-3 py-3 text-xs text-white"
+                />
+              </label>
+
               <div className="flex justify-end gap-2 pt-3">
                 <button
                   type="button"
-                  onClick={() =>
-                    setIsAddModalOpen(false)
-                  }
+                  onClick={() => {
+                    setIsAddModalOpen(false);
+                    resetCardForm();
+                  }}
                   className="px-4 py-2 text-xs text-zinc-100"
                 >
                   Annuler
@@ -1441,7 +1585,7 @@ export default function PSAPage() {
                   type="submit"
                   className="bg-cyan-400 text-black shadow-[0_8px_24px_rgba(34,211,238,0.18)] px-5 py-2 rounded-xl text-xs font-black uppercase"
                 >
-                  Enregistrer
+                  {editingCardId ? "Mettre à jour" : "Enregistrer"}
                 </button>
               </div>
             </form>
