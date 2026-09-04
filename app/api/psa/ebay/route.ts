@@ -5,7 +5,9 @@ import {
   extractPSACardNumberV280,
   isSinglePokemonPSAProductV280,
   normalizePSACardNumberV280,
+  psaDisplayCardNameV302,
 } from "@/lib/psa/identity";
+import { resolvePSASetFromCatalogV302 } from "@/lib/psa/catalog-match";
 
 type EbayPsaListing = {
   id: string;
@@ -324,10 +326,17 @@ export async function GET(request: Request) {
       if (!titleMatchesQuery(title, query)) return null;
       if (currency !== "EUR") return null;
 
+      const catalogSet = resolvePSASetFromCatalogV302({
+        language,
+        text: `${structuredSetName} ${title}`,
+        cardNumber,
+      });
+      const setName = catalogSet?.name || structuredSetName;
+      const displayCardName = psaDisplayCardNameV302(structuredCardName || query, title);
       const identity = buildPSACardIdentityV280({
         language,
-        cardName: structuredCardName || query,
-        setName: structuredSetName,
+        cardName: displayCardName,
+        setName,
         cardNumber,
         title,
         query,
@@ -353,9 +362,9 @@ export async function GET(request: Request) {
         language: language,
         languageLabel: languageLabel(signal, language),
         identityKey: identity.key,
-        cardName: structuredCardName || query.trim(),
+        cardName: displayCardName,
         cardNumber: identity.cardNumber,
-        setName: structuredSetName || identity.setName,
+        setName: setName || identity.setName,
         editionKey: identity.edition,
         variantKey: identity.variant,
       } satisfies EbayPsaListing;
@@ -387,7 +396,7 @@ export async function GET(request: Request) {
     returnedCount: results.length,
     queryCount: searchQueries.length,
     language,
-    identityVersion: "psa-v280",
+    identityVersion: "psa-v302",
     results,
   });
 }

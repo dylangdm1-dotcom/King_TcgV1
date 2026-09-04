@@ -381,11 +381,6 @@ export async function POST(req: NextRequest) {
     const oversized = rejectOversizedContentLength(req, MAX_PSA_REQUEST_BYTES);
     if (oversized) return oversized;
 
-    const apiKey = process.env.GEMINI_API_KEY;
-    if (!apiKey) {
-      return NextResponse.json({ error: "Clé Gemini non configurée." }, { status: 500 });
-    }
-
     const parsedBody = await readJsonBodyWithLimit<any>(req, MAX_PSA_REQUEST_BYTES);
     if ("error" in parsedBody) return parsedBody.error;
     const body = parsedBody.data;
@@ -398,6 +393,10 @@ export async function POST(req: NextRequest) {
 
     if (photos.length !== PSA_PHOTO_IDS.length) {
       return NextResponse.json({ error: "Les quatre photos sont obligatoires." }, { status: 400 });
+    }
+
+    if (body?.manualReview && !manualReviewResult?.success) {
+      return NextResponse.json({ error: "Contrôles manuels PSA invalides." }, { status: 400 });
     }
 
     const uniqueIds = new Set(photos.map((photo) => photo.id));
@@ -419,6 +418,11 @@ export async function POST(req: NextRequest) {
         { error: "Les photos sont trop lourdes. Reprenez-les depuis la caméra intégrée." },
         { status: 413 }
       );
+    }
+
+    const apiKey = process.env.GEMINI_API_KEY;
+    if (!apiKey) {
+      return NextResponse.json({ error: "Clé Gemini non configurée." }, { status: 503 });
     }
 
     const imageParts = parsedPhotos.map((photo) => ({

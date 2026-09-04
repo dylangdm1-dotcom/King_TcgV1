@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { apiError, boundedQuery, enforceRateLimit } from "@/lib/api/security";
 import { buildPSACardIdentityV280 } from "@/lib/psa/identity";
+import { resolvePSASetFromCatalogV302 } from "@/lib/psa/catalog-match";
 import {
   matchesPriceChartingQueryV281,
   priceChartingSearchTermsV281,
@@ -355,7 +356,7 @@ function extractCardInfo(html: string) {
   // Never derive the set name from the whole page. The old implementation
   // captured the navigation menu between the first "Pokemon" and "Details".
   let setName = "";
-  const titleSetMatch = cardName.match(/#\d{1,4}(?:\/\d{1,4})?\s+(.+?)(?:\s+Pokemon Cards)?$/i);
+  const titleSetMatch = cardName.match(/#[A-Z]*\d{1,4}(?:\/[A-Z]*\d{1,4})?\s+(.+?)(?:\s+Pokemon Cards)?$/i);
   if (titleSetMatch?.[1]) {
     setName = titleSetMatch[1]
       .replace(/^Pokemon\s+/i, "")
@@ -366,19 +367,19 @@ function extractCardInfo(html: string) {
 
   if (!setName) {
     const breadcrumbMatch = text.match(
-      /(?:Cartes de Pokemon|Pokemon Cards)\s+([^|]+?)\s+[^|]*#\d{1,4}(?:\/\d{1,4})?/i
+      /(?:Cartes de Pokemon|Pokemon Cards)\s+([^|]+?)\s+[^|]*#[A-Z]*\d{1,4}(?:\/[A-Z]*\d{1,4})?/i
     );
     if (breadcrumbMatch?.[1]) setName = breadcrumbMatch[1].trim();
   }
 
   let cardNumber = "";
   const numberMatch = text.match(
-    /(?:Card Number|Numéro de carte)\s*[:|]?\s*#?\s*(\d{1,4}(?:\/\d{1,4})?)/i
+    /(?:Card Number|Numéro de carte)\s*[:|]?\s*#?\s*([A-Z]*\d{1,4}(?:\/[A-Z]*\d{1,4})?)/i
   );
   if (numberMatch?.[1]) cardNumber = numberMatch[1];
 
   if (!cardNumber) {
-    const fromTitle = cardName.match(/#(\d{1,4}(?:\/\d{1,4})?)/i);
+    const fromTitle = cardName.match(/#([A-Z]*\d{1,4}(?:\/[A-Z]*\d{1,4})?)/i);
     if (fromTitle?.[1]) cardNumber = fromTitle[1];
   }
 
@@ -506,7 +507,7 @@ function addSearchResult(
 
   const cardNumber =
     cleanTitle.match(
-      /#(\d{1,4}(?:\/\d{1,4})?)/i
+      /#([A-Z]*\d{1,4}(?:\/[A-Z]*\d{1,4})?)/i
     )?.[1] ?? "";
 
   const pokemonMatch =
@@ -671,8 +672,14 @@ async function fetchProduct(
      * d'un prix particulier échoue.
      */
     const cardName = info.cardName || product.title;
-    const setName = info.setName || product.setName;
+    const rawSetName = info.setName || product.setName;
     const cardNumber = info.cardNumber || product.cardNumber;
+    const catalogSet = resolvePSASetFromCatalogV302({
+      language,
+      text: `${rawSetName} ${product.title} ${cardName}`,
+      cardNumber,
+    });
+    const setName = catalogSet?.name || rawSetName;
     const identity = buildPSACardIdentityV280({
       language,
       cardName,
@@ -769,8 +776,8 @@ export async function GET(
         resultCount: 0,
         currency: "EUR",
         language,
-        identityVersion: "psa-v280",
-        matchingVersion: "pricecharting-v281",
+        identityVersion: "psa-v302",
+        matchingVersion: "pricecharting-v302",
         usdToEur: rate,
       });
     }
@@ -873,9 +880,9 @@ export async function GET(
 
       language,
 
-      identityVersion: "psa-v280",
+      identityVersion: "psa-v302",
 
-      matchingVersion: "pricecharting-v281",
+      matchingVersion: "pricecharting-v302",
 
       usdToEur: rate,
     });
