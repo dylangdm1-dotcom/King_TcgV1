@@ -475,7 +475,10 @@ async function recoverMissingFrenchImages(cards: any[]): Promise<any[]> {
   const recovered = [...cards];
   const missing = cards
     .map((card, index) => ({ card, index }))
-    .filter(({ card }) => !hasTcgdexImage(card));
+    .filter(({ card }) => !hasTcgdexImage(card))
+    // La grille n'affiche que les premiers résultats au départ. Ne pas bloquer
+    // toute la recherche sur des dizaines (voire centaines) de détails image.
+    .slice(0, 24);
 
   for (let index = 0; index < missing.length; index += 6) {
     const batch = missing.slice(index, index + 6);
@@ -962,7 +965,7 @@ export async function searchCards(
       const knownIds = new Set(tcgdexCards.map((card) => String(card.id).replace(/^tcgdex-fr-/, "")));
       const discoveryIds = Array.from(new Set(
         enResponses.flat().map((card: any) => String(card?.id || "")).filter((id) => id && !knownIds.has(id))
-      ));
+      )).slice(0, Math.max(0, 24 - tcgdexCards.length));
 
       const verifiedFrench: PokemonCard[] = [];
       const concurrency = 8;
