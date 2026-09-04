@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { Briefcase, Plus, Minus } from "lucide-react";
+import Link from "next/link";
+import { Briefcase, Plus, Minus, CircleDollarSign } from "lucide-react";
 import {
   getCardQuantity,
   addToCollection,
@@ -213,6 +214,11 @@ export default function CardPortfolio({ card, currentValue, onPrintingVariantCha
           </p>
         </div>
       </div>
+      {quantity > 0 ? (
+        <Link href={`/ventes?card=${encodeURIComponent(card.id)}`} className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-amber-300/25 bg-amber-300/[0.07] px-4 py-3 text-[9px] font-black uppercase tracking-[0.08em] text-amber-200 transition hover:border-amber-300/45">
+          <CircleDollarSign className="h-4 w-4" /> Marquer une carte comme vendue
+        </Link>
+      ) : null}
     </div>
   );
 }
