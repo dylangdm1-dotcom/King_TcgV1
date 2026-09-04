@@ -70,7 +70,9 @@ export default function ItemsPageContent() {
   };
 
   const frenchStatus = (() => {
-    if (manifest?.languageStatus?.fr?.itemCount) return `${manifest.languageStatus.fr.itemCount} produits français chargés automatiquement avec visuels et cotes CardTrader.`;
+    const frenchCount = manifest?.languageStatus?.fr?.itemCount || 0;
+    if (frenchCount >= 100) return `${frenchCount} produits français chargés automatiquement avec visuels ; objectif minimum validé.`;
+    if (frenchCount > 0) return `${frenchCount}/100 produits français chargés avec visuels. Le catalogue reste partiel et peut être relancé.`;
     if (runtime?.state === "error") return `La synchronisation FR a échoué temporairement (${runtime.lastError || "erreur fournisseur"}). Elle sera retentée automatiquement sans bloquer les items EN.`;
     if (runtime?.state === "empty") return "CardTrader n’a renvoyé aucun produit FR exploitable dans le lot actuel. Un nouveau lot sera retenté automatiquement.";
     if (cardTraderReady === false) return "CardTrader attend sa variable serveur sur cet environnement. Aucun produit anglais ne remplit artificiellement le catalogue français.";
@@ -85,7 +87,7 @@ export default function ItemsPageContent() {
           <div className="flex items-start gap-3">
             <span className="kt-page-icon flex shrink-0 items-center justify-center text-amber-300"><PackageOpen className="h-5 w-5" /></span>
             <div>
-              <div className="mb-2 flex flex-wrap items-center gap-2"><ItemAccessBadge /><span className="rounded-full border border-cyan-300/15 bg-cyan-300/[0.05] px-2 py-1 text-[8px] font-black uppercase tracking-[0.08em] text-cyan-300">V303 · Bêta</span></div>
+              <div className="mb-2 flex flex-wrap items-center gap-2"><ItemAccessBadge /><span className="rounded-full border border-cyan-300/15 bg-cyan-300/[0.05] px-2 py-1 text-[8px] font-black uppercase tracking-[0.08em] text-cyan-300">V304 · Bêta</span></div>
               <h1 className="kt-page-title">Items <span className="text-cyan-300">Pokémon scellés</span></h1>
               <p className="kt-page-subtitle mt-1 max-w-2xl">Espace indépendant pour ETB, displays, boosters, coffrets, bundles, UPC et autres produits scellés. Aucun résultat carte ou extension n’est mélangé ici.</p>
             </div>
@@ -102,8 +104,8 @@ export default function ItemsPageContent() {
       <ItemCreateForm open={createOpen} onClose={() => setCreateOpen(false)} onCreated={() => setFilters((current) => ({ ...current, availability: "personal" }))} />
       <ItemCatalogStatus manifest={manifest} offline={offline} />
       <section className="grid gap-2 sm:grid-cols-2">
-        <div className="rounded-[15px] border border-amber-300/[0.16] bg-amber-300/[0.035] px-4 py-3"><div className="flex items-center justify-between gap-2"><p className="text-[9px] font-black uppercase tracking-[0.1em] text-amber-300">FR · Synchronisation{manifest?.languageStatus?.fr?.itemCount ? ` · ${manifest.languageStatus.fr.itemCount}` : ""}</p>{!manifest?.languageStatus?.fr?.itemCount ? <button type="button" onClick={refreshFrenchCatalog} disabled={refreshingFrench} className="inline-flex items-center gap-1 rounded-lg border border-amber-300/20 bg-amber-300/[0.06] px-2 py-1 text-[8px] font-black uppercase text-amber-200 disabled:opacity-60">{refreshingFrench ? <Loader2 className="h-3 w-3 animate-spin" /> : <RefreshCw className="h-3 w-3" />} Relancer</button> : null}</div><p className="mt-1 text-[10px] leading-5 text-zinc-300">{refreshingFrench ? "Nouvelle synchronisation des produits français et de leurs visuels…" : frenchStatus}</p></div>
-        <div className="rounded-[15px] border border-cyan-300/[0.16] bg-cyan-300/[0.035] px-4 py-3"><p className="text-[9px] font-black uppercase tracking-[0.1em] text-cyan-300">EN · Disponible</p><p className="mt-1 text-[10px] leading-5 text-zinc-300">57 produits réels avec leurs visuels fournisseur ; 54 disposent d’une cote TCGplayer EN/US conservée en USD.</p></div>
+        <div className="rounded-[15px] border border-amber-300/[0.16] bg-amber-300/[0.035] px-4 py-3"><div className="flex items-center justify-between gap-2"><p className="text-[9px] font-black uppercase tracking-[0.1em] text-amber-300">FR · Synchronisation{manifest?.languageStatus?.fr?.itemCount ? ` · ${manifest.languageStatus.fr.itemCount}/100` : ""}</p>{(manifest?.languageStatus?.fr?.itemCount || 0) < 100 ? <button type="button" onClick={refreshFrenchCatalog} disabled={refreshingFrench} className="inline-flex items-center gap-1 rounded-lg border border-amber-300/20 bg-amber-300/[0.06] px-2 py-1 text-[8px] font-black uppercase text-amber-200 disabled:opacity-60">{refreshingFrench ? <Loader2 className="h-3 w-3 animate-spin" /> : <RefreshCw className="h-3 w-3" />} Relancer</button> : null}</div><p className="mt-1 text-[10px] leading-5 text-zinc-300">{refreshingFrench ? "Nouvelle synchronisation des produits français et de leurs visuels…" : frenchStatus}</p></div>
+        <div className="rounded-[15px] border border-cyan-300/[0.16] bg-cyan-300/[0.035] px-4 py-3"><p className="text-[9px] font-black uppercase tracking-[0.1em] text-cyan-300">EN · Disponible</p><p className="mt-1 text-[10px] leading-5 text-zinc-300">53 produits distincts ; 56 visuels sauvegardés directement dans King_TCG et 54 références cotées en USD. Un produit fournisseur sans image réelle reste signalé sans faux visuel.</p></div>
       </section>
       <ItemStats catalog={stats.verified} personal={stats.personal} collection={collectionCount} favorites={favoriteCount} />
 
