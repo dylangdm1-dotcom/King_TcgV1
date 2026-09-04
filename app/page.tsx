@@ -203,7 +203,7 @@ export default function Home() {
                     Actus & à venir
                   </span>
                   <span className="mt-0.5 block truncate text-[11px] font-bold text-zinc-300">
-                    Visuels Items EN disponibles · catalogue FR en préparation
+                    Synchronisation Items FR renforcée · 30e Anniversaire le 16 septembre
                   </span>
                 </span>
               </div>
@@ -225,7 +225,7 @@ export default function Home() {
                         <div className="min-w-0">
                           <h3 className="truncate text-[11px] font-black text-white">{release.name}</h3>
                           <p className="mt-0.5 text-[9px] leading-4 text-zinc-300">
-                            {release.language === "ja" ? "Japon" : String(release.language).toUpperCase()} · {new Date(release.releaseDate).toLocaleDateString("fr-FR")} · {release.contents}
+                            {String(release.language).toUpperCase()} · {new Date(release.releaseDate).toLocaleDateString("fr-FR")} · {release.contents}
                           </p>
                         </div>
                         <a

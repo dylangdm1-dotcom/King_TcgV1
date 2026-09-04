@@ -22,6 +22,7 @@ import {
   Loader2,
   Grid2X2,
   Crown,
+  FileSpreadsheet,
 } from "lucide-react";
 
 import ScannerCamera, {
@@ -39,6 +40,7 @@ import {
   scannerCacheKeyV293,
 } from "@/lib/scanner/catalogIdentity";
 import type { QuadImageQuality, QuadSlotIndex } from "@/lib/scanner/quadScanner";
+import { buildScannerInventoryCsvV303, SCANNER_INVENTORY_LIMIT_V303 } from "@/lib/scanner/inventoryExport";
 
 import Navbar from "@/components/Navbar";
 
@@ -65,8 +67,10 @@ const SCANNER_BATCH_LIMIT = 4;
 const SCANNER_QUOTA_KEY = "king_tcg_scanner_quota_v1";
 const SCANNER_BATCH_KEY = "king_tcg_scanner_batch_v1";
 const SCANNER_QUAD_KEY = "king_tcg_scanner_quad_v1";
+const SCANNER_INVENTORY_KEY = "king_tcg_scanner_inventory_v303";
 const SCANNER_BATCH_QUOTA_KEY = "king_tcg_scanner_batch_quota_v1";
 const SCANNER_QUAD_QUOTA_KEY = "king_tcg_scanner_quad_quota_v1";
+const SCANNER_INVENTORY_QUOTA_KEY = "king_tcg_scanner_inventory_quota_v303";
 
 function scannerCardHref(cardId: string) {
   return `/card/${encodeURIComponent(cardId)}?source=scanner`;
@@ -90,6 +94,8 @@ function readQuota() {
       const fresh = { used: 0, ...period };
       window.localStorage.setItem(SCANNER_QUOTA_KEY, JSON.stringify(fresh));
       window.localStorage.removeItem(SCANNER_BATCH_QUOTA_KEY);
+      window.localStorage.removeItem(SCANNER_QUAD_QUOTA_KEY);
+      window.localStorage.removeItem(SCANNER_INVENTORY_QUOTA_KEY);
       return fresh;
     }
     return { used: Math.max(0, Number(parsed.used) || 0), ...period };
@@ -168,14 +174,16 @@ export default function ScannerPage() {
 
   const [scanMode, setScanMode] = useState<"single" | "batch">("single");
   const [modeSelected, setModeSelected] = useState(false);
-  const [batchCaptureMode, setBatchCaptureMode] = useState<"individual" | "grouped">("individual");
+  const [batchCaptureMode, setBatchCaptureMode] = useState<"individual" | "grouped" | "inventory">("individual");
   const [groupedLanguage, setGroupedLanguage] = useState<"fr" | "en" | "ja" | "zh-tw">("fr");
   const [batchList, setBatchList] = useState<ScannedBatchItem[]>([]);
   const [quadList, setQuadList] = useState<ScannedBatchItem[]>([]);
+  const [inventoryList, setInventoryList] = useState<ScannedBatchItem[]>([]);
   const [quotaUsed, setQuotaUsed] = useState(0);
   const [quotaEnd, setQuotaEnd] = useState("");
   const [batchQuotaConsumed, setBatchQuotaConsumed] = useState(false);
   const [quadQuotaConsumed, setQuadQuotaConsumed] = useState(false);
+  const [inventoryQuotaConsumed, setInventoryQuotaConsumed] = useState(false);
   const [quadProgress, setQuadProgress] = useState<QuadSlotProgress[]>(EMPTY_QUAD_PROGRESS);
 
   useEffect(() => {
@@ -204,8 +212,19 @@ export default function ScannerPage() {
           })));
         }
       }
+      const rawInventory = window.localStorage.getItem(SCANNER_INVENTORY_KEY);
+      if (rawInventory) {
+        const items = JSON.parse(rawInventory);
+        if (Array.isArray(items) && items.length > 0) {
+          setInventoryList(items.slice(0, SCANNER_INVENTORY_LIMIT_V303).map((item: any) => ({
+            ...item,
+            scannedAt: new Date(item.scannedAt),
+          })));
+        }
+      }
       setBatchQuotaConsumed(window.localStorage.getItem(SCANNER_BATCH_QUOTA_KEY) === "1");
       setQuadQuotaConsumed(window.localStorage.getItem(SCANNER_QUAD_QUOTA_KEY) === "1");
+      setInventoryQuotaConsumed(window.localStorage.getItem(SCANNER_INVENTORY_QUOTA_KEY) === "1");
     } catch {}
   }, []);
 
@@ -227,11 +246,21 @@ export default function ScannerPage() {
     } catch {}
   }, [quadList]);
 
+  useEffect(() => {
+    try {
+      window.localStorage.setItem(
+        SCANNER_INVENTORY_KEY,
+        JSON.stringify(inventoryList.map((item) => ({ ...item, scannedAt: item.scannedAt.toISOString() })))
+      );
+    } catch {}
+  }, [inventoryList]);
+
   const quotaBlocked = quotaUsed >= SCANNER_MONTHLY_LIMIT;
 
-  const consumeSuccessfulSession = useCallback((mode: "single" | "batch" | "quad") => {
+  const consumeSuccessfulSession = useCallback((mode: "single" | "batch" | "quad" | "inventory") => {
     if (mode === "batch" && batchQuotaConsumed) return true;
     if (mode === "quad" && quadQuotaConsumed) return true;
+    if (mode === "inventory" && inventoryQuotaConsumed) return true;
     const current = readQuota();
     if (current.used >= SCANNER_MONTHLY_LIMIT) {
       setQuotaUsed(current.used);
@@ -247,9 +276,12 @@ export default function ScannerPage() {
     } else if (mode === "quad") {
       setQuadQuotaConsumed(true);
       try { window.localStorage.setItem(SCANNER_QUAD_QUOTA_KEY, "1"); } catch {}
+    } else if (mode === "inventory") {
+      setInventoryQuotaConsumed(true);
+      try { window.localStorage.setItem(SCANNER_INVENTORY_QUOTA_KEY, "1"); } catch {}
     }
     return true;
-  }, [batchQuotaConsumed, quadQuotaConsumed]);
+  }, [batchQuotaConsumed, quadQuotaConsumed, inventoryQuotaConsumed]);
 
   // =====================================================
   // HAPTIC FEEDBACK
@@ -422,8 +454,12 @@ export default function ScannerPage() {
       setStatus(`Quota Scanner atteint (${SCANNER_MONTHLY_LIMIT}/${SCANNER_MONTHLY_LIMIT}). Renouvellement le ${new Date(currentQuota.end).toLocaleDateString("fr-FR")}.`);
       return;
     }
-    if (scanMode === "batch" && batchList.length >= SCANNER_BATCH_LIMIT) {
-      setStatus("Session batch pleine (4/4). Videz la session pour recommencer.");
+    const sequentialList = batchCaptureMode === "inventory" ? inventoryList : batchList;
+    const sequentialLimit = batchCaptureMode === "inventory" ? SCANNER_INVENTORY_LIMIT_V303 : SCANNER_BATCH_LIMIT;
+    if (scanMode === "batch" && batchCaptureMode !== "grouped" && sequentialList.length >= sequentialLimit) {
+      setStatus(batchCaptureMode === "inventory"
+        ? "Inventaire PRO plein (40/40). Exportez ou videz la session."
+        : "Session batch pleine (4/4). Videz la session pour recommencer.");
         return;
     }
 
@@ -449,7 +485,7 @@ export default function ScannerPage() {
 
       const image64 = captureFrame(
         video,
-        scanMode === "batch" && batchCaptureMode === "individual"
+        scanMode === "batch" && batchCaptureMode !== "grouped"
           ? { maxWidth: 1600, jpegQuality: 0.90 }
           : {}
       );
@@ -630,7 +666,8 @@ export default function ScannerPage() {
           router.push(scannerCardHref(card.id));
         }, 400);
       } else {
-        if (!consumeSuccessfulSession("batch")) {
+        const sessionMode = batchCaptureMode === "inventory" ? "inventory" : "batch";
+        if (!consumeSuccessfulSession(sessionMode)) {
           setStatus("Quota Scanner atteint. Renouvellement le 5 du mois.");
           return;
         }
@@ -641,8 +678,13 @@ export default function ScannerPage() {
           confidence: validatedConfidence,
         };
 
-        setBatchList((prev) => [batchItem, ...prev].slice(0, SCANNER_BATCH_LIMIT));
-            logger.scan("Carte ajoutée au batch V5.");
+        if (batchCaptureMode === "inventory") {
+          setInventoryList((prev) => [batchItem, ...prev].slice(0, SCANNER_INVENTORY_LIMIT_V303));
+          logger.scan("Carte ajoutée à l’inventaire Scanner 4.0.");
+        } else {
+          setBatchList((prev) => [batchItem, ...prev].slice(0, SCANNER_BATCH_LIMIT));
+          logger.scan("Carte ajoutée au batch V5.");
+        }
       }
     } catch (error: any) {
       logger.error("SCAN", "Erreur scan V5", error);
@@ -660,6 +702,8 @@ export default function ScannerPage() {
   const removeBatchItem = (id: string) => {
     if (batchCaptureMode === "grouped") {
       setQuadList((prev) => prev.filter((item) => item.id !== id));
+    } else if (batchCaptureMode === "inventory") {
+      setInventoryList((prev) => prev.filter((item) => item.id !== id));
     } else {
       setBatchList((prev) => prev.filter((item) => item.id !== id));
     }
@@ -671,6 +715,10 @@ export default function ScannerPage() {
         setQuadList([]);
         setQuadQuotaConsumed(false);
         try { window.localStorage.removeItem(SCANNER_QUAD_QUOTA_KEY); } catch {}
+      } else if (batchCaptureMode === "inventory") {
+        setInventoryList([]);
+        setInventoryQuotaConsumed(false);
+        try { window.localStorage.removeItem(SCANNER_INVENTORY_QUOTA_KEY); } catch {}
       } else {
         setBatchList([]);
         setBatchQuotaConsumed(false);
@@ -681,6 +729,9 @@ export default function ScannerPage() {
           window.localStorage.removeItem(SCANNER_QUAD_KEY);
           window.localStorage.removeItem(SCANNER_QUAD_QUOTA_KEY);
           setQuadProgress(EMPTY_QUAD_PROGRESS.map((slot) => ({ ...slot })));
+        } else if (batchCaptureMode === "inventory") {
+          window.localStorage.removeItem(SCANNER_INVENTORY_KEY);
+          window.localStorage.removeItem(SCANNER_INVENTORY_QUOTA_KEY);
         } else {
           window.localStorage.removeItem(SCANNER_BATCH_KEY);
           window.localStorage.removeItem(SCANNER_BATCH_QUOTA_KEY);
@@ -690,18 +741,21 @@ export default function ScannerPage() {
   };
 
   const exportBatch = () => {
-    const dataStr = JSON.stringify(batchCaptureMode === "grouped" ? quadList : batchList, null, 2);
+    const inventoryMode = batchCaptureMode === "inventory";
+    const dataStr = inventoryMode
+      ? buildScannerInventoryCsvV303(inventoryList)
+      : JSON.stringify(batchCaptureMode === "grouped" ? quadList : batchList, null, 2);
     const blob = new Blob([dataStr], {
-      type: "application/json",
+      type: inventoryMode ? "text/csv;charset=utf-8" : "application/json",
     });
 
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
 
     link.href = url;
-    link.download = `king_tcg_scan_batch_${new Date()
+    link.download = `king_tcg_${inventoryMode ? "inventaire_pro" : "scan_batch"}_${new Date()
       .toISOString()
-      .slice(0, 10)}.json`;
+      .slice(0, 10)}.${inventoryMode ? "csv" : "json"}`;
 
     link.click();
     URL.revokeObjectURL(url);
@@ -866,9 +920,14 @@ export default function ScannerPage() {
       setStatus(`Quota Scanner atteint (${SCANNER_MONTHLY_LIMIT}/${SCANNER_MONTHLY_LIMIT}). Renouvellement le ${new Date(currentQuota.end).toLocaleDateString("fr-FR")}.`);
       return;
     }
-    const activeSessionList = batchCaptureMode === "grouped" ? quadList : batchList;
-    if (scanMode === "batch" && activeSessionList.length >= SCANNER_BATCH_LIMIT) {
-      setStatus(batchCaptureMode === "grouped" ? "Session Quad pleine (4/4). Videz la session pour recommencer." : "Session Batch pleine (4/4). Videz la session pour recommencer.");
+    const activeSessionList = batchCaptureMode === "grouped" ? quadList : batchCaptureMode === "inventory" ? inventoryList : batchList;
+    const activeLimit = batchCaptureMode === "inventory" ? SCANNER_INVENTORY_LIMIT_V303 : SCANNER_BATCH_LIMIT;
+    if (scanMode === "batch" && activeSessionList.length >= activeLimit) {
+      setStatus(batchCaptureMode === "grouped"
+        ? "Session Quad pleine (4/4). Videz la session pour recommencer."
+        : batchCaptureMode === "inventory"
+          ? "Inventaire PRO plein (40/40). Exportez ou videz la session."
+          : "Session Batch pleine (4/4). Videz la session pour recommencer.");
       return;
     }
     if (scanMode === "batch" && batchCaptureMode === "grouped") {
@@ -894,7 +953,7 @@ export default function ScannerPage() {
 
   const selectScannerMode = (
     mode: "single" | "batch",
-    captureMode: "individual" | "grouped" = "individual"
+    captureMode: "individual" | "grouped" | "inventory" = "individual"
   ) => {
     setScanMode(mode);
     setBatchCaptureMode(captureMode);
@@ -909,6 +968,8 @@ export default function ScannerPage() {
       setStatus("Mode Mono sélectionné : cadrez une carte entière.");
     } else if (captureMode === "grouped") {
       setStatus("Quad · Premium : placez 4 cartes dans une seule photo.");
+    } else if (captureMode === "inventory") {
+      setStatus("Inventaire · PRO : scannez jusqu’à 40 cartes puis exportez le tableau Excel.");
     } else {
       setStatus("Batch · Premium : scannez jusqu’à 4 cartes à la suite.");
     }
@@ -923,7 +984,8 @@ export default function ScannerPage() {
 
   const quadConfirmedCount = quadProgress.filter((slot) => slot.status === "success").length;
   const quadReviewCount = quadProgress.filter((slot) => slot.status === "review").length;
-  const visibleSessionList = batchCaptureMode === "grouped" ? quadList : batchList;
+  const visibleSessionList = batchCaptureMode === "grouped" ? quadList : batchCaptureMode === "inventory" ? inventoryList : batchList;
+  const visibleSessionLimit = batchCaptureMode === "inventory" ? SCANNER_INVENTORY_LIMIT_V303 : SCANNER_BATCH_LIMIT;
 
   return (
     <>
@@ -953,7 +1015,7 @@ export default function ScannerPage() {
                 Choisissez votre mode de scan
               </p>
 
-              <div className="grid grid-cols-3 gap-2">
+              <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
                 <button
                   type="button"
                   onClick={() => selectScannerMode("single")}
@@ -1016,6 +1078,27 @@ export default function ScannerPage() {
                     Analyse simultanée
                   </span>
                 </button>
+
+                <button
+                  type="button"
+                  onClick={() => selectScannerMode("batch", "inventory")}
+                  className={`rounded-2xl border-2 px-2 py-3 text-center transition-all ${
+                    modeSelected && scanMode === "batch" && batchCaptureMode === "inventory"
+                      ? "border-emerald-300 bg-emerald-500/[0.14] shadow-[0_0_24px_rgba(52,211,153,.10)]"
+                      : "border-emerald-300/70 bg-emerald-500/[0.06] hover:border-emerald-200 hover:bg-emerald-500/[0.10]"
+                  }`}
+                >
+                  <FileSpreadsheet className="mx-auto h-5 w-5 text-emerald-300" />
+                  <span className="mt-1.5 block text-[10px] font-black uppercase tracking-[0.09em] text-emerald-300">
+                    Inventaire
+                  </span>
+                  <span className="mx-auto mt-1 inline-flex items-center justify-center gap-0.5 rounded-full border border-amber-300/30 bg-amber-300/[0.08] px-1.5 py-0.5 text-[6px] font-black uppercase tracking-[0.06em] text-amber-300">
+                    <Crown className="h-2.5 w-2.5" /> PRO
+                  </span>
+                  <span className="mt-1.5 block text-[7px] font-bold leading-3 text-zinc-300">
+                    40 cartes · Excel
+                  </span>
+                </button>
               </div>
 
               {!modeSelected ? (
@@ -1044,7 +1127,9 @@ export default function ScannerPage() {
                   ? "border-cyan-300/45 bg-cyan-400/[0.055] shadow-[0_0_26px_rgba(34,211,238,.06)]"
                   : batchCaptureMode === "grouped"
                     ? "border-amber-300/45 bg-violet-400/[0.065] shadow-[0_0_26px_rgba(245,196,81,.07)]"
-                    : "border-amber-300/45 bg-sky-400/[0.065] shadow-[0_0_26px_rgba(245,196,81,.07)]"
+                    : batchCaptureMode === "inventory"
+                      ? "border-emerald-300/45 bg-emerald-400/[0.06] shadow-[0_0_26px_rgba(52,211,153,.06)]"
+                      : "border-amber-300/45 bg-sky-400/[0.065] shadow-[0_0_26px_rgba(245,196,81,.07)]"
               }`}
             >
               <div className="flex items-start justify-between gap-3">
@@ -1062,7 +1147,9 @@ export default function ScannerPage() {
                         ? "Mono · Normal"
                         : batchCaptureMode === "grouped"
                           ? "Quad · Premium"
-                          : "Batch · Premium"}
+                          : batchCaptureMode === "inventory"
+                            ? "Inventaire · PRO"
+                            : "Batch · Premium"}
                     </p>
                   </div>
                   <h2 className={`mt-1 truncate text-sm font-black ${
@@ -1070,25 +1157,37 @@ export default function ScannerPage() {
                       ? "text-cyan-200"
                       : batchCaptureMode === "grouped"
                         ? "text-violet-200"
-                        : "text-sky-200"
+                        : batchCaptureMode === "inventory"
+                          ? "text-emerald-200"
+                          : "text-sky-200"
                   }`}>
                     {scanMode === "single"
                       ? "Mono · Scan"
                       : batchCaptureMode === "grouped"
                         ? "Quad · Scan simultané"
-                        : "Batch · Scan multiples"}
+                        : batchCaptureMode === "inventory"
+                          ? "Inventaire · 40 cartes"
+                          : "Batch · Scan multiples"}
                   </h2>
                   <p className="mt-1 text-[10px] leading-4 text-zinc-100">
                     {scanMode === "single"
                       ? "Scannez une carte dans les langues disponibles dans l’application."
                       : batchCaptureMode === "grouped"
                         ? "Capturez jusqu’à 4 cartes sur une seule photo."
-                        : "Scannez jusqu’à 4 cartes à la suite dans la même session."}
+                        : batchCaptureMode === "inventory"
+                          ? "Listez jusqu’à 40 cartes physiques : nom, numéro et extension, sans visuel ni prix requis."
+                          : "Scannez jusqu’à 4 cartes à la suite dans la même session."}
                   </p>
                 </div>
                 <div className="shrink-0 whitespace-nowrap">
                   <PremiumBadge tone={scanMode === "single" ? "cyan" : "violet"}>
-                    {scanMode === "single" ? "Mono" : `${batchList.length}/4`}
+                    {scanMode === "single"
+                      ? "Mono"
+                      : batchCaptureMode === "grouped"
+                        ? `${quadList.length}/4`
+                        : batchCaptureMode === "inventory"
+                          ? `${inventoryList.length}/40`
+                          : `${batchList.length}/4`}
                   </PremiumBadge>
                 </div>
               </div>
@@ -1344,7 +1443,7 @@ export default function ScannerPage() {
                 Aucun mode sélectionné
               </p>
               <p className="mx-auto mt-1 max-w-md text-[10px] leading-4 text-zinc-400">
-                Choisissez Mono, Batch ou Quad ci-dessus pour ouvrir la caméra correspondante.
+                Choisissez Mono, Batch, Quad ou Inventaire ci-dessus pour ouvrir la caméra correspondante.
               </p>
             </section>
           )}
@@ -1358,15 +1457,17 @@ export default function ScannerPage() {
                   <div className="flex items-center gap-2">
                     {batchCaptureMode === "grouped" ? (
                       <Grid2X2 className="h-4 w-4 text-violet-300" />
+                    ) : batchCaptureMode === "inventory" ? (
+                      <FileSpreadsheet className="h-4 w-4 text-emerald-300" />
                     ) : (
                       <Layers className="h-4 w-4 text-sky-300" />
                     )}
                     <p className="text-[10px] font-black uppercase tracking-[0.14em] text-white">
-                      {batchCaptureMode === "grouped" ? "Résultats Quad" : "Résultats Batch"}
+                      {batchCaptureMode === "grouped" ? "Résultats Quad" : batchCaptureMode === "inventory" ? "Inventaire PRO" : "Résultats Batch"}
                     </p>
                   </div>
                   <p className="mt-1 text-[10px] text-zinc-300">
-                    {visibleSessionList.length}/{SCANNER_BATCH_LIMIT} carte{visibleSessionList.length > 1 ? "s" : ""} conservée{visibleSessionList.length > 1 ? "s" : ""} dans la session.
+                    {visibleSessionList.length}/{visibleSessionLimit} carte{visibleSessionList.length > 1 ? "s" : ""} conservée{visibleSessionList.length > 1 ? "s" : ""} dans la session.
                   </p>
                 </div>
 
@@ -1377,7 +1478,7 @@ export default function ScannerPage() {
                     className="inline-flex items-center gap-1 rounded-lg border border-cyan-300/18 bg-cyan-400/[0.05] px-2 py-1.5 text-[8px] font-black uppercase text-cyan-300"
                   >
                     <Download className="h-3 w-3" />
-                    Export
+                    {batchCaptureMode === "inventory" ? "Excel CSV" : "Export"}
                   </button>
                   <button
                     type="button"
@@ -1397,7 +1498,7 @@ export default function ScannerPage() {
                     className="flex items-center justify-between gap-3 rounded-xl border border-white/[0.06] bg-white/[0.02] p-2.5"
                   >
                     <div className="flex min-w-0 items-center gap-3">
-                      {item.card.images?.small ? (
+                      {batchCaptureMode !== "inventory" && item.card.images?.small ? (
                         <div className="relative h-14 w-10 shrink-0 overflow-hidden rounded-lg bg-neutral-800">
                           <Image
                             src={item.card.images.small}
@@ -1424,7 +1525,7 @@ export default function ScannerPage() {
                     </div>
 
                     <div className="flex shrink-0 items-center gap-1">
-                      <button
+                      {batchCaptureMode !== "inventory" ? <button
                         type="button"
                         onClick={() => router.push(scannerCardHref(item.card.id))}
                         className="inline-flex items-center gap-1.5 rounded-lg border border-cyan-300/18 bg-cyan-400/[0.05] px-2 py-1.5 text-[9px] font-black uppercase text-cyan-300 transition-colors hover:bg-cyan-400/[0.10]"
@@ -1432,7 +1533,7 @@ export default function ScannerPage() {
                       >
                         <BadgeEuro className="h-3.5 w-3.5" />
                         Prix
-                      </button>
+                      </button> : null}
                       <button
                         type="button"
                         onClick={() => removeBatchItem(item.id)}
