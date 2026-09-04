@@ -2,15 +2,15 @@
 
 King_TCG est une application Next.js de recherche, collection et analyse de cartes Pokémon TCG. Elle réunit un catalogue multilingue, la gestion de collection, les favoris, un scanner assisté par IA, une estimation PSA et une agrégation de données marché.
 
-**Version actuelle : V301 — 2 512 visuels JP supplémentaires et reprise réelle des Items FR.**
+**Version actuelle : V301 — visuels JP, Items FR/EN regroupés et parcours Vente actif.**
 
 La Recherche permet désormais de parcourir séparément les **séries réelles** et les grandes **générations**. Les 18 séries FR, 20 EN, 15 JP et 6 CN restent reliées à leurs extensions, avec des libellés compréhensibles en français pour les séries japonaises et chinoises. Une identité canonique ne peut apparaître que dans une seule section et les 55 alias FR sans cartes restent fusionnés avec leur extension navigable.
 
 La V301 conserve les apports V300 et ajoute **2 512 visuels japonais TCGplayer réellement testés**, reliés aux identifiants tiers du dépôt open-source TCGdex. Le catalogue atteint toujours 59 697 cartes, dont 6 394/12 781 cartes japonaises avec visuel. Les 6 387 références JP encore sans image conservent un placeholder explicite : aucune correspondance ambiguë ou URL en erreur n’est publiée.
 
-L’espace Items synchronise automatiquement les produits scellés français disponibles sur CardTrader et les fusionne avec les 57 produits EN existants. Un snapshot FR rempli reste frais 24 heures ; un résultat vide est retenté après 10 minutes et une erreur fournisseur après 5 minutes. La grille charge les visuels EN par lots de 16, en miniature et en différé, afin d’éviter les rafales qui faisaient échouer les 57 images simultanées. Aucun token ni export manuel n’est demandé dans l’interface.
+L’espace Items synchronise automatiquement les produits scellés français disponibles sur CardTrader et les fusionne avec 53 produits EN distincts. Les cinq façades de la Mega Heroes Mini Tin forment une seule référence avec une galerie de cinq images : les 57 visuels EN restent tous disponibles. Un snapshot FR rempli reste frais 24 heures ; un résultat vide est retenté après 10 minutes et une erreur fournisseur après 5 minutes.
 
-Les comptes et abonnements restent volontairement désactivés. Leur mise en place est planifiée seulement après la stabilisation complète de PSA.
+Le parcours Vente est actif localement : sélection depuis la collection, quantité, prix, frais, bénéfice, retrait du stock, historique et annulation restauratrice. Les comptes, droits et paiements Stripe restent réservés à la V304 ; aucune facturation réelle n’est déclenchée par cette version.
 
 ## Fonctions principales
 
@@ -18,6 +18,7 @@ Les comptes et abonnements restent volontairement désactivés. Leur mise en pla
 - catalogue local versionné avec séries, extensions, cartes, variantes et références visuelles ;
 - vues Recherche compacte (3 cartes par ligne), standard et large ;
 - collection, favoris, dashboard, alertes et opportunités ;
+- ventes de cartes avec historique, bénéfice et mise à jour du portefeuille ;
 - Scanner Mono, Batch et Quad ;
 - raccord Scanner → fiche → prix d'une seule carte validée, sans appels marché sur les candidats ;
 - estimation PSA expérimentale avec PriceCharting et eBay, regroupée par langue, carte, extension, édition, variante et grade ;
@@ -40,7 +41,7 @@ Fonctions actuellement disponibles :
 - d’exporter l’inventaire Items en CSV ;
 - de distinguer le prix de sortie officiel FR de la cote marché actuelle.
 
-Le premier lot public contient **57 produits scellés anglais** issus de deux extensions : `ME01: Mega Evolution` et `ME02: Phantasmal Flames`. Les **57 références disposent d’un visuel fournisseur** servi par une route King_TCG contrôlée et mise en cache. La grille demande d’abord l’image 200 px et n’affiche que 16 références à la fois ; la fiche conserve le grand visuel. Parmi elles, **54 disposent d’une cote actuelle TCGplayer en USD** et 3 restent explicitement sans cote. Aucun prix manquant n’est inventé.
+Le premier lot public contient **53 produits scellés anglais distincts** issus de deux extensions : `ME01: Mega Evolution` et `ME02: Phantasmal Flames`. Il conserve **57 visuels fournisseur** : les cinq illustrations de Mega Heroes Mini Tin sont regroupées dans une seule galerie. **50 produits distincts disposent d’une cote actuelle TCGplayer en USD** et 3 restent explicitement sans cote. Aucun prix manquant n’est inventé.
 
 La source utilisée est **TCGCSV** : gratuite, sans clé API, mise à jour quotidiennement et prévue pour une ingestion serveur. King_TCG respecte une synchronisation maximale toutes les 24 heures avec un User-Agent identifiable. La donnée reste classée EN/US : elle n’est jamais présentée comme une cote française exacte.
 
