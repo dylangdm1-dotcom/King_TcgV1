@@ -1,8 +1,8 @@
 import type { ItemCatalogManifest, ItemCatalogRuntime, ItemSourceStatus, SealedItem } from "./types";
 
-export async function fetchItemCatalog(signal?: AbortSignal): Promise<{ items: SealedItem[]; manifest: ItemCatalogManifest | null; runtime: ItemCatalogRuntime | null }> {
+export async function fetchItemCatalog(signal?: AbortSignal, forceRefresh = false): Promise<{ items: SealedItem[]; manifest: ItemCatalogManifest | null; runtime: ItemCatalogRuntime | null }> {
   try {
-    const response = await fetch("/api/items/catalog", { signal, cache: "no-store" });
+    const response = await fetch(`/api/items/catalog${forceRefresh ? "?refresh=1" : ""}`, { signal, cache: "no-store" });
     if (!response.ok) return { items: [], manifest: null, runtime: null };
     const json = await response.json();
     return {

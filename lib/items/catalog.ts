@@ -57,8 +57,11 @@ export function getServerItemById(idOrSlug: string): SealedItem | null {
   return catalog.find((item) => item.id === idOrSlug || item.slug === idOrSlug) || null;
 }
 
-export async function getServerItemBundleV301(options?: { refreshFrench?: boolean }) {
-  const snapshot = await getCardTraderFrenchRuntimeSnapshotV301({ refresh: Boolean(options?.refreshFrench) });
+export async function getServerItemBundleV301(options?: { refreshFrench?: boolean; forceFrench?: boolean }) {
+  const snapshot = await getCardTraderFrenchRuntimeSnapshotV301({
+    refresh: Boolean(options?.refreshFrench),
+    force: Boolean(options?.forceFrench),
+  });
   const seen = new Set<string>();
   const items = parseItemCatalog([...(snapshot?.items || []), ...catalog])
     .filter((item) => !seen.has(item.id) && Boolean(seen.add(item.id)));
