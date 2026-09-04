@@ -3,6 +3,7 @@ import { apiError, boundedQuery, enforceRateLimit, safeIdentifier } from "@/lib/
 import { safeCardTraderImage } from "@/lib/items/sources/cardtrader-catalog";
 
 const MAX_IMAGE_BYTES = 5 * 1024 * 1024;
+const IMAGE_REVALIDATE_SECONDS = 30 * 24 * 60 * 60;
 
 export async function GET(request: Request) {
   const rateLimited = enforceRateLimit(request, "items-image", { limit: 300, windowMs: 60_000 });
@@ -28,8 +29,10 @@ export async function GET(request: Request) {
   const timeout = setTimeout(() => controller.abort(), 12_000);
   try {
     const upstream = await fetch(upstreamUrl, {
-      headers: { Accept: "image/jpeg,image/webp,image/*", "User-Agent": "King_TCG/1.0" },
-      next: { revalidate: 604_800 },
+      // Certains CDN refusent les User-Agent applicatifs personnalisés alors
+      // que le même fichier public répond dans un navigateur standard.
+      headers: { Accept: "image/jpeg,image/webp,image/*", "User-Agent": "Mozilla/5.0 (compatible; King_TCG image cache)" },
+      next: { revalidate: IMAGE_REVALIDATE_SECONDS },
       signal: controller.signal,
     });
     if (!upstream.ok) return apiError("Visuel Item indisponible.", 404, "item_image_not_found");
@@ -43,7 +46,7 @@ export async function GET(request: Request) {
       headers: {
         "Content-Type": contentType,
         "Content-Length": String(bytes.byteLength),
-        "Cache-Control": "public, s-maxage=604800, stale-while-revalidate=2592000",
+        "Cache-Control": "public, s-maxage=2592000, stale-while-revalidate=31536000",
         "X-Content-Type-Options": "nosniff",
       },
     });
