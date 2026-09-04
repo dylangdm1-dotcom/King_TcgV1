@@ -170,7 +170,9 @@ export async function POST(req: NextRequest) {
   const startTime = Date.now();
 
   try {
-    const rateLimitResponse = enforceRateLimit(req, "scan", { limit: 30, windowMs: 60_000 });
+    // Listing PRO peut produire jusqu'à quatre crops par photo. 90/minute laisse
+    // dix captures de quatre cartes respirer, tout en conservant une borne anti-abus.
+    const rateLimitResponse = enforceRateLimit(req, "scan", { limit: 90, windowMs: 60_000 });
     if (rateLimitResponse) return rateLimitResponse;
 
     const oversized = rejectOversizedContentLength(req, MAX_SCAN_REQUEST_BYTES);
