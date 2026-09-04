@@ -2,7 +2,9 @@
 
 import Link from "next/link";
 import { Hash } from "lucide-react";
+import { useMemo, useState } from "react";
 import type { PokemonCard } from "@/lib/types";
+import { cardThumbnailCandidates } from "@/lib/cardImages";
 import { calculateRealMarketPrices } from "@/lib/priceTracker";
 import { getAdjustedPriceByCondition } from "@/lib/marketEngine";
 import { getCondition } from "@/lib/storage";
@@ -19,6 +21,9 @@ export default function CollectionCardTile({
     market.average ?? 0,
     getCondition(card.id)
   );
+  const imageCandidates = useMemo(() => cardThumbnailCandidates(card), [card]);
+  const [imageIndex, setImageIndex] = useState(0);
+  const imageSrc = imageCandidates[imageIndex] || "/placeholder.png";
 
   return (
     <Link
@@ -29,12 +34,18 @@ export default function CollectionCardTile({
 
       <div className="kt-card-frame relative aspect-[0.72] overflow-hidden rounded-[14px] bg-[#0c151e]">
         <img
-          src={card.images?.small || card.images?.large}
+          src={imageSrc}
           alt={card.name}
           className="h-full w-full object-contain p-1.5 drop-shadow-[0_14px_18px_rgba(0,0,0,.35)] transition duration-300 group-hover:scale-[1.03]"
-          loading="lazy"
+          loading="eager"
+          fetchPriority="high"
+          decoding="async"
           onError={(event) => {
-            event.currentTarget.style.opacity = "0";
+            if (imageIndex < imageCandidates.length - 1) {
+              setImageIndex((current) => current + 1);
+            } else {
+              event.currentTarget.style.opacity = "0";
+            }
           }}
         />
 

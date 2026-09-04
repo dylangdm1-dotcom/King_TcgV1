@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { ArrowRight, Hash, ImageOff } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { PokemonCard } from '@/lib/types';
+import { cardThumbnailCandidates } from '@/lib/cardImages';
 
 interface Props {
   card: PokemonCard;
@@ -11,8 +12,8 @@ interface Props {
 
 export default function CardResult({ card }: Props) {
   const imageCandidates = useMemo(
-    () => Array.from(new Set([card.images?.large, card.images?.small, ...(card.imageCandidates ?? [])].filter(Boolean))) as string[],
-    [card.images?.large, card.images?.small, card.imageCandidates]
+    () => cardThumbnailCandidates(card),
+    [card]
   );
   const [imageIndex, setImageIndex] = useState(0);
   const imageSrc = imageCandidates[imageIndex] || '';
