@@ -34,6 +34,7 @@ export function reconcileRegionalBatchV2(
     aliases: unique([...canonicalSet.aliases, importedSet.name, importedSet.code, source.providerCode]),
     sources: [...canonicalSet.sources, ...sourceRefs],
     lastSyncedAt: source.capturedAt,
+    officialCardCount: canonicalSet.officialCardCount ?? importedSet.officialCardCount,
     knownCardCount: Math.max(canonicalSet.knownCardCount ?? 0, source.receivedCardCount),
     availability: source.receivedCardCount > 0 ? "available" : canonicalSet.availability,
     visuals: canonicalSet.visuals.length > 0 ? canonicalSet.visuals : importedSet.visuals,
@@ -55,4 +56,3 @@ export function reconcileRegionalBatchV2(
     cards,
   };
 }
-
