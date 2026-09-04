@@ -16,6 +16,7 @@ import {
   type QuadSlotStatus,
 } from "../../lib/scanner/quadScanner";
 import { captureFrame } from "../../lib/scanner/capture";
+import { DUAL_FRAMES, QUAD_FRAMES } from "../../lib/scanner/quadLayout";
 
 export type QuadIdentificationResult = {
   card: PokemonCard | null;
@@ -37,7 +38,7 @@ export type QuadSlotProgress = {
 
 export interface ScannerCameraHandle {
   getVideo: () => HTMLVideoElement | null;
-  openGroupedScanner: () => Promise<void>;
+  openGroupedScanner: (cardCount?: 2 | 4) => Promise<void>;
   retryGroupedSlot: (slot: QuadSlotIndex) => Promise<void>;
 }
 
@@ -85,6 +86,7 @@ const ScannerCamera = forwardRef<ScannerCameraHandle, ScannerCameraProps>(
     const onReadyRef = useRef(onReady);
     const progressRef = useRef<QuadSlotProgress[]>(EMPTY_PROGRESS);
     const processingRef = useRef(false);
+    const groupedCountRef = useRef<2 | 4>(4);
     const [isProcessing, setIsProcessing] = useState(false);
 
     useEffect(() => {
@@ -105,7 +107,11 @@ const ScannerCamera = forwardRef<ScannerCameraHandle, ScannerCameraProps>(
       ));
     };
 
-    const runGroupedScanner = async (selectedSlots?: QuadSlotIndex[]) => {
+    const runGroupedScanner = async (
+      selectedSlots?: QuadSlotIndex[],
+      cardCount: 2 | 4 = groupedCountRef.current,
+      resetProgress = !selectedSlots?.length
+    ) => {
       const video = videoRef.current;
       if (!video || processingRef.current || isProcessing || !identifyCardByImage) return;
 
@@ -123,15 +129,17 @@ const ScannerCamera = forwardRef<ScannerCameraHandle, ScannerCameraProps>(
         });
         if (!base64Image) throw new Error("Capture Quad indisponible");
 
+        groupedCountRef.current = cardCount;
+        const frames = cardCount === 2 ? DUAL_FRAMES : QUAD_FRAMES;
         const selected = selectedSlots?.length
           ? selectedSlots
-          : ([0, 1, 2, 3] as QuadSlotIndex[]);
+          : frames.map((frame) => frame.slot);
         const session = await processQuadScan(
-          createQuadScanSession(base64Image),
+          createQuadScanSession(base64Image, frames),
           selected
         );
 
-        if (!selectedSlots?.length) {
+        if (resetProgress) {
           emitProgress(session.slots.map((slot) => ({
             slot: slot.slot,
             label: slot.label,
@@ -233,9 +241,9 @@ const ScannerCamera = forwardRef<ScannerCameraHandle, ScannerCameraProps>(
           }
         };
 
-        // Traitement séquentiel : quatre cartes peuvent déjà représenter quatre appels
-        // Gemini. Les envoyer une par une réduit fortement les pointes de rate-limit.
-        await worker();
+        // Deux workers donnent un vrai gain de temps au Listing PRO, sans envoyer
+        // quatre appels IA simultanés sur les téléphones et connexions mobiles.
+        await Promise.all(Array.from({ length: Math.min(2, work.length) }, () => worker()));
         onCardsIdentified?.(foundCards);
       } finally {
         processingRef.current = false;
@@ -245,8 +253,8 @@ const ScannerCamera = forwardRef<ScannerCameraHandle, ScannerCameraProps>(
 
     useImperativeHandle(ref, () => ({
       getVideo: () => videoRef.current,
-      openGroupedScanner: () => runGroupedScanner(),
-      retryGroupedSlot: (slot) => runGroupedScanner([slot]),
+      openGroupedScanner: (cardCount = 4) => runGroupedScanner(undefined, cardCount, true),
+      retryGroupedSlot: (slot) => runGroupedScanner([slot], groupedCountRef.current, false),
     }));
 
     useEffect(() => {

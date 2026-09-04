@@ -1,14 +1,15 @@
 "use client";
 
 import { CheckCircle2, Loader2, ScanLine } from "lucide-react";
-import { QUAD_FRAMES } from "@/lib/scanner/quadLayout";
+import { DUAL_FRAMES, QUAD_FRAMES } from "@/lib/scanner/quadLayout";
 import type { QuadSlotProgress } from "@/components/scanner/ScannerCamera";
 
 type Props = {
   scanning?: boolean;
   hasResult?: boolean;
   statusText?: string;
-  mode?: "single" | "batch" | "quad";
+  mode?: "single" | "batch" | "quad" | "listing";
+  groupedCount?: 2 | 4;
   quadSlots?: QuadSlotProgress[];
   ready?: boolean;
   onScan?: () => void;
@@ -26,11 +27,12 @@ export default function ScannerOverlay({
   hasResult = false,
   statusText,
   mode = "single",
+  groupedCount = 4,
   quadSlots = [],
   ready = false,
   onScan,
 }: Props) {
-  const stateColor = mode === "batch" || mode === "quad"
+  const stateColor = mode === "batch" || mode === "quad" || mode === "listing"
     ? "border-amber-300 text-amber-200"
     : hasResult
     ? "border-emerald-400 text-emerald-300"
@@ -40,10 +42,10 @@ export default function ScannerOverlay({
 
   return (
     <div className="pointer-events-none absolute inset-0 z-10 select-none overflow-hidden">
-      {mode === "quad" ? (
+      {mode === "quad" || mode === "listing" ? (
         <>
           <div className="absolute inset-0 bg-black/[0.06]" />
-          {QUAD_FRAMES.map((frame, index) => {
+          {(mode === "listing" && groupedCount === 2 ? DUAL_FRAMES : QUAD_FRAMES).map((frame, index) => {
             const slot = quadSlots.find((item) => item.slot === frame.slot);
             const frameColor = slot?.status === "success"
               ? "border-emerald-400 text-emerald-300"
@@ -53,6 +55,8 @@ export default function ScannerOverlay({
               ? "border-rose-400 text-rose-300"
               : slot?.status === "processing" || slot?.status === "cropping" || slot?.status === "ready"
               ? "border-cyan-300 text-cyan-200"
+              : mode === "listing"
+              ? "border-[#f5c451] text-[#ffe29a]"
               : "border-amber-300 text-amber-200";
             const label = slot?.status === "success"
               ? `Carte ${index + 1} · OK`
@@ -88,8 +92,8 @@ export default function ScannerOverlay({
               </div>
             );
           })}
-          <div className="absolute left-1/2 top-[5.5%] w-[88%] -translate-x-1/2 rounded-xl border border-violet-200/35 bg-black/62 px-3 py-2 text-center text-[9px] font-black uppercase leading-4 tracking-[0.12em] text-violet-100 shadow-[0_0_18px_rgba(167,139,250,.08)] backdrop-blur-md">
-            <span className="block">Placez les 4 cartes entièrement</span>
+          <div className={`absolute left-1/2 top-[5.5%] w-[88%] -translate-x-1/2 rounded-xl border bg-black/62 px-3 py-2 text-center text-[9px] font-black uppercase leading-4 tracking-[0.12em] backdrop-blur-md ${mode === "listing" ? "border-[#f5c451]/45 text-[#ffe29a] shadow-[0_0_18px_rgba(245,196,81,.10)]" : "border-violet-200/35 text-violet-100 shadow-[0_0_18px_rgba(167,139,250,.08)]"}`}>
+            <span className="block">Placez les {mode === "listing" ? groupedCount : 4} cartes entièrement</span>
             <span className="block">dans les cadres, sans les superposer</span>
           </div>
         </>
@@ -142,7 +146,9 @@ export default function ScannerOverlay({
             onClick={onScan}
             disabled={!ready || !onScan}
             className={`pointer-events-auto inline-flex min-w-[62%] items-center justify-center gap-2 rounded-xl border-2 px-5 py-3 text-[11px] font-black uppercase tracking-[0.12em] shadow-[0_12px_30px_rgba(0,0,0,.38)] backdrop-blur-md transition-all hover:brightness-110 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-45 ${
-              mode === "quad"
+              mode === "listing"
+                ? "border-[#f5c451] bg-[#8a5b08]/55 text-[#fff2bf] shadow-[0_0_28px_rgba(245,196,81,.18)]"
+                : mode === "quad"
                 ? "border-amber-300 bg-violet-500/24 text-violet-100 shadow-[0_0_24px_rgba(245,196,81,.10)]"
                 : mode === "batch"
                 ? "border-amber-300 bg-sky-500/24 text-sky-100 shadow-[0_0_24px_rgba(245,196,81,.10)]"
@@ -150,14 +156,18 @@ export default function ScannerOverlay({
             }`}
           >
             <ScanLine className={`h-4 w-4 ${
-              mode === "quad"
+              mode === "listing"
+                ? "text-[#ffe29a]"
+                : mode === "quad"
                 ? "text-violet-200"
                 : mode === "batch"
                   ? "text-sky-200"
                   : "text-cyan-200"
             }`} />
             <span className="[text-shadow:0_0_10px_rgba(255,255,255,.12)]">
-              {mode === "quad"
+              {mode === "listing"
+                ? `Ajouter ${groupedCount} cartes au listing`
+                : mode === "quad"
                 ? "Scanner les 4 cartes"
                 : mode === "batch"
                   ? "Ajouter au Batch"
