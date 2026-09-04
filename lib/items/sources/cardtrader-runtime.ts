@@ -6,8 +6,8 @@ import { isMarketRedisConfiguredV277, executeMarketRedisCommandV277 } from "@/li
 import { previewCardTraderFrenchCatalog } from "./cardtrader-catalog";
 import type { CardTraderFrenchItemCandidate } from "./cardtrader-types";
 
-const SNAPSHOT_KEY = "king-tcg:items-fr:v303:snapshot";
-const LOCK_KEY = "king-tcg:items-fr:v303:refresh-lock";
+const SNAPSHOT_KEY = "king-tcg:items-fr:v304:snapshot";
+const LOCK_KEY = "king-tcg:items-fr:v304:refresh-lock";
 const TARGET_FRENCH_ITEMS = 100;
 const READY_FRESH_MS = 24 * 60 * 60 * 1000;
 const EMPTY_RETRY_MS = 10 * 60 * 1000;
@@ -15,8 +15,8 @@ const ERROR_RETRY_MS = 5 * 60 * 1000;
 const RETENTION_SECONDS = 14 * 24 * 60 * 60;
 
 export interface RuntimeSnapshotV301 {
-  version: "items-fr-runtime-v303";
-  state: "ready" | "empty" | "error";
+  version: "items-fr-runtime-v304";
+  state: "ready" | "partial" | "empty" | "error";
   generatedAt: number;
   freshUntil: number;
   items: SealedItem[];
@@ -38,14 +38,14 @@ function configuredExpansionIds(): number[] {
     .split(",")
     .map((value) => Number(value.trim()))
     .filter((value) => Number.isInteger(value) && value > 0)))
-    .slice(0, 30);
+    .slice(0, 40);
 }
 
 function parseSnapshot(value: unknown): RuntimeSnapshotV301 | null {
   if (typeof value !== "string" || !value) return null;
   try {
     const parsed = JSON.parse(value) as RuntimeSnapshotV301;
-    if (parsed?.version !== "items-fr-runtime-v303" || !Array.isArray(parsed.items) || !Number.isFinite(parsed.freshUntil)) return null;
+    if (parsed?.version !== "items-fr-runtime-v304" || !Array.isArray(parsed.items) || !Number.isFinite(parsed.freshUntil)) return null;
     return parsed;
   } catch {
     return null;
@@ -141,8 +141,8 @@ async function synchronize(): Promise<RuntimeSnapshotV301> {
   const explicitIds = configuredExpansionIds();
   const result = await previewCardTraderFrenchCatalog({
     expansionIds: explicitIds,
-    maximumExpansions: explicitIds.length || 30,
-    minimumCandidates: explicitIds.length ? 0 : 160,
+    maximumExpansions: explicitIds.length || 40,
+    minimumCandidates: explicitIds.length ? 0 : 220,
   });
   const seen = new Set<string>();
   const rawItems = result.previews
@@ -152,11 +152,15 @@ async function synchronize(): Promise<RuntimeSnapshotV301> {
     .filter((item) => !seen.has(item.id) && Boolean(seen.add(item.id)));
   const items = groupItemsByPackagingV301(rawItems);
   const allFailed = result.selectedExpansionIds.length > 0 && result.failures.length === result.selectedExpansionIds.length;
-  const state: RuntimeSnapshotV301["state"] = items.length ? "ready" : allFailed ? "error" : "empty";
+  const state: RuntimeSnapshotV301["state"] = items.length >= TARGET_FRENCH_ITEMS
+    ? "ready"
+    : items.length ? "partial" : allFailed ? "error" : "empty";
   const lastError = state === "error" ? result.failures.map((failure) => failure.error).join(", ").slice(0, 300) : undefined;
-  const freshFor = state === "ready" ? READY_FRESH_MS : state === "empty" ? EMPTY_RETRY_MS : ERROR_RETRY_MS;
+  const freshFor = state === "ready" ? READY_FRESH_MS
+    : state === "partial" || state === "empty" ? EMPTY_RETRY_MS
+    : ERROR_RETRY_MS;
   const snapshot: RuntimeSnapshotV301 = {
-    version: "items-fr-runtime-v303",
+    version: "items-fr-runtime-v304",
     state,
     generatedAt,
     freshUntil: generatedAt + freshFor,
@@ -175,7 +179,7 @@ async function refreshOnce(): Promise<RuntimeSnapshotV301> {
   runtime.__kingTcgItemsFrRefreshV301 = (async () => {
     const lease = await acquireRefreshLock();
     if (!lease.acquired) return (await readSnapshot()) || {
-      version: "items-fr-runtime-v303",
+      version: "items-fr-runtime-v304",
       state: "empty",
       generatedAt: Date.now(),
       freshUntil: Date.now() + EMPTY_RETRY_MS,
@@ -206,7 +210,7 @@ export async function getCardTraderFrenchRuntimeSnapshotV301(options?: { refresh
   } catch (error) {
     const generatedAt = Date.now();
     const failure: RuntimeSnapshotV301 = {
-      version: "items-fr-runtime-v303",
+      version: "items-fr-runtime-v304",
       state: "error",
       generatedAt: cached?.generatedAt || generatedAt,
       freshUntil: generatedAt + ERROR_RETRY_MS,
@@ -234,14 +238,14 @@ export function withFrenchRuntimeManifestV301(manifest: ItemCatalogManifest, sna
       : "Synchronisation CardTrader FR en attente d’un lot exploitable.";
   return {
     ...manifest,
-    catalogVersion: frenchItems.length ? "v303-cardtrader-fr-100-grouped" : "v303-items-images-fr-runtime",
+    catalogVersion: frenchItems.length ? "v304-cardtrader-fr-100-grouped-cached-images" : "v304-items-images-fr-runtime",
     itemCount: manifest.itemCount + frenchItems.length,
     priceQuoteCount: (manifest.priceQuoteCount || 0) + frenchQuotes,
     imageCount: (manifest.imageCount || 0) + frenchImages,
     languageStatus: {
       ...manifest.languageStatus,
       fr: {
-        state: frenchItems.length ? "ready" : "preparation",
+        state: frenchItems.length >= TARGET_FRENCH_ITEMS ? "ready" : "preparation",
         itemCount: frenchItems.length,
         imageCount: frenchImages,
         quoteCount: frenchQuotes,

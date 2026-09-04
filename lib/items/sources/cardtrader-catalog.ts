@@ -12,6 +12,7 @@ import type {
   CardTraderMarketplaceProducts,
   CardTraderSealedCategory,
 } from "./cardtrader-types";
+import { cardTraderBlueprintSupportsFrenchV304 } from "./cardtrader-language";
 
 const CATEGORY_RULES: Array<{ pattern: RegExp; category: ItemCategory }> = [
   { pattern: /booster box|display/, category: "booster_box" },
@@ -128,7 +129,8 @@ async function previewFrenchExpansionFromReference(reference: CardTraderPokemonR
     const category = categoryMap.get(Number(blueprint.category_id));
     if (!category || Number(blueprint.game_id) !== reference.game.id || Number(blueprint.expansion_id) !== expansionId) return [];
     const offers = frenchOffers(products, blueprint.id);
-    if (!offers.length) return [];
+    const supportsFrench = cardTraderBlueprintSupportsFrenchV304(blueprint);
+    if (!offers.length && !supportsFrench) return [];
     const prices = offers.map(euroPrice).filter((price): price is number => price !== null);
     const image = safeCardTraderImage(blueprint.image_url);
     return [{
@@ -137,7 +139,7 @@ async function previewFrenchExpansionFromReference(reference: CardTraderPokemonR
       version: String(blueprint.version || "").trim() || undefined,
       categoryId: category.id,
       categoryName: category.name,
-      itemCategory: category.itemCategory,
+      itemCategory: categoryFor(String(blueprint.name || "")) || category.itemCategory,
       expansionId: expansion.id,
       expansionCode: String(expansion.code || "").trim(),
       expansionName: String(expansion.name || "").trim(),
@@ -146,7 +148,7 @@ async function previewFrenchExpansionFromReference(reference: CardTraderPokemonR
       frenchOffers: offers.length,
       availableQuantity: offers.reduce((sum, offer) => sum + Math.max(0, Number(offer.quantity) || 0), 0),
       lowestEur: prices.length ? Math.min(...prices) : undefined,
-      languageEvidence: "marketplace_filter_fr",
+      languageEvidence: offers.length ? "marketplace_filter_fr" : "blueprint_property_fr",
       reviewRequired: true,
     }];
   });
@@ -175,7 +177,7 @@ export async function previewCardTraderFrenchCatalog(options?: {
 }) {
   const reference = await loadCardTraderPokemonReference();
   const explicitIds = Array.from(new Set((options?.expansionIds || []).filter((id) => Number.isInteger(id) && id > 0)));
-  const maximum = Math.max(1, Math.min(30, Number(options?.maximumExpansions) || 12));
+  const maximum = Math.max(1, Math.min(40, Number(options?.maximumExpansions) || 12));
   const minimumCandidates = Math.max(0, Math.min(500, Number(options?.minimumCandidates) || 0));
   const selected = explicitIds.length
     ? explicitIds.slice(0, maximum)
@@ -191,7 +193,7 @@ export async function previewCardTraderFrenchCatalog(options?: {
     } catch (error) {
       failures.push({ expansionId, error: error instanceof Error ? error.message : "cardtrader_unknown_error" });
     }
-    if (minimumCandidates && previews.reduce((sum, preview) => sum + preview.candidates.length, 0) >= minimumCandidates) break;
+    if (minimumCandidates && previews.reduce((sum, preview) => sum + preview.coverage.withImage, 0) >= minimumCandidates) break;
   }
 
   return { selectedExpansionIds: processedExpansionIds, previews, failures };

@@ -93,6 +93,6 @@ export interface CardTraderFrenchItemCandidate {
   frenchOffers: number;
   availableQuantity: number;
   lowestEur?: number;
-  languageEvidence: "marketplace_filter_fr";
+  languageEvidence: "marketplace_filter_fr" | "blueprint_property_fr";
   reviewRequired: true;
 }
