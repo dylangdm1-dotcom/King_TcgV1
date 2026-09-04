@@ -37,8 +37,8 @@ export default function CollectionCardTile({
           src={imageSrc}
           alt={card.name}
           className="h-full w-full object-contain p-1.5 drop-shadow-[0_14px_18px_rgba(0,0,0,.35)] transition duration-300 group-hover:scale-[1.03]"
-          loading="eager"
-          fetchPriority="high"
+          loading="lazy"
+          fetchPriority="low"
           decoding="async"
           onError={(event) => {
             if (imageIndex < imageCandidates.length - 1) {

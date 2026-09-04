@@ -34,6 +34,8 @@ export default function CardResult({ card }: Props) {
               src={imageSrc}
               alt={card.name}
               loading="lazy"
+              fetchPriority="low"
+              decoding="async"
               onError={() => setImageIndex((current) => current + 1)}
               className="relative z-10 h-full w-full object-contain p-2.5 drop-shadow-[0_18px_20px_rgba(0,0,0,.42)] transition duration-300 group-hover:scale-[1.025]"
             />
