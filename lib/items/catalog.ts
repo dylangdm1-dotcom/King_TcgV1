@@ -5,6 +5,7 @@ import manifestData from "@/public/data/items-v1/manifest.json";
 import type { ItemCatalogManifest, SealedItem } from "./types";
 import { groupItemsByPackagingV301 } from "./grouping";
 import { isItemCatalogManifest, parseItemCatalog } from "./validation";
+import { withBundledItemImagesV304 } from "./static-images";
 import { getCardTraderFrenchRuntimeSnapshotV301, withFrenchRuntimeManifestV301 } from "./sources/cardtrader-runtime";
 
 function indexedItems(index: { items?: Array<{ path?: string }> }): SealedItem[] {
@@ -40,7 +41,7 @@ const catalog = groupItemsByPackagingV301(parseItemCatalog([
   ...optionalCatalog("ja/catalog.json"),
   ...optionalCatalog("zh-tw/catalog.json"),
   ...optionalCatalog("multi/catalog.json"),
-]));
+]).map(withBundledItemImagesV304));
 
 export function getServerItemCatalog(): SealedItem[] {
   return catalog;

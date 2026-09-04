@@ -3,7 +3,9 @@ import type { ItemSearchFilters, SealedItem } from "./types";
 
 export const DEFAULT_ITEM_FILTERS: ItemSearchFilters = {
   query: "",
-  language: "all",
+  // La page Items est d'abord un catalogue français. Les autres langues
+  // restent accessibles volontairement depuis le sélecteur.
+  language: "fr",
   category: "all",
   availability: "all",
   sort: "newest",
