@@ -23,12 +23,11 @@ export const KNOWN_SET_RELEASE_DATES: Record<string, string> = {
 export const UPCOMING_OFFICIAL_RELEASES = [
   {
     id: "m6a",
-    language: "ja" as const,
-    name: "30th CELEBRATION",
+    language: "fr" as const,
+    name: "30e Anniversaire",
     releaseDate: "2026-09-16",
-    officialPrice: "360 ¥",
-    contents: "6 cartes brillantes",
-    officialUrl: "https://www.30th.pokemon-card.com/product/m6a",
+    contents: "5 cartes brillantes + 1 Énergie par booster · premiers visuels révélés",
+    officialUrl: "https://www.pokemon.com/fr/actualites/jcc-pokemon-produits-30-anniversaire",
   },
 ];
 
