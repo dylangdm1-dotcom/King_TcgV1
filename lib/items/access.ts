@@ -1,6 +1,6 @@
-export type KingTcgPlan = "normal" | "premium" | "pro";
+export type KingTcgPlan = "normal" | "premium" | "pro" | "admin";
 
-export const ITEM_ACCESS_PLANS: KingTcgPlan[] = ["premium", "pro"];
+export const ITEM_ACCESS_PLANS: KingTcgPlan[] = ["premium", "pro", "admin"];
 
 export function canAccessItems(plan: KingTcgPlan): boolean {
   return ITEM_ACCESS_PLANS.includes(plan);
