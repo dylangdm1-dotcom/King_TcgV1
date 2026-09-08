@@ -54,7 +54,7 @@ import {
 
 import type { PokemonCard, CardScanResult } from "@/lib/types";
 import { PremiumBadge, PremiumCard, PremiumSectionHeading } from "@/components/ui/PremiumPrimitives";
-import { useAccount } from "@/components/providers/AccountProvider";
+import { fetchKingAccess, type KingAccessPlan } from "@/lib/king-access";
 
 interface ConfidenceResult {
   global: number;
@@ -65,9 +65,7 @@ interface ConfidenceResult {
 
 const SCAN_REQUEST_TIMEOUT_MS = 35_000;
 
-// Valeur conservée uniquement pour migrer l'ancien compteur navigateur.
-// La V306 applique désormais les droits et quotas réels côté serveur.
-const SCANNER_MONTHLY_LIMIT = 550;
+// Le quota réel vient de la session King_TCG : 30 / 500 / 550, ou illimité pour admin.
 const SCANNER_BATCH_LIMIT = 4;
 const SCANNER_QUOTA_KEY = "king_tcg_scanner_quota_v1";
 const SCANNER_BATCH_KEY = "king_tcg_scanner_batch_v1";
@@ -111,12 +109,12 @@ function readQuota() {
 }
 
 function writeQuota(used: number) {
-  const next = { ...getScannerPeriod(), used: Math.max(0, Math.min(SCANNER_MONTHLY_LIMIT, used)) };
+  const next = { ...getScannerPeriod(), used: Math.max(0, used) };
   try { window.localStorage.setItem(SCANNER_QUOTA_KEY, JSON.stringify(next)); } catch {}
   return next;
 }
 
-async function requestScanAnalysis(imageBase64: string, sessionId: string, mode: "mono" | "batch" | "quad" | "listing") {
+async function requestScanAnalysis(imageBase64: string) {
   const controller = new AbortController();
   const timeout = window.setTimeout(() => controller.abort(), SCAN_REQUEST_TIMEOUT_MS);
 
@@ -124,7 +122,7 @@ async function requestScanAnalysis(imageBase64: string, sessionId: string, mode:
     const response = await fetch("/api/scan", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ imageBase64, sessionId, mode }),
+      body: JSON.stringify({ imageBase64 }),
       signal: controller.signal,
     });
 
@@ -133,8 +131,6 @@ async function requestScanAnalysis(imageBase64: string, sessionId: string, mode:
       const message =
         response.status === 429
           ? "Quota Gemini temporairement atteint. Réessayez dans un instant."
-          : response.status === 401
-            ? "Vos 5 scans invités sont utilisés. Connectez-vous pour continuer."
           : payload?.error || "Analyse de la carte indisponible.";
       throw new Error(message);
     }
@@ -167,10 +163,8 @@ const EMPTY_QUAD_PROGRESS: QuadSlotProgress[] = [
 
 export default function ScannerPage() {
   const cameraRef = useRef<ScannerCameraHandle>(null);
-  const activeScanSessionRef = useRef("");
   const cameraSectionRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
-  const { account, refreshAccount } = useAccount();
 
   const [ready, setReady] = useState(false);
   const [scanning, setScanning] = useState(false);
@@ -197,14 +191,25 @@ export default function ScannerPage() {
   const [quadQuotaConsumed, setQuadQuotaConsumed] = useState(false);
   const [inventoryQuotaConsumed, setInventoryQuotaConsumed] = useState(false);
   const [quadProgress, setQuadProgress] = useState<QuadSlotProgress[]>(EMPTY_QUAD_PROGRESS);
-
-  const scannerLimit = account.scanLimit ?? Number.MAX_SAFE_INTEGER;
-  const quotaBlocked = !account.unlimited && quotaUsed >= scannerLimit;
+  const [accessPlan, setAccessPlan] = useState<KingAccessPlan>("guest");
+  const [scannerLimit, setScannerLimit] = useState<number | null>(5);
+  const [accessLoading, setAccessLoading] = useState(true);
 
   useEffect(() => {
-    setQuotaUsed(account.scansUsed);
-    setQuotaEnd(account.quotaEndsAt || "");
-  }, [account.scansUsed, account.quotaEndsAt]);
+    let active = true;
+    fetchKingAccess().then((access) => {
+      if (!active) return;
+      setAccessPlan(access.plan);
+      setScannerLimit(access.scannerLimit);
+      setAccessLoading(false);
+    }).catch(() => {
+      if (!active) return;
+      setAccessPlan("guest");
+      setScannerLimit(5);
+      setAccessLoading(false);
+    });
+    return () => { active = false; };
+  }, []);
 
   useEffect(() => {
     const quota = readQuota();
@@ -276,11 +281,23 @@ export default function ScannerPage() {
     } catch {}
   }, [inventoryList]);
 
+  const quotaBlocked = scannerLimit !== null && quotaUsed >= scannerLimit;
+  const hasPremiumAccess = accessPlan === "premium" || accessPlan === "pro" || accessPlan === "admin";
+  const hasProAccess = accessPlan === "pro" || accessPlan === "admin";
+
   const consumeSuccessfulSession = useCallback((mode: "single" | "batch" | "quad" | "inventory") => {
     if (mode === "batch" && batchQuotaConsumed) return true;
     if (mode === "quad" && quadQuotaConsumed) return true;
     if (mode === "inventory" && inventoryQuotaConsumed) return true;
-    if (quotaBlocked) return false;
+    const current = readQuota();
+    if (scannerLimit !== null && current.used >= scannerLimit) {
+      setQuotaUsed(current.used);
+      setQuotaEnd(current.end);
+      return false;
+    }
+    const next = writeQuota(current.used + 1);
+    setQuotaUsed(next.used);
+    setQuotaEnd(next.end);
     if (mode === "batch") {
       setBatchQuotaConsumed(true);
       try { window.localStorage.setItem(SCANNER_BATCH_QUOTA_KEY, "1"); } catch {}
@@ -291,9 +308,8 @@ export default function ScannerPage() {
       setInventoryQuotaConsumed(true);
       try { window.localStorage.setItem(SCANNER_INVENTORY_QUOTA_KEY, "1"); } catch {}
     }
-    void refreshAccount();
     return true;
-  }, [batchQuotaConsumed, quadQuotaConsumed, inventoryQuotaConsumed, quotaBlocked, refreshAccount]);
+  }, [batchQuotaConsumed, quadQuotaConsumed, inventoryQuotaConsumed, scannerLimit]);
 
   // =====================================================
   // HAPTIC FEEDBACK
@@ -482,12 +498,19 @@ export default function ScannerPage() {
   // =====================================================
 
   async function scan() {
+    if (accessLoading) {
+      setStatus("Vérification des droits King_TCG en cours…");
+      return;
+    }
     if (!cameraRef.current || scanning) {
       return;
     }
 
-    if (quotaBlocked) {
-      setStatus(`Quota Scanner atteint (${scannerLimit}/${scannerLimit}). Connectez-vous ou choisissez une formule supérieure.`);
+    const currentQuota = readQuota();
+    if (scannerLimit !== null && currentQuota.used >= scannerLimit) {
+      setQuotaUsed(currentQuota.used);
+      setQuotaEnd(currentQuota.end);
+      setStatus(`Quota Scanner atteint (${scannerLimit}/${scannerLimit}). Renouvellement le ${new Date(currentQuota.end).toLocaleDateString("fr-FR")}.`);
       return;
     }
     const sequentialList = batchCaptureMode === "inventory" ? inventoryList : batchList;
@@ -539,9 +562,7 @@ export default function ScannerPage() {
       setStatus("Analyse IA Gemini V5...");
       logger.gemini("Envoi image vers /api/scan");
 
-      const apiMode = scanMode === "single" ? "mono" : batchCaptureMode === "inventory" ? "listing" : "batch";
-      const resData = await requestScanAnalysis(image64, activeScanSessionRef.current || crypto.randomUUID(), apiMode);
-      if (resData?.quota) setQuotaUsed(Number(resData.quota.used) || 0);
+      const resData = await requestScanAnalysis(image64);
 
       logger.gemini("Réponse Gemini V5", resData);
 
@@ -831,9 +852,7 @@ export default function ScannerPage() {
     context: { slot: QuadSlotIndex; attempt: 1 | 2; quality?: QuadImageQuality }
   ): Promise<QuadIdentificationResult> => {
     try {
-      const apiMode = batchCaptureMode === "inventory" ? "listing" : "quad";
-      const resData = await requestScanAnalysis(imageBase64, activeScanSessionRef.current || crypto.randomUUID(), apiMode);
-      if (resData?.quota) setQuotaUsed(Number(resData.quota.used) || 0);
+      const resData = await requestScanAnalysis(imageBase64);
 
       if (!resData.success || !resData.data) {
         return {
@@ -978,19 +997,16 @@ export default function ScannerPage() {
   }, [batchCaptureMode, inventoryQuotaConsumed, quadQuotaConsumed, consumeSuccessfulSession, handleQuadCardIdentified]);
 
   const handlePrimaryScan = async () => {
-    if (quotaBlocked) {
-      setStatus(`Quota Scanner atteint (${scannerLimit}/${scannerLimit}). Connectez-vous ou choisissez une formule supérieure.`);
+    if (accessLoading) {
+      setStatus("Vérification des droits King_TCG en cours…");
       return;
     }
-    const sessionAlreadyOpen = scanMode === "batch" && (
-      batchCaptureMode === "inventory" ? inventoryQuotaConsumed
-        : batchCaptureMode === "grouped" ? quadQuotaConsumed
-          : batchQuotaConsumed
-    );
-    if (scanMode === "single" || !sessionAlreadyOpen || !activeScanSessionRef.current) {
-      activeScanSessionRef.current = typeof crypto !== "undefined" && "randomUUID" in crypto
-        ? crypto.randomUUID()
-        : `scan-${Date.now()}-${Math.random()}`;
+    const currentQuota = readQuota();
+    if (scannerLimit !== null && currentQuota.used >= scannerLimit) {
+      setQuotaUsed(currentQuota.used);
+      setQuotaEnd(currentQuota.end);
+      setStatus(`Quota Scanner atteint (${scannerLimit}/${scannerLimit}). Renouvellement le ${new Date(currentQuota.end).toLocaleDateString("fr-FR")}.`);
+      return;
     }
     const activeSessionList = batchCaptureMode === "grouped" ? quadList : batchCaptureMode === "inventory" ? inventoryList : batchList;
     const activeLimit = batchCaptureMode === "inventory" ? SCANNER_LISTING_LIMIT_V305 : SCANNER_BATCH_LIMIT;
@@ -1030,14 +1046,20 @@ export default function ScannerPage() {
     mode: "single" | "batch",
     captureMode: "individual" | "grouped" | "inventory" = "individual"
   ) => {
-    if (captureMode === "inventory" && !account.features.listing) {
-      setStatus("Listing est réservé aux comptes PRO. Activez PRO depuis la page Compte.");
-      router.push("/parametres/compte");
+    if (accessLoading) {
+      setStatus("Vérification des droits King_TCG en cours…");
       return;
     }
-    if ((captureMode === "individual" && mode === "batch" || captureMode === "grouped") && !account.features.batch) {
-      setStatus("Batch et Quad nécessitent la formule Premium ou PRO.");
-      router.push("/parametres/compte");
+    if (mode === "batch" && !hasPremiumAccess) {
+      setStatus("Le mode Batch est réservé aux formules Premium, PRO et administrateur.");
+      return;
+    }
+    if (captureMode === "grouped" && !hasPremiumAccess) {
+      setStatus("Le mode Quad est réservé aux formules Premium, PRO et administrateur.");
+      return;
+    }
+    if (captureMode === "inventory" && !hasProAccess) {
+      setStatus("Le Listing PRO est réservé à la formule PRO et à l'administrateur.");
       return;
     }
     setScanMode(mode);
@@ -1125,11 +1147,13 @@ export default function ScannerPage() {
                 <button
                   type="button"
                   onClick={() => selectScannerMode("batch", "individual")}
+                  disabled={accessLoading || !hasPremiumAccess}
+                  title={!hasPremiumAccess ? "Premium / PRO / administrateur requis" : "Batch Premium"}
                   className={`rounded-2xl border-2 px-2 py-3 text-center transition-all ${
                     modeSelected && scanMode === "batch" && batchCaptureMode === "individual"
                       ? "border-amber-300 bg-sky-500/[0.14] shadow-[0_0_24px_rgba(245,196,81,.10)]"
                       : "border-amber-300/75 bg-sky-500/[0.075] hover:border-amber-200 hover:bg-sky-500/[0.11]"
-                  }`}
+                  } disabled:cursor-not-allowed disabled:opacity-45`}
                 >
                   <Layers className="mx-auto h-5 w-5 text-sky-300" />
                   <span className="mt-1.5 block text-[10px] font-black uppercase tracking-[0.09em] text-sky-300">
@@ -1146,11 +1170,13 @@ export default function ScannerPage() {
                 <button
                   type="button"
                   onClick={() => selectScannerMode("batch", "grouped")}
+                  disabled={accessLoading || !hasPremiumAccess}
+                  title={!hasPremiumAccess ? "Premium / PRO / administrateur requis" : "Quad Premium"}
                   className={`rounded-2xl border-2 px-2 py-3 text-center transition-all ${
                     modeSelected && scanMode === "batch" && batchCaptureMode === "grouped"
                       ? "border-amber-300 bg-violet-500/[0.15] shadow-[0_0_24px_rgba(245,196,81,.10)]"
                       : "border-amber-300/75 bg-violet-500/[0.08] hover:border-amber-200 hover:bg-violet-500/[0.12]"
-                  }`}
+                  } disabled:cursor-not-allowed disabled:opacity-45`}
                 >
                   <Grid2X2 className="mx-auto h-5 w-5 text-violet-300" />
                   <span className="mt-1.5 block text-[10px] font-black uppercase tracking-[0.09em] text-violet-300">
@@ -1167,11 +1193,13 @@ export default function ScannerPage() {
                 <button
                   type="button"
                   onClick={() => selectScannerMode("batch", "inventory")}
+                  disabled={accessLoading || !hasProAccess}
+                  title={!hasProAccess ? "PRO / administrateur requis" : "Listing PRO"}
                   className={`rounded-2xl border-2 px-2 py-3 text-center transition-all ${
                     modeSelected && scanMode === "batch" && batchCaptureMode === "inventory"
                       ? "border-[#f5c451] bg-[#f5c451]/[0.14] shadow-[0_0_28px_rgba(245,196,81,.16)]"
                       : "border-[#f5c451]/70 bg-[#f5c451]/[0.065] hover:border-[#ffe29a] hover:bg-[#f5c451]/[0.11]"
-                  }`}
+                  } disabled:cursor-not-allowed disabled:opacity-45`}
                 >
                   <FileSpreadsheet className="mx-auto h-5 w-5 text-[#f5c451]" />
                   <span className="mt-1.5 block text-[10px] font-black uppercase tracking-[0.09em] text-[#ffe29a]">
@@ -1197,10 +1225,10 @@ export default function ScannerPage() {
           <div className="rounded-[18px] border border-emerald-300/24 bg-emerald-400/[0.055] px-4 py-3 flex items-center justify-between gap-3 shadow-[0_10px_28px_rgba(16,185,129,.06)]">
             <div>
               <p className="text-[10px] font-bold uppercase tracking-[0.11em] text-emerald-300">Quota scanner</p>
-              <p className="mt-0.5 text-xs font-black text-emerald-100">{account.unlimited ? "Sessions illimitées" : `${quotaUsed} / ${scannerLimit} sessions`}</p>
-              <p className="mt-0.5 text-[10px] text-zinc-200">{account.authenticated ? `Formule ${account.roleLabel}` : "Invité · compte requis après 5 scans"}</p>
+              <p className="mt-0.5 text-xs font-black text-emerald-100">{quotaUsed} / {scannerLimit === null ? "∞" : scannerLimit} sessions</p>
+              <p className="mt-0.5 text-[10px] text-zinc-200">{accessLoading ? "Vérification des droits…" : scannerLimit === null ? "Accès administrateur illimité" : `Renouvellement le ${quotaEnd ? new Date(quotaEnd).toLocaleDateString("fr-FR") : "5 du mois"}`}</p>
             </div>
-            <span className={`rounded-full border px-2.5 py-1 text-[10px] font-black ${quotaBlocked ? "border-amber-300/30 bg-amber-400/[0.08] text-amber-300" : "border-emerald-300/30 bg-emerald-400/[0.09] text-emerald-300"}`}>{account.unlimited ? "Illimité" : `${Math.max(0, scannerLimit - quotaUsed)} restantes`}</span>
+            <span className={`rounded-full border px-2.5 py-1 text-[10px] font-black ${quotaBlocked ? "border-amber-300/30 bg-amber-400/[0.08] text-amber-300" : "border-emerald-300/30 bg-emerald-400/[0.09] text-emerald-300"}`}>{scannerLimit === null ? "Illimitées" : Math.max(0, scannerLimit - quotaUsed) + " restantes"}</span>
           </div>
 
           {modeSelected ? (
