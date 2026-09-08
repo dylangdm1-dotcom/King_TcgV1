@@ -1,14 +1,41 @@
 import { NextRequest, NextResponse } from "next/server";
-import { publicAppUrl } from "@/lib/billing/stripe-rest";
+import {
+  createPkcePair,
+  getCanonicalAppUrl,
+  getSupabaseConfig,
+  KING_AUTH_NEXT_COOKIE,
+  KING_AUTH_VERIFIER_COOKIE,
+  safeNextPath,
+} from "@/lib/king-auth";
 
-export function GET(req: NextRequest) {
-  const supabaseUrl = process.env.SUPABASE_URL?.replace(/\/$/, "");
-  if (!supabaseUrl || !process.env.SUPABASE_ANON_KEY) {
-    return NextResponse.redirect(`${publicAppUrl(req.url)}/parametres/compte?error=supabase_config`);
+export const dynamic = "force-dynamic";
+
+export async function GET(request: NextRequest) {
+  try {
+    const { url } = getSupabaseConfig();
+    const next = safeNextPath(request.nextUrl.searchParams.get("next"));
+    const { verifier, challenge } = createPkcePair();
+    const redirectUri = `${getCanonicalAppUrl(request)}/auth/callback`;
+
+    const authorizeUrl = new URL(`${url}/auth/v1/authorize`);
+    authorizeUrl.searchParams.set("provider", "google");
+    authorizeUrl.searchParams.set("redirect_to", redirectUri);
+    authorizeUrl.searchParams.set("code_challenge", challenge);
+    authorizeUrl.searchParams.set("code_challenge_method", "s256");
+
+    const response = NextResponse.redirect(authorizeUrl.toString());
+    const cookieOptions = {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax" as const,
+      path: "/",
+      maxAge: 10 * 60,
+    };
+    response.cookies.set(KING_AUTH_VERIFIER_COOKIE, verifier, cookieOptions);
+    response.cookies.set(KING_AUTH_NEXT_COOKIE, next, cookieOptions);
+    return response;
+  } catch (error: any) {
+    console.error("[King_TCG] OAuth start error:", error);
+    return NextResponse.redirect(`${getCanonicalAppUrl(request)}/parametres/compte?auth=error`);
   }
-  const callback = `${publicAppUrl(req.url)}/auth/callback`;
-  const authorize = new URL(`${supabaseUrl}/auth/v1/authorize`);
-  authorize.searchParams.set("provider", "google");
-  authorize.searchParams.set("redirect_to", callback);
-  return NextResponse.redirect(authorize);
 }

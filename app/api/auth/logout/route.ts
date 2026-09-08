@@ -1,6 +1,18 @@
 import { NextResponse } from "next/server";
-import { clearSessionCookies } from "@/lib/auth/session";
+import {
+  clearSessionCookies,
+  getCurrentKingSession,
+  revokeKingSession,
+} from "@/lib/king-auth";
+
+export const dynamic = "force-dynamic";
 
 export async function POST() {
-  return clearSessionCookies(NextResponse.json({ success: true }));
+  const session = await getCurrentKingSession();
+  if (session) await revokeKingSession(session.accessToken);
+
+  const response = NextResponse.json({ ok: true });
+  clearSessionCookies(response);
+  response.headers.set("Cache-Control", "private, no-store");
+  return response;
 }
