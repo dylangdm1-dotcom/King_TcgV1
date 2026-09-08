@@ -1,151 +1,599 @@
 "use client";
 
-import { useEffect, useMemo, useState, type ComponentType } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import {
-  ArrowLeft, BarChart3, BellRing, Check, Cloud, Crown, FileSpreadsheet,
-  Globe2, Layers3, Loader2, LogOut, PackageOpen, RefreshCw, ScanLine,
-  ShieldCheck, ShoppingBag, Sparkles, Star, UserRound,
+  ArrowLeft,
+  BarChart3,
+  BellRing,
+  Check,
+  Crown,
+  LockKeyhole,
+  Mail,
+  ScanLine,
+  ShieldCheck,
+  Sparkles,
+  Star,
+  UserRound,
+  PackageOpen,
+  Boxes,
+  FileSpreadsheet,
 } from "lucide-react";
-import Navbar from "@/components/Navbar";
-import { useAccount } from "@/components/providers/AccountProvider";
+import Navbar from "../../../components/Navbar";
 
-type PlanId = "normal" | "premium" | "pro";
-type Feature = { title: string; description: string; icon: ComponentType<{ className?: string }> };
-type Plan = {
-  id: PlanId; name: string; price: string; tagline: string; scans: string;
-  scanner: string; accent: "cyan" | "gold" | "amber";
-  icon: ComponentType<{ className?: string }>; features: readonly Feature[];
+const PROFILE_STORAGE_KEY = "king_tcg_account_profile_v1";
+
+type AccountSession = {
+  authenticated: boolean;
+  user: { id: string; email: string | null; name: string | null; avatarUrl: string | null } | null;
+  plan: "guest" | "normal" | "premium" | "pro" | "admin";
+  scannerLimit: number | null;
+  scannerLabel: string;
 };
 
-const plans: readonly Plan[] = [
+const normalFeatures = [
   {
-    id: "normal", name: "Normal", price: "Gratuit",
-    tagline: "Toutes les fonctions essentielles pour gérer une collection.",
-    scans: "30 sessions / mois", scanner: "Scanner Mono", accent: "cyan", icon: ShieldCheck,
-    features: [
-      { title: "Recherche FR · EN · JP · CN", description: "Recherche manuelle illimitée par nom, numéro ou extension.", icon: Globe2 },
-      { title: "Collection et favoris", description: "Quantités, états, achats, notes et suivi du portefeuille.", icon: Layers3 },
-      { title: "Prix multi-sources", description: "Sources disponibles séparées et cote King_TCG identifiée.", icon: BarChart3 },
-      { title: "Items et ventes", description: "Inventaire scellé et suivi des ventes liés au compte.", icon: ShoppingBag },
-      { title: "PSA essentiel", description: "Estimation initiale et rangement des cartes gradées.", icon: Star },
-      { title: "Cloud King_TCG", description: "Sauvegarde et synchronisation après connexion Google.", icon: Cloud },
-    ],
+    title: "Normal — 30 sessions Scanner / mois",
+    description: "30 sessions Scanner par mois pour identifier des cartes et ouvrir leurs fiches.",
   },
   {
-    id: "premium", name: "Premium", price: "4,99 € / mois",
-    tagline: "La formule complète pour collectionneurs réguliers.",
-    scans: "500 sessions / mois", scanner: "Mono · Batch · Quad", accent: "gold", icon: Crown,
-    features: [
-      { title: "Tout ce qui est inclus dans Normal", description: "Recherche, collection, favoris, Cloud, Items et ventes.", icon: Check },
-      { title: "Scanner Mono, Batch et Quad", description: "Une carte, une série de cartes ou quatre cartes par photo.", icon: ScanLine },
-      { title: "Dashboard amélioré", description: "Indicateurs enrichis, tendances et lecture du portefeuille.", icon: BarChart3 },
-      { title: "Alertes Premium", description: "Alertes enrichies, mouvements et opportunités prioritaires.", icon: BellRing },
-      { title: "PSA avancé", description: "Contrôles supplémentaires et analyse plus détaillée par zone.", icon: ShieldCheck },
-      { title: "Items Pokémon avancés", description: "Recherche, collection, favoris et ventes de produits scellés.", icon: PackageOpen },
-    ],
+    title: "Historique, collection & favoris",
+    description: "Cartes, quantités, états, achats, favoris et évolution locale regroupés.",
   },
   {
-    id: "pro", name: "PRO", price: "6,99 € / mois",
-    tagline: "Pour vendeurs, boutiques et inventaires à gros volume.",
-    scans: "550 sessions / mois", scanner: "Scanner 4.0 · Listing 2/4", accent: "amber", icon: FileSpreadsheet,
-    features: [
-      { title: "Toutes les fonctions Premium", description: "Le niveau PRO reprend l’intégralité de Premium.", icon: Crown },
-      { title: "Listing 2 ou 4 cartes", description: "Capture accélérée de deux ou quatre cartes sur une photo.", icon: ScanLine },
-      { title: "40 cartes par session", description: "Nom, numéro et série uniquement pour aller au plus vite.", icon: Layers3 },
-      { title: "Export CSV compatible Excel", description: "Listing propre prêt à importer dans les outils métier.", icon: FileSpreadsheet },
-      { title: "Ventes et stock", description: "Suivi des sorties, coûts, bénéfices et inventaire produits.", icon: ShoppingBag },
-      { title: "Accès aux fonctions PRO", description: "Fonctions professionnelles activées par les droits serveur.", icon: ShieldCheck },
-    ],
+    title: "Suivi du portefeuille",
+    description: "Valeur actuelle, investissement, rendement et actifs principaux dans le dashboard.",
+  },
+  {
+    title: "Alertes & opportunités basiques",
+    description: "Mouvements et opportunités essentiels détectés sur la collection et les favoris.",
+  },
+  {
+    title: "Recherche FR / EN / JP / CN",
+    description: "Recherche par nom ou extension et accès aux fiches détaillées.",
+  },
+  {
+    title: "Prix multi-sources",
+    description: "Sources disponibles séparées et cote King_TCG clairement identifiée.",
+  },
+  {
+    title: "Estimation PSA",
+    description: "Première estimation à partir des images fournies.",
+  },
+  {
+    title: "Export / import local",
+    description: "Sauvegarde et restauration des données actuellement présentes.",
+  },
+  {
+    title: "Synchronisation du compte",
+    description: "Préparée avec la connexion Google lors de l’activation des comptes.",
   },
 ] as const;
 
-const accentStyles = {
-  cyan: { border: "border-cyan-400/25", surface: "bg-cyan-400/[0.045]", soft: "border-cyan-400/25 bg-cyan-400/[0.07] text-cyan-300", text: "text-cyan-300", line: "from-cyan-400/45", button: "border-cyan-400/30 bg-cyan-400/[0.07] text-cyan-200" },
-  gold: { border: "border-[#f5c451]/35", surface: "bg-[#f5c451]/[0.045]", soft: "border-[#f5c451]/30 bg-[#f5c451]/[0.08] text-[#f5c451]", text: "text-[#f5c451]", line: "from-[#f5c451]/50", button: "border-[#f5c451]/50 bg-gradient-to-r from-[#8a5b08] via-[#b77908] to-[#7a4b05] text-white" },
-  amber: { border: "border-amber-200/30", surface: "bg-amber-200/[0.04]", soft: "border-amber-200/30 bg-amber-200/[0.08] text-amber-200", text: "text-amber-200", line: "from-amber-200/45", button: "border-amber-200/45 bg-gradient-to-r from-[#79520a] via-[#a8730f] to-[#684405] text-white" },
-} as const;
+const premiumHighlights = [
+  {
+    title: "Premium — 500 sessions Scanner / mois",
+    description: "Mono, Batch et Quad avec un quota global de 500 sessions Scanner par mois.",
+    icon: ScanLine,
+  },
+  {
+    title: "Dashboard amélioré",
+    description: "Tendances marché, lecture stratégique et indicateurs enrichis.",
+    icon: BarChart3,
+  },
+  {
+    title: "Alertes Premium",
+    description: "Alertes illimitées, cause du mouvement et lecture King_TCG.",
+    icon: BellRing,
+  },
+  {
+    title: "Estimation PSA avancée",
+    description: "Contrôles supplémentaires et estimation approfondie par zone.",
+    icon: ShieldCheck,
+  },
+  {
+    title: "Opportunités Premium",
+    description: "Potentiel estimé, niveau de confiance et signaux prioritaires.",
+    icon: Star,
+  },
+  {
+    title: "Items Pokémon scellés",
+    description: "Recherche, collection et favoris dédiés aux produits scellés, séparés des cartes.",
+    icon: PackageOpen,
+  },
+] as const;
+
+const proHighlights = [
+  {
+    title: "Toutes les fonctions Premium",
+    description: "Le niveau PRO reprend l’intégralité de Premium avec 550 sessions Scanner par mois.",
+    icon: Crown,
+  },
+  {
+    title: "Listing PRO · 2 ou 4 cartes",
+    description: "Deux ou quatre cartes par photo, jusqu’à 40 lignes par session, sans prix ni visuel.",
+    icon: Boxes,
+  },
+  {
+    title: "Export professionnel",
+    description: "Listing structuré exportable en CSV et Excel pour les logiciels métier.",
+    icon: FileSpreadsheet,
+  },
+  {
+    title: "Outils Items avancés",
+    description: "Suivi de stock et analyses de produits scellés à mesure de leur activation.",
+    icon: PackageOpen,
+  },
+] as const;
 
 export default function AccountManagementPage() {
-  const { account, loading, logout, refreshAccount, syncCloudNow } = useAccount();
-  const [busy, setBusy] = useState<string | null>(null);
-  const [message, setMessage] = useState("");
+  const [profile, setProfile] = useState({ nickname: "", email: "" });
+  const [session, setSession] = useState<AccountSession | null>(null);
+  const [authLoading, setAuthLoading] = useState(true);
+  const [authBusy, setAuthBusy] = useState(false);
+  const [authMessage, setAuthMessage] = useState("");
+
+  const loadSession = async () => {
+    setAuthLoading(true);
+    try {
+      const response = await fetch("/api/auth/session", { cache: "no-store" });
+      const payload = await response.json().catch(() => null);
+      if (!response.ok || !payload?.authenticated) {
+        setSession({
+          authenticated: false,
+          user: null,
+          plan: "guest",
+          scannerLimit: 5,
+          scannerLabel: "5 sessions invité",
+        });
+        return;
+      }
+      setSession(payload as AccountSession);
+      setProfile((current) => ({
+        nickname: payload.user?.name || current.nickname,
+        email: payload.user?.email || current.email,
+      }));
+    } catch {
+      setSession({
+        authenticated: false,
+        user: null,
+        plan: "guest",
+        scannerLimit: 5,
+        scannerLabel: "5 sessions invité",
+      });
+      setAuthMessage("Impossible de vérifier la session pour le moment.");
+    } finally {
+      setAuthLoading(false);
+    }
+  };
 
   useEffect(() => {
-    if (new URLSearchParams(window.location.search).get("checkout") !== "success") return;
-    setMessage("Paiement reçu. Activation de la formule en cours…");
-    let attempts = 0;
-    const timer = window.setInterval(async () => {
-      const next = await refreshAccount();
-      attempts += 1;
-      if (["premium", "pro", "admin"].includes(next.role) || attempts >= 6) {
-        window.clearInterval(timer);
-        setMessage(["premium", "pro", "admin"].includes(next.role)
-          ? `Formule ${next.roleLabel} activée.`
-          : "Stripe traite encore l’abonnement. Rechargez cette page dans quelques secondes.");
-      }
-    }, 1500);
-    return () => window.clearInterval(timer);
-  }, [refreshAccount]);
-
-  const quotaPercent = useMemo(() => {
-    if (account.unlimited || !account.scanLimit) return 100;
-    return Math.min(100, Math.round((account.scansUsed / account.scanLimit) * 100));
-  }, [account.scanLimit, account.scansUsed, account.unlimited]);
-
-  async function openBilling(path: "checkout" | "portal", plan?: "premium" | "pro") {
-    if (!account.authenticated) { window.location.href = "/api/auth/google"; return; }
-    setBusy(plan || path); setMessage("");
     try {
-      const response = await fetch(`/api/billing/${path}`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(plan ? { plan } : {}) });
-      const data = await response.json();
-      if (!response.ok || !data.url) throw new Error(data.error || "Service indisponible");
-      window.location.assign(data.url);
-    } catch (error) {
-      setMessage(error instanceof Error ? error.message : "Action impossible"); setBusy(null);
+      const raw = window.localStorage.getItem(PROFILE_STORAGE_KEY);
+      const parsed = raw ? JSON.parse(raw) : null;
+      setProfile({
+        nickname: typeof parsed?.nickname === "string" ? parsed.nickname : "",
+        email: typeof parsed?.email === "string" ? parsed.email : "",
+      });
+    } catch {
+      setProfile({ nickname: "", email: "" });
     }
-  }
+    void loadSession();
+  }, []);
 
-  async function synchronize() {
-    setBusy("cloud"); setMessage("");
-    try { setMessage(await syncCloudNow()); }
-    catch (error) { setMessage(error instanceof Error ? error.message : "Synchronisation impossible"); }
-    setBusy(null);
-  }
+  useEffect(() => {
+    const auth = new URLSearchParams(window.location.search).get("auth");
+    if (auth === "error") {
+      setAuthMessage("La connexion Google n’a pas pu être finalisée. Vérifiez la configuration Google/Supabase et réessayez.");
+    } else if (auth === "success") {
+      setAuthMessage("Connexion Google réussie. Votre session King_TCG est active.");
+    } else if (auth === "signed_out") {
+      setAuthMessage("Vous êtes déconnecté de King_TCG.");
+    }
+  }, []);
 
-  const activePlan: PlanId | null = account.role === "admin" || account.role === "tester"
-    ? "pro" : plans.some((plan) => plan.id === account.role) ? account.role as PlanId : null;
+  const startGoogleLogin = () => {
+    setAuthBusy(true);
+    setAuthMessage("");
+    window.location.assign("/api/auth/google?next=/parametres/compte");
+  };
 
-  return <><Navbar /><main className="kt-premium-shell min-h-screen pb-32 text-white"><div className="kt-page-wrap space-y-5">
-    <Link href="/parametres" className="inline-flex items-center gap-2 rounded-xl border border-cyan-400/20 bg-[#111821] px-3 py-2 text-xs font-bold text-zinc-200 transition hover:border-cyan-300/40 hover:text-white"><ArrowLeft className="h-4 w-4 text-cyan-300" /> Retour aux paramètres</Link>
+  const signOut = async () => {
+    setAuthBusy(true);
+    try {
+      await fetch("/api/auth/logout", { method: "POST" });
+    } finally {
+      window.location.assign("/parametres/compte?auth=signed_out");
+    }
+  };
 
-    <header className="kt-page-header kt-hero-surface relative overflow-hidden border"><div className="pointer-events-none absolute -right-12 -top-16 h-48 w-48 rounded-full bg-cyan-400/[0.07] blur-3xl" /><div className="relative flex items-center gap-4"><span className="kt-page-icon flex shrink-0 items-center justify-center text-cyan-300"><UserRound className="h-5 w-5" /></span><div><p className="text-[10px] font-black uppercase tracking-[0.13em] text-cyan-300">V306 · Compte et abonnements</p><h1 className="kt-page-title mt-1">Compte <span className="text-cyan-300">KING_TCG</span></h1><p className="kt-page-subtitle mt-1">Profil, quota Scanner, Cloud et détail complet des formules.</p></div></div></header>
+  return (
+    <>
+      <Navbar />
 
-    <section className="kt-section-surface rounded-[20px] border p-5 sm:p-6">
-      {loading ? <div className="flex items-center gap-3 text-sm"><Loader2 className="h-5 w-5 animate-spin text-cyan-300" /> Chargement du compte…</div> : account.authenticated ? <div className="space-y-5">
-        <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
-          <div className="flex min-w-0 items-center gap-4">{account.avatarUrl ? <img src={account.avatarUrl} alt="" className="h-14 w-14 rounded-2xl border border-cyan-400/25 object-cover" referrerPolicy="no-referrer" /> : <span className="flex h-14 w-14 items-center justify-center rounded-2xl border border-cyan-400/25 bg-cyan-400/[0.07] text-cyan-300"><UserRound className="h-6 w-6" /></span>}<div className="min-w-0"><div className="flex flex-wrap items-center gap-2"><h2 className="truncate text-base font-black">{account.displayName || "Dresseur"}</h2><span className="rounded-full border border-[#f5c451]/30 bg-[#f5c451]/10 px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.08em] text-[#f5c451]">{account.roleLabel}</span></div><p className="mt-1 truncate text-xs text-zinc-300">{account.email}</p>{account.role === "admin" && <p className="mt-1 text-[10px] font-black uppercase tracking-wider text-emerald-300">Administrateur · tous les accès · aucune limite</p>}</div></div>
-          <div className="flex flex-wrap gap-2"><button onClick={synchronize} disabled={busy !== null} className="rounded-xl border border-cyan-400/25 px-4 py-2.5 text-xs font-black transition hover:bg-cyan-400/[0.06] disabled:opacity-50"><Cloud className="mr-2 inline h-4 w-4" />{busy === "cloud" ? "Synchronisation…" : "Synchroniser"}</button>{account.subscriptionStatus && <button onClick={() => openBilling("portal")} disabled={busy !== null} className="rounded-xl border border-[#f5c451]/30 px-4 py-2.5 text-xs font-black text-[#f5c451] transition hover:bg-[#f5c451]/[0.06] disabled:opacity-50">Gérer l’abonnement</button>}<button onClick={async () => { await logout(); await refreshAccount(); }} className="rounded-xl border border-red-400/20 px-4 py-2.5 text-xs font-black text-red-200 transition hover:bg-red-400/[0.05]"><LogOut className="mr-2 inline h-4 w-4" />Déconnexion</button></div>
+      <main className="kt-premium-shell min-h-screen pb-32 text-white">
+        <div className="kt-page-wrap space-y-5">
+          <Link
+            href="/parametres"
+            className="inline-flex items-center gap-2 rounded-[12px] border border-cyan-400/20 bg-[#111821] px-3 py-2 text-[10px] font-bold text-zinc-200 transition hover:border-cyan-300/35 hover:text-white"
+          >
+            <ArrowLeft className="h-3.5 w-3.5 text-cyan-300" />
+            Retour aux paramètres
+          </Link>
+
+          <div className="flex items-center gap-2">
+            <Sparkles className="h-4 w-4 text-cyan-300" />
+            <p className="text-[11px] font-black uppercase tracking-[0.12em] text-cyan-300">
+              Espace compte
+            </p>
+          </div>
+
+          <header className="kt-page-header kt-hero-surface relative overflow-hidden border">
+            <div className="pointer-events-none absolute -right-16 -top-20 h-52 w-52 rounded-full bg-cyan-400/[0.055] blur-3xl" />
+            <div className="relative flex items-center gap-4">
+              <span className="kt-page-icon flex shrink-0 items-center justify-center text-cyan-300">
+                <UserRound className="h-5 w-5" />
+              </span>
+              <div className="min-w-0">
+                <h1 className="kt-page-title">
+                  Compte <span className="text-cyan-300">KING_TCG</span>
+                </h1>
+                <p className="kt-page-subtitle mt-1">
+                  Gérez votre accès et choisissez la formule adaptée à votre utilisation de King_TCG.
+                </p>
+              </div>
+            </div>
+          </header>
+
+          <section className="kt-section-surface rounded-[20px] border p-5 sm:p-6">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex items-start gap-4">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-cyan-400/25 bg-cyan-400/[0.07] text-cyan-300">
+                  <LockKeyhole className="h-5 w-5" />
+                </span>
+                <div>
+                  <p className="text-[10px] font-black uppercase tracking-[0.11em] text-cyan-300">
+                    Connexion du compte
+                  </p>
+                  <h2 className="mt-1 text-[15px] font-black text-white">
+                    Accès et synchronisation Google
+                  </h2>
+                  <p className="mt-1 max-w-xl text-[11px] leading-5 text-zinc-300">
+                    La connexion Google associera votre profil et permettra de retrouver les données synchronisées de votre compte King_TCG.
+                  </p>
+                </div>
+              </div>
+
+              {session?.authenticated ? (
+                <button
+                  type="button"
+                  onClick={signOut}
+                  disabled={authBusy}
+                  className="inline-flex w-full items-center justify-center gap-3 rounded-[10px] border border-zinc-300 bg-white px-4 py-3 text-[12px] font-bold text-[#202124] shadow-[0_2px_8px_rgba(0,0,0,.22)] transition hover:bg-[#f8f9fa] disabled:cursor-wait disabled:opacity-60 sm:w-auto"
+                >
+                  {authBusy ? "Déconnexion…" : "Se déconnecter"}
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  onClick={startGoogleLogin}
+                  disabled={authBusy || authLoading}
+                  className="inline-flex w-full items-center justify-center gap-3 rounded-[10px] border border-zinc-300 bg-white px-4 py-3 text-[12px] font-bold text-[#202124] shadow-[0_2px_8px_rgba(0,0,0,.22)] transition hover:bg-[#f8f9fa] disabled:cursor-wait disabled:opacity-60 sm:w-auto"
+                >
+                <svg aria-hidden="true" viewBox="0 0 24 24" className="h-5 w-5 shrink-0">
+                  <path fill="#4285F4" d="M21.6 12.23c0-.71-.06-1.4-.18-2.07H12v3.92h5.38a4.6 4.6 0 0 1-2 3.02v2.54h3.24c1.9-1.75 2.98-4.33 2.98-7.41Z"/>
+                  <path fill="#34A853" d="M12 22c2.7 0 4.97-.9 6.62-2.36l-3.24-2.54c-.9.6-2.05.96-3.38.96-2.61 0-4.82-1.76-5.61-4.13H3.04v2.62A10 10 0 0 0 12 22Z"/>
+                  <path fill="#FBBC05" d="M6.39 13.93A6 6 0 0 1 6.08 12c0-.67.12-1.32.31-1.93V7.45H3.04A10 10 0 0 0 2 12c0 1.61.39 3.14 1.04 4.55l3.35-2.62Z"/>
+                  <path fill="#EA4335" d="M12 5.94c1.47 0 2.79.5 3.83 1.5l2.87-2.87A9.63 9.63 0 0 0 12 2a10 10 0 0 0-8.96 5.45l3.35 2.62C7.18 7.7 9.39 5.94 12 5.94Z"/>
+                </svg>
+                  {authBusy ? "Redirection vers Google…" : "Continuer avec Google"}
+                </button>
+              )}
+            </div>
+
+            <div className="mt-3 min-h-5 text-center text-[10px] font-bold text-cyan-200">
+              {authLoading ? "Vérification de la session King_TCG…" : authMessage}
+            </div>
+
+            {session?.authenticated && (
+              <div className="mt-4 grid gap-2 sm:grid-cols-3">
+                <div className="kt-subpanel px-3.5 py-3">
+                  <p className="text-[9px] font-black uppercase tracking-[0.10em] text-zinc-400">Statut</p>
+                  <p className="mt-1 text-[11px] font-black text-emerald-300">Session active</p>
+                </div>
+                <div className="kt-subpanel px-3.5 py-3">
+                  <p className="text-[9px] font-black uppercase tracking-[0.10em] text-zinc-400">Formule</p>
+                  <p className="mt-1 text-[11px] font-black uppercase text-white">{session.plan}</p>
+                </div>
+                <div className="kt-subpanel px-3.5 py-3">
+                  <p className="text-[9px] font-black uppercase tracking-[0.10em] text-zinc-400">Scanner</p>
+                  <p className="mt-1 text-[11px] font-black text-white">{session.scannerLabel}</p>
+                </div>
+              </div>
+            )}
+
+            <div className="mt-5 grid gap-2 border-t border-cyan-400/[0.12] pt-4 sm:grid-cols-2">
+              <div className="kt-subpanel flex items-center gap-3 px-3.5 py-3">
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-cyan-400/[0.08] text-cyan-300">
+                  <UserRound className="h-4 w-4" />
+                </span>
+                <div className="min-w-0">
+                  <p className="text-[9px] font-black uppercase tracking-[0.10em] text-zinc-400">Pseudo</p>
+                  <p className="mt-0.5 truncate text-[11px] font-black text-white">
+                    {profile.nickname || "Non renseigné"}
+                  </p>
+                </div>
+              </div>
+
+              <div className="kt-subpanel flex items-center gap-3 px-3.5 py-3">
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-cyan-400/[0.08] text-cyan-300">
+                  <Mail className="h-4 w-4" />
+                </span>
+                <div className="min-w-0">
+                  <p className="text-[9px] font-black uppercase tracking-[0.10em] text-zinc-400">Adresse mail</p>
+                  <p className="mt-0.5 truncate text-[11px] font-black text-white">
+                    {profile.email || "Connexion Google requise"}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <div className="mb-3 flex items-center gap-3">
+              <Crown className="h-4 w-4 text-cyan-300" />
+              <h2 className="whitespace-nowrap text-[13px] font-black uppercase tracking-[0.08em] text-cyan-300">
+                Choisissez votre formule
+              </h2>
+              <span className="h-px flex-1 bg-gradient-to-r from-cyan-400/40 to-transparent" />
+            </div>
+
+            <div className="grid gap-4 lg:grid-cols-3">
+              <article className="kt-plan-card kt-plan-normal relative overflow-hidden rounded-[18px] border p-4 sm:p-5">
+                <div className="pointer-events-none absolute -left-20 -top-24 h-56 w-56 rounded-full bg-cyan-400/[0.055] blur-3xl" />
+                <div className="pointer-events-none absolute -bottom-28 -right-20 h-64 w-64 rounded-full bg-cyan-400/[0.05] blur-3xl" />
+
+                <div className="relative flex flex-col items-center text-center">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-[13px] border border-cyan-400/30 bg-cyan-400/[0.08] text-cyan-300 shadow-[0_0_24px_rgba(34,211,238,.10)]">
+                    <ShieldCheck className="h-5 w-5" />
+                  </span>
+
+                  <h3 className="mt-3 text-[17px] font-black tracking-tight text-white sm:text-[19px]">
+                    <span className="text-cyan-300">NORMAL</span> KING_TCG
+                  </h3>
+
+                  <p className="mt-1 text-[12px] font-medium text-zinc-200">
+                    Les fonctions essentielles de King_TCG au quotidien.
+                  </p>
+
+                  <div className="mt-4 flex items-end justify-center gap-2">
+                    <span className="text-[26px] font-black tracking-tight text-white sm:text-[30px]">
+                      0 €
+                    </span>
+                    <span className="pb-1 text-sm font-bold text-zinc-200">/ mois</span>
+                  </div>
+
+                  <span className="mt-3 rounded-full border border-cyan-400/25 bg-cyan-400/[0.07] px-3 py-1 text-[10px] font-black uppercase tracking-[0.08em] text-cyan-300">
+                    Formule gratuite
+                  </span>
+
+                  <div className="mt-4 w-full rounded-[14px] border border-cyan-400/22 bg-cyan-400/[0.055] px-4 py-3">
+                    <div className="flex items-center justify-between gap-3">
+                      <div className="text-left">
+                        <p className="text-[10px] font-black uppercase tracking-[0.08em] text-cyan-300">
+                          Scanner Mono
+                        </p>
+                        <p className="mt-1 text-[11px] text-zinc-300">
+                          Quota mensuel inclus
+                        </p>
+                      </div>
+                      <p className="text-right text-xl font-black text-white">
+                        30 <span className="text-[11px] font-bold text-zinc-300">scans / mois</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="relative mt-5 border-t border-cyan-400/18 pt-5">
+                  <div className="mb-3 flex items-center gap-3">
+                    <Sparkles className="h-4 w-4 text-cyan-300" />
+                    <h4 className="whitespace-nowrap text-[12px] font-black uppercase tracking-[0.08em] text-cyan-300">
+                      Ce qui est inclus
+                    </h4>
+                    <span className="h-px flex-1 bg-gradient-to-r from-cyan-400/45 to-transparent" />
+                  </div>
+
+                  <div className="kt-feature-list overflow-hidden rounded-[16px] bg-black/15">
+                    {normalFeatures.map((feature, index) => (
+                      <div
+                        key={feature.title}
+                        className={`flex items-center gap-3 px-3.5 py-3 ${
+                          index > 0 ? "border-t border-white/[0.06]" : ""
+                        }`}
+                      >
+                        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-cyan-400/[0.07] text-cyan-300">
+                          <Check className="h-4 w-4" />
+                        </span>
+                        <div className="min-w-0 flex-1 text-left">
+                          <p className="text-[11px] font-black text-white">{feature.title}</p>
+                          <p className="mt-0.5 text-[10px] leading-4 text-zinc-300">{feature.description}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-[14px] border border-cyan-400/30 bg-cyan-400/[0.05] px-4 py-3.5 text-[11px] font-black uppercase tracking-[0.06em] text-cyan-300">
+                    <ShieldCheck className="h-4 w-4" />
+                    Formule actuelle
+                  </div>
+                </div>
+              </article>
+
+              <article className="kt-plan-card kt-plan-premium relative overflow-hidden rounded-[18px] border p-4 sm:p-5">
+                <div className="pointer-events-none absolute -left-20 -top-24 h-56 w-56 rounded-full bg-[#f5c451]/[0.055] blur-3xl" />
+                <div className="pointer-events-none absolute -bottom-28 -right-20 h-64 w-64 rounded-full bg-[#f5c451]/[0.05] blur-3xl" />
+
+                <div className="relative flex flex-col items-center text-center">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-[13px] border border-[#f5c451]/30 bg-[#f5c451]/[0.08] text-[#f5c451] shadow-[0_0_24px_rgba(245,196,81,.10)]">
+                    <Crown className="h-5 w-5" />
+                  </span>
+
+                  <h3 className="mt-3 text-[17px] font-black tracking-tight text-white sm:text-[19px]">
+                    <span className="text-[#f5c451]">PREMIUM</span> KING_TCG
+                  </h3>
+
+                  <p className="mt-1 text-[12px] font-medium text-zinc-200">
+                    Débloquez les fonctions avancées de King_TCG.
+                  </p>
+
+                  <div className="mt-4 flex items-end justify-center gap-2">
+                    <span className="text-[26px] font-black tracking-tight text-white sm:text-[30px]">
+                      4,99 €
+                    </span>
+                    <span className="pb-1 text-sm font-bold text-zinc-200">/ mois</span>
+                  </div>
+
+                  <span className="mt-3 rounded-full border border-[#f5c451]/25 bg-[#f5c451]/[0.07] px-3 py-1 text-[10px] font-black uppercase tracking-[0.08em] text-[#f5c451]">
+                    Sans engagement · annulable à tout moment
+                  </span>
+
+                  <div className="mt-4 w-full rounded-[14px] border border-[#f5c451]/22 bg-[#f5c451]/[0.055] px-4 py-3">
+                    <div className="flex items-center justify-between gap-3">
+                      <div className="text-left">
+                        <p className="text-[10px] font-black uppercase tracking-[0.08em] text-[#f5c451]">
+                          Mono · Batch · Quad
+                        </p>
+                        <p className="mt-1 text-[11px] text-zinc-300">
+                          Quota global partagé
+                        </p>
+                      </div>
+                      <p className="text-right text-xl font-black text-white">
+                        500 <span className="text-[11px] font-bold text-zinc-300">scans / mois</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="relative mt-5 border-t border-[#f5c451]/18 pt-5">
+                  <div className="mb-3 flex items-center gap-3">
+                    <Sparkles className="h-4 w-4 text-[#f5c451]" />
+                    <h4 className="whitespace-nowrap text-[12px] font-black uppercase tracking-[0.08em] text-[#f5c451]">
+                      Ce qui est inclus
+                    </h4>
+                    <span className="h-px flex-1 bg-gradient-to-r from-[#f5c451]/45 to-transparent" />
+                  </div>
+
+                  <div className="kt-feature-list overflow-hidden rounded-[16px] bg-black/15">
+                    {premiumHighlights.map(({ title, description, icon: Icon }, index) => (
+                      <div
+                        key={title}
+                        className={`flex items-center gap-3 px-3.5 py-3 ${
+                          index > 0 ? "border-t border-white/[0.06]" : ""
+                        }`}
+                      >
+                        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#f5c451]/[0.08] text-[#f5c451]">
+                          <Icon className="h-4 w-4" />
+                        </span>
+                        <div className="min-w-0 flex-1 text-left">
+                          <p className="text-[11px] font-black text-white">{title}</p>
+                          <p className="mt-0.5 text-[10px] leading-4 text-zinc-300">{description}</p>
+                        </div>
+                      </div>
+                    ))}
+                    <div className="border-t border-white/[0.06] px-3.5 py-3 text-left">
+                      <p className="text-[10px] leading-4 text-zinc-300">
+                        Inclut également toutes les fonctions de la formule Normal.
+                      </p>
+                    </div>
+                  </div>
+
+                  <button
+                    type="button"
+                    className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-[14px] border border-[#f5c451]/50 bg-gradient-to-r from-[#8a5b08] via-[#b77908] to-[#7a4b05] px-4 py-3 text-[10px] font-black uppercase tracking-[0.06em] text-white shadow-[0_14px_34px_rgba(245,196,81,.11)] transition hover:brightness-110"
+                  >
+                    <Crown className="h-4 w-4" />
+                    Passer Premium · 4,99 € / mois
+                  </button>
+                </div>
+              </article>
+
+              <article className="kt-plan-card relative overflow-hidden rounded-[18px] border border-amber-200/25 p-4 sm:p-5">
+                <div className="pointer-events-none absolute -right-20 -top-24 h-60 w-60 rounded-full bg-cyan-300/[0.06] blur-3xl" />
+                <div className="relative flex flex-col items-center text-center">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-[13px] border border-amber-200/35 bg-amber-200/[0.09] text-amber-200"><Boxes className="h-5 w-5" /></span>
+                  <h3 className="mt-3 text-[17px] font-black tracking-tight text-white sm:text-[19px]"><span className="text-amber-200">PRO</span> KING_TCG</h3>
+                  <p className="mt-1 text-[12px] font-medium text-zinc-200">Pour vendeurs, boutiques et gros collectionneurs.</p>
+                  <div className="mt-4 flex items-end justify-center gap-2"><span className="text-[26px] font-black tracking-tight text-white sm:text-[30px]">6,99 €</span><span className="pb-1 text-sm font-bold text-zinc-200">/ mois</span></div>
+                  <div className="mt-3 rounded-full border border-amber-200/20 bg-amber-200/[0.06] px-3 py-1 text-[10px] font-black uppercase tracking-[0.08em] text-amber-200">550 sessions Scanner / mois</div>
+                  <div className="mt-4 w-full rounded-[14px] border border-amber-200/20 bg-amber-200/[0.045] px-4 py-3 text-left"><p className="text-[10px] font-black uppercase tracking-[0.08em] text-amber-200">Listing PRO</p><p className="mt-1 text-[11px] leading-5 text-zinc-300">2 ou 4 cartes par photo, 40 lignes, correction manuelle et export Excel CSV. Aucun appel de prix.</p></div>
+                </div>
+                <div className="relative mt-5 border-t border-amber-200/15 pt-5">
+                  <div className="kt-feature-list overflow-hidden rounded-[16px] bg-black/15">
+                    {proHighlights.map(({ title, description, icon: Icon }, index) => (
+                      <div key={title} className={`flex items-center gap-3 px-3.5 py-3 ${index > 0 ? "border-t border-white/[0.06]" : ""}`}>
+                        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-amber-200/[0.08] text-amber-200"><Icon className="h-4 w-4" /></span>
+                        <div className="min-w-0 flex-1 text-left"><p className="text-[11px] font-black text-white">{title}</p><p className="mt-0.5 text-[10px] leading-4 text-zinc-300">{description}</p></div>
+                      </div>
+                    ))}
+                  </div>
+                  <button type="button" className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-[14px] border border-amber-200/50 bg-gradient-to-r from-[#76500b] via-[#a06e0b] to-[#684309] px-4 py-3.5 text-[10px] font-black uppercase tracking-[0.06em] text-white shadow-[0_14px_34px_rgba(245,196,81,.11)] transition hover:brightness-110"><Crown className="h-4 w-4" /> Passer PRO · 6,99 € / mois</button>
+                </div>
+              </article>
+            </div>
+          </section>
+
+          <section className="kt-section-surface rounded-[20px] border p-5 sm:p-6">
+            <div className="mb-4 flex items-center gap-3">
+              <Sparkles className="h-4 w-4 text-[#f5c451]" />
+              <h2 className="whitespace-nowrap text-[13px] font-black uppercase tracking-[0.08em] text-white">
+                Avantages Premium
+              </h2>
+              <span className="h-px flex-1 bg-gradient-to-r from-[#f5c451]/35 to-transparent" />
+            </div>
+
+            <div className="grid grid-cols-2 gap-3">
+              <div className="kt-benefit-tile rounded-[16px] p-4 text-center">
+                <span className="mx-auto flex h-10 w-10 items-center justify-center rounded-xl bg-[#f5c451]/[0.07] text-[#f5c451]">
+                  <ScanLine className="h-5 w-5" />
+                </span>
+                <p className="mt-3 text-[11px] font-black text-white">Premium — 500 sessions Scanner / mois</p>
+                <p className="mt-1 text-[10px] leading-4 text-zinc-300">Mono, Batch et Quad</p>
+              </div>
+
+              <div className="kt-benefit-tile rounded-[16px] p-4 text-center">
+                <span className="mx-auto flex h-10 w-10 items-center justify-center rounded-xl bg-[#f5c451]/[0.07] text-[#f5c451]">
+                  <BarChart3 className="h-5 w-5" />
+                </span>
+                <p className="mt-3 text-[11px] font-black text-white">Dashboard amélioré</p>
+                <p className="mt-1 text-[10px] leading-4 text-zinc-300">Analyses Premium et tendances marché</p>
+              </div>
+
+              <div className="kt-benefit-tile rounded-[16px] p-4 text-center">
+                <span className="mx-auto flex h-10 w-10 items-center justify-center rounded-xl bg-[#f5c451]/[0.07] text-[#f5c451]">
+                  <ShieldCheck className="h-5 w-5" />
+                </span>
+                <p className="mt-3 text-[11px] font-black text-white">Estimation PSA avancée</p>
+                <p className="mt-1 text-[10px] leading-4 text-zinc-300">Contrôles et estimation approfondie</p>
+              </div>
+
+              <div className="kt-benefit-tile rounded-[16px] p-4 text-center">
+                <span className="mx-auto flex h-10 w-10 items-center justify-center rounded-xl bg-[#f5c451]/[0.07] text-[#f5c451]">
+                  <Star className="h-5 w-5" />
+                </span>
+                <p className="mt-3 text-[11px] font-black text-white">Fonctions Premium</p>
+                <p className="mt-1 text-[10px] leading-4 text-zinc-300">Alertes et opportunités enrichies</p>
+              </div>
+            </div>
+          </section>
+
+          <footer className="border-t border-white/[0.06] pt-5 text-center">
+            <p className="text-[11px] font-black tracking-[0.18em] text-white">King_TCG</p>
+            <p className="mt-1 text-[11px] font-bold text-zinc-300">
+              Pokémon Trading Card Companion
+            </p>
+          </footer>
         </div>
-        <div className="grid gap-3 border-t border-white/[0.06] pt-5 md:grid-cols-[1.4fr_.8fr_.8fr]">
-          <div className="rounded-2xl border border-cyan-400/18 bg-cyan-400/[0.035] p-4"><div className="flex items-center justify-between gap-3"><div><p className="text-[9px] font-black uppercase tracking-widest text-zinc-400">Utilisation Scanner</p><p className="mt-1 text-sm font-black text-cyan-100">{account.unlimited ? "Sessions illimitées" : `${account.scansUsed} / ${account.scanLimit} ce mois`}</p></div><ScanLine className="h-5 w-5 text-cyan-300" /></div><div className="mt-3 h-2 overflow-hidden rounded-full bg-black/35"><div className="h-full rounded-full bg-gradient-to-r from-cyan-500 to-[#f5c451]" style={{ width: `${quotaPercent}%` }} /></div><p className="mt-2 text-[10px] text-zinc-400">{account.unlimited ? "Aucun quota appliqué à ce compte." : `${Math.max(0, (account.scanLimit || 0) - account.scansUsed)} session(s) restante(s).`}</p></div>
-          <div className="rounded-2xl border border-emerald-400/18 bg-emerald-400/[0.035] p-4"><Cloud className="h-5 w-5 text-emerald-300" /><p className="mt-3 text-[9px] font-black uppercase tracking-widest text-zinc-400">Cloud</p><p className="mt-1 text-xs font-black text-emerald-100">Synchronisation active</p></div>
-          <div className="rounded-2xl border border-[#f5c451]/18 bg-[#f5c451]/[0.035] p-4"><ShieldCheck className="h-5 w-5 text-[#f5c451]" /><p className="mt-3 text-[9px] font-black uppercase tracking-widest text-zinc-400">Droits serveur</p><p className="mt-1 text-xs font-black text-amber-100">{account.roleLabel}</p></div>
-        </div>
-      </div> : <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between"><div className="flex items-start gap-4"><span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-cyan-400/25 bg-cyan-400/[0.07] text-cyan-300"><UserRound className="h-5 w-5" /></span><div><h2 className="text-base font-black">Connexion Google sécurisée</h2><p className="mt-1 max-w-xl text-xs leading-5 text-zinc-300">Sans compte : recherches manuelles libres et 5 sessions Scanner. Créez gratuitement un compte pour obtenir 30 sessions mensuelles, sauvegarder et synchroniser vos données.</p>{!account.configured && <p className="mt-2 text-xs font-bold text-amber-300">Supabase doit encore être relié dans les variables Vercel.</p>}</div></div><a href="/api/auth/google" className="inline-flex shrink-0 items-center justify-center rounded-xl bg-white px-5 py-3 text-xs font-black text-[#202124] shadow-lg transition hover:bg-zinc-100">Continuer avec Google</a></div>}
-      {message && <p className="mt-4 flex items-center gap-2 rounded-xl border border-cyan-400/20 bg-cyan-400/[.06] px-4 py-3 text-xs font-bold text-cyan-100"><RefreshCw className="h-4 w-4 shrink-0" />{message}</p>}
-    </section>
-
-    <section><div className="mb-4 flex items-center gap-3"><Sparkles className="h-4 w-4 text-[#f5c451]" /><div><h2 className="text-sm font-black uppercase tracking-wider">Choisissez votre formule</h2><p className="mt-1 text-[10px] text-zinc-400">Les recherches manuelles restent accessibles sans abonnement.</p></div><span className="h-px flex-1 bg-gradient-to-r from-[#f5c451]/35 to-transparent" /></div>
-      <div className="grid items-start gap-4 lg:grid-cols-3">{plans.map((plan) => { const style = accentStyles[plan.accent]; const Icon = plan.icon; const isActive = activePlan === plan.id; const canSubscribe = plan.id !== "normal"; return <article key={plan.id} className={`kt-plan-card relative overflow-hidden rounded-[20px] border p-4 sm:p-5 ${style.border} ${style.surface}`}>
-        <div className="pointer-events-none absolute -right-20 -top-24 h-56 w-56 rounded-full bg-current opacity-[0.025] blur-3xl" />
-        <div className="relative text-center"><span className={`mx-auto flex h-12 w-12 items-center justify-center rounded-2xl border ${style.soft}`}><Icon className="h-5 w-5" /></span><div className="mt-3 flex min-h-7 items-center justify-center gap-2"><h3 className={`text-lg font-black uppercase tracking-tight ${style.text}`}>{plan.name}</h3>{isActive && <span className="rounded-full border border-emerald-300/30 bg-emerald-300/[0.08] px-2 py-1 text-[8px] font-black uppercase tracking-wider text-emerald-300">Actuelle</span>}</div><p className="mx-auto mt-1 min-h-10 max-w-xs text-[11px] leading-5 text-zinc-300">{plan.tagline}</p><p className="mt-4 text-2xl font-black text-white">{plan.price}</p><div className={`mt-4 rounded-2xl border px-4 py-3 text-left ${style.soft}`}><p className="text-[9px] font-black uppercase tracking-widest">{plan.scanner}</p><p className="mt-1 text-sm font-black text-white">{plan.scans}</p></div></div>
-        <div className="relative mt-5 border-t border-white/[0.07] pt-5"><div className="mb-3 flex items-center gap-2"><Sparkles className={`h-4 w-4 ${style.text}`} /><h4 className={`text-[10px] font-black uppercase tracking-wider ${style.text}`}>Ce qui est inclus</h4><span className={`h-px flex-1 bg-gradient-to-r ${style.line} to-transparent`} /></div><div className="overflow-hidden rounded-2xl border border-white/[0.055] bg-black/15">{plan.features.map((feature, index) => { const FeatureIcon = feature.icon; return <div key={feature.title} className={`flex gap-3 p-3.5 ${index ? "border-t border-white/[0.055]" : ""}`}><span className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border ${style.soft}`}><FeatureIcon className="h-4 w-4" /></span><div><p className="text-[11px] font-black text-white">{feature.title}</p><p className="mt-0.5 text-[10px] leading-4 text-zinc-400">{feature.description}</p></div></div>; })}</div>
-          {canSubscribe ? <button onClick={() => openBilling("checkout", plan.id as "premium" | "pro")} disabled={busy !== null || account.role === "admin" || account.role === "tester" || isActive} className={`mt-4 inline-flex w-full items-center justify-center gap-2 rounded-xl border px-4 py-3 text-[10px] font-black uppercase tracking-wider shadow-lg transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-55 ${style.button}`}><Icon className="h-4 w-4" />{busy === plan.id ? "Ouverture de Stripe…" : account.role === "admin" || account.role === "tester" ? "Tous les accès sont actifs" : isActive ? "Formule actuelle" : `Choisir ${plan.name}`}</button> : <div className={`mt-4 inline-flex w-full items-center justify-center gap-2 rounded-xl border px-4 py-3 text-[10px] font-black uppercase tracking-wider ${style.button}`}><ShieldCheck className="h-4 w-4" />{isActive ? "Formule actuelle" : "Compte gratuit"}</div>}
-        </div>
-      </article>; })}</div>
-    </section>
-
-    <section className="kt-section-surface rounded-[20px] border p-5 sm:p-6"><div className="flex items-start gap-4"><span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-cyan-400/25 bg-cyan-400/[0.07] text-cyan-300"><Cloud className="h-5 w-5" /></span><div><h2 className="text-sm font-black">Ce qui est synchronisé dans le Cloud</h2><p className="mt-1 text-[11px] leading-5 text-zinc-300">Collection de cartes, cartes PSA, favoris, Items, ventes et préférences. La recherche manuelle reste libre et ne consomme aucune session Scanner.</p></div></div></section>
-  </div></main></>;
+      </main>
+    </>
+  );
 }
