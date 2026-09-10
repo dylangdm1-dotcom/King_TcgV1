@@ -54,9 +54,7 @@ import {
 
 import type { PokemonCard, CardScanResult } from "@/lib/types";
 import { PremiumBadge, PremiumCard, PremiumSectionHeading } from "@/components/ui/PremiumPrimitives";
-
-// 🌟 AJOUT : Liaison avec le hook global de session
-import { useAccount } from "@/components/providers/AccountProvider";
+import { fetchKingAccess, type KingAccessPlan } from "@/lib/king-access";
 
 interface ConfidenceResult {
   global: number;
@@ -168,9 +166,6 @@ export default function ScannerPage() {
   const cameraSectionRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
-  // 🌟 CHARGEMENT DE LA SESSION DE COMPTE GLOBALE UNIFIÉE
-  const { account, loading: accountLoading } = useAccount();
-
   const [ready, setReady] = useState(false);
   const [scanning, setScanning] = useState(false);
   const [status, setStatus] = useState(
@@ -196,11 +191,25 @@ export default function ScannerPage() {
   const [quadQuotaConsumed, setQuadQuotaConsumed] = useState(false);
   const [inventoryQuotaConsumed, setInventoryQuotaConsumed] = useState(false);
   const [quadProgress, setQuadProgress] = useState<QuadSlotProgress[]>(EMPTY_QUAD_PROGRESS);
+  const [accessPlan, setAccessPlan] = useState<KingAccessPlan>("guest");
+  const [scannerLimit, setScannerLimit] = useState<number | null>(5);
+  const [accessLoading, setAccessLoading] = useState(true);
 
-  // Évaluation dynamique de l'état basée sur la session réelle
-  const accessPlan = account?.role || "guest";
-  const scannerLimit = account?.scanLimit || 5;
-  const accessLoading = accountLoading;
+  useEffect(() => {
+    let active = true;
+    fetchKingAccess().then((access) => {
+      if (!active) return;
+      setAccessPlan(access.plan);
+      setScannerLimit(access.scannerLimit);
+      setAccessLoading(false);
+    }).catch(() => {
+      if (!active) return;
+      setAccessPlan("guest");
+      setScannerLimit(5);
+      setAccessLoading(false);
+    });
+    return () => { active = false; };
+  }, []);
 
   useEffect(() => {
     const quota = readQuota();
