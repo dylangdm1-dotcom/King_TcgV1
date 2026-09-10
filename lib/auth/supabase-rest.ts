@@ -1,4 +1,5 @@
 import type { NextRequest } from "next/server";
+import { getCurrentKingSession } from "@/lib/king-auth";
 import { normalizeRole, PLAN_LIMITS, roleFeatures, roleLabel, type AccountRole } from "./plans";
 import type { AccountState } from "./types";
 
@@ -108,9 +109,27 @@ export async function ensureProfile(user: SupabaseUser): Promise<ProfileRow> {
 }
 
 export async function resolveRequestUser(req: NextRequest) {
-  const access = req.cookies.get("kt_access")?.value;
-  const user = access ? await getSupabaseUser(access) : null;
-  if (!user) return null;
+  // King_TCG utilise actuellement deux générations de cookies d'authentification.
+  // Le login Google/callback écrit king_tcg_auth_access, alors que certains anciens
+  // endpoints utilisent kt_access. Le Scanner doit accepter les deux afin qu'une
+  // session Google valide ne soit jamais traitée comme un invité.
+  const legacyAccess = req.cookies.get("kt_access")?.value || "";
+  if (legacyAccess) {
+    const user = await getSupabaseUser(legacyAccess);
+    if (user) return { user, profile: await ensureProfile(user) };
+  }
+
+  const kingSession = await getCurrentKingSession();
+  if (!kingSession?.user?.id) return null;
+
+  const user: SupabaseUser = {
+    id: kingSession.user.id,
+    email: kingSession.user.email || undefined,
+    user_metadata: {
+      ...(kingSession.user.name ? { name: kingSession.user.name, full_name: kingSession.user.name } : {}),
+      ...(kingSession.user.avatarUrl ? { avatar_url: kingSession.user.avatarUrl } : {}),
+    },
+  };
   return { user, profile: await ensureProfile(user) };
 }
 
