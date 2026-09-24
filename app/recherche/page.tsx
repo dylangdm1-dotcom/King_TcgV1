@@ -94,6 +94,15 @@ const FR_SET_NAME_ALIASES: Array<[RegExp, string]> = [
 ];
 
 function localizedSetName(set: SetItem, lang: LanguageCode): string {
+  const normalizedId = normalizeSetId(set.id);
+
+  // 30 ans Pokémon : le fournisseur peut renvoyer le nom anglais
+  // "30th Celebration" même lorsque la page Recherche est affichée en FR/JP.
+  // On conserve ici le libellé éditorial du catalogue pour que l'extension
+  // soit immédiatement identifiable dans la liste des extensions.
+  if (normalizedId === "30c" && lang === "fr") return "30ᵉ Anniversaire";
+  if (normalizedId === "m6a" && lang === "ja") return "30th CELEBRATION";
+
   if (lang !== "fr") return set.name;
   for (const [pattern, french] of FR_SET_NAME_ALIASES) {
     if (pattern.test(set.name.trim())) return french;
