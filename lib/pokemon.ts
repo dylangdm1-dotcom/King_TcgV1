@@ -1603,7 +1603,20 @@ export async function getAllSets(lang: LanguageCode = "fr"): Promise<any[]> {
     logger.error("API", `[Catalogue V2 local ${targetLang}]`, error);
   }
 
-  if (localSets.length > 0) {
+  // Le catalogue local reste la base de référence, mais il ne doit plus figer
+  // la liste au jour de sa génération. TCGdex est interrogé en complément afin
+  // d'ajouter les extensions publiées depuis le dernier snapshot (notamment
+  // M6a en japonais et 30C en français/anglais), sans remplacer les données
+  // locales déjà vérifiées. Les cartes d'une nouvelle extension sont ensuite
+  // récupérées par searchCardsBySetId().
+  const localCodes = new Set(localSets.map((set: any) => normalizeSetId(set.id)).filter(Boolean));
+  const needsLiveDiscovery = targetLang === "ja"
+    ? !localCodes.has("m6a")
+    : (targetLang === "fr" || targetLang === "en")
+      ? !localCodes.has("30c")
+      : false;
+
+  if (localSets.length > 0 && !needsLiveDiscovery) {
     localSets.forEach((set: any) => {
       setMetadataCache.set(normalizeSetId(set.id), {
         name: set.name,
@@ -1687,6 +1700,32 @@ export async function getAllSets(lang: LanguageCode = "fr"): Promise<any[]> {
       total: 0,
       printedTotal: 0,
       releaseDate: "2026-07-31",
+      images: {},
+      availability: "announced",
+    });
+  }
+
+  if (targetLang === "ja" && !tcgdexSets.some((set) => normalizeSetId(set.id) === "m6a")) {
+    tcgdexSets.unshift({
+      id: "m6a",
+      name: "30th CELEBRATION",
+      series: "MEGA",
+      total: 0,
+      printedTotal: 0,
+      releaseDate: "2026-09-16",
+      images: {},
+      availability: "announced",
+    });
+  }
+
+  if ((targetLang === "fr" || targetLang === "en") && !tcgdexSets.some((set) => normalizeSetId(set.id) === "30c")) {
+    tcgdexSets.unshift({
+      id: "30c",
+      name: targetLang === "fr" ? "30ᵉ Anniversaire" : "30th Celebration",
+      series: targetLang === "fr" ? "Méga-Évolution" : "Mega Evolution",
+      total: 0,
+      printedTotal: 0,
+      releaseDate: "2026-09-16",
       images: {},
       availability: "announced",
     });

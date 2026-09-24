@@ -16,6 +16,7 @@ export const KNOWN_SET_RELEASE_DATES: Record<string, string> = {
   m5: "2026-05-22",
   m6: "2026-07-31",
   m6a: "2026-09-16",
+  "30c": "2026-09-16",
   csv10c: "2026-07-16",
   cbb6c: "2026-08-07",
 };
@@ -58,6 +59,8 @@ export function localizedSetCode(id: string | undefined, lang: "fr" | "en" | "ja
       "sv10": "EV08.5",
       "sv10.5w": "EV10",
       "sv10.5b": "EV10.5",
+      m6a: "30C",
+      "30c": "30C",
     };
     const known = exact[raw.toLowerCase()];
     if (known) return known;
@@ -68,6 +71,15 @@ export function localizedSetCode(id: string | undefined, lang: "fr" | "en" | "ja
     if (sunMoon) return `SL${String(Number(sunMoon[1])).padStart(2, "0")}${sunMoon[2] || ""}`;
     const xy = raw.match(/^xy0?(\d+)(\.\d+)?$/i);
     if (xy) return `XY${String(Number(xy[1])).padStart(2, "0")}${xy[2] || ""}`;
+  }
+
+  if (lang === "ja") {
+    const exact: Record<string, string> = {
+      m6a: "M6a",
+      "30c": "M6a",
+    };
+    const known = exact[raw.toLowerCase()];
+    if (known) return known;
   }
 
   return raw;

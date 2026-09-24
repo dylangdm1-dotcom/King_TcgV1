@@ -10,6 +10,7 @@ export type RegionalSetEntry = {
 };
 
 export const JAPANESE_SET_CATALOG: RegionalSetEntry[] = [
+  { code: "M6a", name: "30th CELEBRATION", era: "Mega Evolution", releaseDate: "2026-09-16" },
   { code: "M6", name: "Storm Emeralda", era: "Mega Evolution" },
   { code: "M5", name: "Abyss Eye", era: "Mega Evolution" },
   { code: "M4", name: "Ninja Spinner", era: "Mega Evolution" },

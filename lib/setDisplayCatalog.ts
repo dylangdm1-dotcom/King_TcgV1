@@ -20,6 +20,7 @@ function normalize(value?: string): string {
 }
 
 const JP: SetDisplayMeta[] = [
+  { code: "M6a", name: "30th CELEBRATION", year: 2026, era: "Mega Evolution", aliases: ["30th Celebration"], sourceIds: ["m6a"] },
   { code: "M6", name: "Storm Emeralda", year: 2026, era: "Mega Evolution", sourceIds: ["m6"] },
   { code: "M5", name: "Abyss Eye", year: 2026, era: "Mega Evolution", sourceIds: ["m5"] },
   { code: "PBL", name: "Pitch Black", year: 2026, era: "Mega Evolution", sourceIds: ["m4"] },
@@ -175,6 +176,7 @@ const CN: SetDisplayMeta[] = [
 ];
 
 const FR: SetDisplayMeta[] = [
+  { code: "30C", name: "30ᵉ Anniversaire", year: 2026, era: "Méga-Évolution", aliases: ["30th Celebration", "30e Anniversaire"], sourceIds: ["30c", "m6a"] },
   { code: "ME06", name: "Règne Delta", year: 2026, era: "Méga-Évolution", aliases: ["Delta Reign"] },
   { code: "ME05", name: "Nuit Noire", year: 2026, era: "Méga-Évolution", aliases: ["Pitch Black"], sourceIds: ["m5"] },
   { code: "ME04", name: "Chaos Ascendant", year: 2026, era: "Méga-Évolution", aliases: ["Chaos Rising"], sourceIds: ["m4"] },
