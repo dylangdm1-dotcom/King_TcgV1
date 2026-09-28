@@ -27,7 +27,7 @@ export const UPCOMING_OFFICIAL_RELEASES = [
     language: "fr" as const,
     name: "30e Anniversaire",
     releaseDate: "2026-09-16",
-    contents: "5 cartes brillantes + 1 Énergie par booster · premiers visuels révélés",
+    contents: "Disponible depuis le 16 septembre 2026 · plus de 150 cartes · 30 Pikachu rares · 30 cartes de la Collection Classique",
     officialUrl: "https://www.pokemon.com/fr/actualites/jcc-pokemon-produits-30-anniversaire",
   },
 ];

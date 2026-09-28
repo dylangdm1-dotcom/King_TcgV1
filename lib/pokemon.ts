@@ -1262,6 +1262,11 @@ function dedupeRegionalSets(sets: any[], lang: "ja" | "zh-tw"): any[] {
   return Array.from(byCode.values());
 }
 
+function isThirtyAnniversarySetId(setId: string): boolean {
+  const clean = normalizeSetId(setId);
+  return clean === "30c" || clean === "m6a";
+}
+
 export async function searchCardsBySetId(
   setId: string,
   lang: LanguageCode = "fr"
@@ -1289,7 +1294,8 @@ export async function searchCardsBySetId(
       localSet = await loadSearchCatalogSetCardsV278(lang, setId);
       if (
         localSet?.cards.length &&
-        (localSet.status === "complete" || lang === "zh-tw")
+        (localSet.status === "complete" || lang === "zh-tw") &&
+        !isThirtyAnniversarySetId(setId)
       ) {
         const localCards = [...localSet.cards].sort((a, b) => {
           const numA = parseInt((a.number || "0").replace(/\D/g, "")) || 0;
@@ -1462,6 +1468,13 @@ export async function searchCardsBySetId(
     return numA - numB;
   });
 
+  // 30C / M6a : le snapshot local peut être incomplet. Après le chargement
+  // live TCGdex, on enrichit uniquement cette extension avec le moteur de prix
+  // afin d'afficher les cotations disponibles dès la page Recherche.
+  if (isThirtyAnniversarySetId(setId) && cards.length) {
+    cards = await enrichCardsWithMarketPrices(cards);
+  }
+
   cards.forEach((card) => cache.set(card.id, card));
   saveBrowserCache(cards);
   searchCache.set(cacheKey, cards);
@@ -1610,11 +1623,15 @@ export async function getAllSets(lang: LanguageCode = "fr"): Promise<any[]> {
   // locales déjà vérifiées. Les cartes d'une nouvelle extension sont ensuite
   // récupérées par searchCardsBySetId().
   const localCodes = new Set(localSets.map((set: any) => normalizeSetId(set.id)).filter(Boolean));
-  const needsLiveDiscovery = targetLang === "ja"
-    ? !localCodes.has("m6a")
-    : (targetLang === "fr" || targetLang === "en")
-      ? !localCodes.has("30c")
-      : false;
+  const localAnniversary = localSets.find((set: any) =>
+    normalizeSetId(set.id) === (targetLang === "ja" ? "m6a" : "30c")
+  );
+  // Les 30 ans doivent être rafraîchis tant que le snapshot local est absent
+  // ou manifestement incomplet (30 cartes dans l’ancien lot, contre 100+ publiées).
+  const anniversaryMinimum = targetLang === "ja" ? 100 : 150;
+  const needsLiveDiscovery = (targetLang === "ja" || targetLang === "fr" || targetLang === "en")
+    ? !localCodes.has(targetLang === "ja" ? "m6a" : "30c") || Number(localAnniversary?.total || localAnniversary?.printedTotal || 0) < anniversaryMinimum
+    : false;
 
   if (localSets.length > 0 && !needsLiveDiscovery) {
     localSets.forEach((set: any) => {
