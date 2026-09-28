@@ -30,33 +30,38 @@ export default function Home() {
 
   const upcomingKingTcgItems = [
     {
-      title: "57 produits scellés illustrés",
-      text: "Le premier lot EN dispose maintenant de ses visuels fournisseur, avec 54 cotes TCGplayer EN/US en USD.",
-      badge: "V290",
+      title: "30ᵉ Anniversaire : catalogue actualisé",
+      text: "30C en français et M6a au Japon sont maintenant synchronisés avec la source catalogue live, avec plus de 150 cartes pour l’extension occidentale.",
+      badge: "Nouveau",
     },
     {
-      title: "Catalogue Items français propre",
-      text: "Le catalogue FR démarre par défaut, regroupe les produits identiques et conserve les visuels disponibles.",
-      badge: "V304",
+      title: "Visuels 30C / M6a",
+      text: "Les visuels des cartes 30 ans sont récupérés depuis la source catalogue dès leur publication et affichés directement dans Recherche.",
+      badge: "Nouveau",
     },
     {
-      title: "Espace Items indépendant",
-      text: "ETB, displays, boosters, coffrets, bundles et UPC disposent maintenant de leur propre recherche et de leur propre fiche.",
-      badge: "V288",
+      title: "Cotes 30 ans",
+      text: "Les cartes 30C / M6a sont désormais envoyées au moteur de cotation pour récupérer les prix disponibles et actualisés, sans inventer de valeur lorsqu’aucune source ne cote encore la carte.",
+      badge: "Nouveau",
     },
     {
-      title: "Collection et favoris Items",
-      text: "Les produits scellés restent séparés des cartes, avec quantités, achats, favoris et export CSV dédiés.",
-      badge: "V288",
+      title: "Items 30ᵉ Anniversaire",
+      text: "Les produits scellés 30 ans sont synchronisés depuis la source produits et leurs visuels fournisseur sont utilisés lorsqu’ils sont disponibles.",
+      badge: "Nouveau",
     },
     {
-      title: "Cotes de produits scellés",
-      text: "Prochaine étape : connecter une source autorisée en séparant prix de sortie officiel et cote actuelle du marché.",
+      title: "Recherche multilingue",
+      text: "FR / EN / JP / CN restent séparés pour éviter de mélanger les identités, codes et marchés des cartes.",
+      badge: "Catalogue",
+    },
+    {
+      title: "Prochaines améliorations",
+      text: "Poursuite de l’audit des cartes manquantes, des visuels et des données de marché sur les autres extensions.",
       badge: "À venir",
     },
     {
       title: "Listing Scanner PRO",
-      text: "Scan accéléré de 2 ou 4 cartes par photo, jusqu’à 40 lignes corrigibles et exportables dans Excel.",
+      text: "Scan accéléré de 2 ou 4 cartes par photo, avec correction des lignes et export professionnel.",
       badge: "PRO",
     },
   ] as const;
@@ -233,7 +238,7 @@ export default function Home() {
                     Actus & à venir
                   </span>
                   <span className="mt-0.5 block truncate text-[11px] font-bold text-zinc-300">
-                    Synchronisation Items FR renforcée · 30e Anniversaire le 16 septembre
+                    30ᵉ Anniversaire disponible depuis le 16 septembre · catalogue, visuels et cotations en cours de synchronisation
                   </span>
                 </span>
               </div>
@@ -246,7 +251,7 @@ export default function Home() {
                   <div className="mb-2 flex items-center gap-2">
                     <CalendarDays className="h-3.5 w-3.5 shrink-0 text-amber-300" />
                     <p className="text-[9px] font-black uppercase tracking-[0.13em] text-amber-300">
-                      Pokémon · Sorties officielles
+                      Pokémon · Actualité catalogue
                     </p>
                   </div>
                   <div className="space-y-2">
