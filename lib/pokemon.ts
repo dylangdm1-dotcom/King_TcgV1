@@ -1267,6 +1267,30 @@ function isThirtyAnniversarySetId(setId: string): boolean {
   return clean === "30c" || clean === "m6a";
 }
 
+function filterThirtyAnniversarySearchDuplicates(sets: any[], lang: LanguageCode): any[] {
+  if (!Array.isArray(sets) || !sets.length) return sets;
+
+  const canonicalId = lang === "ja" ? "m6a" : "30c";
+  const hasCanonical = sets.some((set) => normalizeSetId(set?.id) === canonicalId);
+
+  const isAnniversaryDuplicate = (set: any) => {
+    const id = normalizeSetId(set?.id);
+    const name = String(set?.name || "").toLowerCase();
+    const aliases = Array.isArray(set?.aliases) ? set.aliases.join(" ").toLowerCase() : "";
+    const text = `${name} ${aliases}`;
+    return isThirtyAnniversarySetId(id)
+      || /30th\s*(?:anniversary|celebration)/i.test(text)
+      || /30(?:e|ᵉ)\s*anniversaire/i.test(text)
+      || (/collection\s+classique/i.test(text) && /30|anniversaire|celebration/i.test(text));
+  };
+
+  // La Recherche ne doit présenter qu'une seule extension pour les 30 ans.
+  // On garde le set canonique 30C (FR/EN) ou M6a (JP), et on masque les
+  // anciennes lignes "Collection Classique" ainsi que les doublons annoncés.
+  if (!hasCanonical) return sets.filter((set) => !isAnniversaryDuplicate(set));
+  return sets.filter((set) => !isAnniversaryDuplicate(set) || normalizeSetId(set?.id) === canonicalId);
+}
+
 export async function searchCardsBySetId(
   setId: string,
   lang: LanguageCode = "fr"
@@ -1644,7 +1668,10 @@ export async function getAllSets(lang: LanguageCode = "fr"): Promise<any[]> {
         coverageBasis: set.coverageBasis,
       });
     });
-    return dedupeSearchCatalogSetsV291(localSets, targetLang).sort(compareSetsNewestFirst);
+    return filterThirtyAnniversarySearchDuplicates(
+      dedupeSearchCatalogSetsV291(localSets, targetLang).sort(compareSetsNewestFirst),
+      targetLang
+    );
   }
 
   if (targetLang === "zh-tw") {
@@ -1799,7 +1826,7 @@ export async function getAllSets(lang: LanguageCode = "fr"): Promise<any[]> {
     if (key.startsWith("search_")) searchCache.delete(key);
   }
 
-  return mergedSets.sort(compareSetsNewestFirst);
+  return filterThirtyAnniversarySearchDuplicates(mergedSets.sort(compareSetsNewestFirst), targetLang);
 }
 
 export async function getCardById(id: string): Promise<PokemonCard | null> {
